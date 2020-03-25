@@ -83,7 +83,7 @@ DATABASES = {
     }
 }
 
-ATH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'account.CustomUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

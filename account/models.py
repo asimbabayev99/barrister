@@ -5,6 +5,11 @@ from django.utils import timezone
 # Create your models here.
 
 
+ROLE_CHOICES = [
+    ('User', 'User'),
+    ('Barrister', 'Barrister')
+]
+
 
 class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
@@ -33,6 +38,8 @@ class CustomUser(AbstractUser):
     username = models.CharField('username', max_length=150, unique=False)
     email = models.EmailField(max_length=256, unique=True)
     phone_number = models.CharField(max_length=16, null=False, blank=False)
+
+    role = models.CharField(max_length=32, choices=ROLE_CHOICES, default='User')
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -43,3 +50,5 @@ class CustomUser(AbstractUser):
         permission = Permissions.objects.get(user=self.id)
       
         return permission.permission
+
+
