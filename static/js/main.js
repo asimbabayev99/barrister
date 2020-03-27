@@ -1,10 +1,9 @@
 $(document).ready(function() {
-
   $('#calendar').fullCalendar({
     header: {
       left: 'prevYear,prev,next,nextYear, today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'year,month,agendaWeek,agendaDay,listWeek'
     },
     buttonText:{
       prevYear: new moment().year()-1,
@@ -15,6 +14,7 @@ $(document).ready(function() {
       $(".fc-prevYear-button").text(y-1);
       $(".fc-nextYear-button").text(y+1);
     },
+    locale:'az',
     navLinks: true, // can click day/week names to navigate views
     selectable: true,
     selectHelper: true,
