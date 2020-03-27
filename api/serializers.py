@@ -25,16 +25,16 @@ class LoginSerializer(serializers.ModelSerializer):
 
 
 
-class TaskCategorySerializer(serializers.ModelSerializer):
+class EventCategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = TaskCategory
+        model = EventCategory
         fields = ['name']
 
 
 class TaskSerializer(serializers.ModelSerializer):
     # category = serializers.PrimaryKeyRelatedField(many=False,read_only=False,queryset=TaskCategory.objects.all())
     class Meta:
-        model = Task
+        model = Event
         fields = ['name','description','location','completed','category']
     def create(self,validated_data):
         task = Task(**validated_data)
