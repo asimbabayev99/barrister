@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from account.models import CustomUser
 from account.forms import *
 from django.contrib.auth import authenticate,login,logout
@@ -9,6 +10,7 @@ from django.contrib.auth.hashers import make_password
 
 
 def login_view(request):
+    form = LoginForm()
     errors = {}  # may contain authentication errors
 
     if request.method == 'POST':
@@ -32,8 +34,7 @@ def login_view(request):
 
     context = {
         'errors': errors,
-        'login': True,
-        'register': False,
+        'form': form,
     }
 
     return render(request, 'account/login.html', context=context)
@@ -51,16 +52,20 @@ def register_view(request):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            phone_number = form.cleaned_data['phone_number']
 
             # new_user = CustomUser(**form.cleaned_data)
             new_user = CustomUser(
-                first_name=first_name, last_name=last_name, email=email, phone_number=phone_number
+                first_name=first_name, last_name=last_name, email=email
             )
             new_user.password = make_password(password)
             new_user.save()
 
-            return redirect(reverse('login'))
+            # return redirect(reverse('login'))
+            form = LoginForm()
+            context = {
+                'form': form
+            }
+            return render(request, 'account/login.html', context=context)
 
     context = {
         "form": form,

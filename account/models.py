@@ -37,7 +37,6 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=50, null=False, blank=False)
     username = models.CharField('username', max_length=150, unique=False)
     email = models.EmailField(max_length=256, unique=True)
-    phone_number = models.CharField(max_length=16, null=False, blank=False)
 
     role = models.CharField(max_length=32, choices=ROLE_CHOICES, default='User')
     
