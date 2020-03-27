@@ -3,6 +3,22 @@ from account.models import CustomUser
 
 
 
+class LoginForm(forms.ModelForm):
+    email = forms.EmailField(label='', max_length=256, widget=forms.TextInput(attrs={
+        'class' : 'input',
+        'placeholder':"Email"
+    }))
+    password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(attrs={
+        'class' : "input",
+        'placeholder': "Password"
+    })) 
+    field_order = ('email', 'password')
+
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'password')
+
+
 class RegisterForm(forms.ModelForm):
     email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
         'class' : 'input',
@@ -24,17 +40,12 @@ class RegisterForm(forms.ModelForm):
         'class' : "input",
         'placeholder': "Confirm Password"
     })) 
-    phone_number = forms.CharField(label='', max_length=20, widget=forms.TextInput(attrs={
-        'class' : "input",
-        'placeholder': "Phone number"
-    }))
-
     field_order =  ('email','first_name', 'last_name', 'password', 'confirm_password', 'phone_number')
 
 
     class Meta:
         model = CustomUser
-        fields = ('email','first_name', 'last_name', 'password', 'phone_number')
+        fields = ('email','first_name', 'last_name', 'password')
 
 
     
