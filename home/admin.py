@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Task,TaskCategory
+from home.models import Event, EventCategory
 
-admin.site.register(Task)
-admin.site.register(TaskCategory)
+admin.site.register(Event)
+admin.site.register(EventCategory)

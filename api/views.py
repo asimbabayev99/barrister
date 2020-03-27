@@ -59,7 +59,7 @@ class UserRegistration(viewsets.ModelViewSet):
 
 
 class TaskList(ListAPIView):
-    queryset = Task.objects.all()
+    queryset = Event.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
@@ -68,13 +68,13 @@ class TaskList(ListAPIView):
 
 
 class TaskCreate(GenericAPIView):
-    queryset = Task.objects.none()
+    queryset = Event.objects.none()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated,]
     def post(self,request):
         serializer = TaskSerializer(data=request.data)
         serializer.is_valid()
-        task = Task(**serializer.validated_data)
+        task = Event(**serializer.validated_data)
         task.save()
         return Response(serializer.data)
         
@@ -82,7 +82,7 @@ class TaskDetail(APIView):
 
     def get_object(self,id):
         try:
-            task = Task.objects.get(id=id)
+            task = Event.objects.get(id=id)
             return task
         except:
             raise ValidationError('user doesnt not exists')
