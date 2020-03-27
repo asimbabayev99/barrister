@@ -5,12 +5,14 @@ from django.db import models
 
 class TaskCategory(models.Model):
     name = models.CharField(max_length=64)
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
-    category = models.ForeignKey(TaskCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(TaskCategory, on_delete=models.CASCADE,null=True)
     location = models.CharField(max_length=256)
     completed = models.BooleanField(default=False)
 

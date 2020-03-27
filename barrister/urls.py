@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from api.views import *
 
 urlpatterns = [
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
+    path('api-auth-token/',CustomAuthToken.as_view()),
+    path('api-register/',UserRegistration.as_view({'post':'create'})),
+    path('api/task/list',TaskList.as_view()),
+    path('api/task/create',TaskCreate.as_view()),
+    path('api/task/detail/<int:id>',TaskDetail.as_view())
 ]
