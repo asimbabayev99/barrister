@@ -37,6 +37,6 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Event
         fields = ['name','description','location','completed','category']
     def create(self,validated_data):
-        task = Task(**validated_data)
+        task = Event(**validated_data)
         task.save()
         return task
