@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
+
+
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
@@ -31,7 +33,7 @@ class EventCategorySerializer(serializers.ModelSerializer):
         fields = ['name']
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     # category = serializers.PrimaryKeyRelatedField(many=False,read_only=False,queryset=TaskCategory.objects.all())
     class Meta:
         model = Event

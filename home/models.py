@@ -26,10 +26,11 @@ class Event(models.Model):
     completed = models.BooleanField(default=False)
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    frequency = models.CharField(max_length=32, choices=FREQUENCY_TYPES)
-    frequency_count = models.IntegerField(default=1)
-    date = models.DateField(auto_now=True)
-    from_time = models.TimeField(auto_now=True)
-    to_time = models.TimeField(auto_now=True)
+    # frequency = models.CharField(max_length=32, choices=FREQUENCY_TYPES)
+    # frequency_count = models.IntegerField(default=1)
+    # date = models.DateField(auto_now=True)
+    is_all_day = models.BooleanField(default=False)
+    from_time = models.DateTimeField(auto_now_add=True)
+    to_time = models.DateTimeField(auto_now_add=True)
 
-    remind_me = models.DateTimeField(auto_now=True)
+    remind_me = models.DateTimeField(auto_now_add=True)
