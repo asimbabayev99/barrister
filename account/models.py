@@ -1,14 +1,17 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractUser
-from django.utils import timezone
+from django.contrib.auth.models import AbstractUser, Permission
 # Create your models here.
 
 
-ROLE_CHOICES = [
-    ('User', 'User'),
-    ('Barrister', 'Barrister')
-]
+
+class Role(models.Model):
+    name = models.CharField(max_length=32)
+    permissions = models.ManyToManyField(Permission)
+
+    def __str__(self):
+        return self.name
+
 
 
 class CustomUserManager(BaseUserManager):
@@ -38,7 +41,7 @@ class CustomUser(AbstractUser):
     username = models.CharField('username', max_length=150, unique=False)
     email = models.EmailField(max_length=256, unique=True)
 
-    role = models.CharField(max_length=32, choices=ROLE_CHOICES, default='User')
+    role = models.ForeignKey(Role, null=True, on_delete=models.SET_NULL)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
