@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barrister - Plans&Calendar </title>
+    <link rel="shortcut icon" href="https://pixabay.com/get/57e5d04a4351a914f1dc8460da293276103ed8e6535273_640.png"
+      alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon"/> 
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+<body id="register-body">
+<div>
+	<!-- <div style="width: 400px; height: 700px; float: left;"><img src="shield.png"></div> -->
+	<form method="post" id="form1"	action="https://www.w3schools.com">
+	<div class="qeyd">
+		<p id="errMessage"></p>
+		<h1 style="text-shadow: 1px 2px 2px #CDBA6D">Qeydiyyat</h1>
+		<div style="float: left;"><input type="text" id="fn"  name="Ad" placeholder="Ad daxil edin..."  ></div>
+		<div ><input type="text" id="ln"  name="Soyad" placeholder="Soyad daxil edin..."></div>
+		<div style="float: left;padding-top: 10px;margin-left: 10px;">
+			<select id="Seria"  style="height: 30px;" onchange="deyis()">
+				<option  disabled="" selected="" value="">Sec</option>
+				<option value="AZE" >AZE</option>
+				<option value="AA" >AA</option>
+			</select></div>
+			
+		<div><input type="number" name=""  id="sn"   placeholder="Şəxsiyyət vəsiqəsinin nömrəsi..." style="width: 335px; margin-left: 25px;" ></div>
+		
+		<div style="width: 500px; height: 60px;">
+			<div id="bir" style="display: block;">
+		<div style="float:left;padding-top: 10px;margin-left: 10px;" >
+			<select style="height: 30px;" id="kod' >
+				<option disabled="" selected="">Sec</option>
+				<option>050</option>
+				<option>051</option>
+				<option>055</option>
+				<option>070</option>
+				<option>077</option>
+			</select>
+			</div>
+		<div>
+			<input type="number" id="telnum" name=""  style="width: 335px;margin-left: 25px;position: absolute;" placeholder="Telefon nömrəsi daxil edin..." >
+		</div>
+			</div>
+	<div id="iki" style="display: none"><input type="number" name="" id="telnum" style="width:425px;  position: absolute;" placeholder="Telefon nömrəsi daxil edin..." ></div>
+</div>
+		<a href="#" onclick="bas()" style="margin: -37px 0 0 99px;position: absolute;color: black;">Digər operator</a>
+		<div><input type="email" name="email"  id="ma"  style="width: 425px;" placeholder="Mail adresi daxil edin..."></div>
+		<div class="passdiv"><input type="password" name="password" id="pass" minlength="6" placeholder="Şifrə daxil edin..."></div>
+		<div class="passdiv"><input type="password" name="repassword" id="pass1" minlength="6" placeholder="Şifrəni təkrar edin..."></div>
+		
+		<div>
+			<input type="submit" value="Qeydiyyatdan keç"  class="duyme"  >
+		</div>
+	
+	</div></form>
+	<!-- 	<div style="width: 400px; height: 700px; float: left;"><img src="shield.png"></div></div> -->
+	
+	</div>
+		
+<script type="text/javascript">
+	function bas() {
+		var ilk = document.getElementById("bir");
+		var son = document.getElementById("iki");
+
+		if (ilk.style.display =="block") {
+			
+			ilk.style.display="none";
+			son.style.display="block";
+		}
+		else{
+			ilk.style.display="block";
+			son.style.display="none";
+
+		}
+	};
+		form1.onsubmit=function() {
+    var x = document.getElementById("Seria");
+	var y = x.options[x.selectedIndex].value;
+    var sv = document.getElementById('sn').value;
+  
+ if(document.getElementById('fn').value == "" || document.getElementById('fn').value.length == 0
+ || document.getElementById('ln').value == "" || document.getElementById('ln').value.length == 0 ){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Zehmet olmasa ad ve soyadi dogru qeyd edin..." + "\n";
+	return false;
+ };
+	if (y =="" ){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Bir seriya secin...";
+	return false;
+ }
+	
+ if (y=="AZE" &&  sv.length != 8 ){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Seriya nomresi 8 reqemli olmalidir...";
+	return false;
+ }
+ 
+ 
+if  (y =="AA" &&  sv.length != 7 ){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Seriya nomresi 7 reqemli olmalidir...";
+	return false;
+ }
+ 
+ if(document.getElementById('telnum').value == "" || document.getElementById('telnum').value.length != 7 ){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Zehmet olmasa telefon nomresini daxil edin..." + "<br>" + "Nomre 7 reqemden ibaret olmalidir..." ;
+	return false;
+ }
+ 
+ 
+ if(document.getElementById('ma').value == ""){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Zehmet olmasa mail adresi daxil edin...";
+	return false;
+ }
+ 
+ if(document.getElementById('pass').value=="" || document.getElementById('pass1').value=="" ){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Zehmet olmasa sifre daxil edin...";
+	return false;
+ }
+ if(document.getElementById('pass').value!=document.getElementById('pass1').value){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Iki sifre de eyni olmalidir...";
+	return false;
+ }
+ };
+
+
+
+
+  
+
+
+</script>
+
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js'   %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js'   %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script> 
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
