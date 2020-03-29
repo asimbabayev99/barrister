@@ -58,27 +58,27 @@ class UserRegistration(viewsets.ModelViewSet):
             })
 
 
-class TaskList(ListAPIView):
+class EventList(ListAPIView):
     queryset = Event.objects.all()
-    serializer_class = TaskSerializer
+    serializer_class = EventSerializer
     permission_classes = [IsAuthenticated,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
     filterset_fields = ['category',]
     ordering_fields = ['category',]
 
 
-class TaskCreate(GenericAPIView):
+class EventCreate(GenericAPIView):
     queryset = Event.objects.none()
-    serializer_class = TaskSerializer
+    serializer_class = EventSerializer
     permission_classes = [IsAuthenticated,]
     def post(self,request):
-        serializer = TaskSerializer(data=request.data)
+        serializer = EventSerializer(data=request.data)
         serializer.is_valid()
         task = Event(**serializer.validated_data)
         task.save()
         return Response(serializer.data)
         
-class TaskDetail(APIView):
+class EventDetail(APIView):
 
     def get_object(self,id):
         try:
@@ -89,19 +89,19 @@ class TaskDetail(APIView):
 
     def get(self,request,id,format=None):
         task = self.get_object(id)
-        serializer = TaskSerializer(task)
+        serializer = EventSerializer(task)
         return Response(serializer.data)
     
     def delete(self,request,id,format=None):
         task = self.get_object(id)   
         task.delete()
         return Response({
-            "task":'deleted'
+            "event":'deleted'
         })
     
     def put(self,request,id,format=None):
         old_task = self.get_object(id)
-        serializer = TaskSerializer(instance=old_task,data=request.data)
+        serializer = EventSerializer(instance=old_task,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
