@@ -6,14 +6,14 @@ from django.contrib.auth.models import AbstractUser, Permission
 
 
 CONTACT_TYPES = [
-    'e-mail': 'e-mail',
-    'phone': 'phone'
+    ('e-mail', 'e-mail'),
+    ('phone', 'phone')
 ]
 
 
 GENDER_CHOICES = [
-    'male': 'male',
-    'female': 'female'
+    ('male', 'male'),
+    ('female', 'female')
 ]
 
 
