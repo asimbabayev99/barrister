@@ -5,6 +5,18 @@ from django.contrib.auth.models import AbstractUser, Permission
 
 
 
+CONTACT_TYPES = [
+    'e-mail': 'e-mail',
+    'phone': 'phone'
+]
+
+
+GENDER_CHOICES = [
+    'male': 'male',
+    'female': 'female'
+]
+
+
 class Role(models.Model):
     name = models.CharField(max_length=32)
     permissions = models.ManyToManyField(Permission)
@@ -53,4 +65,17 @@ class CustomUser(AbstractUser):
       
         return permission.permission
 
+
+
+
+class Contact(models.Model):
+    type = models.CharField(max_length=32, choices=CONTACT_TYPES)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    image = models.ImageField()
+    gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
+    contacts = models.ManyToManyField(Contact)
+    biography = models.TextField()
 
