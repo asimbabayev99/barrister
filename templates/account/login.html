@@ -14,21 +14,31 @@
     <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
-  <body>
-  
-    <form method="POST" action="">
-      {% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" value="Login">
-    </form>
+  <body id="login-body">
+    <div class="page">
+        <form action="" method="POST"> 
+          {% csrf_token %}
+          <h1>Daxil ol</h1>
+          <div><input type="email" class="bir" name="email" placeholder=" Mail adresi daxil edin..." required></div>
+          <div><input type="password" name="password" placeholder=" Şifrə daxil edin..."></div>
+          <div> Şifrəni xatırla <input type="checkbox" class="remember" name=""></div>
+          <div><a href="">Şifrəni unutmusunuz?</a></div>
+          <div><input type="submit" name="" id="duyme"   value="Daxil ol"></div>
+        </form>
+      </div>
+      
 
-    <br>
-    <a href="{% url 'register' %}">Register</a>
-  
+
+
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js'   %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js'   %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script> 
+    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script> 
     <script src="{% static 'js/main.js' %}"></script>
+    
 </body>   
 
 </html>

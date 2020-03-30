@@ -37,7 +37,7 @@ def login_view(request):
         'form': form,
     }
 
-    return render(request, 'account/login_test.html', context=context)
+    return render(request, 'account/login.html', context=context)
 
 
 
@@ -60,18 +60,17 @@ def register_view(request):
             new_user.password = make_password(password)
             new_user.save()
 
-            # return redirect(reverse('login'))
             form = LoginForm()
             context = {
                 'form': form
             }
-            return render(request, 'account/login_test.html', context=context)
+            return render(request, 'account/login.html', context=context)
 
     context = {
         "form": form,
     }
 
-    return render(request, 'account/register.html',context=context)
+    return render(request, 'account/register_test.html',context=context)
 
 
 def logout_view(request):

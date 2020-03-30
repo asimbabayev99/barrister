@@ -89,19 +89,19 @@ class EventDetail(APIView):
 
     def get(self,request,id,format=None):
         task = self.get_object(id)
-        serializer = EventSerializer(task)
+        serializer = TaskSerializer(task)
         return Response(serializer.data)
     
     def delete(self,request,id,format=None):
         task = self.get_object(id)   
         task.delete()
         return Response({
-            "event":'deleted'
+            "task":'deleted'
         })
     
     def put(self,request,id,format=None):
         old_task = self.get_object(id)
-        serializer = EventSerializer(instance=old_task,data=request.data)
+        serializer = TaskSerializer(instance=old_task,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
