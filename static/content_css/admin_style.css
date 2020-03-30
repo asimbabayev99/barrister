@@ -1,0 +1,1793 @@
+/*------------------------------------------------------------------
+* theme-style.php index *
+[Table of contents]
+1.  Background color
+2.  Topbar Background color
+3.  Element Border color
+4.  Textcolor
+5.  Boxshadow
+6.  Header / Footer background color
+7.  Footer background color
+8.  Logo Color
+9.  Genral Elements
+10. "Center Logo Between Menu" options
+11. Floating Bar
+-------------------------------------------------------------------*/
+/**
+ * 0. Background properties
+ * ----------------------------------------------------------------------------
+ */
+body{background-color:#ffffff;background-position:0% 0%;background-size:auto;background-repeat:repeat;background-attachment:scroll;}
+body > .themestek-bg-layer{background-color:#ffffff;}
+ body .site-content-wrapper{background-color:#ffffff;background-position:0% 0%;background-size:auto;background-repeat:repeat;background-attachment:scroll;}
+body .site-content-wrapper > .themestek-bg-layer{background-color:#ffffff;}
+ .themestek-fbar-box-w{background-position:0% 0%;background-size:cover;background-repeat:repeat;background-attachment:scroll;}
+ .themestek-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal li.mega-menu-item ul.mega-sub-menu, #site-header-menu #site-navigation div.nav-menu > ul > li ul{background-color:#313538;background-position:center top;background-size:cover;background-repeat:no-repeat;background-attachment:scroll;}
+.themestek-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal li.mega-menu-item ul.mega-sub-menu, #site-header-menu #site-navigation div.nav-menu > ul > li ul > .themestek-bg-layer{background-color:#313538;}
+ div.themestek-titlebar-wrapper{background-image:url('http://attorco.themestek2.com/demo1/wp-content/uploads/sites/4/revslider/home-slider-1/slider1-02.jpg');background-color:transparent;background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:scroll;}
+div.themestek-titlebar-wrapper > .themestek-bg-layer{background-color:transparent;}
+ .footer{background-image:url('http://attorco.themestek2.com/demo1/wp-content/uploads/sites/4/2020/01/footer-logo-watericon-1.png');background-position:center bottom;background-size:cover;background-repeat:no-repeat;background-attachment:scroll;}
+ .first-footer{background-color:transparent;background-position:0% 0%;background-size:auto;background-repeat:no-repeat;background-attachment:fixed;}
+.first-footer > .themestek-bg-layer{background-color:transparent;}
+ .second-footer{background-color:transparent;background-position:0% 0%;background-size:auto;background-repeat:repeat;background-attachment:scroll;}
+.second-footer > .themestek-bg-layer{background-color:transparent;}
+ .bottom-footer-text{background-color:transparent;background-position:center center;background-size:auto;background-repeat:no-repeat;background-attachment:fixed;}
+.bottom-footer-text > .themestek-bg-layer{background-color:transparent;}
+ .error404 .site-content-wrapper{background-image:url('http://attorco.themestek2.com/demo1/wp-content/uploads/sites/4/2019/07/404-bg.jpg');background-color:rgba(0,0,0,0.8);background-position:center top;background-size:cover;background-repeat:no-repeat;background-attachment:scroll;}
+.error404 .site-content-wrapper > .themestek-bg-layer{background-color:rgba(0,0,0,0.8);}
+ .uconstruction_background{background-image:url('http://lawyerco.themestek2.com/wp-content/themes/lawyerco/images/uconstruction-bg.jpg');background-color:#ffffff;background-position:center top;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;}
+.uconstruction_background > .themestek-bg-layer{background-color:#ffffff;}/**
+ * 0. Font properties
+ * ----------------------------------------------------------------------------
+ */
+.headerlogo a.home-link{font-family:"Nunito Sans", Arial, Helvetica, sans-serif;font-weight:700;font-size:26px;line-height:27px;color:#202020;}
+ #site-header-menu #site-navigation div.nav-menu > ul > li > a, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal > li.mega-menu-item > a{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:700;text-transform:uppercase;font-size:14px;line-height:16px;letter-spacing:0.2px;color:#ffffff;}
+ ul.nav-menu li ul li a, div.nav-menu > ul li ul li a, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a:hover, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a:focus, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a.mega-menu-link, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a.mega-menu-link:hover, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a.mega-menu-link:focus, .themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu > li.mega-menu-item-type-widget{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:500;text-transform:uppercase;font-size:12px;line-height:16px;letter-spacing:0.5px;color:#ffffff;}
+ .themestek-titlebar h1.entry-title, .themestek-titlebar-textcolor-custom .themestek-titlebar-main .entry-title{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:42px;line-height:50px;color:#dd9933;}
+ .themestek-titlebar .entry-subtitle, .themestek-titlebar-textcolor-custom .themestek-titlebar-main .entry-subtitle{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:400;font-size:19px;line-height:22px;letter-spacing:1px;color:#dd9933;}
+ .themestek-titlebar .breadcrumb-wrapper, .themestek-titlebar .breadcrumb-wrapper a{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:500;font-size:14px;line-height:22px;color:#eeee22;}
+ body{font-family:"Montserrat", Tahoma, Geneva, sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#666666;}
+ h1{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:42px;line-height:46px;color:#42474c;}
+ h2{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:38px;line-height:40px;color:#42474c;}
+ h3{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:32px;line-height:36px;color:#42474c;}
+ h4{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:28px;line-height:30px;color:#42474c;}
+ h5{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:26px;line-height:28px;color:#42474c;}
+ h6{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:22px;line-height:24px;color:#42474c;}
+ .themestek-element-heading-wrapper .themestek-vc_general .themestek-vc_cta3_content-container .themestek-vc_cta3-content .themestek-vc_cta3-content-header h2{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:400;font-size:38px;line-height:46px;color:#42474c;}
+ .themestek-element-heading-wrapper .themestek-vc_general .themestek-vc_cta3_content-container .themestek-vc_cta3-content .themestek-vc_cta3-content-header h4, .themestek-vc_general.themestek-vc_cta3.themestek-vc_cta3-color-transparent.themestek-cta3-only .themestek-vc_cta3-content .themestek-vc_cta3-headers h4{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:600;text-transform:uppercase;font-size:13px;line-height:26px;letter-spacing:3px;color:#cdba6d;}
+ .themestek-element-heading-wrapper .themestek-vc_general.themestek-vc_cta3 .themestek-vc_cta3-content p{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:400;font-size:16px;line-height:24px;color:#272b2e;}
+ body .widget .widget-title, body .widget .widgettitle, #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu > li.mega-menu-item > h4.mega-block-title, .portfolio-description h2, .themestek-portfolio-details h2, .themestek-portfolio-related h2{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:700;font-size:18px;line-height:24px;color:#42474c;}
+ .woocommerce button.button, .woocommerce-page button.button, .themestek-vc_btn, .themestek-vc_btn3, .woocommerce-page a.button, .button, .wpb_button, button, .woocommerce input.button, .woocommerce-page input.button, .tp-button.big, .woocommerce #content input.button, .woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce-page #content input.button, .woocommerce-page #respond input#submit, .woocommerce-page a.button, .woocommerce-page button.button, .woocommerce-page input.button, .themestek-post-readmore a{font-family:"Montserrat", Arial, Helvetica, sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:2px;}
+ .wpb_tabs_nav a.ui-tabs-anchor, body .wpb_accordion .wpb_accordion_wrapper .wpb_accordion_header a, .vc_progress_bar .vc_label, .vc_tta.vc_general .vc_tta-tab > a, .vc_toggle_title > h4{font-family:"Playfair Display", Arial, Helvetica, sans-serif;font-weight:700;text-transform:uppercase;font-size:14px;}/**
+ * 0. Text link and hover color properties
+ * ----------------------------------------------------------------------------
+ */
+a{color:#42474c;}
+a:hover{color:#cdba6d;}
+/**
+ * 0. Header bg color
+ * ----------------------------------------------------------------------------
+ */
+/**
+ * 0. Sticky header bg color
+ * ----------------------------------------------------------------------------
+ */
+/**
+ * 0. header menu bg color
+ * ----------------------------------------------------------------------------
+ */
+/**
+ * 0. Sticky menu bg color
+ * ----------------------------------------------------------------------------
+ */
+/**
+ * 0. List style special style
+ * ----------------------------------------------------------------------------
+ */
+.wpb_row .vc_tta.vc_general.vc_tta-color-white:not(.vc_tta-o-no-fill) .vc_tta-panel-body .wpb_text_column{
+	color:#666666;
+}
+/**
+ * 0. Page loader css
+ * ----------------------------------------------------------------------------
+ */
+.themestek-page-loader-wrapper{background-image:url(http://localhost/barrister/wp-content/themes/attorco/images/loader1.gif)}/**
+ * 0. Floating bar
+ * ----------------------------------------------------------------------------
+ */
+/* This is Titlebar Background color */
+.themestek-header-overlay .themestek-titlebar-wrapper .themestek-titlebar-inner-wrapper{	
+	padding-top: 105px;
+}
+/* This is Titlebar Text color */
+.themestek-titlebar-wrapper .themestek-titlebar-inner-wrapper{
+	height: 700px;	
+}
+.themestek-header-overlay .themestek-titlebar-wrapper .themestek-titlebar-inner-wrapper{	
+	padding-top: 135px;
+}
+.themestek-header-style-3.themestek-header-overlay .themestek-titlebar-wrapper .themestek-titlebar-inner-wrapper{
+	padding-top: 160px;
+}
+/* Logo Max-Height */
+.headerlogo img{
+    max-height: 56px;
+}
+.is_stuck .headerlogo img{
+    max-height: 40px;
+}
+span.themestek-sc-logo.themestek-sc-logo-type-image {
+    position: relative;
+	display: block;
+	z-index: 1;
+}
+/**
+ * Topbar Background color
+ * ----------------------------------------------------------------------------
+ */
+/* Show/hide topbar in some devices */
+	@media (max-width: 1200px){
+		.themestek-pre-header-wrapper{
+			display: none !important;
+		}
+	}
+	.widget .search-form .search-field:focus, 
+.main-holder .site #content table.cart td.actions .input-text:focus, 
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, 
+input[type="datetime"]:focus, input[type="datetime-local"]:focus, 
+input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, 
+input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, 
+input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, 
+input[type="color"]:focus, input.input-text:focus, 
+select:focus{
+	border-color: #cdba6d;
+}
+/* Dynamic main menu color applying to responsive menu link text */
+.header-controls .search_box i.tsicon-fa-search,
+.righticon i,
+.menu-toggle i,
+.header-controls a{
+    color: rgba( 255,255,255 , 1) ;
+}
+.menu-toggle i:hover,
+.header-controls a:hover {
+    color: #cdba6d !important;
+}
+	.themestek-mmmenu-override-yes  #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu > li.mega-menu-item-type-widget div{
+		color: rgba( 255,255,255 , 0.8);
+		font-weight: normal;
+	}
+/*Logo Color --------------------------------*/ 
+h1.site-title{
+	color: #202020;
+}
+/**
+ * Heading Elements
+ * ----------------------------------------------------------------------------
+ */
+.themestek-textcolor-skincolor h1,
+.themestek-textcolor-skincolor h2,
+.themestek-textcolor-skincolor h3,
+.themestek-textcolor-skincolor h4,
+.themestek-textcolor-skincolor h5,
+.themestek-textcolor-skincolor h6,
+.themestek-textcolor-skincolor .themestek-vc_cta3-content-header h2{
+	color: #cdba6d !important;
+}
+.themestek-textcolor-skincolor .themestek-vc_cta3-content-header h4{
+	color: rgba( 205,186,109 , 0.90) !important;
+}
+.themestek-textcolor-skincolor .themestek-vc_cta3-content .themestek-cta3-description{
+	color: rgba( 205,186,109 , 0.60) !important;
+}
+.themestek-textcolor-skincolor{
+	color: rgba( 205,186,109 , 0.60);
+}
+.themestek-textcolor-skincolor a{
+	color: rgba( 205,186,109 , 0.80);
+}
+/**
+ * Floating Bar
+ * ----------------------------------------------------------------------------
+ */
+/* Show/hide topbar in some devices */
+@media (max-width: 1200px){
+	.themestek-fbar-btn,
+	    .themestek-fbar-box-w{
+			display: none !important;
+		}
+	}
+	/**
+ * 1. Textcolor
+ * ----------------------------------------------------------------------------
+ */
+/*** AttorCO Special ***/
+.ts-footer-contact-info i,
+.themestek-teambox-style-3 .themestek-box-team-position,
+.themestek-timeline-bottom h3,
+.themestek-fidbox-style-5 .themestek-sbox-icon-wrapper i,
+.themestek-blogbox-style-1 .cat-links a,
+.themestek-blogbox-style-2 .cat-links a,
+.themestek-servicebox-style-2 .themestek-box-category a,
+
+ul.themestek-recent-post-list > li .post-date,
+.single-service-contact-inner i,
+.single-service-contact li span,
+.themestek-headerstyle-classic .themestek-pre-header-wrapper:not(.themestek-bgcolor-skincolor) .top-contact i,
+.themestek-firstlater p:first-letter,
+.themestek-entry-meta-wrapper .themestek-meta-line a,
+.themestek-teambox-style-1 .themestek-team-social-links li a:hover,
+.themestek-portfoliobox-style-1 .themestek-box-category a,
+.themestek-ihbox-style-2 .themestek-ihbox-icon-wrapper i,
+.themestek-portfoliobox-style-3 .themestek-box-category a,
+.themestek-fidbox-style-3 .themestek-fid-inner,
+.themestek-fidbox-style-4 .themestek-fid-inner,
+.themestek-blogbox-style-1 .ts-meta-line.posted-on a,
+.themestek-blogbox-style-2 .themestek-entry-meta-wrapper .themestek-meta-line a,
+.themestek-blogbox-style-3 .themestek-entry-meta-wrapper .themestek-meta-line a,
+.themestek-servicebox-style-4 .themestek-box-link a,
+.sidebar .widget ul li a:hover,
+.themestek-entry-meta-wrapper .themestek-meta-line a:hover,
+.themestek-teambox-style-1 .themestek-box-title h4 a:hover,
+.themestek-servicebox-style-2.themestek-box .themestek-pf-box-title h3 a:hover,
+.themestek-servicebox-style-1 .themestek-box-content .themestek-box-link a:hover,
+.themestek-servicebox-style-1 .ts-ihbox-icon,
+.themestek-servicebox-style-3 .ts-ihbox-icon,
+.themestek-ihbox.themestek-ihbox-style-5 .themestek-vc_general.themestek-vc_btn3:hover,
+.themestek-ihbox.themestek-ihbox-style-5 .themestek-ihbox-icon,
+.themestek-box-blog-classic .themestek-box-title a:hover,
+.themestek-box-blog-classic .themestek-readmore-link a:hover,
+.themestek-testimonialbox-style-3 .themestek-box-footer,
+.themestek-fidbox-style-4 .themestek-sbox-icon-wrapper,
+.themestek-ihbox-style-5 .themestek-ihbox-icon .themestek-ihbox-big-number-text,
+.themestek-teambox-style-2.themestek-box-team .themestek-box-team-position,
+.themestek-teambox-style-3 .themestek-box-content-inner .themestek-teambox-email a:hover,
+.themestek-teambox-style-3 .themestek-box-title h4 a:hover,
+.themestek-teambox-style-2 .themestek-box-title h4 a:hover,
+.themestek-blogbox-style-2 .themestek-box-title a:hover,
+.themestek-blogbox-style-1 .themestek-box-title a:hover,
+.themestek-box-blog .ts-blogbox-readmore a:hover,
+.themestek-ihbox-style-1 .themestek-ihbox-icon-wrapper i,
+.themestek-ihbox-style-2 .themestek-vc_general.themestek-vc_btn3:hover,
+.themestek-ihbox-style-3 .themestek-vc_general.themestek-vc_btn3:hover,
+.themestek-ihbox-style-1 .themestek-vc_general.themestek-vc_btn3:hover,
+/*** End ***/
+/* Text color skin in row secion*/
+.themestek-vc_icon_element-color-skincolor.themestek-vc_icon_element-style-,
+.themestek-vc_btn3-style-outline.themestek-vc_btn3-color-skincolor,
+.themestek-icon-skincolor i,
+.themestek-background-image.themestek-row-textcolor-skin h1, 
+.themestek-background-image.themestek-row-textcolor-skin h2, 
+.themestek-background-image.themestek-row-textcolor-skin h3, 
+.themestek-background-image.themestek-row-textcolor-skin h4, 
+.themestek-background-image.themestek-row-textcolor-skin h5, 
+.themestek-background-image.themestek-row-textcolor-skin h6,
+.themestek-background-image.themestek-row-textcolor-skin .themestek-element-heading-wrapper h2,
+.themestek-background-image.themestek-row-textcolor-skin .themestek-reviews-title,
+.themestek-background-image.themestek-row-textcolor-skin a,
+.themestek-background-image.themestek-row-textcolor-skin .item-content a:hover,
+.themestek-row-textcolor-skin h1, 
+.themestek-row-textcolor-skin h2, 
+.themestek-row-textcolor-skin h3, 
+.themestek-row-textcolor-skin h4, 
+.themestek-row-textcolor-skin h5, 
+.themestek-row-textcolor-skin h6,
+.themestek-row-textcolor-skin .themestek-element-heading-wrapper h2,
+.themestek-row-textcolor-skin .themestek-reviews-title,
+.themestek-row-textcolor-skin a,
+.themestek-row-textcolor-skin .item-content a:hover,
+.themestek-vc_icon_element-color-skincolor,
+.site-footer-w .themestek-textcolor-white a:hover{
+	color: #cdba6d;
+}
+/**
+ * 2. Second Skin Textcolor
+ * ----------------------------------------------------------------------------
+ */
+
+.themestek-box-star i {
+	color:  #42474c;
+}
+/**
+ * 3. Background
+ * ----------------------------------------------------------------------------
+ */
+
+/*** AttorCO Special ***/
+body .site-footer .widget .widget-title:before,
+.themestek-fidbox-style-2,
+.themestek-teambox-style-3 .themestek-team-image-box:before,
+
+.themestek-vc_btn3.themestek-vc_btn3-color-black.themestek-vc_btn3-style-flat:hover,
+.themestek-timeline-bottom h3:after,
+.slick-dots li.slick-active button,
+.themestek-ihbox-style-5.themestek-ihbox .themestek-custom-heading:before,
+
+.widget.themestek_widget_list_all_posts ul .themestek-post-active a,
+.widget.themestek_widget_list_all_posts ul > li a:hover,
+.themestek-element-heading-wrapper h2.themestek-custom-heading:after,
+.themestek-iconbox-active .themestek-ihbox-style-3,
+.themestek-teambox-style-1 .themestek-team-social-links li a:hover,
+.themestek-vertical-text,
+.themestek-pf-single-style-1 .project-details-top,
+.themestek-pf-single-style-4 .project-details-top,
+.themestek-servicebox-style-4 .themestek-box-link a:before,
+.themestek-blogbox-style-2 .themestek-entry-meta-blogclassic > span+span:before,
+.themestek-blogbox-style-3 .themestek-entry-meta-blogclassic > span+span:before,
+.themestek-bg-effect .vc_single_image-wrapper:after,
+.site-footer .sidebar-container.themestek-textcolor-white .tagcloud a:hover,
+.themestek-ptablebox-featured-col .themestek-ptablebox-style-1 .themestek-vc_btn3.themestek-vc_btn3-color-inverse.themestek-vc_btn3-style-flat,
+.themestek-ptablebox-style-1 .themestek-vc_btn3.themestek-vc_btn3-color-inverse.themestek-vc_btn3-style-flat:hover,
+.main-holder .site-content nav.woocommerce-pagination ul li .page-numbers.current, 
+.main-holder .site-content nav.woocommerce-pagination ul li a:hover, 
+
+.themestek-pagination .page-numbers.current, 
+.themestek-pagination .page-numbers:hover,
+
+.comments-pagination .page-numbers.current, 
+.comments-pagination .page-numbers:hover,
+
+.themestek-header-wc-cart-link .number-cart,
+.ts-tab-box-skincolor .vc_tta-container,
+.themestek-portfoliobox-style-1 .themestek-icon-btn,
+.ts-footer-contact .themestek-vc_icon_element,
+.themestek-team-member-single-content-wrapper .themestek-team-social-links li a,
+.themestek-teambox-style-2 .themestek-team-social-links li a:hover,
+.themestek-teambox-style-3 .themestek-team-social-links li a:hover,
+.themestek-blogbox-style-1 .themestek-meta-date,
+.themestek-blogbox-style-2 .themestek-meta-date,
+.themestek-ihbox-style-6 .ts-ihbox-icon-wrapper,
+.themestek-blogbox-style-3.themestek-box-blog .themestek-meta-date,
+body .site-footer .widget .widget-title:after,
+.site-footer .mc4wp-form-fields button,
+/*** End ***/
+.wp-block-button__link,
+.themestek-social-share-links ul li a:hover,
+.themestek-meta-info-bottom-left .tags-links a:hover,
+.themestek-no-featured-content.post.sticky,
+.comment-body .reply a:hover,
+.themestek-header-overlay .site-header.themestek-sticky-bgcolor-skincolor.is_stuck,
+.site-header-menu.themestek-sticky-bgcolor-skincolor.is_stuck,
+.themestek-header-style-infostack .site-header .themestek-stickable-header.is_stuck.themestek-sticky-bgcolor-skincolor,
+.is_stuck.themestek-sticky-bgcolor-skincolor,
+.themestek-servicebox-style-1.themestek-box .themestek-box-link a:before,
+.themestek-bgcolor-skincolor,
+.themestek-skincolor-bg,
+.themestek-col-bgcolor-skincolor .themestek-bg-layer-inner,
+.themestek-bgcolor-skincolor > .themestek-bg-layer,
+footer#colophon.themestek-bgcolor-skincolor > .themestek-bg-layer,
+.themestek-titlebar-wrapper.themestek-bgcolor-skincolor .themestek-titlebar-wrapper-bg-layer,
+.themestek-titlebar-wrapper.themestek-breadcrumb-on-bottom .themestek-titlebar .breadcrumb-wrapper .container,
+.sidebar h3.widget-title:before,
+
+mark, 
+ins,
+.tagcloud a:hover,
+.themestek_prettyphoto .vc_single_image-wrapper:after, 
+#totop,
+.themestek-commonform input[type="submit"],
+.themestek-sortable-list .themestek-sortable-link a:hover,
+.themestek-sortable-list .themestek-sortable-link a.selected,
+.themestek-pf-single-content-bottom .themestek-pf-single-category-w a:hover,
+.themestek-box-portfolio.themestek-box-view-overlay .themestek-icon-box:hover,
+.themestek-vc_icon_element-background-color-skincolor,
+.footer .widget-title:after,
+.themestek-vc_general.themestek-vc_btn3.themestek-vc_btn3-color-skincolor.themestek-vc_btn3-style-outline:hover,
+.themestek-vc_general.themestek-vc_btn3.themestek-vc_btn3-color-skincolor:not(.themestek-vc_btn3-style-text):not(.themestek-vc_btn3-style-outline),
+.vc_progress_bar.vc_progress-bar-color-skincolor .vc_single_bar .vc_bar,
+ button, input[type="submit"],
+.themestek-col-bgcolor-skincolor {
+	background-color: #cdba6d;
+}
+
+body table.booked-calendar td.today:hover .date span,
+#ui-datepicker-div.booked_custom_date_picker table.ui-datepicker-calendar tbody td.ui-datepicker-today a, 
+ui-datepicker-div.booked_custom_date_picker table.ui-datepicker-calendar tbody td.ui-datepicker-today a:hover, 
+body #booked-profile-page input[type=submit].button-primary, 
+body table.booked-calendar input[type=submit].button-primary, 
+body .booked-list-view button.button, 
+body .booked-list-view input[type=submit].button-primary, body .booked-list-view button.button, 
+body .booked-list-view input[type=submit].button-primary, 
+body .booked-modal input[type=submit].button-primary, 
+body table.booked-calendar .booked-appt-list .timeslot .timeslot-people button, 
+body #booked-profile-page .booked-profile-appt-list .appt-block.approved .status-block, 
+body #booked-profile-page .appt-block .google-cal-button > a, 
+body .booked-modal p.booked-title-bar, 
+body table.booked-calendar td:hover .date span, 
+body .booked-list-view a.booked_list_date_picker_trigger.booked-dp-active, 
+body .booked-list-view a.booked_list_date_picker_trigger.booked-dp-active:hover, 
+.booked-ms-modal .booked-book-appt,
+body table.booked-calendar thead tr:first-child th,
+.ts-bt-skincolor{
+	background-color: #cdba6d !important;
+}
+
+
+
+/*** End ***/
+/**
+ * 4. Second Screen  Background Color
+ * ----------------------------------------------------------------------------
+ */
+
+
+
+.themestek-vc_btn3.themestek-vc_btn3-color-inverse.themestek-vc_btn3-style-flat:hover,
+.themestek-servicebox-style-4 .themestek-box-link a:after,
+.themestek-header-overlay .themestek-vc_general.themestek-vc_btn3.themestek-vc_btn3-color-skincolor:not(.themestek-vc_btn3-style-text):not(.themestek-vc_btn3-style-outline),
+.themestek-box-blog-classic .themestek-blog-classic-datebox-overlay,
+.themestek-bg-effect2 .vc_single_image-wrapper:after,
+.themestek-teambox-style-1 .themestek-item-thumbnail-inner:after, 
+.themestek-ptablebox-featured-col .themestek-ptablebox-style-1,
+.themestek-testimonialbox-style-4 .themestek-box-img:after{   
+    background-color:  #42474c;
+}
+
+/*** End ***/
+/**
+ * 5. Background with opacity
+ * ----------------------------------------------------------------------------
+ */
+/*** AttorCO Special ***/
+.themestek-teambox-style-4 .themestek-box-content,
+.themestek-teambox-style-2 .themestek-item-thumbnail:before,
+.themestek-portfoliobox-style-2 .themestek-overlay{
+	background-color: rgba( 205,186,109 , 0.80);
+}
+/*** End ***/
+/**
+ * 6. Tabs and Accordion
+ * ----------------------------------------------------------------------------
+ */
+/******** Tab style ********/
+/* Tab flat style */
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor .vc_tta-tab>a,
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor .vc_tta-panel .vc_tta-panel-heading,
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor .vc_tta-panel.vc_active .vc_tta-panel-heading,
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor .vc_tta-tab>a:focus, 
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor .vc_tta-tab>a:hover,
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor .vc_tta-tab.vc_active>a,
+/* Tab modern style */
+.wpb-js-composer .vc_tta-style-modern.vc_tta-color-skincolor .vc_tta-tab>a, 
+.wpb-js-composer .vc_tta-style-modern.vc_tta-color-skincolor .vc_tta-panel .vc_tta-panel-heading,
+/* Tab classic style */
+.wpb-js-composer .vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-tab.vc_active > a, 
+.wpb-js-composer .vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-tab > a:focus,
+.wpb-js-composer .vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-tab > a:hover,
+.wpb-js-composer .vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-tab.vc_active > a,
+.wpb-js-composer .vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-panel.vc_active .vc_tta-panel-title>a{
+	background-color: #cdba6d;
+}
+.wpb-js-composer .vc_tta-style-flat.vc_tta-color-skincolor:not(.vc_tta-o-no-fill) .vc_tta-panel .vc_tta-panel-body{
+	background-color: rgba( 205,186,109 , 0.80);
+}
+/*** Tab outline style ***/
+.wpb-js-composer .vc_tta-container  .vc_tta-style-outline.vc_tta.vc_general.vc_tta-color-skincolor .vc_tta-tab.vc_active>a {
+    border-color: #cdba6d;    
+    color: #cdba6d;
+}
+.wpb-js-composer .vc_tta-style-outline.vc_tta-color-skincolor .vc_tta-panel .vc_tta-panel-heading,
+.wpb-js-composer .vc_tta-style-outline.vc_tta-color-skincolor .vc_tta-tab>a {
+    border-color: #cdba6d;    
+    color: #cdba6d;
+}
+.wpb-js-composer .vc_tta-style-outline.vc_tta-color-skincolor .vc_tta-panel .vc_tta-panel-heading:hover,
+.wpb-js-composer .vc_tta-style-outline.vc_tta-color-skincolor .vc_tta-tab>a:focus, 
+.wpb-js-composer .vc_tta-style-outline.vc_tta-color-skincolor .vc_active .vc_tta-tab>a:hover{
+	background-color: #cdba6d;
+}
+.themestek-blogbox-style-2 .themestek-meta-date,
+.themestek-headerstyle-classic.themestek-slider-yes #themestek-home,
+.wpb-js-composer .vc_tta-color-skincolor.vc_tta-style-outline .vc_tta-tab>a:focus, 
+.wpb-js-composer .vc_tta-color-skincolor.vc_tta-style-outline .vc_tta-tab>a:hover {
+    background-color: #cdba6d;
+}
+.wpb-js-composer .vc_tta-style-outline.vc_tta-color-skincolor .vc_tta-panel.vc_active .vc_tta-panel-title>a{
+	color: #cdba6d;
+}
+
+ .wpb-js-composer .vc_tta-color-skincolor.vc_tta-style-outline:not(.vc_tta-o-no-fill) .vc_tta-panel .vc_tta-panel-body,
+ .wpb-js-composer .vc_tta-accordion.vc_tta-style-outline.vc_tta-color-skincolor .vc_tta-panel.vc_active .vc_tta-panel-heading{
+ 	border-color: #cdba6d;    
+}
+/******** Accordion style ********/
+/* Tab classic style */
+.wpb-js-composer .vc_tta-color-skincolor.vc_tta-style-classic:not(.vc_tta-o-no-fill) .vc_tta-panel .vc_tta-panel-body {
+    background-color: #cdba6d;
+}
+.wpb-js-composer .vc_tta-accordion.vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-panel.vc_active .vc_tta-panel-heading,
+.wpb-js-composer .vc_tta-accordion.vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-panel .vc_tta-panel-heading:focus, 
+.wpb-js-composer .vc_tta-accordion.vc_tta-style-classic.vc_tta-color-skincolor .vc_tta-panel .vc_tta-panel-heading:hover {
+	background-color: #cdba6d;
+}
+/**
+ * Border color
+ * ----------------------------------------------------------------------------
+ */
+
+.themestek-teambox-style-1 .themestek-box-content,
+.themestek-servicebox-style-2 .themestek-serviceimagebox,
+.themestek-vc_btn3-style-outline.themestek-vc_btn3-color-skincolor:not(.themestek-vc_btn3-style-text),
+.wpb-js-composer .vc_tta-color-skincolor.vc_tta-style-modern .vc_tta-tab>a{
+	border-color: #cdba6d;
+}
+.main-form .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #cdba6d transparent transparent transparent;
+}
+.main-form  .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #cdba6d transparent;
+    border-width: 0 4px 5px 4px;
+}
+/* Progress Bar Section */
+.vc_progress_bar .vc_general.vc_single_bar.vc_progress-bar-color-skincolor span.themestek-vc_label_units.vc_label_units:before,
+span.themestek-vc_label_units.vc_label_units:before{ 
+	border-color: #cdba6d transparent; 
+}
+
+.themestek-seperator-solid .themestek-vc_general.themestek-vc_cta3 .themestek-vc_cta3-content-header:before,
+
+.themestek-box-effect,
+.themestek-search-overlay input[type="search"],
+.nav-links .nav-next:before, 
+.nav-links .nav-previous:before{
+	border-bottom-color: #cdba6d; 
+}
+.slick-dots li.slick-active button{
+	box-shadow: inset 0 0 0 2px #cdba6d;
+}
+/*** AttorCO Special ***/
+.ts-playeffect .themestek-vc_icon_element-inner{
+    box-shadow: 0 0 0 0 rgba( 205,186,109 , 0.80);
+}
+
+.themestek-timeline-bottom{
+	border-top-color: #cdba6d; 
+}
+
+
+
+ /************************ Mega Main Menu **************************/  
+ul.nav-menu li ul li a, 
+div.nav-menu > ul li ul li a, 
+.themestek-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal .mega-sub-menu a{
+	opacity: 0.95;
+}
+#site-header-menu #site-navigation div.nav-menu > ul > li li.current_page_ancestor > a, 
+#site-header-menu #site-navigation div.nav-menu > ul > li li.current_page_item > a, 
+#site-header-menu #site-navigation div.nav-menu > ul > li li.current_page_parent > a, 
+#site-header-menu #site-navigation div.nav-menu > ul > li li.current-menu-ancestor > a, 
+#site-header-menu #site-navigation div.nav-menu > ul > li li.current-menu-parent > a, 
+#site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal > li.mega-menu-item ul.mega-sub-menu li.current-menu-item > a, 
+#site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal > li.mega-menu-item ul.mega-sub-menu li.mega-current-menu-item > a,
+#site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal > li.mega-menu-item ul.mega-sub-menu li.mega-current-menu-ancestor > a{
+	opacity: 1;
+}
+/************************ End Mega Main Menu **************************/  
+/************************ Woocommece and bbPress **************************/ 
+#bbpress-forums li.bbp-header,
+#bbpress-forums .bbp-search-form input[type="submit"]:hover,
+.ts-header-icons .ts-header-wc-cart-link span.number-cart,
+.woocommerce button.button.alt.disabled,
+.woocommerce button.button.alt:disabled,
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce .woocommerce-message  .button,
+.woocommerce div.product .woocommerce-tabs ul.tabs li a:before,
+.woocommerce div.product .woocommerce-tabs ul.tabs li a,
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt{
+	background: #cdba6d;
+}
+.woocommerce-info,
+.woocommerce-message{
+	border-top-color: #cdba6d; 
+}
+.woocommerce ul.products li.product a:hover,
+.woocommerce ul.product_list_widget li a:hover h2,
+.woocommerce .star-rating span,
+.woocommerce-info::before,
+.woocommerce-message::before{
+	color: #cdba6d;
+}
+.woocommerce-pagination ul li a:hover,
+.woocommerce-pagination ul li span,
+.woocommerce nav.woocommerce-pagination ul li a:focus,
+.woocommerce nav.woocommerce-pagination ul li a:hover,
+.woocommerce nav.woocommerce-pagination ul li span.current{
+   background: #cdba6d;
+   border-color: #cdba6d; 
+}
+/* ********************* Responsive Menu Code Start *************************** */
+.headerlogo{
+    height: 105px;
+    line-height: 105px;
+}
+/* Header sticky animation */        
+@keyframes menu_sticky {
+    0%   {margin-top:-120px;opacity: 0;}
+    50%  {margin-top: -64px;opacity: 0;}
+    100% {margin-top: 0;opacity: 1;}
+}
+/**
+* Responsive Menu
+* ----------------------------------------------------------------------------
+*/
+@media (max-width: 1200px){
+    body.themestek-slider-yes{
+        background-image: none;
+    }
+    .themestek-slider-yes .headerlogo .standardlogo{
+        display: inline-block;
+    }
+    .themestek-header-text-area,
+    .themestek-header-icon.themestek-header-wc-cart-link{
+        display: none;
+    }    
+    /*** Header Section ***/
+    .site-header-main.themestek-table{
+        margin: 0 15px;
+        width: auto;
+        display: block;
+    }   
+    .site-header-main.themestek-table .themestek-table-cell {
+        display: block;     
+    }   
+    .themestek-header-icon{
+        padding-right: 0px;
+        padding-left: 20px;
+        position: relative;
+    } 
+    .site-title{
+        width: inherit;        
+    }       
+    /*** Navigation ***/
+    .main-navigation {
+        clear: both;
+    }    
+    .site-branding,
+    .menu-themestek-main-menu-container,
+    #site-header-menu {
+        float: none;    
+    }      
+    /*** Responsive Menu ***/    
+    .righticon{
+        position: absolute;
+        right: 0px;
+        z-index: 33;
+        top: 15px;
+        display: block;
+    }    
+    .righticon i{
+        font-size:20px;
+        cursor:pointer;
+        display:block;
+        line-height: 0px;
+    } 
+    /*** Default menu box ***/ 
+    #site-header-menu #site-navigation div.nav-menu > ul{
+        position: absolute;
+        padding: 10px 20px; 
+        left: 0px;  
+        box-shadow: rgba(0, 0, 0, 0.12) 3px 3px 15px;
+        border-top: 3px solid #cdba6d;   
+        background-color: #333;       
+        z-index: 100;
+        width: 100%;
+        top: 105px;  
+    }  
+               
+        #site-header-menu #site-navigation div.nav-menu > ul{
+            background-color: #313538;
+        }    
+          
+    #site-header-menu #site-navigation div.nav-menu > ul,
+    #site-header-menu #site-navigation div.nav-menu > ul ul {
+        overflow: hidden;
+        max-height: 0px;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul ul ul{
+        max-height: none;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul > li{
+        position: relative;
+        text-align: left;
+    }    
+    #site-header-menu #site-navigation.toggled-on div.nav-menu > ul{       
+        display: block;
+        max-height: 10000px;       
+    }
+    #site-header-menu #site-navigation.toggled-on div.nav-menu > ul ul.open {
+        max-height: 10000px;
+    } 
+    #site-header-menu #site-navigation div.nav-menu > ul ul{
+          background-color: transparent !important;
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul > li a{
+        display: block;
+        padding: 15px 0px;        
+        text-decoration: none;
+        line-height: 18px;
+        height: auto;
+        line-height: 18px !important;
+    }     
+    #site-header-menu #site-navigation div.nav-menu > ul ul a{
+        margin: 0;
+        display: block;
+        padding: 15px 15px 15px 0px;
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul > li li a:before{
+        font-family: "FontAwesome";
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: .2em;
+        text-align: center;
+        opacity: .8;
+        font-variant: normal;
+        text-transform: none;
+        font-size: 13px;
+        content: "\f105";
+        margin-right: 8px;
+        display: none;
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul > li a{
+        display: inline-block;
+    }  
+            #site-header-menu #site-navigation div.nav-menu > ul > li > a,
+        .righticon i  {
+            color: rgba( 255,255,255 , 1);
+        } 
+        #site-header-menu #site-navigation div.nav-menu > ul li {
+            border-bottom: 1px solid rgba( 255,255,255 , 0.15);
+        }  
+        #site-header-menu #site-navigation div.nav-menu > ul li li:last-child{
+            border-bottom: none;
+        }     
+        
+    /* Dynamic main menu color applying to responsive menu link text */           
+    .menu-toggle i,     
+    .themestek-header-icons a{
+        color: rgba( 255,255,255 , 1) ;
+    }
+    .themestek-attorco-icon-bars,
+    .themestek-attorco-icon-bars:before, 
+    .themestek-attorco-icon-bars:after{
+        background: rgba( 255,255,255 , 1);
+    }
+    .themestek-headerstyle-infostack .main-navigation:not(.toggled-on) .themestek-attorco-icon-bars,
+    .themestek-headerstyle-infostack .main-navigation .themestek-attorco-icon-bars:before, 
+    .themestek-headerstyle-infostack .main-navigation .themestek-attorco-icon-bars:after{
+        background: #031b4e;
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul{
+        padding-right: 15px;
+        padding-left: 15px;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul ul{
+        list-style: none;
+    }      
+    .themestek-header-icons{
+        position: absolute;
+        top: 4px;
+        float: none;
+        right: 53px;
+        margin-right: 0px;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul > li ul{       
+        display: block !important;
+        height: auto !important;  
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul > li ul{
+        background-image: none !important;      
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul > li ul{
+        background: none;
+        background-image: none;
+    }    
+    .themestek-header-overlay .themestek-titlebar-wrapper .themestek-titlebar-inner-wrapper{
+        padding-top: 0px;
+    }
+    .themestek-header-icon{
+        top: 38px;
+        display: block;
+        position: absolute; 
+        right: 7px;
+    }
+    #site-header-menu #site-navigation .menu-toggle {
+        top: 33px;
+        display: block;
+        position: absolute; 
+        right: 0;       
+        width: 40px;       
+        background: none;
+        z-index: 1;
+        outline: none;
+        padding: 0;
+        line-height: normal;
+    }
+    /*** Display None ***/
+    .themestek-header-overlay .site-header .themestek-header-right,
+    .themestek-infostack-right-content,
+    #site-header-menu #site-navigation div.nav-menu > ul{
+        display: none;
+    }
+    .themestek-header-style-infostack .themestek-stickable-header-w{
+        height: auto !important;
+    }
+    .themestek-header-style-infostack .themestek-header-top-wrapper.container{
+        width: 100%;
+    }
+    /*** sticky footer bottom margin ***/   
+    body .site-content-wrapper {
+        margin-bottom: 0px !important;
+    }
+    /*** Classic header cross ***/  
+    .themestek-header-overlay .themestek-header-icons,
+    .themestek-header-overlay .site-header .themestek-social-links-wrapper,
+    .themestek-headerstyle-classic.themestek-slider-yes #themestek-home{
+        display: none;
+    }
+    .themestek-header-overlay .site-header-main.themestek-table{  
+        margin: 0 15px;
+        padding: 0;
+        width: auto;
+        display: block;
+    }
+    .themestek-header-overlay .site-header-main.themestek-table .themestek-header-top-wrapper.container{
+       width: auto;
+       padding: 0; 
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-stickable-header-w{
+        background-color: transparent !important;
+    }
+
+
+}
+@media (min-width: 1200px) {
+    .site-header .themestek-vc_btn3-container{
+        margin-bottom: 0;
+    }
+    /*** Header full ***/
+    .site-header-main.container-full {
+        padding: 0 50px;
+    }
+    .themestek-stickable-header.is_stuck{        
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
+    } 
+    .themestek-stickable-header{
+        z-index: 12;      
+    }
+    .themestek-header-right,   
+    .headerlogo, 
+    #site-header-menu #site-navigation div.nav-menu > ul,
+    #site-header-menu #site-navigation div.nav-menu > ul > li, 
+    #site-header-menu #site-navigation div.nav-menu > ul > li > a {
+        transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+    }
+    .themestek-header-icon{       
+        position: relative;
+    }
+    #site-header-menu #site-navigation .nav-menu,  
+    #site-header-menu,        
+    .menu-themestek-main-menu-container{
+        float: right;
+    }    
+    .navbar{
+        vertical-align: top;
+    }
+    .menu-toggle {
+        display: none;
+        z-index: 10;    
+    }
+    .menu-toggle i{
+        color:#fff;
+        font-size:28px;
+    }
+    .toggled-on li, 
+    .toggled-on .children {
+        display: block;
+    }  
+    #site-header-menu #site-navigation .nav-menu-wrapper > ul {
+        margin: 0;
+        padding: 0; 
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul{
+        margin: 0px;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul > li{
+        height: 105px;
+        line-height: 105px !important;
+    }  
+    #site-header-menu #site-navigation div.nav-menu > ul > li {
+        margin: 0 0px 0 0;
+        display: inline-block;
+        position: relative;
+        vertical-align: top;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul > li > a{
+        display: block; 
+        margin: 0px 18px 0px 18px;
+        padding:  0px; 
+        text-decoration: none;
+        position: relative;
+        z-index: 1;       
+        height: 105px;
+        line-height: 105px;        
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul{    
+        height: 105px;       
+    }
+    .is_stuck #site-header-menu #site-navigation div.nav-menu > ul{
+        height: 90px;  
+    }
+    /*WordPress Dropdown Menu*/
+    .themestek-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li li.current-menu-ancestor > a,    
+    .themestek-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li li.current-menu-item > a,    
+    .themestek-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li li.current_page_item > a,    
+    .themestek-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li li.current_page_ancestor > a{
+        color: #cdba6d ;
+    }
+        /*** Defaultsenu ***/      
+    .themestek-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li li:hover > a,
+    .themestek-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li li:hover > a{
+        color: #cdba6d ;
+    }
+    .themestek-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li.current-menu-ancestor > a, 
+    .themestek-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li.current_page_item > a,     
+    .themestek-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li.current_page_ancestor > a, 
+    .themestek-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu > ul > li:hover > a{
+        color: #cdba6d ;
+    } 
+          
+    #site-header-menu #site-navigation div.nav-menu > ul > li > a{
+        margin: 0px 15px 0px 15px;
+    }
+    .themestek-main-menu-more-than-six #site-header-menu #site-navigation div.nav-menu > ul > li > a{
+        margin: 0px 10px 0px 10px;
+    }
+
+    .site-header.is_stuck .social-icons li > a, 
+    .site-header.is_stuck .themestek-header-icons .themestek-header-icon a,
+
+    .is_stuck #site-header-menu #site-navigation div.nav-menu > ul > li > a,
+    #site-header-menu.is_stuck #site-navigation div.nav-menu > ul > li > a{
+        color: #313538;
+    }   
+    .site-header .social-icons li > a,
+    .themestek-header-icons .themestek-header-icon a{
+        color: rgba( 255,255,255 , 1) ;
+        transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+    }
+    .site-header .social-icons li > a:hover,
+    .themestek-header-icons .themestek-header-icon a:hover{
+        color: #cdba6d ;
+    }
+    .themestek-header-style-classic .site-header.themestek-bgcolor-white .themestek-header-icons .themestek-header-wc-cart-link a:hover span.number-cart{
+        color: #fff;
+    } 
+    /*** Sub Navigation Section ***/     
+    #site-header-menu #site-navigation div.nav-menu > ul > li ul{
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.20);
+    }
+    header#masthead #site-header-menu #site-navigation div.nav-menu > ul li.last ul.sub-menu{
+        left: auto;
+        right: 0px !important;
+    }    
+    header#masthead #site-header-menu #site-navigation div.nav-menu > ul li.last ul.sub-menu ul.sub-menu, 
+    header#masthead #site-header-menu #site-navigation div.nav-menu > ul li.lastsecond ul.sub-menu ul.sub-menu{
+        left: -100%;
+    }            
+    #site-header-menu #site-navigation div.nav-menu > ul ul {
+        width: 250px;
+        padding: 0px;
+    }        
+    #site-header-menu #site-navigation div.nav-menu > ul ul li > a {
+        margin: 0;
+        display: block;
+        padding: 12px 0px;
+        position: relative;         
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul ul li > a{
+        padding: 15px 20px;         
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul ul li:hover > a{
+        background: #fff;
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul ul li > a{
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }      
+  
+    #site-header-menu #site-navigation div.nav-menu > ul li > ul ul  {
+        border-left: 0;
+        left: 100%;
+        top: 0;        
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul li > ul ul.themestek-nav-left{
+        left: -100%;
+        right: 0;
+    }
+
+    #site-header-menu #site-navigation ul ul li {
+        position: relative;
+    }    
+    #site-header-menu #site-navigation div.nav-menu > ul ul {
+        text-align: left;
+        position: absolute;        
+        display: block;
+        line-height: 14px;        
+        margin: 0;
+        list-style: none;
+        left: 0;        
+        border-radius: 0;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        background-clip: padding-box;
+        z-index: 99;
+
+        visibility: hidden;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: all .3s linear 0s;
+        transition: all .3s linear 0s;
+    }
+    #site-header-menu #site-navigation div.nav-menu > ul li:hover > ul {
+        opacity: 1;        
+        visibility: visible; 
+    }   
+    /*** Sep Section ***/
+    #site-header-menu #site-navigation div.nav-menu ul ul > li {
+        border-bottom: 1px solid transparent;
+    } 
+    .themestek-dmenu-sep-grey #site-header-menu #site-navigation div.nav-menu ul ul > li{
+        border-bottom-color: rgba(0, 0, 0, 0.10);
+    }
+    .themestek-dmenu-sep-white #site-header-menu #site-navigation div.nav-menu ul ul > li {
+        border-bottom-color: rgba(255, 255, 255, 0.20);
+    }
+    /*** Sticky Header Height ***/ 
+    header .is_stuck #site-header-menu #site-navigation,    
+    .is_stuck .headerlogo,
+    .is_stuck #site-header-menu #site-navigation div.nav-menu > ul > li,
+    .is_stuck #site-header-menu #site-navigation div.nav-menu > ul > li > a{
+        height: 90px ;
+        line-height: 90px;
+    }
+    /*** Sub Navigation menu ***/
+    #site-header-menu #site-navigation div.nav-menu > ul > li > ul {
+        top: auto; 
+        border-bottom: 3px solid #cdba6d;       
+    }  
+    /*** Sticky Sub Navigation menu ***/
+    .site-header-main.container-fullwide{
+        padding-left: 30px;
+        padding-right: 0px;
+    }    
+    /*** Header Icon border ***/       
+    .is_stuck .themestek-header-icons{  
+        border-left-color: rgba( 49,53,56 , 0.15) ;
+        height: 90px;
+    }    
+    header .is_stuck .site-header:after{
+        border-bottom-color: rgba( 49,53,56 , 0.15) ;
+    }
+    /*** Header Text Area ***/
+    .themestek-header-style-classic .nav-menu{
+        margin-right:10px;
+    }
+    .themestek-header-style-classic .themestek-header-icons {
+         margin-left: 15px;       
+         float: right;
+    }
+    .themestek-header-style-classic .themestek-header-text-area {
+         float: right;
+         margin-left: 20px;
+    }
+    .themestek-header-style-classic:not(.themestek-header-overlay) .themestek-header-icons,
+    .themestek-header-style-classic:not(.themestek-header-overlay) .themestek-header-text-area {
+        height: 105px;
+        line-height: 105px;
+        transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+    }
+    .themestek-header-style-classic .is_stuck .themestek-header-icons,
+    .themestek-header-style-classic .is_stuck .themestek-header-text-area {
+        height: 90px;
+        line-height: 90px;
+    }
+    .themestek-header-style-classic .ts-vc_btn3 {
+        padding: 20px 35px;
+        padding-right: 50px;
+        background-color: #42474c;
+        color: #062945;
+        font-family: "Muli", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 900;
+        display: inline-block;
+        line-height: normal;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    .themestek-header-style-classic .themestek-vc_btn3:hover{
+        background-color: #062945;
+        color: #fff
+    }
+    .themestek-header-style-classic .ts-vc_btn3 i{
+        font-size: 15px;
+        margin-right: -20px;
+        margin-left: 10px;
+    }
+
+    .themestek-header-style-classic #site-header-menu #site-navigation .themestek-header-icon a{
+        line-height: 35px;
+        /*color: #313538;*/
+        display: inline-block;
+        font-size: 20px;
+        text-align: center;
+    }
+    .themestek-header-style-classic #site-header-menu #site-navigation .themestek-header-icon a:hover{
+        color: #cdba6d;
+    }
+    .themestek-header-style-classic #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a:hover{
+        border-color: transparent;;
+        color: #fff;
+    }
+    .themestek-header-style-classic #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a:hover .number-cart{
+        background-color: rgba( 255,255,255 , 1);
+    }
+
+    /*themestek-header-wc-cart-link*/
+    .themestek-header-wc-cart-link{
+        margin-right: 15px;
+    }
+    .themestek-header-style-infostack .themestek-header-wc-cart-link {
+        margin-right: 5px;
+    }
+    .themestek-header-wc-cart-link .number-cart{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        background-color: #cdba6d;
+        color: #fff;
+        border-radius: 50%;
+        top: -21px;
+        left: 8px;
+        font-size: 11px;
+        transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+    }
+    .themestek-headerstyle-infostack .themestek-header-wc-cart-link .number-cart{
+        background-color: #fff;
+        color: #313437;
+        top: 4px;
+        left: 28px;
+        text-align: center;
+        font-size: 13px;
+    }
+    .themestek-header-style-overlay #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a,
+    .themestek-header-style-classic #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a{
+        background-color: transparent;
+        color: rgba( 255,255,255 , 1) ;
+    }
+    .themestek-header-style-overlay .is_stuck #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a,
+    .themestek-header-style-classic .is_stuck #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a{           
+        color: rgba( 49,53,56 , 1) ;
+    }
+    .themestek-header-style-overlay #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a:hover,
+    .themestek-header-style-classic #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a:hover{     
+        color: #cdba6d;
+    } 
+
+    .themestek-header-style-classic.themestek-header-overlay #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a:hover .number-cart{
+        color: #cdba6d;
+        background-color: #fff;
+    }
+
+    .themestek-header-style-classic.themestek-header-overlay .is_stuck #site-header-menu #site-navigation .themestek-header-icon.themestek-header-wc-cart-link a:hover .number-cart{
+        background-color: rgba( 49,53,56 , 1);
+        color: #fff;
+    }
+
+    /*** ThemeStek Center Menu ***/     
+    .themestek-header-menu-position-center #site-header-menu{
+        float: none;
+    }
+    .themestek-header-menu-position-center #site-header-menu #site-navigation{
+        text-align: center;
+        width: 100%;
+    }    
+    .themestek-header-menu-position-center #site-header-menu  #site-navigation .nav-menu{       
+        float: none;
+        right: 0;
+        left: 0;
+        text-align: center;      
+    }
+    .themestek-header-menu-position-center .site-header-menu.themestek-table-cell{
+        display: block;
+    }
+    .themestek-header-menu-position-center .headerlogo, 
+    .themestek-header-menu-position-center .themestek-header-icon{
+        position: relative;
+        z-index: 2;
+    }  
+
+    /*** ThemeStek Left Menu ***/   
+    .themestek-header-menu-position-left #site-header-menu{
+        float: none;
+        display: block;
+    }
+    .themestek-header-menu-position-left #site-header-menu #site-navigation .nav-menu{
+        float: none;
+    }
+    .themestek-header-menu-position-left .site-branding{    
+        padding-right: 25px;
+    }
+
+    /*** Header Social link ***/ 
+    .site-header .social-icons {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .site-header.is_stuck {
+        position: fixed;
+        width:100%;
+        top:0;    
+        z-index: 999;
+        margin:0;
+        animation-name: menu_sticky;
+        -webkit-box-shadow: 0px 13px 25px -12px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 13px 25px -12px rgba(0,0,0,0.25);
+        box-shadow: 0px 13px 25px -12px rgba(0,0,0,0.25);
+        padding: 0;
+    }    
+    #site-header-menu #site-navigation div.nav-menu ul ul > li:last-child{
+        border-bottom: none !important;
+    }
+
+    /***  Ts Header Style Infostack ***/     
+    .themestek-header-style-infostack{
+        position: relative;   
+    }
+
+    .themestek-header-style-infostack .site-header .themestek-header-top-wrapper-inner:after{
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+    .themestek-header-style-infostack .site-header.themestek-bgcolor-white .themestek-infostack-right-content:after,
+    .themestek-header-style-infostack .site-header.themestek-bgcolor-white .themestek-header-top-wrapper-inner{
+        background-color:  #fff;
+    }
+    
+    .themestek-header-style-infostack .site-header.themestek-bgcolor-darkgrey .themestek-infostack-right-content:after,
+    .themestek-header-style-infostack .site-header.themestek-bgcolor-darkgrey .themestek-header-top-wrapper-inner{
+        background-color:  #313538;
+    }
+
+    
+
+    .themestek-header-style-infostack .site-header-menu-inner.themestek-header-menu-bg-color-darkgrey .site-header-menu-middle{
+        background-color:  #313538;
+    }
+    .themestek-header-style-infostack .site-header-menu-inner.themestek-header-menu-bg-color-grey .site-header-menu-middle{
+        background-color:  #f4fbfd;
+    }
+    .themestek-header-style-infostack .site-header-menu-inner.themestek-header-menu-bg-color-white .site-header-menu-middle{
+        background-color:  #fff;
+    }
+    
+
+    .themestek-header-style-infostack .site-header-menu-inner.themestek-header-menu-bg-color-custom .site-header-menu-middle{
+        background-color:  rgba(0,0,0,0.31);
+    }
+
+
+
+
+    .themestek-header-style-infostack .site-header-menu-inner.is_stuck.themestek-sticky-bgcolor-darkgrey .site-header-menu-middle{
+        background-color:  #313538;
+    }
+    .themestek-header-style-infostack .site-header-menu-inner.is_stuck.themestek-sticky-bgcolor-grey .site-header-menu-middle{
+        background-color:  #f4fbfd;
+    }
+    .themestek-header-style-infostack .site-header-menu-inner.is_stuck.themestek-sticky-bgcolor-white .site-header-menu-middle{
+        background-color:  #fff;
+    }
+    .themestek-header-style-infostack .site-header-menu-inner.is_stuck.themestek-sticky-bgcolor-skincolor .site-header-menu-middle{
+        background-color:  #cdba6d;
+    }
+
+    .themestek-header-style-infostack .site-header-menu-inner.is_stuck.themestek-sticky-bgcolor-custom .site-header-menu-middle{
+        background-color:  #ffffff;
+    }
+
+
+
+
+
+
+
+    .themestek-header-style-infostack .site-header .themestek-infostack-right-content{
+        position: relative;
+    }
+    .themestek-header-style-infostack .site-header .themestek-infostack-right-content:after{
+        content: "";
+        width: 5000px;
+        height: 100%;      
+        left: 0;
+        top: 0;
+        position: absolute;
+        z-index: -1;
+    }
+    .themestek-header-style-infostack #site-header-menu #site-navigation .nav-menu ul,
+    .themestek-header-style-infostack #site-header-menu #site-navigation .nav-menu{
+        float: left;
+        height: auto;
+    }  
+    .themestek-header-style-infostack  #site-header-menu{
+        float: none;       
+    }
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li{
+        vertical-align: top;
+    }
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li > a{ 
+        padding: 0px 25px 0px 25px;
+        margin: 0;
+    }
+
+    .themestek-header-style-infostack #site-header-menu #site-navigation .nav-menu ul {
+        height: auto !important;
+    }
+    .themestek-header-style-infostack .is_stuck .themestek-header-icons,
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li, 
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li > a, 
+    .themestek-header-style-infostack #site-header-menu #site-navigation {
+        height: 70px !important;
+        line-height: 70px !important;
+    }
+
+
+
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li.current-menu-item > a:after,
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li.current-menu-ancestor > a:after{    
+        background-color: #fff;       
+        content: "" ;
+        height: calc(100% - 30px);
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%) ;
+        -khtml-transform:  translateY(-50%) ;
+        -moz-transform:  translateY(-50%) ;
+        -ms-transform: translateY(-50%) ;
+        -o-transform: translateY(-50%) ;
+        transform:  translateY(-50%) ;
+        left: 0;
+        z-index: -1;
+    }
+/*    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li,      
+    .themestek-header-style-infostack #site-header-menu #site-navigation div.nav-menu > ul > li > a, 
+    .themestek-header-style-infostack #site-header-menu #site-navigation{
+        height: 70px;
+        line-height: 70px !important;
+    }*/
+   
+    .themestek-header-style-infostack .headerlogo{
+        height: 105px; 
+        margin-left: 20px;
+    }
+    .themestek-header-style-infostack .site-header-menu-middle .container {        
+        position: relative;  
+        width: auto;        
+    }
+    .themestek-header-style-infostack .is_stuck .site-header-menu-middle{
+        padding: 0px;
+    }
+    .themestek-header-style-infostack #site-header-menu .is_stuck .container,
+    .themestek-header-style-infostack .site-header-menu-inner{
+        background-color: transparent;
+    }
+    .themestek-header-style-infostack .site-header-menu .is_stuck .themestek-sticky-bgcolor-skincolor{
+        background-color: #cdba6d; 
+    }
+    .themestek-header-style-infostack .themestek-infostack-right-content {
+        float: right;
+        position: relative;
+        z-index: 3;
+        text-align: right;
+        height: 105px; 
+        display: table;
+    }
+    .themestek-header-style-infostack .themestek-header-button-w,
+    .themestek-header-style-infostack .themestek-infostack-right-content .info-widget{
+        vertical-align: middle;
+        display: table-cell;
+        text-align: left;
+    }
+    .themestek-header-style-infostack .themestek-header-button-w a{
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .themestek-infostack-right-content .info-widget *{
+        margin-bottom: 0;
+    }
+    .themestek-infostack-right-content .info-widget i{
+        font-size: 24px;
+        color: #cdba6d;
+    }
+    .themestek-infostack-right-content .themestek-attorco-icon-location-pin:before{
+        margin-left: 0;
+    }
+    .themestek-infostack-right-content .info-widget .media-top h3{
+        font-size: 20px;
+        line-height: 24px;
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .themestek-infostack-right-content .info-widget .media-bottom{
+        color: #737373;
+        font-size: 14px;
+        padding-left: 10px;
+        margin-top: 5px;
+    }
+    
+    .themestek-infostack-right-content .info-widget .media-left .icon{
+        margin-right: 15px;      
+        height: 55px;
+        line-height: 55px;
+        text-align: center;
+        border-radius: 50%;
+    } 
+    .themestek-infostack-right-content .info-widget h3{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px; 
+    }
+    .themestek-infostack-right-content .info-widget h6{
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: normal;
+        color: #76797e;
+    }
+    .themestek-header-style-infostack .themestek-infostack-right-content .info-widget .info-widget-inner{
+        margin-right: 40px;
+    }
+    .themestek-header-style-infostack .themestek-infostack-right-content .info-widget:last-child .info-widget-inner{
+        margin-right: 0px;
+    }
+    .themestek-header-style-infostack #site-header-menu #site-navigation{
+        float: left;
+        position: relative;
+    }
+    .themestek-header-style-infostack .themestek-header-right{
+        float: right;
+        margin-right: -15px;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-icons a,
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-text-area{
+        display: inline-block;
+        vertical-align: top;
+        height: 70px;
+        line-height: 70px;
+        position: relative;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-text-area{
+        position: relative;
+        padding-left: 20px;
+    }     
+    .themestek-header-style-infostack .themestek-header-right .themestek-vc_btn3-inline{
+        position: relative;
+        z-index: 1;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-vc_btn3-inline .themestek-vc_btn3 {
+        background: transparent !important;
+        padding: 0;
+        color: #313538 !important;
+        font-size: 13px;        
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-icons a{
+        padding: 0 25px;
+        background-color: #cdba6d; 
+        font-size: 16px;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-icons a:hover{
+        color: #fff;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-icons .themestek-header-wc-cart-link a{
+        background-color: transparent;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-icons .themestek-header-wc-cart-link a:hover{
+        color: #cdba6d;
+    }
+    .themestek-header-style-infostack .themestek-header-right .themestek-header-icons .themestek-header-wc-cart-link .number-cart {
+        width: 17px;
+        height: 17px;
+        line-height: 17px;
+        top: 9px;
+        left: 31px;
+        font-size: 11px;
+    }
+    .themestek-headerstyle-infostack section.error-404{
+        margin-top: 175px; 
+    }
+   .themestek-header-style-classic .themestek-vc_btn3.themestek-vc_btn3-size-md:after,
+   .themestek-header-overlay .themestek-vc_btn3.themestek-vc_btn3-size-md:after,
+   .themestek-header-style-infostack .themestek-header-right .themestek-vc_btn3-inline .themestek-vc_btn3:after {
+        font-family: 'themestek-attorco-icons';
+        content: "\e850"; 
+        margin-left: 10px;
+        font-weight: normal;
+    }
+    .themestek-headerstyle-classic .themestek-header-icons{    
+        position: relative;        
+    }
+    .themestek-headerstyle-classic .themestek-stickable-header-w .themestek-social-links-wrapper{
+        float: right;
+    }
+
+    /*themestek-header-style-infostack*/    
+    .themestek-header-style-classic-center.themestek-header-overlay #site-header-menu #site-navigation .nav-menu,
+    .themestek-header-style-classic-center.themestek-header-overlay #site-header-menu {
+        float: none;
+        text-align: center;
+        position: relative;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay #site-header-menu #site-navigation .nav-menu ul{      
+        height: auto;
+    }  
+    .themestek-header-style-classic-center.themestek-header-overlay #site-header-menu #site-navigation div.nav-menu > ul > li, 
+    .themestek-header-style-classic-center.themestek-header-overlay #site-header-menu #site-navigation div.nav-menu > ul > li > a, 
+    .themestek-header-style-classic-center.themestek-header-overlay #site-header-menu #site-navigation {
+        height: 70px;
+        line-height: 70px !important;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-left{
+        float: left;
+         width: 30%;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-right{
+        float: right;
+         width: 30%;    
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .site-branding{
+        margin: 0 auto;
+        float: left;
+        width: 40%;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .site-branding,
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-left,
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-right{       
+        height: 105px; 
+        display: table;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-left .themestek-social-links-wrapper,
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-right .themestek-header-button-w{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: right;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-left .themestek-social-links-wrapper{
+        text-align: left;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-header-icons {
+        z-index: 1;
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        margin-top: -14px;
+    }
+
+
+   .themestek-header-style-classic-center.themestek-header-overlay .themestek-stickable-header-w.themestek-bgcolor-darkgrey {
+        background-color: rgba(49, 53, 56, 0.20);
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-stickable-header-w.themestek-bgcolor-darkgrey.is_stuck {
+        background-color: rgba(49, 53, 56, 1);
+    }
+
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-vc_btn3-style-outline.themestek-vc_btn3-color-skincolor:not(.themestek-vc_btn3-style-text){
+        border-color: #fff;
+        color: #fff;
+    }
+    .themestek-header-style-classic-center.themestek-header-overlay .themestek-vc_btn3-style-outline.themestek-vc_btn3-color-skincolor:not(.themestek-vc_btn3-style-text):hover{
+        border-color: #cdba6d;
+    }
+     
+}
+
+   /*** Classic Header ***/
+   .themestek-headerstyle-classic .themestek-pre-header-wrapper.themestek-textcolor-dark {
+        color: #42474c;
+   }
+    .themestek-headerstyle-classic .themestek-pre-header-wrapper:not(.themestek-bgcolor-skincolor) .themestek-social-links-wrapper .social-icons a:hover{
+        color:#cdba6d;
+   }
+   .themestek-headerstyle-classic .themestek-social-links-wrapper .social-icons a{
+        width: 40px;
+    }
+   .themestek-headerstyle-classic .themestek-textcolor-white .top-contact{
+       font-size: 13px;          
+       font-weight: 500;
+   }
+    .themestek-headerstyle-classic .top-contact i{
+       font-size: 16px;
+       margin-right: 5px;
+   }
+   .themestek-headerstyle-classic .themestek-social-links-wrapper{
+      position: relative;      
+   }   
+
+    .themestek-headerstyle-classic .top-contact li{
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+    .themestek-headerstyle-classic .top-contact li:first-child{
+        padding-left: 0;
+    }
+    .themestek-headerstyle-classic .themestek-textcolor-white .top-contact span{
+        color: #fff;        
+    } 
+
+
+    /*** Overlay Header ***/  
+    .themestek-header-overlay .themestek-stickable-header-w-main{
+        position: absolute;
+        z-index: 21;
+        width: 100%;
+        box-shadow: none;
+        -khtml-box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -ms-box-shadow: none;
+        -o-box-shadow: none;
+    }   
+
+    .themestek-header-overlay.themestek-header-style-classic .themestek-pre-header-wrapper.themestek-textcolor-white:not(.themestek-bgcolor-skincolor) .social-icons li > a:hover,
+    .themestek-header-overlay.themestek-header-style-classic .themestek-pre-header-wrapper:not(.themestek-bgcolor-skincolor) .top-contact i{
+        color:#cdba6d;
+    }
+
+    .themestek-header-overlay.themestek-header-style-classic  .themestek-stickable-header-w{
+        background-color: transparent;
+    }   
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-bgcolor-darkgrey,   
+    .themestek-header-overlay.themestek-header-style-classic .site-header.themestek-bgcolor-darkgrey{
+        background-color: rgba(0, 0, 0, 0.40);
+    }    
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-bgcolor-grey, 
+    .themestek-header-overlay.themestek-header-style-classic .site-header.themestek-bgcolor-grey{
+        background-color: rgba(235, 235, 235, 0.38);
+    }   
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-bgcolor-white,
+    .themestek-header-overlay.themestek-header-style-classic .site-header.themestek-bgcolor-white{
+        background-color: rgba(255, 255, 255, 0.38);
+    }   
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-bgcolor-skincolor,
+    .themestek-header-overlay.themestek-header-style-classic .site-header.themestek-bgcolor-skincolor{
+        background-color: rgba( 205,186,109 , 0.30);
+    }    
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-sticky-bgcolor-darkgrey.is_stuck{
+        background-color: #151515;
+    }    
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-sticky-bgcolor-grey.is_stuck{
+        background-color: #f5f5f5;
+    }
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-sticky-bgcolor-white.is_stuck{
+        background-color: #fff;
+    }
+    .themestek-header-overlay.themestek-header-style-classic .site-header-menu.themestek-sticky-bgcolor-skincolor.is_stuck{
+        background-color: rgba( 205,186,109 , 1);
+    }    
+    .themestek-header-overlay.themestek-header-style-classic .themestek-pre-header-wrapper.themestek-bgcolor-darkgrey{
+        border-bottom-color: rgba(0, 0, 0, 0.13);
+    }  
+    .themestek-header-style-classic .site-header .themestek-header-right,
+    .themestek-header-overlay.themestek-header-style-classic .site-header .themestek-header-right{
+        height: 105px;
+        line-height: 105px;
+    }
+
+    .themestek-header-overlay.themestek-header-style-classic .site-header.is_stuck .themestek-header-right,
+    .themestek-header-overlay.themestek-header-style-classic .site-header.is_stuck .themestek-social-links-wrapper{
+        height: 90px ;
+        line-height: 90px;
+    }
+    .themestek-header-overlay.themestek-header-style-classic #site-header-menu #site-navigation div.nav-menu > ul > li:hover > a,
+    .themestek-header-overlay.themestek-header-style-classic .site-header.is_stuck #site-header-menu #site-navigation div.nav-menu > ul > li.current-menu-ancestor > a{
+        color: rgba( 205,186,109 , 1);
+    }
+    .themestek-header-overlay.themestek-header-style-classic .site-header.is_stuck.themestek-stickable-header{
+        border-bottom: none;
+    }
+    .themestek-header-overlay.themestek-header-style-classic  .site-branding{
+        margin-right: 45px;
+    }
+    .themestek-header-style-classic .themestek-header-right,
+    .themestek-header-overlay.themestek-header-style-classic .themestek-header-right{
+        float: right;
+    }
+    .themestek-header-style-classic .themestek-header-right .themestek-header-icons,
+    .themestek-header-overlay .themestek-header-right .themestek-header-icons,
+    .themestek-header-style-classic .themestek-header-right .themestek-header-button-w,
+    .themestek-header-overlay .themestek-header-right .themestek-header-button-w,
+    .themestek-header-overlay .themestek-header-right .themestek-social-links-wrapper,
+    .themestek-header-overlay .themestek-header-right .themestek-header-phone-w {
+        display: inline-block;        
+    }
+    .themestek-header-overlay .themestek-header-right .themestek-header-phone-w{
+        background-color: #cdba6d; 
+        font-size: 24px;
+        color: #fff;
+        padding: 0 50px;
+        font-weight: bold;
+    }
+    .themestek-header-overlay .site-header.is_stuck .social-icons li > a{
+        color: #313538;
+    }
+    .themestek-header-overlay.themestek-header-style-classic .themestek-social-links-wrapper .social-icons li{
+        width: 40px;
+        height: 60px;        
+    }
+    .themestek-header-overlay .themestek-pre-header-inner{
+        line-height: 60px;
+    }
+    .themestek-header-overlay .themestek-textcolor-dark .themestek-social-links-wrapper .social-icons a {
+        background: transparent;
+        color: #313538;
+        line-height: 60px;
+    }
+    .themestek-header-overlay .top-contact li:first-child{
+        padding-left: 0;
+        border: none;
+    }
+    .themestek-header-overlay .themestek-textcolor-dark{
+        color: #313538;
+    }
+    .themestek-header-overlay .top-contact i{
+        font-size: 18px;
+    }
+    .themestek-header-style-classic .themestek-vc_btn3.themestek-vc_btn3-size-md,
+    .themestek-header-overlay .themestek-vc_btn3.themestek-vc_btn3-size-md{
+        font-size: 13px;
+        padding: 15px 25px;
+        font-weight: 500; 
+        letter-spacing: 0; 
+    }
+/* ********************** Responsive Menu Code END **************************** */
+/******************************************************/
+/******************* Custom Code **********************/
+
+blockquote{
+	border-color: #cdba6d;
+}
+.themestek-servicebox-style-1:before {
+    border-top: 1px solid #cdba6d;
+	border-bottom: 1px solid #cdba6d;
+}
+.themestek-servicebox-style-1:after {
+    border-right: 1px solid #cdba6d;
+    border-left: 1px solid #cdba6d;
+}
+/******************************************************/
+ 
