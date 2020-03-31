@@ -89,7 +89,7 @@ body {
   overflow: hidden;
   
 }
-.qeyd form{
+#form1{
   float:left;
 }
 .qeyd{
@@ -103,10 +103,10 @@ body {
   position:relative;
   z-index:1;
 }
-.qeyd div{
+#form1 > div {
    margin-bottom:20px; 
  }
- .qeyd input{
+ #form1 >div> input{
   width: 200px;
   height: 30px;
   margin: 10px 10px 10px 10px;
@@ -116,18 +116,18 @@ body {
   padding-left: 5px;
   
 }
-.qeyd ::placeholder{
+#form1 >::placeholder{
   color: black;
   font-weight: bold;
   opacity: 0.8;
 }
-.qeyd select{
+#form1 > select{
   background-color: #e9d4b3;
   border-radius: 8px;
   width: 65px;
 }
 
-.qeyd .duyme{
+.qeydDuyme{
   width: 160px; 
   height: 35px; 
   border: 1px solid #cdba6d; 
@@ -140,24 +140,21 @@ body {
   color: #cdba6d;
   cursor: pointer;
 }
-.qeyd .duyme:hover{
+.qeydDuyme:hover{
   background-color: rgba(252,225,146,0.5);
   color: black;
   border:1px solid black;
 }
-.qeyd .duyme:active{
+.qeydDuyme :active{
   box-shadow: 2px 2px 3px #cdba6d;
   background-color: black;
   color: #cdba6d;
 
 }
-.qeyd h1{
+.qeyd > h1{
   margin:0 0 10px 150px; 
 }
-.qeyd .passdiv{
-  float: left;
-}
-.qeyd .passdiv{
+.passdiv{
   float: left;
 }
 
