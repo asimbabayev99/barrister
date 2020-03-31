@@ -79,3 +79,4 @@ class Profile(models.Model):
     contacts = models.ManyToManyField(Contact)
     biography = models.TextField()
 
+
