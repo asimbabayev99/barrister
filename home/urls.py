@@ -5,4 +5,5 @@ from home.views import *
 urlpatterns = [
     path('', index_view, name='home'),
     path('calendar/', calendar_view, name='calendar'),
+    path('single/',single_view)
 ]

@@ -9,7 +9,7 @@ from rest_framework.generics import *
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.views import APIView
-
+from rest_framework.authentication import SessionAuthentication
 class CustomAuthToken(ObtainAuthToken):
     serializer_class=LoginSerializer
     permission_classes = [AllowAny,]
@@ -62,6 +62,7 @@ class EventList(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
     filterset_fields = ['category',]
     ordering_fields = ['category',]
