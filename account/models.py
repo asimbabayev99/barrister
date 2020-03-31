@@ -68,15 +68,26 @@ class CustomUser(AbstractUser):
 
 
 
+class JobCategory(models.Model):
+    name = models.CharField(max_length=64)
+    slug = models.SlugField()
+
+
 class Contact(models.Model):
     type = models.CharField(max_length=32, choices=CONTACT_TYPES)
 
 
+class Skill(models.Model):
+    name = models.CharField(max_length=32)
+    progress = models.IntegerField(default=100)  # for example 70/100
+
+
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField(null=True)
     gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
     contacts = models.ManyToManyField(Contact)
+    skills = models.ManyToManyField(Skill)
     biography = models.TextField()
-
+    job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
 
