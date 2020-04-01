@@ -290,7 +290,40 @@
 	<div class="vc_column-inner">
 		 
 		<div class="wpb_wrapper">
-			<div class="themestek-progress-bar vc_progress_bar wpb_content_element vc_progress-bar-color-skincolor vc_progress-bar-color-skincolor"><div class="themestek-pbar-single-bar-w themestek-pbar-icon-false"><div class="vc_general vc_single_bar"><small class="vc_label">Success Cases</small> <span class="themestek-vc_label_units vc_label_units">90%</span><span class="vc_bar" data-percentage-value="90" data-value="90"></span></div></div><div class="themestek-pbar-single-bar-w themestek-pbar-icon-false"><div class="vc_general vc_single_bar"><small class="vc_label">Case Experience</small> <span class="themestek-vc_label_units vc_label_units">80%</span><span class="vc_bar" data-percentage-value="80" data-value="80"></span></div></div><div class="themestek-pbar-single-bar-w themestek-pbar-icon-false"><div class="vc_general vc_single_bar"><small class="vc_label">Family Law</small> <span class="themestek-vc_label_units vc_label_units">70%</span><span class="vc_bar" data-percentage-value="70" data-value="70"></span></div></div></div>		</div>
+			<div class="themestek-progress-bar vc_progress_bar wpb_content_element vc_progress-bar-color-skincolor vc_progress-bar-color-skincolor">
+				{% for skill in skills %}
+					<div class="themestek-pbar-single-bar-w themestek-pbar-icon-false">
+						<div class="vc_general vc_single_bar">
+							<small class="vc_label">{{skill.name}}</small> 
+							<span class="themestek-vc_label_units vc_label_units">{{skill.progress}}%</span>
+							<span class="vc_bar" data-percentage-value="{{skill.progress}}" data-value="{{skill.progress}}"></span>
+						</div>
+					</div>
+				{% endfor %}
+					
+				<!-- <div class="themestek-pbar-single-bar-w themestek-pbar-icon-false">
+					<div class="vc_general vc_single_bar">
+						<small class="vc_label">Success Cases</small> 
+						<span class="themestek-vc_label_units vc_label_units">90%</span>
+						<span class="vc_bar" data-percentage-value="90" data-value="90"></span>
+					</div>
+				</div>
+				<div class="themestek-pbar-single-bar-w themestek-pbar-icon-false">
+					<div class="vc_general vc_single_bar">
+						<small class="vc_label">Case Experience</small> 
+						<span class="themestek-vc_label_units vc_label_units">80%</span>
+						<span class="vc_bar" data-percentage-value="80" data-value="80"></span>
+					</div>
+				</div>
+				<div class="themestek-pbar-single-bar-w themestek-pbar-icon-false">
+					<div class="vc_general vc_single_bar">
+						<small class="vc_label">Family Law</small> 
+						<span class="themestek-vc_label_units vc_label_units">70%</span>
+						<span class="vc_bar" data-percentage-value="70" data-value="70"></span>
+					</div>
+				</div> -->
+			</div>		
+		</div>
 	</div>
 </div>
 </div>

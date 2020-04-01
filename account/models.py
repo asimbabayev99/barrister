@@ -79,6 +79,18 @@ class Skill(models.Model):
     progress = models.IntegerField(default=100)  # for example 70/100
 
 
+class EducationAndWorkExperience(models.Model):
+    title = models.CharField(max_length=256)
+    from_time = models.DateField(auto_now_add=True)
+    to_time = models.DateField(null=True)
+
+
+class Award(models.Model):
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=256)
+
+
+
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     image = models.ImageField(null=True)
@@ -90,6 +102,8 @@ class Profile(models.Model):
 
     gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
     skills = models.ManyToManyField(Skill)
+    experiences = models.ManyToManyField(EducationAndWorkExperience)
+    awards = models.ManyToManyField(Award)
     biography = models.TextField()
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
 
