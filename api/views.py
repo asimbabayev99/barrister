@@ -74,34 +74,36 @@ class EventCreate(GenericAPIView):
     def post(self,request):
         serializer = EventSerializer(data=request.data)
         serializer.is_valid()
-        task = Event(**serializer.validated_data)
-        task.save()
+        event = Event(**serializer.validated_data)
+        event.save()
         return Response(serializer.data)
-        
+
+
+
 class EventDetail(APIView):
 
     def get_object(self,id):
         try:
-            task = Event.objects.get(id=id)
-            return task
+            event = Event.objects.get(id=id)
+            return event
         except:
             raise ValidationError('user doesnt not exists')
 
     def get(self,request,id,format=None):
-        task = self.get_object(id)
-        serializer = TaskSerializer(task)
+        event = self.get_object(id)
+        serializer = EventSerializer(event)
         return Response(serializer.data)
     
     def delete(self,request,id,format=None):
-        task = self.get_object(id)   
-        task.delete()
+        event = self.get_object(id)   
+        event.delete()
         return Response({
-            "task":'deleted'
+            "event":'deleted'
         })
     
     def put(self,request,id,format=None):
-        old_task = self.get_object(id)
-        serializer = TaskSerializer(instance=old_task,data=request.data)
+        old_event = self.get_object(id)
+        serializer = EventSerializer(instance=old_event,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

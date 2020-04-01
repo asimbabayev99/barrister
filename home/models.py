@@ -30,4 +30,4 @@ class Event(models.Model):
     from_time = models.DateTimeField(auto_now_add=True)
     to_time = models.DateTimeField(auto_now_add=True)
 
-    remind_me = models.DateTimeField(auto_now_add=True)
+    remind_me = models.DateTimeField(null=True)
