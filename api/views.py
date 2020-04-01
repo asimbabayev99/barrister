@@ -9,28 +9,30 @@ from rest_framework.generics import *
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication , BasicAuthentication
+from django.contrib.auth import authenticate,login
 
-class CustomAuthToken(ObtainAuthToken):
-    serializer_class=LoginSerializer
-    permission_classes = [AllowAny,]
-    def post(self,request,*args,**kwargs):
+# class CustomAuthToken(ObtainAuthToken):
+#     serializer_class=LoginSerializer
+#     permission_classes = [AllowAny,]
+#     def post(self,request,*args,**kwargs):
 
-        serializer = LoginSerializer(data=request.data)
-        serializer.is_valid()
-        try:
-            user = CustomUser.objects.get(email=serializer.data['email'])
-        except:
-            return Response({
-              'user':'doesnt not exists'  
-            })
-        token,created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token':token.key,
-            'user': user.id,
-            'email':user.email,
-            'first_name':user.first_name,
-            'last_name':user.last_name
-        })
+#         serializer = LoginSerializer(data=request.data)
+#         serializer.is_valid()
+#         try:
+#             user = CustomUser.objects.get(email=serializer.data['email'])
+#         except:
+#             return Response({
+#               'user':'doesnt not exists'  
+#             })
+#         token,created = Token.objects.get_or_create(user=user)
+#         return Response({
+#             'token':token.key,
+#             'user': user.id,
+#             'email':user.email,
+#             'first_name':user.first_name,
+#             'last_name':user.last_name
+#         })
 
 
 
@@ -56,15 +58,37 @@ class UserRegistration(viewsets.ModelViewSet):
                 'user':'created',
                 'token':token.key
             })
+        
+        
+class LoginView(APIView):
+
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (AllowAny,)
+    def post(self,request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid()
+        user = authenticate(request,email=serializer.data['email'],password=serializer.data['password'])
+        if not user:
+            return Response({
+                'error':'incorrect email or password'
+            })
+        else:
+            login(request,user)
+            return Response({
+                'user':'login'
+            })
+        
 
 
 class EventList(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
     filterset_fields = ['category',]
     ordering_fields = ['category',]
+
 
 
 class EventCreate(GenericAPIView):
