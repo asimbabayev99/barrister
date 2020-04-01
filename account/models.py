@@ -100,6 +100,12 @@ class Profile(models.Model):
     website = models.URLField(null=True)
     address = models.CharField(max_length=256, null=True)
 
+    # social networks
+    facebook_link = models.URLField(null=True)
+    twitter_link = models.URLField(null=True)
+    linkedin_link = models.URLField(null=True)
+    google_link = models.URLField(null=True)
+
     gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
     skills = models.ManyToManyField(Skill)
     work_summary = models.CharField(max_length=2014)
