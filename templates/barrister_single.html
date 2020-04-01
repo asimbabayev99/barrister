@@ -199,7 +199,7 @@
 					<div class="themestek-titlebar-main">
 						<div class="container">
 							<div class="themestek-titlebar-main-inner">
-								<div class="entry-title-wrapper"><div class="container"><h1 class="entry-title"> John Fletcher</h1></div></div><div class="breadcrumb-wrapper"><div class="container"><div class="breadcrumb-wrapper-inner"><!-- Breadcrumb NavXT output --><span><a title="Go to barrister." href="" class="home"><i class="fa fa-home"></i><span class="hide">barrister</span></a></span> <span class="themestek-bread-sep"> &nbsp; &rarr; &nbsp;</span><span class="post post-themestek-team current-item">John Fletcher</span></div></div></div>							</div>
+								<div class="entry-title-wrapper"><div class="container"><h1 class="entry-title"> {{profile.user.first_name}} {{profile.user.last_name}}</h1></div></div><div class="breadcrumb-wrapper"><div class="container"><div class="breadcrumb-wrapper-inner"><!-- Breadcrumb NavXT output --><span><a title="Go to barrister." href="" class="home"><i class="fa fa-home"></i><span class="hide">barrister</span></a></span> <span class="themestek-bread-sep"> &nbsp; &rarr; &nbsp;</span><span class="post post-themestek-team current-item">{{profile.user.first_name}} {{profile.user.last_name}}</span></div></div></div>							</div>
 						</div>
 					</div><!-- .themestek-titlebar-main -->
 				</div><!-- .themestek-titlebar-inner-wrapper -->
@@ -218,22 +218,22 @@
 				
 		<span class="themestek-item-thumbnail">
 			<span class="themestek-item-thumbnail-inner">
-				<img width="800" height="800" src="{% static 'uploads/2018/12/img-03.jpg' %}" class="attachment-full size-full wp-post-image" alt="" />
+				<img width="800" height="800" src="{{profile.image.url}}" class="attachment-full size-full wp-post-image" alt="" />
 			</span>
 		</span>			</div>
 		</div>
 		<div class="col-md-7 themestek-box-content">
 			<div class="themestek-team-des">
-			<h3>John Fletcher</h3>
+			<h3>{{profile.user.first_name}} {{profile.user.last_name}}</h3>
 							<div class="themestek-box-team-position">
-					<h5 class="themestek-team-single-position">Criminal Lawyer</h5>				</div>
+					<h5 class="themestek-team-single-position">{{profile.job_category.name}}</h5>				</div>
 						<hr>
 			<p>More than 40 years ago, our company’s namesake, LineThemes, pioneered a revolutionary sales training program for businesses of every size. Today, our proven sales training program has made us a leader in sales and management training.</p>
 			<div class="themestek-team-details-wrapper"><ul class="themestek-team-details-list"><li class="themestek-team-details-line themestek-team-extra-details-line-phone"><div class="themestek-team-list-title themestek-skincolor">Phone</div>
-						<div class="themestek-team-list-value"><a href="tel:+31 123 456 789">+31 123 456 789</a></div></li><li class="themestek-team-details-line themestek-team-extra-details-line-email"><div class="themestek-team-list-title themestek-skincolor">Email</div>
-						<div class="themestek-team-list-value"><a href="mailto:contact@attorco.com">contact@attorco.com</a></div></li><li class="themestek-team-details-line themestek-team-extra-details-line-website"><div class="themestek-team-list-title themestek-skincolor">Website</div>
-						<div class="themestek-team-list-value"><a target="_blank" href="http://attorco.com/">attorco.com</a></div></li><li class="themestek-team-details-line themestek-team-extra-details-line-address"><div class="themestek-team-list-title themestek-skincolor">Address</div>
-						<div class="themestek-team-list-value">2946 Angus Road, NY</div></li></ul></div>						<div class="themestek-team-social-links-wrapper"><ul class="themestek-team-social-links">
+						<div class="themestek-team-list-value"><a href="tel:+31 123 456 789">+994{{profile.phone_number}}</a></div></li><li class="themestek-team-details-line themestek-team-extra-details-line-email"><div class="themestek-team-list-title themestek-skincolor">Email</div>
+						<div class="themestek-team-list-value"><a href="mailto:contact@attorco.com">{{profile.user.email}}</a></div></li><li class="themestek-team-details-line themestek-team-extra-details-line-website"><div class="themestek-team-list-title themestek-skincolor">Website</div>
+						<div class="themestek-team-list-value"><a target="_blank" href="http://attorco.com/">{{profile.website}}</a></div></li><li class="themestek-team-details-line themestek-team-extra-details-line-address"><div class="themestek-team-list-title themestek-skincolor">Address</div>
+						<div class="themestek-team-list-value">{{profile.address}}</div></li></ul></div>						<div class="themestek-team-social-links-wrapper"><ul class="themestek-team-social-links">
 				<li>
 					<a href="#" target="_blank" class="">
 						<i class="themestek-attorco-icon-facebook"></i>
@@ -270,6 +270,7 @@
 
 	<div class="wpb_text_column wpb_content_element" >
 		<div class="wpb_wrapper">
+			<p>{{profile.biography}}</p>
 			<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, aliquam quaerat voluptatem.</p>
 <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem.</p>
 

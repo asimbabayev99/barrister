@@ -7,9 +7,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from barrister import settings
 
 urlpatterns = [
-    
+
     path('', index_view, name='home'),
     path('calendar/', calendar_view, name='calendar'),
-    path('single/',single_view,)
+    path('profile/<int:id>', single_view, name='single-view')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

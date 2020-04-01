@@ -11,8 +11,13 @@ def index_view(request):
 
 
 
-def single_view(request):
-    return render(request, "barrister_single.html", context={})
+def single_view(request, id):
+    profile = Profile.objects.get(id=id)
+    
+    context = {
+        "profile": profile
+    }
+    return render(request, "barrister_single.html", context=context)
 
 
 

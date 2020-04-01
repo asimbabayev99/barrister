@@ -960,7 +960,7 @@ Family Law Matters</h2>
 							<div class="themestek-box-content">
 								<div class="themestek-box-content-inner">		  
 									<div class="themestek-pf-box-title">
-										<div class="themestek-box-title"><h4><a href="http://127.0.0.1:8000/single/">{{profile.user.first_name}} {{profile.user.last_name}}</a></h4></div>				
+										<div class="themestek-box-title"><h4><a href="{% url 'single-view' profile.id %}">{{profile.user.first_name}} {{profile.user.last_name}}</a></h4></div>				
 									</div> 
 									<div class="themestek-box-team-position themestek-skincolor">
 										{{profile.job_category.name}}				
