@@ -13,9 +13,15 @@ def index_view(request):
 
 def single_view(request, id):
     profile = Profile.objects.get(id=id)
-    
+    skills = Skill.objects.filter(profile=profile)
+    experiences = EducationAndWorkExperience.objects.filter(profile=profile)
+    awards = Award.objects.filter(profile=profile)
+
     context = {
-        "profile": profile
+        "profile": profile,
+        "skills": skills,
+        "experiences": experiences,
+        "awards": awards,
     }
     return render(request, "barrister_single.html", context=context)
 
