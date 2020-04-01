@@ -102,6 +102,7 @@ class Profile(models.Model):
 
     gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
     skills = models.ManyToManyField(Skill)
+    work_summary = models.CharField(max_length=2014)
     experiences = models.ManyToManyField(EducationAndWorkExperience)
     awards = models.ManyToManyField(Award)
     biography = models.TextField()

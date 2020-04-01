@@ -20,6 +20,8 @@ def single_view(request, id):
     context = {
         "profile": profile,
         "skills": skills,
+        "experiences": experiences,
+        "awards": awards,
     }
     return render(request, "barrister_single.html", context=context)
 
