@@ -73,9 +73,6 @@ class JobCategory(models.Model):
     slug = models.SlugField()
 
 
-class Contact(models.Model):
-    type = models.CharField(max_length=32, choices=CONTACT_TYPES)
-
 
 class Skill(models.Model):
     name = models.CharField(max_length=32)
@@ -85,8 +82,13 @@ class Skill(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     image = models.ImageField(null=True)
+
+    # contacts
+    phone_number = models.BigIntegerField(null=True)
+    website = models.URLField(null=True)
+    address = models.CharField(max_length=256, null=True)
+
     gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
-    contacts = models.ManyToManyField(Contact)
     skills = models.ManyToManyField(Skill)
     biography = models.TextField()
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
