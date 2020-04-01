@@ -4,15 +4,15 @@ from home.models import *
 from account.models import *
 
 def index_view(request):
-    profiles = Profile.objects.filter(user__role__name='Barrister')[:4]
+    profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
     print(profiles)
 
-    return render(request,"index.html",context={'profiles':profiles})
+    return render(request, "index_test.html", context={'profiles':profiles})
 
 
 
 def single_view(request):
-    return render(request,"barrister_single.html",context={})
+    return render(request, "barrister_single.html", context={})
 
 
 

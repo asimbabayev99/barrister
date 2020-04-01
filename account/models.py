@@ -93,3 +93,6 @@ class Profile(models.Model):
     biography = models.TextField()
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.user.email
+
