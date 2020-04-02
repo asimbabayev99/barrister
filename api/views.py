@@ -137,6 +137,9 @@ class EventDetail(APIView):
 
 class SkillAPIView(APIView):
 
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
+
     def get(self, request):
         profile = request.GET.get('profile')
         if profile:
@@ -150,6 +153,9 @@ class SkillAPIView(APIView):
 
     def post(self, request):
         data = request.data
+        profile = Profile.objects.get(id=data.get('profile_id'))
+        if profile.user != request.user:
+            return Response({"detail": "Permission denied"}, status=403)
         # Create a skill from the above data
         serializer = SkillSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
@@ -160,7 +166,8 @@ class SkillAPIView(APIView):
     def put(self, request, pk):
         saved_skill = get_object_or_404(Skill.objects.all(), pk=pk)
         data = request.data
-        # print("data -> ", data)
+        if request.user != saved_skill.profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         serializer = SkillSerializer(instance=saved_skill, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             skill_saved = serializer.save()
@@ -170,6 +177,8 @@ class SkillAPIView(APIView):
     def delete(self, request, pk):
         # Get object with this pk
         skill = get_object_or_404(Skill.objects.all(), pk=pk)
+        if request.user != skill.profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         skill.delete()
         return Response({"message": "Skill with id `{}` has been deleted.".format(pk)},status=204)
 
@@ -178,6 +187,9 @@ class SkillAPIView(APIView):
 
 
 class AwardAPIView(APIView):
+
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request):
         profile = request.GET.get('profile')
@@ -191,6 +203,9 @@ class AwardAPIView(APIView):
 
 
     def post(self, request):
+        profile = Profile.objects.get(id=data.get('profile_id'))
+        if request.user != profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         data = request.data
         # Create an award from the above data
         serializer = AwardSerializer(data=data)
@@ -201,6 +216,8 @@ class AwardAPIView(APIView):
 
     def put(self, request, pk):
         saved_award = get_object_or_404(Award.objects.all(), pk=pk)
+        if request.user != saved_award.profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         data = request.data
         serializer = AwardSerializer(instance=saved_award, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
@@ -211,6 +228,8 @@ class AwardAPIView(APIView):
     def delete(self, request, pk):
         # Get object with this pk
         award = get_object_or_404(Award.objects.all(), pk=pk)
+        if request.user != award.profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         award.delete()
         return Response({"message": "Award with id `{}` has been deleted.".format(pk)},status=204)
 
@@ -218,6 +237,10 @@ class AwardAPIView(APIView):
 
 
 class ExperienceAPIView(APIView):
+
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
+    
     def get(self, request):
         profile = request.GET.get('profile')
         if profile:
@@ -231,6 +254,9 @@ class ExperienceAPIView(APIView):
 
     def post(self, request):
         data = request.data
+        profile = Profile.objects.get(id=data.get('profile_id'))
+        if request.user != profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         # Create an experience from the above data
         serializer = ExperienceSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
@@ -240,6 +266,8 @@ class ExperienceAPIView(APIView):
 
     def put(self, request, pk):
         saved_experience = get_object_or_404(EducationAndWorkExperience.objects.all(), pk=pk)
+        if request.user != saved_experience.profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         data = request.data
         serializer = ExperienceSerializer(instance=saved_experience, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
@@ -250,5 +278,7 @@ class ExperienceAPIView(APIView):
     def delete(self, request, pk):
         # Get object with this pk
         experience = get_object_or_404(EducationAndWorkExperience.objects.all(), pk=pk)
+        if request.user != experience.profile.user:
+            return Response({"detail": "Permission denied"}, status=403)
         experience.delete()
         return Response({"message": "Experience with id `{}` has been deleted.".format(pk)},status=204)
