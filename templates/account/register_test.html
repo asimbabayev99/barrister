@@ -83,7 +83,7 @@
 
            <div class="col-md-6">
               <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" id="ma" class="form-control" placeholder="Email">
                </div>
           </div>
 
@@ -116,6 +116,18 @@
         <div class="col-md-12">
           <div class="form-group">
               <a href="#" onclick="bas()">Digər operator</a>  
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group passdiv">
+              <input type="password" name="password" id="pass" class="form-control"  minlength="6" placeholder="Şifrə daxil edin..."> 
+            </div>
+        </div>
+         
+        <div class="col-md-6">
+          <div class="form-group passdiv">
+            <input type="password" name="repassword" id="pass1" class="form-control" minlength="6" placeholder="Şifrəni təkrar edin...">
             </div>
         </div>
          
@@ -173,7 +185,7 @@
 	document.getElementById('errMessage').innerHTML="Zehmet olmasa ad ve soyadi dogru qeyd edin..." + "\n";
 	return false;
  };
-	if (y =="" ){
+	if (y =="" || sv=="" ){
 	document.getElementById('errMessage').style.display="block";
 	document.getElementById('errMessage').innerHTML="Bir seriya secin...";
 	return false;
@@ -192,6 +204,12 @@ if  (y =="AA" &&  sv.length != 7 ){
 	return false;
  }
  
+ if(document.getElementById('ma').value == ""){
+	document.getElementById('errMessage').style.display="block";
+	document.getElementById('errMessage').innerHTML="Zehmet olmasa mail adresi daxil edin...";
+	return false;
+ }
+
  if(document.getElementById('telnum').value == "" || document.getElementById('telnum').value.length != 7 ){
 	document.getElementById('errMessage').style.display="block";
 	document.getElementById('errMessage').innerHTML="Zehmet olmasa telefon nomresini daxil edin." + "  " + "Nomre 7 reqemden ibaret olmalidir." ;
@@ -199,13 +217,7 @@ if  (y =="AA" &&  sv.length != 7 ){
  }
  
  
- if(document.getElementById('ma').value == ""){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Zehmet olmasa mail adresi daxil edin...";
-	return false;
- }
- 
- if(document.getElementById('pass').value=="" || document.getElementById('pass1').value=="" ){
+ if (document.getElementById('pass').value=="" || document.getElementById('pass1').value=="" ){
 	document.getElementById('errMessage').style.display="block";
 	document.getElementById('errMessage').innerHTML="Zehmet olmasa sifre daxil edin...";
 	return false;
