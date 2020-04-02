@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from api.views import *
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+# router.register(r'skills', SkillView, basename="Skill")
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -28,6 +33,13 @@ urlpatterns = [
     path('api/event/detail/<int:id>',EventDetail.as_view()),
     path('api/profile/list/',ProfilesList.as_view()),
     path('api/profile/<int:id>',ProfileDetail.as_view()),
-    path('api/profile/create',ProfileCreate.as_view())
+    path('api/profile/create',ProfileCreate.as_view()),
+    path('api/', include(router.urls)),
+    path("api/skills/<int:pk>", SkillAPIView.as_view()),
+    path('api/skills/', SkillAPIView.as_view()),
+    path('api/awards/<int:pk>', AwardAPIView.as_view()),
+    path('api/awards/', AwardAPIView.as_view()),   
+    path('api/experiences/<int:pk>', ExperienceAPIView.as_view()),
+    path('api/experiences/', ExperienceAPIView.as_view()),
 
 ]
