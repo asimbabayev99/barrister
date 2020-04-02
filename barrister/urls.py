@@ -16,14 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from api.views import *
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+# router.register(r'skills', SkillView, basename="Skill")
 
 urlpatterns = [
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
     # path('api-auth/',ExampleViews.as_view()),
+    path('api/', include(router.urls)),
     path('api-register/',UserRegistration.as_view({'post':'create'})),
     path('api/task/list',EventList.as_view()),
     path('api/task/create',EventCreate.as_view()),
-    path('api/task/detail/<int:id>',EventDetail.as_view())
+    path('api/task/detail/<int:id>',EventDetail.as_view()),
+    path("api/skills/<int:pk>", SkillAPIView.as_view()),
+    path('api/skills/', SkillAPIView.as_view()),
+    path('api/awards/<int:pk>', AwardAPIView.as_view()),
+    path('api/awards/', AwardAPIView.as_view()),   
+    path('api/experiences/<int:pk>', ExperienceAPIView.as_view()),
+    path('api/experiences/', ExperienceAPIView.as_view()),
+
 ]

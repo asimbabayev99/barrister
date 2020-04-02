@@ -134,3 +134,121 @@ class EventDetail(APIView):
 
 
 
+
+class SkillAPIView(APIView):
+
+    def get(self, request):
+        profile = request.GET.get('profile')
+        if profile:
+            skills = Skill.objects.filter(profile__id=profile)
+        else:
+            skills = Skill.objects.all()
+        # the many param informs the serializer that it will be serializing more than a single skill.
+        serializer = SkillSerializer(skills, many=True)
+        return Response({"skills": serializer.data})
+
+
+    def post(self, request):
+        data = request.data
+        # Create a skill from the above data
+        serializer = SkillSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            skill_saved = serializer.save()
+        return Response({"success": "Skill '{}' created successfully".format(skill_saved.name)})
+    
+
+    def put(self, request, pk):
+        saved_skill = get_object_or_404(Skill.objects.all(), pk=pk)
+        data = request.data
+        # print("data -> ", data)
+        serializer = SkillSerializer(instance=saved_skill, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            skill_saved = serializer.save()
+        return Response({"success": "Skill '{}' updated successfully".format(skill_saved.name)})
+
+
+    def delete(self, request, pk):
+        # Get object with this pk
+        skill = get_object_or_404(Skill.objects.all(), pk=pk)
+        skill.delete()
+        return Response({"message": "Skill with id `{}` has been deleted.".format(pk)},status=204)
+
+
+
+
+
+class AwardAPIView(APIView):
+
+    def get(self, request):
+        profile = request.GET.get('profile')
+        if profile:
+            awards = Award.objects.filter(profile__id=profile)
+        else:
+            awards = Award.objects.all()
+        # the many param informs the serializer that it will be serializing more than a single award.
+        serializer = AwardSerializer(awards, many=True)
+        return Response({"awards": serializer.data})
+
+
+    def post(self, request):
+        data = request.data
+        # Create an award from the above data
+        serializer = AwardSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            award_saved = serializer.save()
+        return Response({"success": "Award '{}' created successfully".format(award_saved.title)})
+    
+
+    def put(self, request, pk):
+        saved_award = get_object_or_404(Award.objects.all(), pk=pk)
+        data = request.data
+        serializer = AwardSerializer(instance=saved_award, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            award_saved = serializer.save()
+        return Response({"success": "Award '{}' updated successfully".format(award_saved.title)})
+
+
+    def delete(self, request, pk):
+        # Get object with this pk
+        award = get_object_or_404(Award.objects.all(), pk=pk)
+        award.delete()
+        return Response({"message": "Award with id `{}` has been deleted.".format(pk)},status=204)
+
+
+
+
+class ExperienceAPIView(APIView):
+    def get(self, request):
+        profile = request.GET.get('profile')
+        if profile:
+            experiences = ExperienceAPIView.objects.filter(profile__id=profile)
+        else:
+            experiences = ExperienceAPIView.objects.all()
+        # the many param informs the serializer that it will be serializing more than a single experience.
+        serializer = ExperienceSerializer(experiences, many=True)
+        return Response({"experiences": serializer.data})
+
+
+    def post(self, request):
+        data = request.data
+        # Create an experience from the above data
+        serializer = ExperienceSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            experience_saved = serializer.save()
+        return Response({"success": "Experience '{}' created successfully".format(experience_saved.title)})
+    
+
+    def put(self, request, pk):
+        saved_experience = get_object_or_404(EducationAndWorkExperience.objects.all(), pk=pk)
+        data = request.data
+        serializer = ExperienceSerializer(instance=saved_experience, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            experience_saved = serializer.save()
+        return Response({"success": "Experience '{}' updated successfully".format(experience_saved.title)})
+
+
+    def delete(self, request, pk):
+        # Get object with this pk
+        experience = get_object_or_404(EducationAndWorkExperience.objects.all(), pk=pk)
+        experience.delete()
+        return Response({"message": "Experience with id `{}` has been deleted.".format(pk)},status=204)

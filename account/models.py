@@ -110,8 +110,8 @@ class Skill(models.Model):
 class EducationAndWorkExperience(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
     title = models.CharField(max_length=256)
-    from_time = models.DateField(auto_now_add=True)
-    to_time = models.DateField(null=True)
+    start = models.DateField(auto_now_add=True)
+    end = models.DateField(null=True)
 
 
 class Award(models.Model):

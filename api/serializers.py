@@ -42,3 +42,61 @@ class EventSerializer(serializers.ModelSerializer):
         task = Event(**validated_data)
         task.save()
         return task
+
+
+
+class SkillSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(required=False)
+    profile_id = serializers.IntegerField()
+    name = serializers.CharField(max_length=32)
+    progress = serializers.IntegerField() 
+
+    def create(self, validated_data):
+        return Skill.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.profile_id = validated_data.get('profile_id', instance.profile_id)
+        instance.name = validated_data.get('name', instance.name)
+        instance.progress = validated_data.get('progress', instance.progress)
+
+        instance.save()
+        return instance
+
+
+class AwardSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(required=False)
+    profile_id = serializers.IntegerField()
+    title = serializers.CharField(max_length=128)
+    description = serializers.CharField(max_length=256)
+
+    def create(self, validated_data):
+        return Award.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.profile_id = validated_data.get('profile_id', instance.profile_id)
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+
+        instance.save()
+        return instance
+
+
+
+class ExperienceSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(required=False)
+    profile_id = models.IntegerField()
+    title = serializers.CharField(max_length=256)
+    start = serializers.DateField()
+    end = serializers.DateField(required=False)
+
+    def create(self, validated_data):
+        return EducationAndWorkExperience.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.profile_id = validated_data.get('profile_id', instance.profile_id)
+        instance.title = validated_data.get('title', instance.title)
+        instance.start = validated_data.get('start', instance.start)
+        instance.end = validated_data.get('end', instance.end)
+
+        instance.save()
+        return instance
