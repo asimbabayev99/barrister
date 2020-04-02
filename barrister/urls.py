@@ -21,9 +21,13 @@ urlpatterns = [
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
-    path('api-auth/',ExampleView.as_view()),
-    path('api-register/',UserRegistration.as_view({'post':'create'})),
-    path('api/task/list',EventList.as_view()),
-    path('api/task/create',EventCreate.as_view()),
-    path('api/task/detail/<int:id>',EventDetail.as_view())
+    path('api-auth/',LoginView.as_view()),
+    path('api-register/',UserRegistration.as_view()),
+    path('api/event/list',EventList.as_view()),
+    path('api/event/create',EventCreate.as_view()),
+    path('api/event/detail/<int:id>',EventDetail.as_view()),
+    path('api/profile/list/',ProfilesList.as_view()),
+    path('api/profile/<int:id>',ProfileDetail.as_view()),
+    path('api/profile/create',ProfileCreate.as_view())
+
 ]

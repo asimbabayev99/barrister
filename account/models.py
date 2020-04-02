@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser, Permission
-# Create your models here.
+from django.utils import timezone
 
 
 
@@ -71,6 +71,8 @@ class CustomUser(AbstractUser):
 class JobCategory(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField()
+    def __str__(self):
+        return self.name
 
 
 class Contact(models.Model):
@@ -80,6 +82,9 @@ class Contact(models.Model):
 class Skill(models.Model):
     name = models.CharField(max_length=32)
     progress = models.IntegerField(default=100)  # for example 70/100
+    def __str__(self):
+        return self.name
+        
 
 
 class Profile(models.Model):
@@ -90,4 +95,6 @@ class Profile(models.Model):
     skills = models.ManyToManyField(Skill)
     biography = models.TextField()
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
+    
+    
 

@@ -42,3 +42,18 @@ class EventSerializer(serializers.ModelSerializer):
         task = Event(**validated_data)
         task.save()
         return task
+
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['user','image','gender','contacts','skills','biography','job_category']
+
+class ProfileCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    class Meta:
+        model = Profile    
+        fields = ['user','gender','contacts','skills','job_category']
+    
+    
