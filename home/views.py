@@ -1,9 +1,29 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from home.models import *
+from account.models import *
 
 def index_view(request):
-    
-    return render(request,"index.html",context={})
+    profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
+    print(profiles)
+
+    return render(request, "index_test.html", context={'profiles':profiles})
+
+
+
+def single_view(request, id):
+    profile = Profile.objects.get(id=id)
+    skills = Skill.objects.filter(profile=profile)
+    experiences = EducationAndWorkExperience.objects.filter(profile=profile)
+    awards = Award.objects.filter(profile=profile)
+
+    context = {
+        "profile": profile,
+        "skills": skills,
+        "experiences": experiences,
+        "awards": awards,
+    }
+    return render(request, "barrister_single.html", context=context)
 
 
 

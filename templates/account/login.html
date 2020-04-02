@@ -19,11 +19,15 @@
         <form action="" method="POST"> 
           {% csrf_token %}
           <h1>Daxil ol</h1>
+          <p class='error'>{{errors.message}}</p>
           <div><input type="email" class="bir" name="email" placeholder=" Mail adresi daxil edin..." required></div>
           <div><input type="password" name="password" placeholder=" Şifrə daxil edin..."></div>
           <div> Şifrəni xatırla <input type="checkbox" class="remember" name=""></div>
           <div><a href="">Şifrəni unutmusunuz?</a></div>
           <div><input type="submit" name="" id="duyme"   value="Daxil ol"></div>
+
+          <br>
+          <a href='{% url "register" %}'>Register</a>
         </form>
       </div>
       

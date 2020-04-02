@@ -20,6 +20,7 @@ class LoginForm(forms.ModelForm):
 
 
 class RegisterForm(forms.ModelForm):
+    error_css_class = 'error'
     email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
         'class' : 'input',
         'placeholder':"Email"
@@ -40,7 +41,7 @@ class RegisterForm(forms.ModelForm):
         'class' : "input",
         'placeholder': "Confirm Password"
     })) 
-    field_order =  ('email','first_name', 'last_name', 'password', 'confirm_password', 'phone_number')
+    field_order =  ('email','first_name', 'last_name', 'password', 'confirm_password')
 
 
     class Meta:
@@ -55,7 +56,4 @@ class RegisterForm(forms.ModelForm):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            # raise forms.ValidationError(
-            #     "Password and Confirm Password does not match"
-            # )
             self.add_error('confirm_password', 'Password and Confirm Password does not match')

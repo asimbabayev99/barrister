@@ -12,8 +12,8 @@ CONTACT_TYPES = [
 
 
 GENDER_CHOICES = [
-    ('male', 'male'),
-    ('female', 'female')
+    ('male', 'Male'),
+    ('female', 'Female')
 ]
 
 
@@ -68,14 +68,53 @@ class CustomUser(AbstractUser):
 
 
 
-class Contact(models.Model):
-    type = models.CharField(max_length=32, choices=CONTACT_TYPES)
+class JobCategory(models.Model):
+    name = models.CharField(max_length=64)
+    slug = models.SlugField()
+
+
 
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    image = models.ImageField()
-    gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
-    contacts = models.ManyToManyField(Contact)
-    biography = models.TextField()
+    image = models.ImageField(null=True)
 
+    # contacts
+    phone_number = models.BigIntegerField(null=True)
+    website = models.URLField(null=True)
+    address = models.CharField(max_length=256, null=True)
+
+    # social networks
+    facebook_link = models.URLField(null=True)
+    twitter_link = models.URLField(null=True)
+    linkedin_link = models.URLField(null=True)
+    google_link = models.URLField(null=True)
+
+    gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
+    work_summary = models.CharField(max_length=2014)
+    biography = models.TextField()
+    job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.user.email
+
+
+
+
+class Skill(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='skills')
+    name = models.CharField(max_length=32)
+    progress = models.IntegerField(default=100)  # for example 70/100
+
+
+class EducationAndWorkExperience(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
+    title = models.CharField(max_length=256)
+    from_time = models.DateField(auto_now_add=True)
+    to_time = models.DateField(null=True)
+
+
+class Award(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='awards')
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=256)
