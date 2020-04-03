@@ -72,11 +72,11 @@ class EventList(ListAPIView):
     def get_queryset(self):
 
         user = self.request.user
-        return Event.objects.filter(user=user).order_by('from_time')
+        return Event.objects.filter(user=user).order_by('start')
 
     queryset = get_queryset 
 
-    serializer_class = EventSerializer
+    serializer_class = EventCreateSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [ExampleAuth,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
@@ -89,12 +89,12 @@ class EventList(ListAPIView):
 
 class EventCreate(GenericAPIView):
     queryset = Event.objects.none()
-    serializer_class = EventSerializer
+    serializer_class = EventCreateSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [ExampleAuth,]
     def post(self,request):
-        serializer = EventSerializer(data=request.data)
-        serializer.is_valid()
+        serializer = EventCreateSerializer(data=request.data,context={'request':request})
+        serializer.is_valid(raise_exception=True)
         event = Event(**serializer.validated_data)
         event.save()
         return Response(serializer.data)
@@ -105,17 +105,17 @@ class EventDetail(APIView):
     authentication_classes = [ExampleAuth,]
     permission_classes = [IsAuthenticated,]
     
-
+    
     def get_object(self,id):
         try:
-            event = Event.objects.get(id=id)
+            event = Event.objects.get(id=id,user=self.request.user)
             return event
         except:
-            raise ValidationError('user doesnt not exists')
+            raise serializers.ValidationError('event doesnt not exists')
 
     def get(self,request,id,format=None):
         event = self.get_object(id)
-        serializer = EventSerializer(event)
+        serializer = EventCreateSerializer(event)
         return Response(serializer.data)
     
     def delete(self,request,id,format=None):
@@ -125,12 +125,16 @@ class EventDetail(APIView):
             "event":'deleted'
         })
     
+
+
+    
     def put(self,request,id,format=None):
         old_event = self.get_object(id)
-        serializer = EventSerializer(instance=old_event,data=request.data)
-        if serializer.is_valid():
+        serializer = EventCreateSerializer(instance=old_event,data=request.data,context={'request':request})
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
 
 
 class ProfilesList(ListAPIView):
@@ -163,10 +167,36 @@ class ProfileDetail(APIView):
 
     def delete(self,request,id):
         profile = self.get_object(id)
-        profile.delete()
+        if request.user == profile.user:
+            profile.delete()
+            return Response({
+                'profile':'deleted'
+            })
+        else:
+            return Response({
+                'permission':'denied'
+            })
+     
+    def put(self,request,id):
+        profile = self.get_object(id)
+        data = request.data
+        if profile.user != request.user:
+            return Response({
+                'permission':'denied'
+            }) 
+        serializer = ProfileCreateSerializer(profile,data,context={'request':request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response({
-            'profile':'deleted'
+            'profile':'updated'
+            
         })
+     
+
+
+
+        
+
     
 class ProfileCreate(APIView):
     permission_classes = [AllowAny,]
@@ -188,16 +218,6 @@ class ProfileCreate(APIView):
      
 
 
-
-
-
-
-            
-
-
-
-
-
     
 
 
@@ -211,7 +231,7 @@ class ProfileCreate(APIView):
 
 class SkillAPIView(APIView):
 
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [ExampleAuth,]
     # permission_classes = [IsAuthenticated]
 
     def get(self, request):
