@@ -1,244 +1,256 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Barrister - Plans&Calendar </title>
-        <link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
-          alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon"/> 
-        <link rel="stylesheet" href="vendor/bootstrap.min.css" />
-        <link rel="stylesheet" href="fontawesome/all.css" />
-        <link rel="stylesheet" href="vendor/owl.carousel.css" />
-        <link rel="stylesheet" href="vendor/owl.theme.default.min.css"/>
-        <link rel="stylesheet" href="vendor/animate.css">
-        <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barrister - Plans&Calendar </title>
+  <link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+    alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon" />
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 
-      
+
 <body id="register-body">
-        <!-- <form method="post" class="col-md-6 col-sm-12" id="form1"	action=""> -->
- <section class="contact-from pt-4">
+  <!-- <form method="post" class="col-md-6 col-sm-12" id="form1"	action=""> -->
+  <section class="contact-from pt-4">
 
-   <div class="container">      
-                           
-     <div class="row mt-5">
-         <div class="col-md-7 mx-auto">
-           <div class="form-wrapper">
-             
-            <div class="row"> <!--row begin-->
-               <div class="col-md-12">
-                 <h4>Registration form</h4>
-               </div>
-             </div> <!--row end-->
+    <div class="container">
 
-             <form id="form1">
+      <div class="row mt-5">
+        <div class="col-md-7 mx-auto">
+          <div class="form-wrapper">
 
-  <div class="row"> <!--row begin-->
-
-           <div class="col-md-4">
-               <div class="form-group">
-                   <input type="text" id="fn" class="form-control"  name="Ad" placeholder="Ad daxil edin..."  >
-               </div>
-           </div>
-
-           <div class="col-md-4">
-               <div class="form-group">
-                <input type="text" id="ln" class="form-control"  name="Soyad" placeholder="Soyad daxil edin...">
-               </div>
-           </div>
-
-           <div class="col-md-4">
-            <div class="form-group">
-             <input type="text" id="ln" class="form-control"  name="Soyad" placeholder="Ata adını daxil edin...">
+            <div class="row">
+              <!--row begin-->
+              <div class="col-md-12">
+                <h4>Registration form</h4>
+              </div>
             </div>
-           </div>
+            <!--row end-->
 
-           <div class="col-md-3">
-               <div class="form-group">
-                   <select id="seriya" name="seriya_code" class="custom-select">
-                      <option  disabled="" selected="" value="">Seçin</option>
-                      <option value="aze" >AZE</option>
-                      <option value="aa" >AA</option>                       
-                   </select>
-               </div>
-           </div>
+            <form id="form1">
 
-           <div class="col-md-9">
-             <div class="form-group">
-                 <input type="number" name="seriya"  id="sn" class="form-control"   placeholder="Şəxsiyyət vəsiqəsinin nömrəsi..." >
-             </div>
-           </div>
+              <div class="row">
+                <!--row begin-->
 
-           <div class="col-md-12">
-            <div class="form-group">
-             <input type="text" class="form-control"  name="Soyad" placeholder="Qeydiyyatda olduğunuz ünvan... ">
-            </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input type="text" id="fn" class="form-control" name="Ad" placeholder="Ad daxil edin...">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input type="text" id="ln" class="form-control" name="Soyad" placeholder="Soyad daxil edin...">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input type="text" id="ln" class="form-control" name="Soyad" placeholder="Ata adını daxil edin...">
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <select id="seriya" name="seriya_code" class="custom-select">
+                      <option disabled="" selected="" value="">Seçin</option>
+                      <option value="aze">AZE</option>
+                      <option value="aa">AA</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-9">
+                  <div class="form-group">
+                    <input type="number" name="seriya" id="sn" class="form-control"
+                      placeholder="Şəxsiyyət vəsiqəsinin nömrəsi...">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="Soyad" placeholder="Qeydiyyatda olduğunuz ünvan... ">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Şəxsiyyət vəsiqəsinin fin kodu...">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="email" id="ma" class="form-control" placeholder="Email">
+                  </div>
+                </div>
+
+                <div class="col-md-3" id="bir_code" style="display: block">
+                  <div class="form-group">
+                    <select id="kod" name="phone_code" class="custom-select">
+                      <option disabled="" selected="">Seçin</option>
+                      <option>050</option>
+                      <option>051</option>
+                      <option>055</option>
+                      <option>070</option>
+                      <option>077</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-9" id="bir_no" style="display: block">
+                  <div class="form-group">
+                    <input type="number" name="phone_no" id="telnum" class="form-control"
+                      placeholder="Telefon nömrəsi daxil edin...">
+                  </div>
+                </div>
+
+
+                <div class="col-md-9">
+                  <div class="form-group">
+                    <div id="iki" style="display: none">
+                      <input type="number" name="phone_other" id="telnum" class="form-control"
+                        placeholder="Telefon nömrəsi daxil edin..."></div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <a href="#" onclick="bas()">Digər operator</a>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group passdiv">
+                    <input type="password" name="password" id="pass" class="form-control" minlength="6"
+                      placeholder="Şifrə daxil edin...">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group passdiv">
+                    <input type="password" name="repassword" id="pass1" class="form-control" minlength="6"
+                      placeholder="Şifrəni təkrar edin...">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <button type="submit" class="btn qeydDuyme">Qeydiyyatdan keç</button>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <span id="errMessage" class="form-control"></span>
+                  </div>
+                </div>
+
+              </div>
+              <!--row end-->
+
+            </form>
           </div>
-
-           <div class="col-md-6">
-               <div class="form-group">
-                   <input type="text" class="form-control" placeholder="Şəxsiyyət vəsiqəsinin fin kodu...">
-               </div>
-           </div>
-
-           <div class="col-md-6">
-              <div class="form-group">
-                <input type="email" id="ma" class="form-control" placeholder="Email">
-               </div>
-          </div>
-
-          <div class="col-md-3" id="bir_code" style="display: block">
-            <div class="form-group">
-                <select id="kod" name="phone_code" class="custom-select">
-                  <option disabled="" selected="">Seçin</option>
-				          <option>050</option>
-				          <option>051</option>
-				          <option>055</option>
-				          <option>070</option>
-				          <option>077</option>                    
-                </select>
-            </div>
         </div>
-        <div class="col-md-9" id="bir_no" style="display: block">
-          <div class="form-group">
-              <input type="number" name="phone_no"  id="telnum" class="form-control"   placeholder="Telefon nömrəsi daxil edin..." >
-          </div>
-        </div> 
-
-
-        <div class="col-md-9">
-          <div class="form-group">
-            <div id="iki" style="display: none">
-              <input type="number" name="phone_other" id="telnum" class="form-control"  placeholder="Telefon nömrəsi daxil edin..." ></div>
-          </div>
-          </div>
-
-        <div class="col-md-12">
-          <div class="form-group">
-              <a href="#" onclick="bas()">Digər operator</a>  
-            </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="form-group passdiv">
-              <input type="password" name="password" id="pass" class="form-control"  minlength="6" placeholder="Şifrə daxil edin..."> 
-            </div>
-        </div>
-         
-        <div class="col-md-6">
-          <div class="form-group passdiv">
-            <input type="password" name="repassword" id="pass1" class="form-control" minlength="6" placeholder="Şifrəni təkrar edin...">
-            </div>
-        </div>
-         
-        <div class="col-md-12">
-          <div class="form-group">
-            <button type="submit" class="btn qeydDuyme">Qeydiyyatdan keç</button>
-          </div>
-        </div>
-        
-        <div class="col-md-12">
-          <div class="form-group">
-            <span id="errMessage" class="form-control"></span>
-          </div>
-        </div>
-
-      </div> <!--row end-->
-
-         </form>
-       </div>
-       </div>
-     </div>
+      </div>
     </div>
-</section>
-         
- 
-
-		
-<script type="text/javascript">
-	function bas() {
-		var ilk_code = document.getElementById("bir_code");
-		var ilk_no = document.getElementById("bir_no");
-		var son = document.getElementById("iki");
-
-		if (ilk_code.style.display =="block") {
-			
-			ilk_code.style.display="none";
-			ilk_no.style.display="none";
-			son.style.display="block";
-		}
-		else{
-      ilk_code.style.display="block";
-			ilk_no.style.display="block";
-			son.style.display="none";
-
-		}
-	};
-		form1.onsubmit=function() {
-    var x = document.getElementById("seriya");
-	var y = x.options[x.selectedIndex].value;
-    var sv = document.getElementById('sn').value;
-  
- if(document.getElementById('fn').value == "" || document.getElementById('fn').value.length == 0
- || document.getElementById('ln').value == "" || document.getElementById('ln').value.length == 0 ){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Zehmet olmasa ad ve soyadi dogru qeyd edin..." + "\n";
-	return false;
- };
-	if (y =="" || sv=="" ){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Bir seriya secin...";
-	return false;
- }
-	
- if (y=="AZE" &&  sv.length != 8 ){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Seriya nomresi 8 reqemli olmalidir...";
-	return false;
- }
- 
- 
-if  (y =="AA" &&  sv.length != 7 ){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Seriya nomresi 7 reqemli olmalidir...";
-	return false;
- }
- 
- if(document.getElementById('ma').value == ""){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Zehmet olmasa mail adresi daxil edin...";
-	return false;
- }
-
- if(document.getElementById('telnum').value == "" || document.getElementById('telnum').value.length != 7 ){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Zehmet olmasa telefon nomresini daxil edin." + "  " + "Nomre 7 reqemden ibaret olmalidir." ;
-	return false;
- }
- 
- 
- if (document.getElementById('pass').value=="" || document.getElementById('pass1').value=="" ){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Zehmet olmasa sifre daxil edin...";
-	return false;
- }
- if(document.getElementById('pass').value!=document.getElementById('pass1').value){
-	document.getElementById('errMessage').style.display="block";
-	document.getElementById('errMessage').innerHTML="Iki sifre de eyni olmalidir...";
-	return false;
- }
- };
+  </section>
 
 
-</script>
 
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src='vendor/fullcalendar-3.10.0/lib/moment.min.js'></script>
-<script src='vendor/fullcalendar-3.10.0/lib/jquery.min.js'></script>
-<script src='vendor/fullcalendar-3.10.0/fullcalendar.min.js'></script>
-<script src='vendor/fullcalendar-3.10.0/locale/az.js'></script>
-<script src="js/main.js"></script>
+
+  <script type="text/javascript">
+    function bas() {
+      var ilk_code = document.getElementById("bir_code");
+      var ilk_no = document.getElementById("bir_no");
+      var son = document.getElementById("iki");
+
+      if (ilk_code.style.display == "block") {
+
+        ilk_code.style.display = "none";
+        ilk_no.style.display = "none";
+        son.style.display = "block";
+      }
+      else {
+        ilk_code.style.display = "block";
+        ilk_no.style.display = "block";
+        son.style.display = "none";
+
+      }
+    };
+    form1.onsubmit = function () {
+      var x = document.getElementById("seriya");
+      var y = x.options[x.selectedIndex].value;
+      var sv = document.getElementById('sn').value;
+
+      if (document.getElementById('fn').value == "" || document.getElementById('fn').value.length == 0
+        || document.getElementById('ln').value == "" || document.getElementById('ln').value.length == 0) {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Zehmet olmasa ad ve soyadi dogru qeyd edin..." + "\n";
+        return false;
+      };
+      if (y == "" || sv == "") {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Bir seriya secin...";
+        return false;
+      }
+
+      if (y == "AZE" && sv.length != 8) {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Seriya nomresi 8 reqemli olmalidir...";
+        return false;
+      }
+
+
+      if (y == "AA" && sv.length != 7) {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Seriya nomresi 7 reqemli olmalidir...";
+        return false;
+      }
+
+      if (document.getElementById('ma').value == "") {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Zehmet olmasa mail adresi daxil edin...";
+        return false;
+      }
+
+      if (document.getElementById('telnum').value == "" || document.getElementById('telnum').value.length != 7) {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Zehmet olmasa telefon nomresini daxil edin." + "  " + "Nomre 7 reqemden ibaret olmalidir.";
+        return false;
+      }
+
+
+      if (document.getElementById('pass').value == "" || document.getElementById('pass1').value == "") {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Zehmet olmasa sifre daxil edin...";
+        return false;
+      }
+      if (document.getElementById('pass').value != document.getElementById('pass1').value) {
+        document.getElementById('errMessage').style.display = "block";
+        document.getElementById('errMessage').innerHTML = "Iki sifre de eyni olmalidir...";
+        return false;
+      }
+    };
+
+
+  </script>
+
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
+
 </html>
