@@ -60,10 +60,7 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
     def __str__(self):
         return self.email
-    def get_permission(self):
-        permission = Permissions.objects.get(user=self.id)
-      
-        return permission.permission
+    
 
 
 
@@ -99,8 +96,6 @@ class Profile(models.Model):
     
     
 
-    def __str__(self):
-        return self.user.email
 
 
 

@@ -33,28 +33,31 @@ class EventCategorySerializer(serializers.ModelSerializer):
         fields = ['name']
 
 
-class EventSerializer(serializers.ModelSerializer):
-    # category = serializers.PrimaryKeyRelatedField(many=False,read_only=False,queryset=TaskCategory.objects.all())
+class EventCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Event
-        fields = ['name','description','location','completed','category']
+        fields = ['name','description','location','completed','category','user']
     def create(self,validated_data):
         task = Event(**validated_data)
         task.save()
         return task
 
-
+class EventCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = Event
+        fields = ['user','name','description','location','completed','category']
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['user','image','gender','contacts','skills','biography','job_category']
+        fields = ['user','image','gender','biography','job_category']
 
 class ProfileCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Profile    
-        fields = ['user','gender','contacts','skills','job_category']
+        fields = ['user','gender','job_category','biography']
     
 
 class SkillSerializer(serializers.Serializer):
