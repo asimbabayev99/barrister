@@ -45,6 +45,18 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['user','image','gender','contacts','skills','biography','job_category']
+
+class ProfileCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    class Meta:
+        model = Profile    
+        fields = ['user','gender','contacts','skills','job_category']
+    
+
 class SkillSerializer(serializers.Serializer):
     pk = serializers.IntegerField(required=False)
     profile_id = serializers.IntegerField()

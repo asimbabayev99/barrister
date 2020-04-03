@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser, Permission
-# Create your models here.
+from django.utils import timezone
 
 
 
@@ -71,6 +71,8 @@ class CustomUser(AbstractUser):
 class JobCategory(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField()
+    def __str__(self):
+        return self.name
 
 
 
@@ -94,6 +96,8 @@ class Profile(models.Model):
     work_summary = models.CharField(max_length=2014)
     biography = models.TextField()
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
+    
+    
 
     def __str__(self):
         return self.user.email
