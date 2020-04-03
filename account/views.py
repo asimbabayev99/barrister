@@ -119,7 +119,6 @@ def user_detail_view(request, pk):
         'awards': awards,
         'experiences': experiences,
     }
-
     return render(request, 'user-detail.html', context=context)
 
 
@@ -129,7 +128,6 @@ def add_user_view(request, pk):
     if request.method == "POST":
 
         pass
-
     else:
         roles = Role.objects.all()
 
