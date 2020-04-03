@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from account.models import CustomUser
+from account.models import *
 from account.forms import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.hashers import make_password
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -76,3 +77,69 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
+
+
+
+def user_list_view(request):
+    user_list = CustomUser.objects.all()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(user_list, 24)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an integer 
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if page is out of range (e.g. 999), deliver last page of results.
+        page_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        "page_obj": page_obj,
+    }
+    # print(page_obj.num_pages)
+    # print(context)
+
+    return render(request, "user-list.html", context=context)
+
+
+
+def user_detail_view(request, pk):
+
+    user = CustomUser.objects.get(pk=pk)
+    profile = Profile.objects.get(user=user)
+    skills = Skill.objects.filter(profile=profile)
+    awards = Award.objects.filter(profile=profile)
+    experiences = EducationAndWorkExperience(profile=profile)
+
+    context = {
+        'user': user,
+        'profile': profile,
+        'skills': skills,
+        'awards': awards,
+        'experiences': experiences,
+    }
+
+    return render(request, 'user-detail.html', context=context)
+
+
+
+def add_user_view(request, pk):
+
+    if request.method == "POST":
+
+        pass
+
+    else:
+        roles = Role.objects.all()
+
+        context = {
+            'roles': roles,
+        }
+        return render(request, 'add-user.html', context=context)
+
+
+
+
+
+
