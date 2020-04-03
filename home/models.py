@@ -301,3 +301,12 @@ class Occurrence(models.Model):
             and self.original_start == other.original_start
             and self.original_end == other.original_end
         )
+
+
+class News(models.Model):
+    title = models.CharField(_("title"), max_length=255, blank=False)
+    content = models.TextField(_("content"), blank=False)
+    date = models.DateTimeField(_("date"), auto_now_add=True)
+    image = models.ImageField(_("image"),  blank=False)
+
+
