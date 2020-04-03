@@ -174,16 +174,16 @@ class ProfileDetail(APIView):
             })
         else:
             return Response({
-                'permission':'denied'
-            })
+                'detail':'Permission denied'
+            },status=403)
      
     def put(self,request,id):
         profile = self.get_object(id)
         data = request.data
         if profile.user != request.user:
             return Response({
-                'permission':'denied'
-            }) 
+                'detail':'Permission denied'
+            }, status=403) 
         serializer = ProfileCreateSerializer(profile,data,context={'request':request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -210,20 +210,6 @@ class ProfileCreate(APIView):
         profile.save()
         return Response(serializer.data)
         
-
-
-
-
-
-     
-
-
-    
-
-
-
-
-
 
 
 
