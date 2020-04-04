@@ -312,4 +312,8 @@ class News(models.Model):
     image = models.ImageField(_("image"),upload_to='news', blank=False)
     slug = models.SlugField(max_length=20,blank=True,null=True)
 
+    def __str__(self):
+        return self.title 
+
+
 
