@@ -160,6 +160,11 @@
                   <div class="form-group passdiv">
                     <!-- <input type="password" name="repassword" id="pass1" class="form-control" minlength="6" placeholder="Şifrəni təkrar edin..."> -->
                     {{ form.confirm_password }}
+                    {% for error in form.confirm_password.errors %}
+                      <div class="alert alert-danger">
+                          <strong>{{ error }}</strong>
+                      </div>
+                    {% endfor %}
                   </div>
                 </div>
 

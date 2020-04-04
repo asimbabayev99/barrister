@@ -89,7 +89,6 @@ class RegisterForm(forms.ModelForm):
 
 
 
-
 class UserForm(forms.ModelForm):
     error_css_class = 'error'
     email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
