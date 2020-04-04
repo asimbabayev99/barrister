@@ -1,5 +1,7 @@
 from django.db import models
 from account.models import CustomUser
+from ckeditor.fields import RichTextField
+
 
 from dateutil.rrule import (
     DAILY,
@@ -305,8 +307,9 @@ class Occurrence(models.Model):
 
 class News(models.Model):
     title = models.CharField(_("title"), max_length=255, blank=False)
-    content = models.TextField(_("content"), blank=False)
+    content = RichTextField(_("content"), blank=False)
     date = models.DateTimeField(_("date"), auto_now_add=True)
-    image = models.ImageField(_("image"),  blank=False)
+    image = models.ImageField(_("image"),upload_to='news', blank=False)
+    slug = models.SlugField(max_length=20,blank=True,null=True)
 
 
