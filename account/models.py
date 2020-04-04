@@ -111,11 +111,11 @@ class Profile(models.Model):
 
 
 
-
 class Skill(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='skills')
     name = models.CharField(max_length=32)
     progress = models.IntegerField(default=100)  # for example 70/100
+
 
 
 class EducationAndWorkExperience(models.Model):
@@ -123,6 +123,7 @@ class EducationAndWorkExperience(models.Model):
     title = models.CharField(max_length=256)
     start = models.DateField(auto_now_add=True)
     end = models.DateField(null=True)
+
 
 
 class Award(models.Model):
