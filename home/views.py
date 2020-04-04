@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
+from home.forms import Newsform 
+
 
 def index_view(request):
     profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
@@ -31,3 +33,24 @@ def single_view(request, id):
 def calendar_view(request):
 
     return render(request, "calendar.html", context={})
+
+def news_add_view(request):
+    errors = {}
+    form = Newsform()
+    if request.method == "POST":
+        form = Newsform(request.POST,request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            image = form.cleaned_data['image']
+            news = News(title=title,content=content,image=image)
+            news.save()
+            
+        else:
+            errors['message'] = 'Error'
+    
+    return render(request,'news_add.html',context={'form':form,'errors':errors})
+
+
+
+        

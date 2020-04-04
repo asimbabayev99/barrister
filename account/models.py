@@ -54,8 +54,8 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=256, unique=True)
     father_name = models.CharField(max_length=100,unique=False,null=True,blank=True)
     idcard_fin = models.CharField(max_length=20,unique=True,blank=True,null=True)
-    idcard_serial_num = models.SmallIntegerField(max_length=20,unique=True,blank=True,null=True)
-    phone_number = models.SmallIntegerField(max_length=12,unique=True,blank=True,null=True)
+    idcard_serial_num = models.SmallIntegerField(unique=True,blank=True,null=True)
+    phone_number = models.SmallIntegerField(unique=True,blank=True,null=True)
 
 
 
