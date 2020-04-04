@@ -42,102 +42,124 @@
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="text" id="fn" class="form-control" name="first_name" placeholder="Ad daxil edin...">
+                    <!-- <input type="text" id="fn" class="form-control" name="first_name" placeholder="Ad daxil edin..."> -->
+                    {{ form.first_name}}
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="text" id="ln" class="form-control" name="last_name" placeholder="Soyad daxil edin...">
+                    <!-- <input type="text" id="ln" class="form-control" name="last_name" placeholder="Soyad daxil edin..."> -->
+                    {{ form.last_name }}
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="text" id="ln" class="form-control" name="middle_name" placeholder="Ata adını daxil edin...">
+                    <!-- <input type="text" id="ln" class="form-control" name="middle_name" placeholder="Ata adını daxil edin..."> -->
+                    {{ form.middle_name }}
                   </div>
                 </div>
 
                 <div class="col-md-3">
                   <div class="form-group">
-                    <select id="seriya" name="seriya_type" class="custom-select">
+                    {{ form.seriya_type }}
+                    <!-- <select id="seriya" name="seriya_type" class="custom-select">
                       <option disabled="" selected="" value="">Seçin</option>
                       <option value="AZE">AZE</option>
                       <option value="AA">AA</option>
-                    </select>
+                    </select> -->
                   </div>
                 </div>
 
                 <div class="col-md-9">
                   <div class="form-group">
-                    <input type="number" name="seriya" id="sn" class="form-control"
-                      placeholder="Şəxsiyyət vəsiqəsinin nömrəsi...">
+                    <!-- <input type="number" name="seriya" id="sn" class="form-control" placeholder="Şəxsiyyət vəsiqəsinin nömrəsi..."> -->
+                    {{ form.seriya }}
+                    {% for error in form.seriya.errors %}
+                      <div class="alert alert-danger">
+                          <strong>{{ error }}</strong>
+                      </div>
+                    {% endfor %}
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="address" placeholder="Qeydiyyatda olduğunuz ünvan... ">
+                    <!-- <input type="text" class="form-control" name="address" placeholder="Qeydiyyatda olduğunuz ünvan... "> -->
+                    {{ form.address }}
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="fin" placeholder="Şəxsiyyət vəsiqəsinin fin kodu...">
+                    <!-- <input type="text" class="form-control" name="fin" placeholder="Şəxsiyyət vəsiqəsinin fin kodu..."> -->
+                    {{ form.fin }}
+                    {% for error in form.fin.errors %}
+                      <div class="alert alert-danger">
+                          <strong>{{ error }}</strong>
+                      </div>
+                    {% endfor %}
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="email" id="ma" name="email" class="form-control" placeholder="Email">
+                    <!-- <input type="email" id="ma" name="email" class="form-control" placeholder="Email"> -->
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                      <div class="alert alert-danger">
+                          <strong>{{ error }}</strong>
+                      </div>
+                    {% endfor %}
                   </div>
                 </div>
 
                 <div class="col-md-3" id="bir_code" style="display: block">
                   <div class="form-group">
-                    <select id="kod" name="phone_prefix" class="custom-select">
+                    {{ form.phone_prefix }}
+                    <!-- <select id="kod" name="phone_prefix" class="custom-select">
                       <option disabled="" selected="">Seçin</option>
                       <option value="050">050</option>
                       <option value="051">051</option>
                       <option value="055">055</option>
                       <option value="070">070</option>
                       <option value="077">077</option>
-                    </select>
+                    </select> -->
                   </div>
                 </div>
                 <div class="col-md-9" id="bir_no" style="display: block">
                   <div class="form-group">
-                    <input type="number" name="phone_number" id="telnum" class="form-control"
-                      placeholder="Telefon nömrəsi daxil edin...">
+                    <!-- <input type="number" name="phone_number" id="telnum" class="form-control" placeholder="Telefon nömrəsi daxil edin..."> -->
+                    {{ form.phone_number }}
                   </div>
                 </div>
 
 
-                <div class="col-md-9">
+                <!-- <div class="col-md-9">
                   <div class="form-group">
                     <div id="iki" style="display: none">
-                      <input type="number" name="phone_number" id="telnum" class="form-control"
-                        placeholder="Telefon nömrəsi daxil edin..."></div>
+                      <input type="number" name="phone_number" id="telnum" class="form-control" placeholder="Telefon nömrəsi daxil edin..."></div>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                   <div class="form-group">
                     <a href="#" onclick="bas()">Digər operator</a>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="col-md-6">
                   <div class="form-group passdiv">
-                    <input type="password" name="password" id="pass" class="form-control" minlength="6"
-                      placeholder="Şifrə daxil edin...">
+                    <!-- <input type="password" name="password" id="pass" class="form-control" minlength="6" placeholder="Şifrə daxil edin..."> -->
+                    {{ form.password }}
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group passdiv">
-                    <input type="password" name="repassword" id="pass1" class="form-control" minlength="6"
-                      placeholder="Şifrəni təkrar edin...">
+                    <!-- <input type="password" name="repassword" id="pass1" class="form-control" minlength="6" placeholder="Şifrəni təkrar edin..."> -->
+                    {{ form.confirm_password }}
                   </div>
                 </div>
 

@@ -49,15 +49,17 @@ def register_view(request):
         form = RegisterForm(request.POST)
 
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            if 'confirm_password' in form.cleaned_data:
+                del form.cleaned_data['confirm_password']
 
-            # new_user = CustomUser(**form.cleaned_data)
-            new_user = CustomUser(
-                first_name=first_name, last_name=last_name, email=email
-            )
+            # first_name = form.cleaned_data['first_name']
+            # last_name = form.cleaned_data['last_name']
+            # email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            new_user = CustomUser(**form.cleaned_data)
+            # new_user = CustomUser(
+            #     first_name=first_name, last_name=last_name, email=email
+            # )
             new_user.password = make_password(password)
             new_user.save()
 

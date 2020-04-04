@@ -1,5 +1,5 @@
 from django import forms
-from account.models import CustomUser
+from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES
 
 
 
@@ -19,35 +19,63 @@ class LoginForm(forms.ModelForm):
         fields = ('email', 'password')
 
 
+
+
 class RegisterForm(forms.ModelForm):
     error_css_class = 'error'
-    email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : 'input',
+    email = forms.EmailField(label='', max_length=32, widget=forms.EmailInput(attrs={
+        'class' : 'form-control',
         'placeholder':"Email"
     }))
-    first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "input",
+    first_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class' : "form-control",
         'placeholder': "First Name"
     })) 
-    last_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "input",
+    last_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class' : "form-control",
         'placeholder': "Last Name"
     })) 
+    middle_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Middle Name'
+    }))
     password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(attrs={
-        'class' : "input",
+        'class' : "form-control",
         'placeholder': "Password"
     })) 
     confirm_password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(attrs={
-        'class' : "input",
+        'class' : "form-control",
         'placeholder': "Confirm Password"
     })) 
-    field_order =  ('email','first_name', 'last_name', 'password', 'confirm_password')
+    address = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Adress'
+    }))
+    fin = forms.CharField(label='', max_length=10, widget=forms.TextInput(attrs={
+        'class' : "form-control",
+        'placeholder': "Fin"
+    }))
+    seriya_type = forms.ChoiceField(choices=SERIYA_TYPES, required=True, widget=forms.Select(attrs={
+        'class': 'custom-select'
+    }))
+    seriya = forms.IntegerField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Seriya'
+    }))
+    phone_prefix = forms.ChoiceField(choices=PHONE_PREFIXES, required=True, widget=forms.Select(attrs={
+        'class': 'custom-select'
+    }))
+    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Phone Number'
+    }))
+
+    # field_order =  ('email','first_name', 'last_name', 'middle_name', 'password', 'confirm_password')
 
 
     class Meta:
         model = CustomUser
-        fields = ('email','first_name', 'last_name', 'password')
-
+        fields = ('email','first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_prefix', 'phone_number', 'password')
 
     
     def clean(self):
@@ -57,6 +85,7 @@ class RegisterForm(forms.ModelForm):
 
         if password != confirm_password:
             self.add_error('confirm_password', 'Password and Confirm Password does not match')
+
 
 
 
