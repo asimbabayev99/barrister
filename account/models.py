@@ -5,17 +5,25 @@ from django.utils import timezone
 
 
 
-CONTACT_TYPES = [
-    ('e-mail', 'e-mail'),
-    ('phone', 'phone')
-]
-
-
 GENDER_CHOICES = [
     ('male', 'Male'),
     ('female', 'Female')
 ]
 
+
+SERIYA_TYPES = [
+    ('AZE', 'AZE'),
+    ('AA', 'AA')
+]
+
+
+PHONE_PREFIXES = [
+    ('050', '050'),
+    ('051', '051'),
+    ('055', '055'),
+    ('070', '070'),
+    ('077', '077')
+]
 
 class Role(models.Model):
     name = models.CharField(max_length=32)
@@ -50,14 +58,14 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
+    middle_name = models.CharField(max_length=100,unique=False, null=True)
     username = models.CharField('username', max_length=150, unique=False)
     email = models.EmailField(max_length=256, unique=True)
-    father_name = models.CharField(max_length=100,unique=False,null=True,blank=True)
-    idcard_fin = models.CharField(max_length=20,unique=True,blank=True,null=True)
-    idcard_serial_num = models.SmallIntegerField(max_length=20,unique=True,blank=True,null=True)
-    phone_number = models.SmallIntegerField(max_length=12,unique=True,blank=True,null=True)
-
-
+    fin = models.CharField(max_length=10, unique=True, null=True)
+    seriya_type = models.CharField(max_length=3, choices=SERIYA_TYPES)
+    seriya = models.IntegerField(unique=True, null=True)
+    phone_prefix = models.CharField(max_length=4, choices=PHONE_PREFIXES, null=True)
+    phone_number = models.IntegerField(null=True)
 
     role = models.ForeignKey(Role, null=True, on_delete=models.SET_NULL)
     
@@ -98,9 +106,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
     work_summary = models.CharField(max_length=2014)
     biography = models.TextField()
-    job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
-    
-    
+    job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)    
 
 
 

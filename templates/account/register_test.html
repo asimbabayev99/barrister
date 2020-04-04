@@ -35,35 +35,35 @@
             </div>
             <!--row end-->
 
-            <form id="form1">
-
+            <form id="form1" method="POST" action="">
+              {% csrf_token %}
               <div class="row">
                 <!--row begin-->
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="text" id="fn" class="form-control" name="Ad" placeholder="Ad daxil edin...">
+                    <input type="text" id="fn" class="form-control" name="first_name" placeholder="Ad daxil edin...">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="text" id="ln" class="form-control" name="Soyad" placeholder="Soyad daxil edin...">
+                    <input type="text" id="ln" class="form-control" name="last_name" placeholder="Soyad daxil edin...">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="text" id="ln" class="form-control" name="Soyad" placeholder="Ata adını daxil edin...">
+                    <input type="text" id="ln" class="form-control" name="middle_name" placeholder="Ata adını daxil edin...">
                   </div>
                 </div>
 
                 <div class="col-md-3">
                   <div class="form-group">
-                    <select id="seriya" name="seriya_code" class="custom-select">
+                    <select id="seriya" name="seriya_type" class="custom-select">
                       <option disabled="" selected="" value="">Seçin</option>
-                      <option value="aze">AZE</option>
-                      <option value="aa">AA</option>
+                      <option value="AZE">AZE</option>
+                      <option value="AA">AA</option>
                     </select>
                   </div>
                 </div>
@@ -77,37 +77,37 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="Soyad" placeholder="Qeydiyyatda olduğunuz ünvan... ">
+                    <input type="text" class="form-control" name="address" placeholder="Qeydiyyatda olduğunuz ünvan... ">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Şəxsiyyət vəsiqəsinin fin kodu...">
+                    <input type="text" class="form-control" name="fin" placeholder="Şəxsiyyət vəsiqəsinin fin kodu...">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="email" id="ma" class="form-control" placeholder="Email">
+                    <input type="email" id="ma" name="email" class="form-control" placeholder="Email">
                   </div>
                 </div>
 
                 <div class="col-md-3" id="bir_code" style="display: block">
                   <div class="form-group">
-                    <select id="kod" name="phone_code" class="custom-select">
+                    <select id="kod" name="phone_prefix" class="custom-select">
                       <option disabled="" selected="">Seçin</option>
-                      <option>050</option>
-                      <option>051</option>
-                      <option>055</option>
-                      <option>070</option>
-                      <option>077</option>
+                      <option value="050">050</option>
+                      <option value="051">051</option>
+                      <option value="055">055</option>
+                      <option value="070">070</option>
+                      <option value="077">077</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-9" id="bir_no" style="display: block">
                   <div class="form-group">
-                    <input type="number" name="phone_no" id="telnum" class="form-control"
+                    <input type="number" name="phone_number" id="telnum" class="form-control"
                       placeholder="Telefon nömrəsi daxil edin...">
                   </div>
                 </div>
@@ -116,7 +116,7 @@
                 <div class="col-md-9">
                   <div class="form-group">
                     <div id="iki" style="display: none">
-                      <input type="number" name="phone_other" id="telnum" class="form-control"
+                      <input type="number" name="phone_number" id="telnum" class="form-control"
                         placeholder="Telefon nömrəsi daxil edin..."></div>
                   </div>
                 </div>
