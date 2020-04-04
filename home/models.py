@@ -1,6 +1,7 @@
 from django.db import models
 from account.models import CustomUser
 from ckeditor.fields import RichTextField
+from django.utils.text import slugify
 
 
 from dateutil.rrule import (
@@ -310,6 +311,12 @@ class News(models.Model):
     content = RichTextField(_("content"), blank=False)
     date = models.DateTimeField(_("date"), auto_now_add=True)
     image = models.ImageField(_("image"),upload_to='news', blank=False)
-    slug = models.SlugField(max_length=20,blank=True,null=True)
+    slug = models.SlugField(max_length=20,blank=True,null=True,unique=True)
+    
+    def save(self,*args,**kwargs):
+        self.slug = slugify(self.title)
+        super(News,self).save(*args,**kwargs)
+        
+
 
 

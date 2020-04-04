@@ -47,10 +47,10 @@ def news_add_view(request):
             content = form.cleaned_data['content']
             image = form.cleaned_data['image']
             news = News(title=title,content=content,image=image)
-            news.save()
-            
+            news.save()   
         else:
             errors['message'] = 'Error'
+        form = Newsform()
     
     return render(request,'news_add.html',context={'form':form,'errors':errors})
 
