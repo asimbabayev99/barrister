@@ -312,6 +312,7 @@ class News(models.Model):
     date = models.DateTimeField(_("date"), auto_now_add=True)
     image = models.ImageField(_("image"),upload_to='news', blank=False)
     slug = models.SlugField(max_length=20,blank=True,null=True,unique=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,null=True,blank=True)
     
     def save(self,*args,**kwargs):
         self.slug = slugify(self.title)

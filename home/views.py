@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse ,get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
@@ -46,7 +46,8 @@ def news_add_view(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
             image = form.cleaned_data['image']
-            news = News(title=title,content=content,image=image)
+            user = request.user 
+            news = News(title=title,content=content,image=image,user = user)
             news.save()   
         else:
             errors['message'] = 'Error'
@@ -54,6 +55,22 @@ def news_add_view(request):
     
     return render(request,'news_add.html',context={'form':form,'errors':errors})
 
+def news_update(request,slug):
+    news = get_object_or_404(News.objects.all(),slug=slug)
+    if request.user != news.user:
+        return HttpResponse('<h1>Permission denied</h1>')
+    form = Newsform(instance=news)
+    if request.method == "POST":
+        form = Newsform(request.POST,request.FILES,instance=news)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            image = form.cleaned_data['image']
+            news = News(title=title,content=content,image=image,user=request.user)
+            news.save()
+
+    form = Newsform(instance=news)
+    return render(request,'news_update.html',context={'form':form})
 
 
         
