@@ -21,16 +21,17 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
-<body>
-    <form enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        {{ form.title }}
-        {{ form.content }}
-        {{ form.media }}
-        {{ form.image }}
-        <input type="submit">
-    
-
-    </form>
+<body class="news-add-body">
+   <div class="container">
+      <h4 class="text-center">Xəbər əlavə et</h4>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ form.title }}
+            {{ form.content }}
+            {{ form.media }}
+            {{ form.image }}
+            <input type="submit" value="Dərc et" class="mt-2 publish-button">
+        </form>
+    </div>
 </body>
 </html>

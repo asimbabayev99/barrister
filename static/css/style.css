@@ -147,3 +147,42 @@ body {
 
 /* register page end */
 
+/* news add and update page begin*/
+.news-add-body{
+  background-color: #F8F8F8;
+}
+#id_image{
+  display: block;
+  margin-top: 0.5rem;
+}
+.publish-button{
+  background-color: #cdba6d;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 16px 44px 16px;
+  border-radius: 0px;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  outline: none !important;
+}
+.publish-button:hover {
+  background-color: #42474c;
+    color: #fff;
+}
+.django-ckeditor-widget{
+  display: block!important;
+}
+.cke_chrome{
+  width: 100%!important;
+}
+/* media */
+@media only screen and (max-width: 600px) {
+  .cke_chrome{
+    width: 100%!important;
+  }
+}
+/* news add and update page end*/
