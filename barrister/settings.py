@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'barrister',
         'USER': 'barrister',
         'PASSWORD': 'barrister',
-        'HOST': 'lua.az',
+        'HOST': 'barrister.az',
         'PORT': '5432',
     }
 }
