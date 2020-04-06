@@ -182,7 +182,7 @@ body {
 /* media */
 @media only screen and (max-width: 600px) {
   .cke_chrome{
-    width: 100%!important;
+   
   }
 }
 /* news add and update page end*/
