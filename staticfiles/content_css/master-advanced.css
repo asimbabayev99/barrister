@@ -538,7 +538,7 @@ input[type="reset"]{
 }
 .top-contact li {
     display: inline-block;
-    padding-left: 15px;
+    /* padding-left: 15px; */
     padding-right: 15px;
     letter-spacing: 0.5px;
     position: relative;

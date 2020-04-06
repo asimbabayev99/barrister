@@ -1,5 +1,8 @@
 from django.db import models
 from account.models import CustomUser
+from ckeditor.fields import RichTextField
+from django.utils.text import slugify
+
 
 from dateutil.rrule import (
     DAILY,
@@ -301,3 +304,26 @@ class Occurrence(models.Model):
             and self.original_start == other.original_start
             and self.original_end == other.original_end
         )
+
+
+class News(models.Model):
+    title = models.CharField(_("title"), max_length=255, blank=False)
+    content = RichTextField(_("content"), blank=False)
+    date = models.DateTimeField(_("date"), auto_now_add=True)
+    image = models.ImageField(_("image"),upload_to='news', blank=False)
+    slug = models.SlugField(max_length=20,blank=True,null=True,unique=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,null=True,blank=True)
+    
+    def save(self,*args,**kwargs):
+        self.slug = slugify(self.title)
+        super(News,self).save(*args,**kwargs)
+        
+
+
+
+    def __str__(self):
+        return self.title 
+
+
+
+
