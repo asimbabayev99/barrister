@@ -63,7 +63,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=256, unique=True)
     address = models.CharField(max_length=256, null=True)
     fin = models.CharField(max_length=10, unique=True, null=True)
-    seriya_type = models.CharField(max_length=3, choices=SERIYA_TYPES)
+    seriya_type = models.CharField(max_length=5, choices=SERIYA_TYPES)
     seriya = models.IntegerField(unique=True, null=True)
     phone_prefix = models.CharField(max_length=4, choices=PHONE_PREFIXES, null=True)
     phone_number = models.IntegerField(null=True)
