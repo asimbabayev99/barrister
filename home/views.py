@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
 from home.forms import Newsform 
-
+from django.utils.text import slugify
 
 def index_view(request):
     profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
@@ -63,10 +63,9 @@ def news_update(request,slug):
     if request.method == "POST":
         form = Newsform(request.POST,request.FILES,instance=news)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-            image = form.cleaned_data['image']
-            news = News(title=title,content=content,image=image,user=request.user)
+            news.title = form.cleaned_data['title']
+            news.content = form.cleaned_data['content']
+            news.image = form.cleaned_data['image']
             news.save()
 
     form = Newsform(instance=news)
