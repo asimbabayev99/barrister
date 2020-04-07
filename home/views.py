@@ -81,4 +81,10 @@ def news_view(request):
 
     return render(request, "news.html", context)
 
+def news_detail_view(request, slug):
+    news = get_object_or_404(News, slug = slug)
+    context = {
+        'news': news
+    }
+    return render(request, "news_detail.html", context)
         
