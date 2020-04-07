@@ -19,13 +19,11 @@ body {
 }
 
 .page{
-  width:400px;
-  height: 400px;
   padding: 10px 4% 10px 4%;
   border:1px solid #CDBA6D;
   border-radius: 10px;
   text-align: center;
-  margin: 150px 0 0 10%;
+  margin: 3rem 0 3rem 0;
   box-shadow: 0px 7px 26px 2px rgba(0,0,0,0.75);
   background-color:rgba(252, 225, 146, 0.83);
 }
@@ -50,17 +48,15 @@ body {
   height: 15px;
 }
 #duyme{
-  width: 160px; 
-  height: 35px; 
   border: 1px solid #cdba6d; 
   border-radius: 15px;
-  padding: 6px 5px 5px 5px;
   text-align: center;
   font-size: 18px;
   background-color: black;
   color: #cdba6d;
   cursor: pointer;
-  margin-top:20px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 #duyme:hover{
   background-color: rgba(252,225,146,0.5);
@@ -81,13 +77,11 @@ body {
 
 /* register page begin */
 #register-body{
-  height: 1000px;
   /* Изображение succo с сайта Pixabay  */
   background-image: url(../img/hammer-620011_640.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
   
 }
 .form-wrapper{
@@ -153,3 +147,42 @@ body {
 
 /* register page end */
 
+/* news add and update page begin*/
+.news-add-body{
+  background-color: #F8F8F8;
+}
+#id_image{
+  display: block;
+  margin-top: 0.5rem;
+}
+.publish-button{
+  background-color: #cdba6d;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 16px 44px 16px;
+  border-radius: 0px;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  outline: none !important;
+}
+.publish-button:hover {
+  background-color: #42474c;
+    color: #fff;
+}
+.django-ckeditor-widget{
+  display: block!important;
+}
+.cke_chrome{
+  width: 100%!important;
+}
+/* media */
+@media only screen and (max-width: 600px) {
+  .cke_chrome{
+   
+  }
+}
+/* news add and update page end*/

@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse ,get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
 from home.forms import Newsform 
-
+from django.utils.text import slugify
 
 def index_view(request):
     profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
@@ -46,14 +46,30 @@ def news_add_view(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
             image = form.cleaned_data['image']
-            news = News(title=title,content=content,image=image)
-            news.save()
-            
+            user = request.user 
+            news = News(title=title,content=content,image=image,user = user)
+            news.save()   
         else:
             errors['message'] = 'Error'
+        form = Newsform()
     
     return render(request,'news_add.html',context={'form':form,'errors':errors})
 
+def news_update(request,slug):
+    news = get_object_or_404(News.objects.all(),slug=slug)
+    if request.user != news.user:
+        return HttpResponse('<h1>Permission denied</h1>')
+    form = Newsform(instance=news)
+    if request.method == "POST":
+        form = Newsform(request.POST,request.FILES,instance=news)
+        if form.is_valid():
+            news.title = form.cleaned_data['title']
+            news.content = form.cleaned_data['content']
+            news.image = form.cleaned_data['image']
+            news.save()
+
+    form = Newsform(instance=news)
+    return render(request,'news_update.html',context={'form':form})
 
 
         
