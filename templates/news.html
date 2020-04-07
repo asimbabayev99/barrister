@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Add</title>
+    <!-- Изображение Tim Treis с сайта Pixabay  -->
+    <link rel="shortcut icon" href="{% static 'img/calendar-1559935_640.png' %}"
+      alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon"/> 
+
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
+
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel='stylesheet' />
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body class="news-add-body">
+  <div class="container">
+    <div class="row">
+     
+      {% if news %}
+          {% for n in news %}
+            <div class="col-md-4 mt-4"> 
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ n.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{n.title}}</h5>
+                  <p class="card-text">{{n.content|safe}}</p>
+                  <p class="card-text">{{n.date| timesince}}</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                 </div>
+               </div>
+            </div>
+          {% endfor %} 
+
+        {%else%}
+          <div class="alert alert-warning">
+            <p> No News</p>
+          </div>
+       {%endif%}
+          
+    </div>
+  </div>
+</body>
+</html>

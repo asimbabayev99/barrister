@@ -5,6 +5,7 @@ from home.models import *
 from account.models import *
 from home.forms import Newsform 
 from django.utils.text import slugify
+from .models import News
 
 def index_view(request):
     profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
@@ -71,5 +72,13 @@ def news_update(request,slug):
     form = Newsform(instance=news)
     return render(request,'news_update.html',context={'form':form})
 
+def news_view(request):
+    news = News.objects.all()
+    context = {
+        "news":news
+    }
+    
+
+    return render(request, "news.html", context)
 
         
