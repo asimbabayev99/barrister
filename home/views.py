@@ -7,11 +7,20 @@ from home.forms import Newsform
 from django.utils.text import slugify
 from .models import News
 
+
+
 def index_view(request):
     profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
-    print(profiles)
+    # print(profiles)
+    news = News.objects.all().order_by('-date')[:5]
+    news = news.values('title', 'date', 'image', 'slug')
 
-    return render(request, "index_test.html", context={'profiles':profiles})
+    context = {
+        'profiles': profiles,
+        'news': news
+    }
+    return render(request, "index_test.html", context=context)
+
 
 
 
@@ -33,14 +42,22 @@ def single_view(request, id):
 
 
 
+
 @login_required(login_url='account/login')
 def calendar_view(request):
 
+
     return render(request, "calendar.html", context={})
+
+
+
 
 def news_add_view(request):
     errors = {}
     form = Newsform()
+    if request.user.is_staff is False:
+        return Http404()
+
     if request.method == "POST":
         form = Newsform(request.POST,request.FILES)
         if form.is_valid():
@@ -48,18 +65,27 @@ def news_add_view(request):
             content = form.cleaned_data['content']
             image = form.cleaned_data['image']
             user = request.user 
-            news = News(title=title,content=content,image=image,user = user)
+            slug = slugify(title)
+            news = News(title=title,content=content,image=image,user = user, slug=slug)
             news.save()   
         else:
-            errors['message'] = 'Error'
+            errors['message'] = 'Form is not valid'
         form = Newsform()
     
-    return render(request,'news_add.html',context={'form':form,'errors':errors})
+    context = {
+        'form': form,
+        'errors': errors,
+    }
+    return render(request, 'news_add.html', context=context)
+
+
+
 
 def news_update(request,slug):
+    if request.user.is_staff is False:
+        return Http404()
+        
     news = get_object_or_404(News.objects.all(),slug=slug)
-    if request.user != news.user:
-        return HttpResponse('<h1>Permission denied</h1>')
     form = Newsform(instance=news)
     if request.method == "POST":
         form = Newsform(request.POST,request.FILES,instance=news)
@@ -72,19 +98,24 @@ def news_update(request,slug):
     form = Newsform(instance=news)
     return render(request,'news_update.html',context={'form':form})
 
+
+
+
 def news_view(request):
     news = News.objects.all()
+    
     context = {
         "news":news
     }
-    
+    return render(request, "news.html", context=context)
 
-    return render(request, "news.html", context)
+
+
 
 def news_detail_view(request, slug):
     news = get_object_or_404(News, slug = slug)
     context = {
         'news': news
     }
-    return render(request, "news_detail.html", context)
+    return render(request, "news_detail.html", context=context)
         
