@@ -1,20 +1,37 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        {{ form.title }}
-        {{ form.content }}
-        {{ form.image }}
-        {{ form.media }}
-        <input type="submit">
-    
+    <title>News add</title>
+    <!-- Изображение Tim Treis с сайта Pixabay  -->
+    <link rel="shortcut icon" href="{% static 'img/calendar-1559935_640.png' %}"
+      alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon"/> 
 
-    </form>
-</body>
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel='stylesheet' />
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+  <body class="news-add-body">
+       <div class="container">
+          <h4 class="text-center">Xəbər əlavə et</h4>
+            <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {{ form.title }}
+                {{ form.content }}
+                {{ form.media }}
+                {{ form.image }}
+                <input type="submit" value="Dərc et" class="mt-2 publish-button">
+            </form>
+        </div>
+    </body>
+
 </html>

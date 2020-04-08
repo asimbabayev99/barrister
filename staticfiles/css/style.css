@@ -19,13 +19,20 @@ body {
 }
 
 .page{
+<<<<<<< HEAD
   width:400px;
   height: 400px;
+=======
+>>>>>>> dc93c2d7b3938b333929d71d3bad7b059ffde400
   padding: 10px 4% 10px 4%;
   border:1px solid #CDBA6D;
   border-radius: 10px;
   text-align: center;
+<<<<<<< HEAD
   margin: 150px 0 0 10%;
+=======
+  margin: 3rem 0 3rem 0;
+>>>>>>> dc93c2d7b3938b333929d71d3bad7b059ffde400
   box-shadow: 0px 7px 26px 2px rgba(0,0,0,0.75);
   background-color:rgba(252, 225, 146, 0.83);
 }
@@ -50,17 +57,27 @@ body {
   height: 15px;
 }
 #duyme{
+<<<<<<< HEAD
   width: 160px; 
   height: 35px; 
   border: 1px solid #cdba6d; 
   border-radius: 15px;
   padding: 6px 5px 5px 5px;
+=======
+  border: 1px solid #cdba6d; 
+  border-radius: 15px;
+>>>>>>> dc93c2d7b3938b333929d71d3bad7b059ffde400
   text-align: center;
   font-size: 18px;
   background-color: black;
   color: #cdba6d;
   cursor: pointer;
+<<<<<<< HEAD
   margin-top:20px;
+=======
+  margin-top:10px;
+  margin-bottom:10px;
+>>>>>>> dc93c2d7b3938b333929d71d3bad7b059ffde400
 }
 #duyme:hover{
   background-color: rgba(252,225,146,0.5);
@@ -76,4 +93,121 @@ body {
 .page a{
   color: black;
 }
+<<<<<<< HEAD
 /* login page end */
+=======
+/* login page end */
+
+
+/* register page begin */
+#register-body{
+  /* Изображение succo с сайта Pixabay  */
+  background-image: url(../img/hammer-620011_640.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+.form-wrapper{
+  box-shadow: 0px 7px 26px 2px rgba(0,0,0,0.75);
+  background-color: rgba(252,225,146,0.5);
+  border-radius: 20px;
+  border-radius: 5px;
+  padding: 15px 20px 20px;
+  position:relative;
+  z-index:1;
+}
+
+ #form1 div input{
+  background-color:#e9d4b3;
+  border:1px solid #CDBA6D;
+  border-radius: 8px;
+  padding-left: 5px;
+  
+}
+#form1 ::placeholder{
+  font-weight: bold;
+  opacity: 0.8;
+}
+#form1  select{
+  background-color: #e9d4b3;
+  border-radius: 8px;
+}
+
+.qeydDuyme{
+  border: 1px solid #cdba6d; 
+  border-radius: 15px;
+  padding: 10px 5%; 
+  text-align: center;
+  font-size: 18px;
+  background-color: black;
+  color: #cdba6d;
+  cursor: pointer;
+}
+.qeydDuyme:hover{
+  background-color: rgba(252,225,146,0.5);
+  color: black;
+  border:1px solid black;
+}
+.qeydDuyme :active{
+  box-shadow: 2px 2px 3px #cdba6d;
+  background-color: black;
+  color: #cdba6d;
+
+}
+.passdiv{
+  float: left;
+}
+
+#errMessage{
+  border:1px solid black;
+  background-color:rgba(252,225,146,0.5);
+  display:none;
+  font-size:12px;
+  font-weight:bold; 
+  border:2px solid red;
+  color:black;
+}
+
+/* register page end */
+
+/* news add and update page begin*/
+.news-add-body{
+  background-color: #F8F8F8;
+}
+#id_image{
+  display: block;
+  margin-top: 0.5rem;
+}
+.publish-button{
+  background-color: #cdba6d;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 16px 44px 16px;
+  border-radius: 0px;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  outline: none !important;
+}
+.publish-button:hover {
+  background-color: #42474c;
+    color: #fff;
+}
+.django-ckeditor-widget{
+  display: block!important;
+}
+.cke_chrome{
+  width: 100%!important;
+}
+/* media */
+@media only screen and (max-width: 600px) {
+  .cke_chrome{
+   
+  }
+}
+/* news add and update page end*/
+>>>>>>> dc93c2d7b3938b333929d71d3bad7b059ffde400

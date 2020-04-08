@@ -5,9 +5,15 @@ from ckeditor import widgets
 
 class Newsform(forms.ModelForm):
     error_css_class = 'error'
-    title = forms.CharField(label='',max_length=50,min_length=5,widget=forms.TextInput(attrs={'class':'input','placeholder':'Basliq'}))
-    content = forms.CharField(label='',widget=widgets.CKEditorWidget(attrs={'class':'input'}))
-    image = forms.ImageField(label='',required=False)
+
+    title = forms.CharField(label='', max_length=50, min_length=5, widget=forms.TextInput(attrs={
+        'class':'form-group form-control news-header',
+        'placeholder':'Xəbər başlığı'
+    }))
+    content = forms.CharField(label='',widget=widgets.CKEditorWidget(attrs={
+        'class':'form-group form-control'
+    }))
+    image = forms.ImageField(label='',required=False,)
 
 
     class Meta:
@@ -15,3 +21,15 @@ class Newsform(forms.ModelForm):
         fields = ['title','content','image',]
 
 
+
+
+class PublicationForm(forms.ModelForm):
+    error_css_class = 'error'
+    
+    text = forms.CharField(label='', widget=forms.Textarea(attrs={
+        'class': 'text',
+        'placeholder': 'Mənt'
+    }))
+    file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
+        'class': 'file'
+    }))

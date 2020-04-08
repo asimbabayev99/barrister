@@ -67,6 +67,7 @@ class RegisterForm(forms.ModelForm):
     }))
     phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
         'class': 'form-control',
+        'type' : 'text',
         'placeholder': 'Phone Number'
     }))
 
