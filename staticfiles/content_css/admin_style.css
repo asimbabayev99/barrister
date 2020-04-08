@@ -128,8 +128,23 @@ span.themestek-sc-logo.themestek-sc-logo-type-image {
 /* Show/hide topbar in some devices */
 	@media (max-width: 1200px){
 		.themestek-pre-header-wrapper{
-			display: none !important;
-		}
+			display: block !important;
+        }
+        .themestek-header-overlay .top-contact li:first-child{
+            display: none !important;;
+        }
+        .themestek-header-overlay .top-contact li:nth-child(2){
+            display: none !important;;
+        }
+        .themestek-header-overlay .top-contact li:nth-child(3){
+            display: none !important;;
+        }
+        .themestek-header-overlay .top-contact li:nth-child(4){
+            display: block !important;;
+        }
+        .themestek-header-overlay .top-contact li:last-child{
+            display: block !important;;
+        }
 	}
 	.widget .search-form .search-field:focus, 
 .main-holder .site #content table.cart td.actions .input-text:focus, 
@@ -1760,6 +1775,12 @@ div.nav-menu > ul li ul li a,
     .themestek-header-overlay .top-contact li:first-child{
         padding-left: 0;
         border: none;
+    }
+    .themestek-header-overlay .top-contact li:nth-child(4){
+        display: none;
+    }
+    .themestek-header-overlay .top-contact li:last-child a:hover{
+        color:#CDBA6D;
     }
     .themestek-header-overlay .themestek-textcolor-dark{
         color: #313538;
