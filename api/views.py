@@ -13,7 +13,9 @@ from rest_framework.authentication import SessionAuthentication , BasicAuthentic
 from django.views.decorators.csrf import  csrf_exempt,get_token
 from rest_framework import  exceptions
 from django.contrib import auth
-
+from rest_framework.pagination import PageNumberPagination
+from django.core.paginator import Paginator
+from django.contrib.auth.models import Permission
 
 
 
@@ -324,9 +326,9 @@ class ExperienceAPIView(APIView):
     def get(self, request):
         profile = request.GET.get('profile')
         if profile:
-            experiences = ExperienceAPIView.objects.filter(profile__id=profile)
+            experiences = EducationAndWorkExperience.objects.filter(profile__id=profile)
         else:
-            experiences = ExperienceAPIView.objects.all()
+            experiences = EducationAndWorkExperience.objects.all()
         # the many param informs the serializer that it will be serializing more than a single experience.
         serializer = ExperienceSerializer(experiences, many=True)
         return Response({"experiences": serializer.data})
@@ -362,3 +364,58 @@ class ExperienceAPIView(APIView):
             return Response({"detail": "Permission denied"}, status=403)
         experience.delete()
         return Response({"message": "Experience with id `{}` has been deleted.".format(pk)},status=204)
+
+
+
+
+
+class PublicationAPIView(APIView):
+
+    items_per_page = 24
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    serializer_class = PublicationSerializer
+    # permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        page = request.query_params.get('page', 1)
+        publications = Publication.objects.all()
+        paginator = Paginator(publications, self.items_per_page)
+        serializer = self.serializer_class(paginator.get_page(page), many=True)
+
+        return Response({"publications": serializer.data}, status=200)
+
+
+    def post(self, request):
+        data = request.data
+        permission = Permission.objects.get(codename='add_publication')
+        if request.user.role is None or permission not in request.user.role.permissions:
+            return Response({"detail": "Permission denied"}, status=403)
+        # Create an experience from the above data
+        serializer = self.serializer_class(data=data)
+        if serializer.is_valid(raise_exception=True):
+            publication_saved = serializer.save()
+        return Response({"success": "Publication '{}' created successfully".format(publication_saved.pk)})
+    
+
+    def put(self, request, pk):
+        saved_publication = get_object_or_404(Publication.objects.all(), pk=pk)
+        permission = Permission.objects.get(codename='change_publication')
+        if request.user.role is None or permission not in request.user.role.permissions:
+            return Response({"detail": "Permission denied"}, status=403)
+        data = request.data
+        serializer = self.serializer_class(instance=saved_publication, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            publication_saved = serializer.save()
+        return Response({"success": "Publication '{}' updated successfully".format(publication_saveds.pk)})
+
+
+    def delete(self, request, pk):
+        # Get object with this pk
+        publication = get_object_or_404(Publication.objects.all(), pk=pk)
+        permission = Permission.objects.get(codename='delete_publication')
+        if request.user.role is None or permission not in request.user.role.permissions:
+            return Response({"detail": "Permission denied"}, status=403)
+
+        publication.delete()
+        return Response({"message": "Publication with id `{}` has been deleted.".format(pk)},status=204)
+
