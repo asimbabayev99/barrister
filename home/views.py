@@ -119,3 +119,26 @@ def news_detail_view(request, slug):
     }
     return render(request, "news_detail.html", context=context)
         
+
+
+
+
+def post_add_view(request):
+
+    form = PostForm()
+    if request.user.role.name is not "Barrister":
+        return Http404()
+
+    if request.method == "POST":
+        form = PostForm(request.POST,request.FILES,instance=news)
+        if form.is_valid():
+            new_post = Post(**form.cleaned_data)
+            new_post.user = request.user
+            new_post.save()
+
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, '', context=context)
