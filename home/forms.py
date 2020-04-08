@@ -15,7 +15,7 @@ class Newsform(forms.ModelForm):
     }))
     image = forms.ImageField(label='',required=False,)
 
-
+ 
     class Meta:
         model = News
         fields = ['title','content','image',]

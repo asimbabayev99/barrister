@@ -102,7 +102,7 @@ body {
 /* register page begin */
 #register-body{
   /* Изображение succo с сайта Pixabay  */
-  background-image: url(../img/hammer-620011_640.jpg);
+  background-image: url(/static/img/hammer-620011_640.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
