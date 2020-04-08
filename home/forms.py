@@ -9,7 +9,7 @@ class Newsform(forms.ModelForm):
     content = forms.CharField(label='',widget=widgets.CKEditorWidget(attrs={'class':'form-group form-control'}))
     image = forms.ImageField(label='',required=False,)
 
-
+ 
     class Meta:
         model = News
         fields = ['title','content','image',]

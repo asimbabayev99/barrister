@@ -38,6 +38,9 @@ def calendar_view(request):
     return render(request, "calendar.html", context={})
 
 def news_add_view(request):
+    if request.user.role != "Barrister":
+        return HttpResponse('<p>Permission denied</p>')
+
     errors = {}
     form = Newsform()
     if request.method == "POST":
@@ -56,6 +59,10 @@ def news_add_view(request):
     return render(request,'news_add.html',context={'form':form,'errors':errors})
 
 def news_update(request,slug):
+
+    if request.user.role != "Barrister":
+        return HttpResponse('<h1>Permission denied</h1>')
+
     news = get_object_or_404(News.objects.all(),slug=slug)
     if request.user != news.user:
         return HttpResponse('<h1>Permission denied</h1>')
