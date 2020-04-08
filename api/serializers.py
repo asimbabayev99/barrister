@@ -118,7 +118,7 @@ class ExperienceSerializer(serializers.Serializer):
 
 
 
-class ExperienceSerializer(serializers.Serializer):
+class PublicationSerializer(serializers.Serializer):
     pk = serializers.IntegerField(required=False)
     user_id = models.IntegerField()
     text = serializers.CharField()
