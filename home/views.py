@@ -123,7 +123,7 @@ def news_detail_view(request, slug):
 
 
 
-def post_add_view(request):
+def publication_add_view(request):
 
     form = PublicationForm()
     if request.user.role.name is not "Barrister":
