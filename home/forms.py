@@ -23,7 +23,7 @@ class Newsform(forms.ModelForm):
 
 
 
-class PostForm(forms.ModelForm):
+class PublicationForm(forms.ModelForm):
     error_css_class = 'error'
     
     text = forms.CharField(label='', widget=forms.Textarea(attrs={

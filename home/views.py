@@ -125,14 +125,14 @@ def news_detail_view(request, slug):
 
 def post_add_view(request):
 
-    form = PostForm()
+    form = PublicationForm()
     if request.user.role.name is not "Barrister":
         return Http404()
 
     if request.method == "POST":
-        form = PostForm(request.POST,request.FILES,instance=news)
+        form = PublicationForm(request.POST,request.FILES,instance=news)
         if form.is_valid():
-            new_post = Post(**form.cleaned_data)
+            new_post = Publication(**form.cleaned_data)
             new_post.user = request.user
             new_post.save()
 
