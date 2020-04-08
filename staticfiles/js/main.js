@@ -90,5 +90,7 @@ $(document).ready(function() {
       }
     ]
   });
-
 });
+ $(document).ready(function(){
+  $("#id_phone_number").mask("xxx-xx-xx");
+   });   
