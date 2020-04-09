@@ -146,3 +146,16 @@ def publication_add_view(request):
     }
 
     return render(request, '', context=context)
+
+
+def publication_show_view(request):
+    publication = Publication.objects.all().order_by('-id')[:10]
+
+    context = {
+        "publication":publication
+  
+    }
+        
+    
+    return render(request, context=context)
+
