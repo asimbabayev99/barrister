@@ -317,14 +317,19 @@ class News(models.Model):
     def save(self,*args,**kwargs):
         self.slug = slugify(self.title)
         super(News,self).save(*args,**kwargs)
-        
-
-
 
 
     def __str__(self):
         return self.title 
 
+
+
+class Publication(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    text = models.TextField()
+    file = models.FileField()
+    date = models.DateTimeField(auto_now_add=True)
+    views = models.IntegerField(default=0)
 
 
 
