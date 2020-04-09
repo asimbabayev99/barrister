@@ -149,8 +149,9 @@ def publication_add_view(request):
 
 
 def publication_show_view(request):
-    publication = Publication.objects.all().order_by('-id')[:10]
-
+    
+    
+    publications = Publication.objects.all().order_by("-date")[:10]
     context = {
         "publication":publication
   
