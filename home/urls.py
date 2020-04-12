@@ -15,5 +15,6 @@ urlpatterns = [
     path('news-update/<slug:slug>',news_update,name='news-update'),
     path('news/',news_view,name='news'),
     path('news/<slug:slug>', news_detail_view, name='news_detail'),
-
+    path('about-us/',about_us_view,name='contacts'),
+  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

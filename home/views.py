@@ -160,3 +160,7 @@ def publication_show_view(request):
     
     return render(request, context=context)
 
+def about_us_view(request):
+    return render(request,'about-us.html',context={})
+
+
