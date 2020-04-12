@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User List</title>
+    <link
+      rel="shortcut icon"
+      href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+      alt="Изображение Tim Treis с сайта Pixabay "
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="fontawesome/all.css" />
+    <link rel="stylesheet" href="vendor/owl.carousel.css" />
+    <link rel="stylesheet" href="vendor/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="vendor/animate.css" />
+    <link
+      href="vendor/fullcalendar-3.10.0/fullcalendar.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="vendor/fullcalendar-3.10.0/fullcalendar.print.min.css"
+      rel="stylesheet"
+      media="print"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body style="background-color: #384554;">
+    <div class="page-wrapper chiller-theme toggled">
+    <div id="show-sidebar">
+      <a
+        title="Genişləndirmək"
+        id="show-sidebar"
+        class="btn btn-sm btn-dark"
+        href="#"
+      >
+        <i class="fas fa-bars"></i>
+      </a>
+
+      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
+        <i class="fa fa-calendar-plus"></i>
+      </a>
+
+      <a
+        title="Təqvim"
+        id="minicalendaricon"
+        class="btn btn-sm btn-dark"
+        href="#"
+      >
+        <i class="fa fa-calendar"></i>
+      </a>
+    </div>
+
+    <nav id="sidebar" class="sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <a href="#">Təqvim</a>
+          <div id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+        <div class="sidebar-header">
+          <div class="user-pic">
+            <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
+            <img
+              class="img-responsive img-rounded"
+              src="img/person-311292_640.png"
+              alt="User picture"
+            />
+          </div>
+          <div class="user-info">
+            <span class="user-name">Admin </span>
+            <span class="user-role">Administrator</span>
+            <span class="user-status">
+              <i class="fa fa-circle"></i>
+              <span>Online</span>
+            </span>
+          </div>
+        </div>
+        <!-- sidebar-header  -->
+        
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span></span>
+            </li>
+
+            <li>
+              <a href="admin-Dashboard.html">
+                  <i class="fa fa-home"></i>
+                  <span>Əsas lövhə</span>
+                </a>
+            </li>
+            <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fa fa-users"></i>
+                  <span>İstifadəçilər</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="admin-AddUser.html">Yeni istifadəçi əlavə et</a>
+                    </li>
+                    <li>
+                      <a href="admin-UserList.html">İstifadəçilərin siyahısı</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fa fa-newspaper"></i>
+                  <span>Xəbərlər</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="admin-AddNews.html">Yeni xəbər əlavə et</a>
+                    </li>
+                    <li>
+                      <a href="admin-NewsList.html">Xəbər siyahısı</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content  -->
+      <div class="sidebar-footer">
+        <a href="#">
+          <i class="fa fa-bell"></i>
+          <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-envelope"></i>
+          <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a>
+        <a href="#">
+          <i class="fa fa-power-off"></i>
+        </a>
+      </div>
+    </nav>
+    <main class="page-content design">
+      <div class="tbl-header">
+        <table class="user-table" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th>Ad</th>
+              <th>Soyad</th>
+              <th>Ata Adı</th>
+              <th>Elektron Poçt</th>
+              <th>İş Təcrübəsi</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table class="user-table" cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+            <tr>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin@barrister.az</td>
+              <td>1 il</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
+            </tr>
+            <tr>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin@barrister.az</td>
+              <td>1 il</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
+            </tr>
+            <tr>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin@barrister.az</td>
+              <td>1 il</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
+            </tr>
+            <tr>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin</td>
+              <td>Admin@barrister.az</td>
+              <td>1 il</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+      <!-- Modal popup -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title border-0 text-center" id="exampleModalLongTitle">Mr User FatherSon</h5>
+              <button type="button" class="close no-outline" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <p class="text-center"><img src="img/person-311292_640.png" width="50%" height="50%" alt="" srcset=""></img></p>
+                 </div>
+
+                 <div class="col-md-6 mb-4">
+                  <p class="text-center float-left"><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
+                  <p class="text-center float-left"><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
+                 </div>
+
+                <div class="col-md-12">
+                 <p class="text-center"><strong>Bio</strong></p>
+                 <p>Lorem ipsum dolor sit amet consectetur,
+                    adipisicing elititiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
+                       Lorem ipsum dolor sit amet consectetur,
+                      adipisicing elit. Dolore id itaque ipsam deserunt repudiandae magni est ab perspiciatis quisquam,
+                       veniam ullam blanditiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
+                  </p>
+                </div>
+
+                <div class="col-md-12">
+                  <p class="text-center" data-toggle="collapse" data-target="#collapsePrac" 
+                  aria-expanded="false" aria-controls="collapsePrac">
+                  <strong>Təcrübə &downarrow;</strong>
+                </p>
+              </div>
+              <div class="collapse" id="collapsePrac">
+                <div class="card card-body border-0">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <p class="text-center"  data-toggle="collapse" data-target="#collapseCert" 
+                aria-expanded="false" aria-controls="collapseCert">
+                <strong>Sertifikatlar &downarrow;</strong>
+              </p>
+            </div>
+            <div class="collapse" id="collapseCert">
+              <div class="card card-body border-0">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi nisi sapiente repudiandae, ea quidem, 
+                veritatis fugit asperiores autem officia reiciendis maxime non nam magnam vero totam debitis cumque qui! Ipsam!
+              </div>
+            </div>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal popup -->
+    </main>
+    </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/lib/moment.min.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/fullcalendar.min.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/locale/az.js"></script>
+    <script src="js/fullcalendar.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
