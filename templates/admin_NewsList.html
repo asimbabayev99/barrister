@@ -26,38 +26,46 @@
       <div class="tbl-content">
         <table class="user-table" cellpadding="0" cellspacing="0" border="0">
           <tbody>
+            {% for n in news %}
             <tr>
-              <td>Gündəm</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>00:00  01.01.2001</td>
+              <td>
+                {% if n.title %}
+                  {{n.title}}
+                {% else %} 
+                 -
+                {% endif %}  
+              </td>
+              <td>
+                {% if n.user.first_name %}
+                  {{n.user.first_name}}
+                {% else %} 
+                 -
+                {% endif %} 
+              </td>
+              <td>
+                {% if n.user.last_name %}
+                  {{n.user.last_name}}
+                {% else %} 
+                 -
+                {% endif %} 
+              </td>
+              <td>
+                {% if n.user.email %}
+                  {{n.user.email}}
+                {% else %} 
+                 -
+                {% endif %} 
+              </td>
+              <td>
+                {% if n.date %}
+                  {{n.date}}
+                {% else %} 
+                 -
+                {% endif %}
+              </td>
               <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
             </tr>
-            <tr>
-              <td>Gündəm</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>00:00 01.01.2001</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
-            </tr>
-            <tr>
-              <td>Gündəm</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>00:00 01.01.2001</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
-            </tr>
-            <tr>
-              <td>Gündəm</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>00:00 01.01.2001</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
