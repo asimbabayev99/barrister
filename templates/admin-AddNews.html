@@ -11,8 +11,8 @@
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' }" />
-    <link rel="stylesheet" href="{% static 'fontawesome/all.css' }" />
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
@@ -68,7 +68,7 @@
               <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
               <img
                 class="img-responsive img-rounded"
-                src="img/person-311292_640.png"
+                src="{% static 'img/person-311292_640.png' %}"
                 alt="User picture"
               />
             </div>
@@ -251,10 +251,11 @@
       </main>
       </div>
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+    <!-- <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script> -->
     <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
     <script src="{% static 'js/fullcalendar.js' %}"></script>
