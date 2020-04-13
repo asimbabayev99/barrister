@@ -6,6 +6,7 @@ from account.models import *
 from home.forms import Newsform 
 from django.utils.text import slugify
 from .models import News
+from django.core.paginator import Paginator
 
 
 
@@ -148,19 +149,38 @@ def publication_add_view(request):
     return render(request, '', context=context)
 
 
-def publication_show_view(request):
-    
+
+def publication_show_view(request):   
     
     publications = Publication.objects.all().order_by("-date")[:10]
     context = {
-        "publication":publication
-  
+        "publications":publications
     }
-        
-    
     return render(request, context=context)
+
+
 
 def about_us_view(request):
     return render(request,'about-us.html',context={})
 
 
+
+
+
+def admin_user_list(request):
+
+    page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        page = 1
+ 
+    users = CustomUser.objects.all()
+    paginator = Paginator(users, 25)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+
+    return render(request, 'admin-UserList.html', context=context)

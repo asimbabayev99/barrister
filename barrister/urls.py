@@ -18,6 +18,8 @@ from django.urls import path, include
 from api.views import *
 from rest_framework import routers
 
+admin.site.index_template = 'admin-Dashboard.html'
+admin.autodiscover()
 
 router = routers.DefaultRouter()
 # router.register(r'skills', SkillView, basename="Skill")
@@ -26,6 +28,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
+
     path('api-auth/',LoginView.as_view()),
     path('api-register/',UserRegistration.as_view()),
     path('api/event/list',EventList.as_view()),
@@ -41,6 +44,5 @@ urlpatterns = [
     path('api/awards/', AwardAPIView.as_view()),   
     path('api/experiences/<int:pk>', ExperienceAPIView.as_view()),
     path('api/experiences/', ExperienceAPIView.as_view()),
-    
 
 ]

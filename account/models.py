@@ -90,7 +90,7 @@ class JobCategory(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, related_name='profile', on_delete=models.CASCADE)
     image = models.ImageField(null=True)
 
     # contacts

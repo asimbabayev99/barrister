@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,21 +11,21 @@
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="fontawesome/all.css" />
-    <link rel="stylesheet" href="vendor/owl.carousel.css" />
-    <link rel="stylesheet" href="vendor/owl.theme.default.min.css" />
-    <link rel="stylesheet" href="vendor/animate.css" />
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
     <link
-      href="vendor/fullcalendar-3.10.0/fullcalendar.min.css"
+      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
       rel="stylesheet"
     />
     <link
-      href="vendor/fullcalendar-3.10.0/fullcalendar.print.min.css"
+      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}"
       rel="stylesheet"
       media="print"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body style="background-color: #384554;">
     <div class="page-wrapper chiller-theme toggled">
@@ -165,38 +166,16 @@
       <div class="tbl-content">
         <table class="user-table" cellpadding="0" cellspacing="0" border="0">
           <tbody>
+            {% for user in page_obj %}
             <tr>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>{{user.middle_name}}</td>
+              <td>{{user.email}}</td>
               <td>1 il</td>
               <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
             </tr>
-            <tr>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>1 il</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
-            </tr>
-            <tr>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>1 il</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
-            </tr>
-            <tr>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin</td>
-              <td>Admin@barrister.az</td>
-              <td>1 il</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
@@ -268,14 +247,14 @@
     </main>
     </div>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="vendor/fullcalendar-3.10.0/lib/moment.min.js"></script>
-    <script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
-    <script src="vendor/fullcalendar-3.10.0/fullcalendar.min.js"></script>
-    <script src="vendor/fullcalendar-3.10.0/locale/az.js"></script>
-    <script src="js/fullcalendar.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+    <script src="{% static 'js/fullcalendar.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>
