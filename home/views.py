@@ -185,6 +185,20 @@ def admin_user_list(request):
 
     return render(request, 'admin-UserList.html', context=context)
 
+
+
+def admin_user_add(request):
+
+    
+
+
+    context = {
+
+    }
+    return render(request, 'admin-AddUser.html', context=context)
+
+
+
 def admin_add_news(request):
 
     return render(request,'admin-AddNews.html')
