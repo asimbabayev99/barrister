@@ -919,7 +919,7 @@ outline: 0px;
 
 .login-box {
     background: #fff;
-    width: 400px;
+    width: 100%;
 		box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.1);
 		text-align: center;
 		padding: 20px;
