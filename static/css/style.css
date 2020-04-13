@@ -982,7 +982,16 @@ outline: 0px;
 }
 .design input{
   height: 36px;
-  padding: 5px;
+}
+.news-date{
+  width: 50%;
+  margin-right: 3%;
+}
+.news-time{
+  width: 47%;
+}
+.news-date-text{
+  font-weight: bold;
 }
 /* user form editor end */
 
