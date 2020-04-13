@@ -189,4 +189,8 @@ def admin_add_news(request):
 
     return render(request,'admin-AddNews.html')
 
+def admin_news_list(request):
+
+
+    return render(request, 'admin_NewsList.html')
     

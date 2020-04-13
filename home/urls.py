@@ -18,6 +18,7 @@ urlpatterns = [
     path('about-us/',about_us_view,name='contacts'),
   
     path('admin/user/list', admin_user_list, name='admin-user-list'),
-    path('admin/home/news/add_news',admin_add_news,name='admin-add-news')
+    path('admin/home/news/add_news',admin_add_news,name='admin-add-news'),
+    path('admin/news/list',admin_news_list,name='admin-news-list'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
