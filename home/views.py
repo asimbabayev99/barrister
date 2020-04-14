@@ -3,10 +3,12 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
-from home.forms import Newsform 
+from account.forms import UserForm
+from home.forms import * 
 from django.utils.text import slugify
 from .models import News
 from django.core.paginator import Paginator
+from django.contrib.auth.hashers import make_password
 
 
 
@@ -135,7 +137,7 @@ def publication_add_view(request):
         return Http404()
 
     if request.method == "POST":
-        form = PublicationForm(request.POST,request.FILES,instance=news)
+        form = PublicationForm(request.POST,request.FILES)
         if form.is_valid():
             new_post = Publication(**form.cleaned_data)
             new_post.user = request.user
@@ -189,11 +191,36 @@ def admin_user_list(request):
 
 def admin_user_add(request):
 
-    
+    form = UserForm()
 
+    if request.method == "POST": 
+        form = UserForm(request.POST,request.FILES)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            middle_name = form.cleaned_data['middle_name']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            role = form.cleaned_data['role']
+            image = request.FILES.get('image', None)
+
+            user = CustomUser(
+                first_name=first_name, 
+                last_name=last_name, 
+                middle_name=middle_name,
+                email=email, 
+                role=role
+            )
+            user.password = make_password(password)
+            user.save()
+
+            profile = Profile(
+                user=user,
+                image=image,
+            ).save()
 
     context = {
-
+        'form':form,
     }
     return render(request, 'admin-AddUser.html', context=context)
 
@@ -202,6 +229,8 @@ def admin_user_add(request):
 def admin_add_news(request):
 
     return render(request,'admin-AddNews.html')
+
+
 
 def admin_news_list(request):
     news = News.objects.all()

@@ -6,7 +6,7 @@
       <div class="wrapper">
         <div class="login-box">
           <h3 class="info-text">İstifadəçi əlavə et</h3>
-          <form class="form-container" action="">
+          <!-- <form class="form-container" action="">
             <div class="input-addon">
               <input class="form-element input-field" placeholder="Ad" type="text">
               <span class="input-group-text fa fa-user"></span>
@@ -55,6 +55,85 @@
                 <input type="file" name="chooseFile" id="chooseFile">
               </div>
             </div>
+            <input class="form-element is-submit" type="submit" value="Yeni istifadəçi">
+          </form> -->
+
+
+          <form class="form-container" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="Ad" type="text"> -->
+              {{ form.first_name }}
+              {{ form.first_name.errors }}
+              <span class="input-group-text fa fa-user"></span>
+            </div>
+
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="Soyad" type="text"> -->
+              {{ form.last_name }}
+              {{ form.last_name.errors }}
+              <span class="input-group-text fa fa-user"></span>
+            </div>
+
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="Ata adı" type="text"> -->
+              {{ form.middle_name }}
+              {{ form.middle_name.errors }}
+              <span class="input-group-text fa fa-user"></span>
+            </div>
+
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="E-poçt" type="email"> -->
+              {{ form.email }}
+              {{ form.email.errors }}
+              <span class="input-group-text fa fa-envelope"></span>
+            </div>
+
+            <br>
+            <div class="file-upload">
+              <div class="file-select">
+                <div class="file-select-button" id="fileName">Şəkil əlavə et</div>
+                <div class="file-select-name" id="noFile">Fayl seçilməyib..</div> 
+                <!-- <input type="file" name="chooseFile" id="chooseFile"> -->
+                {{ form.image }}
+                {{ form.image.errors }}
+              </div>
+            </div>
+            <!-- <div class="input-addon">
+              <textarea placeholder="Biografiya" name="" id="" cols="50" rows="3"></textarea>
+              <span class="input-group-text fas fa-user-edit"></span>
+            </div> -->
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="Şifrə" type="password"> -->
+              {{ form.password }}
+              {{ form.password.errors }}
+              <span class="input-group-text fa fa-lock"></span>
+            </div>
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="Şifrəni təkrarla" type="password"> -->
+              {{ form.confirm_password }}
+              {{ form.confirm_password.errors }}
+              <span class="input-group-text fa fa-lock"></span>
+            </div>
+            <br>
+
+            <!-- <div class="file-upload">
+              <div class="file-select">
+                <div class="file-select-button" id="fileName">Diplom və sertifikat</div>
+                <div class="file-select-name" id="noFile">Fayl seçilməyib..</div> 
+                <input type="file" name="chooseFile" id="chooseFile">
+              </div>
+            </div> -->
+
+            <div class="input-addon">
+              <!-- <input class="form-element input-field" placeholder="Ad" type="text"> -->
+              <div class="file-select-button">Rol </div>
+              {{ form.role }}
+              {{ form.role.errors }}
+              <span class="input-group-text fa fa-user"></span>
+            </div>
+
             <input class="form-element is-submit" type="submit" value="Yeni istifadəçi">
           </form>
       

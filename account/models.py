@@ -60,7 +60,7 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=50, null=False, blank=False)
     middle_name = models.CharField(max_length=100,unique=False, null=True)
     username = models.CharField('username', max_length=150, unique=False)
-    email = models.EmailField(max_length=256, unique=True)
+    email = models.EmailField(max_length=256, unique=True, null=False, blank=False)
     address = models.CharField(max_length=256, null=True)
     fin = models.CharField(max_length=10, unique=True, null=True)
     seriya_type = models.CharField(max_length=5, choices=SERIYA_TYPES)
