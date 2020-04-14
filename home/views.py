@@ -233,10 +233,19 @@ def admin_add_news(request):
 
 
 def admin_news_list(request):
-    news = News.objects.all()
+
+    page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        page = 1
+
+    news = News.objects.all().order_by("-date")
+    paginator = Paginator(news, 4)
+    page_obj = paginator.get_page(page)
     
     context = {
-        "news":news
+        'page_obj': page_obj,
     }
 
 
