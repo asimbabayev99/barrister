@@ -187,6 +187,18 @@ def admin_user_list(request):
 
 def admin_add_news(request):
 
-    return render(request,'admin-AddNews.html')
+    form = Newsform()
+    if request.method == 'POST' :
+
+        form = Newsform(request.POST,request.FILES or None)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            image = form.cleaned_data['image']
+            news = News(title=title,content=content,image=image,user=request.user)
+            news.save()
+    form = Newsform()
+    
+    return render(request,'admin-AddNews.html',context={ 'form':form})
 
     

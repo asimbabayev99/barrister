@@ -2,7 +2,7 @@ from django.db import models
 from account.models import CustomUser
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
-
+import random
 
 from dateutil.rrule import (
     DAILY,
@@ -313,11 +313,20 @@ class News(models.Model):
     image = models.ImageField(_("image"),upload_to='news', blank=False)
     slug = models.SlugField(max_length=20,blank=True,null=True,unique=True)
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,null=True,blank=True)
-    
-    def save(self,*args,**kwargs):
-        self.slug = slugify(self.title)
-        super(News,self).save(*args,**kwargs)
 
+    def unique_slug(self,slug):
+        if News.objects.filter(slug=slug):
+            index = random.randrange(0,20)
+            new_slug = "%s-%s"%(slug,index)
+            slug = self.unique_slug(slug=new_slug)
+        return slug           
+
+
+
+
+    def save(self,*args, **kwargs):
+        self.slug = self.unique_slug(slug=slugify(self.title))
+        super(News,self).save(*args,**kwargs)
 
     def __str__(self):
         return self.title 

@@ -7,18 +7,29 @@ class Newsform(forms.ModelForm):
     error_css_class = 'error'
 
     title = forms.CharField(label='', max_length=50, min_length=5, widget=forms.TextInput(attrs={
-        'class':'form-group form-control news-header',
-        'placeholder':'Xəbər başlığı'
-    }))
+        'class':'form-element input-field',
+        'placeholder':'Xəbər başlığı',
+        'type':'text'
+    }),required=True,error_messages={'invalid' : 'Bu xana bos ola bilmez','required' : 'Bu xana bos ola bilmez'})
     content = forms.CharField(label='',widget=widgets.CKEditorWidget(attrs={
-        'class':'form-group form-control'
-    }))
-    image = forms.ImageField(label='',required=False,)
+        'class':'form-element input-field',
+        'placeholder':'Xəbərin məzmunu'
 
- 
+    }),required=True)
+    image = forms.FileField(label='',required=False,widget=forms.FileInput(attrs={'id' : 'choosefile',
+    'type':'file',
+    'name' : 'choosefile',
+    
+    }))
     class Meta:
         model = News
         fields = ['title','content','image',]
+        
+    # def clean_title(self):
+    #     title = self.cleaned_data.get('title')  
+    #     if 'a' in title == False:
+    #         raise forms.ValidationError('Xeber basligi bos ola bilmez')
+    
 
 
 
