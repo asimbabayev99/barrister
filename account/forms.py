@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES
+from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES, Role
 
 
 
@@ -93,42 +93,46 @@ class RegisterForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     error_css_class = 'error'
     email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : 'input',
+        'class' : 'form-element input-field',
         'placeholder':"Email"
     }))
     first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "input",
-        'placeholder': "First Name"
+        'class' : "form-element input-field",
+        'placeholder': "Ad"
     })) 
     last_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "input",
-        'placeholder': "Last Name"
+        'class' : "form-element input-field",
+        'placeholder': "Soyad"
     })) 
+    middle_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class': 'form-element input-field',
+        'placeholder': 'Ata adı'
+    }))
     password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(attrs={
-        'class' : "input",
-        'placeholder': "Password"
+        'class' : "form-element input-field",
+        'placeholder': "Şəfrə"
     })) 
     confirm_password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(attrs={
-        'class' : "input",
-        'placeholder': "Confirm Password"
+        'class' : "form-element input-field",
+        'placeholder': "Şifrəni təkrarla"
     })) 
-    field_order =  ('email','first_name', 'last_name', 'password', 'confirm_password')
-    
-    # user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    # image = models.ImageField(null=True)
+    role = forms.ModelChoiceField(queryset=Role.objects.all(), widget=forms.Select(attrs={
+        'class': 'form-element input-field',
+    }))
+    image =  forms.ImageField()
 
-    # # contacts
-    # phone_number = models.BigIntegerField(null=True)
-    # website = models.URLField(null=True)
-    # address = models.CharField(max_length=256, null=True)
+    field_order =  ('email','first_name', 'last_name', 'middle_name', 'password', 'confirm_password', 'role')
 
-    # # social networks
-    # facebook_link = models.URLField(null=True)
-    # twitter_link = models.URLField(null=True)
-    # linkedin_link = models.URLField(null=True)
-    # google_link = models.URLField(null=True)
 
-    # gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
-    # work_summary = models.CharField(max_length=2014)
-    # biography = models.TextField()
-    # job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)
+    class Meta:
+        model = CustomUser
+        fields =  ('email','first_name', 'last_name', 'middle_name', 'password', 'confirm_password', 'role')
+
+
+    def clean(self):
+        cleaned_data = super(UserForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            self.add_error('confirm_password', 'Password and Confirm Password does not match')

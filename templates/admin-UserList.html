@@ -1,186 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% load static %}
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add News</title>
-    <link
-      rel="shortcut icon"
-      href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
-      alt="Изображение Tim Treis с сайта Pixabay "
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
-    <link
-      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}"
-      rel="stylesheet"
-      media="print"
-    />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-  
-  <body style="background-color: #384554;">
-    <div class="page-wrapper chiller-theme toggled">
-    <div id="show-sidebar">
-      <a
-        title="Genişləndirmək"
-        id="show-sidebar"
-        class="btn btn-sm btn-dark"
-        href="#"
-      >
-        <i class="fas fa-bars"></i>
-      </a>
+{% extends 'admin-base.html' %}
 
-      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
-        <i class="fa fa-calendar-plus"></i>
-      </a>
-
-      <a
-        title="Təqvim"
-        id="minicalendaricon"
-        class="btn btn-sm btn-dark"
-        href="#"
-      >
-        <i class="fa fa-calendar"></i>
-      </a>
-    </div>
-
-    <nav id="sidebar" class="sidebar-wrapper">
-      <div class="sidebar-content">
-        <div class="sidebar-brand">
-          <a href="#">Təqvim</a>
-          <div id="close-sidebar">
-            <i class="fas fa-times"></i>
-          </div>
-        </div>
-        <div class="sidebar-header">
-          <div class="user-pic">
-            <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
-            <img
-              class="img-responsive img-rounded"
-              src="img/person-311292_640.png"
-              alt="User picture"
-            />
-          </div>
-          <div class="user-info">
-            <span class="user-name">Admin </span>
-            <span class="user-role">Administrator</span>
-            <span class="user-status">
-              <i class="fa fa-circle"></i>
-              <span>Online</span>
-            </span>
-          </div>
-        </div>
-        <!-- sidebar-header  -->
-        
-        <div class="sidebar-menu">
-          <ul>
-            <li class="header-menu">
-              <span></span>
-            </li>
-
-            <li>
-              <a href="admin-Dashboard.html">
-                  <i class="fa fa-home"></i>
-                  <span>Əsas lövhə</span>
-                </a>
-            </li>
-            <li class="sidebar-dropdown">
-                <a href="#">
-                  <i class="fa fa-users"></i>
-                  <span>İstifadəçilər</span>
-                </a>
-                <div class="sidebar-submenu">
-                  <ul>
-                    <li>
-                      <a href="admin-AddUser.html">Yeni istifadəçi əlavə et</a>
-                    </li>
-                    <li>
-                      <a href="admin-UserList.html">İstifadəçilərin siyahısı</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="sidebar-dropdown">
-                <a href="#">
-                  <i class="fa fa-newspaper"></i>
-                  <span>Xəbərlər</span>
-                </a>
-                <div class="sidebar-submenu">
-                  <ul>
-                    <li>
-                      <a href="admin-AddNews.html">Yeni xəbər əlavə et</a>
-                    </li>
-                    <li>
-                      <a href="admin-NewsList.html">Xəbər siyahısı</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-          </ul>
-        </div>
-        <!-- sidebar-menu  -->
-      </div>
-      <!-- sidebar-content  -->
-      <div class="sidebar-footer">
-        <a href="#">
-          <i class="fa fa-bell"></i>
-          <span class="badge badge-pill badge-warning notification">3</span>
-        </a>
-        <a href="#">
-          <i class="fa fa-envelope"></i>
-          <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#">
-          <i class="fa fa-cog"></i>
-          <span class="badge-sonar"></span>
-        </a>
-        <a href="#">
-          <i class="fa fa-power-off"></i>
-        </a>
-      </div>
-    </nav>
+ {% load static %}
+ {% load home_filters %}
+    
+ {% block content %}
+  <div>
     <main class="page-content design">
-      <div class="tbl-header">
-        <table class="user-table" cellpadding="0" cellspacing="0" border="0">
-          <thead>
-            <tr>
-              <th>Ad</th>
-              <th>Soyad</th>
-              <th>Ata Adı</th>
-              <th>Elektron Poçt</th>
-              <th>İş Təcrübəsi</th>
-              <th></th>
+
+       <!--table begin  -->
+       <div class="table-responsive-xl">
+        <table class="table">
+          <thead class="tbl-header tbl-content">
+            <tr>  
+              <th scope="col">Ad</th>
+              <th scope="col">Soyad</th>
+              <th scope="col">Ata Adı</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Ətraflı</th>
             </tr>
           </thead>
-        </table>
-      </div>
-      <div class="tbl-content">
-        <table class="user-table" cellpadding="0" cellspacing="0" border="0">
-          <tbody>
+          <tbody class="user-table tbl-content"> 
             {% for user in page_obj %}
             <tr>
-              <td>{{user.first_name}}</td>
-              <td>{{user.last_name}}</td>
-              <td>{{user.middle_name}}</td>
-              <td>{{user.email}}</td>
-              <td>1 il</td>
+              <td>
+                {% if user.first_name %}
+                  {{user.first_name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.last_name %}
+                  {{user.last_name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.middle_name %}
+                  {{user.middle_name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.email %}
+                  {{user.email}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.role %}
+                  {{user.role.name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
               <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+      <!--table  end-->
 
+      <!-- pagination begin -->
+      <ul class="pagination mt-3">  
+        
+        {% if page_obj.number > 1 %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
+        {% endif %}
+        {% for page in page_obj|get_page_list %}
+          {% if page == page_obj.number %}
+            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.number < page_obj.paginator.num_pages %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
+        {% endif %}        
+      </ul>
+      <!-- pagination end -->
       
       <!-- Modal popup -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -196,12 +99,12 @@
 
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <p class="text-center"><img src="img/person-311292_640.png" width="50%" height="50%" alt="" srcset=""></img></p>
+                  <p class="text-center"><img src="{%static 'img/person-311292_640.png'%}" width="50%" height="50%" alt="" srcset=""></img></p>
                  </div>
 
                  <div class="col-md-6 mb-4">
-                  <p class="text-center float-left"><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
-                  <p class="text-center float-left"><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
+                  <p><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
+                  <p><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
                  </div>
 
                 <div class="col-md-12">
@@ -247,16 +150,17 @@
       <!-- Modal popup -->
     </main>
     </div>
+    {% endblock %}
 
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-    <!-- <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script> -->
-    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-    <script src="{% static 'js/fullcalendar.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-  </body>
-</html>
+    {% block scripts %}
+      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+      <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+      <!-- <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script> -->
+      <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+      <script src="{% static 'js/fullcalendar.js' %}"></script>
+      <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %}

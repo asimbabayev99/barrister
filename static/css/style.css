@@ -982,7 +982,19 @@ outline: 0px;
 }
 .design input{
   height: 36px;
-  padding: 5px;
+}
+.news-date{
+  width: 50%;
+  margin-right: 3%;
+}
+.news-time{
+  width: 47%;
+}
+.news-date-text{
+  font-weight: bold;
+}
+.news-content{
+  width: 100%;
 }
 /* user form editor end */
 
@@ -1358,6 +1370,23 @@ opacity: 1;
  }
 /* admin-NewsList end */
 
+/* admin-userList begin */
+.pagination{
+  outline: none!important;
+  padding-left: 40px;
+}
+.page-item{
+  margin-right:1% ;
+}
+.page-link{
+  background-color: #1e2229 ;
+  color: #818896;
+}
+.page-item.active .page-link{
+  border: 1px solid #dee2e6;
+}
+
+/* admin-userList end */
 
 
 

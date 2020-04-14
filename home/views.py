@@ -3,10 +3,12 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
-from home.forms import Newsform 
+from account.forms import UserForm
+from home.forms import * 
 from django.utils.text import slugify
 from .models import News
 from django.core.paginator import Paginator
+from django.contrib.auth.hashers import make_password
 
 
 
@@ -135,7 +137,7 @@ def publication_add_view(request):
         return Http404()
 
     if request.method == "POST":
-        form = PublicationForm(request.POST,request.FILES,instance=news)
+        form = PublicationForm(request.POST,request.FILES)
         if form.is_valid():
             new_post = Publication(**form.cleaned_data)
             new_post.user = request.user
@@ -175,8 +177,8 @@ def admin_user_list(request):
     except:
         page = 1
  
-    users = CustomUser.objects.all().select_related('role')
-    paginator = Paginator(users, 25)
+    users = CustomUser.objects.all().select_related('role').order_by('-id')
+    paginator = Paginator(users, 2)
     page_obj = paginator.get_page(page)
 
     context = {
@@ -184,6 +186,50 @@ def admin_user_list(request):
     }
 
     return render(request, 'admin-UserList.html', context=context)
+
+
+
+def admin_user_add(request):
+
+    message = None
+    form = UserForm()
+
+    if request.method == "POST": 
+        form = UserForm(request.POST,request.FILES)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            middle_name = form.cleaned_data['middle_name']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            role = form.cleaned_data['role']
+            image = request.FILES.get('image', None)
+
+            user = CustomUser(
+                first_name=first_name, 
+                last_name=last_name, 
+                middle_name=middle_name,
+                email=email, 
+                role=role
+            )
+            user.password = make_password(password)
+            user.save()
+
+            profile = Profile(
+                user=user,
+                image=image,
+            ).save()
+            
+            form = UserForm()
+            message = 'İstifadəçi uğurla əlavə olundu'
+
+    context = {
+        'form':form,
+        'message': message,
+    }
+    return render(request, 'admin-AddUser.html', context=context)
+
+
 
 def admin_add_news(request):
 
@@ -201,4 +247,24 @@ def admin_add_news(request):
     
     return render(request,'admin-AddNews.html',context={ 'form':form})
 
+
+
+def admin_news_list(request):
+
+    page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        page = 1
+
+    news = News.objects.all().order_by("-date")
+    paginator = Paginator(news, 4)
+    page_obj = paginator.get_page(page)
+    
+    context = {
+        'page_obj': page_obj,
+    }
+
+
+    return render(request, 'admin_NewsList.html', context = context)
     
