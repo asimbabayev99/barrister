@@ -61,6 +61,7 @@
 
           <form class="form-container" action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+            <p>{{message}}</p>
             {{ form.non_field_errors }}
             <div class="input-addon">
               <!-- <input class="form-element input-field" placeholder="Ad" type="text"> -->

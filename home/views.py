@@ -191,6 +191,7 @@ def admin_user_list(request):
 
 def admin_user_add(request):
 
+    message = None
     form = UserForm()
 
     if request.method == "POST": 
@@ -218,9 +219,13 @@ def admin_user_add(request):
                 user=user,
                 image=image,
             ).save()
+            
+            form = UserForm()
+            message = 'İstifadəçi uğurla əlavə olundu'
 
     context = {
         'form':form,
+        'message': message,
     }
     return render(request, 'admin-AddUser.html', context=context)
 
