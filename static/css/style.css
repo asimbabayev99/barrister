@@ -1367,6 +1367,23 @@ opacity: 1;
  }
 /* admin-NewsList end */
 
+/* admin-userList begin */
+.pagination{
+  outline: none!important;
+  padding-left: 40px;
+}
+.page-item{
+  margin-right:1% ;
+}
+.page-link{
+  background-color: #1e2229 ;
+  color: #818896;
+}
+.page-item.active .page-link{
+  border: 1px solid #dee2e6;
+}
+
+/* admin-userList end */
 
 
 

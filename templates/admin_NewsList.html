@@ -11,23 +11,20 @@
 {% block content %}
 <div>
   <main class="page-content design">
-    <div class="tbl-header">
-      <table class="user-table" cellpadding="0" cellspacing="0" border="0">
-        <thead>
-          <tr>
+    <!--table begin  -->
+    <div class="table-responsive-xl">
+      <table class="table">
+        <thead class="tbl-header tbl-content">
+          <tr>  
             <th>Xəbər başlığı</th>
             <th>Müəllifin adı</th>
             <th>Müəllifin soyadı</th>
-            <th>Elektron Poçt</th>
+            <th>Email</th>
             <th>Elan vaxtı</th>
-            <th></th>
+            <th>Ətraflı</th>
           </tr>
         </thead>
-      </table>
-    </div>
-    <div class="tbl-content">
-      <table class="user-table" cellpadding="0" cellspacing="0" border="0">
-        <tbody>
+        <tbody class="user-table tbl-content"> 
           {% for n in page_obj %}
           <tr>
             <td>
@@ -72,7 +69,9 @@
         </tbody>
       </table>
     </div>
-    <ul class="pagination">  
+    <!--table  end-->
+
+    <ul class="pagination mt-3">  
         
       {% if page_obj.number > 1 %}
         <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>

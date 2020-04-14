@@ -6,23 +6,21 @@
  {% block content %}
   <div>
     <main class="page-content design">
-      <div class="tbl-header">
-        <table class="user-table" cellpadding="0" cellspacing="0" border="0">
-          <thead>
-            <tr>
-              <th>Ad</th>
-              <th>Soyad</th>
-              <th>Ata Adı</th>
-              <th>Elektron Poçt</th>
-              <th>Rol</th>
-              <th></th>
+
+       <!--table begin  -->
+       <div class="table-responsive-xl">
+        <table class="table">
+          <thead class="tbl-header tbl-content">
+            <tr>  
+              <th scope="col">Ad</th>
+              <th scope="col">Soyad</th>
+              <th scope="col">Ata Adı</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Ətraflı</th>
             </tr>
           </thead>
-        </table>
-      </div>
-      <div class="tbl-content">
-        <table class="user-table" cellpadding="0" cellspacing="0" border="0">
-          <tbody>
+          <tbody class="user-table tbl-content"> 
             {% for user in page_obj %}
             <tr>
               <td>
@@ -66,8 +64,10 @@
           </tbody>
         </table>
       </div>
+      <!--table  end-->
 
-      <ul class="pagination">  
+      <!-- pagination begin -->
+      <ul class="pagination mt-3">  
         
         {% if page_obj.number > 1 %}
           <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
@@ -83,6 +83,7 @@
           <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
         {% endif %}        
       </ul>
+      <!-- pagination end -->
       
       <!-- Modal popup -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -98,12 +99,12 @@
 
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <p class="text-center"><img src="img/person-311292_640.png" width="50%" height="50%" alt="" srcset=""></img></p>
+                  <p class="text-center"><img src="{%static 'img/person-311292_640.png'%}" width="50%" height="50%" alt="" srcset=""></img></p>
                  </div>
 
                  <div class="col-md-6 mb-4">
-                  <p class="text-center float-left"><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
-                  <p class="text-center float-left"><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
+                  <p><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
+                  <p><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
                  </div>
 
                 <div class="col-md-12">
