@@ -993,6 +993,9 @@ outline: 0px;
 .news-date-text{
   font-weight: bold;
 }
+.news-content{
+  width: 100%;
+}
 /* user form editor end */
 
 /* Choose file begin*/
