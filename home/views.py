@@ -178,7 +178,7 @@ def admin_user_list(request):
         page = 1
  
     users = CustomUser.objects.all().select_related('role')
-    paginator = Paginator(users, 25)
+    paginator = Paginator(users, 2)
     page_obj = paginator.get_page(page)
 
     context = {

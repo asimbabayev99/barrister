@@ -1,10 +1,10 @@
 {% extends 'admin-base.html' %}
 
  {% load static %}
-
+ {% load home_filters %}
     
  {% block content %}
-  
+  <div>
     <main class="page-content design">
       <div class="tbl-header">
         <table class="user-table" cellpadding="0" cellspacing="0" border="0">
@@ -61,6 +61,22 @@
         </table>
       </div>
 
+      <ul class="pagination">  
+        
+        {% if page_obj.number > 1 %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
+        {% endif %}
+        {% for page in page_obj|get_page_list %}
+          {% if page == page_obj.number %}
+            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.number < page_obj.paginator.num_pages %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
+        {% endif %}        
+      </ul>
       
       <!-- Modal popup -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
