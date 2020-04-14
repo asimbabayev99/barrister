@@ -14,7 +14,7 @@
               <th>Soyad</th>
               <th>Ata Adı</th>
               <th>Elektron Poçt</th>
-              <th>İş Təcrübəsi</th>
+              <th>Rol</th>
               <th></th>
             </tr>
           </thead>
@@ -53,7 +53,13 @@
                   -
                 {% endif %}
               </td>
-              <td>1 il</td>
+              <td>
+                {% if user.role %}
+                  {{user.role.name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
               <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
             </tr>
             {% endfor %}

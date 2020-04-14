@@ -177,7 +177,7 @@ def admin_user_list(request):
     except:
         page = 1
  
-    users = CustomUser.objects.all().select_related('role')
+    users = CustomUser.objects.all().select_related('role').order_by('-id')
     paginator = Paginator(users, 2)
     page_obj = paginator.get_page(page)
 
