@@ -16,7 +16,7 @@ class Newsform(forms.ModelForm):
         'placeholder':'Xəbərin məzmunu'
 
     }),required=True)
-    image = forms.FileField(label='',required=False,widget=forms.FileInput(attrs={'id' : 'choosefile',
+    image = forms.FileField(label='',required=False,widget=forms.FileInput(attrs={'id' : 'choosefile','class':'file_upl',
     'type':'file',
     'name' : 'choosefile',
     

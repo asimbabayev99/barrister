@@ -996,10 +996,15 @@ outline: 0px;
 .news-content{
   width: 100%;
 }
+.file_upl{
+  background-color: #CDBA6D;
+  padding: 5px;
+  border: 1px solid #323A43;
+}
 /* user form editor end */
 
 /* Choose file begin*/
-.file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload{display:block;text-align:left;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
 .file-upload .file-select{display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 .file-upload .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
 .file-upload .file-select .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
