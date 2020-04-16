@@ -268,3 +268,8 @@ def admin_news_list(request):
 
     return render(request, 'admin_NewsList.html', context = context)
     
+
+
+def blog_grid_view(request):
+
+    return render(request, 'blog-grid-view.html')
