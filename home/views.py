@@ -88,8 +88,8 @@ def news_add_view(request):
 
 
 
-def news_update(request,slug):
-    if request.user.is_staff is False:
+def admin_news_update(request,slug):
+    if request.user.is_superuser is False:
         return Http404()
         
     news = get_object_or_404(News.objects.all(),slug=slug)
@@ -101,9 +101,10 @@ def news_update(request,slug):
             news.content = form.cleaned_data['content']
             news.image = form.cleaned_data['image']
             news.save()
+            
 
     form = Newsform(instance=news)
-    return render(request,'news_update.html',context={'form':form})
+    return render(request,'admin-UpdateNews.html',context={'form':form})
 
 
 

@@ -325,8 +325,20 @@ class News(models.Model):
 
 
     def save(self,*args, **kwargs):
-        self.slug = self.unique_slug(slug=slugify(self.title))
-        super(News,self).save(*args,**kwargs)
+        if self.slug:
+            if self.id == News.objects.get(slug=self.slug).id:
+                super(News,self).save(*args,**kwargs)
+            elif News.objects.filter(slug=self.slug).exists() == False:
+                super(News,self).save(*args,**kwargs)
+
+        else:
+            self.slug = slugify(self.title)
+            if News.objects.filter(slug=self.slug).exists():
+                self.slug = "%s-%s"%(self.slug,random.randrange(0,20))
+                super(News,self).save(*args,**kwargs)
+            else:
+                super(News,self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.title 

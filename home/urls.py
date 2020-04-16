@@ -18,8 +18,9 @@ urlpatterns = [
     path('blog/', blog_grid_view, name='blog'),
   
     path('admin/user/list', admin_user_list, name='admin-user-list'),
-    path('admin/home/news/add_news',admin_add_news,name='admin-add-news'),
+    path('admin/news/add_news',admin_add_news,name='admin-add-news'),
     path('admin/news/list',admin_news_list,name='admin-news-list'),
+    path('admin/news/update/<slug:slug>',admin_news_update,name='admin-news-update'),
     path('admin/user/add', admin_user_add, name='admin-user-add'),
     
 
