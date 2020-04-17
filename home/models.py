@@ -354,3 +354,9 @@ class Publication(models.Model):
 
 
 
+
+class Comment(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    text = models.CharField(max_length=2048, null=False, blank=False)
+    date = models.DateTimeField(auto_now_add=True)
