@@ -116,9 +116,9 @@ class Profile(models.Model):
     linkedin_link = models.URLField(null=True)
     google_link = models.URLField(null=True)
 
-    gender = models.CharField(max_length=32, choices=GENDER_CHOICES)
-    work_summary = models.CharField(max_length=2014)
-    biography = models.TextField()
+    gender = models.CharField(max_length=32, choices=GENDER_CHOICES, null=True)
+    work_summary = models.CharField(max_length=2014, null=True)
+    biography = models.TextField(null=True)
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)    
 
 
