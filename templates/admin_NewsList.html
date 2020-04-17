@@ -22,6 +22,7 @@
             <th>Email</th>
             <th>Elan vaxtı</th>
             <th>Ətraflı</th>
+            <th>Düzəliş et</th>
           </tr>
         </thead>
         <tbody class="user-table tbl-content"> 
@@ -63,7 +64,11 @@
               {% endif %}
             </td>
             <td><button  type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#exampleModalCenter">Ətraflı</button></td>
+                data-target="#exampleModalCenter">Ətraflı</button>
+            </td>
+            <td><a href="news_update.html"><button  type="button" class="btn btn-light" data-toggle="modal"
+              data-target="#exampleModalCenter"><i class="fas fa-pen-square"></i></button></a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
