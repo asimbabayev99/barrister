@@ -143,6 +143,11 @@ class EventCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name',]),
+        ]
+
 
 
 class Event(models.Model):
@@ -167,8 +172,10 @@ class Event(models.Model):
     )
     remind_me = models.DateTimeField(null=True)
 
-
-
+    class Meta: 
+        indexes = [
+            models.Index(fields=['user', 'category', 'start', 'end']),
+        ]
 
 
 
@@ -314,14 +321,19 @@ class News(models.Model):
     slug = models.SlugField(max_length=20,blank=True,null=True,unique=True)
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,null=True,blank=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['date',]),
+            models.Index(fields=['slug',]),
+        ]         
+
+
     def unique_slug(self,slug):
         if News.objects.filter(slug=slug):
             index = random.randrange(0,20)
             new_slug = "%s-%s"%(slug,index)
             slug = self.unique_slug(slug=new_slug)
-        return slug           
-
-
+        return slug  
 
 
     def save(self,*args, **kwargs):
@@ -352,6 +364,12 @@ class Publication(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', 'date',]),
+            models.Index(fields=['date']),
+        ]
+
 
 
 
@@ -360,3 +378,9 @@ class Comment(models.Model):
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
     text = models.CharField(max_length=2048, null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['publication', 'date',]),
+        ] 
+    
