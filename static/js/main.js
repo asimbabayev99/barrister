@@ -1,3 +1,4 @@
+
 // sidebar js begin
 $(".sidebar-dropdown > a").click(function() {
   $(".sidebar-submenu").slideUp(200);
@@ -38,6 +39,8 @@ $("#newevent").click(function() {
   $(".nevevent").addClass("active");
 });
 // sidebar js end
+
+
 // choose file begin
 $('#chooseFile').bind('change', function () {
   var filename = $("#chooseFile").val();
@@ -50,9 +53,7 @@ $('#chooseFile').bind('change', function () {
     $("#noFile").text(filename.replace("C:\\fakepath\\", "")); 
   }
 });
-
 // choose file end
-
 
 // user-table begin
 $(window).on("load resize ", function() {
@@ -61,7 +62,89 @@ $(window).on("load resize ", function() {
 }).resize();
 // user-table end
 
+
+// phone mask begin
 $(document).ready(function(){
   $("#telnum").mask("+ 994" +  " (xx) xxx-xx-xx");
      });   
+// phone mask end
 
+
+//Choose icon via jquery begin
+$(document).ready(function() {
+  $("#choose_icon_button").click(function() {
+    $("#icon_secmek_ucun").slideToggle()    
+  });
+    for (let i = 1; i <21; i++) {
+      $("#icon"+i).click(function() {
+        $("#choose_icon_button").html($("#icon"+i).html());
+        $("#icon_secmek_ucun").slideUp(200)
+      });
+      }
+});
+//Choose icon via jquery begin
+
+
+//Vaxt secimi intervallar ile begin
+$(document).ready(function() {
+  $("#select_box_baslig").click(function() {
+    $("#select_box_alt_hisse").slideToggle()
+  })
+})
+
+$(document).ready(function() {
+  $(".deqiqe_0").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_0").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".deqiqe_hec").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_hec").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".deqiqe_5").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_5").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  
+  $(".deqiqe_10").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_10").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".deqiqe_15").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_15").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".deqiqe_30").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_30").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".deqiqe_45").click(function() {
+    $("#select_box_baslig").html($(".deqiqe_45").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".saat_1").click(function() {
+    $("#select_box_baslig").html($(".saat_1").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".saat_3").click(function() {
+    $("#select_box_baslig").html($(".saat_3").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".saat_6").click(function() {
+    $("#select_box_baslig").html($(".saat_6").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".saat_12").click(function() {
+    $("#select_box_baslig").html($(".saat_12").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".gun_1").click(function() {
+    $("#select_box_baslig").html($(".gun_1").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  });
+  $(".hefte_1").click(function() {
+    $("#select_box_baslig").html($(".hefte_1").html());
+    $("#select_box_alt_hisse").slideUp(200)
+  })
+})
+//Vaxt secimi intervallar ile begin

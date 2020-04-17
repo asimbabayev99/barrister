@@ -1,0 +1,263 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalendar </title>
+    <!-- Изображение Tim Treis с сайта Pixabay  -->
+    <link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+      alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon"/>    
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel='stylesheet' />
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
+  </head>
+
+
+  <body id="calendar-body">
+
+  
+    <div class="page-wrapper chiller-theme toggled">
+
+      <div id="show-sidebar">
+
+
+      <a title="Genişləndirmək" id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+
+
+      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
+        <i class="fa fa-calendar-plus"></i>
+      </a>
+
+
+      <a title="Təqvim" id="minicalendaricon" class="btn btn-sm btn-dark" href="#">
+        <i class="fa fa-calendar"></i>
+      </a>
+      
+
+      </div>
+
+
+
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <a href="#">Təqvim</a>
+            <div id="close-sidebar">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+          <div class="sidebar-header">
+            <div class="user-pic">  <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
+              <img class="img-responsive img-rounded" src="img/person-311292_640.png"
+                alt="User picture">
+            </div>
+            <div class="user-info">
+              <span class="user-name">Admin
+              </span>
+              <span class="user-role">Administrator</span>
+              <span class="user-status">
+                <i class="fa fa-circle"></i>
+                <span>Online</span>
+              </span>
+            </div>
+          </div>
+          <!-- sidebar-header  -->
+          <div class="sidebar-search">
+            <div>
+              <div class="input-group">
+                <input type="text" class="form-control search-menu" placeholder="Axtarış..">
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- sidebar-search  -->
+          <div class="sidebar-menu">
+            <ul>
+              <li class="header-menu">
+                <span></span>
+              </li>
+
+              <li>
+                <a href="javascript:void(0);"
+                onclick="window.open('https://mail.yandex.com/','Ratting','width=550,height=550,left=500,top=80,toolbar=0,status=0');">
+                  <i class="fa fa-envelope"></i>
+                  <span>E-poçt</span>
+                </a>
+            </li>
+              
+              <!-- New event -->
+              <li>
+                <a class="nevevent" href="#">
+                  <i class="fa fa-plus"></i>
+                  <span>Yeni hadisə</span>
+                </a>
+              </li>
+
+              <!-- Calendar iconca -->
+              <li class="calendarr sidebar-dropdown">
+                <a href="#">
+                  <i class="fa fa-calendar-alt"></i>
+                  <span>Təqvim</span>
+                </a>
+                <div class="sidebar-submenu calendaropen">
+                  Bura calendar qoyulacaq
+                </div>
+              </li>
+              <!-- Calendar iconca end -->
+            </ul>
+          </div>
+          <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+          <a href="#">
+            <i class="fa fa-bell"></i>
+            <span class="badge badge-pill badge-warning notification">3</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span class="badge-sonar"></span>
+          </a>
+          <a href="#">
+            <i class="fa fa-power-off"></i>
+          </a>
+        </div>
+      </nav>
+      <!-- sidebar-wrapper  -->
+      <main class="page-content">
+        <div class="container-fluid">
+          <div id='calendar-ms'></div>          
+          <div id='datepicker'></div>
+          <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content border-0" style="height: 300px;padding: 0px;border-radius: 0rem;background-clip: content-box;">
+      <!--Birinci yeni yuxari hisse-->          
+                <div class="top_of_event_box"><span class="pencere_basligi">Boşluqları doldurun</span>  <span class="pencere_baglayan_icon" data-dismiss="modal"><i class="fas fa-times"></i></span></div>
+      <!--Birinci yeni yuxari hisse-->
+                <div class="modal-header">
+                  <div>
+                  <button id="choose_icon_button"><i class="far fa-bell"></i>&downarrow;</button>
+                  <div id="icon_secmek_ucun" style="background-color: white;z-index: 100;position: absolute;width: 314px;height: 230px;display: none;border: 1px solid black;box-shadow: 2px 2px 3px grey;">
+                    
+                    <span id="icon1" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-car" style="color: mediumvioletred;"></i></span>
+                    <span id="icon2" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-music" style="color: indianred;"></i></span>
+                    <span id="icon3" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-heart" style="color: red;"></i></span>
+                    <span id="icon4" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i  class="fas fa-plane" style="color: teal;"></i></i></span>
+                    <span id="icon5" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-ambulance" style="color: orangered;"></i></i></span>
+                    <span id="icon6" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-baby" style="color: firebrick;"></i></i></span>
+                    <span id="icon7" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-graduation-cap" style="color:lightslategrey;"></i></i></span>
+                    <span id="icon8"  style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-camera-retro" style="color: darkorange;"></i></i></span>
+                    <span id="icon9" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-trophy" style="color: gold;"></i></span>
+   
+                    <span id="icon11" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="far fa-star" style="color:crimson;"></i></span>
+                    <span id="icon12" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="far fa-user" style="color: royalblue;"></i></span>
+                    <span id="icon13" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-tv" style="color: purple;"></i></span>
+                    <span id="icon14" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-truck" style="color: olivedrab;"></i></i></span>
+                    <span id="icon15" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-biking" style="color: maroon;"></i></i></span>
+                    <span id="icon16" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-bus-alt" style="color: orange;"></i></i></span>
+                    <span id="icon17" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-tree" style="color:lightseagreen ;"></i></i></span>
+                    <span id="icon18" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-list" style="color: deeppink;"></i></i></span>
+                    <span id="icon19" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-futbol" style="color:#234232;"></i></span>
+                    <span id="icon20" style="width: 40px;height: 40px;font-size: 25px;cursor: pointer;"><i class="fas fa-check" style="color: seagreen;"></i></span>
+
+
+                  </div>
+                  </div>
+                  
+                   <input  class="modal-title" type="text" name="title" id="event_name_input" placeholder="Hadisə başlığını əlavə edin"><input style="margin-top: 15px;margin-left: 0px;width: 20px;" type="checkbox">
+                 <span style="line-height: 40px;margin-right: 5px;font-size: 14px;">Bütün günü</span><br>
+      
+                </div>
+      <!--ikinci hisse yuxardikidir-->          
+                <div class="modal-body" id="modal-body">
+                  <div class="row" style="float: left;">
+                    <div>
+                      <label for="starts-at"><span class="saat_iconu"><i class="saat_iconu_2 far fa-clock"></i></span></label>
+                      <!-- <input type="text" name="starts_at" id="input_baslama_vaxti" placeholder="Başlama vaxtı"/> -->
+                      <input type="text"  name="starts_at"  id="input_baslama_vaxti" placeholder="Başlama vaxtı" 
+                      data-toggle="datetimepicker" data-target="#input_baslama_vaxti"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div style="float: left;margin-left: 20px;">
+                      <label  for="ends-at"> <span class="time_inputlari_arasi_span">dan :</span></label>
+                      <!-- <input type="text" name="ends_at" id="input_bitme_vaxti" placeholder="Bitmə vaxtı"/> -->
+                      <input type="text"  name="ends_at"  id="input_bitme_vaxti" placeholder="Bitmə vaxtı" 
+                      data-toggle="datetimepicker" data-target="#input_bitme_vaxti"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-body"  id="modal-body2">
+                  <div  style="float: left;">
+                    <div>
+                      <label for="location"><i class="location_icon fas fa-map-marked-alt"></i> <span class="location_span">Yer,məkan :</span></label>
+                      <input type="text" name="location" id="location_input" placeholder="Məkan daxil edin"/>
+                    </div>
+                  </div>
+                  <div class="div_for_select_in_event_box" >
+                  <div class="remind_me"><label for=""><i class="second_icon far fa-bell" style="line-height: 40px;"></i>Yada sal :</label></div>
+                    <div class="div_for_select_box">
+                      <div id="select_box_baslig"><center><span id="vaxt_secimi">Vaxtı seçin...</span></center></div>
+                      <div id="select_box_alt_hisse" style="width: 200px;height: 480px;position: absolute;display: none;">
+                      <div id="vaxt_divleri" class="deqiqe_0">0 dəqiqə əvvəl</div>
+                      <div id="vaxt_divleri" class="deqiqe_hec">Heç vaxt</div>
+                      <div id="vaxt_divleri" class="deqiqe_5">5 dəqiqə əvvəl</div>
+                      <div id="vaxt_divleri" class="deqiqe_10">10 dəqiqə əvvəl</div>
+                      <div id="vaxt_divleri" class="deqiqe_15">15 dəqiqə əvvəl</div>
+                      <div id="vaxt_divleri" class="deqiqe_30">30 dəqiqə əvvəl</div>
+                      <div id="vaxt_divleri" class="deqiqe_45">45 dəqiqə əvvəl</div>
+                      <div id="vaxt_divleri" class="saat_1">1 saat əvvəl</div>
+                      <div id="vaxt_divleri" class="saat_6">6 saat əvvəl </div>
+                      <div id="vaxt_divleri" class="saat_12">12 saat əvvəl</div>
+                      <div id="vaxt_divleri" class="gun_1">1 gün əvvəl</div>
+                      <div id="vaxt_divleri" class="hefte_1">1 həftə əvvəl</div>
+                      </div>
+
+
+                    </div>
+                 </div>
+
+          
+         <!--*********************************-->       
+                <div class="modal-footer">
+                  <button type="button" class="close_button_in_event_box btn"><a href="New-event.html">Daha ətraflı</a></button>
+                  <button type="button" class="save_button_in_event_box btn" id="save-event">Yadda saxla</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{% 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% 'js/fullcalendar-date.js' %}"></script>
+<script src="{% 'js/main.js' %}"></script>
+</body>   
+
+</html>
