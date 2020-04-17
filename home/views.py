@@ -51,7 +51,7 @@ def single_view(request, id):
 def calendar_view(request):
 
 
-    return render(request, "calendar.html", context={})
+    return render(request, "calendar-date.html", context={})
 
 
 
@@ -274,3 +274,9 @@ def admin_news_list(request):
 def blog_grid_view(request):
 
     return render(request, 'blog-grid-view.html')
+
+def blog_large_view(request):
+    return render(request,'blog-large-image.html')
+
+def blog_single_view(request):
+    return render(request,'blog-single.html')
