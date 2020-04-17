@@ -115,3 +115,24 @@ class ExperienceSerializer(serializers.Serializer):
 
         instance.save()
         return instance
+
+
+
+class PublicationSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(required=False)
+    user_id = models.IntegerField()
+    text = serializers.CharField()
+    file = serializers.FileField()
+    date = serializers.DateTimeField()
+
+    def create(self, validated_data):
+        return Publication.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.user_id = validated_data.get('user_id', instance.user_id)
+        instance.text = validated_data.get('text', instance.text)
+        instance.file = validated_data.get('file', instance.file)
+        instance.date = validated_data.get('date', instance.date)
+
+        instance.save()
+        return instance

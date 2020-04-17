@@ -1,0 +1,166 @@
+{% extends 'admin-base.html' %}
+
+ {% load static %}
+ {% load home_filters %}
+    
+ {% block content %}
+  <div>
+    <main class="page-content design">
+
+       <!--table begin  -->
+       <div class="table-responsive-xl">
+        <table class="table">
+          <thead class="tbl-header tbl-content">
+            <tr>  
+              <th scope="col">Ad</th>
+              <th scope="col">Soyad</th>
+              <th scope="col">Ata Adı</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Ətraflı</th>
+            </tr>
+          </thead>
+          <tbody class="user-table tbl-content"> 
+            {% for user in page_obj %}
+            <tr>
+              <td>
+                {% if user.first_name %}
+                  {{user.first_name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.last_name %}
+                  {{user.last_name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.middle_name %}
+                  {{user.middle_name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.email %}
+                  {{user.email}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if user.role %}
+                  {{user.role.name}}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!--table  end-->
+
+      <!-- pagination begin -->
+      <ul class="pagination mt-3">  
+        
+        {% if page_obj.number > 1 %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
+        {% endif %}
+        {% for page in page_obj|get_page_list %}
+          {% if page == page_obj.number %}
+            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.number < page_obj.paginator.num_pages %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
+        {% endif %}        
+      </ul>
+      <!-- pagination end -->
+      
+      <!-- Modal popup -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title border-0 text-center" id="exampleModalLongTitle">Mr User FatherSon</h5>
+              <button type="button" class="close no-outline" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <p class="text-center"><img src="{%static 'img/person-311292_640.png'%}" width="50%" height="50%" alt="" srcset=""></img></p>
+                 </div>
+
+                 <div class="col-md-6 mb-4">
+                  <p><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
+                  <p><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
+                 </div>
+
+                <div class="col-md-12">
+                 <p class="text-center"><strong>Bio</strong></p>
+                 <p>Lorem ipsum dolor sit amet consectetur,
+                    adipisicing elititiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
+                       Lorem ipsum dolor sit amet consectetur,
+                      adipisicing elit. Dolore id itaque ipsam deserunt repudiandae magni est ab perspiciatis quisquam,
+                       veniam ullam blanditiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
+                  </p>
+                </div>
+
+                <div class="col-md-12">
+                  <p class="text-center" data-toggle="collapse" data-target="#collapsePrac" 
+                  aria-expanded="false" aria-controls="collapsePrac">
+                  <strong>Təcrübə &downarrow;</strong>
+                </p>
+              </div>
+              <div class="collapse" id="collapsePrac">
+                <div class="card card-body border-0">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <p class="text-center"  data-toggle="collapse" data-target="#collapseCert" 
+                aria-expanded="false" aria-controls="collapseCert">
+                <strong>Sertifikatlar &downarrow;</strong>
+              </p>
+            </div>
+            <div class="collapse" id="collapseCert">
+              <div class="card card-body border-0">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi nisi sapiente repudiandae, ea quidem, 
+                veritatis fugit asperiores autem officia reiciendis maxime non nam magnam vero totam debitis cumque qui! Ipsam!
+              </div>
+            </div>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal popup -->
+    </main>
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+      <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+      <!-- <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script> -->
+      <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+      <script src="{% static 'js/fullcalendar.js' %}"></script>
+      <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %}

@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {% block title %}
+       
+    {% endblock title %}
+      
+   
+    <link
+      rel="shortcut icon"
+      href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+      alt="Изображение Tim Treis с сайта Pixabay "
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body style="background-color: #2a2b3d;">
+
+      
+    <div class="page-wrapper chiller-theme toggled">
+    <div id="show-sidebar">
+      <a
+        title="Genişləndirmək"
+        id="show-sidebar"
+        class="btn btn-sm btn-dark"
+        href="#"
+      >
+        <i class="fas fa-bars"></i>
+      </a>
+
+      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
+        <i class="fa fa-calendar-plus"></i>
+      </a>
+
+      <a
+        title="Təqvim"
+        id="minicalendaricon"
+        class="btn btn-sm btn-dark"
+        href="#"
+      >
+        <i class="fa fa-calendar"></i>
+      </a>
+    </div>
+
+    <nav id="sidebar" class="sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <a href="{% url 'home' %}">Home</a>
+          <div id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+        <div class="sidebar-header">
+          <div class="user-pic">
+            <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
+            <img
+              class="img-responsive img-rounded"
+              src="{% static 'img/person-311292_640.png' %}"
+              alt="User picture"
+            />
+          </div>
+          <div class="user-info">
+            <span class="user-name">Admin </span>
+            <span class="user-role">Administrator</span>
+            <span class="user-status">
+              <i class="fa fa-circle"></i>
+              <span>Online</span>
+            </span>
+          </div>
+        </div>
+        <!-- sidebar-header  -->
+        
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span></span>
+            </li>
+
+            <li>
+              <a href="/admin">
+                  <i class="fa fa-home"></i>
+                  <span>Əsas lövhə</span>
+                </a>
+            </li>
+            <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fa fa-users"></i>
+                  <span>İstifadəçilər</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="{% url 'admin-user-add' %}">Yeni istifadəçi əlavə et</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'admin-user-list' %}">İstifadəçilərin siyahısı</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fa fa-newspaper"></i>
+                  <span>Xəbərlər</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="{% url 'admin-add-news'  %}">Yeni xəbər əlavə et</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'admin-news-list'  %}">Xəbər siyahısı</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content  -->
+      <div class="sidebar-footer">
+        <!-- <a href="#">
+          <i class="fa fa-bell"></i>
+          <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a> -->
+        <a href="/admin/logout">
+          <i class="fa fa-power-off"></i>
+        </a>
+      </div>
+    </nav>
+    
+    {% block content %}
+        
+    {% endblock content %}
+
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+    <script src="{% static 'js/fullcalendar.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+

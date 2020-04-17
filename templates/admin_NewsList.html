@@ -1,0 +1,129 @@
+{% extends 'admin-base.html' %}
+{% load static %}
+
+{% load home_filters %}
+
+{% block title %}
+<title></title>
+{% endblock title %}
+
+
+{% block content %}
+<div>
+  <main class="page-content design">
+    <!--table begin  -->
+    <div class="table-responsive-xl">
+      <table class="table">
+        <thead class="tbl-header tbl-content">
+          <tr>  
+            <th>Xəbər başlığı</th>
+            <th>Müəllifin adı</th>
+            <th>Müəllifin soyadı</th>
+            <th>Email</th>
+            <th>Elan vaxtı</th>
+            <th>Ətraflı</th>
+          </tr>
+        </thead>
+        <tbody class="user-table tbl-content"> 
+          {% for n in page_obj %}
+          <tr>
+            <td>
+              {% if n.title %}
+              {{n.title}}
+              {% else %}
+              -
+              {% endif %}
+            </td>
+            <td>
+              {% if n.user.first_name %}
+              {{n.user.first_name}}
+              {% else %}
+              -
+              {% endif %}
+            </td>
+            <td>
+              {% if n.user.last_name %}
+              {{n.user.last_name}}
+              {% else %}
+              -
+              {% endif %}
+            </td>
+            <td>
+              {% if n.user.email %}
+              {{n.user.email}}
+              {% else %}
+              -
+              {% endif %}
+            </td>
+            <td>
+              {% if n.date %}
+              {{n.date}}
+              {% else %}
+              -
+              {% endif %}
+            </td>
+            <td><button  type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModalCenter">Ətraflı</button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!--table  end-->
+
+    <ul class="pagination mt-3">  
+        
+      {% if page_obj.number > 1 %}
+        <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
+      {% endif %}
+      {% for page in page_obj|get_page_list %}
+        {% if page == page_obj.number %}
+          <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.number < page_obj.paginator.num_pages %}
+        <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
+      {% endif %}        
+    </ul>>
+
+
+    <!-- Modal popup -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title border-0 text-center" id="exampleModalLongTitle">Xəbər başlığı</h5>
+            <button type="button" class="close no-outline" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <p class="text-center"><img src="img/hammer-620011_640.jpg" width="100%" height="100%" alt=""
+                    srcset=""></img></p>
+              </div>
+              <div class="col-md-12">
+                <p class="text-center"><strong>Mətn</strong></p>
+                <p>Lorem ipsum dolor sit amet consectetur,
+                  adipisicing elititiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
+                  Lorem ipsum dolor sit amet consectetur,
+                  adipisicing elit. Dolore id itaque ipsam deserunt repudiandae magni est ab perspiciatis quisquam,
+                  veniam ullam blanditiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
+                </p>
+              </div>
+              <div class="col-md-6"><strong>Kateqoriya : </strong>Hüquq</div>
+              <div class="col-md-6"><strong>Müəllif : </strong>Mr.Test</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal popup -->
+  </main>
+</div>
+
+{% endblock content %}

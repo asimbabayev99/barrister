@@ -2,7 +2,7 @@ from django.db import models
 from account.models import CustomUser
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
-
+import random
 
 from dateutil.rrule import (
     DAILY,
@@ -143,6 +143,11 @@ class EventCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name',]),
+        ]
+
 
 
 class Event(models.Model):
@@ -167,8 +172,10 @@ class Event(models.Model):
     )
     remind_me = models.DateTimeField(null=True)
 
-
-
+    class Meta: 
+        indexes = [
+            models.Index(fields=['user', 'category', 'start', 'end']),
+        ]
 
 
 
@@ -313,13 +320,36 @@ class News(models.Model):
     image = models.ImageField(_("image"),upload_to='news', blank=False)
     slug = models.SlugField(max_length=20,blank=True,null=True,unique=True)
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,null=True,blank=True)
-    
-    def save(self,*args,**kwargs):
-        self.slug = slugify(self.title)
-        super(News,self).save(*args,**kwargs)
-        
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['date',]),
+            models.Index(fields=['slug',]),
+        ]         
 
 
+    def unique_slug(self,slug):
+        if News.objects.filter(slug=slug):
+            index = random.randrange(0,20)
+            new_slug = "%s-%s"%(slug,index)
+            slug = self.unique_slug(slug=new_slug)
+        return slug  
+
+
+    def save(self,*args, **kwargs):
+        if self.slug:
+            if self.id == News.objects.get(slug=self.slug).id:
+                super(News,self).save(*args,**kwargs)
+            elif News.objects.filter(slug=self.slug).exists() == False:
+                super(News,self).save(*args,**kwargs)
+
+        else:
+            self.slug = slugify(self.title)
+            if News.objects.filter(slug=self.slug).exists():
+                self.slug = "%s-%s"%(self.slug,random.randrange(0,20))
+                super(News,self).save(*args,**kwargs)
+            else:
+                super(News,self).save(*args, **kwargs)
 
 
     def __str__(self):
@@ -327,4 +357,30 @@ class News(models.Model):
 
 
 
+class Publication(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    text = models.TextField()
+    file = models.FileField()
+    date = models.DateTimeField(auto_now_add=True)
+    views = models.IntegerField(default=0)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', 'date',]),
+            models.Index(fields=['date']),
+        ]
+
+
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    text = models.CharField(max_length=2048, null=False, blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['publication', 'date',]),
+        ] 
+    
