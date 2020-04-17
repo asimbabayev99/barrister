@@ -328,12 +328,15 @@ class News(models.Model):
         ]         
 
 
-    def unique_slug(self,slug):
-        if News.objects.filter(slug=slug):
-            index = random.randrange(0,20)
-            new_slug = "%s-%s"%(slug,index)
-            slug = self.unique_slug(slug=new_slug)
-        return slug  
+    # def unique_slug(self,slug):
+    #     if News.objects.filter(slug=slug):
+    #         index = random.randrange(0,20)
+    #         new_slug = "%s-%s"%(slug,index)
+    #         slug = self.unique_slug(slug=new_slug)
+    #     return slug  
+    def get_absolute_url(self):
+        return reverse("admin-update-news", kwargs={"slug": self.slug})
+    
 
 
     def save(self,*args, **kwargs):
