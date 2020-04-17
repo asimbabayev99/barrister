@@ -28,21 +28,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
+    path('api/',include('api.urls'))
 
-    path('api-auth/',LoginView.as_view()),
-    path('api-register/',UserRegistration.as_view()),
-    path('api/event/list',EventList.as_view()),
-    path('api/event/create',EventCreate.as_view()),
-    path('api/event/detail/<int:id>',EventDetail.as_view()),
-    path('api/profile/list/',ProfilesList.as_view()),
-    path('api/profile/<int:id>',ProfileDetail.as_view()),
-    path('api/profile/create',ProfileCreate.as_view()),
-    path('api/', include(router.urls)),
-    path("api/skills/<int:pk>", SkillAPIView.as_view()),
-    path('api/skills/', SkillAPIView.as_view()),
-    path('api/awards/<int:pk>', AwardAPIView.as_view()),
-    path('api/awards/', AwardAPIView.as_view()),   
-    path('api/experiences/<int:pk>', ExperienceAPIView.as_view()),
-    path('api/experiences/', ExperienceAPIView.as_view()),
+   
 
 ]
