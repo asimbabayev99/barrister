@@ -51,7 +51,7 @@ def single_view(request, id):
 def calendar_view(request):
 
 
-    return render(request, "calendar.html", context={})
+    return render(request, "calendar-date.html", context={})
 
 
 
