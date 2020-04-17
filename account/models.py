@@ -32,6 +32,12 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name',]),
+        ]         
+
+
 
 
 class CustomUserManager(BaseUserManager):
@@ -83,15 +89,21 @@ class CustomUser(AbstractUser):
 class JobCategory(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField()
+
     def __str__(self):
         return self.name
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['slug',]),
+        ]  
 
 
 
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, related_name='profile', on_delete=models.CASCADE)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True, upload_to='profile')
 
     # contacts
     phone_number = models.BigIntegerField(null=True)
@@ -110,12 +122,22 @@ class Profile(models.Model):
     job_category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True)    
 
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['user',]),
+        ]  
+
 
 
 class Skill(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='skills')
     name = models.CharField(max_length=32)
     progress = models.IntegerField(default=100)  # for example 70/100
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['profile',]),
+        ]  
 
 
 
@@ -125,9 +147,18 @@ class EducationAndWorkExperience(models.Model):
     start = models.DateField(auto_now_add=True)
     end = models.DateField(null=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['profile',]),
+        ]  
 
 
 class Award(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='awards')
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=256)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['profile',]),
+        ]
