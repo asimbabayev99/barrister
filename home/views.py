@@ -22,7 +22,7 @@ def index_view(request):
         'profiles': profiles,
         'news': news
     }
-    return render(request, "index_test.html", context=context)
+    return render(request, "index.html", context=context)
 
 
 
