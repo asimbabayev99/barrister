@@ -360,7 +360,7 @@ class News(models.Model):
 class Publication(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()
-    file = models.FileField()
+    file = models.FileField(upload_to='publication')
     date = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
 

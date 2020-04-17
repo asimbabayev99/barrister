@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+asgiref==3.2.7
+Django==3.0.3
+django-filter==2.2.0
+django-templated-mail==1.1.1
+djangorestframework==3.11.0
+djoser==2.0.3
+Pillow==7.0.0
+pytz==2019.3
+sqlparse==0.3.1
+=======
 aioredis==1.0.0
 amqp==2.5.2
 anyjson==0.3.3
@@ -146,3 +157,4 @@ wrapt==1.11.1
 xmltodict==0.12.0
 zipp==0.6.0
 zope.interface==4.6.0
+>>>>>>> 549f3c690eb8264f9a07077fed7b1fff5b34ed59
