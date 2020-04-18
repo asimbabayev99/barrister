@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'api',
     'rest_framework.authtoken',
     'djoser',
-    'ckeditor'
+    'ckeditor',
+    'django_cleanup'
 ]
 
 MIDDLEWARE = [
