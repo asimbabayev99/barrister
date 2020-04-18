@@ -1023,14 +1023,14 @@
                             <div class="themestek-boxes-inner themestek-boxes-team-inner ">
 
                               <div class="row multi-columns-row themestek-boxes-row-wrapper">
-                                {% for profile in profiles %}
+                                {% for barrister in barristers %}
                                 <div class="themestek-box-col-wrapper col-lg-3 col-sm-6 col-md-3 col-xs-12 ">
                                   <article class="themestek-box themestek-box-team themestek-teambox-style-3">
                                     <div class="themestek-post-item">
                                       <div class="themestek-team-image-box">
                                         <span class="themestek-item-thumbnail">
                                           <span class="themestek-item-thumbnail-inner">
-                                            <img width="600" height="700" src="{{profile.image.url}}"
+                                            <img width="600" height="700" src="{{barrister.profile.image.url}}"
                                               class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
                                               alt="" />
                                           </span>
@@ -1038,30 +1038,39 @@
                                         <div class="themestek-teambox-social-links">
                                           <div class="themestek-team-social-links-wrapper">
                                             <ul class="themestek-team-social-links">
+                                              
+                                              {% if barrister.profile.facebook_link %}
                                               <li>
-                                                <a href="#" target="_blank" class="themestek-team-social-facebook">
+                                                <a href="{{barrister.profile.facebook_link}}" target="_blank" class="themestek-team-social-facebook">
                                                   <i class="themestek-attorco-icon-facebook"></i>
                                                   <span class="themestek-hide">Facebook</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
+                                              {% if barrister.profile.twitter_link %}
                                               <li>
-                                                <a href="#" target="_blank" class="themestek-team-social-twitter">
+                                                <a href="{{barrister.profile.twitter_link}}" target="_blank" class="themestek-team-social-twitter">
                                                   <i class="themestek-attorco-icon-twitter"></i>
                                                   <span class="themestek-hide">Twitter</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
+                                              {% if barrister.profile.google_link %}
                                               <li>
-                                                <a href="#" target="_blank" class="themestek-team-social-google">
+                                                <a href="{{barrister.profile.google_link}}" target="_blank" class="themestek-team-social-google">
                                                   <i class="themestek-attorco-icon-gplus"></i>
                                                   <span class="themestek-hide">Google+</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
+                                              {% if barrister.profile.linkedin_link %}
                                               <li>
-                                                <a href="#" target="_blank" class="themestek-team-social-linkedin">
+                                                <a href="{{barrister.profile.linkedin_link" target="_blank" class="themestek-team-social-linkedin">
                                                   <i class="themestek-attorco-icon-linkedin"></i>
                                                   <span class="themestek-hide">LinkedIn</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
                                             </ul> <!-- .themestek-team-social-links -->
                                           </div> <!-- .themestek-team-social-links-wrapper -->
                                         </div>
@@ -1071,12 +1080,14 @@
                                           <div class="themestek-pf-box-title">
                                             <div class="themestek-box-title">
                                               <h4><a
-                                                  href="{% url 'single-view' profile.id %}">{{profile.user.first_name}}
-                                                  {{profile.user.last_name}}</a></h4>
+                                                  href="{% url 'single-view' barrister.profile.id %}">{{barrister.first_name}}
+                                                  {{barrister.last_name}}</a></h4>
                                             </div>
                                           </div>
                                           <div class="themestek-box-team-position themestek-skincolor">
-                                            {{profile.job_category.name}}
+                                            {% if barrister.profile.job_category %}
+                                              {{barrister.profile.job_category.name}}
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>

@@ -13,13 +13,14 @@ from django.contrib.auth.hashers import make_password
 
 
 def index_view(request):
-    profiles = Profile.objects.filter(user__role__name='Barrister').order_by('-id')[:4]
+    barristers = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile', 'profile__job_category').order_by('-id')[:4]
     # print(profiles)
+    
     news = News.objects.all().order_by('-date')[:5]
     news = news.values('title', 'date', 'image', 'slug')
 
     context = {
-        'profiles': profiles,
+        'barristers': barristers,
         'news': news
     }
     return render(request, "index.html", context=context)
