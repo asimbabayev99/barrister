@@ -21,15 +21,12 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <script> 'use strict'; (function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
     <!-- Изображение Tim Treis с сайта Pixabay  -->
-    <link rel="shortcut icon" href="{% static 'img/calendar-1559935_640.png' %}"
-        alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static 'img/calendar-1559935_640.png' %}" alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon" />
     <meta name='robots' content='noindex,nofollow' />
     <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
     <link rel='dns-prefetch' href='http://s.w.org/' />
-    <link rel="alternate" type="application/rss+xml" title="barrister &raquo; beslemesi"
-        href="http://localhost/barrister/feed/" />
-    <link rel="alternate" type="application/rss+xml" title="barrister &raquo; yorum beslemesi"
-        href="http://localhost/barrister/comments/feed/" />
+    <link rel="alternate" type="application/rss+xml" title="barrister &raquo; beslemesi" href="http://localhost/barrister/feed/" />
+    <link rel="alternate" type="application/rss+xml" title="barrister &raquo; yorum beslemesi" href="http://localhost/barrister/comments/feed/" />
     <link rel='stylesheet' id='wp-block-library-css' href="{% static 'content_css/style.min.css' %}" media='all' />
     <link rel='stylesheet' id='contact-form-7-css' href="{% static 'content_css/styles.css' %}" media='all' />
     <link rel='stylesheet' id='rs-plugin-settings-css' href="{% static 'content_css/rs6.css' %}" media='all' />
@@ -434,6 +431,8 @@
   {% endblock %}
 </head>
 
+
+{% block body %}
 <body
     class="home page-template-default page page-id-6439 themestek-headerstyle-classic-overlay themestek-wide themestek-page-full-width themestek-empty-sidebar wpb-js-composer js-comp-ver-6.1 vc_responsive">
     <div id="themestek-home"></div>
@@ -458,6 +457,7 @@
                         </div>
                     </div>
                     <div id="themestek-stickable-header-w-main" class="themestek-stickable-header-w-main">
+                        {% block pre-header %}
                         <div class="themestek-pre-header-wrapper themestek-bgcolor-darkgrey themestek-textcolor-white">
                             <div class="themestek-pre-header-inner">
                                 <div class="container">
@@ -508,6 +508,8 @@
                                 </div>
                             </div>
                         </div>
+                        {% endblock %}
+                        {% block header-navigation %}
                         <div id="themestek-stickable-header-w"
                             class="themestek-stickable-header-w themestek-bgcolor-transparent" style="height:105px">
                             <div id="site-header"
@@ -666,19 +668,15 @@
                                                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11452">
                                                         <a href="#">Blog</a>
                                                         <ul class="sub-menu">
-                                                            <li id="menu-item-11569"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11569">
-                                                                <a href="http://localhost/barrister/blog-large-image/">Blog
-                                                                    Geniş Şəkil</a></li>
-                                                            <li id="menu-item-11570"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11570">
+                                                            <li id="menu-item-11569" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11569">
+                                                                <a href="{% url 'blog-large' %}">Blog Geniş Şəkil</a>
+                                                            </li>
+                                                            <li id="menu-item-11570" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11570">
                                                                 <a href="{% url 'blog-grid' %}">Bloq Cədvəl Görünüşü</a>
                                                             </li>
-                                                            <li id="menu-item-11587"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a
-                                                                    href="http://localhost/barrister/2019/06/13/what-we-are-capable-of-usually-gets-discovered/">Bloq
-                                                                    Tək Görünüşü</a></li>
+                                                            <li id="menu-item-11587" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
+                                                                <a href="{% url 'blog-single' %}">Bloq Tək Görünüşü</a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <li id="menu-item-11565"
@@ -708,6 +706,7 @@
                                 </div><!-- .site-header-main -->
                             </div>
                         </div>
+                        {% endblock %}
                     </div>
 
                     {% block header %}
@@ -720,6 +719,8 @@
 
             {% endblock %}
 
+
+            {% block footer %}
             <footer id="colophon" class="site-footer ">
                 <div class="footer_inner_wrapper footer themestek-bg themestek-bgcolor-darkgrey themestek-bgimage-yes">
                     <div class="site-footer-bg-layer themestek-bg-layer"></div>
@@ -953,6 +954,7 @@
                     </div><!-- .footer-inner-wrapper -->
                 </div><!-- .site-footer-inner -->
             </footer><!-- .site-footer -->
+            {% endblock %}
         </div><!-- #page .site -->
     </div><!-- .main-holder -->
     <!-- To Top -->
@@ -1021,7 +1023,7 @@
     <script src="{% static 'content_js/forms.min.js' %}"></script>
     {% endblock %}
 </body>
-
+{% endblock %}
 <!-- Mirrored from localhost/barrister/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Mar 2020 19:49:22 GMT -->
 
 </html>
