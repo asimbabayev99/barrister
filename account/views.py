@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from account.models import *
 from account.forms import *
@@ -99,8 +99,6 @@ def user_list_view(request):
     context = {
         "page_obj": page_obj,
     }
-    # print(page_obj.num_pages)
-    # print(context)
 
     return render(request, "user-list.html", context=context)
 
@@ -125,18 +123,12 @@ def user_detail_view(request, pk):
 
 
 
-def add_user_view(request, pk):
 
-    if request.method == "POST":
 
-        pass
-    else:
-        roles = Role.objects.all()
+def user_profile(request):
 
-        context = {
-            'roles': roles,
-        }
-        return render(request, 'add-user.html', context=context)
+    return render(request, 'user-profile.html')
+
 
 
 
