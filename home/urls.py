@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/news/list', admin_news_list, name='admin-news-list'),
     path('admin/news/update/<slug:slug>', admin_news_update, name='admin-news-update'),
     path('admin/user/add', admin_user_add, name='admin-user-add'),
+    path('contacts/',contacts_view,name='contacts')
     
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

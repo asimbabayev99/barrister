@@ -280,3 +280,6 @@ def blog_large_view(request):
 
 def blog_single_view(request):
     return render(request,'blog-single.html')
+
+def contacts_view(request):
+    return render(request,'contacts.html')

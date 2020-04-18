@@ -136,3 +136,9 @@ class PublicationSerializer(serializers.Serializer):
 
         instance.save()
         return instance
+
+
+class NewsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        fields = ['title','content','date','image','user']
