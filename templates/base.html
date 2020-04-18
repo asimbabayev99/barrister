@@ -663,19 +663,15 @@
                                                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11452">
                                                         <a href="#">Blog</a>
                                                         <ul class="sub-menu">
-                                                            <li id="menu-item-11569"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11569">
-                                                                <a href="http://localhost/barrister/blog-large-image/">Blog
-                                                                    Geniş Şəkil</a></li>
-                                                            <li id="menu-item-11570"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11570">
+                                                            <li id="menu-item-11569" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11569">
+                                                                <a href="{% url 'blog-large' %}">Blog Geniş Şəkil</a>
+                                                            </li>
+                                                            <li id="menu-item-11570" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11570">
                                                                 <a href="{% url 'blog-grid' %}">Bloq Cədvəl Görünüşü</a>
                                                             </li>
-                                                            <li id="menu-item-11587"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a
-                                                                    href="http://localhost/barrister/2019/06/13/what-we-are-capable-of-usually-gets-discovered/">Bloq
-                                                                    Tək Görünüşü</a></li>
+                                                            <li id="menu-item-11587" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
+                                                                <a href="{% url 'blog-single' %}">Bloq Tək Görünüşü</a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <li id="menu-item-11565"
