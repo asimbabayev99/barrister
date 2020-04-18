@@ -431,6 +431,8 @@
   {% endblock %}
 </head>
 
+
+{% block body %}
 <body
     class="home page-template-default page page-id-6439 themestek-headerstyle-classic-overlay themestek-wide themestek-page-full-width themestek-empty-sidebar wpb-js-composer js-comp-ver-6.1 vc_responsive">
     <div id="themestek-home"></div>
@@ -455,6 +457,7 @@
                         </div>
                     </div>
                     <div id="themestek-stickable-header-w-main" class="themestek-stickable-header-w-main">
+                        {% block pre-header %}
                         <div class="themestek-pre-header-wrapper themestek-bgcolor-darkgrey themestek-textcolor-white">
                             <div class="themestek-pre-header-inner">
                                 <div class="container">
@@ -505,6 +508,8 @@
                                 </div>
                             </div>
                         </div>
+                        {% endblock %}
+                        {% block header-navigation %}
                         <div id="themestek-stickable-header-w"
                             class="themestek-stickable-header-w themestek-bgcolor-transparent" style="height:105px">
                             <div id="site-header"
@@ -701,6 +706,7 @@
                                 </div><!-- .site-header-main -->
                             </div>
                         </div>
+                        {% endblock %}
                     </div>
 
                     {% block header %}
@@ -713,6 +719,8 @@
 
             {% endblock %}
 
+
+            {% block footer %}
             <footer id="colophon" class="site-footer ">
                 <div class="footer_inner_wrapper footer themestek-bg themestek-bgcolor-darkgrey themestek-bgimage-yes">
                     <div class="site-footer-bg-layer themestek-bg-layer"></div>
@@ -946,6 +954,7 @@
                     </div><!-- .footer-inner-wrapper -->
                 </div><!-- .site-footer-inner -->
             </footer><!-- .site-footer -->
+            {% endblock %}
         </div><!-- #page .site -->
     </div><!-- .main-holder -->
     <!-- To Top -->
@@ -1014,7 +1023,7 @@
     <script src="{% static 'content_js/forms.min.js' %}"></script>
     {% endblock %}
 </body>
-
+{% endblock %}
 <!-- Mirrored from localhost/barrister/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Mar 2020 19:49:22 GMT -->
 
 </html>
