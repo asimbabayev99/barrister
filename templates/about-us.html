@@ -324,94 +324,74 @@
                               </div>
                               <!-- .themestek-element-heading-wrapper container -->
 
-                              <div
-                                class="row multi-columns-row themestek-boxes-row-wrapper">
-                                <div
-                                  class="themestek-box-col-wrapper col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                  <article
-                                    class="themestek-box themestek-box-team themestek-teambox-style-2">
+                              <div class="row multi-columns-row themestek-boxes-row-wrapper">
+                                {% for barrister in barristers %}
+                                <div class="themestek-box-col-wrapper col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                  <article class="themestek-box themestek-box-team themestek-teambox-style-2">
                                     <div class="themestek-post-item">
-                                      <div
-                                        class="col-md-6 themestek-box-img-left">
-                                        <div
-                                          class="themestek-featured-outer-wrapper themestek-post-featured-outer-wrapper">
-
-                                          <span
-                                            class="themestek-item-thumbnail">
-                                            <span
-                                              class="themestek-item-thumbnail-inner">
-                                              <img width="800"
-                                                height="800"
-                                                src="{% static 'uploads/2018/12/img-03.jpg' %}"
+                                      <div class="col-md-6 themestek-box-img-left">
+                                        <div class="themestek-featured-outer-wrapper themestek-post-featured-outer-wrapper">
+                                          <span class="themestek-item-thumbnail">
+                                            <span class="themestek-item-thumbnail-inner">
+                                              {% if barrister.profile.image %}
+                                              <img width="800" height="800"
+                                                src="{{barrister.profile.image.url}}"
                                                 class="attachment-themestek-img-600x600 size-themestek-img-600x600 wp-post-image"
                                                 alt="" />
+                                              {% else %}
+                                              <img width="800" height="800"
+                                                src="{% static 'uploads\2018\12\img-03-800x740.jpg' %}"
+                                                class="attachment-themestek-img-600x600 size-themestek-img-600x600 wp-post-image"
+                                                alt="" />
+                                              {% endif %}
                                             </span>
                                           </span> </div>
                                       </div>
-                                      <div
-                                        class="themestek-box-content col-md-6">
-                                        <div
-                                          class="themestek-box-content-inner">
-                                          <div
-                                            class="themestek-box-title">
-                                            <h4><a
-                                                href="/team/christian-woods/">Christian
-                                                Woods</a></h4>
+                                      <div class="themestek-box-content col-md-6">
+                                        <div class="themestek-box-content-inner">
+                                          <div class="themestek-box-title">
+                                            <h4><a href="/team/christian-woods/">{{barrister.first_name}} {{barrister.last_name}}</a></h4>
                                           </div>
-                                          <div
-                                            class="themestek-box-team-position">
-                                            Financial Lawyer </div>
-                                          <div
-                                            class="themestek-teambox-email">
-                                            <a
-                                              href="mailto:contact@attorco.com"><i
-                                                class="fa fa-envelope"></i>
-                                              contact@attorco.com</a>
+                                          {% if barrister.profile.job_category %}
+                                          <div class="themestek-box-team-position">{{barrister.profile.job_category.name}}</div>
+                                          {% endif %}
+                                          <div class="themestek-teambox-email">
+                                            <a href="mailto:contact@attorco.com"><i class="fa fa-envelope"></i>{{barrister.email}}</a>
                                           </div>
-                                          <div
-                                            class="themestek-team-social-links-wrapper">
-                                            <ul
-                                              class="themestek-team-social-links">
+                                          <div class="themestek-team-social-links-wrapper">
+                                            <ul class="themestek-team-social-links">
+                                              {% if barrister.profile.facebook_link %}
                                               <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-facebook"></i>
-                                                  <span
-                                                    class="themestek-hide">Facebook</span>
+                                                <a href="{{barrister.profile.facebook_link}}" target="_blank" class="">
+                                                  <i class="themestek-attorco-icon-facebook"></i>
+                                                  <span class="themestek-hide">Facebook</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
+                                              {% if barrister.profile.twitter_link %}
                                               <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-twitter"></i>
-                                                  <span
-                                                    class="themestek-hide">Twitter</span>
+                                                <a href="{{barrister.profile.twitter_link}}" target="_blank" class="">
+                                                  <i class="themestek-attorco-icon-twitter"></i>
+                                                  <span class="themestek-hide">Twitter</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
+                                              {% if barrister.profile.google_link %}
                                               <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-gplus"></i>
-                                                  <span
-                                                    class="themestek-hide">Google+</span>
+                                                <a href="{{barrister.profile.google_link}}" target="_blank" class="">
+                                                  <i class="themestek-attorco-icon-gplus"></i>
+                                                  <span class="themestek-hide">Google+</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
+                                              {% if barrister.profile.linkedin_link %}
                                               <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-linkedin"></i>
-                                                  <span
-                                                    class="themestek-hide">LinkedIn</span>
+                                                <a href="{{barrister.profile.linkedin_link}}" target="_blank" class="">
+                                                  <i class="themestek-attorco-icon-linkedin"></i>
+                                                  <span class="themestek-hide">LinkedIn</span>
                                                 </a>
                                               </li>
+                                              {% endif %}
                                             </ul>
                                             <!-- .themestek-team-social-links -->
                                           </div>
@@ -421,292 +401,7 @@
                                     </div>
                                   </article>
                                 </div>
-                                <div
-                                  class="themestek-box-col-wrapper col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                  <article
-                                    class="themestek-box themestek-box-team themestek-teambox-style-2">
-                                    <div class="themestek-post-item">
-                                      <div
-                                        class="col-md-6 themestek-box-img-left">
-                                        <div
-                                          class="themestek-featured-outer-wrapper themestek-post-featured-outer-wrapper">
-
-                                          <span
-                                            class="themestek-item-thumbnail">
-                                            <span
-                                              class="themestek-item-thumbnail-inner">
-                                              <img width="800"
-                                                height="800"
-                                                src="{% static 'uploads/2018/12/img-03.jpg' %}"
-                                                class="attachment-themestek-img-600x600 size-themestek-img-600x600 wp-post-image"
-                                                alt="" />
-                                            </span>
-                                          </span> </div>
-                                      </div>
-                                      <div
-                                        class="themestek-box-content col-md-6">
-                                        <div
-                                          class="themestek-box-content-inner">
-                                          <div
-                                            class="themestek-box-title">
-                                            <h4><a
-                                                href="/team/melanie-brown/">Melanie
-                                                Brown</a></h4>
-                                          </div>
-                                          <div
-                                            class="themestek-box-team-position">
-                                            civil Lawyer </div>
-                                          <div
-                                            class="themestek-teambox-email">
-                                            <a
-                                              href="mailto:contact@attorco.com"><i
-                                                class="fa fa-envelope"></i>
-                                              contact@attorco.com</a>
-                                          </div>
-                                          <div
-                                            class="themestek-team-social-links-wrapper">
-                                            <ul
-                                              class="themestek-team-social-links">
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-facebook"></i>
-                                                  <span
-                                                    class="themestek-hide">Facebook</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-twitter"></i>
-                                                  <span
-                                                    class="themestek-hide">Twitter</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-gplus"></i>
-                                                  <span
-                                                    class="themestek-hide">Google+</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-linkedin"></i>
-                                                  <span
-                                                    class="themestek-hide">LinkedIn</span>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                            <!-- .themestek-team-social-links -->
-                                          </div>
-                                          <!-- .themestek-team-social-links-wrapper -->
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </article>
-                                </div>
-                                <div
-                                  class="themestek-box-col-wrapper col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                  <article
-                                    class="themestek-box themestek-box-team themestek-teambox-style-2">
-                                    <div class="themestek-post-item">
-                                      <div
-                                        class="col-md-6 themestek-box-img-left">
-                                        <div
-                                          class="themestek-featured-outer-wrapper themestek-post-featured-outer-wrapper">
-
-                                          <span
-                                            class="themestek-item-thumbnail">
-                                            <span
-                                              class="themestek-item-thumbnail-inner">
-                                              <img width="800"
-                                                height="800"
-                                                src="{% static 'uploads/2018/12/img-03.jpg' %}"
-                                                class="attachment-themestek-img-600x600 size-themestek-img-600x600 wp-post-image"
-                                                alt="" />
-                                            </span>
-                                          </span> </div>
-                                      </div>
-                                      <div
-                                        class="themestek-box-content col-md-6">
-                                        <div
-                                          class="themestek-box-content-inner">
-                                          <div
-                                            class="themestek-box-title">
-                                            <h4><a
-                                                href="/team/lily-watson/">Lily
-                                                Watson</a></h4>
-                                          </div>
-                                          <div
-                                            class="themestek-box-team-position">
-                                            Family Lawyer </div>
-                                          <div
-                                            class="themestek-teambox-email">
-                                            <a
-                                              href="mailto:contact@attorco.com"><i
-                                                class="fa fa-envelope"></i>
-                                              contact@attorco.com</a>
-                                          </div>
-                                          <div
-                                            class="themestek-team-social-links-wrapper">
-                                            <ul
-                                              class="themestek-team-social-links">
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-facebook"></i>
-                                                  <span
-                                                    class="themestek-hide">Facebook</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-twitter"></i>
-                                                  <span
-                                                    class="themestek-hide">Twitter</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-gplus"></i>
-                                                  <span
-                                                    class="themestek-hide">Google+</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-linkedin"></i>
-                                                  <span
-                                                    class="themestek-hide">LinkedIn</span>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                            <!-- .themestek-team-social-links -->
-                                          </div>
-                                          <!-- .themestek-team-social-links-wrapper -->
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </article>
-                                </div>
-                                <div
-                                  class="themestek-box-col-wrapper col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                  <article
-                                    class="themestek-box themestek-box-team themestek-teambox-style-2">
-                                    <div class="themestek-post-item">
-                                      <div
-                                        class="col-md-6 themestek-box-img-left">
-                                        <div
-                                          class="themestek-featured-outer-wrapper themestek-post-featured-outer-wrapper">
-
-                                          <span
-                                            class="themestek-item-thumbnail">
-                                            <span
-                                              class="themestek-item-thumbnail-inner">
-                                              <img width="800"
-                                                height="800"
-                                                src="{% static 'uploads/2018/12/img-03.jpg' %}"
-                                                class="attachment-themestek-img-600x600 size-themestek-img-600x600 wp-post-image"
-                                                alt="" />
-                                            </span>
-                                          </span> </div>
-                                      </div>
-                                      <div
-                                        class="themestek-box-content col-md-6">
-                                        <div
-                                          class="themestek-box-content-inner">
-                                          <div
-                                            class="themestek-box-title">
-                                            <h4><a
-                                                href="/team/john-fletcher/">John
-                                                Fletcher</a>
-                                            </h4>
-                                          </div>
-                                          <div
-                                            class="themestek-box-team-position">
-                                            Criminal Lawyer </div>
-                                          <div
-                                            class="themestek-teambox-email">
-                                            <a
-                                              href="mailto:contact@attorco.com"><i
-                                                class="fa fa-envelope"></i>
-                                              contact@attorco.com</a>
-                                          </div>
-                                          <div
-                                            class="themestek-team-social-links-wrapper">
-                                            <ul
-                                              class="themestek-team-social-links">
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-facebook"></i>
-                                                  <span
-                                                    class="themestek-hide">Facebook</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-twitter"></i>
-                                                  <span
-                                                    class="themestek-hide">Twitter</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-gplus"></i>
-                                                  <span
-                                                    class="themestek-hide">Google+</span>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="#"
-                                                  target="_blank"
-                                                  class="">
-                                                  <i
-                                                    class="themestek-attorco-icon-linkedin"></i>
-                                                  <span
-                                                    class="themestek-hide">LinkedIn</span>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                            <!-- .themestek-team-social-links -->
-                                          </div>
-                                          <!-- .themestek-team-social-links-wrapper -->
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </article>
-                                </div>
+                                {% endfor %}
                               </div>
                             </div><!-- .themestek-boxes-inner -->
                           </div><!-- .themestek-boxes -->

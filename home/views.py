@@ -164,7 +164,16 @@ def publication_show_view(request):
 
 
 def about_us_view(request):
-    return render(request,'about-us.html',context={})
+
+    barristers = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile', 'profile__job_category')
+    # for i in barristers:
+    #     print(i.profile.job_category)
+
+    context = {
+        'barristers': barristers,
+    }
+
+    return render(request,'about-us.html',context=context)
 
 
 
