@@ -39,6 +39,7 @@
               {{ block.super }}
             {% endblock %}
           </div>
+          {% block header %}
           <div
             class="themestek-titlebar-wrapper themestek-bg themestek-bgcolor-transparent themestek-titlebar-align-allleft themestek-textcolor-white themestek-bgimage-yes">
             <div class="themestek-titlebar-wrapper-bg-layer themestek-bg-layer"></div>
@@ -71,6 +72,7 @@
               </div><!-- .themestek-titlebar-inner-wrapper -->
             </div><!-- .themestek-titlebar -->
           </div><!-- .themestek-titlebar-wrapper -->
+          {% endblock %}
         </div>
       </header><!-- .site-header -->
 
