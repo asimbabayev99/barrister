@@ -12,7 +12,7 @@ body {
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
   /* Изображение André Stämmler с сайта Pixabay  */
-  background-image: url(/img/law-firm-4924547_640.jpg);
+  background-image: url(../../static/img/law-firm-4924547_640.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
