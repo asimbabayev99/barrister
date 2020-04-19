@@ -693,11 +693,11 @@
                                                             </li>
                                                             <li id="menu-item-11587"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a href="user-profile.html">
+                                                                <a href="{% url 'user-profile' %}">
                                                                    <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım</a></li>
                                                             <li id="menu-item-11587"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a href="logout">
+                                                                <a href="{% url 'logout' %}">
                                                                     <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış</a></li>
                                                         </ul>
                                                     </li>
@@ -997,7 +997,7 @@
         }
     </script>
     <link rel='stylesheet' id='themestek-footer-gfonts-css'
-        href='http://fonts.googleapis.com/css?family=Abril+Fatface%7CArimo%3A700&amp;ver=1.0.0' media='all' />
+        href='https://fonts.googleapis.com/css?family=Abril+Fatface%7CArimo%3A700&amp;ver=1.0.0' media='all' />
     <script>
         /* <![CDATA[ */
         var wpcf7 = { "apiSettings": { "root": "http:\/\/localhost\/barrister\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };
@@ -1024,6 +1024,8 @@
     <script src="{% static 'content_js/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'content_js/numinate.min.js' %}"></script>
     <script src="{% static 'content_js/forms.min.js' %}"></script>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% endblock %}
 </body>

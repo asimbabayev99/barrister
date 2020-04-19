@@ -10,6 +10,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
 
     path('auth/',LoginView.as_view()),
+    path('user/<int:pk>', UserAPI.as_view()),
     path('register/',UserRegistration.as_view()),
     path('event/list',EventList.as_view()),
     path('event/create',EventCreate.as_view()),
@@ -24,5 +25,4 @@ urlpatterns = [
     path('awards/', AwardAPIView.as_view()),   
     path('experiences/<int:pk>', ExperienceAPIView.as_view()),
     path('experiences/', ExperienceAPIView.as_view()),
-
 ]

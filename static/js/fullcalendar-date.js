@@ -6,13 +6,13 @@ $(document).ready(function() {
       right: "month,agendaWeek,agendaDay"
     },
     buttonText: {
-        prevYear: parseInt(new Date().getFullYear(), 10) - 1,
-        nextYear: parseInt(new Date().getFullYear(), 10) + 1
+        prevYear: new moment().year() - 1,
+        nextYear: new moment().year() + 1
     },
-    viewDisplay: function(view) {
-        var d = $('#calendar').fullCalendar('getDate');
-        $(".fc-button-prevYear .fc-button-content").text(parseInt(d.getFullYear(), 10) - 1);
-        $(".fc-button-nextYear .fc-button-content").text(parseInt(d.getFullYear(), 10) + 1);
+    viewRender: function(view) {
+        var y = moment($('#calendar-ms').fullCalendar('getDate')).year();
+        $(".fc-prevYear-button").text(y-1),
+        $(".fc-nextYear-button").text(y+1)
     },
     defaultView: "month",
     navLinks: true, // can click day/week names to navigate views

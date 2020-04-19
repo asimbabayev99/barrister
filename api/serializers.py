@@ -13,6 +13,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         return user
 
+
+
 class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
@@ -33,6 +35,8 @@ class EventCategorySerializer(serializers.ModelSerializer):
         fields = ['name']
 
 
+
+
 class EventCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
@@ -43,22 +47,15 @@ class EventCreateSerializer(serializers.ModelSerializer):
         task.save()
         return task
 
+
+
 class EventCreateSerializer(serializers.ModelSerializer):
     class Meta:
         models = Event
         fields = ['user','name','description','location','completed','category']
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['user','image','gender','biography','job_category']
-
-class ProfileCreateSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    class Meta:
-        model = Profile    
-        fields = ['user','gender','job_category','biography']
     
+
 
 class SkillSerializer(serializers.Serializer):
     pk = serializers.IntegerField(required=False)
@@ -118,6 +115,25 @@ class ExperienceSerializer(serializers.Serializer):
 
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many=True)
+    experiences = ExperienceSerializer(many=True)
+    awards = AwardSerializer(many=True)
+    class Meta:
+        model = Profile
+        fields = ['user','image','gender','biography','job_category', 'skills', 'experiences', 'awards']
+
+
+
+
+class ProfileCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    class Meta:
+        model = Profile    
+        fields = ['user','gender','job_category','biography']
+
+
+
 class PublicationSerializer(serializers.Serializer):
     pk = serializers.IntegerField(required=False)
     user_id = models.IntegerField()
@@ -138,7 +154,35 @@ class PublicationSerializer(serializers.Serializer):
         return instance
 
 
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many=True)
+    experiences = ExperienceSerializer(many=True)
+    awards = AwardSerializer(many=True)
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = UserProfileSerializer()
+
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name', 'middle_name', 'email', 'phone_prefix', 
+            'phone_number', 'address', 'seriya_type', 'seriya', 'fin', 'profile', 
+            'is_active', 'is_superuser', 'is_staff', 'date_joined'
+        ]
+
+
+
+
 class NewsSerializer(serializers.ModelSerializer):
     
     class Meta:
         fields = ['title','content','date','image','user']
+
+
+

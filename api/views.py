@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .serializers import *
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.permissions import AllowAny,IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
@@ -18,6 +18,27 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import Permission
 
 
+
+
+class UserAPI(APIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser, ]
+
+    def get_object(self, pk):
+        try:
+            user = CustomUser.objects.get(pk=pk)
+        except:
+            raise exceptions.ValidationError('This user doesnt not exists')
+        return user
+
+    def get(self, request, pk):
+        user = self.get_object(pk)
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
+
+    class Meta:
+        models = CustomUser
+        fields = '__all__'
 
 
 class UserRegistration(APIView):
@@ -161,11 +182,11 @@ class ProfileDetail(APIView):
         except:
             raise exceptions.ValidationError('This profile doesnt not exists')
         return profile
+
     def get(self,request,id):
         profile = self.get_object(id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
-    
 
     def delete(self,request,id):
         profile = self.get_object(id)
@@ -196,9 +217,7 @@ class ProfileDetail(APIView):
      
 
 
-
-        
-
+ 
     
 class ProfileCreate(APIView):
     permission_classes = [AllowAny,]
@@ -211,8 +230,6 @@ class ProfileCreate(APIView):
         profile  = Profile(**serializer.validated_data)
         profile.save()
         return Response(serializer.data)
-        
-
 
 
 
