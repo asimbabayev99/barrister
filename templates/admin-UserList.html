@@ -58,7 +58,10 @@
                   -
                 {% endif %}
               </td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ətraflı</button></td>
+              <td><button type="button" class="btn btn-primary" user-name="{{user.first_name}}" user-middlename="{{user.middle_name}}"
+                user-surname="{{user.last_name}}" user-id="{{user.id}}" data-toggle="modal" data-target="#exampleModalCenter">
+                  Ətraflı
+              </button></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -90,31 +93,29 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title border-0 text-center" id="exampleModalLongTitle">Mr User FatherSon</h5>
+              <h5 class="modal-title border-0 text-center" id="exampleModalLongTitle"> - </h5>
               <button type="button" class="close no-outline" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-
+              <img class='loading-img' src="{% static 'img/loading.gif' %}" />
+              
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <p class="text-center"><img src="{%static 'img/person-311292_640.png'%}" width="50%" height="50%" alt="" srcset=""></img></p>
+                  <p class="text-center"><img class='user-image' src="{%static 'img/person-311292_640.png'%}" width="50%" height="50%" alt="" srcset=""></img></p>
                  </div>
 
                  <div class="col-md-6 mb-4">
-                  <p><i class="fa fa-envelope"></i>&nbsp;<span>mr.user@barrister.az</span></p>
-                  <p><i class="fa fa-phone"></i>&nbsp;<span>055 555</span></p>
+                  <p><i class="fa fa-envelope"></i>&nbsp;<span class='user-email'> - </span></p>
+                  <p><i class="fa fa-phone"></i>&nbsp;<span class='user-phone'> - </span></p>
                  </div>
 
                 <div class="col-md-12">
                  <p class="text-center"><strong>Bio</strong></p>
-                 <p>Lorem ipsum dolor sit amet consectetur,
-                    adipisicing elititiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
-                       Lorem ipsum dolor sit amet consectetur,
-                      adipisicing elit. Dolore id itaque ipsam deserunt repudiandae magni est ab perspiciatis quisquam,
-                       veniam ullam blanditiis natus nam repellat, accusantium obcaecati. Recusandae, consequatur explicabo.
-                  </p>
+                 <p class='user-bio'>
+                   Bio text
+                 </p>
                 </div>
 
                 <div class="col-md-12">
@@ -124,8 +125,8 @@
                 </p>
               </div>
               <div class="collapse" id="collapsePrac">
-                <div class="card card-body border-0">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                <div class="card card-body border-0 user-experience">
+                  Experience text
                 </div>
               </div>
 
@@ -136,9 +137,8 @@
               </p>
             </div>
             <div class="collapse" id="collapseCert">
-              <div class="card card-body border-0">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi nisi sapiente repudiandae, ea quidem, 
-                veritatis fugit asperiores autem officia reiciendis maxime non nam magnam vero totam debitis cumque qui! Ipsam!
+              <div class="card card-body border-0 user-awards">
+                user certificates
               </div>
             </div>
               
@@ -163,4 +163,36 @@
       <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
       <script src="{% static 'js/fullcalendar.js' %}"></script>
       <script src="{% static 'js/main.js' %}"></script>
+
+      <script>
+        $(document).ready(function(){
+            $(".btn-primary").on("click", function() {
+              let first_name = $(this).attr('user-name') || ""
+              let last_name = $(this).attr('user-surname') || ""
+
+              $('.loading-img').removeAttr('hidden')
+              $('.row').attr('hidden', 'true')
+              $('#exampleModalLongTitle').text(first_name + " " + last_name);
+              let id = $(this).attr("user-id");
+
+              $.get("/api/user/" + id, function( data ) {
+                console.log(data)
+                $('.row').removeAttr('hidden')
+
+                $('.loading-img').attr('hidden', 'true')
+                $('.user-phone').text("(" + data.phone_prefix + ")" + data.phone_number)
+                $('.user-email').text(data.email)
+                $('.user-image').attr('src', data.profile.image || "-")
+                $('.user-bio').text(data.profile.biography || "-")
+                $('.user-experience').text(data.profile.work_summary || "-")
+                str = ""
+                for(i = 0; i < data.profile.awards.length; i++){
+                  str += data.profile.awards[i].title + "\n"
+                }
+                if(str == "") str = "-"
+                $('.user-awards').text(str)
+              });
+            })
+        });
+      </script>
     {% endblock %}

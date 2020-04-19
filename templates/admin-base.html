@@ -152,7 +152,7 @@
         
     {% endblock content %}
 
-
+    {% block scripts %}
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -162,6 +162,7 @@
     <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
     <script src="{% static 'js/fullcalendar.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %}
   </body>
 </html>
 
