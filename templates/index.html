@@ -1039,9 +1039,15 @@
                                       <div class="themestek-team-image-box">
                                         <span class="themestek-item-thumbnail">
                                           <span class="themestek-item-thumbnail-inner">
-                                            <img width="600" height="700" src="{{barrister.profile.image.url}}"
+                                            {% if profile.image.url %}
+                                            <img width="600" height="700" src="{{profile.image.url}}"
                                               class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
                                               alt="" />
+                                            {% else %}
+                                            <img width="600" height="700" src="default-image.png"
+                                              class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
+                                              alt="" />
+                                            {% endif %}
                                           </span>
                                         </span>
                                         <div class="themestek-teambox-social-links">
@@ -1089,7 +1095,7 @@
                                           <div class="themestek-pf-box-title">
                                             <div class="themestek-box-title">
                                               <h4><a
-                                                  href="{% url 'single-view' barrister.profile.id %}">{{barrister.first_name}}
+                                                  href="{% url 'single-view' barrister.id %}">{{barrister.first_name}}
                                                   {{barrister.last_name}}</a></h4>
                                             </div>
                                           </div>

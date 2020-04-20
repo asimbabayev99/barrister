@@ -62,6 +62,8 @@ def register_view(request):
             # )
             new_user.password = make_password(password)
             new_user.save()
+            profile = Profile(user=new_user)
+            profile.save()
 
             form = LoginForm()
             context = {

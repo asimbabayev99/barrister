@@ -29,10 +29,11 @@ def index_view(request):
 
 
 def single_view(request, id):
-    # if request.user.role.name is not "Barrister":
-    #     raise Http404("Profile does not exist")
+    user = get_object_or_404(CustomUser.objects.all().select_related('role'), id=id)
+    if user.role is None or user.role.name != 'Barrister':
+        raise Http404()
 
-    profile = get_object_or_404(Profile.objects.all(),pk=id)
+    profile, created = Profile.objects.get_or_create(user=user)
     skills = Skill.objects.filter(profile=profile)
     experiences = EducationAndWorkExperience.objects.filter(profile=profile)
     awards = Award.objects.filter(profile=profile)
