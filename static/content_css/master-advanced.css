@@ -7956,6 +7956,7 @@ body .booked-calendar-wrap .booked-appt-list .timeslot .timeslot-people button{
 /* preheader begin */
 .account-dropdown{
     background-color: #323A43;
+    padding: 0 5%;
 }
 .account-dropdown-item{
     display: block;
