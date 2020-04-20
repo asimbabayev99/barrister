@@ -26,7 +26,8 @@ def login_view(request):
             if not request.POST.get("remember_me"):
                 request.session.set_expiry(0)
 
-            next = request.POST.get('next')
+            next = request.GET.get('next')
+            print(next)
             if next:
                 return redirect(next)
             else: 
