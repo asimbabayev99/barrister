@@ -1,9 +1,17 @@
 $(document).ready(function() {
   $("#calendar-ms").fullCalendar({
+    customButtons: {
+      printButton: {
+        text: 'Çap et',
+        click: function() {
+          window.print(); 
+        }
+      }
+    },
     header: {
-      left: "prevYear,prev,next,nextYear, today",
+      left: "prevYear,prev,next,nextYear",
       center: "title",
-      right: "month,agendaWeek,agendaDay"
+      right: "today,month,agendaWeek,agendaDay,printButton"
     },
     buttonText: {
         prevYear: new moment().year() - 1,
