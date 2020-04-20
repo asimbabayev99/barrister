@@ -1,5 +1,5 @@
 from django import forms
-from home.models import News
+from home.models import News, Publication
 from ckeditor import widgets
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (
@@ -41,7 +41,7 @@ class Newsform(forms.ModelForm):
 class PublicationForm(forms.ModelForm):
     error_css_class = 'error'
     
-    text = forms.CharField(label='', widget=forms.Textarea(attrs={
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={
         'class': 'text',
         'placeholder': 'Mənt'
     }))
