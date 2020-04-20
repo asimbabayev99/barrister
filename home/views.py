@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse ,get_object_or_404
+from django.shortcuts import render,HttpResponse ,get_object_or_404, redirect
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
@@ -9,6 +9,9 @@ from django.utils.text import slugify
 from .models import News
 from django.core.paginator import Paginator
 from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.utils.translation import ugettext as _
 
 
 
@@ -294,3 +297,5 @@ def blog_single_view(request):
 
 def contacts_view(request):
     return render(request,'contacts.html')
+
+
