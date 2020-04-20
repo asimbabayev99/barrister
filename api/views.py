@@ -436,3 +436,14 @@ class PublicationAPIView(APIView):
         publication.delete()
         return Response({"message": "Publication with id `{}` has been deleted.".format(pk)},status=204)
 
+class NewsList(ListAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    authentication_classes = [ExampleAuth,]
+    permission_classes = [AllowAny,]
+    filter_backends = [DjangoFilterBackend,OrderingFilter]
+    
+
+
+
+    

@@ -387,3 +387,13 @@ class Comment(models.Model):
             models.Index(fields=['publication', 'date',]),
         ] 
     
+
+
+class Task(models.Model):
+    title = models.CharField(max_length=50,blank=True,null=True)
+    description = models.CharField(max_length=256,blank=True,null=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
+    status = models.BooleanField(blank=True,null=True)
+    added_date = models.DateField(auto_now_add=True)
+    deadline = models.DateField(blank = True,null = True)
+    
