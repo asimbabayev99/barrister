@@ -1,148 +1,8 @@
+{% extends 'admin-panel/admin-base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalendar </title>
-    <!-- Изображение Tim Treis с сайта Pixabay  -->
-    <link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
-      alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon"/>    
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}">
-    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel='stylesheet' />
-    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    
-  </head>
-
-
-  <body id="calendar-body">
-
-  
-    <div class="page-wrapper chiller-theme toggled">
-
-      <div id="show-sidebar">
-
-
-      <a title="Genişləndirmək" id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-        <i class="fas fa-bars"></i>
-      </a>
-
-
-      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
-        <i class="fa fa-calendar-plus"></i>
-      </a>
-
-
-      <a title="Təqvim" id="minicalendaricon" class="btn btn-sm btn-dark" href="#">
-        <i class="fa fa-calendar"></i>
-      </a>
       
+      {% block content %}
 
-      </div>
-
-
-
-      <nav id="sidebar" class="sidebar-wrapper">
-        <div class="sidebar-content">
-          <div class="sidebar-brand">
-            <a href="#">Təqvim</a>
-            <div id="close-sidebar">
-              <i class="fas fa-times"></i>
-            </div>
-          </div>
-          <div class="sidebar-header">
-            <div class="user-pic">  <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
-              <img class="img-responsive img-rounded" src="{% static 'img/person-311292_640.png' %}"
-                alt="User picture">
-            </div>
-            <div class="user-info">
-              <span class="user-name">Admin
-              </span>
-              <span class="user-role">Administrator</span>
-              <span class="user-status">
-                <i class="fa fa-circle"></i>
-                <span>Online</span>
-              </span>
-            </div>
-          </div>
-          <!-- sidebar-header  -->
-          <div class="sidebar-search">
-            <div>
-              <div class="input-group">
-                <input type="text" class="form-control search-menu" placeholder="Axtarış..">
-                <div class="input-group-append">
-                  <span class="input-group-text">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- sidebar-search  -->
-          <div class="sidebar-menu">
-            <ul>
-              <li class="header-menu">
-                <span></span>
-              </li>
-
-              <li>
-                <a href="javascript:void(0);"
-                onclick="window.open('https://mail.yandex.com/','Ratting','width=550,height=550,left=500,top=80,toolbar=0,status=0');">
-                  <i class="fa fa-envelope"></i>
-                  <span>E-poçt</span>
-                </a>
-            </li>
-              
-              <!-- New event -->
-              <li>
-                <a class="nevevent" href="#">
-                  <i class="fa fa-plus"></i>
-                  <span>Yeni hadisə</span>
-                </a>
-              </li>
-
-              <!-- Calendar iconca -->
-              <li class="calendarr sidebar-dropdown">
-                <a href="#">
-                  <i class="fa fa-calendar-alt"></i>
-                  <span>Təqvim</span>
-                </a>
-                <div class="sidebar-submenu calendaropen">
-                  Bura calendar qoyulacaq
-                </div>
-              </li>
-              <!-- Calendar iconca end -->
-            </ul>
-          </div>
-          <!-- sidebar-menu  -->
-        </div>
-        <!-- sidebar-content  -->
-        <div class="sidebar-footer">
-          <a href="#">
-            <i class="fa fa-bell"></i>
-            <span class="badge badge-pill badge-warning notification">3</span>
-          </a>
-          <a href="#">
-            <i class="fa fa-envelope"></i>
-            <span class="badge badge-pill badge-success notification">7</span>
-          </a>
-          <a href="#">
-            <i class="fa fa-cog"></i>
-            <span class="badge-sonar"></span>
-          </a>
-          <a href="#">
-            <i class="fa fa-power-off"></i>
-          </a>
-        </div>
-      </nav>
-      <!-- sidebar-wrapper  -->
       <main class="page-content">
         <div class="container-fluid">
           <div id='calendar-ms'></div>          
@@ -247,17 +107,23 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+          {% endblock content %}
           
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-<script src="{% static 'js/fullcalendar-date.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+          
+            
+          
+      {% block scripts %}           
+      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+      <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+      <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+      <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+      <script src="{% static 'js/fullcalendar-date.js' %}"></script>
+      <script src="{% static 'js/main.js' %}"></script>
+      {% endblock  %}
 </body>   
 
 </html>

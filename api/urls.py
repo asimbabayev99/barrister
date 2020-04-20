@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include 
 from api.views import *
 from rest_framework import routers
 
@@ -14,6 +14,9 @@ urlpatterns = [
     path('register/',UserRegistration.as_view()),
     path('event/list',EventList.as_view()),
     path('event/create',EventCreate.as_view()),
+    path('news/list/',NewsList.as_view()),
+    path('news/create/',NewsAPI.as_view()),
+    path('news/detail/<int:pk>',NewsAPI.as_view()),
     path('event/detail/<int:id>',EventDetail.as_view()),
     path('profile/list/',ProfilesList.as_view()),
     path('profile/<int:id>',ProfileDetail.as_view()),

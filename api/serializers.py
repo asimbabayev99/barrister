@@ -180,9 +180,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class NewsSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     
     class Meta:
+        model = News
         fields = ['title','content','date','image','user']
+
 
 
 
