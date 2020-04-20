@@ -299,3 +299,21 @@ def contacts_view(request):
     return render(request,'contacts.html')
 
 
+
+
+def get_tasks_list(request):
+
+    status = request.GET.get('status')
+    if status:
+        tasks = Task.objects.filter(status=status)
+    else:
+        tasks = Task.objects.all()
+
+    paginator = Paginator(tasks, 20)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+
+    return render(request, '', context=context)
