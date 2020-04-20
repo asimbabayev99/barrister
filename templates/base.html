@@ -491,7 +491,7 @@
    <div class="dropdown">
     <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hesab</button>
      <div class="dropdown-menu account-dropdown">
-        {% if request.user.is_authentificated %}   
+        {% if request.user.is_authenticated %}   
         <a class="dropdown-item account-dropdown-item" href="{% url 'user-profile' %}">
             <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım
           </a>
