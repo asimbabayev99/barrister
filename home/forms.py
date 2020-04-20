@@ -48,6 +48,9 @@ class PublicationForm(forms.ModelForm):
     file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
         'class': 'file'
     }))
+    class Meta:
+        model = Publication
+        fields = "__all__"
 
 class TaskForm(forms.ModelForm):
     title = forms.CharField(label="", widget=forms.TextInput)
