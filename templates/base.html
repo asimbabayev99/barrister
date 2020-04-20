@@ -482,8 +482,27 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="themestek-table-cell themestek-align-right">
-                                            <div class="themestek-social-links-wrapper">
+   <!-- account button begin-->
+   <div class="dropdown">
+    <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hesab</button>
+     <div class="dropdown-menu account-dropdown">
+      <a class="dropdown-item" href="{% url 'login' %}">
+         <i class="themestek-attorco-icon-arrow-right"></i>&nbsp;Giriş
+      </a>
+      <a class="dropdown-item account-dropdown-item" href="{% url 'register' %}">
+        <i class="themestek-attorco-icon-file"></i>&nbsp;Qeydiyyat
+      </a>
+      <a class="dropdown-item account-dropdown-item" href="{% url 'user-profile' %}">
+        <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım
+      </a>
+     <div class="dropdown-divider account-dropdown-item "></div>
+      <a class="dropdown-item account-dropdown-item" href="{% url 'logout' %}">
+        <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış</a>
+     </div>
+   </div>
+      <!-- account button end-->                                        
+  <div class="themestek-table-cell themestek-align-right">
+    <div class="themestek-social-links-wrapper" >
                                                 <ul class="social-icons">
                                                     <li class="themestek-social-facebook"><a class=" tooltip-top"
                                                             target="_blank" href="#"><i
@@ -570,7 +589,7 @@
                                                             <li id="menu-item-11571"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11571">
                                                                 <a
-                                                                    href="http://localhost/barrister/about-us/">Haqqımızda</a>
+                                                                    href="{% url 'about-us' %}">Haqqımızda</a>
                                                             </li>
                                                             <li id="menu-item-11586"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11586">
@@ -677,7 +696,7 @@
                                                     </li>
                                                     <li id="menu-item-11565"
                                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11565">
-                                                        <a href="{% url 'about-us' %}">Əlaqə</a></li>
+                                                        <a href="{% url 'contacts' %}">Əlaqə</a></li>
                                                         <li id="menu-item-11452"
                                                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11452">
                                                         <a href="#">Hesab</a>
