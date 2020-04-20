@@ -49,3 +49,10 @@ class PublicationForm(forms.ModelForm):
         'class': 'file'
     }))
 
+class TaskForm(forms.ModelForm):
+    title = forms.CharField(label="", widget=forms.TextInput)
+    description = forms.CharField(label="", widget=forms.TextInput)
+    added_date = forms.DateField(label=,widget=forms.DateInput)
+    deadline = forms.DateField(label="",widget=forms.DateInput)
+    status = forms.BooleanField(label="")
+
