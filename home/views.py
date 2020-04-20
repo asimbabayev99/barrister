@@ -105,7 +105,7 @@ def admin_news_update(request,slug):
             
 
     form = Newsform(instance=news)
-    return render(request,'admin-UpdateNews.html',context={'form':form})
+    return render(request,'admin-panel/admin-UpdateNews.html',context={'form':form})
 
 
 
@@ -196,7 +196,7 @@ def admin_user_list(request):
         'page_obj': page_obj,
     }
 
-    return render(request, 'admin-UserList.html', context=context)
+    return render(request, 'admin-panel/admin-UserList.html', context=context)
 
 
 
@@ -238,7 +238,7 @@ def admin_user_add(request):
         'form':form,
         'message': message,
     }
-    return render(request, 'admin-AddUser.html', context=context)
+    return render(request, 'admin-panel/admin-AddUser.html', context=context)
 
 
 
@@ -256,7 +256,7 @@ def admin_add_news(request):
             news.save()
     form = Newsform()
     
-    return render(request,'admin-AddNews.html',context={ 'form':form})
+    return render(request,'admin-panel/admin-AddNews.html',context={ 'form':form})
 
 
 
@@ -277,7 +277,7 @@ def admin_news_list(request):
     }
 
 
-    return render(request, 'admin_NewsList.html', context = context)
+    return render(request, 'admin-panel/admin_NewsList.html', context = context)
     
 
 
