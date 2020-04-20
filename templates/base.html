@@ -477,8 +477,13 @@
                                                     </span>mail@attorco.com
                                                 </li>
                                                 <li>
+                                                    {% if request.user.role.name == "Barrister" %}
+                                              <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
+                                                       href="{% url 'calendar' %}" title="">İş masası</a>
+                                                       {% else %}
                                                     <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
                                                         href="{% url 'calendar' %}" title="">Konsultasiya</a>
+                                                        {% endif %}
                                                 </li>
                                             </ul>
                                         </div>
@@ -486,18 +491,21 @@
    <div class="dropdown">
     <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hesab</button>
      <div class="dropdown-menu account-dropdown">
-      <a class="dropdown-item" href="{% url 'login' %}">
-         <i class="themestek-attorco-icon-arrow-right"></i>&nbsp;Giriş
-      </a>
-      <a class="dropdown-item account-dropdown-item" href="{% url 'register' %}">
-        <i class="themestek-attorco-icon-file"></i>&nbsp;Qeydiyyat
-      </a>
-      <a class="dropdown-item account-dropdown-item" href="{% url 'user-profile' %}">
-        <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım
-      </a>
-     <div class="dropdown-divider account-dropdown-item "></div>
-      <a class="dropdown-item account-dropdown-item" href="{% url 'logout' %}">
-        <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış</a>
+        {% if request.user.is_authentificated %}   
+        <a class="dropdown-item account-dropdown-item" href="{% url 'user-profile' %}">
+            <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım
+          </a>
+          <a class="dropdown-item account-dropdown-item" href="{% url 'logout' %}">
+            <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış
+          </a>        
+          {% else%}
+        <a class="dropdown-item" href="{% url 'login' %}">
+            <i class="themestek-attorco-icon-arrow-right"></i>&nbsp;Giriş
+         </a>
+         <a class="dropdown-item account-dropdown-item" href="{% url 'register' %}">
+           <i class="themestek-attorco-icon-file"></i>&nbsp;Qeydiyyat
+         </a>
+        {% endif %}
      </div>
    </div>
       <!-- account button end-->                                        
@@ -697,29 +705,6 @@
                                                     <li id="menu-item-11565"
                                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11565">
                                                         <a href="{% url 'contacts' %}">Əlaqə</a></li>
-                                                        <li id="menu-item-11452"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11452">
-                                                        <a href="#">Hesab</a>
-                                                        <ul class="sub-menu">
-                                                            <li id="menu-item-11569"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11569">
-                                                                <a href="{% url 'login' %}">
-                                                                    <i class="themestek-attorco-icon-arrow-right"></i>&nbsp;Giriş</a></li>
-                                                            <li id="menu-item-11570"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11570">
-                                                                <a href="{% url 'register' %}">
-                                                                    <i class="themestek-attorco-icon-file"></i>&nbsp;Qeydiyyat</a>
-                                                            </li>
-                                                            <li id="menu-item-11587"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a href="{% url 'user-profile' %}">
-                                                                   <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım</a></li>
-                                                            <li id="menu-item-11587"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a href="{% url 'logout' %}">
-                                                                    <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış</a></li>
-                                                        </ul>
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </nav><!-- .main-navigation -->
