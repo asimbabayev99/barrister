@@ -5,7 +5,9 @@ from account.forms import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
-
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -24,7 +26,8 @@ def login_view(request):
             if not request.POST.get("remember_me"):
                 request.session.set_expiry(0)
 
-            next = request.POST.get('next')
+            next = request.GET.get('next')
+            print(next)
             if next:
                 return redirect(next)
             else: 
@@ -78,10 +81,30 @@ def register_view(request):
     return render(request, 'account/register_test.html',context=context)
 
 
+
+
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
 
+
+
+@login_required(login_url='/account/login')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect(reverse('change-password'))
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'account/change-password.html', {
+        'form': form
+    })    
 
 
 def user_list_view(request):

@@ -1,6 +1,10 @@
 from django import forms
 from home.models import News
 from ckeditor import widgets
+from django.utils.translation import ugettext as _
+from django.contrib.auth import (
+    authenticate, get_user_model, password_validation,
+)
 
 
 class Newsform(forms.ModelForm):
@@ -44,3 +48,4 @@ class PublicationForm(forms.ModelForm):
     file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
         'class': 'file'
     }))
+
