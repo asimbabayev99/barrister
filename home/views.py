@@ -139,8 +139,8 @@ def news_detail_view(request, slug):
 def publication_add_view(request):
 
     form = PublicationForm()
-    if request.user.role.name is not "Barrister":
-        return Http404()
+    # if request.user.role is None or  request.user.role.name is not "Barrister":
+    #     raise Http404()
 
     if request.method == "POST":
         form = PublicationForm(request.POST,request.FILES)
@@ -154,7 +154,7 @@ def publication_add_view(request):
         'form': form,
     }
 
-    return render(request, '', context=context)
+    return render(request, 'xeber_elave_etmek_user_ucun.html', context=context)
 
 
 

@@ -14,6 +14,8 @@ urlpatterns = [
     path('news/', news_view, name='news'),
     path('news/<slug:slug>', news_detail_view, name='news_detail'),
     path('about-us/', about_us_view, name='about-us'),
+
+    path('publication/add', publication_add_view, name='publication-add'),
     
     path('blog-grid/', blog_grid_view, name='blog-grid'),
     path('blog-large/',blog_large_view,name='blog-large'),
