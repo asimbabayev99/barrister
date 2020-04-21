@@ -11,7 +11,7 @@
 {% endblock %}
 
 
-{% block header %}
+{% block header-content %}
   <div class="themestek-slider-wrapper">
     <div class="themestek-slider-wide">
       <!-- START Homeslider3 REVOLUTION SLIDER 6.1.7 -->
@@ -1378,6 +1378,10 @@
       </div><!-- .site-content-inner -->
     </div><!-- .site-content -->
   </div><!-- .site-content-wrapper -->
+{% endblock %}
+
+{% block footer %}
+  {{ block.super }}
 {% endblock %}
 
 {% block scripts %}

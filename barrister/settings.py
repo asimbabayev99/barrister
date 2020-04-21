@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'home',
     'account',
+    'shop',
     'rest_framework',
     'api',
     'rest_framework.authtoken',
