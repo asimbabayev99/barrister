@@ -17,6 +17,7 @@ from rest_framework.pagination import PageNumberPagination
 from django.core.paginator import Paginator
 from django.contrib.auth.models import Permission
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import *
 
 
 
@@ -454,6 +455,7 @@ class NewsList(ListAPIView):
 class NewsAPI(APIView):
     authentication_classes=[ExampleAuth]
     permission_classes = [AllowAny]
+    
 
     def get_object(self,pk):
         news = get_object_or_404(News.objects.all(),pk=pk)
@@ -478,12 +480,12 @@ class NewsAPI(APIView):
     def put(self,request,pk):
         old_news = self.get_object(pk)
         data  = request.data
-        serializer = NewsSerializer(old_news,data)
-        permission = Permission.objects.get(codename="update_news")
-        if request.user.role is None or permission not in request.user.role.permissions:
-            return Response({"permission":'denied'})
+        serializer = NewsSerializer(old_news,data,context={'request':request})
+        # permission = Permission.objects.get(codename="update_news")
+        # if request.user.role is None or permission not in request.user.role.permissions.all():
+        #     return Response({"permission":'denied'})
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.update
         return Response(serializer.validated_data)
     
     def delete(self,request,pk):
