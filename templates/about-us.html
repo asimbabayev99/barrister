@@ -350,7 +350,7 @@
                                       <div class="themestek-box-content col-md-6">
                                         <div class="themestek-box-content-inner">
                                           <div class="themestek-box-title">
-                                            <h4><a href="/team/christian-woods/">{{barrister.first_name}} {{barrister.last_name}}</a></h4>
+                                            <h4><a href="{% url 'single-view' barrister.id %}">{{barrister.first_name}} {{barrister.last_name}}</a></h4>
                                           </div>
                                           {% if barrister.profile.job_category %}
                                           <div class="themestek-box-team-position">{{barrister.profile.job_category.name}}</div>

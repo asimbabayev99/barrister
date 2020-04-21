@@ -18,7 +18,7 @@ from django.urls import path, include
 from api.views import *
 from rest_framework import routers
 
-admin.site.index_template = 'admin-Dashboard.html'
+admin.site.index_template = 'admin-panel/admin-Dashboard.html'
 admin.autodiscover()
 
 router = routers.DefaultRouter()

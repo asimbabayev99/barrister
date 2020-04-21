@@ -1,6 +1,10 @@
 from django import forms
-from home.models import News
+from home.models import News, Publication, Task, TASK_STATUS
 from ckeditor import widgets
+from django.utils.translation import ugettext as _
+from django.contrib.auth import (
+    authenticate, get_user_model, password_validation,
+)
 
 
 class Newsform(forms.ModelForm):
@@ -37,10 +41,27 @@ class Newsform(forms.ModelForm):
 class PublicationForm(forms.ModelForm):
     error_css_class = 'error'
     
-    text = forms.CharField(label='', widget=forms.Textarea(attrs={
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={
         'class': 'text',
         'placeholder': 'Mənt'
     }))
     file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
         'class': 'file'
     }))
+    class Meta:
+        model = Publication
+        fields = "__all__"
+
+
+
+class TaskForm(forms.ModelForm):
+    title = forms.CharField(label="", widget=forms.TextInput)
+    description = forms.CharField(label="", widget=forms.TextInput)
+    added_date = forms.DateField(label="",widget=forms.DateInput)
+    deadline = forms.DateField(label="",widget=forms.DateInput)
+    status = forms.ChoiceField(label="", choices=TASK_STATUS)
+
+
+    class Meta:
+        model = Task
+        fields = '__all__'

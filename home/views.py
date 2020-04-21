@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse ,get_object_or_404
+from django.shortcuts import render,HttpResponse ,get_object_or_404, redirect
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
@@ -9,6 +9,9 @@ from django.utils.text import slugify
 from .models import News
 from django.core.paginator import Paginator
 from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.utils.translation import ugettext as _
 
 
 
@@ -29,10 +32,11 @@ def index_view(request):
 
 
 def single_view(request, id):
-    # if request.user.role.name is not "Barrister":
-    #     raise Http404("Profile does not exist")
+    user = get_object_or_404(CustomUser.objects.all().select_related('role'), id=id)
+    if user.role is None or user.role.name != 'Barrister':
+        raise Http404()
 
-    profile = get_object_or_404(Profile.objects.all(),pk=id)
+    profile, created = Profile.objects.get_or_create(user=user)
     skills = Skill.objects.filter(profile=profile)
     experiences = EducationAndWorkExperience.objects.filter(profile=profile)
     awards = Award.objects.filter(profile=profile)
@@ -105,7 +109,7 @@ def admin_news_update(request,slug):
             
 
     form = Newsform(instance=news)
-    return render(request,'admin-UpdateNews.html',context={'form':form})
+    return render(request,'admin-panel/admin-UpdateNews.html',context={'form':form})
 
 
 
@@ -135,8 +139,8 @@ def news_detail_view(request, slug):
 def publication_add_view(request):
 
     form = PublicationForm()
-    if request.user.role.name is not "Barrister":
-        return Http404()
+    # if request.user.role is None or  request.user.role.name is not "Barrister":
+    #     raise Http404()
 
     if request.method == "POST":
         form = PublicationForm(request.POST,request.FILES)
@@ -150,7 +154,7 @@ def publication_add_view(request):
         'form': form,
     }
 
-    return render(request, '', context=context)
+    return render(request, 'xeber_elave_etmek_user_ucun.html', context=context)
 
 
 
@@ -196,7 +200,7 @@ def admin_user_list(request):
         'page_obj': page_obj,
     }
 
-    return render(request, 'admin-UserList.html', context=context)
+    return render(request, 'admin-panel/admin-UserList.html', context=context)
 
 
 
@@ -238,7 +242,7 @@ def admin_user_add(request):
         'form':form,
         'message': message,
     }
-    return render(request, 'admin-AddUser.html', context=context)
+    return render(request, 'admin-panel/admin-AddUser.html', context=context)
 
 
 
@@ -256,7 +260,7 @@ def admin_add_news(request):
             news.save()
     form = Newsform()
     
-    return render(request,'admin-AddNews.html',context={ 'form':form})
+    return render(request,'admin-panel/admin-AddNews.html',context={ 'form':form})
 
 
 
@@ -277,7 +281,7 @@ def admin_news_list(request):
     }
 
 
-    return render(request, 'admin_NewsList.html', context = context)
+    return render(request, 'admin-panel/admin_NewsList.html', context = context)
     
 
 
@@ -293,3 +297,41 @@ def blog_single_view(request):
 
 def contacts_view(request):
     return render(request,'contacts.html')
+
+
+
+
+def get_tasks_list(request):
+
+    status = request.GET.get('status')
+    if status:
+        tasks = Task.objects.filter(status=status)
+    else:
+        tasks = Task.objects.all()
+
+    paginator = Paginator(tasks, 20)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+
+    return render(request, '', context=context)
+
+
+def add_task_view(request):
+
+    form = TaskForm()
+
+    if request.method == 'POST' :
+        form = TaskForm(request.POST, request.user)
+        if form.is_valid():
+            form.save()
+    
+    context = {
+        'form': form,
+    }
+    
+    return render(request, '', context=contetx)
+
+

@@ -478,13 +478,40 @@
                                                     </span>mail@attorco.com
                                                 </li>
                                                 <li>
+                                                    {% if request.user.role.name == "Barrister" %}
+                                              <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
+                                                       href="{% url 'calendar' %}" title="">İş masası</a>
+                                                       {% else %}
                                                     <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
                                                         href="{% url 'calendar' %}" title="">Konsultasiya</a>
+                                                        {% endif %}
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="themestek-table-cell themestek-align-right">
-                                            <div class="themestek-social-links-wrapper">
+   <!-- account button begin-->
+   <div class="dropdown">
+    <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hesab</button>
+     <div class="dropdown-menu account-dropdown">
+        {% if request.user.is_authenticated %}   
+        <a class="dropdown-item account-dropdown-item" href="{% url 'user-profile' %}">
+            <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım
+          </a>
+          <a class="dropdown-item account-dropdown-item" href="{% url 'logout' %}">
+            <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış
+          </a>        
+          {% else %}
+        <a class="dropdown-item" href="{% url 'login' %}">
+            <i class="themestek-attorco-icon-arrow-right"></i>&nbsp;Giriş
+         </a>
+         <a class="dropdown-item account-dropdown-item" href="{% url 'register' %}">
+           <i class="themestek-attorco-icon-file"></i>&nbsp;Qeydiyyat
+         </a>
+        {% endif %}
+     </div>
+   </div>
+      <!-- account button end-->                                        
+  <div class="themestek-table-cell themestek-align-right">
+    <div class="themestek-social-links-wrapper" >
                                                 <ul class="social-icons">
                                                     <li class="themestek-social-facebook"><a class=" tooltip-top"
                                                             target="_blank" href="#"><i
@@ -534,10 +561,18 @@
                                                         <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
                                                             href="{% url 'calendar' %}" title="">Konsultasiya</a></div>
                                                 </div>
-                                                <div class="themestek-header-icons "><span
-                                                        class="themestek-header-icon themestek-header-search-link"><a
-                                                            href="#"><i
-                                                                class="themestek-attorco-icon-search-2"></i></a></span>
+                                                <div class="themestek-header-icons ">
+                                                    <span class="themestek-header-icon themestek-header-wc-cart-link">
+                                                      <a href="#">
+                                                      <i class="themestek-attorco-icon-cart"></i>
+                                                      <span class="number-cart">0</span>
+                                                    </a>
+                                                    </span>
+                                                    <span class="themestek-header-icon themestek-header-search-link">
+                                                      <a href="#">
+                                                      <i class="themestek-attorco-icon-search-2"></i>
+                                                      </a>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <button id="menu-toggle" class="menu-toggle">
@@ -571,7 +606,12 @@
                                                             <li id="menu-item-11571"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11571">
                                                                 <a
-                                                                    href="http://localhost/barrister/about-us/">Haqqımızda</a>
+                                                                    href="{% url 'about-us' %}">Haqqımızda</a>
+                                                            </li>
+                                                            <li id="menu-item-11571"
+                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11571">
+                                                                <a
+                                                                    href="#">Mağaza</a>
                                                             </li>
                                                             <li id="menu-item-11586"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11586">
@@ -647,7 +687,7 @@
                                                             <li id="menu-item-11581"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-themestek-service menu-item-11581">
                                                                 <a
-                                                                    href="http://localhost/barrister/service/criminal-law/">Cianyət
+                                                                    href="http://localhost/barrister/service/criminal-law/">Cinayət
                                                                     Hüququ</a></li>
                                                             <li id="menu-item-11582"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-themestek-service menu-item-11582">
@@ -678,30 +718,7 @@
                                                     </li>
                                                     <li id="menu-item-11565"
                                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11565">
-                                                        <a href="{% url 'about-us' %}">Əlaqə</a></li>
-                                                        <li id="menu-item-11452"
-                                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11452">
-                                                        <a href="#">Hesab</a>
-                                                        <ul class="sub-menu">
-                                                            <li id="menu-item-11569"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11569">
-                                                                <a href="{% url 'login' %}">
-                                                                    <i class="themestek-attorco-icon-arrow-right"></i>&nbsp;Giriş</a></li>
-                                                            <li id="menu-item-11570"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11570">
-                                                                <a href="{% url 'register' %}">
-                                                                    <i class="themestek-attorco-icon-file"></i>&nbsp;Qeydiyyat</a>
-                                                            </li>
-                                                            <li id="menu-item-11587"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a href="user-profile.html">
-                                                                   <i class="themestek-attorco-icon-user"></i>&nbsp;Hesabım</a></li>
-                                                            <li id="menu-item-11587"
-                                                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11587">
-                                                                <a href="logout">
-                                                                    <i class="themestek-attorco-icon-home themestek-attorco-icon-angle-double-left"></i>&nbsp;Çıxış</a></li>
-                                                        </ul>
-                                                    </li>
+                                                        <a href="{% url 'contacts' %}">Əlaqə</a></li>
                                                 </ul>
                                             </div>
                                         </nav><!-- .main-navigation -->
@@ -1193,7 +1210,7 @@
         }
     </script>
     <link rel='stylesheet' id='themestek-footer-gfonts-css'
-        href='http://fonts.googleapis.com/css?family=Abril+Fatface%7CArimo%3A700&amp;ver=1.0.0' media='all' />
+        href='https://fonts.googleapis.com/css?family=Abril+Fatface%7CArimo%3A700&amp;ver=1.0.0' media='all' />
     <script>
         /* <![CDATA[ */
         var wpcf7 = { "apiSettings": { "root": "http:\/\/localhost\/barrister\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };
@@ -1220,6 +1237,8 @@
     <script src="{% static 'content_js/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'content_js/numinate.min.js' %}"></script>
     <script src="{% static 'content_js/forms.min.js' %}"></script>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% endblock %}
 </body>

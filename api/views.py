@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .serializers import *
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.permissions import AllowAny,IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
@@ -16,8 +16,29 @@ from django.contrib import auth
 from rest_framework.pagination import PageNumberPagination
 from django.core.paginator import Paginator
 from django.contrib.auth.models import Permission
+from rest_framework.pagination import PageNumberPagination
 
 
+
+class UserAPI(APIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser, ]
+
+    def get_object(self, pk):
+        try:
+            user = CustomUser.objects.get(pk=pk)
+        except:
+            raise exceptions.ValidationError('This user doesnt not exists')
+        return user
+
+    def get(self, request, pk):
+        user = self.get_object(pk)
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
+
+    class Meta:
+        models = CustomUser
+        fields = '__all__'
 
 
 class UserRegistration(APIView):
@@ -161,11 +182,11 @@ class ProfileDetail(APIView):
         except:
             raise exceptions.ValidationError('This profile doesnt not exists')
         return profile
+
     def get(self,request,id):
         profile = self.get_object(id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
-    
 
     def delete(self,request,id):
         profile = self.get_object(id)
@@ -196,9 +217,7 @@ class ProfileDetail(APIView):
      
 
 
-
-        
-
+ 
     
 class ProfileCreate(APIView):
     permission_classes = [AllowAny,]
@@ -211,8 +230,6 @@ class ProfileCreate(APIView):
         profile  = Profile(**serializer.validated_data)
         profile.save()
         return Response(serializer.data)
-        
-
 
 
 
@@ -419,3 +436,72 @@ class PublicationAPIView(APIView):
         publication.delete()
         return Response({"message": "Publication with id `{}` has been deleted.".format(pk)},status=204)
 
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 4
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
+class NewsList(ListAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    authentication_classes = [ExampleAuth,]
+    permission_classes = [AllowAny,]
+    filter_backends = [DjangoFilterBackend,OrderingFilter]
+    pagination_class = StandardResultsSetPagination
+    
+
+class NewsAPI(APIView):
+    authentication_classes=[ExampleAuth]
+    permission_classes = [AllowAny]
+
+    def get_object(self,pk):
+        news = get_object_or_404(News.objects.all(),pk=pk)
+        return news
+    
+    def get(self,request,pk):
+        news = self.get_object(pk=pk)
+        serializer = NewsSerializer(news)
+        return Response(serializer.data)
+    
+    def post(self,request,format=None):
+        data = request.data
+        serializer = NewsSerializer(data=data,context={'request':request},)
+        permission = Permission.objects.get(codename="add_news")
+        if request.user.is_superuser == False:
+            return Response({"permission":'denied'})
+        if serializer.is_valid(raise_exception=True):
+            news = News(**serializer.validated_data)
+            news.save()
+        return Response({"detail" : "publication {} saved".format(news.pk)})
+    
+    def put(self,request,pk):
+        old_news = self.get_object(pk)
+        data  = request.data
+        serializer = NewsSerializer(old_news,data)
+        permission = Permission.objects.get(codename="update_news")
+        if request.user.role is None or permission not in request.user.role.permissions:
+            return Response({"permission":'denied'})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+        return Response(serializer.validated_data)
+    
+    def delete(self,request,pk):
+        news = self.get_object(pk)
+        serializer = NewsSerializer(news)
+        # permission = Permission.objects.get(codename='can_delete_news')
+        if request.user.has_perm('news.can_delete_news') == False or request.user.role is None or request.user != news.user:
+            return Response({'permission':'denied'})
+        news.delete()
+        return Response({'news':'deleted'})
+
+            
+
+
+        
+
+
+
+
+
+    
