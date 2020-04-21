@@ -1,5 +1,5 @@
 from django import forms
-from home.models import News, Publication
+from home.models import News, Publication, Task, TASK_STATUS
 from ckeditor import widgets
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (
@@ -52,10 +52,16 @@ class PublicationForm(forms.ModelForm):
         model = Publication
         fields = "__all__"
 
+
+
 class TaskForm(forms.ModelForm):
     title = forms.CharField(label="", widget=forms.TextInput)
     description = forms.CharField(label="", widget=forms.TextInput)
     added_date = forms.DateField(label="",widget=forms.DateInput)
     deadline = forms.DateField(label="",widget=forms.DateInput)
-    status = forms.BooleanField(label="")
+    status = forms.ChoiceField(label="", choices=TASK_STATUS)
 
+
+    class Meta:
+        model = Task
+        fields = '__all__'
