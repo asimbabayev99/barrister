@@ -131,6 +131,7 @@
 	<div id="themestek-home"></div>
 	<div class="main-holder">
 		<div id="page" class="hfeed site">
+      {% block header %}
 			<header id="masthead"
 				class="themestek-header-style-classic themestek-header-overlay themestek-main-menu-total-6">
 				<div
@@ -156,7 +157,8 @@
             {% block header-navigation %}
               {{ block.super }}
             {% endblock %}
-					</div>
+          </div>
+          {% block header-content %}
 					<div
 						class="themestek-titlebar-wrapper themestek-bg themestek-bgcolor-transparent themestek-titlebar-align-allleft themestek-textcolor-white themestek-bgimage-yes">
 						<div class="themestek-titlebar-wrapper-bg-layer themestek-bg-layer"></div>
@@ -198,10 +200,12 @@
 								</div><!-- .themestek-titlebar-main -->
 							</div><!-- .themestek-titlebar-inner-wrapper -->
 						</div><!-- .themestek-titlebar -->
-					</div><!-- .themestek-titlebar-wrapper -->
+          </div><!-- .themestek-titlebar-wrapper -->
+          {% endblock %}
 				</div>
       </header><!-- .site-header -->
-      
+      {% endblock %}
+
       {% block content %}
 			<div id="content-wrapper" class="site-content-wrapper">
 				<div id="content" class="site-content container">
