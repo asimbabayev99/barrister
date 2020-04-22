@@ -10,5 +10,7 @@ urlpatterns = [
     
     path('', shop_view, name='shop'),
     path('<str:category>/', shop_view, name='shop'),
+    path('basket/',shop_basket_view,name="basket"),
+    path('product-single/',product_single_view),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 

@@ -21,9 +21,6 @@ urlpatterns = [
     path('blog-grid/', blog_grid_view, name='blog-grid'),
     path('blog-large/',blog_large_view,name='blog-large'),
     path('blog-single/',blog_single_view,name='blog-single'),
-    path('shop/',shop_view,name='shop'),
-    path('basket/',shop_basket_view,name="basket"),
-    path('product-single/',product_single_view),
 
     path('admin/user/list', admin_user_list, name='admin-user-list'),
     path('admin/news/add', admin_add_news, name='admin-add-news'),

@@ -18,6 +18,7 @@ def shop_view(request, category=None):
     categories = Category.objects.all()
 
     page = request.GET.get('page', 1)
+
     try:
         page = int(page)
     except:
@@ -32,7 +33,6 @@ def shop_view(request, category=None):
     paginator = Paginator(products, 24)
     page_obj = paginator.get_page(page)  
 
-
     context = {
         'product_count': paginator.count,
         'page_obj': page_obj,
@@ -41,3 +41,11 @@ def shop_view(request, category=None):
     }
 
     return render(request, 'shop/shop.html', context=context)
+
+
+
+def shop_basket_view(request):
+    return render(request,'shop/basket.html')
+
+def product_single_view(request):
+    return render(request,'shop/product-single.html')
