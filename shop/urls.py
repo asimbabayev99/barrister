@@ -9,5 +9,6 @@ from barrister import settings
 urlpatterns = [
     
     path('', shop_view, name='shop'),
+    path('<str:category>/', shop_view, name='shop'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
