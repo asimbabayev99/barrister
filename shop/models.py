@@ -41,7 +41,7 @@ class Product(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
+    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING, null=True, blank=True)
     image = models.ImageField(upload_to='product')
     price = models.DecimalField(max_digits=6, decimal_places=2)
     discounted_price = models.DecimalField(max_digits=6, decimal_places=2)
