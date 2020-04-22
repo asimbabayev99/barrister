@@ -11,6 +11,7 @@ PAYMENT_TYPES = (
 # models for product category
 class Category(models.Model):
     name = models.CharField(max_length=32, null=False, blank=False, unique=True)
+    slug = models.SlugField()
 
     class Meta:
         indexes = [

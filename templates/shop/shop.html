@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% load filters %}
+
+
+{% block title %}
+<title>Mağaza &#8211; barrister</title>
+{% endblock %}
+
 {% block links %}
 <meta charset="UTF-8">
 <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
 <link rel="profile" href="https://gmpg.org/xfn/11">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script> 'use strict'; (function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
-<title>Mağaza &#8211; barrister</title>
 <meta name='robots' content='noindex,nofollow' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
 <link rel='dns-prefetch' href='//s.w.org' />
@@ -215,9 +221,9 @@
                 </header>
                 <div class="woocommerce-notices-wrapper"></div>
                 <p class="woocommerce-result-count">
-                  Gösterilen sonuç sayısı: 3</p>
+                  Gösterilen sonuç sayısı: {{ page_obj.start_index }} - {{ page_obj.end_index }} of {{ page_obj.paginator.count }}.</p>
                 <!-- <form class="woocommerce-ordering" method="get" data-select2-id="5">
-                  <select name="orderby" class="select2 orderby select2-hidden-accessible" aria-label="Sipariş" tabindex="-1"
+                  <select name="orderby" class="orderby select2-hidden-accessible" aria-label="Sipariş" tabindex="-1"
                     aria-hidden="true" data-select2-id="1">
                     <option value="menu_order" selected="selected" data-select2-id="3">Varsayılan Sıralama</option>
                     <option value="popularity" data-select2-id="6">En çok incelenene göre sırala</option>
@@ -240,14 +246,50 @@
                 </form> -->
                 <br><br><br>
                 <ul class="products columns-3">
-                  <li
+                  {% for product in page_obj %}
+                  <li class="product type-product post-11653 status-publish last instock product_cat-aksesuarlar has-post-thumbnail shipping-taxable purchasable product-type-simple">
+                    <a href="#"
+                      class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300"
+                      src="{{product.image.url}}"
+                      class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
+                      alt="Image by Jagrit Parajuli from Pixabay"
+                      srcset="{{product.image.url}}"
+                      sizes="(max-width: 300px) 100vw, 300px" data-id="11656">
+                    <h2 class="woocommerce-loop-product__title">{{product.title}}</h2>
+                    <span class="price">
+                    {% if product|has_discounted_price %}
+                      <del>
+                        <span class="woocommerce-Price-amount amount">
+                          <span class="woocommerce-Price-currencySymbol">AZN</span>
+                          {{product.price}}
+                        </span>
+                      </del> 
+                      <ins><span class="woocommerce-Price-amount amount">
+                        <span class="woocommerce-Price-currencySymbol">AZN</span>
+                        {{product.discounted_price}}
+                      </span></ins>
+                    </span>
+                    {% else %}
+                      <span class="price"><span class="woocommerce-Price-amount amount">
+                        <span class="woocommerce-Price-currencySymbol">AZN</span>
+                        {{product.price}}
+                      </span>
+                    {% endif %}
+                    </span>
+                      
+                  </a><a href="?add-to-cart=11655" data-quantity="1"
+                    class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="11655"
+                    data-product_sku="" aria-label="“Klassik geyim” ürününü sepete ekle" rel="nofollow">Sepete
+                    Ekle</a></li>  
+                  {% endfor %}
+                  <!-- <li
                     class="product type-product post-11655 status-publish first instock product_cat-umumi has-post-thumbnail shipping-taxable purchasable product-type-simple">
                     <a href="http://localhost/barrister/urun/klassik-geyim/"
                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300"
-                        src="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640-300x300.png"
+                        src="/media/product/table.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="Image by Jagrit Parajuli from Pixabay"
-                        srcset="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640-300x300.png 300w, http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640-150x150.png 150w, http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640-100x100.png 100w"
+                        srcset="/media/product/table.jpg"
                         sizes="(max-width: 300px) 100vw, 300px" data-id="11656">
                       <h2 class="woocommerce-loop-product__title">Klassik geyim</h2>
                       <span class="price"><span class="woocommerce-Price-amount amount"><span
@@ -262,10 +304,10 @@
                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                       <span class="onsale">İndirim!</span>
                       <img width="300" height="300"
-                        src="http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-300x300.png"
+                        src="/media/product/table.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="Image by OpenClipart-Vectors from Pixabay"
-                        srcset="http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-300x300.png 300w, http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-150x150.png 150w, http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-100x100.png 100w"
+                        srcset="/media/product/table.jpg"
                         sizes="(max-width: 300px) 100vw, 300px" data-id="11652">
                       <h2 class="woocommerce-loop-product__title">Kreslo</h2>
                       <span class="price"><del><span class="woocommerce-Price-amount amount"><span
@@ -279,10 +321,10 @@
                     class="product type-product post-11653 status-publish last instock product_cat-aksesuarlar has-post-thumbnail shipping-taxable purchasable product-type-simple">
                     <a href="http://localhost/barrister/urun/qelem-ve-qeyd-defteri/"
                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300"
-                        src="http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-300x300.png"
+                        src="/media/product/table.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="Image by FiveFlowersForFamilyFirst from Pixabay"
-                        srcset="http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-300x300.png 300w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-150x150.png 150w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-600x600.png 600w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-100x100.png 100w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640.png 640w"
+                        srcset="/media/product/table.jpg"
                         sizes="(max-width: 300px) 100vw, 300px" data-id="11654">
                       <h2 class="woocommerce-loop-product__title">Qələm və qeyd dəftəri</h2>
                       <span class="price"><span class="woocommerce-Price-amount amount"><span
@@ -290,7 +332,7 @@
                     </a><a href="?add-to-cart=11653" data-quantity="1"
                       class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="11653"
                       data-product_sku="" aria-label="“Qələm və qeyd dəftəri” ürününü sepete ekle" rel="nofollow">Sepete
-                      Ekle</a></li>
+                      Ekle</a></li> -->
                 </ul>
               </main>
             </div>
@@ -310,12 +352,11 @@
                 <div class="widget-as-link ">
                   <h3 class="widget-title">Ürün kategorileri</h3>
                   <ul class="product-categories">
-                    <li class="cat-item cat-item-40"><a
-                        href="http://localhost/barrister/urun-kategori/aksesuarlar/">Aksesuarlar</a></li>
-                    <li class="cat-item cat-item-41"><a
-                        href="http://localhost/barrister/urun-kategori/kreslolar/">Kreslolar</a></li>
-                    <li class="cat-item cat-item-39"><a href="http://localhost/barrister/urun-kategori/umumi/">Ümumi</a>
+                    {% for category in categories %}
+                    <li class="cat-item cat-item-40">
+                      <a href="{% url 'shop' category.slug %}">{{category.name}}</a>
                     </li>
+                    {% endfor %}
                   </ul>
                 </div>
               </aside>
@@ -378,6 +419,24 @@
               </aside>
             </aside><!-- #sidebar-right -->
           </div><!-- .site-content-inner -->
+          <!-- pagination begin -->
+      <ul class="pagination mt-3">  
+        
+        {% if page_obj.number > 1 %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
+        {% endif %}
+        {% for page in page_obj|get_page_list %}
+          {% if page == page_obj.number %}
+            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.number < page_obj.paginator.num_pages %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
+        {% endif %}        
+      </ul>
+      <!-- pagination end -->
         </div><!-- .site-content -->
       </div>
       {% endblock %}
