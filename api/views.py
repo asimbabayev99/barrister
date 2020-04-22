@@ -498,9 +498,30 @@ class NewsAPI(APIView):
         return Response({'news':'deleted'})
 
             
+class TaskList(ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    authentication_classes = [ExampleAuth,]
+    permission_classes = [AllowAny,]
+    filter_backends = [DjangoFilterBackend,OrderingFilter]
+    pagination_class = StandardResultsSetPagination
+    
 
-
+class TaskDetail(APIView):
+    
+    def get_object(self,pk):
+        task = get_object_or_404(Task.objects.all(),pk=pk)
+        return task
+    
+    def get(self,request,pk):
+        task = self.get_object(pk)
+        serializer = TaskSerializer(task)
+        return Response(serializer.data)
+    
+    
         
+
+    
 
 
 

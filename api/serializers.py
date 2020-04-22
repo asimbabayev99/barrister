@@ -198,9 +198,13 @@ class NewsSerializer(serializers.ModelSerializer):
         return instance
 
 
+class TaskSerializer(serializers.ModelSerializer):
 
 
-
+    class Meta:
+        model = Task
+        fields = ['title','description','status','deadline','user']
+    
 
 
 

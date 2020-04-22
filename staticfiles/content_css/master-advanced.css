@@ -499,7 +499,7 @@ input[type="reset"]{
     padding-right: 0;
 }
 .themestek-pre-header-wrapper .social-icons li > a {   
-    width: 50px;
+    /* width: 50px; */
     height: 60px;
     line-height: 60px;
     font-size: 16px;
@@ -7953,3 +7953,12 @@ body .booked-calendar-wrap .booked-appt-list .timeslot .timeslot-people button{
 .themestek-testimonialbox-style-3 blockquote{
     font-family: "Playfair Display", Arial, Helvetica, sans-serif;
 }
+/* preheader begin */
+.account-dropdown{
+    background-color: #323A43;
+    padding: 0 5%;
+}
+.account-dropdown-item{
+    display: block;
+}
+/* preheader end */

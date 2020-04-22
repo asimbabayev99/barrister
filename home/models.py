@@ -402,4 +402,9 @@ class Task(models.Model):
     status = models.CharField(max_length=32, choices=TASK_STATUS)
     added_date = models.DateField(auto_now_add=True)
     deadline = models.DateField(blank = True,null = True)
+
+    def __str__(self):
+        return self.title
+        
+    
     
