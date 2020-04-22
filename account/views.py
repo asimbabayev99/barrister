@@ -149,10 +149,11 @@ def user_detail_view(request, pk):
 
 
 
-
+@login_required(login_url='/account/login')
 def user_profile(request):
 
-    return render(request, 'user-profile.html')
+    # return render(request, 'user-profile.html')
+    return render(request, 'barrister-admin.html')
 
 
 

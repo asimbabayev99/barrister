@@ -350,6 +350,9 @@
                 <div class="widget-as-link ">
                   <h3 class="widget-title">Ürün kategorileri</h3>
                   <ul class="product-categories">
+                    <li class="cat-item cat-item-40">
+                      <a href="{% url 'shop' %}">Hamisi</a>
+                    </li>
                     {% for category in categories %}
                     <li class="cat-item cat-item-40">
                       <a href="{% url 'shop' category.slug %}">{{category.name}}</a>
