@@ -298,7 +298,14 @@ def blog_single_view(request):
 def contacts_view(request):
     return render(request,'contacts.html')
 
+def shop_view(request):
+    return render(request,'shop/shop.html')
 
+def shop_basket_view(request):
+    return render(request,'shop/basket.html')
+
+def product_single_view(request):
+    return render(request,'shop/product-single.html')
 
 
 def get_tasks_list(request):
