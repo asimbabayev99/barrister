@@ -499,7 +499,7 @@ input[type="reset"]{
     padding-right: 0;
 }
 .themestek-pre-header-wrapper .social-icons li > a {   
-    width: 50px;
+    /* width: 50px; */
     height: 60px;
     line-height: 60px;
     font-size: 16px;

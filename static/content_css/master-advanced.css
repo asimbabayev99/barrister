@@ -499,7 +499,7 @@ input[type="reset"]{
     padding-right: 0;
 }
 .themestek-pre-header-wrapper .social-icons li > a {   
-    width: 50px;
+    /* width: 50px; */
     height: 60px;
     line-height: 60px;
     font-size: 16px;
@@ -7961,4 +7961,11 @@ body .booked-calendar-wrap .booked-appt-list .timeslot .timeslot-people button{
 .account-dropdown-item{
     display: block;
 }
+.lang-select{
+    width: 55px;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid #cdba6d;
+}
 /* preheader end */
+
