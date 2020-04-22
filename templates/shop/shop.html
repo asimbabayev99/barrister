@@ -417,6 +417,24 @@
               </aside>
             </aside><!-- #sidebar-right -->
           </div><!-- .site-content-inner -->
+          <!-- pagination begin -->
+      <ul class="pagination mt-3">  
+        
+        {% if page_obj.number > 1 %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"><</a></li>
+        {% endif %}
+        {% for page in page_obj|get_page_list %}
+          {% if page == page_obj.number %}
+            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.number < page_obj.paginator.num_pages %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">></a></li>
+        {% endif %}        
+      </ul>
+      <!-- pagination end -->
         </div><!-- .site-content -->
       </div>
       {% endblock %}

@@ -10,7 +10,11 @@ from django.core.paginator import Paginator
 
 def shop_view(request, category=None):
 
-    basket = Basket.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+    else:
+        basket = []
+
     categories = Category.objects.all()
 
     page = request.GET.get('page', 1)
