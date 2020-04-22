@@ -491,7 +491,7 @@
    <!-- account button begin-->
    <div class="dropdown">
     {% if request.user.is_authenticated %}   
-    <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ request.user.first_name }}</button>
+    <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ request.user.email }}</button>
     {% else %}
     <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hesab</button>
     {% endif %}
