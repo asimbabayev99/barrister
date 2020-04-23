@@ -424,7 +424,7 @@ class PublicationAPIView(APIView):
         serializer = self.serializer_class(instance=saved_publication, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             publication_saved = serializer.save()
-        return Response({"success": "Publication '{}' updated successfully".format(publication_saveds.pk)})
+        return Response({"success": "Publication '{}' updated successfully".format(publication_saved.pk)})
 
 
     def delete(self, request, pk):
