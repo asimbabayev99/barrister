@@ -105,8 +105,8 @@ def admin_news_update(request,slug):
             news.title = form.cleaned_data['title']
             news.content = form.cleaned_data['content']
             news.image = form.cleaned_data['image']
-            
             news.save()
+            return redirect('admin-news-list')
             
 
     form = Newsform(instance=news)
@@ -259,6 +259,7 @@ def admin_add_news(request):
             image = form.cleaned_data['image']
             news = News(title=title,content=content,image=image,user=request.user)
             news.save()
+            
     form = Newsform()
     
     return render(request,'admin-panel/admin-AddNews.html',context={ 'form':form})
@@ -333,4 +334,7 @@ def add_task_view(request):
     
     return render(request, '', context=contetx)
 
+def redirect_news_list(request):
+    
+    return render(request,'admin-panel/admin_NewsList.html')
 
