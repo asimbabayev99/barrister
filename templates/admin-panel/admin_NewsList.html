@@ -66,8 +66,8 @@
             <td><button  type="button" class="btn btn-primary" data-toggle="modal"
                 data-target="#exampleModalCenter">Ətraflı</button>
             </td>
-            <td><a href="news_update.html"><button  type="button" class="btn btn-light" data-toggle="modal"
-              data-target="#exampleModalCenter"><i class="fas fa-pen-square"></i></button></a>
+            <td><a href="{% url 'admin-news-update' n.slug %}"><button  type="button" class="btn btn-light" >
+            <i class="fas fa-pen-square"></i></button></a>
             </td>
           </tr>
           {% endfor %}
