@@ -518,7 +518,14 @@ class TaskDetail(APIView):
         serializer = TaskSerializer(task)
         return Response(serializer.data)
     
+
+
+
     
+    def delete(self,request,pk):
+        task = self.get_object(pk)
+        task.delete()
+        return Response({'task':'deleted'})
         
 
     
