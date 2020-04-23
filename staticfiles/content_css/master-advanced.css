@@ -7961,4 +7961,10 @@ body .booked-calendar-wrap .booked-appt-list .timeslot .timeslot-people button{
 .account-dropdown-item{
     display: block;
 }
+.lang-select{
+    width: 55px;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid #cdba6d;
+}
 /* preheader end */
