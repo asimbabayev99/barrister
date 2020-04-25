@@ -47,5 +47,9 @@ def shop_view(request, category=None):
 def shop_basket_view(request):
     return render(request,'shop/basket.html')
 
-def product_single_view(request):
-    return render(request,'shop/product-single.html')
+def product_single_view(request, id):
+    product = get_object_or_404(Product, id = id)
+    context = {
+        'product':product
+    }
+    return render(request,'shop/product-single.html', context=context)
