@@ -102,6 +102,7 @@ def admin_news_update(request,slug):
     if request.method == "POST":
         form = Newsform(request.POST,request.FILES,instance=news)
         if form.is_valid():
+            news.date = timezone.now()
             news.title = form.cleaned_data['title']
             news.content = form.cleaned_data['content']
             news.image = form.cleaned_data['image']
