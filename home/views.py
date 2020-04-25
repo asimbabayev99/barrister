@@ -339,3 +339,8 @@ def redirect_news_list(request):
     
     return render(request,'admin-panel/admin_NewsList.html')
 
+def basket_view(request):
+    return render(request, 'shop/basket.html')
+
+def product_single_view(request):
+    return render(request, 'shop/product-single.html')    
