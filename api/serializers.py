@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
+from shop.models import *
 # from rest_framework.parsers import 
 
 
@@ -200,11 +201,24 @@ class NewsSerializer(serializers.ModelSerializer):
 
 class TaskSerializer(serializers.ModelSerializer):
 
-
     class Meta:
         model = Task
-        fields = ['title','description','status','deadline','user']
+        fields = ['title','description','status','deadline',]
+
     
+class ProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = ['title','description','category','color','image','price','discounted_price','stock','date','deleted']
+
+
+class BasketSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+    class Meta:
+        model = Basket
+        fields = ['user','product','quantity']
+
 
 
 

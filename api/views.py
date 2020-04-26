@@ -18,7 +18,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import Permission
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import *
-
+from shop.models import *
 
 
 class UserAPI(APIView):
@@ -501,13 +501,15 @@ class NewsAPI(APIView):
 class TaskList(ListAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    authentication_classes = [ExampleAuth,]
+    authentication_classes = [SessionAuthentication,]
     permission_classes = [AllowAny,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
     pagination_class = StandardResultsSetPagination
     
 
 class TaskDetail(APIView):
+    authentication_classes=[ExampleAuth]
+    permission_classes = [IsAuthenticated]
     
     def get_object(self,pk):
         task = get_object_or_404(Task.objects.all(),pk=pk)
@@ -518,8 +520,28 @@ class TaskDetail(APIView):
         serializer = TaskSerializer(task)
         return Response(serializer.data)
     
+    def post(self,request):
+        data = request.data
+        serializer = TaskSerializer(data=data)
+        if serializer.is_valid():
+            task = Task()
+            task.title = serializer.validated_data['title']
+            task.description = serializer.validated_data['description']
+            task.status = serializer.validated_data['status']
+            task.user = request.user
+            task.deadline = serializer.validated_data['deadline']
+            task.save()
+        return Response({'task':'created'})
 
 
+    
+    def put(self,request,pk):
+        old_task = self.get_object(pk)
+        data = request.data
+        serializer = TaskSerializer(old_task,data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({'task':'updated'})        
 
     
     def delete(self,request,pk):
@@ -528,10 +550,45 @@ class TaskDetail(APIView):
         return Response({'task':'deleted'})
         
 
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [ExampleAuth,]
+    permission_classes = [AllowAny,]
+    filter_backends = [DjangoFilterBackend,OrderingFilter]
+    pagination_class = StandardResultsSetPagination
+
+
+
+class BasketList(ListAPIView):
+    def get_queryset(self):
+        queryset = Basket.objects.filter(user=self.request.user)
+        return queryset
+    queryset = get_queryset
+    serializer_class  = BasketSerializer
+    permission_classes = [AllowAny,]
+    authentication_classes = [SessionAuthentication,ExampleAuth]
+
+
+
+class BasketDetail(APIView):
+    authentication_classes=[SessionAuthentication,ExampleAuth]
+    permission_classes = [IsAuthenticated,]
+    
+    def post(self,request):
+        data = request.data
+        serializer = BasketSerializer(data=data,context={'request':request})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+        return Response("basket saved")
+    
+
     
 
 
-
+    
+        
+    
 
 
     
