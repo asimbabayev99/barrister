@@ -45,7 +45,14 @@ def shop_view(request, category=None):
 
 
 def shop_basket_view(request):
-    return render(request,'shop/basket.html')
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+    else:
+        basket = []
+    
+    context={'basket':basket}
+
+    return render(request,'shop/basket.html',context)
 
 def product_single_view(request, id=None):
     if request.user.is_authenticated:

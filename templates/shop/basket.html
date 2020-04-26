@@ -259,60 +259,14 @@
 													</thead>
 													<tbody>
 
+														{% for basket in basket %}
 														<tr class="woocommerce-cart-form__cart-item cart_item">
 
 															<td class="product-remove">
-																<a href="http://localhost/barrister/sepet/?remove_item=0dc23b6a0e4abc39904388dd3ffadcd1&amp;_wpnonce=c913dbd9f8"
-																	class="remove" aria-label="Bu ürünü çıkar"
-																	data-product_id="11653" data-product_sku="">×</a>
-															</td>
-
-															<td class="product-thumbnail">
-																<a
-																	href="http://localhost/barrister/urun/qelem-ve-qeyd-defteri/"><img
-																		width="100" height="100"
-																		src="http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-300x300.png"
-																		class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-																		alt="Image by FiveFlowersForFamilyFirst from Pixabay"
-																		srcset="http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-300x300.png 300w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-150x150.png 150w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-600x600.png 600w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640-100x100.png 100w, http://localhost/barrister/wp-content/uploads/2020/04/notebook-2282300_640.png 640w"
-																		sizes="(max-width: 300px) 100vw, 300px"
-																		data-id="11654"></a> </td>
-
-															<td class="product-name" data-title="Ürün">
-																<a
-																	href="http://localhost/barrister/urun/qelem-ve-qeyd-defteri/">Qələm
-																	və qeyd dəftəri</a> </td>
-
-															<td class="product-price" data-title="Fiyat">
-																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">AZN</span>15.00</span>
-															</td>
-
-															<td class="product-quantity" data-title="Miktar">
-																<div class="quantity">
-																	<label class="screen-reader-text"
-																		for="quantity_5e9f000423fea">Qələm və qeyd
-																		dəftəri adet</label>
-																	<input type="number" id="quantity_5e9f000423fea"
-																		class="input-text qty text" step="1" min="0"
-																		max=""
-																		name="cart[0dc23b6a0e4abc39904388dd3ffadcd1][qty]"
-																		value="1" title="Miktar" size="4" placeholder=""
-																		inputmode="numeric">
-																</div>
-															</td>
-
-															<td class="product-subtotal" data-title="Ara Toplam">
-																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">AZN</span>15.00</span>
-															</td>
-														</tr>
-														<tr class="woocommerce-cart-form__cart-item cart_item">
-
-															<td class="product-remove">
-																<a href="http://localhost/barrister/sepet/?remove_item=6595d842ae9e6c1ecfd9f976dcb8e058&amp;_wpnonce=c913dbd9f8"
-																	class="remove" aria-label="Bu ürünü çıkar"
-																	data-product_id="11649" data-product_sku="">×</a>
+																<!-- <a href="http://localhost/barrister/sepet/?remove_item=6595d842ae9e6c1ecfd9f976dcb8e058&amp;_wpnonce=c913dbd9f8" -->
+																	<button type="button" basket_id="{{ basket.pk }}" class="remove" aria-label="Bu ürünü çıkar"
+																	data-product_id="11649" data-product_sku="">×</button>
+																<!-- </a> -->
 															</td>
 
 															<td class="product-thumbnail">
@@ -324,26 +278,29 @@
 																		srcset="http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-300x300.png 300w, http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-150x150.png 150w, http://localhost/barrister/wp-content/uploads/2020/04/armchair-160499_640-100x100.png 100w"
 																		sizes="(max-width: 300px) 100vw, 300px"
 																		data-id="11652"></a> </td>
-
+															
+														    
+															
 															<td class="product-name" data-title="Ürün">
 																<a
-																	href="http://localhost/barrister/urun/kreslo/">Kreslo</a>
+																	href="http://localhost/barrister/urun/kreslo/">{{ basket.product.name }}</a>
 															</td>
+
 
 															<td class="product-price" data-title="Fiyat">
 																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">AZN</span>120.00</span>
+																		class="woocommerce-Price-currencySymbol">AZN</span>{{ basket.product.price }}</span>
 															</td>
 
 															<td class="product-quantity" data-title="Miktar">
 																<div class="quantity">
 																	<label class="screen-reader-text"
-																		for="quantity_5e9f00042538a">Kreslo adet</label>
+																		for="quantity_5e9f00042538a">{{ basket.product.name }} adet</label>
 																	<input type="number" id="quantity_5e9f00042538a"
 																		class="input-text qty text" step="1" min="0"
 																		max=""
 																		name="cart[6595d842ae9e6c1ecfd9f976dcb8e058][qty]"
-																		value="1" title="Miktar" size="4" placeholder=""
+																		value="{{ basket.quantity }}" title="Miktar" size="4" placeholder=""
 																		inputmode="numeric">
 																</div>
 															</td>
@@ -353,6 +310,7 @@
 																		class="woocommerce-Price-currencySymbol">AZN</span>120.00</span>
 															</td>
 														</tr>
+														{% endfor %}
 
 
 														<tr>
@@ -539,6 +497,51 @@
 	</script>
 	<script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
 	<script src="{% static 'content_js/forms.min.js' %}"></script>
+	<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+	<script>
+	 function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
+	$(document).ready(function(){
+		$('.remove').on('click',function(){
+			var id = $(this).attr('basket_id')
+			$.ajax({
+				headers: { 
+            	"X-CSRFToken": getCookie('csrftoken'),
+            	// 'Email':'azad@mail.ru',
+            	// 'Password':'azad12345'
+          		},
+				type : "DELETE",
+				url : '/api/basket/delete/'+ String(id),
+				success: function (data, status, xhr) {
+           			 console.log('success')
+          			},
+
+
+			});
+			location.reload();
+
+
+		});
+
+
+	});
+
+
+
+	</script>
 	{% endblock %}
 </body>
 	{% endblock %}

@@ -23,6 +23,7 @@ urlpatterns = [
     path('product/list/',ProductList.as_view()),
     path('basket/list/',BasketList.as_view()),
     path('basket/add',BasketDetail.as_view()),
+    path('basket/delete/<int:pk>',BasketDetail.as_view()),
     path('event/detail/<int:id>',EventDetail.as_view()),
     path('profile/list/',ProfilesList.as_view()),
     path('profile/<int:id>',ProfileDetail.as_view()),

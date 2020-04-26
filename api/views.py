@@ -574,8 +574,8 @@ class BasketList(ListAPIView):
 
 
 class BasketDetail(APIView):
-    # authentication_classes=[SessionAuthentication,ExampleAuth]
-    # permission_classes = [IsAuthenticated,]
+    authentication_classes=[SessionAuthentication]
+    permission_classes = [IsAuthenticated,]
     
     def post(self,request):
         data = request.data
@@ -585,6 +585,12 @@ class BasketDetail(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return Response("basket saved")
+    
+    def delete(self,request,pk):
+        basket = get_object_or_404(Basket.objects.filter(),pk=pk)
+        basket.delete()
+        return Response({'basket':'deleted'})
+    
     
 
     
