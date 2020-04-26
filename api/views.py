@@ -574,11 +574,13 @@ class BasketList(ListAPIView):
 
 
 class BasketDetail(APIView):
-    authentication_classes=[SessionAuthentication,ExampleAuth]
-    permission_classes = [IsAuthenticated,]
+    # authentication_classes=[SessionAuthentication,ExampleAuth]
+    # permission_classes = [IsAuthenticated,]
     
     def post(self,request):
         data = request.data
+        print("data")
+        print(data)
         serializer = BasketSerializer(data=data,context={'request':request})
         if serializer.is_valid(raise_exception=True):
             serializer.save()

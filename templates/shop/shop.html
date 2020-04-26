@@ -278,7 +278,7 @@
                     </span>
                       
                   </a>
-                  <button id='bt1' type="button" onclick="" quantity="1"
+                  <button id='bt1' class="cart-button" type="button" onclick="" quantity="1"
                     class="button product_type_simple add_to_cart_button ajax_add_to_cart" product_id="{{ product.id }}"
                     data-product_sku="" aria-label="“Klassik geyim” ürününü sepete ekle" rel="nofollow">Sepete Ekle
                   </button>
@@ -507,34 +507,52 @@
   </script>
   <script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
   <script src="{% static 'content_js/forms.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
     $(document).ready(function(){
-      $('#bt1').on('click','ajax_add_to_cart',function(){
+      $('.cart-button').on('click', function(){
         var product = $(this).attr('product_id');
-        var quantity = $(this).attr('quantity');
-        jQuery.ajax({
-          type = "POST",
-          beforeSend: function(request){
-            request.setRequestHeader('Email','azad@mail.ru')
-            request.setRequestHeader('Password','azad12345')
-
+        var quantity = 1;
+        // var data = JSON.stringify({
+        //   "product": product,
+        //   "quantity": quantity
+        // });
+        var data = {
+          "product": product,
+          "quantity": quantity
+        };
+        $.ajax('/api/basket/add', {
+          headers: { 
+            "X-CSRFToken": getCookie('csrftoken'),
+            // 'Email':'azad@mail.ru',
+            // 'Password':'azad12345'
           },
-          url = '/api/basket/add',
-          dataType = 'json',
-          contentType = 'application/json',
-          data = {'product': String(product),'quantity': String(quantity)},
-          console
+          type: 'POST',
+          data: data,
+          success: function (data, status, xhr) {
+            console.log('success')
+          },
+          error: function (jqXhr, textStatus, errorMessage) {
+            // handle
+          }
         });
-
-
-      })
-
-
+      });
     });
-
-
-
-
   </script>
 
 
