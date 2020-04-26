@@ -97,15 +97,17 @@ def admin_news_update(request,slug):
     if request.user.is_superuser is False:
         return Http404()
         
-    news = get_object_or_404(News.objects.all(),slug=slug)
+    news = get_object_or_404(News, slug=slug)
     form = Newsform(instance=news)
     if request.method == "POST":
         form = Newsform(request.POST,request.FILES,instance=news)
         if form.is_valid():
+            news.date = timezone.now()
             news.title = form.cleaned_data['title']
             news.content = form.cleaned_data['content']
             news.image = form.cleaned_data['image']
             news.save()
+            return redirect('admin-news-list')
             
 
     form = Newsform(instance=news)
@@ -258,6 +260,7 @@ def admin_add_news(request):
             image = form.cleaned_data['image']
             news = News(title=title,content=content,image=image,user=request.user)
             news.save()
+            
     form = Newsform()
     
     return render(request,'admin-panel/admin-AddNews.html',context={ 'form':form})
@@ -332,4 +335,9 @@ def add_task_view(request):
     
     return render(request, '', context=contetx)
 
+def redirect_news_list(request):
+    
+    return render(request,'admin-panel/admin_NewsList.html')
 
+
+      

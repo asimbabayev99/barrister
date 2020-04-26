@@ -47,5 +47,22 @@ def shop_view(request, category=None):
 def shop_basket_view(request):
     return render(request,'shop/basket.html')
 
-def product_single_view(request):
-    return render(request,'shop/product-single.html')
+def product_single_view(request, id=None):
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+    else:
+        basket = []
+
+    if id:
+        product = get_object_or_404(Product, id=id)
+    else:
+        product = Product.objects.all()  
+
+    context = {
+        'product': product,
+        'basket': basket,
+    }       
+
+
+
+    return render(request,'shop/product-single.html', context=context)

@@ -25,14 +25,15 @@
 	</style>
 	<link rel='stylesheet' id='font-awesome-css' href="{% static 'content_css/font-awesome.min.css' %}" media='all' />
 	<link rel='stylesheet' id='themify-css' href="{% static 'content_css/themify-icons.css' %}" media='all' />
-	<link rel='stylesheet' id='vc_linecons-css' href="{% static 'content_css/vc_linecons_icons.min.css' %}" media='all' />
+	<link rel='stylesheet' id='vc_linecons-css' href="{% static 'content_css/vc_linecons_icons.min.css' %}"
+		media='all' />
 	<link rel='stylesheet' id='woocommerce-layout-css'
 		href="{% static 'content_css/woocommerce_css/woocommerce-layout.css' %}" media='all' />
 	<link rel='stylesheet' id='woocommerce-smallscreen-css'
 		href="{% static 'content_css/woocommerce_css/woocommerce-smallscreen.css' %}"
 		media='only screen and (max-width: 768px)' />
-	<link rel='stylesheet' id='woocommerce-general-css' href="{% static 'content_css/woocommerce_css/woocommerce.css' %}"
-		media='all' />
+	<link rel='stylesheet' id='woocommerce-general-css'
+		href="{% static 'content_css/woocommerce_css/woocommerce.css' %}" media='all' />
 	<style id='woocommerce-inline-inline-css'>
 		.woocommerce form .form-row .required {
 			visibility: visible;
@@ -47,17 +48,21 @@
 		media='all' />
 	<link rel='stylesheet' id='chrisbracco-tooltip-css' href="{% static 'content_css/chrisbracco-tooltip.min.css' %}"
 		media='all' />
-	<link rel='stylesheet' id='multi-columns-row-css' href="{% static 'content_css/multi-columns-row.css' %}" media='all' />
+	<link rel='stylesheet' id='multi-columns-row-css' href="{% static 'content_css/multi-columns-row.css' %}"
+		media='all' />
 	<link rel='stylesheet' id='select2-css' href="{% static 'content_css/select2.min.css' %}" media='all' />
 	<link rel='stylesheet' id='flexslider-css' href="{% static 'content_css/flexslider.min.css' %}" media='all' />
 	<link rel='stylesheet' id='slick-css' href="{% static 'content_css/slick.css' %}" media='all' />
 	<link rel='stylesheet' id='slick-theme-css' href="{% static 'content_css/slick-theme.css' %}" media='all' />
 	<link rel='stylesheet' id='prettyphoto-css' href="{% static 'content_css/prettyPhoto.min.css' %}" media='all' />
 	<link rel='stylesheet' id='bootstrap-css' href="{% static 'content_css/bootstrap.min.css' %}" media='all' />
-	<link rel='stylesheet' id='bootstrap-theme-css' href="{% static 'content_css/bootstrap-theme.min.css' %}" media='all' />
+	<link rel='stylesheet' id='bootstrap-theme-css' href="{% static 'content_css/bootstrap-theme.min.css' %}"
+		media='all' />
 	<link rel='stylesheet' id='attorco-core-style-css' href="{% static 'content_css/core.css' %}" media='all' />
-	<link rel='stylesheet' id='js_composer_front-css' href="{% static 'content_css/js_composer.min.css' %}" media='all' />
-	<link rel='stylesheet' id='attorco-master-style-css' href="{% static 'content_css/master-advanced.css' %}" media='all' />
+	<link rel='stylesheet' id='js_composer_front-css' href="{% static 'content_css/js_composer.min.css' %}"
+		media='all' />
+	<link rel='stylesheet' id='attorco-master-style-css' href="{% static 'content_css/master-advanced.css' %}"
+		media='all' />
 	<link rel='stylesheet' id='attorco-responsive-style-css' href="{% static 'content_css/responsive-advanced.css' %}"
 		media='all' />
 	<link rel='stylesheet' href="{% static 'content_css/admin_style.css' %}" media='all' />
@@ -149,12 +154,13 @@
 {% endblock %}
 
 {% block body %}
+
 <body
 	class="page-template-default page page-id-11645 theme-attorco woocommerce woocommerce-page woocommerce-no-js themestek-headerstyle-classic-overlay themestek-wide themestek-sidebar-true themestek-sidebar-right wpb-js-composer js-comp-ver-6.1 vc_responsive">
 	<div id="themestek-home"></div>
 	<div class="main-holder">
 		<div id="page" class="hfeed site">
-			
+
 			{% block header %}
 			<header id="masthead"
 				class="themestek-header-style-classic themestek-header-overlay themestek-main-menu-total-7 themestek-main-menu-more-than-six">
@@ -175,15 +181,15 @@
 						</div>
 					</div>
 					<div id="themestek-stickable-header-w-main" class="themestek-stickable-header-w-main">
-					{% block pre-header %}
+						{% block pre-header %}
 						{{ block.super }}
-					{% endblock %}	
-					{% block blockname %}
-					    {{ block.super }}
-					{% endblock %}	
+						{% endblock %}
+						{% block blockname %}
+						{{ block.super }}
+						{% endblock %}
 					</div>
-					
-					{% block header-content %}	
+
+					{% block header-content %}
 					<div
 						class="themestek-titlebar-wrapper themestek-bg themestek-bgcolor-transparent themestek-titlebar-align-allleft themestek-textcolor-white themestek-bgimage-yes">
 						<div class="themestek-titlebar-wrapper-bg-layer themestek-bg-layer"></div>
@@ -240,7 +246,7 @@
 			</header><!-- .site-header -->
 			{% endblock %}
 
-			
+
 			{% block content %}
 			<div id="content-wrapper" class="site-content-wrapper">
 				<div id="content" class="site-content container">
@@ -248,6 +254,7 @@
 						<div id="primary" class="content-area col-md-9 col-lg-9 col-xs-12 ">
 							<main id="main" class="site-main">
 								<div class="woocommerce-notices-wrapper"></div>
+								{% if product %}
 								<div id="product-11655"
 									class="product type-product post-11655 status-publish first instock product_cat-umumi has-post-thumbnail shipping-taxable purchasable product-type-simple">
 
@@ -256,10 +263,12 @@
 										<figure class="woocommerce-product-gallery__wrapper">
 											<div data-thumb="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640-100x100.png"
 												data-thumb-alt="Image by Jagrit Parajuli from Pixabay"
-												class="woocommerce-product-gallery__image"><a
-													href="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640.png"><img
+												class="woocommerce-product-gallery__image">
+												<a href="">
+													{% if product.image %}
+													<img
 														width="514" height="640"
-														src="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640.png"
+														src="{{ product.image.url }}"
 														class="wp-post-image"
 														alt="Image by Jagrit Parajuli from Pixabay"
 														title="suit-4558480_640"
@@ -267,49 +276,57 @@
 														data-src="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640.png"
 														data-large_image="http://localhost/barrister/wp-content/uploads/2020/04/suit-4558480_640.png"
 														data-large_image_width="514" data-large_image_height="640"
-														srcset="https://qadinla.com/uploads/posts/2018-05/1527034000_ottavio_nuccio_2141.jpg 514w, https://qadinla.com/uploads/posts/2018-05/1527034000_ottavio_nuccio_2141.jpg 241w"
-														sizes="(max-width: 514px) 100vw, 514px" data-id="11656"></a>
+														sizes="(max-width: 514px) 100vw, 514px" data-id="11656">
+													{% endif %}
+													</a>
 											</div>
 										</figure>
 									</div>
 
 									<div class="summary entry-summary">
-										<h1 class="product_title entry-title">Klassik geyim</h1>
+										
+										<h1 class="product_title entry-title">{{product.title}}</h1>
 										<p class="price"><span class="woocommerce-Price-amount amount"><span
-													class="woocommerce-Price-currencySymbol">AZN</span>15.00</span></p>
-										<div class="woocommerce-product-details__short-description">
-											<p>Lorem ipsumLorem ipsum</p>
-										</div>
-
-
-										<form class="cart" action="http://localhost/barrister/urun/klassik-geyim/"
-											method="post" enctype="multipart/form-data">
-
-											<div class="quantity">
-												<label class="screen-reader-text" for="quantity_5e9f0080dc93d">Klassik
-													geyim adet</label>
-												<input type="number" id="quantity_5e9f0080dc93d"
-													class="input-text qty text" step="1" min="1" max="" name="quantity"
-													value="1" title="Miktar" size="4" placeholder=""
-													inputmode="numeric">
+													class="woocommerce-Price-currencySymbol">AZN</span>{{product.price}}</span></p>
+											<div class="woocommerce-product-details__short-description">
+												<p>{{product.description}}</p>
 											</div>
 
-											<button type="submit" name="add-to-cart" value="11655"
-												class="single_add_to_cart_button button alt">Sepete Ekle</button>
 
-										</form>
+											<form class="cart" action="http://localhost/barrister/urun/klassik-geyim/"
+												method="post" enctype="multipart/form-data">
+
+												<div class="quantity">
+													<label class="screen-reader-text"
+														for="quantity_5e9f0080dc93d">Klassik
+														geyim adet</label>
+													<input type="number" id="quantity_5e9f0080dc93d"
+														class="input-text qty text" step="1" min="1" max=""
+														name="quantity" value="1" title="Miktar" size="4" placeholder=""
+														inputmode="numeric">
+												</div>
+
+												<button type="submit" name="add-to-cart" value="11655"
+													class="single_add_to_cart_button button alt">Sepete Ekle</button>
+
+											</form>
 
 
-										<div class="product_meta">
+											<div class="product_meta">
 
 
 
-											<span class="posted_in">Kategoriler: <a
-													href="http://localhost/barrister/urun-kategori/umumi/"
-													rel="tag">Ümumi</a></span>
+												<span class="posted_in">Kategoriler: <a
+														href="http://localhost/barrister/urun-kategori/umumi/"
+														rel="tag"> {{product.category}}</a></span>
 
 
-										</div>
+											</div>
+											{%else%}
+											<div class="alert alert-warning">
+												<p> No product</p>
+											</div>
+											{%endif%}
 									</div>
 
 
@@ -544,73 +561,74 @@
 				</div><!-- .site-content -->
 			</div>
 			{% endblock %}
-			
+
 			{% block footer %}
 			{{ block.super }}
 			{% endblock %}
-				
 
-			
-				</div><!-- #page .site -->
-				</div><!-- .main-holder -->
-				<!-- To Top -->
-				<a id="totop" href="#top"><i class="themestek-attorco-icon-angle-up"></i></a>
-				
-				{% block scripts %}
-				<script>(function () {
-						function maybePrefixUrlField() {
-							if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
-								this.value = "http://" + this.value;
-							}
-						}
 
-						var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
-						if (urlFields) {
-							for (var j = 0; j < urlFields.length; j++) {
-								urlFields[j].addEventListener('blur', maybePrefixUrlField);
-							}
-						}
-					})();</script>
-				<script>
-					var c = document.body.className;
-					c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
-					document.body.className = c;
-				</script>
-				<script>
-					/* <![CDATA[ */
-					var wpcf7 = { "apiSettings": { "root": "http:\/\/localhost\/barrister\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };
+
+		</div><!-- #page .site -->
+	</div><!-- .main-holder -->
+	<!-- To Top -->
+	<a id="totop" href="#top"><i class="themestek-attorco-icon-angle-up"></i></a>
+
+	{% block scripts %}
+	<script>(function () {
+			function maybePrefixUrlField() {
+				if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+					this.value = "http://" + this.value;
+				}
+			}
+
+			var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+			if (urlFields) {
+				for (var j = 0; j < urlFields.length; j++) {
+					urlFields[j].addEventListener('blur', maybePrefixUrlField);
+				}
+			}
+		})();</script>
+	<script>
+		var c = document.body.className;
+		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+		document.body.className = c;
+	</script>
+	<script>
+		/* <![CDATA[ */
+		var wpcf7 = { "apiSettings": { "root": "http:\/\/localhost\/barrister\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };
 /* ]]> */
-				</script>
-				<script src="{% static 'content_js/cf_js/scripts.js' %}"></script>
-				<script src="{% static 'content_js/js.cookie.min.js' %}"></script>
-				<script>
-					/* <![CDATA[ */
-					/* ]]> */
-				</script>
-				<script src="{% static 'content_js/woocommerce.min.js' %}"></script>
-				<script>
-					/* <![CDATA[ */
-					/* ]]> */
-				</script>
-				<script src="{% static 'content_js/cart-fragments.min.js' %}"></script>
-				<script src="{% static 'content_js/perfect-scrollbar.jquery.min.js' %}"></script>
-				<script src="{% static 'content_js/select2.min.js' %}"></script>
-				<script src="{% static 'content_js/isotope.pkgd.min.js' %}"></script>
-				<script src="{% static 'content_js/jquery.mousewheel.min.js' %}"></script>
-				<script src="{% static 'content_js/jquery.flexslider-min.js' %}"></script>
-				<script src="{% static 'content_js/jquery.sticky-kit.min.js' %}"></script>
-				<script src="{% static 'content_js/slick.min.js' %}"></script>
-				<script src="{% static 'content_js/jquery.prettyPhoto.min.js' %}"></script>
-				<script src="{% static 'content_js/js_composer_front.min.js' %}"></script>
-				<script>
-					/* <![CDATA[ */
-					var themestek_breakpoint = "1200";
-					var ajaxurl = "http:\/\/localhost\/barrister\/wp-admin\/admin-ajax.php";
+	</script>
+	<script src="{% static 'content_js/cf_js/scripts.js' %}"></script>
+	<script src="{% static 'content_js/js.cookie.min.js' %}"></script>
+	<script>
+		/* <![CDATA[ */
+		/* ]]> */
+	</script>
+	<script src="{% static 'content_js/woocommerce.min.js' %}"></script>
+	<script>
+		/* <![CDATA[ */
+		/* ]]> */
+	</script>
+	<script src="{% static 'content_js/cart-fragments.min.js' %}"></script>
+	<script src="{% static 'content_js/perfect-scrollbar.jquery.min.js' %}"></script>
+	<script src="{% static 'content_js/select2.min.js' %}"></script>
+	<script src="{% static 'content_js/isotope.pkgd.min.js' %}"></script>
+	<script src="{% static 'content_js/jquery.mousewheel.min.js' %}"></script>
+	<script src="{% static 'content_js/jquery.flexslider-min.js' %}"></script>
+	<script src="{% static 'content_js/jquery.sticky-kit.min.js' %}"></script>
+	<script src="{% static 'content_js/slick.min.js' %}"></script>
+	<script src="{% static 'content_js/jquery.prettyPhoto.min.js' %}"></script>
+	<script src="{% static 'content_js/js_composer_front.min.js' %}"></script>
+	<script>
+		/* <![CDATA[ */
+		var themestek_breakpoint = "1200";
+		var ajaxurl = "http:\/\/localhost\/barrister\/wp-admin\/admin-ajax.php";
 /* ]]> */
-				</script>
-				<script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
-				<script src="{% static 'content_js/forms.min.js' %}"></script>
-				{% endblock %}
-			</body>
-            {% endblock  %}
-			</html>
+	</script>
+	<script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
+	<script src="{% static 'content_js/forms.min.js' %}"></script>
+	{% endblock %}
+</body>
+{% endblock  %}
+
+</html>

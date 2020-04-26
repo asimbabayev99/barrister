@@ -248,7 +248,7 @@
                 <ul class="products columns-3">
                   {% for product in page_obj %}
                   <li class="product type-product post-11653 status-publish last instock product_cat-aksesuarlar has-post-thumbnail shipping-taxable purchasable product-type-simple">
-                    <a href="#"
+                    <a href="{% url 'product-single' product.id %}"
                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300"
                       src="{{product.image.url}}"
                       class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
@@ -277,10 +277,12 @@
                     {% endif %}
                     </span>
                       
-                  </a><a href="?add-to-cart=11655" data-quantity="1"
+                  </a>
+                  <button  data-quantity="1"
                     class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="11655"
-                    data-product_sku="" aria-label="“Klassik geyim” ürününü sepete ekle" rel="nofollow">Sepete
-                    Ekle</a></li>  
+                    data-product_sku="" aria-label="“Klassik geyim” ürününü sepete ekle" rel="nofollow">Sepete Ekle
+                  </button>
+                  </li>  
                   {% endfor %}
                   <!-- <li
                     class="product type-product post-11655 status-publish first instock product_cat-umumi has-post-thumbnail shipping-taxable purchasable product-type-simple">

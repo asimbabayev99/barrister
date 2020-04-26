@@ -424,7 +424,7 @@ class PublicationAPIView(APIView):
         serializer = self.serializer_class(instance=saved_publication, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             publication_saved = serializer.save()
-        return Response({"success": "Publication '{}' updated successfully".format(publication_saveds.pk)})
+        return Response({"success": "Publication '{}' updated successfully".format(publication_saved.pk)})
 
 
     def delete(self, request, pk):
@@ -446,14 +446,15 @@ class StandardResultsSetPagination(PageNumberPagination):
 class NewsList(ListAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    authentication_classes = [ExampleAuth,]
+    # authentication_classes = [ExampleAuth,]
     permission_classes = [AllowAny,]
     filter_backends = [DjangoFilterBackend,OrderingFilter]
     pagination_class = StandardResultsSetPagination
     
 
+
 class NewsAPI(APIView):
-    authentication_classes=[ExampleAuth]
+    # authentication_classes=[ExampleAuth]
     permission_classes = [AllowAny]
     
 
@@ -485,8 +486,9 @@ class NewsAPI(APIView):
         # if request.user.role is None or permission not in request.user.role.permissions.all():
         #     return Response({"permission":'denied'})
         if serializer.is_valid(raise_exception=True):
-            serializer.update
-        return Response(serializer.validated_data)
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self,request,pk):
         news = self.get_object(pk)
