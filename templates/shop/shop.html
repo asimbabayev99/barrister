@@ -278,8 +278,8 @@
                     </span>
                       
                   </a>
-                  <button  data-quantity="1"
-                    class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="11655"
+                  <button id='bt1' type="button" onclick="" quantity="1"
+                    class="button product_type_simple add_to_cart_button ajax_add_to_cart" product_id="{{ product.id }}"
                     data-product_sku="" aria-label="“Klassik geyim” ürününü sepete ekle" rel="nofollow">Sepete Ekle
                   </button>
                   </li>  
@@ -507,6 +507,38 @@
   </script>
   <script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
   <script src="{% static 'content_js/forms.min.js' %}"></script>
+  <script>
+    $(document).ready(function(){
+      $('#bt1').on('click','ajax_add_to_cart',function(){
+        var product = $(this).attr('product_id');
+        var quantity = $(this).attr('quantity');
+        jQuery.ajax({
+          type = "POST",
+          beforeSend: function(request){
+            request.setRequestHeader('Email','azad@mail.ru')
+            request.setRequestHeader('Password','azad12345')
+
+          },
+          url = '/api/basket/add',
+          dataType = 'json',
+          contentType = 'application/json',
+          data = {'product': String(product),'quantity': String(quantity)},
+          console
+        });
+
+
+      })
+
+
+    });
+
+
+
+
+  </script>
+
+
+
   {% endblock %}
 </body>
 {% endblock %}
