@@ -340,13 +340,11 @@ def redirect_news_list(request):
     return render(request,'admin-panel/admin_NewsList.html')
 
 def attorneys_view(request):
-
     page = request.GET.get('page', 1)
     try:
         page = int(page)
     except:
         page = 1
-
 
     attorneys = CustomUser.objects.filter(role__name="Barrister")
     paginator = Paginator(attorneys, 6)
