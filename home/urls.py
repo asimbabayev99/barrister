@@ -28,7 +28,8 @@ urlpatterns = [
     path('admin/news/update/<slug:slug>', admin_news_update, name='admin-news-update'),
     path('admin/user/add', admin_user_add, name='admin-user-add'),
     path('contacts/',contacts_view,name='contacts'),
-    path('attorneys/', attorneys_view, name='attorneys')
+    path('attorneys/', attorneys_view, name='attorneys'),
+    path('is-masasi/',is_masasi,name='is-masasi')
    
     
 
