@@ -340,5 +340,19 @@ def redirect_news_list(request):
     return render(request,'admin-panel/admin_NewsList.html')
 
 def attorneys_view(request):
-    return render(request,'attorneys.html')
+    page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        page = 1
+ 
+    attorneys = CustomUser.objects.all()
+    paginator = Paginator(attorneys, 6)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+    
+    return render(request,'attorneys.html', context=context)
       
