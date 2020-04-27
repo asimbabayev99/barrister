@@ -339,5 +339,6 @@ def redirect_news_list(request):
     
     return render(request,'admin-panel/admin_NewsList.html')
 
-
+def attorneys_view(request):
+    return render(request,'attorneys.html')
       
