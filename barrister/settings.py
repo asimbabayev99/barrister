@@ -133,6 +133,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+
+
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7         # 7 days
 
 
