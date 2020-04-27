@@ -350,6 +350,9 @@ def attorneys_view(request):
     paginator = Paginator(attorneys, 6)
     page_obj = paginator.get_page(page)
 
+    # for i in page_obj:
+    #     print(i)
+
     context = {
         "page_obj": page_obj,
     }
