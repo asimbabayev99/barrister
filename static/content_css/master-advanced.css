@@ -5798,7 +5798,7 @@ span.themestek-vc_label_units.vc_label_units {
     background: transparent;
     height: 5px;
     border-radius: 6px;
-    transition-property: width, 
+    transition-property: width;
     padding: 0;
     top: -36px;
     left: 0px;
@@ -7325,6 +7325,25 @@ button, input, select, textarea{
 	font-weight: bold;
 }
 
+.woocommerce button.remove {
+    display: block;
+    font-size: 1.5em;
+    height: 1em;
+    width: 1em;
+    padding: 0px 5px 0px 4px;
+    text-align: center;
+    line-height: 1;
+    border-radius: 100%;
+    color: red!important;
+    text-decoration: none;
+    font-weight: 700;
+    border: 0;
+    background: white;
+}
+.woocommerce button.remove:hover {
+    color: #fff!important;
+    background: red;
+}
 /* woocommerce checkout */
 .woocommerce-checkout h3{
 	font-size: 18px;
