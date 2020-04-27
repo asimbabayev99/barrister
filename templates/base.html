@@ -34,7 +34,7 @@
         #rs-demo-id {}
     </style>
     <link rel='stylesheet' id='font-awesome-css' href="{% static 'content_css/font-awesome.min.css' %}" media='all' />
-    <link rel='stylesheet' id='sgicon-css' href="{% static 'content_css/style.css' %}" media='all' />
+    <!-- <link rel='stylesheet' id='sgicon-css' href="{% static 'content_css/style.css' %}" media='all' /> -->
     <!-- <link rel='stylesheet' id='vc_linecons-css'  href="{% static 'content_css/vc_linecons_icons.min.css' %}"  media='all' /> -->
     <link rel='stylesheet' id='themestek-cs-google-fonts-css'
         href='http://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPlayfair+Display%3A400%2Citalic%2C700%2C700italic%2C900%2C900italic%7CNunito+Sans%3A700&amp;ver=1.0.0'
@@ -479,18 +479,22 @@
                                                 </li>
                                                 <li>
                                                     {% if request.user.role.name == "Barrister" %}
-                                              <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
+                                                    <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
                                                        href="{% url 'calendar' %}" title="">İş masası</a>
-                                                       {% else %}
+                                                    {% else %}
                                                     <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
                                                         href="{% url 'calendar' %}" title="">Konsultasiya</a>
-                                                        {% endif %}
+                                                    {% endif %}
                                                 </li>
                                             </ul>
                                         </div>
    <!-- account button begin-->
    <div class="dropdown">
+    {% if request.user.is_authenticated %}   
+    <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ request.user.first_name }}</button>
+    {% else %}
     <button type="button" class=" wpcf7-form-control wpcf7-submit btn-blockdropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hesab</button>
+    {% endif %}
      <div class="dropdown-menu account-dropdown">
         {% if request.user.is_authenticated %}   
         <a class="dropdown-item account-dropdown-item" href="{% url 'user-profile' %}">
@@ -509,6 +513,7 @@
         {% endif %}
      </div>
    </div>
+   
       <!-- account button end-->                                        
   <div class="themestek-table-cell themestek-align-right">
     <div class="themestek-social-links-wrapper" >
@@ -519,12 +524,14 @@
                                                     <li class="themestek-social-twitter"><a class=" tooltip-top"
                                                             target="_blank" href="#"><i
                                                                 class="themestek-attorco-icon-twitter"></i></a></li>
-                                                    <li class="themestek-social-flickr"><a class=" tooltip-top"
-                                                            target="_blank" href="#"><i
-                                                                class="themestek-attorco-icon-flickr"></i></a></li>
                                                     <li class="themestek-social-linkedin"><a class=" tooltip-top"
                                                             target="_blank" href="#"><i
                                                                 class="themestek-attorco-icon-linkedin"></i></a></li>
+                                                    <select id="cars" class="lang-select"> 
+                                                        <option value="az">AZ</option>
+                                                        <option value="ru">RU</option>
+                                                        <option value="en">EN</option>
+                                                    </select>
                                                 </ul>
                                             </div>
                                         </div>
@@ -558,8 +565,14 @@
                                             <div class="themestek-header-right">
                                                 <div class="themestek-header-text-area themestek-header-button-w">
                                                     <div class="themestek-vc_btn3-container themestek-vc_btn3-inline">
+                                                        
+                                                        {% if request.user.role.name == "Barrister" %}
+                                                        <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
+                                                        href="{% url 'calendar' %}" title="">İş masası</a></div>
+                                                        {% else %}
                                                         <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
                                                             href="{% url 'calendar' %}" title="">Konsultasiya</a></div>
+                                                        {% endif %}      
                                                 </div>
                                                 <div class="themestek-header-icons ">
                                                     <span class="themestek-header-icon themestek-header-wc-cart-link">

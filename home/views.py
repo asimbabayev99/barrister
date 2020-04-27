@@ -97,15 +97,17 @@ def admin_news_update(request,slug):
     if request.user.is_superuser is False:
         return Http404()
         
-    news = get_object_or_404(News.objects.all(),slug=slug)
+    news = get_object_or_404(News, slug=slug)
     form = Newsform(instance=news)
     if request.method == "POST":
         form = Newsform(request.POST,request.FILES,instance=news)
         if form.is_valid():
+            news.date = timezone.now()
             news.title = form.cleaned_data['title']
             news.content = form.cleaned_data['content']
             news.image = form.cleaned_data['image']
             news.save()
+            return redirect('admin-news-list')
             
 
     form = Newsform(instance=news)
@@ -258,6 +260,7 @@ def admin_add_news(request):
             image = form.cleaned_data['image']
             news = News(title=title,content=content,image=image,user=request.user)
             news.save()
+            
     form = Newsform()
     
     return render(request,'admin-panel/admin-AddNews.html',context={ 'form':form})
@@ -299,8 +302,6 @@ def contacts_view(request):
     return render(request,'contacts.html')
 
 
-
-
 def get_tasks_list(request):
 
     status = request.GET.get('status')
@@ -334,4 +335,27 @@ def add_task_view(request):
     
     return render(request, '', context=contetx)
 
+def redirect_news_list(request):
+    
+    return render(request,'admin-panel/admin_NewsList.html')
 
+def attorneys_view(request):
+    page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        page = 1
+
+    attorneys = CustomUser.objects.filter(role__name="Barrister")
+    paginator = Paginator(attorneys, 6)
+    page_obj = paginator.get_page(page)
+
+    # for i in page_obj:
+    #     print(i)
+
+    context = {
+        "page_obj": page_obj,
+    }
+
+    return render(request,'attorneys.html', context=context)
+      

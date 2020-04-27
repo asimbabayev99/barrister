@@ -1,9 +1,17 @@
 $(document).ready(function() {
   $("#calendar-ms").fullCalendar({
+    customButtons: {
+      printButton: {
+        text: 'Çap et',
+        click: function() {
+          window.print(); 
+        }
+      }
+    },
     header: {
-      left: "prevYear,prev,next,nextYear, today",
+      left: "prevYear,prev,next,nextYear",
       center: "title",
-      right: "month,agendaWeek,agendaDay"
+      right: "today,month,agendaWeek,agendaDay,printButton"
     },
     buttonText: {
         prevYear: new moment().year() - 1,
@@ -12,8 +20,7 @@ $(document).ready(function() {
     viewRender: function(view) {
         var y = moment($('#calendar-ms').fullCalendar('getDate')).year();
         $(".fc-prevYear-button").text(y-1),
-        $(".fc-nextYear-button").text(y+1),
-        console.log(y)
+        $(".fc-nextYear-button").text(y+1)
     },
     defaultView: "month",
     navLinks: true, // can click day/week names to navigate views

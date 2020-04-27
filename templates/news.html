@@ -29,7 +29,9 @@
           {% for n in news %}
             <div class="col-md-4 mt-4"> 
               <div class="card" style="width: 18rem;">
+                {% if n.image %}
                 <img class="card-img-top" src="{{ n.image.url }}" alt="Card image cap">
+                {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">{{n.title}}</h5>
                   <p class="card-text">{{n.content|safe}}</p>

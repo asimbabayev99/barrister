@@ -876,7 +876,7 @@ div.nav-menu > ul li ul li a,
         box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
     } 
     .themestek-stickable-header{
-        z-index: 12;      
+        z-index: 0;      
     }
     .themestek-header-right,   
     .headerlogo, 

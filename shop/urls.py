@@ -9,5 +9,8 @@ from barrister import settings
 urlpatterns = [
     
     path('', shop_view, name='shop'),
+    path('basket/',shop_basket_view,name="basket"),
+    path('product-single/<int:id>',product_single_view, name='product-single'),
+    path('<str:category>/', shop_view, name='shop'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 

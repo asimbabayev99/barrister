@@ -17,6 +17,13 @@ urlpatterns = [
     path('news/list/',NewsList.as_view()),
     path('news/create/',NewsAPI.as_view()),
     path('news/detail/<int:pk>',NewsAPI.as_view()),
+    path('task/list',TaskList.as_view()),
+    path('task/detail/<int:pk>',TaskDetail.as_view()),
+    path('task/create',TaskDetail.as_view()),
+    path('product/list/',ProductList.as_view()),
+    path('basket/list/',BasketList.as_view()),
+    path('basket/add',BasketDetail.as_view()),
+    path('basket/delete/<int:pk>',BasketDetail.as_view()),
     path('event/detail/<int:id>',EventDetail.as_view()),
     path('profile/list/',ProfilesList.as_view()),
     path('profile/<int:id>',ProfileDetail.as_view()),
@@ -28,4 +35,5 @@ urlpatterns = [
     path('awards/', AwardAPIView.as_view()),   
     path('experiences/<int:pk>', ExperienceAPIView.as_view()),
     path('experiences/', ExperienceAPIView.as_view()),
+
 ]

@@ -22,6 +22,10 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+#calendar-ms {
+  margin: 0 auto;
+  height: auto;  
+}
 /* calendar end */
 
 /* login page begin */
@@ -376,7 +380,7 @@ body {
   width: 100%;
   text-decoration: none;
   position: relative;
-  padding: 8px 30px 8px 20px;
+  padding: 8px 30px 3px 20px;
 }
 
 .sidebar-wrapper .sidebar-menu ul li a i {
@@ -1453,6 +1457,45 @@ opacity: 1;
 .danger {background-color: #d9534f}
 .success {background-color: #5cb85c}
 .inf {background-color: #5bc0de}
+
+
+/* barrister-Dashboard begin */
+.h3db{
+  color: #7d846f;
+  font-family: 'Trocchi', serif;
+  font-size: 35px;
+  line-height: 48px;
+  margin: 0;
+  text-align:center;
+  font-weight: bold;
+}
+.chart-container{
+  font-family: Verdana, sans-serif;
+  background-color: #31353df7 !important;
+}
+.box{
+  background-color: #313348d4 !important; 
+}
+.box15{
+  background-color: #3072b9bf !important;
+}
+.box16{
+  background-color: #d9534fcf !important;
+}
+.box17{
+  background-color: #f0ad4eba !important;
+}
+.box18{
+  background-color: #2f5406ad !important;
+}
+.notes{
+  padding: 10px 5% 35px 0;
+}
+.settings{
+}
+/* barrister-Dashboard end */
+
+
 /* admin-dashboard end */
 
 /* admin-NewsList begin */

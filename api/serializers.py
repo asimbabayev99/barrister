@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
+from shop.models import *
+# from rest_framework.parsers import 
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -179,12 +181,43 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 
+
+
 class NewsSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    image = serializers.FileField()
     
     class Meta:
         model = News
         fields = ['title','content','date','image','user']
+    
+    def update(self,instance,validated_data):
+        instance.title = validated_data['title']
+        instance.content = validated_data['content']
+        instance.image = validated_data['image']
+        instance.save()
+        return instance
+
+
+class TaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ['title','description','status','deadline',]
+
+    
+class ProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = ['title','description','category','color','image','price','discounted_price','stock','date','deleted']
+
+
+class BasketSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+    class Meta:
+        model = Basket
+        fields = ['user','product','quantity']
 
 
 

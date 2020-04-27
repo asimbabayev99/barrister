@@ -4,13 +4,15 @@ body {
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
+
+/* calendar begin */
 #calendar-body {
   margin:10px;
   padding: 0;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
   /* Изображение André Stämmler с сайта Pixabay  */
-  background-image: url(/img/law-firm-4924547_640.jpg);
+  background-image: url(../../static/img/law-firm-4924547_640.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -20,6 +22,7 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+/* calendar end */
 
 /* login page begin */
 #login-body{
@@ -28,7 +31,6 @@ body {
   background-size: cover;
   background-position: center center;
 }
-
 .page{
   padding: 10px 4% 10px 4%;
   border:1px solid #CDBA6D;
@@ -47,13 +49,11 @@ body {
   border-radius: 8px;
   padding-left: 5px;
 }
-
 .page ::placeholder{
   color: black;
   font-weight: bold;
   opacity: 0.8;
 }
-
 .page .remember{
   width: 15px;
   height: 15px;
@@ -78,7 +78,6 @@ body {
   box-shadow: 2px 2px 3px #cdba6d;
   background-color: black;
   color: #cdba6d;
-
 }
 .page a{
   color: black;
@@ -93,7 +92,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
 }
 .form-wrapper{
   box-shadow: 0px 7px 26px 2px rgba(0,0,0,0.75);
@@ -104,13 +102,11 @@ body {
   position:relative;
   z-index:1;
 }
-
  #form1 div input{
   background-color:#e9d4b3;
   border:1px solid #CDBA6D;
   border-radius: 8px;
   padding-left: 5px;
-  
 }
 #form1 ::placeholder{
   font-weight: bold;
@@ -120,7 +116,6 @@ body {
   background-color: #e9d4b3;
   border-radius: 8px;
 }
-
 .qeydDuyme{
   border: 1px solid #cdba6d; 
   border-radius: 15px;
@@ -140,12 +135,10 @@ body {
   box-shadow: 2px 2px 3px #cdba6d;
   background-color: black;
   color: #cdba6d;
-
 }
 .passdiv{
   float: left;
 }
-
 #errMessage{
   border:1px solid black;
   background-color:rgba(252,225,146,0.5);
@@ -155,10 +148,11 @@ body {
   border:2px solid red;
   color:black;
 }
-
 /* register page end */
 
 
+/* sidebar begin */
+/* sidebar animation begin */
 @keyframes swing {
   0% {
     transform: rotate(0deg);
@@ -216,6 +210,7 @@ body {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+/* sidebar animation end */
 
 /*----------------page-wrapper----------------*/
 
@@ -637,6 +632,8 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+/* sidebar end */
+
 #minicalendaricon{
   height: 30px !important;
   top:14% !important;
@@ -657,29 +654,23 @@ body {
 }
 
 
-/* modal begin */
-.closeon {
-  border-radius: 5px;
-}
-/* modal end */
 
+/*calendar modal begin  */
+#event_name_input {
+  width: 70%;
+}
 .top_of_event_box {
 width: 100%;
 height: 40px;
-background-color: seagreen;
+background-color: #bb3939;
 line-height: 40px;
 color: white;
 font-size: 18px;
 font-family: 'Courier New', Courier, monospace;
-
-
-
 }
-
 .pencere_basligi{
 line-height: 40px;
 margin-left: 5px;
-
 }
 .pencere_baglayan_icon {
 font-size: 15px;
@@ -711,8 +702,7 @@ cursor: pointer;
   padding: 0px;
   font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
-  transition: 1s;
-  
+  transition: 1s; 
 }
 .modal-title:hover {
   border-bottom:1.5px solid darkblue ;
@@ -725,10 +715,8 @@ cursor: pointer;
 .modal-header {
   width: 100%;
   height: 40px;
-  
   padding: 0px;
   margin: 5px 0px 0px 0px;
-
 }
 #input_baslama_vaxti{
   padding-left: 5px;
@@ -754,32 +742,26 @@ border-bottom:1px solid  darkblue;
 padding: 0px 2px !important;
 transition: 0.5s;
 font-family: 'Courier New', Courier, monospace;
-
-
 }  
-
 #input_baslama_vaxti:hover {
-background-color: aqua;
 border-bottom:1.5px solid darkblue
 }
 #input_baslama_vaxti:focus {
 outline: 0px;
-background-color: mediumseagreen;
+background-color:#76bfd5;
 border-bottom:1.5px solid darkblue
 }
 #input_bitme_vaxti:hover {
-background-color: aqua;
 border-bottom:1.5px solid darkblue
 }
 #input_bitme_vaxti:focus {
 outline: 0px;
-background-color: mediumseagreen;
+background-color: #76bfd5;
 border-bottom:1.5px solid darkblue;
-
 }
 .location_icon {
 font-size: 20px;
-color: seagreen;
+color: #bb3939;
 margin-right: 5px; 
 } 
 #location_input {
@@ -798,11 +780,9 @@ transition: 0.5s;
 #location_input:hover {
 border-bottom: 1.3px solid darkblue;
 }
-
 .div_for_select_in_event_box {
 width: 100%;height: 40px;margin-top: 40px;
 }
-
 #select_box_in_event_box {
 width: 200px;
 height: 40px;
@@ -819,12 +799,10 @@ outline: 0px;
 }
 .close_button_in_event_box{
 padding: 5px 15px;
-border: 1px solid green;
+color: #bb3939;
 background: white;
 border-radius: 0px;
 font-family: 'Courier New', Courier, monospace;
-
-
 }
 .save_button_in_event_box{
 padding: 5px 15px;
@@ -832,17 +810,14 @@ border: 1px solid green;
 background: white;
 border-radius: 0px;
 font-family: 'Courier New', Courier, monospace;
-background-color: seagreen;
-color: white;}
-
+background-color: #bb3939;
+color: white;
+}
 .save_button_in_event_box:hover {
   color: white;
 }
-
-
 .close_button_in_event_box:hover {
-background-color: seagreen;
-color: white;
+color: blue;
 padding: 5px 15px;
 border-radius: 0px;
 }
@@ -851,16 +826,14 @@ outline: 0px;
 }
 .second_icon {
   font-size: 25px;
-  color: seagreen;
+  color: #F50057;
   margin-right:10px;
 }  
-
 #modal-body {
   padding: 0px 0px 0px 20px !important;
   margin:10px 0px 10px 10px !important;
   flex: 0 0 auto;
 }
-
 #modal-body2 {
   padding: 0px 0px 0px  20px !important;
   margin:10px 0px !important;
@@ -873,7 +846,7 @@ outline: 0px;
 }
 .calendar_icon {
   font-size: 20px;
-  color: seagreen;
+  color: #F50057;
   margin-right: 10px;
   margin-left: 20px;
   line-height: 40px;
@@ -882,7 +855,7 @@ outline: 0px;
   font-size: 20px;
   margin-left: 5px;
   margin-right: 10px;
-  color: seagreen;
+  color: #F50057;
   line-height: 100%;
 }
 .saat_iconu {
@@ -903,8 +876,86 @@ outline: 0px;
   font-size: 18px;
   font-family: 'Courier New', Courier, monospace;
 }
-/* user form editor begin */
+.etrafli_linki {
+  color: #bb3939;
+  text-decoration: none;
+}
 
+/*In modal to choose icons and time interval */
+
+.icon_secmek_ucun span {
+  
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+#icon_secmek_ucun i {
+  font-size: 35px !important;
+  
+  margin: 10px;
+}
+#choose_icon_button {
+  color: black;
+  font-size: 20px;
+  background-color:transparent;
+  width: 52px;
+  height: 36px;
+  outline: none;
+  border-style: none;
+  margin: 0px 5px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+#event_name_input {
+  width: 66%;
+}
+#icon_secmek_ucun {
+  background-color: white;
+  z-index: 100;
+  position: absolute;
+  width: 314px;
+  height: 214px;
+  display: none;
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px grey;
+}
+.div_for_select_box {
+  width: 200px;
+  height: 40px;
+  background-color: transparent;
+  margin:10px 10px 10px 147px;
+  
+}
+
+#select_box_baslig {
+  width: 100%;
+  height: 40px; 
+  cursor: pointer;
+  line-height: 40px;
+  font-size: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}
+#select_box_alt_hisse {
+  background-color:white;
+  box-shadow: 6px 6px 10px grey;
+}
+#vaxt_divleri {
+  border-bottom: 1px solid black;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+}
+#vaxt_divleri:hover {
+  background-color:#76bfd5;
+}
+/* calendar modal end */
+
+/* user form editor begin */
 .info-text {
 	font-size: 1rem;
 }
@@ -1080,20 +1131,31 @@ outline: 0px;
 .made-with-love a:hover {
   text-decoration: underline;
 }
-
-
-/* for custom scrollbar for webkit browser*/
-
+/* for custom scrollbar for webkit browser begin*/
 ::-webkit-scrollbar {
     width: 6px;
 } 
+/* for custom scrollbar for webkit browser end*/
+
 /* User table end */
+
 /* Newevent begin */
 .newevent button{
   margin-left: 10px;
 }
 .browser-default{
   width: 200px;
+}
+.show-select{
+  width: 10%;
+  background-color: #f8f9fa;
+}
+.reminder-select{
+  width: 10%;
+  background-color: #f8f9fa;
+}
+.header-icons{
+  background-color: #f8f9fa;
 }
 .that{
   width: inherit;
@@ -1108,8 +1170,6 @@ outline: 0px;
   font-size: 20px;
 }
 .that3{
-  width: 55%;
-  /* margin-top: 30px; */
   height: 35px !important;
 }
 .that4{
@@ -1135,8 +1195,34 @@ outline: 0px;
 .headmain{
   margin-top: 50px;
 }
-
+/* media*/
+@media screen and (max-width: 768px) {
+ .reminder-select {
+    width: 40%;
+  }
+ .show-select{
+   width: 40%;
+ }
+ .save-btn{
+   width: 48%;
+ }
+ .delete-btn{
+   width: 48%;
+ }
+ .show-text{
+  margin-right: 20%;
+  margin-left: 5%;
+ }
+ .remind-text{
+  margin-right: 11%;
+  margin-left: 5%;
+ }
+ .remind-btn{
+   width: 50%;
+ }
+}
 /* Newevent end */
+
 
 
 /*Yeni xeber elave etmek ucun*/ /*Musa*/
@@ -1367,7 +1453,52 @@ opacity: 1;
 .danger {background-color: #d9534f}
 .success {background-color: #5cb85c}
 .inf {background-color: #5bc0de}
+
+
+/* barrister-Dashboard begin */
+.h3db{
+  color: #7d846f;
+  font-family: 'Trocchi', serif;
+  font-size: 35px;
+  line-height: 48px;
+  margin: 0;
+  text-align:center;
+  font-weight: bold;
+}
+.chart-container{
+  font-family: Verdana, sans-serif;
+  background-color: #31353df7 !important;
+}
+.box{
+  background-color: #313348d4 !important; 
+}
+.box15{
+  background-color: #3072b9bf !important;
+}
+.box16{
+  background-color: #d9534fcf !important;
+}
+.box17{
+  background-color: #f0ad4eba !important;
+}
+.box18{
+  background-color: #2f5406ad !important;
+}
+.notes{
+  padding: 10px 5% 50px 0;
+}
+.settings{
+}
+/* barrister-Dashboard end */
+
+
 /* admin-dashboard end */
+
+/* admin-NewsList begin */
+.no-outline{
+   outline: none!important;
+ }
+/* admin-NewsList end */
 
 /* admin-NewsList begin */
 .no-outline{
