@@ -4,7 +4,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {% block title %}
     <title>Barrister Admin</title>
+    {% endblock title %}
+      
+    
+    {% block links %}
     <link
       rel="shortcut icon"
       href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
@@ -26,7 +32,10 @@
       media="print"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    {% endblock links %}
   </head>
+  
   <body style="background-color: #384554;">
     <div class="page-wrapper chiller-theme toggled">
     <div id="show-sidebar">
@@ -236,6 +245,7 @@
       </div> 
     </nav>
     
+  {% block content %}
 <main style="font-weight: bold;" class="page-content design">
     <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
       <div class="welcome">
@@ -368,9 +378,11 @@
           </div>
 
   </main>
+  {% endblock content %}
   </div>
-  
+ 
 
+{% block scripts %}
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -380,5 +392,6 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
 </body>
 </html>

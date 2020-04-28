@@ -358,4 +358,7 @@ def attorneys_view(request):
     }
 
     return render(request,'attorneys.html', context=context)
+
+def is_masasi(request):
+    return render(request,'barrister-admin.html')
       

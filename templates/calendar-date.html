@@ -1,5 +1,16 @@
-{% extends 'admin-panel/admin-base.html' %}
+{% extends 'barrister-admin.html' %}
 {% load static %}
+
+{% block title %}
+  <title>Calendar</title>
+{% endblock title %}
+
+
+{% block links %}
+  {{ block.super }}
+{% endblock links %}
+  
+  
       
       {% block content %}
 
@@ -123,7 +134,7 @@
       <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
       <script src="{% static 'js/fullcalendar-date.js' %}"></script>
       <script src="{% static 'js/main.js' %}"></script>
-      {% endblock  %}
+      {% endblock scripts %}
 </body>   
 
 </html>
