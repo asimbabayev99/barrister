@@ -11,8 +11,6 @@ urlpatterns = [
     path('', index_view, name='home'),
     path('calendar/', calendar_view, name='calendar'),
     path('profile/<int:id>', single_view, name='single-view'),
-    path('news/', news_view, name='news'),
-    path('news/<slug:slug>', news_detail_view, name='news_detail'),
     path('about-us/', about_us_view, name='about-us'),
 
     path('publication/add', publication_add_view, name='publication-add'),
@@ -30,7 +28,6 @@ urlpatterns = [
     path('contacts/',contacts_view,name='contacts'),
     path('attorneys/', attorneys_view, name='attorneys'),
     path('is-masasi/',is_masasi,name='is-masasi')
-   
-    
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
