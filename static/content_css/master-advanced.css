@@ -7986,5 +7986,12 @@ body .booked-calendar-wrap .booked-appt-list .timeslot .timeslot-people button{
     background: transparent;
     border: 1px solid #cdba6d;
 }
+.basket-select{
+    font-size: 13px;
+    width: 55px;
+    padding: 10px 5px;
+    background: transparent;
+    border: 1px solid #cdba6d;
+}
 /* preheader end */
 
