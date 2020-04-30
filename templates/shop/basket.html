@@ -294,7 +294,7 @@
 
 															<td class="product-quantity" data-title="Miktar">
 																<div class="quantity">
-																	<select id="basket" class="basket-select"> 
+																	<select id="basket" class="basket-select" basket_id ="{{ basket.id }}" actualqty='{{ basket.quantity }}' > 
 																		<option value="1">1</option>
 																		<option value="2">2</option>
 																		<option value="3">3</option>
@@ -534,13 +534,35 @@
 				success: function (data, status, xhr) {
            			 console.log('success')
           			},
-
+ 
 
 			});
 			location.reload();
-
-
 		});
+
+		$('.basket-select').on('change',function(){
+			var id = $(this).attr('basket_id')
+			var quantity = $('#basket option:selected').val()
+			
+			$.ajax({
+				headers:{
+					"X-CSRFToken":getCookie('csrftoken')
+				},
+				url :'/api/basket/' + String(id) ,
+				type : "PATCH",
+				data : {'quantity': quantity },
+				success: function(data){
+					$('#basket').val($('#basket option:selected')).val($(this).attr('actualqty'))
+				}
+
+			});
+			
+
+	
+		});
+		$('#basket').each(function(i){
+			$(this).val($('#basket option:selected')).val($(this).attr('actualqty'))
+		})
 
 
 	});

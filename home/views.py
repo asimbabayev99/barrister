@@ -112,27 +112,6 @@ def admin_news_update(request,slug):
 
     form = Newsform(instance=news)
     return render(request,'admin-panel/admin-UpdateNews.html',context={'form':form})
-
-
-
-
-def news_view(request):
-    news = News.objects.all()
-    
-    context = {
-        "news":news
-    }
-    return render(request, "news.html", context=context)
-
-
-
-
-def news_detail_view(request, slug):
-    news = get_object_or_404(News, slug = slug)
-    context = {
-        'news': news
-    }
-    return render(request, "news_detail.html", context=context)
         
 
 

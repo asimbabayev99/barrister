@@ -574,8 +574,8 @@ class BasketList(ListAPIView):
 
 
 class BasketDetail(APIView):
-    authentication_classes=[SessionAuthentication]
-    permission_classes = [IsAuthenticated,AllowAny]
+    # authentication_classes=[SessionAuthentication]
+    # permission_classes = [IsAuthenticated,AllowAny]
 
     def get(self,request,pk):
         basket = get_object_or_404(Basket.objects.all(),pk=pk)
