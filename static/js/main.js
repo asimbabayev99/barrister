@@ -105,7 +105,7 @@ $(document).ready(function() {
     $("#select_box_baslig").html($(".deqiqe_5").html());
     $("#select_box_alt_hisse").slideUp(200)
   });
-  
+   
   $(".deqiqe_10").click(function() {
     $("#select_box_baslig").html($(".deqiqe_10").html());
     $("#select_box_alt_hisse").slideUp(200)
