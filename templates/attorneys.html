@@ -376,8 +376,9 @@
 	<!-- To Top -->
 	<a id="totop" href="#top"><i class="themestek-attorco-icon-angle-up"></i></a>
 
-	{% block scripts %}
-	<script>(function () {
+  {% block scripts %}
+    {{ block.super }}
+	<!-- <script>(function () {
 			function maybePrefixUrlField() {
 				if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
 					this.value = "http://" + this.value;
@@ -431,7 +432,7 @@
 /* ]]> */
 	</script>
 	<script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
-	<script src="{% static 'content_js/forms.min.js' %}"></script>
+	<script src="{% static 'content_js/forms.min.js' %}"></script> -->
 	{% endblock %}
 
 </body>
