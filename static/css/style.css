@@ -1569,3 +1569,40 @@ opacity: 1;
   }
 }
 /* news add and update page end*/
+/* personal-information begin*/
+.personal{
+  font-weight: bold;
+  background-image: url(https://cdn.pixabay.com/photo/2016/07/11/11/10/law-1509436_960_720.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content-personal{
+  background-color: #191813d4;
+}
+.content-personal h2{
+  color: #a18432
+}
+.box-personal{
+  background-color: #191813d4;
+  padding: 15px;
+}
+.info-personal{
+  margin-top:15px;
+}
+.info-personal label{
+  color: #a18432;
+}
+.input-personal{
+  width: 100%;
+  background-color: #191813d4;
+  color: white;
+  border-color: #a18432;
+}
+.button-personal{
+  width: 100%;
+  background-color: #191813d4;
+  color: #a18432;
+  border-color: #a18432;
+}
+/* personal-information end*/
