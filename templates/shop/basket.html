@@ -540,7 +540,8 @@
 			location.reload();
 		});
 		$('.basket-select').each(function(i){
-			$(this).find('option:selected').text(String($(this).attr('actualqty'))) 
+			// $(this).find('option:selected').text(String($(this).attr('actualqty'))) 
+      $(this).val($(this).attr('actualqty'))
 		})
 
 		$('.basket-select').on('change',function(){
