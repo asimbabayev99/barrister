@@ -545,7 +545,7 @@
 
 		$('.basket-select').on('change',function(){
 			var id = $(this).attr('basket_id')
-			var quantity = $('#basket option:selected').val()
+			var quantity = $(this).val()
 			
 			$.ajax({
 				headers:{
