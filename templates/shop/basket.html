@@ -539,6 +539,9 @@
 			});
 			location.reload();
 		});
+		$('.basket-select').each(function(i){
+			$(this).find('option:selected').text(String($(this).attr('actualqty'))) 
+		})
 
 		$('.basket-select').on('change',function(){
 			var id = $(this).attr('basket_id')
@@ -552,7 +555,8 @@
 				type : "PATCH",
 				data : {'quantity': quantity },
 				success: function(data){
-					$('#basket').val($('#basket option:selected')).val($(this).attr('actualqty'))
+					alert('Sebetiniz yenilendi')
+					$('basket option:selected').val($(this).attr('actualqty'))
 				}
 
 			});
@@ -560,10 +564,7 @@
 
 	
 		});
-		$('#basket').each(function(i){
-			$(this).val($('#basket option:selected')).val($(this).attr('actualqty'))
-		})
-
+		
 
 	});
 
