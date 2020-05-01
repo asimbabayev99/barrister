@@ -153,7 +153,7 @@ def user_detail_view(request, pk):
 def user_profile(request):
 
     # return render(request, 'user-profile.html')
-    return render(request, 'barrister-admin.html')
+    return render(request, 'barrister/barrister-admin.html')
 
 
 
