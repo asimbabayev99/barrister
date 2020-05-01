@@ -4,7 +4,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {% block title %}
     <title>Barrister Admin</title>
+    {% endblock title %}
+      
+    
+    {% block links %}
     <link
       rel="shortcut icon"
       href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
@@ -26,7 +32,10 @@
       media="print"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    {% endblock links %}
   </head>
+  
   <body style="background-color: #384554;">
     <div class="page-wrapper chiller-theme toggled">
     <div id="show-sidebar">
@@ -236,141 +245,91 @@
       </div> 
     </nav>
     
-<main style="font-weight: bold;" class="page-content design">
+  {% block content %}
+  <main class="page-content personal">
     <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+
       <div class="welcome">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
-                <div class="content">
-                  <h2>Ümumi statistik məlumatlar</h2>
+                <div class="content-personal">
+                  <h2>Şəxsi Məlumatlar</h2>
                 </div>
               </div>
             </div>
           </div>
         </div>
         
-        <div class="statistics">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="box">
-                  <i class="fa fa-envelope fa-fw bg-primary"></i>
-                  <div class="info">
-                    <h3>1,245</h3> <span>E-poçtlar</span>
-                    <p>Nəzərdən keçirilib</p>
-                    <br><br>
+        <div class="statistics" >
+          <div class="container-fluid" >
+            <div class="row" >
+              <div class="col-md-12" >
+                <div class="box-personal" >
+                  <form class="info_input">
+                 <div class="info-personal"> <label>Ad</label> 
+                    <div  > <input type="text" name="name" value="Testname" required="" placeholder="Adınız" maxlength="64" class="input-personal"> 
+                    </div>
+                 </div>
+                 <div class="info-personal"> <label>Soyad</label> 
+                    <div > <input type="text" name="last_name" value="TestSurname" required="" placeholder="Soyadiniz" maxlength="64" class="input-personal" > 
+                    </div>
+                 </div>
+                 <div class="info-personal"> <label>Email adresi</label> 
+                    <div > <input type="Email" name="email" value="test@lua.az" required="" placeholder="Email adresiniz" maxlength="64" class="input-personal"> 
+                    </div>
                   </div>
+                  <!-- <div class="info-personal"><label>Cinsiyyet</label> <div style="
+                          font-size: 17px;
+                      ">
+                                          <label style="
+                          margin-right: 12px;
+                      ">Kisi</label><input type="radio" checked="" name="gender" value="Kisi" style="
+                          margin-right: 29px;
+                          height: 13px;
+                      "> 
+                                          <label style="
+                          margin-right: 12px;
+                      ">Qadin</label><input type="radio" name="gender" value="Qadin" style="
+                          margin-right: 29px;
+                          height: 13px;
+                      ">
+                    </div>
+                 </div>   -->
+                  <div class="info-personal"> <label>Dogum tarixi</label> 
+                    <div> <input type="date" name="date" value="date" required="" class="input-personal" > 
+                    </div>
+                 </div>
+                 <div class="info-personal"> <label>Ünvan</label> 
+                    <div > 
+                      <input type="text" name="address" value="Qara Qarayev metro" required="" class="input-personal"> 
+                    </div>
+                 </div>
+                 <div class="info-personal"> <label>Telefon</label> 
+                    <div > <input type="number" name="phone" value="" required="" class="input-personal"> 
+                    </div>
+                 </div>
+                 <div class="info-personal"> 
+                    <div > <input type="submit" name="button" value="Yadda saxla" required="" class="button-personal"> 
+                    </div>
+                 </div>
+                 </form>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="box">
-                  <i class="fa fa-file fa-fw danger"></i>
-                  <div class="info">
-                    <h3>34</h3> <span>Ərizə</span>
-                    <p>Ay ərzində icra olunub</p>
-                    <br><br>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="box">
-                  <i class="fa fa-users fa-fw success"></i>
-                  <div class="info">
-                    <h3>104</h3> <span>Müştəri</span>
-                    <p>Müştəri sayı</p>
-                    <br>
-                    <br>
-                  </div>
-                </div>
-              </div>
+        
+         
             </div>
           </div>
         </div>
         
-        <div class="charts">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="chart-container">
-                  <p class="h3db">Bu gün görüləcək işlər</p>
-                  <br>
-                  <ol>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                    <li>Vəkil ivanla gorüş [20.04.2020]</li>
-                  </ol>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="chart-container">
-                  <p class="h3db">Konsultusiyalar</p>
-                  <br>
-                  <ol>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                    <li>Vəkil İvan [20.04.2020]</li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-      <div class='statis text-center'>
-        <div class="container-fluid">
-           <div class="row">
-
-                <div class="col-md-3">
-                  <div class="box box15 bg-primary">
-                    <i class="fa fa-eye"></i>
-                    <h3>620</h3>
-                    <p class="lead">Cari ay baxışı</p><br>
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="box box16 danger">
-                    <i class="fa fa-user-o"></i>
-                    <h3>340</h3>
-                    <p class="lead">Müştəri qeydiyyatı</p><br>
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="box box17 warning">
-                    <i class="fa fa-handshake-o"></i>
-                    <h3>1115</h3>
-                    <p class="lead">Məhkəmə prosesi</p><br>
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="box box18 success">
-                    <i class="fa fa-handshake-o"></i>
-                    <h3>8</h3>
-                    <p class="lead">Beynəlxalq diplom və sertifikatlar</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+       
 
   </main>
+  {% endblock content %}
   </div>
-  
+ 
 
+{% block scripts %}
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -380,5 +339,6 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
 </body>
 </html>

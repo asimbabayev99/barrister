@@ -574,8 +574,13 @@ class BasketList(ListAPIView):
 
 
 class BasketDetail(APIView):
-    authentication_classes=[SessionAuthentication]
-    permission_classes = [IsAuthenticated,]
+    # authentication_classes=[SessionAuthentication]
+    # permission_classes = [IsAuthenticated,AllowAny]
+
+    def get(self,request,pk):
+        basket = get_object_or_404(Basket.objects.all(),pk=pk)
+        serializer = BasketSerializer(basket)
+        return Response(serializer.data)
     
     def post(self,request):
         data = request.data
@@ -590,6 +595,18 @@ class BasketDetail(APIView):
         basket = get_object_or_404(Basket.objects.filter(),pk=pk)
         basket.delete()
         return Response({'basket':'deleted'})
+    
+    def patch(self,request,pk):
+        basket = get_object_or_404(Basket.objects.all(),pk=pk)
+        serializer = BasketSerializer(basket,request.data,partial=True,context={'request':request})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({'basket':'updated'})
+        return Response({'error':'occured'})
+        
+
+
+
     
     
 

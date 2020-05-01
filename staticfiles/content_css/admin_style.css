@@ -616,6 +616,25 @@ div.nav-menu > ul li ul li a,
    background: #cdba6d;
    border-color: #cdba6d; 
 }
+.woocommerce button.remove {
+    display: block;
+    font-size: 1.5em;
+    height: 1em;
+    width: 1em;
+    padding: 0px 5px 0px 4px;
+    text-align: center;
+    line-height: 1;
+    border-radius: 100%;
+    color: red!important;
+    text-decoration: none;
+    font-weight: 700;
+    border: 0;
+    background: white;
+}
+.woocommerce button.remove :hover {
+    color: #fff!important;
+    background: red;
+}
 /* ********************* Responsive Menu Code Start *************************** */
 .headerlogo{
     height: 105px;
@@ -1649,6 +1668,9 @@ div.nav-menu > ul li ul li a,
        font-size: 16px;
        margin-right: 5px;
    }
+   .themestek-social-links-wrapper{
+       width: 150px;
+   }
    .themestek-headerstyle-classic .themestek-social-links-wrapper{
       position: relative;      
    }   
@@ -1767,6 +1789,9 @@ div.nav-menu > ul li ul li a,
     .themestek-header-overlay .themestek-pre-header-inner{
         line-height: 60px;
     }
+    .themestek-pre-header-inner{
+        height: 60px;
+    }
     .themestek-header-overlay .themestek-textcolor-dark .themestek-social-links-wrapper .social-icons a {
         background: transparent;
         color: #313538;
@@ -1779,7 +1804,7 @@ div.nav-menu > ul li ul li a,
     .themestek-header-overlay .top-contact li:nth-child(4){
         display: none;
     }
-    .themestek-header-overlay .top-contact li:last-child a:hover{
+    .themestek-header-overlay .top-contact li a:hover{
         color:#CDBA6D;
     }
     .themestek-header-overlay .themestek-textcolor-dark{
@@ -1811,4 +1836,86 @@ blockquote{
     border-left: 1px solid #cdba6d;
 }
 /******************************************************/
- 
+#profile_icon{
+     width:45px;
+     height:45px;
+     border-radius:50%;
+     border:1px solid gold;
+     background-color: #404452;
+     text-align:center;
+     margin-left:20px;
+     float:right;
+     display:inline-block;
+     align-items: center;
+     font-size: 34px;
+     line-height: 40px;
+     transform: translateY(17%);
+     cursor: pointer;
+}
+
+#profile_menu{
+    width: 200px;
+    border:1px solid gold;
+    right: -82px;
+    z-index: 100;
+    position: relative;
+    background-color: #323a43;
+    float: right;
+    text-align: center;
+}
+
+
+
+#profile_menu ul{
+font-size: 16px;
+text-align: center;
+font-family:"Nunito Sans", Arial, Helvetica, sans-serif;
+padding: 0 0 0 10px;
+list-style: none;
+margin-left: 8px;
+
+}
+
+#profile_menu ul li{
+width: 90%;
+height: 40px;
+font-size: 16px;
+text-align: center;
+font-family:"Nunito Sans", Arial, Helvetica, sans-serif;
+color: #cdba6d;
+border:1px solid #cdba6d ;
+padding-left:5px;
+line-height: 30px;
+margin-top: 10px;
+}
+#profile_menu li:hover {
+background-color:#9b8e59;
+color:white;
+}
+
+.btn{
+position: relative;
+display: block;
+transition: 1s all ease;
+}
+
+.btn::before{
+background: #555d65;
+content: "";
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+z-index: -1;
+transition: all 0.6s ease;
+}
+
+.btn1::before{
+width: 0%;
+height: 100%;
+
+}
+
+.btn1:hover::before{
+width:100%;
+color: white;}

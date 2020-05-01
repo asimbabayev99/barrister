@@ -289,25 +289,30 @@
 
 															<td class="product-price" data-title="Fiyat">
 																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">AZN</span>{{ basket.product.price }}</span>
+																		class="woocommerce-Price-currencySymbol">{{ basket.product.price }}</span>&nbsp;AZN</span>
 															</td>
 
 															<td class="product-quantity" data-title="Miktar">
 																<div class="quantity">
-																	<label class="screen-reader-text"
-																		for="quantity_5e9f00042538a">{{ basket.product.name }} adet</label>
-																	<input type="number" id="quantity_5e9f00042538a"
-																		class="input-text qty text" step="1" min="0"
-																		max=""
-																		name="cart[6595d842ae9e6c1ecfd9f976dcb8e058][qty]"
-																		value="{{ basket.quantity }}" title="Miktar" size="4" placeholder=""
-																		inputmode="numeric">
+																	<select id="basket" class="basket-select" basket_id ="{{ basket.id }}" actualqty='{{ basket.quantity }}' > 
+																		<option value="1">1</option>
+																		<option value="2">2</option>
+																		<option value="3">3</option>
+																		<option value="4">4</option>
+																		<option value="5">5</option>
+																		<option value="6">6</option>
+																		<option value="7">7</option>
+																		<option value="8">8</option>
+																		<option value="9">9</option>
+																		<option value="10">10</option>
+																		<option value="11">11</option>
+																	</select>
 																</div>
 															</td>
 
 															<td class="product-subtotal" data-title="Ara Toplam">
 																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">AZN</span>120.00</span>
+																		class="woocommerce-Price-currencySymbol">120.00</span>&nbsp;AZN</span>
 															</td>
 														</tr>
 														{% endfor %}
@@ -316,7 +321,7 @@
 														<tr>
 															<td colspan="6" class="actions">
 
-																<div class="coupon">
+																<div class="coupon pull-right">
 																	<label for="coupon_code">Kupon:</label> <input
 																		type="text" name="coupon_code"
 																		class="input-text" id="coupon_code" value=""
@@ -325,8 +330,8 @@
 																		value="Kupon kullan">Kupon kullan</button>
 																</div>
 
-																<button type="submit" class="button" name="update_cart"
-																	value="Sepeti güncelle">Sepeti güncelle</button>
+																<!-- <button type="submit" class="button" name="update_cart"
+																	value="Sepeti güncelle">Sepeti güncelle</button> -->
 
 
 																<input type="hidden" id="woocommerce-cart-nonce"
@@ -529,14 +534,38 @@
 				success: function (data, status, xhr) {
            			 console.log('success')
           			},
-
+ 
 
 			});
 			location.reload();
-
-
 		});
+		$('.basket-select').each(function(i){
+			// $(this).find('option:selected').text(String($(this).attr('actualqty'))) 
+      $(this).val($(this).attr('actualqty'))
+		})
 
+		$('.basket-select').on('change',function(){
+			var id = $(this).attr('basket_id')
+			var quantity = $(this).val()
+			
+			$.ajax({
+				headers:{
+					"X-CSRFToken":getCookie('csrftoken')
+				},
+				url :'/api/basket/' + String(id) ,
+				type : "PATCH",
+				data : {'quantity': quantity },
+				success: function(data){
+					alert('Sebetiniz yenilendi')
+					$('basket option:selected').val($(this).attr('actualqty'))
+				}
+
+			});
+			
+
+	
+		});
+		
 
 	});
 

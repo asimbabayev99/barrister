@@ -659,22 +659,35 @@ body {
 
 
 
-/*calendar modal begin  */
+/*Event box begin */
 #event_name_input {
   width: 70%;
 }
+
 .top_of_event_box {
 width: 100%;
 height: 40px;
 background-color: #bb3939;
 line-height: 40px;
 color: white;
-font-size: 18px;
-font-family: 'Courier New', Courier, monospace;
+font-size: 15px;
+/* font-family: Arial,Arial, Helvetica, sans-serif; */
+
+
+
+}
+.a1::after{
+    color:#000;
+    content: '\f35a'; /* You should use \ and not /*/
+    font-family: "Font Awesome 5 Free"; /* This is the correct font-family*/
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
 }
 .pencere_basligi{
 line-height: 40px;
 margin-left: 5px;
+
 }
 .pencere_baglayan_icon {
 font-size: 15px;
@@ -704,8 +717,8 @@ cursor: pointer;
   border-right-style: hidden;
   border-bottom:1px solid royalblue;
   padding: 0px;
-  font-size: 20px;
-  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  
   transition: 1s; 
 }
 .modal-title:hover {
@@ -723,8 +736,8 @@ cursor: pointer;
   margin: 5px 0px 0px 0px;
 }
 #input_baslama_vaxti{
-  padding-left: 5px;
-  width: 185px;
+  padding-left: 10px;
+  width: 120px;
   height: 35px;
   font-size: 15px;
   border-top-style: hidden;
@@ -733,20 +746,69 @@ cursor: pointer;
   border-bottom:1px solid darkblue ;
   padding: 0px;
   transition: 0.5s;
-  font-family: 'Courier New', Courier, monospace;
+  
 }
+.span_icon i {
+  font-size: 25px;
+  cursor: pointer;
+}
+#begin_hour_input {
+  padding-left: 10px;
+  width: 50px;
+  height: 35px;
+  font-size: 15px;
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom:1px solid darkblue ;
+  padding: 0px;
+  transition: 0.5s;
+  
+  outline: none;
+  margin-left: 5px;
+}
+#begin_hour_input:focus,#end_hour_input:focus {
+  background-color: #76bfd5;
+}
+#end_hour_input {
+  /* padding-left: 5px; */
+  width: 50px;
+  height: 35px;
+  font-size: 15px;
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom:1px solid darkblue ;
+  padding: 0px;
+  transition: 0.5s;
+  padding-left: 10px !important;
+  outline: none;
+  
+  width: 60px;
+  margin-left: 5px;
+}
+
 #input_bitme_vaxti{
-width: 185px;
+width: 120px;
+padding-left: 10px !important;
 height: 35px;
 font-size: 15px;
 border-top-style: hidden;
 border-left-style: hidden;
+
 border-right-style: hidden;
 border-bottom:1px solid  darkblue;
 padding: 0px 2px !important;
 transition: 0.5s;
-font-family: 'Courier New', Courier, monospace;
+margin-right: 5px;
+
 }  
+.yada_sal_modal {
+  font-size: 16px !important;
+}
+.location_span {
+  font-size: 16px !important;
+}
 #input_baslama_vaxti:hover {
 border-bottom:1.5px solid darkblue
 }
@@ -756,21 +818,26 @@ background-color:#76bfd5;
 border-bottom:1.5px solid darkblue
 }
 #input_bitme_vaxti:hover {
-border-bottom:1.5px solid darkblue
+border-bottom:1.5px solid darkblue;
+
 }
 #input_bitme_vaxti:focus {
 outline: 0px;
 background-color: #76bfd5;
 border-bottom:1.5px solid darkblue;
+
 }
 .location_icon {
 font-size: 20px;
 color: #bb3939;
 margin-right: 5px; 
+
 } 
+
+
 #location_input {
-font-family: 'Courier New', Courier, monospace;
-font-size: 20px;
+
+font-size: 15px;
 width: 320px;
 height: 35px;
 border-top-style: hidden;
@@ -780,13 +847,16 @@ border-bottom:1px solid grey ;
 padding: 0px;
 padding-left: 5px;
 transition: 0.5s;
+
 }
 #location_input:hover {
 border-bottom: 1.3px solid darkblue;
 }
+
 .div_for_select_in_event_box {
 width: 100%;height: 40px;margin-top: 40px;
 }
+
 #select_box_in_event_box {
 width: 200px;
 height: 40px;
@@ -796,7 +866,6 @@ border-left-style: hidden;
 margin-left: 20px;
 padding-bottom: 0px !important;
 font-size: 15px;
-font-family: 'Courier New', Courier, monospace;
 }
 #select_box_in_event_box:focus {
 outline: 0px;
@@ -806,21 +875,26 @@ padding: 5px 15px;
 color: #bb3939;
 background: white;
 border-radius: 0px;
-font-family: 'Courier New', Courier, monospace;
+font-size: 15px !important;
+
 }
 .save_button_in_event_box{
 padding: 5px 15px;
 border: 1px solid green;
 background: white;
 border-radius: 0px;
-font-family: 'Courier New', Courier, monospace;
+font-size: 15px !important;
+
 background-color: #bb3939;
-color: white;
-}
+color: white;}
+
 .save_button_in_event_box:hover {
   color: white;
 }
+
+
 .close_button_in_event_box:hover {
+
 color: blue;
 padding: 5px 15px;
 border-radius: 0px;
@@ -833,11 +907,13 @@ outline: 0px;
   color: #F50057;
   margin-right:10px;
 }  
+
 #modal-body {
   padding: 0px 0px 0px 20px !important;
   margin:10px 0px 10px 10px !important;
   flex: 0 0 auto;
 }
+
 #modal-body2 {
   padding: 0px 0px 0px  20px !important;
   margin:10px 0px !important;
@@ -846,7 +922,7 @@ outline: 0px;
   float: left;
   margin-top: 10px;
   font-size: 18px;
-  font-family: 'Courier New', Courier, monospace;
+  
 }
 .calendar_icon {
   font-size: 20px;
@@ -866,8 +942,8 @@ outline: 0px;
   margin-top: 10px;
 }
 .time_inputlari_arasi_span {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 20px;
+  
+  font-size: 15px;
 }
 .div_for_select_box {
   width: 300px;
@@ -878,12 +954,16 @@ outline: 0px;
 }
 .location_span {
   font-size: 18px;
-  font-family: 'Courier New', Courier, monospace;
+  
+
 }
+
 .etrafli_linki {
   color: #bb3939;
   text-decoration: none;
 }
+/*Event box style end*/
+
 
 /*In modal to choose icons and time interval */
 
@@ -1569,3 +1649,40 @@ opacity: 1;
   }
 }
 /* news add and update page end*/
+/* personal-information begin*/
+.personal{
+  font-weight: bold;
+  background-image: url(https://cdn.pixabay.com/photo/2016/07/11/11/10/law-1509436_960_720.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content-personal{
+  background-color: #191813d4;
+}
+.content-personal h2{
+  color: #a18432
+}
+.box-personal{
+  background-color: #191813d4;
+  padding: 15px;
+}
+.info-personal{
+  margin-top:15px;
+}
+.info-personal label{
+  color: #a18432;
+}
+.input-personal{
+  width: 100%;
+  background-color: #191813d4;
+  color: white;
+  border-color: #a18432;
+}
+.button-personal{
+  width: 100%;
+  background-color: #191813d4;
+  color: #a18432;
+  border-color: #a18432;
+}
+/* personal-information end*/
