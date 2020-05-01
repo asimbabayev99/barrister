@@ -153,22 +153,22 @@ $(document).ready(function() {
 $(document).ready(function() {
   // scrool trigger for click begin
  // https://gist.github.com/shlomohass/22249c0da0f53157dfe9#file-jquery-mousewheel-direction-capture-js
-$('#calendar-ms').on('mousewheel DOMMouseScroll', function(e){
-  if(typeof e.originalEvent.detail == 'number' && e.originalEvent.detail !== 0) {
-    if(e.originalEvent.detail > 0) {
-      $( ".fc-next-button" ).trigger( "click" );     
-    } else if(e.originalEvent.detail < 0){
-      $( ".fc-prev-button" ).trigger( "click" );     
+// $('#calendar-ms').on('mousewheel DOMMouseScroll', function(e){
+//   if(typeof e.originalEvent.detail == 'number' && e.originalEvent.detail !== 0) {
+//     if(e.originalEvent.detail > 0) {
+//       $( ".fc-next-button" ).trigger( "click" );     
+//     } else if(e.originalEvent.detail < 0){
+//       $( ".fc-prev-button" ).trigger( "click" );     
            
-    }
-  } else if (typeof e.originalEvent.wheelDelta == 'number') {
-    if(e.originalEvent.wheelDelta < 0) {
-      $( ".fc-next-button" ).trigger( "click" );     
-    } else if(e.originalEvent.wheelDelta > 0) {
-        $( ".fc-prev-button" ).trigger( "click" );
-    }
-  }
-});
+//     }
+//   } else if (typeof e.originalEvent.wheelDelta == 'number') {
+//     if(e.originalEvent.wheelDelta < 0) {
+//       $( ".fc-next-button" ).trigger( "click" );     
+//     } else if(e.originalEvent.wheelDelta > 0) {
+//         $( ".fc-prev-button" ).trigger( "click" );
+//     }
+//   }
+// });
 // scrool trigger for click end
 
 // Start chart
