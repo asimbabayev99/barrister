@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load home_filters %}
+
 {% block title %}
 <title>Our Attorneys &#8211; barrister</title>
 {% endblock %}
@@ -244,7 +246,10 @@
 
 																	<div
 																		class="row multi-columns-row themestek-boxes-row-wrapper">
+
 																		{% for attorneys in page_obj %}
+																		
+
 																		<div
 																			class="themestek-box-col-wrapper col-lg-4 col-sm-6 col-md-4 col-xs-12">
 																			<article
@@ -257,10 +262,19 @@
 																							class="themestek-item-thumbnail">
 																							<span
 																								class="themestek-item-thumbnail-inner">
+																								{% if attorneys.image %}
+																								<img width="600"
+																									height="700"
+																									src="{{attorneys.image.url}}"
+																									class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
+																									alt="" />
+																								{% else %}
 																								<img width="600"
 																									height="700" src=""
 																									class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
 																									alt="" />
+																								{% endif %}
+
 																							</span>
 																						</span>
 																						<div
@@ -325,8 +339,8 @@
 
 																									<h4><a
 																											href="/team/lily-watson/"></a>
-																										{% if attorneys.username %}
-																										{{attorneys.username}}
+																										{% if attorneys.user.username %}
+																										{{attorneys.user.username}}
 																										{% else %}
 																										-
 																										{% endif %}
@@ -337,8 +351,8 @@
 																							</div>
 																							<div
 																								class="themestek-box-team-position themestek-skincolor">
-																								{% if attorneys.email %}
-																								{{attorneys.email}}
+																								{% if attorneys.user.email %}
+																								{{attorneys.user.email}}
 																								{% else %}
 																								-
 																								{% endif %}
@@ -348,7 +362,10 @@
 																				</div>
 																			</article>
 																		</div>
+																		
+
 																		{% endfor %}
+
 																	</div>
 																</div><!-- .themestek-boxes-inner -->
 															</div><!-- .themestek-boxes -->
@@ -357,6 +374,28 @@
 												</div>
 											</div>
 										</div>
+										<ul class="pagination mt-3">
+
+											{% if page_obj.number > 1 %}
+											<li class="page-item"><a class="page-link"
+													href="?page={{page_obj.previous_page_number}}">
+													<</a>
+											</li>
+											{% endif %}
+											{% for page in page_obj|get_page_list %}
+											{% if page == page_obj.number %}
+											<li class="page-item active"><a class="page-link"
+													href="?page={{page}}">{{page}}</a></li>
+											{% else %}
+											<li class="page-item"><a class="page-link"
+													href="?page={{page}}">{{page}}</a></li>
+											{% endif %}
+											{% endfor %}
+											{% if page_obj.number < page_obj.paginator.num_pages %}
+											<li class="page-item"><a class="page-link"
+													href="?page={{page_obj.next_page_number}}">></a></li>
+											{% endif %}
+										</ul>
 										<div class="vc_row-full-width vc_clearfix"></div>
 									</div><!-- .entry-content -->
 								</article><!-- #post-## -->

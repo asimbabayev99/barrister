@@ -325,8 +325,8 @@ def attorneys_view(request):
     except:
         page = 1
 
-    attorneys = CustomUser.objects.filter(role__name="Barrister")
-    paginator = Paginator(attorneys, 6)
+    attorneys = Profile.objects.all()
+    paginator = Paginator(attorneys, 2)
     page_obj = paginator.get_page(page)
 
     # for i in page_obj:
