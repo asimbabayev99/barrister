@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% load filters %}
 
 {% block links %}
 
@@ -270,7 +271,7 @@
 															</td>
 
 															<td class="product-thumbnail">
-																<a href="http://localhost/barrister/urun/kreslo/"><img
+																<a href="{% url 'product-single' basket.product.id %}"><img
 																		width="100" height="100"
 																		src="{{basket.product.image.url}}"
 																		class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
@@ -283,36 +284,35 @@
 															
 															<td class="product-name" data-title="Ürün">
 																<a
-																	href="http://localhost/barrister/urun/kreslo/">{{ basket.product.title }}</a>
+																	href="{% url 'product-single' basket.product.id %}">{{ basket.product.title }}</a>
 															</td>
 
 
 															<td class="product-price" data-title="Fiyat">
-																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">{{ basket.product.price }}</span>&nbsp;AZN</span>
+																<span class="woocommerce-Price-amount amount">
+                                  <span class="woocommerce-Price-currencySymbol">{{ basket.product.price }}</span>
+                                  &nbsp;AZN
+                                </span>
 															</td>
 
 															<td class="product-quantity" data-title="Miktar">
 																<div class="quantity">
-																	<select id="basket" class="basket-select" basket_id ="{{ basket.id }}" actualqty='{{ basket.quantity }}' > 
-																		<option value="1">1</option>
-																		<option value="2">2</option>
-																		<option value="3">3</option>
-																		<option value="4">4</option>
-																		<option value="5">5</option>
-																		<option value="6">6</option>
-																		<option value="7">7</option>
-																		<option value="8">8</option>
-																		<option value="9">9</option>
-																		<option value="10">10</option>
-																		<option value="11">11</option>
+																	<select  class="basket-select" basket_id ="{{ basket.id }}" actualqty='{{ basket.quantity }}' > 
+                                    
+                                    {% for i in basket.product|get_stock_range %}
+                                      <option {% if i == basket.quantity %}selected{% endif %}
+                                         value="{{i}}">{{i}}</option>
+                                    {% endfor %}
 																	</select>
 																</div>
 															</td>
 
 															<td class="product-subtotal" data-title="Ara Toplam">
-																<span class="woocommerce-Price-amount amount"><span
-																		class="woocommerce-Price-currencySymbol">120.00</span>&nbsp;AZN</span>
+																<span class="woocommerce-Price-amount amount">
+                                  <span	class="woocommerce-Price-currencySymbol">
+                                    <!-- price -->
+                                  </span>&nbsp;AZN
+                                </span>
 															</td>
 														</tr>
 														{% endfor %}
@@ -357,9 +357,12 @@
 														<tbody>
 															<tr class="cart-subtotal">
 																<th>Ara Toplam</th>
-																<td data-title="Ara Toplam"><span
-																		class="woocommerce-Price-amount amount"><span
-																			class="woocommerce-Price-currencySymbol">AZN</span>135.00</span>
+																<td data-title="Ara Toplam">
+                                  <span class="woocommerce-Price-amount amount">
+                                    <span	class="woocommerce-Price-currencySymbol"> 
+                                      <!-- price  -->
+                                    </span>&nbsp;AZN
+                                  </span>
 																</td>
 															</tr>
 
@@ -370,9 +373,13 @@
 
 															<tr class="order-total">
 																<th>Toplam</th>
-																<td data-title="Toplam"><strong><span
-																			class="woocommerce-Price-amount amount"><span
-																				class="woocommerce-Price-currencySymbol">AZN</span>135.00</span></strong>
+																<td data-title="Toplam"><strong>
+                                  <span	class="woocommerce-Price-amount amount">
+                                    <span	class="woocommerce-Price-currencySymbol"> 
+                                      <!-- price -->
+                                    </span>&nbsp;AZN
+                                  </span>
+                                  </strong>
 																</td>
 															</tr>
 
@@ -520,28 +527,41 @@
       }
       return cookieValue;
     }
+	function setAmountPrice(){
+		let total = 0.0;
+		$('.cart_item').each(function(){
+      console.log($(this))
+      var tmp = $(this).find('.product-price').find('.woocommerce-Price-currencySymbol').text();
+      var qnt = $(this).find('.basket-select').children("option:selected").val();
+      var subTotal = (parseFloat(tmp) * parseInt(qnt))
+      $(this).find('.product-subtotal').find('.woocommerce-Price-currencySymbol').text(subTotal.toFixed(2))
+      total += subTotal;
+    });
+    console.log(total)
+    $('.cart-subtotal').find('.woocommerce-Price-currencySymbol').text(total.toFixed(2));
+    $('.order-total').find('.woocommerce-Price-currencySymbol').text(total.toFixed(2));
+  }
 	$(document).ready(function(){
 		$('.remove').on('click',function(){
 			var id = $(this).attr('basket_id')
 			let tr = $(this);
 			$.ajax({
 				headers: { 
-            	"X-CSRFToken": getCookie('csrftoken'),
-            	// 'Email':'azad@mail.ru',
-            	// 'Password':'azad12345'
-          		},
+        	"X-CSRFToken": getCookie('csrftoken'),
+        },
 				type : "DELETE",
 				url : '/api/basket/delete/'+ String(id),
 				success: function (data, status, xhr) {
-           			console.log('success');
-					tr.parent('.product-remove').parent('.cart_item').remove();
-          		},
+          console.log('success');
+          tr.parent('.product-remove').parent('.cart_item').remove();
+          setAmountPrice();
+        },
 			});
 		});
-		$('.basket-select').each(function(i){
-      		$(this).val($(this).attr('actualqty'))
-		})
-
+		// $('.basket-select').each(function(i){
+    //   		$(this).val($(this).attr('actualqty'))
+		// })
+    setAmountPrice()
 		$('.basket-select').on('change',function(){
 			var id = $(this).attr('basket_id')
 			var quantity = $(this).val()
@@ -555,7 +575,7 @@
 				data : {'quantity': quantity },
 				success: function(data){
 					alert('Sebetiniz yenilendi')
-					$('basket option:selected').val($(this).attr('actualqty'))
+          setAmountPrice();
 				}
 			});
 		});

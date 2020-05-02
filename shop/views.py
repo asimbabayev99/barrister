@@ -46,11 +46,14 @@ def shop_view(request, category=None):
 
 def shop_basket_view(request):
     if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
+        basket = Basket.objects.filter(user=request.user).select_related('product').order_by('-date')
     else:
         basket = []
     
-    context={'basket':basket}
+    context = { 
+        'basket':basket,
+    }
+
 
     return render(request,'shop/basket.html',context)
 

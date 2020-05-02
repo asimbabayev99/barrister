@@ -33,3 +33,10 @@ def has_discounted_price(item):
         return False
     else:
         return True
+
+
+
+@register.filter
+def get_stock_range(product):
+
+    return range(1, min(10, product.stock) + 1)
