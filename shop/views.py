@@ -51,7 +51,7 @@ def shop_basket_view(request):
         basket = []
     
     context = { 
-        'basket':basket,
+        'basket_items':basket,
     }
 
 

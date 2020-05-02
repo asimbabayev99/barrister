@@ -260,7 +260,7 @@
 													</thead>
 													<tbody>
 
-														{% for basket in basket %}
+														{% for basket in basket_items %}
 														<tr class="woocommerce-cart-form__cart-item cart_item">
 
 															<td class="product-remove">
@@ -310,7 +310,7 @@
 															<td class="product-subtotal" data-title="Ara Toplam">
 																<span class="woocommerce-Price-amount amount">
                                   <span	class="woocommerce-Price-currencySymbol">
-                                    <!-- price -->
+                                    <!-- {{ basket|get_subtotal_price }} -->
                                   </span>&nbsp;AZN
                                 </span>
 															</td>

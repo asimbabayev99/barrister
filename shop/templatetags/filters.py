@@ -40,3 +40,10 @@ def has_discounted_price(item):
 def get_stock_range(product):
 
     return range(1, min(10, product.stock) + 1)
+
+
+
+@register.filter
+def get_subtotal_price(basket_item):
+
+    return basket_item.product.price * basket_item.quantity
