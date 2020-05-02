@@ -314,9 +314,7 @@ def add_task_view(request):
     
     return render(request, '', context=contetx)
 
-def redirect_news_list(request):
-    
-    return render(request,'admin-panel/admin_NewsList.html')
+
 
 def attorneys_view(request):
     page = request.GET.get('page', 1)
