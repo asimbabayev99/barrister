@@ -325,8 +325,9 @@ def attorneys_view(request):
     except:
         page = 1
 
-    attorneys = Profile.objects.all()
-    paginator = Paginator(attorneys, 2)
+
+    attorneys = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile')
+    paginator = Paginator(attorneys, 3)
     page_obj = paginator.get_page(page)
 
     # for i in page_obj:
@@ -337,6 +338,8 @@ def attorneys_view(request):
     }
 
     return render(request,'attorneys.html', context=context)
+
+
 
 def is_masasi(request):
     return render(request,'barrister/barrister-admin.html')
