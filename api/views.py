@@ -584,25 +584,31 @@ class BasketDetail(APIView):
     
     def post(self,request):
         data = request.data
-        print("data")
-        print(data)
+        if Basket.objects.filter(user=request.user, product__id=data['product']).exists():
+            return Response({'detail': 'You already have this item in basket'}, status=400)
         serializer = BasketSerializer(data=data,context={'request':request})
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-        return Response("basket saved")
+        return Response({'detail': 'Basket item saved successfully'})
     
     def delete(self,request,pk):
         basket = get_object_or_404(Basket.objects.filter(),pk=pk)
-        basket.delete()
-        return Response({'basket':'deleted'})
+        if basket.user == request.user:
+            basket.delete()
+            return Response({'detail':'basket item deleted'})
+        else:
+            return Response({'detail':'You do not have permissions to delete this item'}, status=403)
     
     def patch(self,request,pk):
         basket = get_object_or_404(Basket.objects.all(),pk=pk)
-        serializer = BasketSerializer(basket,request.data,partial=True,context={'request':request})
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response({'basket':'updated'})
-        return Response({'error':'occured'})
+        if basket.user == request.user:
+            serializer = BasketSerializer(basket,request.data,partial=True,context={'request':request})
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            return Response({'detail':'basket item updated'})
+        else:
+            return Response({'detail':'You do not have permissions to delete this item'}, status=403)
+            
         
 
 
