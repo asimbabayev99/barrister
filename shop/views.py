@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db.models import Count
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -38,12 +39,13 @@ def shop_view(request, category=None):
         'page_obj': page_obj,
         'basket':basket,
         'categories': categories,
+        'basket_count': len(basket)
     }
 
     return render(request, 'shop/shop.html', context=context)
 
 
-
+@login_required(login_url='/account/login')
 def shop_basket_view(request):
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user).select_related('product').order_by('-date')
@@ -52,6 +54,7 @@ def shop_basket_view(request):
     
     context = { 
         'basket_items':basket,
+        'basket_count': len(basket)
     }
 
 
@@ -71,6 +74,7 @@ def product_single_view(request, id=None):
     context = {
         'product': product,
         'basket': basket,
+        'basket_count': len(basket)
     }       
 
 

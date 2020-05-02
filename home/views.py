@@ -12,6 +12,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.utils.translation import ugettext as _
+from shop.models import Basket
 
 
 
@@ -21,10 +22,16 @@ def index_view(request):
     
     news = News.objects.all().order_by('-date')[:5]
     news = news.values('title', 'date', 'image', 'slug')
+    
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
 
     context = {
         'barristers': barristers,
-        'news': news
+        'news': news,
+        'basket_count': basket_count,
     }
     return render(request, "index.html", context=context)
 
@@ -41,11 +48,17 @@ def single_view(request, id):
     experiences = EducationAndWorkExperience.objects.filter(profile=profile)
     awards = Award.objects.filter(profile=profile)
 
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
     context = {
         "profile": profile,
         "skills": skills,
         "experiences": experiences,
         "awards": awards,
+        "basket_count": basket_count,
     }
     return render(request, "barrister_single.html", context=context)
 
@@ -61,58 +74,34 @@ def calendar_view(request):
 
 
 
-def news_add_view(request):
-    if request.user.role != "Barrister":
-        return HttpResponse('<p>Permission denied</p>')
+# def news_add_view(request):
+#     if request.user.role != "Barrister":
+#         return HttpResponse('<p>Permission denied</p>')
 
-    errors = {}
-    form = Newsform()
-    if request.user.is_staff is False:
-        return Http404()
+#     errors = {}
+#     form = Newsform()
+#     if request.user.is_staff is False:
+#         return Http404()
 
-    if request.method == "POST":
-        form = Newsform(request.POST,request.FILES)
-        if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-            image = form.cleaned_data['image']
-            user = request.user 
-            slug = slugify(title)
-            news = News(title=title,content=content,image=image,user = user, slug=slug)
-            news.save()   
-        else:
-            errors['message'] = 'Form is not valid'
-        form = Newsform()
+#     if request.method == "POST":
+#         form = Newsform(request.POST,request.FILES)
+#         if form.is_valid():
+#             title = form.cleaned_data['title']
+#             content = form.cleaned_data['content']
+#             image = form.cleaned_data['image']
+#             user = request.user 
+#             slug = slugify(title)
+#             news = News(title=title,content=content,image=image,user = user, slug=slug)
+#             news.save()   
+#         else:
+#             errors['message'] = 'Form is not valid'
+#         form = Newsform()
     
-    context = {
-        'form': form,
-        'errors': errors,
-    }
-    return render(request, 'news_add.html', context=context)
-
-
-
-
-def admin_news_update(request,slug):
-    if request.user.is_superuser is False:
-        return Http404()
-        
-    news = get_object_or_404(News, slug=slug)
-    form = Newsform(instance=news)
-    if request.method == "POST":
-        form = Newsform(request.POST,request.FILES,instance=news)
-        if form.is_valid():
-            news.date = timezone.now()
-            news.title = form.cleaned_data['title']
-            news.content = form.cleaned_data['content']
-            news.image = form.cleaned_data['image']
-            news.save()
-            return redirect('admin-news-list')
-            
-
-    form = Newsform(instance=news)
-    return render(request,'admin-panel/admin-UpdateNews.html',context={'form':form})
-        
+#     context = {
+#         'form': form,
+#         'errors': errors,
+#     }
+#     return render(request, 'news_add.html', context=context)
 
 
 
@@ -155,8 +144,14 @@ def about_us_view(request):
     # for i in barristers:
     #     print(i.profile.job_category)
 
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
     context = {
         'barristers': barristers,
+        'basket_count': basket_count,
     }
 
     return render(request,'about-us.html',context=context)
@@ -267,18 +262,85 @@ def admin_news_list(request):
     
 
 
+def admin_news_update(request,slug):
+    if request.user.is_superuser is False:
+        return Http404()
+        
+    news = get_object_or_404(News, slug=slug)
+    form = Newsform(instance=news)
+    if request.method == "POST":
+        form = Newsform(request.POST,request.FILES,instance=news)
+        if form.is_valid():
+            news.date = timezone.now()
+            news.title = form.cleaned_data['title']
+            news.content = form.cleaned_data['content']
+            news.image = form.cleaned_data['image']
+            news.save()
+            return redirect('admin-news-list')
+            
+
+    form = Newsform(instance=news)
+    return render(request,'admin-panel/admin-UpdateNews.html',context={'form':form})
+
+
+
 def blog_grid_view(request):
 
-    return render(request, 'blog-grid-view.html')
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
+    context = {
+        'basket_count': basket_count,
+    }
+
+    return render(request, 'blog-grid-view.html', context=context)
+
+
 
 def blog_large_view(request):
-    return render(request,'blog-large-image.html')
+
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
+    context = { 
+        'basket_count': basket_count,
+    }
+
+    return render(request,'blog-large-image.html', context=context)
+
+
 
 def blog_single_view(request):
-    return render(request,'blog-single.html')
+
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
+    context = { 
+        "basket_count": basket_count,
+    }
+
+    return render(request,'blog-single.html', context=context)
+
+
 
 def contacts_view(request):
-    return render(request,'contacts.html')
+
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
+    context = { 
+        "basket_count": basket_count,
+    }
+    
+    return render(request,'contacts.html', context=context)
 
 
 def get_tasks_list(request):
@@ -331,8 +393,14 @@ def attorneys_view(request):
     # for i in page_obj:
     #     print(i)
 
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+    else:
+        basket_count = 0
+
     context = {
         "page_obj": page_obj,
+        "basket_count": basket_count,
     }
 
     return render(request,'attorneys.html', context=context)

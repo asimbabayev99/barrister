@@ -496,7 +496,9 @@
                           <li class="themestek-social-instagram"><a class=" tooltip-top" target="_blank" href="#"><i
                                 class="themestek-attorco-icon-instagram"></i></a></li>
                         </ul>
+                        {% if request.user.is_authenticated %}
                         <div id="profile_icon" onclick="profile_click()">S</div>
+                        {% endif %}
                         <div id="profile_menu" style="display: none;">
                           <p style="color:#cdba6d;font-size: 12px;line-height: 30px;margin-top: 10px;">Xoş
                             Gəlmisiniz!<br><span style="font-size: 16px;">{{request.user.first_name}} {{request.user.last_name}}</span></p>
@@ -566,7 +568,7 @@
                         <span class="themestek-header-icon themestek-header-wc-cart-link">
                           <a href="{% url 'basket' %}">
                             <i class="themestek-attorco-icon-cart"></i>
-                            <span class="number-cart">0</span>
+                            <span class="number-cart">{{basket_count}}</span>
                           </a>
                         </span>
                         <span class="themestek-header-icon themestek-header-search-link">

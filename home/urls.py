@@ -10,7 +10,7 @@ urlpatterns = [
 
     path('', index_view, name='home'),
     path('calendar/', calendar_view, name='calendar'),
-    path('profile/<int:id>', single_view, name='single-view'),
+    path('barrister/<int:id>', single_view, name='single-view'),
     path('about-us/', about_us_view, name='about-us'),
 
     path('publication/add', publication_add_view, name='publication-add'),
