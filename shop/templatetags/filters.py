@@ -42,6 +42,12 @@ def get_stock_range(product):
     return range(1, min(10, product.stock) + 1)
 
 
+@register.filter
+def get_stock_number(product):
+
+    return min(10, product.stock)
+
+
 
 @register.filter
 def get_subtotal_price(basket_item):

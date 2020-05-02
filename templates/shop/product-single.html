@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filters %}
 
 {% block links %}
 
@@ -293,7 +294,7 @@
 											</div>
 
 
-											<form class="cart" action="http://localhost/barrister/urun/klassik-geyim/"
+											<form class="cart" action="#"
 												method="post" enctype="multipart/form-data">
 
 												<div class="quantity">
@@ -301,13 +302,13 @@
 														for="quantity_5e9f0080dc93d">Klassik
 														geyim adet</label>
 													<input type="number" id="quantity_5e9f0080dc93d"
-														class="input-text qty text" step="1" min="1" max=""
+														class="input-text qty text" step="1" min="1" max="{{product|get_stock_number}}"
 														name="quantity" value="1" title="Miktar" size="4" placeholder=""
 														inputmode="numeric">
 												</div>
 
-												<button type="submit" name="add-to-cart" value="11655"
-													class="single_add_to_cart_button button alt">Sepete Ekle</button>
+												<input type="button" name="add-to-cart" value="Sepete Ekle" product-id="{{product.id}}"
+													class="single_add_to_cart_button button alt">
 
 											</form>
 
@@ -626,9 +627,51 @@
 /* ]]> */
 	</script>
 	<script src="{% static 'content_js/attorco_js/scripts.js' %}"></script>
-	<script src="{% static 'content_js/forms.min.js' %}"></script>
+  <script src="{% static 'content_js/forms.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+	<script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
+		$(document).ready(function(){
+			$('.single_add_to_cart_button').on('click', function(){
+        var product = $(this).attr('product-id');
+        var quantity = $('input.qty').val()
+
+        console.log("product = " + product + " quantity = " + quantity)
+
+        var data = {
+          "product": product,
+          "quantity": quantity
+        };
+        $.ajax('/api/basket/add', {
+          headers: { 
+            "X-CSRFToken": getCookie('csrftoken'),
+          },
+          type: 'POST',
+          data: data,
+          success: function (data, status, xhr) {
+            alert("Mehsul sebete elave olundu");
+          },
+          error: function (jqXhr, textStatus, errorMessage) {
+            // handle
+          }
+        });
+      });
+		});
+	</script>
 	{% endblock %}
 </body>
 {% endblock  %}
-
-</html>
