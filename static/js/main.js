@@ -168,7 +168,7 @@ $(document).ready(function() {
 //         $( ".fc-prev-button" ).trigger( "click" );
 //     }
 //   }
-// });
+// }); 
 // scrool trigger for click end
 
 // Start chart

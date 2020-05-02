@@ -1,167 +1,169 @@
 {% extends 'base.html' %}
 
 {% load static %}
-	<title>Our Attorneys &#8211; barrister</title>
-{% block title %}
 
+{% load home_filters %}
+
+{% block title %}
+<title>Our Attorneys &#8211; barrister</title>
 {% endblock %}
 
+
 {% block links %}
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script> 'use strict'; (function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
-	<meta name='robots' content='noindex,nofollow' />
-	<link rel='dns-prefetch' href='//fonts.googleapis.com' />
-	<link rel='dns-prefetch' href='//s.w.org' />
-	<link rel="alternate" type="application/rss+xml" title="barrister &raquo; beslemesi" href="/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="barrister &raquo; yorum beslemesi" href="/comments/feed/" />
-	<link rel='stylesheet' id='wp-block-library-css' href="{% static 'content_css/style.min.css'%}" media='all' />
-	<link rel='stylesheet' id='wc-block-style-css' href="{% static 'content_css/woocommerce_css/style.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='contact-form-7-css' href="{% static 'content_css/styles.css' %}" media='all' />
-	<link rel='stylesheet' id='rs-plugin-settings-css' href="{% static 'content_css/rs6.css' %}" media='all' />
-	<style id='rs-plugin-settings-inline-css'>
-		#rs-demo-id {}
-	</style>
-	<link rel='stylesheet' id='font-awesome-css' href="{% static 'content_css/font-awesome.min.css' %}" media='all' />
-	<link rel='stylesheet' id='themify-css' href="{% static 'content_css/themify-icons.css' %}" media='all' />
-	<link rel='stylesheet' id='vc_linecons-css' href="{% static 'content_css/vc_linecons_icons.min.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='woocommerce-layout-css'
-		href="{% static 'content_css/woocommerce_css/woocommerce-layout.css' %}" media='all' />
-	<link rel='stylesheet' id='woocommerce-smallscreen-css'
-		href="{% static 'content_css/woocommerce_css/woocommerce-smallscreen.css' %}"
-		media='only screen and (max-width: 768px)' />
-	<link rel='stylesheet' id='woocommerce-general-css'
-		href="{% static 'content_css/woocommerce_css/woocommerce.css' %}" media='all' />
-	<style id='woocommerce-inline-inline-css'>
-		.woocommerce form .form-row .required {
-			visibility: visible;
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script> 'use strict'; (function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
+<meta name='robots' content='noindex,nofollow' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="barrister &raquo; beslemesi" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="barrister &raquo; yorum beslemesi" href="/comments/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href="{% static 'content_css/style.min.css'%}" media='all' />
+<link rel='stylesheet' id='wc-block-style-css' href="{% static 'content_css/woocommerce_css/style.css' %}"
+	media='all' />
+<link rel='stylesheet' id='contact-form-7-css' href="{% static 'content_css/styles.css' %}" media='all' />
+<link rel='stylesheet' id='rs-plugin-settings-css' href="{% static 'content_css/rs6.css' %}" media='all' />
+<style id='rs-plugin-settings-inline-css'>
+	#rs-demo-id {}
+</style>
+<link rel='stylesheet' id='font-awesome-css' href="{% static 'content_css/font-awesome.min.css' %}" media='all' />
+<link rel='stylesheet' id='themify-css' href="{% static 'content_css/themify-icons.css' %}" media='all' />
+<link rel='stylesheet' id='vc_linecons-css' href="{% static 'content_css/vc_linecons_icons.min.css' %}" media='all' />
+<link rel='stylesheet' id='woocommerce-layout-css'
+	href="{% static 'content_css/woocommerce_css/woocommerce-layout.css' %}" media='all' />
+<link rel='stylesheet' id='woocommerce-smallscreen-css'
+	href="{% static 'content_css/woocommerce_css/woocommerce-smallscreen.css' %}"
+	media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='woocommerce-general-css' href="{% static 'content_css/woocommerce_css/woocommerce.css' %}"
+	media='all' />
+<style id='woocommerce-inline-inline-css'>
+	.woocommerce form .form-row .required {
+		visibility: visible;
+	}
+</style>
+<link rel='stylesheet' id='themestek-cs-google-fonts-css'
+	href='//fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPlayfair+Display%3A400%2Citalic%2C700%2C700italic%2C900%2C900italic%7CNunito+Sans%3A700&#038;ver=1.0.0'
+	media='all' />
+<link rel='stylesheet' id='themestek-base-icons-css' href="{% static 'content_css/themestek-attorco-icons.css' %}"
+	media='all' />
+<link rel='stylesheet' id='perfect-scrollbar-css' href="{% static 'content_css/perfect-scrollbar.min.css' %}"
+	media='all' />
+<link rel='stylesheet' id='chrisbracco-tooltip-css' href="{% static 'content_css/chrisbracco-tooltip.min.css' %}"
+	media='all' />
+<link rel='stylesheet' id='multi-columns-row-css' href="{% static 'content_css/multi-columns-row.css' %}" media='all' />
+<link rel='stylesheet' id='select2-css' href="{% static 'content_css/select2.min.css' %}" media='all' />
+<link rel='stylesheet' id='flexslider-css' href="{% static 'content_css/flexslider.min.css' %}" media='all' />
+<link rel='stylesheet' id='slick-css' href="{% static 'content_css/slick.css' %}" media='all' />
+<link rel='stylesheet' id='slick-theme-css' href="{% static 'content_css/slick-theme.css' %}" media='all' />
+<link rel='stylesheet' id='prettyphoto-css' href="{% static 'content_css/prettyPhoto.min.css' %}" media='all' />
+<link rel='stylesheet' id='bootstrap-css' href="{% static 'content_css/bootstrap.min.css' %}" media='all' />
+<link rel='stylesheet' id='bootstrap-theme-css' href="{% static 'content_css/bootstrap-theme.min.css' %}" media='all' />
+<link rel='stylesheet' id='attorco-core-style-css' href="{% static 'content_css/core.css' %}" media='all' />
+<link rel='stylesheet' id='js_composer_front-css' href="{% static 'content_css/js_composer.min.css' %}" media='all' />
+<link rel='stylesheet' id='attorco-master-style-css' href="{% static 'content_css/master-advanced.css' %}"
+	media='all' />
+<link rel='stylesheet' id='attorco-responsive-style-css' href="{% static 'content_css/responsive-advanced.css' %}"
+	media='all' />
+<link rel='stylesheet' href="{% static 'content_css/admin_style.css' %}" media='all' />
+<!-- <link rel='stylesheet' id='tste-attorco-theme-style-css'  href='wp-admin/admin-ajax.php?action=themestek_theme_css&amp;ver=5.3.2'  media='all' /> -->
+<script src="{% static 'content_js/jquery.js' %}"></script>
+<script src="{% static 'content_js/jquery-migrate.min.js' %}"></script>
+<script src="{% static 'content_js/revolution.tools.min.js' %}"></script>
+<script src="{% static 'content_js/rs6.min.js' %}"></script>
+<script src="{% static 'content_js/jquery-resize.min.js' %}"></script>
+<script src="{% static 'content_js/jquery.blockUI.min.js' %}"></script>
+<script>
+	/* <![CDATA[ */
+	var wc_add_to_cart_params = { "ajax_url": "\/barrister\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/barrister\/?wc-ajax=%%endpoint%%", "i18n_view_cart": "Sepeti g\u00f6r\u00fcnt\u00fcle", "cart_url": "http:\/\/localhost\/barrister\/sepet\/", "is_cart": "", "cart_redirect_after_add": "no" };
+/* ]]> */
+</script>
+<script src="{% static 'content_js/add-to-cart.min.js' %}"></script>
+<script src="{% static 'content_js/woocommerce-add-to-cart.js' %}"></script>
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 5.3.2" />
+<meta name="generator" content="WooCommerce 4.0.1" />
+<link rel="canonical" href="/our-attorneys/" />
+<link rel='shortlink' href='/?p=6691' />
+<link rel="alternate" type="application/json+oembed"
+	href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fbarrister%2Four-attorneys%2F" />
+<link rel="alternate" type="text/xml+oembed"
+	href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fbarrister%2Four-attorneys%2F&#038;format=xml" />
+<!-- Inline CSS Start -->
+<!-- Inline CSS End --> <noscript>
+	<style>
+		.woocommerce-product-gallery {
+			opacity: 1 !important;
 		}
 	</style>
-	<link rel='stylesheet' id='themestek-cs-google-fonts-css'
-		href='//fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPlayfair+Display%3A400%2Citalic%2C700%2C700italic%2C900%2C900italic%7CNunito+Sans%3A700&#038;ver=1.0.0'
-		media='all' />
-	<link rel='stylesheet' id='themestek-base-icons-css' href="{% static 'content_css/themestek-attorco-icons.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='perfect-scrollbar-css' href="{% static 'content_css/perfect-scrollbar.min.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='chrisbracco-tooltip-css' href="{% static 'content_css/chrisbracco-tooltip.min.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='multi-columns-row-css' href="{% static 'content_css/multi-columns-row.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='select2-css' href="{% static 'content_css/select2.min.css' %}" media='all' />
-	<link rel='stylesheet' id='flexslider-css' href="{% static 'content_css/flexslider.min.css' %}" media='all' />
-	<link rel='stylesheet' id='slick-css' href="{% static 'content_css/slick.css' %}" media='all' />
-	<link rel='stylesheet' id='slick-theme-css' href="{% static 'content_css/slick-theme.css' %}" media='all' />
-	<link rel='stylesheet' id='prettyphoto-css' href="{% static 'content_css/prettyPhoto.min.css' %}" media='all' />
-	<link rel='stylesheet' id='bootstrap-css' href="{% static 'content_css/bootstrap.min.css' %}" media='all' />
-	<link rel='stylesheet' id='bootstrap-theme-css' href="{% static 'content_css/bootstrap-theme.min.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='attorco-core-style-css' href="{% static 'content_css/core.css' %}" media='all' />
-	<link rel='stylesheet' id='js_composer_front-css' href="{% static 'content_css/js_composer.min.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='attorco-master-style-css' href="{% static 'content_css/master-advanced.css' %}"
-		media='all' />
-	<link rel='stylesheet' id='attorco-responsive-style-css' href="{% static 'content_css/responsive-advanced.css' %}"
-		media='all' />
-	<link rel='stylesheet' href="{% static 'content_css/admin_style.css' %}" media='all' />
-	<!-- <link rel='stylesheet' id='tste-attorco-theme-style-css'  href='wp-admin/admin-ajax.php?action=themestek_theme_css&amp;ver=5.3.2'  media='all' /> -->
-	<script src="{% static 'content_js/jquery.js' %}"></script>
-	<script src="{% static 'content_js/jquery-migrate.min.js' %}"></script>
-	<script src="{% static 'content_js/revolution.tools.min.js' %}"></script>
-	<script src="{% static 'content_js/rs6.min.js' %}"></script>
-	<script src="{% static 'content_js/jquery-resize.min.js' %}"></script>
-	<script src="{% static 'content_js/jquery.blockUI.min.js' %}"></script>
-	<script>
-		/* <![CDATA[ */
-		var wc_add_to_cart_params = { "ajax_url": "\/barrister\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/barrister\/?wc-ajax=%%endpoint%%", "i18n_view_cart": "Sepeti g\u00f6r\u00fcnt\u00fcle", "cart_url": "http:\/\/localhost\/barrister\/sepet\/", "is_cart": "", "cart_redirect_after_add": "no" };
-/* ]]> */
-	</script>
-	<script src="{% static 'content_js/add-to-cart.min.js' %}"></script>
-	<script src="{% static 'content_js/woocommerce-add-to-cart.js' %}"></script>
-	<link rel='https://api.w.org/' href='/wp-json/' />
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
-	<meta name="generator" content="WordPress 5.3.2" />
-	<meta name="generator" content="WooCommerce 4.0.1" />
-	<link rel="canonical" href="/our-attorneys/" />
-	<link rel='shortlink' href='/?p=6691' />
-	<link rel="alternate" type="application/json+oembed"
-		href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fbarrister%2Four-attorneys%2F" />
-	<link rel="alternate" type="text/xml+oembed"
-		href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fbarrister%2Four-attorneys%2F&#038;format=xml" />
-	<!-- Inline CSS Start -->
-	<!-- Inline CSS End --> <noscript>
-		<style>
-			.woocommerce-product-gallery {
-				opacity: 1 !important;
-			}
-		</style>
-	</noscript>
-	<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress." />
-	<meta name="generator"
-		content="Powered by Slider Revolution 6.1.7 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
-	<script>function setREVStartSize(e) {
-			try {
-				var pw = document.getElementById(e.c).parentNode.offsetWidth,
-					newh;
-				pw = pw === 0 || isNaN(pw) ? window.innerWidth : pw;
-				e.tabw = e.tabw === undefined ? 0 : parseInt(e.tabw);
-				e.thumbw = e.thumbw === undefined ? 0 : parseInt(e.thumbw);
-				e.tabh = e.tabh === undefined ? 0 : parseInt(e.tabh);
-				e.thumbh = e.thumbh === undefined ? 0 : parseInt(e.thumbh);
-				e.tabhide = e.tabhide === undefined ? 0 : parseInt(e.tabhide);
-				e.thumbhide = e.thumbhide === undefined ? 0 : parseInt(e.thumbhide);
-				e.mh = e.mh === undefined || e.mh == "" || e.mh === "auto" ? 0 : parseInt(e.mh, 0);
-				if (e.layout === "fullscreen" || e.l === "fullscreen")
-					newh = Math.max(e.mh, window.innerHeight);
-				else {
-					e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
-					for (var i in e.rl) if (e.gw[i] === undefined || e.gw[i] === 0) e.gw[i] = e.gw[i - 1];
-					e.gh = e.el === undefined || e.el === "" || (Array.isArray(e.el) && e.el.length == 0) ? e.gh : e.el;
-					e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
-					for (var i in e.rl) if (e.gh[i] === undefined || e.gh[i] === 0) e.gh[i] = e.gh[i - 1];
+</noscript>
+<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress." />
+<meta name="generator"
+	content="Powered by Slider Revolution 6.1.7 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<script>function setREVStartSize(e) {
+		try {
+			var pw = document.getElementById(e.c).parentNode.offsetWidth,
+				newh;
+			pw = pw === 0 || isNaN(pw) ? window.innerWidth : pw;
+			e.tabw = e.tabw === undefined ? 0 : parseInt(e.tabw);
+			e.thumbw = e.thumbw === undefined ? 0 : parseInt(e.thumbw);
+			e.tabh = e.tabh === undefined ? 0 : parseInt(e.tabh);
+			e.thumbh = e.thumbh === undefined ? 0 : parseInt(e.thumbh);
+			e.tabhide = e.tabhide === undefined ? 0 : parseInt(e.tabhide);
+			e.thumbhide = e.thumbhide === undefined ? 0 : parseInt(e.thumbhide);
+			e.mh = e.mh === undefined || e.mh == "" || e.mh === "auto" ? 0 : parseInt(e.mh, 0);
+			if (e.layout === "fullscreen" || e.l === "fullscreen")
+				newh = Math.max(e.mh, window.innerHeight);
+			else {
+				e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+				for (var i in e.rl) if (e.gw[i] === undefined || e.gw[i] === 0) e.gw[i] = e.gw[i - 1];
+				e.gh = e.el === undefined || e.el === "" || (Array.isArray(e.el) && e.el.length == 0) ? e.gh : e.el;
+				e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+				for (var i in e.rl) if (e.gh[i] === undefined || e.gh[i] === 0) e.gh[i] = e.gh[i - 1];
 
-					var nl = new Array(e.rl.length),
-						ix = 0,
-						sl;
-					e.tabw = e.tabhide >= pw ? 0 : e.tabw;
-					e.thumbw = e.thumbhide >= pw ? 0 : e.thumbw;
-					e.tabh = e.tabhide >= pw ? 0 : e.tabh;
-					e.thumbh = e.thumbhide >= pw ? 0 : e.thumbh;
-					for (var i in e.rl) nl[i] = e.rl[i] < window.innerWidth ? 0 : e.rl[i];
-					sl = nl[0];
-					for (var i in nl) if (sl > nl[i] && nl[i] > 0) { sl = nl[i]; ix = i; }
-					var m = pw > (e.gw[ix] + e.tabw + e.thumbw) ? 1 : (pw - (e.tabw + e.thumbw)) / (e.gw[ix]);
+				var nl = new Array(e.rl.length),
+					ix = 0,
+					sl;
+				e.tabw = e.tabhide >= pw ? 0 : e.tabw;
+				e.thumbw = e.thumbhide >= pw ? 0 : e.thumbw;
+				e.tabh = e.tabhide >= pw ? 0 : e.tabh;
+				e.thumbh = e.thumbhide >= pw ? 0 : e.thumbh;
+				for (var i in e.rl) nl[i] = e.rl[i] < window.innerWidth ? 0 : e.rl[i];
+				sl = nl[0];
+				for (var i in nl) if (sl > nl[i] && nl[i] > 0) { sl = nl[i]; ix = i; }
+				var m = pw > (e.gw[ix] + e.tabw + e.thumbw) ? 1 : (pw - (e.tabw + e.thumbw)) / (e.gw[ix]);
 
-					newh = (e.type === "carousel" && e.justify === "true" ? e.gh[ix] : (e.gh[ix] * m)) + (e.tabh + e.thumbh);
-				}
+				newh = (e.type === "carousel" && e.justify === "true" ? e.gh[ix] : (e.gh[ix] * m)) + (e.tabh + e.thumbh);
+			}
 
-				if (window.rs_init_css === undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));
-				document.getElementById(e.c).height = newh;
-				window.rs_init_css.innerHTML += "#" + e.c + "_wrapper { height: " + newh + "px }";
-			} catch (e) {
-				console.log("Failure at Presize of Slider:" + e)
-			}
-		};</script>
-	<noscript>
-		<style>
-			.wpb_animate_when_almost_visible {
-				opacity: 1;
-			}
-		</style>
-	</noscript>
+			if (window.rs_init_css === undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));
+			document.getElementById(e.c).height = newh;
+			window.rs_init_css.innerHTML += "#" + e.c + "_wrapper { height: " + newh + "px }";
+		} catch (e) {
+			console.log("Failure at Presize of Slider:" + e)
+		}
+	};</script>
+<noscript>
+	<style>
+		.wpb_animate_when_almost_visible {
+			opacity: 1;
+		}
+	</style>
+</noscript>
 {% endblock %}
 
 {% block body %}
+
 <body
 	class="page-template-default page page-id-6691 theme-attorco woocommerce-no-js themestek-headerstyle-classic-overlay themestek-wide themestek-page-full-width themestek-empty-sidebar wpb-js-composer js-comp-ver-6.1 vc_responsive">
 	<div id="themestek-home"></div>
 	<div class="main-holder">
 		<div id="page" class="hfeed site">
 			{% block header %}
-			<header id="masthead" class="themestek-header-style-classic themestek-header-overlay themestek-main-menu-total-7 themestek-main-menu-more-than-six">
-				<div class="themestek-header-block  themestek-mmenu-active-color-skin themestek-dmenu-active-color-skin">
+			<header id="masthead"
+				class="themestek-header-style-classic themestek-header-overlay themestek-main-menu-total-7 themestek-main-menu-more-than-six">
+				<div
+					class="themestek-header-block  themestek-mmenu-active-color-skin themestek-dmenu-active-color-skin">
 					<div class="themestek-search-overlay">
 						<div class="themestek-form-title">Hi, How Can We Help You?</div>
 						<div class="themestek-icon-close"></div>
@@ -178,10 +180,10 @@
 					</div>
 					<div id="themestek-stickable-header-w-main" class="themestek-stickable-header-w-main">
 						{% block pre-header %}
-							{{ block.super }}
+						{{ block.super }}
 						{% endblock %}
 						{% block header-navigation %}
-							{{ block.super }}
+						{{ block.super }}
 						{% endblock %}
 					</div>
 					<div
@@ -244,7 +246,10 @@
 
 																	<div
 																		class="row multi-columns-row themestek-boxes-row-wrapper">
+
 																		{% for attorneys in page_obj %}
+																		
+
 																		<div
 																			class="themestek-box-col-wrapper col-lg-4 col-sm-6 col-md-4 col-xs-12">
 																			<article
@@ -257,11 +262,19 @@
 																							class="themestek-item-thumbnail">
 																							<span
 																								class="themestek-item-thumbnail-inner">
+																								{% if attorneys.image %}
 																								<img width="600"
 																									height="700"
-																									src="{% static '/uploads/2018/12/img-03-600x700.jpg' %}"
+																									src="{{attorneys.image.url}}"
 																									class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
 																									alt="" />
+																								{% else %}
+																								<img width="600"
+																									height="700" src=""
+																									class="attachment-themestek-img-600x700 size-themestek-img-600x700 wp-post-image"
+																									alt="" />
+																								{% endif %}
+
 																							</span>
 																						</span>
 																						<div
@@ -326,8 +339,8 @@
 
 																									<h4><a
 																											href="/team/lily-watson/"></a>
-																										{% if attorneys.username %}
-																										{{attorneys.username}}
+																										{% if attorneys.user.username %}
+																										{{attorneys.user.username}}
 																										{% else %}
 																										-
 																										{% endif %}
@@ -338,8 +351,8 @@
 																							</div>
 																							<div
 																								class="themestek-box-team-position themestek-skincolor">
-																								{% if attorneys.email %}
-																								{{attorneys.email}}
+																								{% if attorneys.user.email %}
+																								{{attorneys.user.email}}
 																								{% else %}
 																								-
 																								{% endif %}
@@ -349,7 +362,10 @@
 																				</div>
 																			</article>
 																		</div>
+																		
+
 																		{% endfor %}
+
 																	</div>
 																</div><!-- .themestek-boxes-inner -->
 															</div><!-- .themestek-boxes -->
@@ -358,6 +374,28 @@
 												</div>
 											</div>
 										</div>
+										<ul class="pagination mt-3">
+
+											{% if page_obj.number > 1 %}
+											<li class="page-item"><a class="page-link"
+													href="?page={{page_obj.previous_page_number}}">
+													<</a>
+											</li>
+											{% endif %}
+											{% for page in page_obj|get_page_list %}
+											{% if page == page_obj.number %}
+											<li class="page-item active"><a class="page-link"
+													href="?page={{page}}">{{page}}</a></li>
+											{% else %}
+											<li class="page-item"><a class="page-link"
+													href="?page={{page}}">{{page}}</a></li>
+											{% endif %}
+											{% endfor %}
+											{% if page_obj.number < page_obj.paginator.num_pages %}
+											<li class="page-item"><a class="page-link"
+													href="?page={{page_obj.next_page_number}}">></a></li>
+											{% endif %}
+										</ul>
 										<div class="vc_row-full-width vc_clearfix"></div>
 									</div><!-- .entry-content -->
 								</article><!-- #post-## -->
@@ -369,15 +407,15 @@
 			{% endblock %}
 
 			{% block footer %}
-				{{ block.super }}
+			{{ block.super }}
 			{% endblock %}
 		</div><!-- #page .site -->
 	</div><!-- .main-holder -->
 	<!-- To Top -->
 	<a id="totop" href="#top"><i class="themestek-attorco-icon-angle-up"></i></a>
 
-  {% block scripts %}
-    {{ block.super }}
+	{% block scripts %}
+	{{ block.super }}
 	<!-- <script>(function () {
 			function maybePrefixUrlField() {
 				if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
