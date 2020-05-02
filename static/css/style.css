@@ -1686,3 +1686,379 @@ opacity: 1;
   border-color: #a18432;
 }
 /* personal-information end*/
+
+
+/*Advocat user html begin */
+.vekil_yeni_title {
+  background-color: #3a3f48;
+  padding-left: 15px;
+  height: 50px;
+  line-height: 50px;
+  color: white;
+  font-size: 18px;
+}
+
+.vekil_yeni_title a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+.vekil_yeni_title a:hover {
+  color: #CDBA6D;
+
+
+}
+.vekil_main {
+  padding-left: 30px;
+  
+}
+
+.vekil_yeni_fikir {
+  min-height: 100px;
+  /* background-color: #d9534f; */
+  padding:20px 0px;
+}
+
+#text_of_vekil {
+  height: 200px;
+  width: 100%;
+  padding: 10px 10px;
+
+}
+
+.xeber_name {
+  height: 60px;
+  /* background-color: teal; */
+  padding:0px;
+  line-height: 60px;
+}
+
+.xeber_name input {
+  height: 40px;
+  width: 400px;
+  outline: none;
+padding-left: 10px;
+  border-style: hidden;
+}
+
+.label_2 {
+  background-color: #3a3f48;
+  width: 400px;
+}
+
+.vekil_yeni_fikir input {
+  height: 40px;
+  width: 400px;
+  outline: none;
+padding-left: 10px;
+  border-style: hidden;
+  margin: 0px 0px 20px 0px;
+}
+
+.vekil_yeni_fikir button {
+  border-radius: 0px;
+  background-color: #3a3f48;
+  margin-bottom: 20px;
+  border: hidden;
+  padding: 10px 20px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.vekil_yeni_fikir button:hover {
+  opacity: 1;
+  background-color: #3a3f48;
+}
+.img_of_post {
+  width: 400px;
+  height: 400px;
+  margin-bottom: 120px;
+}
+
+.img_of_post img {
+  width: 100%;
+  height: 100%;
+
+}
+.image-upload>input {
+  display: none;
+}
+.image-upload span {
+  color: #3a3f48;
+}
+.label_icon {
+  margin: 20px 0px;
+}
+.label_icon i {
+  font-size: 20px;
+  color: #3a3f48;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.label_icon span {
+  color: #3a3f48;
+}
+.main_class .mekan_input {
+  width: 80%;
+  height: 40px;
+  outline: none;
+  border-style: hidden;
+  border-bottom: 1.5px solid #3a3f48;
+  margin: 10px 0px;
+}
+
+#file_input_2 {
+  display: none;
+}
+
+.confirm_button button {
+  border-radius: 0px;
+  padding: 10px 20px;
+}
+
+.image_main {
+  height: 400px;
+}
+
+.image_main_1 {
+  height: 250px;
+}
+.metn_post {
+  color: #3a3f48;
+  line-height: 30px;
+  text-align: justify;
+}
+
+.metn_post p {
+  font-size: 20px;
+  padding-bottom: 0px !important;
+  
+}
+
+.tarix_1 {
+  height: 50%;
+  background-color: #3a3f48;
+  color: #b8bfce;
+  text-align: center;
+  
+  font-size: 20px;
+  
+}
+.tarix_1 h6 {
+  padding-top: 37px;
+  line-height: 30px;
+}
+.metn_post em {
+  font-size: 12px;
+}
+
+.metn_post em i {
+  margin-right: 10px;
+}
+.tarix_2 {
+  height: 50%;
+}
+
+.image_main_1 div[class="div_img"] {
+  height: 100%;
+  width: 100%;
+  background-image: url(../img/hammer-620011_640.jpg);
+  background-position: center;
+  background-size: cover;
+  background-color: #bb3939;
+}
+.back_img {
+  height: 250px;
+  padding: 0px;
+}
+.main_of_class span {
+  color: rgb(66, 1, 13);
+  font-size: 15px;
+}
+.main_of_class em {
+  font-size: 10px;
+  color: #3a3f48;
+  margin-top: 10px;
+  
+}
+.main_of_class {
+  line-height: 40px;
+}
+.main_of_class .span_main {
+  font-size: 10px;
+}
+.span_for_location {
+  color: #3a3f48;
+  font-size: 13px !important;
+}
+
+.history_icon {
+  font-size: 20px;
+  color: #3a3f48;
+  margin-right: 10px;
+}
+.main_of_class i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.title_of_post {
+  font-size: 20px !important;
+}
+.main_of_class em i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+.pdf_span {
+  font-size: 14px;
+}
+@media only screen and (max-width:360px) {
+  .span_for_location {
+    font-size: 12px !important;
+
+
+  }
+}
+.sil_btn {
+  padding: 10px 20px;
+  border-radius: 0px;
+  margin-bottom: 10px;
+}
+
+
+.back_img div {
+  height: 100%;
+  width: 100%;
+  background-image: url(../img/hammer-620011_640.jpg);
+  background-position: center;
+  background-size: cover;
+}
+.span_main {
+  display: none;
+  color: #b8bfce;
+  padding-top: 100px;
+  line-height: 30px;
+}
+.span_metn_post_lorem {
+  font-weight: 400;
+  color: rgb(66, 1, 13) !important;
+}
+
+
+/*Advocat user html end */
+
+/* new-appointment begin*/
+.btn-appointment{
+  background-color: #cdba6d;
+  display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 16px 34px 16px;
+    border-radius: 0px;
+    text-transform: uppercase;
+    border: none;
+    color: #fff;
+}
+.btn-appointment:hover{
+  background-color: #42474c;
+    color: #fff;
+}
+/* new-appointment end*/
+
+
+/*Musteriler special begin*/
+.musteri_baslig {
+  height: 40px;
+  line-height: 40px;
+  color: #CDBA6D;
+  font-size: 18px;
+  text-align: center;
+  background-color: #3a3f48;
+  font-weight: 400;
+}
+
+
+.musteri_cedvel {
+  min-height: 400px;
+  background-color: #3a3f48;
+ 
+  float: left;
+}
+
+.musteri_adlari {
+  padding: 0px;
+  
+ 
+}
+
+.musteri_item {
+  height: 50px;
+  line-height: 50px;
+  color: #CDBA6D;
+  border-bottom: 1px solid #CDBA6D;
+  /* border-right: 1px solid #cdba6d; */
+  border-left: 5px solid #F50057;
+  font-weight: 500;
+
+  
+}
+
+.musteri_telefon {
+  padding: 0px;
+
+}
+.item_tel {
+  padding-left: 0px;
+  float: left;
+  /* border-right: 1px solid #CDBA6D; */
+}
+
+
+.item_mail {
+  float: left;
+  padding-left: 15px;
+}
+
+.tel_item {
+  height: 50px;
+  line-height: 50px;
+  color: #CDBA6D;
+  border-bottom: 1px solid #CDBA6D;
+  font-weight: 400;
+  /* border-right: 1px solid #CDBA6D; */
+}
+
+.tel_item a {
+  color: #CDBA6D;
+}
+
+.vekil_main tr {
+  background-color: #F8F8F8;
+  color: #42474c;
+  font-family: ;
+  font-weight: 400;
+  border-left: 1px solid red !important;
+}
+.vekil_main td {
+  border-left: #CDBA6D 1px solid !important;
+  height: 40px !important;
+  border-top: #CDBA6D 2px solid !important;
+}
+
+.vekil_main th {
+  border-bottom: #CDBA6D 2px solid !important;
+}
+
+.border_left {
+  border-left: 5px solid #CDBA6D !important;
+}
+
+
+.vekil_main tr a {
+  color: #42474c;
+}
+/*Musteriler special end*/
