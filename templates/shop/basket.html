@@ -523,6 +523,7 @@
 	$(document).ready(function(){
 		$('.remove').on('click',function(){
 			var id = $(this).attr('basket_id')
+			let tr = $(this);
 			$.ajax({
 				headers: { 
             	"X-CSRFToken": getCookie('csrftoken'),
@@ -532,16 +533,13 @@
 				type : "DELETE",
 				url : '/api/basket/delete/'+ String(id),
 				success: function (data, status, xhr) {
-           			 console.log('success')
-          			},
- 
-
+           			console.log('success');
+					tr.parent('.product-remove').parent('.cart_item').remove();
+          		},
 			});
-			location.reload();
 		});
 		$('.basket-select').each(function(i){
-			// $(this).find('option:selected').text(String($(this).attr('actualqty'))) 
-      $(this).val($(this).attr('actualqty'))
+      		$(this).val($(this).attr('actualqty'))
 		})
 
 		$('.basket-select').on('change',function(){
@@ -559,14 +557,8 @@
 					alert('Sebetiniz yenilendi')
 					$('basket option:selected').val($(this).attr('actualqty'))
 				}
-
 			});
-			
-
-	
 		});
-		
-
 	});
 
 
