@@ -421,6 +421,7 @@ def new_appointment_view(request):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             middle_name = form.cleaned_data['middle_name']
+            country = form.cleaned_data['country']
             phone_number = form.cleaned_data['phone_number']
             city = form.cleaned_data['city']
             zip = form.cleaned_data['zip']

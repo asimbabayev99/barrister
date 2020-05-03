@@ -1,5 +1,5 @@
 from django import forms
-from home.models import News, Publication, Task, TASK_STATUS, Appointment
+from home.models import News, Publication, Task, TASK_STATUS, Appointment, City
 from ckeditor import widgets
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (
@@ -69,7 +69,7 @@ class TaskForm(forms.ModelForm):
 
 class AppointmentForm(forms.ModelForm):
     error_css_class = 'error'
-    email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
+    email = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
         'class' : "form-element input-field",
         'placeholder':"Email"
     }))
@@ -85,12 +85,16 @@ class AppointmentForm(forms.ModelForm):
         'class': 'form-element input-field',
         'placeholder': 'Ata adı'
     }))
+    country = forms.CharField(label='', max_length=128, widget=forms.TextInput(attrs={
+        'class': 'form-element input-field',
+        'placeholder': 'Ölkə'
+    }))
     phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
         'class': 'form-control',
         'type' : 'text',
         'placeholder': 'Phone Number'
     }))
-    city = forms.ChoiceField(  widget=forms.Select(attrs={
+    city = forms.ChoiceField(choices=City ,  widget=forms.Select(attrs={
         'class': 'custom-select'
     }))
     zip = forms.CharField(label='', max_length=8, widget=forms.TextInput(attrs={
@@ -104,6 +108,6 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ('email','first_name', 'last_name', 'middle_name', 'phone_number', 'city', 'zip', 'detail')
+        fields = ('email','first_name', 'last_name', 'middle_name','country', 'phone_number', 'city', 'zip', 'detail')
 
     
