@@ -405,6 +405,45 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', 'status']),
+        ]
         
     
     
+class City(models.Model):
+    name = models.CharField(max_length=16, null=False, blank=False, unique=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', ]),
+        ]
+
+
+class Appointment(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
+
+    first_name = models.CharField(max_length=32, null=False, blank=False)
+    last_name = models.CharField(max_length=32, null=False, blank=False)
+    middle_name = models.CharField(max_length=32, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=16, null=True, blank=True)
+    title = models.CharField(max_length=128, null=True, blank=True)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    zip = models.CharField(max_length=8, null=True, blank=True)
+    detail = models.CharField(max_length=256, null=True, blank=True)
+    date = models.DateTimeField(null=False)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', ]),
+        ]
+
