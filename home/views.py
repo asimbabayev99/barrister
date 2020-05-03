@@ -426,18 +426,7 @@ def new_appointment_view(request):
             zip = form.cleaned_data['zip']
             detail = form.cleaned_data['detail']
 
-            appointm = Appointment(
-                email = email,
-                first_name = first_name,
-                last_name = last_name,
-                middle_name = middle_name,
-                phone_number =phone_number,
-                city = city,
-                zip = zip,
-                detail = detail
-            )
-
-            appointm.save()
+            form.save()
 
     context = {
         'form' : form,
