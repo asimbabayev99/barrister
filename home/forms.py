@@ -1,5 +1,5 @@
 from django import forms
-from home.models import News, Publication, Task, TASK_STATUS
+from home.models import News, Publication, Task, TASK_STATUS, Appointment
 from ckeditor import widgets
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (
@@ -65,3 +65,45 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = '__all__'
+
+
+class AppointmentForm(forms.ModelForm):
+    error_css_class = 'error'
+    email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder':"Email"
+    }))
+    first_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder': "Ad"
+    })) 
+    last_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder': "Soyad"
+    })) 
+    middle_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class': 'form-element input-field',
+        'placeholder': 'Ata adı'
+    }))
+    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'type' : 'text',
+        'placeholder': 'Phone Number'
+    }))
+    city = forms.ChoiceField(  widget=forms.Select(attrs={
+        'class': 'custom-select'
+    }))
+    zip = forms.CharField(label='', max_length=8, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder': "Zip code"
+    }))
+    detail = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder': "Görüşün detalları"
+    }))
+
+    class Meta:
+        model = Appointment
+        fields = ('email','first_name', 'last_name', 'middle_name', 'phone_number', 'city', 'zip', 'detail')
+
+    
