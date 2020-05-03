@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/news/update/<slug:slug>', admin_news_update, name='admin-news-update'),
     path('contacts/',contacts_view,name='contacts'),
     path('attorneys/', attorneys_view, name='attorneys'),
-   
+    path('is-masasi/',is_masasi,name='is-masasi'),
+    path('new-appointment/', new_appointment_view, name='new-appointment')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
