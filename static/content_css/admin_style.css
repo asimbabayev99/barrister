@@ -1836,6 +1836,8 @@ blockquote{
     border-left: 1px solid #cdba6d;
 }
 /******************************************************/
+/* profile in menu begin */
+/* profile in menu end */
 #profile_icon{
      width:45px;
      height:45px;
@@ -1919,3 +1921,13 @@ height: 100%;
 .btn1:hover::before{
 width:100%;
 color: white;}
+/* profile in menu end */
+
+/* revslider style begin */
+#slider-1-slide-1-layer-1{
+	width: 400px !important;
+}
+#slider-1-slide-2-layer-1{
+	width: 400px !important;
+}
+/* revslider style end */
