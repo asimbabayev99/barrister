@@ -12,7 +12,9 @@
       
 <main style="font-weight: bold;" class="page-content design">
     <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
-      
+      <form enctype="multipart/form-data" method="POST">
+
+        {% csrf_token %}
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12 vekil_main">
@@ -25,9 +27,8 @@
           <div class="col-md-12 vekil_main">
                 
                 <div class="col-12 vekil_yeni_fikir">
-                  
-                 
-                    <textarea name="" id="text_of_vekil"  placeholder="Yeni paylaşımın mətni"></textarea>
+                    {{ form.text }}
+                    {{ form.media }}
                 </div>
 
 
@@ -39,8 +40,8 @@
                       <i class="fas fa-photo-video"></i>
                       
                     </label>
-                    <span class="pdf_span">Səkil və ya video daxil edin</span>
-                    <input id="file-input" type="file" />
+                    <span class="pdf_span">{{ form.fayl }}</span>
+                    
                   </div>
                 
                 </div>
@@ -61,13 +62,13 @@
                    </div>
 
                    <div class="col-12 confirm_button">
-                     <button class="btn btn-dark">Paylaşımı təstiqlə</button>
+                     <button type="submit" class="btn btn-dark">Paylaşımı təstiqlə</button>
                    </div>
 
                  </div>
                 </div>
           </div>
-
+        </form>
 
 
 
@@ -78,20 +79,20 @@
               </div>
             </div>
           </div>
+          
+          {% for publication in publications %}  
           <div class="container-fluid " style="padding-left: 70px;padding-right: 55px;margin-top: 40px;">
             
             <div class="row">
               <div class="col-2"></div>
               <div class="col-12 main_of_class" style="padding:0 0 20px 0px;text-align: justify;">
-                <i class="far fa-user"></i><span class="title_of_post">Lionel Messi</span>
+                <i class="far fa-user"></i><span class="title_of_post">{{ publication.user.first_name }} {{ publication.user.last_name }} </span>
                 <br>
                   <em ><i class="fas fa-map-marker-alt"></i><span class="span_for_location">Azerbaijan,Baku Inshaatchilar 21.23.34</span></em>
                   <br>
-                  <i class="fas fa-history history_icon"  ></i><span>2020.14.09 14:34</span>
+                  <i class="fas fa-history history_icon"  ></i><span>{{ publication.date }}</span>
                   <br>
-                <span class="span_metn_post_lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error consequatur excepturi accusantium 
-                  impedit obcaecati exercitationem cupiditate tempora in corporis, voluptas possimus fugiat ullam. Qu
-                  i quas quasi assumenda veniam omnis. Ab!</span>
+                <span class="span_metn_post_lorem">{{ publication.text|safe }}</span>
                   
               </div>
               
@@ -100,36 +101,8 @@
               <button class="btn btn-outline-dark sil_btn">Paylaşımı silin</button>
             </div>
             </div>
-                  
-               
           </div>
-          <div class="container-fluid" style="padding-left: 70px;padding-right: 55px;margin-top: 100px;">
-            
-            <div class="row">
-              <div class="col-2"></div>
-              <div class="col-12 main_of_class" style="padding:0 0 20px 0px;text-align: justify;">
-                <i class="far fa-user"></i><span class="title_of_post">Luiz Suarez</span>
-                <br>
-                  <em ><i class="fas fa-map-marker-alt"></i><span class="span_for_location">Azerbaijan,Baku Inshaatchilar 21.23.34</span></em>
-                  <br>
-                  <i class="fas fa-history history_icon"  ></i><span>2020.14.09 14:34</span>
-                  <br>
-                <span class="span_metn_post_lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error consequatur excepturi accusantium 
-                  impedit obcaecati exercitationem cupiditate tempora in corporis, voluptas possimus fugiat ullam. Qu
-                  i quas quasi assumenda veniam omnis. Ab!</span>
-                  <br>
-                  
-                  
-              </div>
-              
-              <div class="col-12 back_img"><div class="col-12"></div>
-              <br>
-              <button class="btn btn-outline-dark sil_btn">Paylaşımı silin</button>
-            </div>
-            </div>
-                  
-               
-          </div>
+          {% endfor %}
           
          
          

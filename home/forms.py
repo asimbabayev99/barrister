@@ -41,16 +41,16 @@ class Newsform(forms.ModelForm):
 class PublicationForm(forms.ModelForm):
     error_css_class = 'error'
     
-    content = forms.CharField(label='', widget=forms.Textarea(attrs={
+    text = forms.CharField(label='', widget=widgets.CKEditorWidget(attrs={
         'class': 'text',
         'placeholder': 'Mənt'
     }))
-    file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
+    fayl = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
         'class': 'file'
     }))
     class Meta:
         model = Publication
-        fields = "__all__"
+        fields = ['text','fayl']
 
 
 
