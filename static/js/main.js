@@ -154,6 +154,7 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   if (pathname.indexOf("/calendar/")==0 ){ 
     $('body').css('overflow', 'hidden'); 
+    $('body').css('margin-top', '20px'); 
   }  
   // scrool trigger for click begin
  // https://gist.github.com/shlomohass/22249c0da0f53157dfe9#file-jquery-mousewheel-direction-capture-js
