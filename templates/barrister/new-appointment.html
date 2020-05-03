@@ -1,30 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block title %}
     <title>New Appointment</title>
+    {% endblock title %}
+
+    {% block links %}
     <link
       rel="shortcut icon"
       href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="fontawesome/all.css" />
-    <link rel="stylesheet" href="vendor/owl.carousel.css" />
-    <link rel="stylesheet" href="vendor/owl.theme.default.min.css" />
-    <link rel="stylesheet" href="vendor/animate.css" />
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
     <link
-      href="vendor/fullcalendar-3.10.0/fullcalendar.min.css"
+      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
       rel="stylesheet"
     />
     <link
-      href="vendor/fullcalendar-3.10.0/fullcalendar.print.min.css"
+      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}"
       rel="stylesheet"
       media="print"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> 
+    {% endblock links %}
   </head>
   <body style="background-color: #384554;">
     <div class="page-wrapper chiller-theme toggled">
@@ -65,7 +71,7 @@
             <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
             <img
               class="img-responsive img-rounded"
-              src="img/person-311292_640.png"
+              src="{% static 'img/person-311292_640.png' %}"
               alt="User picture"
             />
           </div>
@@ -234,7 +240,7 @@
         </a>
       </div> 
     </nav>
-    
+ {% block content %}   
 <main class="page-content">
     <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
 
@@ -321,22 +327,20 @@
               </form>
           </div>
         </div>
-        
-        
-       
-
   </main>
+ {% endblock content %} 
   </div>
   
-
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="vendor/fullcalendar-3.10.0/lib/moment.min.js"></script>
-  <script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
-  <script src="vendor/fullcalendar-3.10.0/fullcalendar.min.js"></script>
-  <script src="vendor/fullcalendar-3.10.0/locale/az.js"></script>
-  <script src="js/fullcalendar.js"></script>
-  <script src="js/main.js"></script>
+  {% block scripts %}
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+  <script src="{% static 'js/fullcalendar.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  {% endblock scripts %}
 </body>
 </html>

@@ -409,4 +409,7 @@ def attorneys_view(request):
 
 def is_masasi(request):
     return render(request,'barrister/barrister-admin.html')
+
+def new_appointment_view(request):
+    return render(request,'barrister/new-appointment.html')    
       
