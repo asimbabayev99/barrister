@@ -406,13 +406,6 @@ rs-layer:not(.rs-wtbindex),
 .rs-layer:not(.rs-wtbindex),
 rs-alyer *:not(.rs-wtbindex),
 .rs-layer *:not(.rs-wtbindex) { outline: none !important; }
-
-#slider-1-slide-1-layer-1{
-	width: 400px !important;
-}
-#slider-1-slide-2-layer-1{
-	width: 400px !important;
-}
 	
 /* CAROUSEL FUNCTIONS */
 rs-carousel-wrap {
