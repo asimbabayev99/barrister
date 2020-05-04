@@ -32,6 +32,7 @@ urlpatterns = [
     path('barrister/dashboard/', is_masasi, name='barrister-dashboard'),
     path('barrister/new-appointment/', new_appointment_view, name='barrister-new-appointment'),
     path('barrister/new-task/', add_task_view, name='barrister-add-task'),
+    path('barrister-personal', barrister_personal, name='barrister-personal')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

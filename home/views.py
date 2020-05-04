@@ -440,3 +440,6 @@ def add_task_view(request):
     
     return render(request, 'barrister/new-task.html', context=context)
 
+def barrister_personal(request):
+    return render(request,'barrister/barrister-personal.html')    
+
