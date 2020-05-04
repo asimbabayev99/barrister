@@ -417,17 +417,25 @@ def new_appointment_view(request):
     return render(request,'barrister/new-appointment.html', context=context)    
       
 
-def add_task_view(request):
 
+def add_task_view(request):
     form = TaskForm()
+    message = ""
 
     if request.method == 'POST' :
-        form = TaskForm(request.POST, request.user)
+        form = TaskForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            new_task = form.save(commit=False)
+            new_task = request.user
+            new_task.save()
+            message = "Tapşırıq uğurla əlavə olundu"
+        else:
+            print("invalid")
+            print(form.errors)
     
     context = {
         'form': form,
+        'message': message
     }
     
     return render(request, 'barrister/new-task.html', context=context)

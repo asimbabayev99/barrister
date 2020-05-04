@@ -396,9 +396,11 @@ class Comment(models.Model):
 
 
 class Task(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
+    type = models.CharField(max_length=32, null=True, blank=True)
     title = models.CharField(max_length=50,blank=True,null=True)
     description = models.CharField(max_length=256,blank=True,null=True)
-    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
+    media_file = models.FileField(upload_to='task', null=True, blank=True)
     status = models.CharField(max_length=32, choices=TASK_STATUS)
     added_date = models.DateField(auto_now_add=True)
     due_date = models.DateField(blank = False, null = False)

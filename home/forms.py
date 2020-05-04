@@ -56,7 +56,7 @@ class PublicationForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
-    type = forms.CharField(label="", widget=forms.TextInput(attrs={
+    type = forms.CharField(label="", required=False, widget=forms.TextInput(attrs={
         'class': 'form-element input-field',
         'placeholder': 'Tapşırıgın növü'
     }))
@@ -65,20 +65,20 @@ class TaskForm(forms.ModelForm):
         'placeholder': 'Başlıq',
         'autocomplete': 'off'
     }))
-    description = forms.CharField(label="", widget=forms.Textarea(attrs={
+    description = forms.CharField(label="", required=False, widget=forms.Textarea(attrs={
         # 'class': 'form-element input-field',
         'placeholder': 'Tapşırığın qısa məzmunu',
         'cols': '50', 
         'rows': '3',
     }))
-    media_file = forms.FileField(label="", widget=forms.FileInput(attrs={
+    media_file = forms.FileField(label="", required=False, widget=forms.FileInput(attrs={
         'name':'media_file',
         'id': 'chooseFile',
     }))
     due_date = forms.DateField(label="",widget=forms.DateInput(attrs={
         'type': 'date'
     }))
-    due_time = forms.TimeField(label="", widget=forms.TimeInput(attrs={
+    due_time = forms.TimeField(label="", required=False, widget=forms.TimeInput(attrs={
         'type': 'time',
         'style': 'margin-left: auto;',
         'class': 'that4 browser-default custom-select',
