@@ -497,14 +497,14 @@
                                 class="themestek-attorco-icon-instagram"></i></a></li>
                         </ul>
                         {% if request.user.is_authenticated %}
-                        <div id="profile_icon" onclick="profile_click()">S</div>
+                        <div id="profile_icon" onclick="profile_click()">{{request.user.first_name|make_list|first}}</div>
                         {% endif %}
                         <div id="profile_menu" style="display: none;">
                           <p style="color:#cdba6d;font-size: 12px;line-height: 30px;margin-top: 10px;">Xoş
                             Gəlmisiniz!<br><span style="font-size: 16px;">{{request.user.first_name}} {{request.user.last_name}}</span></p>
                           <hr>
 
-                          <ul style="">
+                          <ul>
                             <a href="{% url 'user-profile' %}">
                               <li class="btn btn1"> <i class="themestek-attorco-icon-user ">Şəxsi məlumatlar</i></li>
                             </a>
@@ -557,10 +557,10 @@
 
                             {% if request.user.role.name == "Barrister" %}
                             <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
-                              href="{% url 'calendar' %}" title="">İş masası</a></div>
+                              href="{% url 'calendar' %}" target="_blank" title="İşlərinizi planlaşdırın">İş masası</a></div>
                           {% else %}
                           <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
-                            href="{% url 'calendar' %}" title="">Konsultasiya</a>
+                            href="{% url 'calendar' %}" title="Müraciət üçün daxil ol">Konsultasiya</a>
                         </div>
                         {% endif %}
                       </div>

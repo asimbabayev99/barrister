@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
 from django.urls import reverse
 from account.models import *
 from account.forms import *
@@ -8,7 +8,8 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+from home.forms import PublicationForm
+from home.models import Publication
 
 
 
@@ -155,6 +156,21 @@ def user_profile(request):
     # return render(request, 'user-profile.html')
     return render(request, 'barrister/barrister-admin.html')
 
+
+def advocat_user(request):
+    if request.user.role.name != "Barrister":
+        return HttpResponse('<h1>Permission denied</h1>')
+    last_publications = Publication.objects.filter(user=request.user).order_by('date')[:3]
+    form = PublicationForm()
+    if request.method == "POST":
+        form = PublicationForm(request.POST,request.FILES or None)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            fayl = form.cleaned_data['fayl']
+            Publication.objects.create(user=request.user,text=text,fayl=fayl)
+    form = PublicationForm()
+    context={'form':form,'publications':last_publications}
+    return render(request,'barrister/advocat_user.html',context)
 
 
 
