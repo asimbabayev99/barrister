@@ -237,12 +237,14 @@
 
           <div class="input-addon">
             {{ form.title }}
+            {{ form.title.errors }}
             <!-- <input class="form-element input-field" placeholder="Başlıq" type="text"> -->
             <span class="input-group-text fas fa-pen"></span>
           </div>
 
           <div class="input-addon">
             {{ form.type }}
+            {{ form.type.errors }}
             <!-- <input class="form-element input-field" placeholder="Tapşırıgın növü" type="text"> -->
             <span class="input-group-text fas fa-pen"></span>
           </div>
@@ -256,8 +258,9 @@
           <div class="file-upload">
             <div class="file-select">
               <div class="file-select-button" id="fileName">Media əlavə edin</div>
-              <div class="file-select-name" id="noFile">Fayl seçilməyib..</div> 
+              <!-- <div class="file-select-name" id="noFile">Fayl seçilməyib..</div>  -->
               {{ form.media_file }}
+              {{ form.media_file.errors }}
               <!-- <input type="file" name="chooseFile" id="chooseFile"> -->
             </div>
           </div>
@@ -266,8 +269,10 @@
 
               <div class="input-addon">
               {{ form.due_date }}
+              {{ form.due_date.errors }}
               <!-- <input placeholder="Başla: 7 Aprel 2020"  type="date"> -->
               {{ form.due_time }}
+              {{ form.due_time.errors }}
               <!-- <select style="margin-left: auto;" class="that4 browser-default custom-select">
                 <option selected>00:00</option>
                 <option value="1">00:30</option>
@@ -301,6 +306,7 @@
               <br>
           <div class="input-addon">
             {{ form.description }}
+            {{ form.description.errors }}
             <!-- <textarea placeholder="Tapşırığın qısa məzmunu" name="" id="" cols="50" rows="3"></textarea> -->
             <span class="input-group-text fas fa-file-alt"></span>
           </div>

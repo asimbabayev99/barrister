@@ -401,7 +401,7 @@ class Task(models.Model):
     title = models.CharField(max_length=50,blank=True,null=True)
     description = models.CharField(max_length=256,blank=True,null=True)
     media_file = models.FileField(upload_to='task', null=True, blank=True)
-    status = models.CharField(max_length=32, choices=TASK_STATUS)
+    status = models.CharField(max_length=32, choices=TASK_STATUS, default="in progress")
     added_date = models.DateField(auto_now_add=True)
     due_date = models.DateField(blank = False, null = False)
     due_time = models.TimeField(blank=True, null=True)

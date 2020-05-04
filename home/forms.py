@@ -87,7 +87,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['type', 'title', 'description', 'media_file', 'due_date', 'due_time']
 
 
 
