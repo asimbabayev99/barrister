@@ -29,8 +29,9 @@ urlpatterns = [
     path('attorneys/', attorneys_view, name='attorneys'),
 
     path('is-masasi/',is_masasi,name='is-masasi'),
-    path('new-appointment/', new_appointment_view, name='new-appointment'),
-    path('new-task/', add_task_view, name='add-task'),
+    path('barrister/dashboard/', is_masasi, name='barrister-dashboard'),
+    path('barrister/new-appointment/', new_appointment_view, name='barrister-new-appointment'),
+    path('barrister/new-task/', add_task_view, name='barrister-add-task'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
