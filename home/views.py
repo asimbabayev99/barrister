@@ -361,22 +361,6 @@ def get_tasks_list(request):
     return render(request, '', context=context)
 
 
-def add_task_view(request):
-
-    form = TaskForm()
-
-    if request.method == 'POST' :
-        form = TaskForm(request.POST, request.user)
-        if form.is_valid():
-            form.save()
-    
-    context = {
-        'form': form,
-    }
-    
-    return render(request, '', context=contetx)
-
-
 
 def attorneys_view(request):
     page = request.GET.get('page', 1)
@@ -432,3 +416,19 @@ def new_appointment_view(request):
 
     return render(request,'barrister/new-appointment.html', context=context)    
       
+
+def add_task_view(request):
+
+    form = TaskForm()
+
+    if request.method == 'POST' :
+        form = TaskForm(request.POST, request.user)
+        if form.is_valid():
+            form.save()
+    
+    context = {
+        'form': form,
+    }
+    
+    return render(request, 'barrister/new-task.html', context=context)
+
