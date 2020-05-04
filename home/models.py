@@ -437,7 +437,8 @@ class Appointment(models.Model):
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
     zip = models.CharField(max_length=8, null=True, blank=True)
     detail = models.CharField(max_length=256, null=True, blank=True)
-    date = models.DateTimeField(null=False)
+    date = models.DateField(null=False)
+    time = models.TimeField(null=True, blank=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
 

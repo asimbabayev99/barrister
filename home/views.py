@@ -410,42 +410,25 @@ def attorneys_view(request):
 def is_masasi(request):
     return render(request,'barrister/barrister-admin.html')
 
+
+
 def new_appointment_view(request):
-
     form = AppointmentForm()
+    message = ""
 
-    if request.method == "Post":
-        form = AppointmentForm(request.Post, request.Files or None)
+    if request.method == "POST":
+        form = AppointmentForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            middle_name = form.cleaned_data['middle_name']
-            phone_number = form.cleaned_data['phone_number']
-            city = form.cleaned_data['city']
-            zip = form.cleaned_data['zip']
-            detail = form.cleaned_data['detail']
+            new_appointment = form.save(commit=False)
+            new_appointment.user = request.user
+            new_appointment.save()
 
-            appointm = Appointment(
-                email = email,
-                first_name = first_name,
-                last_name = last_name,
-                middle_name = middle_name,
-                phone_number =phone_number,
-                city = city,
-                zip = zip,
-                detail = detail
-            )
-
-            appointm.save()
+            message = "Görüş uğurla elavə olundu"
 
     context = {
         'form' : form,
-    }        
-            
-
-
-
+        'message': message,
+    }
 
     return render(request,'barrister/new-appointment.html', context=context)    
       

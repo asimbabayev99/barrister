@@ -1,6 +1,7 @@
 from django import forms
-from home.models import News, Publication, Task, TASK_STATUS, Appointment
-from ckeditor import widgets
+from home.models import News, Publication, Task, TASK_STATUS, Appointment, City
+# from ckeditor import widgets
+import ckeditor
 from django.utils.translation import ugettext as _
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
@@ -15,7 +16,7 @@ class Newsform(forms.ModelForm):
         'placeholder':'Xəbər başlığı',
         'type':'text'
     }),required=True,error_messages={'invalid' : 'Bu xana bos ola bilmez','required' : 'Bu xana bos ola bilmez'})
-    content = forms.CharField(label='',widget=widgets.CKEditorWidget(attrs={
+    content = forms.CharField(label='',widget=ckeditor.widgets.CKEditorWidget(attrs={
         'class':'form-element input-field',
         'placeholder':'Xəbərin məzmunu'
 
@@ -67,43 +68,58 @@ class TaskForm(forms.ModelForm):
         fields = '__all__'
 
 
+
+
 class AppointmentForm(forms.ModelForm):
     error_css_class = 'error'
-    email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+    email = forms.CharField(label='', max_length=100, required=False, widget=forms.TextInput(attrs={
+        'class' : "form-control",
         'placeholder':"Email"
     }))
     first_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+        'class' : "form-control",
         'placeholder': "Ad"
     })) 
     last_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+        'class' : "form-control",
         'placeholder': "Soyad"
     })) 
-    middle_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
-        'class': 'form-element input-field',
+    middle_name = forms.CharField(label='', max_length=32, required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control',
         'placeholder': 'Ata adı'
     }))
-    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
+    phone = forms.CharField(required=False, widget=forms.NumberInput(attrs={
         'class': 'form-control',
         'type' : 'text',
-        'placeholder': 'Phone Number'
+        'placeholder': 'Telefon'
     }))
-    city = forms.ChoiceField(  widget=forms.Select(attrs={
-        'class': 'custom-select'
+    date = forms.DateField(
+        # input_formats=['%d/%m/%Y'], 
+        widget=forms.DateInput(attrs={
+            'class': 'form-control',
+            'type': 'date',
+            'data-target': '#datetimepicker1'
+        })
+    )
+    time = forms.TimeField(
+        # input_formats=['%H:%M'],
+        widget=forms.TimeInput(attrs={
+            'type': 'time',
+            'class': 'form-control'
+        })
+    )
+    city = forms.ModelChoiceField(required=False, queryset=City.objects.all(), widget=forms.Select(attrs={
+        'class': 'form-control'
     }))
-    zip = forms.CharField(label='', max_length=8, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+    zip = forms.CharField(label='', max_length=8, required=False, widget=forms.TextInput(attrs={
+        'class' : "form-control",
         'placeholder': "Zip code"
     }))
-    detail = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+    detail = forms.CharField(label='', max_length=256, required=False, widget=forms.Textarea(attrs={
+        'class' : "form-control",
         'placeholder': "Görüşün detalları"
     }))
 
     class Meta:
         model = Appointment
-        fields = ('email','first_name', 'last_name', 'middle_name', 'phone_number', 'city', 'zip', 'detail')
-
-    
+        fields = ('email','first_name', 'last_name', 'middle_name', 'phone', 'date', 'time', 'city', 'zip', 'detail')

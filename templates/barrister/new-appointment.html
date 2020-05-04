@@ -246,6 +246,9 @@
 
       <div class="welcome">
           <div class="container-fluid">
+            <!-- Tesdiq mesaji -->
+            <p>{{ message }}</p>
+            <!-- Tesdiq mesaji -->
             <div class="row">
               <div class="col-md-12">
                 <div class="content text-center mb-3">
@@ -253,34 +256,40 @@
                 </div>
               </div>
             </div>
-            <form>
+            <form method="POST" action=''>
+              {% csrf_token %}
                 <div class="form-row">
                     <div class="form-group col-md-4 input-group mb-4">
-                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Ad">
+                        {{ form.first_name }}
+                        <!-- <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Ad"> -->
                         <div class="input-group-append">
                             <div class="input-group-text"><span class="fa fa-user"></span></div>
                           </div>
                       </div>
                     <div class="form-group col-md-4 input-group mb-4">
-                        <input type="text" class="form-control" id="inputSurname" placeholder="Soyad">
+                        <!-- <input type="text" class="form-control" id="inputSurname" placeholder="Soyad"> -->
+                        {{ form.last_name }}
                         <div class="input-group-append">
                             <div class="input-group-text"><span class="fa fa-envelope"></span></div>
                           </div>
                       </div>
                       <div class="form-group col-md-4 input-group mb-4">
-                        <input type="mail" class="form-control" id="inputEmail4" placeholder="Ata adı">
+                        {{ form.middle_name }}
+                        <!-- <input type="mail" class="form-control" id="inputEmail4" placeholder="Ata adı"> -->
                         <div class="input-group-append">
                             <div class="input-group-text"><span class="fa fa-user"></span></div>
                           </div>
                       </div>
                       <div class="form-group col-md-6 input-group mb-4">
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                        {{ form.email }}
+                        <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="Email"> -->
                         <div class="input-group-append">
                             <div class="input-group-text"><span class="fa fa-user"></span></div>
                           </div>
                       </div>
                     <div class="form-group col-md-6 input-group mb-4">
-                        <input type="tel" class="form-control" id="inputPhone" placeholder="Telefon">
+                        {{ form.phone }}
+                        <!-- <input type="tel" class="form-control" id="inputPhone" placeholder="Telefon"> -->
                         <div class="input-group-append">
                             <div class="input-group-text"><span class="fa fa-phone"></span></div>
                           </div>
@@ -294,30 +303,34 @@
                         </div>
                       </div>
                  <div class="form-row">
-                  <div class="form-group col-md-6 input-group mb-4">
-                    <input type="text" class="form-control" id="inputCity" placeholder="Ölkə">
+                  <div class="form-group col-md-4 input-group mb-4">
+                    {{ form.date }}
+                    <!-- <input type="text" class="form-control" id="inputCity" placeholder="Ölkə"> -->
                     <div class="input-group-append">
                       <div class="input-group-text"><span class="fas fa-globe-europe"></span></div>
                     </div>
                   </div>
                   <div class="form-group col-md-4 input-group mb-4">
-                    <select id="inputState" class="form-control">
-                      <option selected>Şəhər...</option>
-                      <option>Bakı</option>
-                      <option>Şirvan</option>
-                    </select>
-                    <div class="input-group-append">
-                      <div class="input-group-text"><span class="far fa-building"></span></div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2 input-group mb-4">
-                    <input type="text" class="form-control" id="inputZip" placeholder="Zip code">
+                    {{ form.time }}
+                    <!-- <input type="text" class="form-control" id="inputZip" placeholder="Zip code"> -->
                     <div class="input-group-append">
                       <div class="input-group-text"><span class="fas fa-mail-bulk"></span></div>
                     </div>
                   </div>
+                  <div class="form-group col-md-4 input-group mb-4">
+                    {{ form.city }}
+                    <!-- <select id="inputState" class="form-control">
+                      <option selected>Şəhər...</option>
+                      <option>Bakı</option>
+                      <option>Şirvan</option>
+                    </select> -->
+                    <div class="input-group-append">
+                      <div class="input-group-text"><span class="far fa-building"></span></div>
+                    </div>
+                  </div>
                    <div class="form-group col-md-12 input-group mb-4">
-                    <textarea type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Görüşün detalları"></textarea>
+                    {{ form.detail }}
+                    <!-- <textarea type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Görüşün detalları"></textarea> -->
                     <div class="input-group-append">
                         <div class="input-group-text"><span class="fa fa-user"></span></div>
                       </div>
