@@ -173,7 +173,8 @@ def advocat_user(request):
     return render(request,'barrister/advocat_user.html',context)
 
 
-
+def musteriler(request):
+    return render(request,'barrister/musteriler_special.html')
 
 
 
