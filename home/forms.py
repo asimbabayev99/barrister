@@ -42,7 +42,7 @@ class Newsform(forms.ModelForm):
 class PublicationForm(forms.ModelForm):
     error_css_class = 'error'
     
-    text = forms.CharField(label='', widget=widgets.CKEditorWidget(attrs={
+    text = forms.CharField(label='', widget=ckeditor.widgets.CKEditorWidget(attrs={
         'class': 'text',
         'placeholder': 'Mənt'
     }))
@@ -56,12 +56,34 @@ class PublicationForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
-    title = forms.CharField(label="", widget=forms.TextInput)
-    description = forms.CharField(label="", widget=forms.TextInput)
-    added_date = forms.DateField(label="",widget=forms.DateInput)
-    deadline = forms.DateField(label="",widget=forms.DateInput)
-    status = forms.ChoiceField(label="", choices=TASK_STATUS)
-
+    type = forms.CharField(label="", widget=forms.TextInput(attrs={
+        'class': 'form-element input-field',
+        'placeholder': 'Tapşırıgın növü'
+    }))
+    title = forms.CharField(label="", widget=forms.TextInput(attrs={
+        'class': 'form-element input-field',
+        'placeholder': 'Başlıq',
+        'autocomplete': 'off'
+    }))
+    description = forms.CharField(label="", widget=forms.Textarea(attrs={
+        # 'class': 'form-element input-field',
+        'placeholder': 'Tapşırığın qısa məzmunu',
+        'cols': '50', 
+        'rows': '3',
+    }))
+    media_file = forms.FileField(label="", widget=forms.FileInput(attrs={
+        'name':'media_file',
+        'id': 'chooseFile',
+    }))
+    due_date = forms.DateField(label="",widget=forms.DateInput(attrs={
+        'type': 'date'
+    }))
+    due_time = forms.TimeField(label="", widget=forms.TimeInput(attrs={
+        'type': 'time',
+        'style': 'margin-left: auto;',
+        'class': 'that4 browser-default custom-select',
+    }))
+    # status = forms.ChoiceField(label="", choices=TASK_STATUS)
 
     class Meta:
         model = Task

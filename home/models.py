@@ -369,7 +369,7 @@ class News(models.Model):
 class Publication(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = RichTextField()
-    fayl = models.FileField(upload_to='publication')
+    file = models.FileField(upload_to='publication')
     date = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
 
@@ -401,7 +401,8 @@ class Task(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=32, choices=TASK_STATUS)
     added_date = models.DateField(auto_now_add=True)
-    deadline = models.DateField(blank = True,null = True)
+    due_date = models.DateField(blank = False, null = False)
+    due_time = models.TimeField(blank=True, null=True)
 
     def __str__(self):
         return self.title
