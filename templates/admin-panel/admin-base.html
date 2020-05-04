@@ -9,7 +9,8 @@
        
     {% endblock title %}
       
-   
+    
+     
     <link
       rel="shortcut icon"
       href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
@@ -24,6 +25,7 @@
     <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet"/>
     <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
   </head>
   <body style="background-color: #2a2b3d;">
 
@@ -152,7 +154,8 @@
         
     {% endblock content %}
 
-
+    
+    {% block scripts %}   
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -162,5 +165,6 @@
     <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
     <script src="{% static 'js/fullcalendar.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    {% endblock scripts %}
   </body>
 </html>

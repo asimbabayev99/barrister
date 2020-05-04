@@ -158,22 +158,27 @@ def user_profile(request):
 
 
 def advocat_user(request):
-    if request.user.role.name != "Barrister":
+    if  request.user.is_authenticated == False or request.user.role.name != "Barrister":
         return HttpResponse('<h1>Permission denied</h1>')
-    last_publications = Publication.objects.filter(user=request.user).order_by('date')[:3]
+    last_publications = Publication.objects.filter(user=request.user).order_by('-date')[:3]
     form = PublicationForm()
     if request.method == "POST":
         form = PublicationForm(request.POST,request.FILES or None)
         if form.is_valid():
             text = form.cleaned_data['text']
-            fayl = form.cleaned_data['fayl']
-            Publication.objects.create(user=request.user,text=text,fayl=fayl)
+            file = form.cleaned_data['fayl']
+            Publication.objects.create(user=request.user,text=text,fayl=file)
     form = PublicationForm()
     context={'form':form,'publications':last_publications}
     return render(request,'barrister/advocat_user.html',context)
 
 
+def musteriler(request):
+    return render(request,'barrister/musteriler_special.html')
 
+def new_task(request):
+    return render(request,'barrister/new-task.html')
 
-
+def new_appointment(request):
+    return render(request,'barrister/new-appointment.html')
 
