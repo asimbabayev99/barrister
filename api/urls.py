@@ -36,5 +36,7 @@ urlpatterns = [
     path('awards/', AwardAPIView.as_view()),   
     path('experiences/<int:pk>', ExperienceAPIView.as_view()),
     path('experiences/', ExperienceAPIView.as_view()),
+    path('publication/',PublicationAPIView.as_view()),
+    path('publication/<int:pk>',PublicationAPIView.as_view())
 
 ]

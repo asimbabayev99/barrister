@@ -80,8 +80,8 @@
             </div>
           </div>
           
-          {% for publication in publications %}  
-          <div class="container-fluid " style="padding-left: 70px;padding-right: 55px;margin-top: 40px;">
+           
+          <div id="div" class="container-fluid " style="padding-left: 70px;padding-right: 55px;margin-top: 40px;">
             
             <div class="row">
               <div class="col-2"></div>
@@ -102,7 +102,7 @@
             </div>
             </div>
           </div>
-          {% endfor %}
+          
           
          
          
@@ -115,5 +115,70 @@
   {% endblock content %}
 
 {% block scripts %} 
-  {{ block.super }}  
+  {{ block.super }}
+
+  <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
+
+    function copydiv(arr){
+      i = 0 
+      
+      
+      
+      let original = $('#div')[0]
+      original.children('span.span_metn_post_lorem').text(JSON.stringify(arr['text']))
+
+      let clone = original.cloneNode(true)
+      clone.id = 'div' + ++i
+      original.parentNode.appendChild(clone)
+      // $(String(clone.id)).attr('.span_metn_post_lorem').text(arr["text"])
+
+
+    }
+
+    
+
+  $(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        $.ajax({
+          headers: { 
+            "X-CSRFToken": getCookie('csrftoken'),
+            // 'Email':'azad@mail.ru',
+            // 'Password':'azad12345'
+          },
+          method : "GET",
+          url : '/api/publication',
+          success : function(data){
+            var arr = data['publications']
+            console.log(arr[0])
+            for(var i=0;i<arr.length;i++){
+            copydiv(arr[i])
+            }
+          }
+          
+
+
+
+        });
+    };
+});
+
+
+
+
+  </script> 
 {% endblock scripts %}
