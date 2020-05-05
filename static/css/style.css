@@ -2069,3 +2069,127 @@ padding-left: 10px;
   color: #42474c;
 }
 /*Musteriler special end*/
+
+
+/*Professional skills begin*/
+
+.performance {
+  color:#a18432;
+  
+  }
+  .performance .content {
+    background-color: #191813d4;
+    padding: 15px;
+    margin-top: 25px;
+  }
+  
+  .perfo_body{
+    color:#a18432;
+    background-color: #191813d4;
+    height:100vh;
+  }
+  
+  
+  .frame{
+    width: 90%!important;
+    margin:10px 20px 20px 10px; 
+  }
+  .p_raw{
+    width: 100%;
+    margin-bottom: 50px;
+    display: block;
+  }
+  
+  .box1 .info p{
+     width: 90%;
+     float: left;
+     margin: 0 0 0 10px;
+  
+    
+  }
+  .box1 .info hr{
+    margin-top: 30px;
+  }
+  
+  .remove{
+    width: 20px; 
+    height: 20px;
+  }
+  
+  .box1{
+    float: left;
+    background-color: #191813d4 !important; 
+    width: 50%;
+    height: 370px;
+    padding-left: 10px;
+    color:#a18432;
+  }
+  .box2{
+    float: right;
+    background-color: #191813d4 !important; 
+    width: 50%;
+    height: 370px;
+    padding-left: 10px;
+    border-left: 1px solid gold;
+    color:#a18432;
+  }
+  
+  .win{
+    font-size: 25px!important;
+      margin-right: 20px!important;
+  }
+  .edu{
+    font-size: 25px!important;
+      margin-right: 20px!important;
+      background-color: transparent!important;
+  }
+  
+  .box2 input{
+    width: 60px;
+    height: 25px;
+    overflow: hidden;
+    margin-left: 10px;
+  
+  }
+  
+  .box2 h3{
+    display: inline-block;
+  }
+  .box1 h3{
+    display: inline-block;
+  }
+  
+  .faiz{
+    width: 90%;
+    height: 25px;
+    border:1px solid #a18432;
+    background-color: #a18432;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+  }
+  
+  .faiz_ic{
+   width:68%;
+    height: 25px;
+    border:1px solid gold;
+    background-color: #191813d4;
+     border-radius: 10px;
+    
+  }
+  
+  .faiz p{
+    text-align: center;
+    margin: 0 auto;
+    transform: translateX(50%);
+    color: gold;
+  }
+  
+  .title_law{
+    margin-top: 10px;
+    margin-left: 10px;
+  }   
+      
+/*Professional skills end*/
+

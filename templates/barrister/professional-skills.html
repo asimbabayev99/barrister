@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barrister Admin</title>
+    <link
+      rel="shortcut icon"
+      href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+      alt="Изображение Tim Treis с сайта Pixabay "
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="fontawesome/all.css" />
+    <link rel="stylesheet" href="vendor/owl.carousel.css" />
+    <link rel="stylesheet" href="vendor/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="vendor/animate.css" />
+    <link
+      href="vendor/fullcalendar-3.10.0/fullcalendar.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="vendor/fullcalendar-3.10.0/fullcalendar.print.min.css"
+      rel="stylesheet"
+      media="print"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body style="background-color: #384554;">
+    <div class="page-wrapper chiller-theme toggled">
+    <div id="show-sidebar">
+      <a
+        title="Genişləndirmək"
+        id="show-sidebar"
+        class="btn btn-sm btn-dark"
+        href="#"
+      >
+        <i class="fas fa-bars"></i>
+      </a>
+
+      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
+        <i class="fa fa-calendar-plus"></i>
+      </a>
+
+      <a
+        title="Təqvim"
+        id="minicalendaricon"
+        class="btn btn-sm btn-dark"
+        href="#"
+      >
+        <i class="fa fa-calendar"></i>
+      </a>
+    </div>
+
+    <nav id="sidebar" class="sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <a href="#">Təqvim</a>
+          <div id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+        <div class="sidebar-header">
+          <div class="user-pic">
+            <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
+            <img
+              class="img-responsive img-rounded"
+              src="img/person-311292_640.png"
+              alt="User picture"
+            />
+          </div>
+          <div class="user-info">
+            <span class="user-name">Admin </span>
+            <span class="user-role">Administrator</span>
+            <span class="user-status">
+              <i class="fa fa-circle"></i>
+              <span>Online</span>
+            </span>
+          </div>
+        </div>
+        <!-- sidebar-header  -->
+        
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span></span>
+            </li>
+
+            <li>
+              <a href="admin-Dashboard.html">
+                  <i class="fa fa-home"></i>
+                  <span>Əsas səhifə</span>
+                </a>
+            </li>
+            <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fas fa-user-alt"></i>
+                  <span>Mənim səhifəm</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="##">Hesabım</a>
+                    </li>
+                    <li>
+                      <a href="##">Şəxsi məlumatlarım</a>
+                    </li>
+                    <li>
+                      <a href="##">Peşəkar bacarıqlarım</a>
+                    </li>
+                    <li>
+                      <a href="##">Sosial aktivliyim</a>
+                    </li>
+                    <li>
+                      <a href="##">Abunə haqqı</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="far fa-envelope"></i>
+                  <span>Elektron poçt</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="##">Daxil olanlar(İnbox)</a>
+                    </li>
+                    <li>
+                      <a href="##">Qaralama(Draft)</a>
+                    </li>
+                    <li>
+                      <a href="##">Göndərilənlər(Sent Mail)</a>
+                    </li>
+                    <li>
+                      <a href="##">İmza</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fas fa-tasks"></i>
+                  <span>Tapşırıqlar</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="##">Yeni tapşırıq</a>
+                    </li>
+                    <li>
+                      <a href="##">Cari tapşırıqlar</a>
+                    </li>
+                    <li>
+                      <a href="##">İcra olunmuş tapşırıqlar</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="far fa-calendar-check"></i>
+                  <span>İş gündəliyi</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="##">Təqvim</a>
+                    </li>
+                    <li>
+                      <a href="##">Yeni görüş</a>
+                    </li>
+                    <li>
+                      <a href="##">Ümumi görüşlər</a>
+                    </li> 
+                    <li>
+                      <a href="##">Filtrlər</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Müştərilər</span>
+                </a>
+              </li>
+              <li >
+                <a href="#">
+                  <i class="far fa-folder-open"></i>
+                  <span>Sənədlər</span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content-->
+      <div class="sidebar-footer notes">
+        <a href="#">
+            <i class="fas fa-pager"></i>
+          <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-envelope"></i>
+          <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+            <i class="fas fa-list-ol"></i>
+            <span class="badge badge-pill badge-warning notification">3</span>
+          </a>
+        <a href="#">
+            <i class="far fa-sticky-note"></i>
+          <span class="badge badge-pill badge-success notification">2</span>
+        </a>
+        <a href="#">
+            <i class="fas fa-users"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+            <i class="fas fa-file-contract"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer settings">
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a>
+        <a href="#">
+          <i class="fa fa-power-off"></i>
+        </a>
+      </div> 
+    </nav>
+    
+<main style="font-weight: bold; " class="page-content design perfo_body">
+    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+      <div class="performance">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content">
+                  <h2>Peşəkar bacarıqlar</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="statistics">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="box1">
+                  <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
+                  <h3>Təhsil</h3>
+                  <div class="info" style="padding-bottom: 10px;">
+                     
+                    <div class="p_raw"><p>Bakalavr - Bakı Dövlət Universitetinin (BDU) Hüquq fakültəsi; Hüquqşünaslıq ixtisası</p><hr></div>
+                    <br>
+                    <div class="p_raw"><p>Magistr - Bakı Dövlət Universitetinin (BDU) Hüquq fakültəsi; Cinayət hüququ, cinayət prosesi, kriminalistika və məhkəmə ekspertizası ixtisası</p><hr></div>
+                    <br>
+                    <div class="p_raw"><p>Doktorant -Bakı Dövlət Universitetinin (BDU) Cinayət prosesi; kriminalistika və məhkəmə ekspertizası; əməliyyat axtarış fəaliyyəti</p><hr></div>
+                    
+                    </div>
+                  
+                </div>
+                <div class="box2">
+                  <i class="fas fa-trophy win"></i>
+                  <h3>Muveffeqiyyetler</h3>
+                  <div class="info frame " style="padding-bottom: 10px;">
+                     <p class="title_law">Aile huququ</p>
+                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+                    
+                     <p class="title_law">Cinayet huququ</p>
+                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+
+                    <p class="title_law">Dasinmaz Emlak huququ</p>
+                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+
+
+                   
+</div>
+                 
+                  </div>
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+        
+        
+  </main>
+  </div>
+  <script type="text/javascript">
+
+// document.getElementsByClassName("enter_num")[0].addEventListener("keyup", myFunction);
+
+// function myFunction() {
+// var x = document.getElementsByClassName("enter_num")[0].value;
+
+  
+//     if (x<=100) {
+//       document.getElementsByClassName("degree")[0].innerHTML=document.getElementsByClassName("enter_num")[0].value + "%";
+//   document.getElementsByClassName("faiz_ic")[0].style.width= x + "%";
+//     }
+//     else  {
+//     document.getElementsByClassName("faiz_ic")[0].style.width=0;
+//     }
+// }
+
+  </script>
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/lib/moment.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/fullcalendar.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/locale/az.js"></script>
+  <script src="js/fullcalendar.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
