@@ -216,3 +216,50 @@ class PasswordChangeForm(SetPasswordForm):
                 code='password_incorrect',
             )
         return old_password    
+
+
+class UserUpdateForm(forms.ModelForm):
+    error_css_class = 'error'
+    email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
+        'class' : 'form-element input-field',
+        'placeholder':"Email"
+    }))
+    first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder': "Ad"
+    })) 
+    last_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
+        'class' : "form-element input-field",
+        'placeholder': "Soyad"
+    })) 
+    middle_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+        'class': 'form-element input-field',
+        'placeholder': 'Ata adı'
+    }))
+    address = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Adress'
+    }))
+    fin = forms.CharField(label='', max_length=10, widget=forms.TextInput(attrs={
+        'class' : "form-control",
+        'placeholder': "Fin"
+    }))
+    seriya_type = forms.ChoiceField(choices=SERIYA_TYPES, required=True, widget=forms.Select(attrs={
+        'class': 'custom-select'
+    }))
+    seriya = forms.IntegerField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Seriya'
+    }))
+    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'type' : 'text',
+        'placeholder': 'Phone Number'
+    }))
+
+    field_order =  ('email','first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
+
+
+    class Meta:
+        model = CustomUser
+        fields =  ('email','first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')

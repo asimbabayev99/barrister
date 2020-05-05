@@ -176,9 +176,5 @@ def advocat_user(request):
 def musteriler(request):
     return render(request,'barrister/musteriler_special.html')
 
-def new_task(request):
-    return render(request,'barrister/new-task.html')
 
-def new_appointment(request):
-    return render(request,'barrister/new-appointment.html')
 

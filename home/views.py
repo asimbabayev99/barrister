@@ -3,7 +3,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
-from account.forms import UserForm
+from account.forms import UserForm, UserUpdateForm
 from home.forms import * 
 from django.utils.text import slugify
 from .models import News
@@ -439,4 +439,20 @@ def add_task_view(request):
     }
     
     return render(request, 'barrister/new-task.html', context=context)
+
+def barrister_personal(request):
+    user = request.user
+    form = UserUpdateForm(instance=user)
+
+    if request.method == 'Post':
+        form = UserUpdateForm(request.Post, instance=user)
+        if form.is_valid():
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.save()
+
+    form = UserUpdateForm(instance=user)      
+
+
+    return render(request,'barrister/barrister-personal.html')    
 
