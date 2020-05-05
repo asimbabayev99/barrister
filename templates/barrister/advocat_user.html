@@ -18,9 +18,9 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12 vekil_main">
-                <div class="vekil_yeni_title">
-                  <p><a href="">Paylaşım yarat</a></p>
-                </div>
+                <div class="col-12 musteri_baslig">
+                    <h3>Yeni Paylaşım</h3>
+                </div> 
               </div>
             
           
@@ -34,37 +34,17 @@
 
                 <div class="col-12 main_class">
                  <div class="row">
-                   <div class="col-xl-4 col-12">
+                   <div class="col-md-6 col-xs-12">
                      <div class="image-upload">
                     <label for="file-input" class="label_icon">
                       <i class="fas fa-photo-video"></i>
-                      
                     </label>
                     <span class="pdf_span">{{ form.fayl }}</span>
-                    
                   </div>
-                
                 </div>
-
-                   <div class="col-xl-4 col-12">
-                    <i class="far fa-map" style="color: #3a3f48;font-size: 20px;margin-right: 10px;"></i><input class="mekan_input" type="text" placeholder="Məkan daxil edin">
-                   </div>
-
-
-                   <div class="col-xl-4 col-12 main_class">
-                     <label for="file_input_2" class="label_icon">
-                      <i class="far fa-file-word"></i>
-                      
-                     
-                     </label>
-                     <span style="color: #3a3f48;" class="pdf_span">Pdf ve bu kimi fayllar secin</span>
-                    <input id="file_input_2" type="file" accept=".doc, .docx,.ppt, .pptx,.txt,.pdf">
-                   </div>
-
-                   <div class="col-12 confirm_button">
-                     <button type="submit" class="btn btn-dark">Paylaşımı təstiqlə</button>
-                   </div>
-
+                   <div class="col-md-6 col-xs-12 confirm_button">
+                    <button type="submit" class="btn btn-appointment float-right">Paylaşımı təsdiqlə</button>
+                  </div>
                  </div>
                 </div>
           </div>
@@ -73,18 +53,16 @@
 
 
               <div class="col-md-12 vekil_main " style="margin-top: 100px;">
-                <div class="vekil_yeni_title">
-                  <p><a href="">Son paylaşılan postlar</a></p>
+                <div class="col-12 musteri_baslig">
+                  <h3>Son paylaşımlar</h3>
                 </div>
               </div>
             </div>
           </div>
-          
-          {% for publication in publications %}  
-          <div class="container-fluid " style="padding-left: 70px;padding-right: 55px;margin-top: 40px;">
-            
-            <div class="row">
-              <div class="col-2"></div>
+       
+          {% for publication in publications %}
+          <div  style="padding-left: 70px;padding-right: 55px;margin-top: 60px;">
+            <div class="row"> 
               <div class="col-12 main_of_class" style="padding:0 0 20px 0px;text-align: justify;">
                 <i class="far fa-user"></i><span class="title_of_post">{{ publication.user.first_name }} {{ publication.user.last_name }} </span>
                 <br>
@@ -100,9 +78,11 @@
               <br>
               <button class="btn btn-outline-dark sil_btn">Paylaşımı silin</button>
             </div>
-            </div>
           </div>
-          {% endfor %}
+          </div>
+            {% endfor %}
+            
+          
           
          
          

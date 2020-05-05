@@ -521,7 +521,7 @@ body {
 }
 
 .page-wrapper .page-content {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 /*------scroll bar---------------------*/
@@ -1136,6 +1136,11 @@ outline: 0px;
   background-color: #CDBA6D;
   padding: 5px;
   border: 1px solid #323A43;
+}
+.bordered_upl{
+  padding: 16px 8px 27px;
+  border-radius: 50px;
+  margin-bottom:10px ;
 }
 /* user form editor end */
 
@@ -1816,8 +1821,8 @@ padding-left: 10px;
 }
 
 .confirm_button button {
-  border-radius: 0px;
-  padding: 10px 20px;
+  border-radius: 50px;
+  width: 100%;
 }
 
 .image_main {
@@ -1926,6 +1931,7 @@ padding-left: 10px;
   padding: 10px 20px;
   border-radius: 0px;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 
