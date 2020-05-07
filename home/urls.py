@@ -14,7 +14,6 @@ urlpatterns = [
     path('about-us/', about_us_view, name='about-us'),
 
     path('publication/add', publication_add_view, name='publication-add'),
-    path('task-list/', get_tasks_list, name='task-list'),
     
     path('blog-grid/', blog_grid_view, name='blog-grid'),
     path('blog-large/',blog_large_view,name='blog-large'),
@@ -32,6 +31,8 @@ urlpatterns = [
     path('barrister/dashboard/', is_masasi, name='barrister-dashboard'),
     path('barrister/new-appointment/', new_appointment_view, name='barrister-new-appointment'),
     path('barrister/new-task/', add_task_view, name='barrister-add-task'),
+    path('barrister/completed-tasks/', barrister_completed_tasks, name='barrister-completed-tasks'),
+    path('barrister/current-tasks/', barrister_current_tasks, name='barrister-current-tasks'),
     path('barrister-personal', barrister_personal, name='barrister-personal')
 
 

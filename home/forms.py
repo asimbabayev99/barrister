@@ -47,7 +47,7 @@ class PublicationForm(forms.ModelForm):
         'placeholder': 'Mənt'
     }))
     fayl = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
-        'class': 'file'
+        'class': 'file file_upl bordered_upl'
     }))
     class Meta:
         model = Publication

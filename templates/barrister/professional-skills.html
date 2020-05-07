@@ -1,42 +1,32 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    {% block title %}
     <title>Barrister Admin</title>
-    {% endblock title %}
-      
-    
-    {% block links %}
     <link
       rel="shortcut icon"
       href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="fontawesome/all.css" />
+    <link rel="stylesheet" href="vendor/owl.carousel.css" />
+    <link rel="stylesheet" href="vendor/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="vendor/animate.css" />
     <link
-      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
+      href="vendor/fullcalendar-3.10.0/fullcalendar.min.css"
       rel="stylesheet"
     />
     <link
-      href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}"
+      href="vendor/fullcalendar-3.10.0/fullcalendar.print.min.css"
       rel="stylesheet"
       media="print"
     />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
-    {% endblock links %}
+    <link rel="stylesheet" href="css/style.css" />
   </head>
-  
-  <body style="background-color: #F8F8F8;">
+  <body style="background-color: #384554;">
     <div class="page-wrapper chiller-theme toggled">
     <div id="show-sidebar">
       <a
@@ -53,10 +43,10 @@
       </a>
 
       <a
-        title="Home"
+        title="Təqvim"
         id="minicalendaricon"
         class="btn btn-sm btn-dark"
-        href="{% url 'home' %}"
+        href="#"
       >
         <i class="fa fa-calendar"></i>
       </a>
@@ -65,7 +55,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand">
-          <a href="{% url 'home' %}">Home</a>
+          <a href="#">Təqvim</a>
           <div id="close-sidebar">
             <i class="fas fa-times"></i>
           </div>
@@ -75,7 +65,7 @@
             <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
             <img
               class="img-responsive img-rounded"
-              src="{% static 'img/person-311292_640.png' %}"
+              src="img/person-311292_640.png"
               alt="User picture"
             />
           </div>
@@ -97,7 +87,7 @@
             </li>
 
             <li>
-              <a href="{% url 'user-profile' %}">
+              <a href="admin-Dashboard.html">
                   <i class="fa fa-home"></i>
                   <span>Əsas səhifə</span>
                 </a>
@@ -119,7 +109,7 @@
                       <a href="##">Peşəkar bacarıqlarım</a>
                     </li>
                     <li>
-                      <a href="{% url 'advocat-user' %}">Sosial aktivliyim</a>
+                      <a href="##">Sosial aktivliyim</a>
                     </li>
                     <li>
                       <a href="##">Abunə haqqı</a>
@@ -157,13 +147,13 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href="{% url 'barrister-add-task' %}">Yeni tapşırıq</a>
+                      <a href="##">Yeni tapşırıq</a>
                     </li>
                     <li>
-                      <a href="{% url 'barrister-current-tasks' %}">Cari tapşırıqlar</a>
+                      <a href="##">Cari tapşırıqlar</a>
                     </li>
                     <li>
-                      <a href="{% url 'barrister-completed-tasks' %}">İcra olunmuş tapşırıqlar</a>
+                      <a href="##">İcra olunmuş tapşırıqlar</a>
                     </li>
                   </ul>
                 </div>
@@ -176,10 +166,10 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href="{% url 'calendar' %}">Təqvim</a>
+                      <a href="##">Təqvim</a>
                     </li>
                     <li>
-                      <a href="{% url 'barrister-new-appointment' %}">Yeni görüş</a>
+                      <a href="##">Yeni görüş</a>
                     </li>
                     <li>
                       <a href="##">Ümumi görüşlər</a>
@@ -191,7 +181,7 @@
                 </div>
               </li>
               <li>
-                <a href="{% url 'musteriler' %}">
+                <a href="#">
                   <i class="fas fa-user-plus"></i>
                   <span>Müştərilər</span>
                 </a>
@@ -245,25 +235,94 @@
       </div> 
     </nav>
     
-  {% block content %}
+<main style="font-weight: bold; " class="page-content design perfo_body">
+    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+      <div class="performance">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content">
+                  <h2>Peşəkar bacarıqlar</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="statistics">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="box1">
+                  <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
+                  <h3>Təhsil</h3>
+                  <div class="info" style="padding-bottom: 10px;">
+                     
+                    <div class="p_raw"><p>Bakalavr - Bakı Dövlət Universitetinin (BDU) Hüquq fakültəsi; Hüquqşünaslıq ixtisası</p><hr></div>
+                    <br>
+                    <div class="p_raw"><p>Magistr - Bakı Dövlət Universitetinin (BDU) Hüquq fakültəsi; Cinayət hüququ, cinayət prosesi, kriminalistika və məhkəmə ekspertizası ixtisası</p><hr></div>
+                    <br>
+                    <div class="p_raw"><p>Doktorant -Bakı Dövlət Universitetinin (BDU) Cinayət prosesi; kriminalistika və məhkəmə ekspertizası; əməliyyat axtarış fəaliyyəti</p><hr></div>
+                    
+                    </div>
+                  
+                </div>
+                <div class="box2">
+                  <i class="fas fa-trophy win"></i>
+                  <h3>Muveffeqiyyetler</h3>
+                  <div class="info frame " style="padding-bottom: 10px;">
+                     <p class="title_law">Aile huququ</p>
+                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+                    
+                     <p class="title_law">Cinayet huququ</p>
+                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+
+                    <p class="title_law">Dasinmaz Emlak huququ</p>
+                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
 
 
+                   
+</div>
+                 
+                  </div>
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+        
+        
+  </main>
+  </div>
+  <script type="text/javascript">
 
-  {% endblock content %}
+// document.getElementsByClassName("enter_num")[0].addEventListener("keyup", myFunction);
+
+// function myFunction() {
+// var x = document.getElementsByClassName("enter_num")[0].value;
+
   
- 
+//     if (x<=100) {
+//       document.getElementsByClassName("degree")[0].innerHTML=document.getElementsByClassName("enter_num")[0].value + "%";
+//   document.getElementsByClassName("faiz_ic")[0].style.width= x + "%";
+//     }
+//     else  {
+//     document.getElementsByClassName("faiz_ic")[0].style.width=0;
+//     }
+// }
 
-{% block scripts %}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-  <script src="{% static 'js/fullcalendar.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-{% endblock scripts %}
+  </script>
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/lib/moment.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/fullcalendar.min.js"></script>
+  <script src="vendor/fullcalendar-3.10.0/locale/az.js"></script>
+  <script src="js/fullcalendar.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

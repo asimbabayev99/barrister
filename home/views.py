@@ -74,38 +74,6 @@ def calendar_view(request):
 
 
 
-# def news_add_view(request):
-#     if request.user.role != "Barrister":
-#         return HttpResponse('<p>Permission denied</p>')
-
-#     errors = {}
-#     form = Newsform()
-#     if request.user.is_staff is False:
-#         return Http404()
-
-#     if request.method == "POST":
-#         form = Newsform(request.POST,request.FILES)
-#         if form.is_valid():
-#             title = form.cleaned_data['title']
-#             content = form.cleaned_data['content']
-#             image = form.cleaned_data['image']
-#             user = request.user 
-#             slug = slugify(title)
-#             news = News(title=title,content=content,image=image,user = user, slug=slug)
-#             news.save()   
-#         else:
-#             errors['message'] = 'Form is not valid'
-#         form = Newsform()
-    
-#     context = {
-#         'form': form,
-#         'errors': errors,
-#     }
-#     return render(request, 'news_add.html', context=context)
-
-
-
-
 def publication_add_view(request):
 
     form = PublicationForm()
@@ -343,23 +311,6 @@ def contacts_view(request):
     return render(request,'contacts.html', context=context)
 
 
-def get_tasks_list(request):
-
-    status = request.GET.get('status')
-    if status:
-        tasks = Task.objects.filter(status=status)
-    else:
-        tasks = Task.objects.all()
-
-    paginator = Paginator(tasks, 20)
-    page_obj = paginator.get_page(page)
-
-    context = {
-        'page_obj': page_obj,
-    }
-
-    return render(request, '', context=context)
-
 
 
 def attorneys_view(request):
@@ -462,3 +413,55 @@ def barrister_personal(request):
 
     return render(request,'barrister/barrister-personal.html', context=context)    
 
+
+
+
+
+def barrister_current_tasks(request):
+    status = request.GET.get('status')
+    if status:
+        tasks = Task.objects.filter(status=status)
+    else:
+        tasks = Task.objects.all()
+
+    page = request.GET.get('page')
+    try:
+        page = int(page)
+    except: 
+        page = 1
+
+
+    paginator = Paginator(tasks, 20)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+
+    return render(request, 'barrister/current_task.html', context=context)
+
+
+
+
+def barrister_completed_tasks(request):
+    status = request.GET.get('status')
+    if status:
+        tasks = Task.objects.filter(status=status)
+    else:
+        tasks = Task.objects.all()
+
+    page = request.GET.get('page')
+    try:
+        page = int(page)
+    except: 
+        page = 1
+
+
+    paginator = Paginator(tasks, 20)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+
+    return render(request, 'barrister/completed_task.html', context=context)

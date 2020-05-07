@@ -140,7 +140,7 @@ class PublicationSerializer(serializers.Serializer):
     pk = serializers.IntegerField(required=False)
     user_id = models.IntegerField()
     text = serializers.CharField()
-    file = serializers.FileField()
+    fayl = serializers.FileField()
     date = serializers.DateTimeField()
 
     def create(self, validated_data):
