@@ -220,10 +220,7 @@ class PasswordChangeForm(SetPasswordForm):
 
 class UserUpdateForm(forms.ModelForm):
     error_css_class = 'error'
-    email = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : 'form-element input-field',
-        'placeholder':"Email"
-    }))
+  
     first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
         'class' : "form-element input-field",
         'placeholder': "Ad"
@@ -232,7 +229,7 @@ class UserUpdateForm(forms.ModelForm):
         'class' : "form-element input-field",
         'placeholder': "Soyad"
     })) 
-    middle_name = forms.CharField(label='', max_length=32, widget=forms.TextInput(attrs={
+    middle_name = forms.CharField(label='', max_length=32, required=False, widget=forms.TextInput(attrs={
         'class': 'form-element input-field',
         'placeholder': 'Ata adı'
     }))
@@ -240,26 +237,26 @@ class UserUpdateForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Adress'
     }))
-    fin = forms.CharField(label='', max_length=10, widget=forms.TextInput(attrs={
+    fin = forms.CharField(label='', max_length=10, required=False, widget=forms.TextInput(attrs={
         'class' : "form-control",
         'placeholder': "Fin"
     }))
-    seriya_type = forms.ChoiceField(choices=SERIYA_TYPES, required=True, widget=forms.Select(attrs={
+    seriya_type = forms.ChoiceField(choices=SERIYA_TYPES, required=False, widget=forms.Select(attrs={
         'class': 'custom-select'
     }))
-    seriya = forms.IntegerField(widget=forms.NumberInput(attrs={
+    seriya = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={
         'class': 'form-control',
         'placeholder': 'Seriya'
     }))
-    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={
+    phone_number = forms.IntegerField(required= True, widget=forms.NumberInput(attrs={
         'class': 'form-control',
         'type' : 'text',
         'placeholder': 'Phone Number'
     }))
 
-    field_order =  ('email','first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
+    field_order =  ('first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
 
 
     class Meta:
         model = CustomUser
-        fields =  ('email','first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
+        fields =  ('first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')

@@ -443,16 +443,22 @@ def add_task_view(request):
 def barrister_personal(request):
     user = request.user
     form = UserUpdateForm(instance=user)
-
-    if request.method == 'Post':
-        form = UserUpdateForm(request.Post, instance=user)
+    
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=user)
         if form.is_valid():
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
+            user.address = form.cleaned_data['address']
+            user.phone_number = form.cleaned_data['phone_number']
             user.save()
+       
 
-    form = UserUpdateForm(instance=user)      
+    form = UserUpdateForm(instance=user)
+    context = {
+        'form': form,
+    }      
 
 
-    return render(request,'barrister/barrister-personal.html')    
+    return render(request,'barrister/barrister-personal.html', context=context)    
 

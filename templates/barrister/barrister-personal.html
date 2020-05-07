@@ -243,17 +243,19 @@
           <div class="row">
             <div class="col-md-12">
               <div class="box-personal">
-                <form class="info_input">
+                <form class="info_input" method="POST" action="">
                   {% csrf_token %}
+                  <!-- {{ form.as_p }} -->
                   <div class="info-personal"> <label>Ad</label>
-                    
-                    {{ form.first_name }}
+                    <br>
+                    {{form.first_name}}
 
                   </div>
                   <div class="info-personal"> <label>Soyad</label>
-                    {{ form.last_name }}
+                    <br>
+                    {{form.last_name}}
                   </div>
-
+ 
                   <!-- <div class="info-personal"><label>Cinsiyyet</label> <div style="
                           font-size: 17px;
                       ">
@@ -273,13 +275,10 @@
                  </div>   -->
 
                   <div class="info-personal"> <label>Ünvan</label>
-                    <div>
-                      <input type="text" name="address" value="Qara Qarayev metro" required="" class="input-personal">
-                    </div>
+                    {{form.address}}
                   </div>
                   <div class="info-personal"> <label>Telefon</label>
-                    <div> <input type="text" name="phone" value="" required="" class="input-personal">
-                    </div>
+                    {{form.phone_number}}
                   </div>
                   <div class="info-personal">
                     <div> <input type="submit" name="button" value="Yadda saxla" required="" class="button-personal">
