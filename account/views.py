@@ -8,8 +8,8 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from home.forms import PublicationForm
-from home.models import Publication
+from home.forms import PublicationForm , ContactForm
+from home.models import Publication , Contact
 
 
 
@@ -166,8 +166,8 @@ def advocat_user(request):
         form = PublicationForm(request.POST,request.FILES or None)
         if form.is_valid():
             text = form.cleaned_data['text']
-            file = form.cleaned_data['fayl']
-            Publication.objects.create(user=request.user,text=text,fayl=file)
+            file = form.cleaned_data['file']
+            Publication.objects.create(user=request.user,text=text,file=file)
     form = PublicationForm()
     context={'form':form,'publications':last_publications}
     return render(request,'barrister/advocat_user.html',context)
@@ -176,5 +176,25 @@ def advocat_user(request):
 def musteriler(request):
     return render(request,'barrister/musteriler_special.html')
 
+def add_contact(request):
+    form = ContactForm()
+    if request.method == "POST":
+        form = ContactForm(request.POST or None)
+        if form.is_valid():
+            contact = Contact()
+            contact.user = request.user
+            contact.first_name = form.cleaned_data['first_name']
+            contact.last_name = form.cleaned_data['last_name']
+            contact.phone = form.cleaned_data['phone'] 
+            contact.phone2 = form.cleaned_data['phone2']
+            contact.email = form.cleaned_data['email']
+            contact.adress = form.cleaned_data['adress'] 
+            contact.save()
+    form = ContactForm()
+    return render(request,'barrister/add_contact.html',context={ 'form':form }) 
 
+
+def contact_list(request):
+    contacts = Contact.objects.filter(user=request.user).order_by('id')
+    return render(request,'barrister/contact_list.html',context={'contacts' : contacts})
 

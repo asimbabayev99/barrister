@@ -369,7 +369,7 @@ class News(models.Model):
 class Publication(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = RichTextField()
-    fayl = models.FileField(upload_to='publication')
+    file  = models.FileField(upload_to='publication')
     date = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
 
@@ -459,3 +459,14 @@ class Musteri(models.Model):
     phone = models.CharField(max_length=20,blank=True,null=True)
     email = models.EmailField( max_length=254,blank=True,null=True)
     date = models.DateField(auto_now_add=False,blank=True,null=True)
+
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50,blank=True,null=True)
+    phone = models.CharField(max_length=20)
+    phone2 = models.CharField(max_length=20,blank=True,null=True)
+    email = models.CharField(max_length=50,blank=True,null=True)
+    adress = models.CharField(max_length=50,blank=True,null=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)

@@ -1,0 +1,81 @@
+{% extends 'barrister/barrister-base.html' %}
+{% load static %}
+
+
+{% block title %}
+  <title>Musteriler</title>
+{% endblock title %}
+
+{% block links %}
+  {{ block.super }}
+{% endblock links %}
+  
+
+{% block content %}
+<main style="font-weight: bold;" class="page-content design">
+    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+      
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 vekil_main">
+                <div class="col-12 musteri_baslig">
+                    <span>Müştərilər</span>
+                </div>
+                  
+                </div>
+              </div>
+              </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 vekil_main">
+                <div class="table-responsive-xl">
+                    <table class="table">
+                      <thead>
+                        <tr>  
+                          <th scope="col" class="border_left">Sıra</th>
+                          <th scope="col" >Ad</th>
+                          <th scope="col">Soyad</th>
+                          <th scope="col">Nomre</th>
+                          <th scope="col">Nomre2</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Adress</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for contact in contacts %}     
+                        <tr>
+                          <th scope="row" class="border_left">{{ contact.id }}</th>
+                          <td>{{ contact.first_name }}</td>
+                          <td>{{ contact.last_name }}</td>
+                          <td><a href="tel:+994-55-999-99-99">{{ contact.phone }}</a></td>
+                          <td><a href="tel:+994-55-999-99-99">{{ contact.phone2 }}</a></td>
+                          <td><a href="mailto:account2020@gmail.com">{{ contact.email }}</a></td>
+                          <td>{{ contact.adress }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+              </div>
+            </div>
+              
+
+  </main>
+
+{% endblock content %}
+  
+
+{% block scripts %}  
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+  <script src="{% static 'js/fullcalendar.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}
+

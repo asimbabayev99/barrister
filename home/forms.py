@@ -1,5 +1,5 @@
 from django import forms
-from home.models import News, Publication, Task, TASK_STATUS, Appointment, City
+from home.models import News, Publication, Task, TASK_STATUS, Appointment, City , Contact
 # from ckeditor import widgets
 import ckeditor
 from django.utils.translation import ugettext as _
@@ -46,12 +46,12 @@ class PublicationForm(forms.ModelForm):
         'class': 'text',
         'placeholder': 'Mənt'
     }))
-    fayl = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
+    file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
         'class': 'file file_upl bordered_upl'
     }))
     class Meta:
         model = Publication
-        fields = ['text','fayl']
+        fields = ['text','file']
 
 
 
@@ -145,3 +145,17 @@ class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
         fields = ('email','first_name', 'last_name', 'middle_name', 'phone', 'date', 'time', 'city', 'zip', 'detail')
+    
+    
+class ContactForm(forms.ModelForm):
+    first_name = forms.CharField(label="",max_length=40,widget=forms.TextInput(attrs={'placeholder':'Ad'}))
+    last_name = forms.CharField(label='' , max_length=40,widget=forms.TextInput(attrs={'placeholder':'Soyad'}),required = False)
+    phone = forms.CharField(label='', max_length=20,widget=forms.TextInput(attrs={'placeholder':'Nomre'}),required=True)
+    phone2 = forms.CharField(label='',max_length=20,required=False,widget=forms.TextInput(attrs={'placeholder':'Nomre2'}))
+    email = forms.CharField(label='',max_length=20,required=False,widget=forms.TextInput(attrs={'placeholder':'Emaili'}))
+    adress = forms.CharField(label='',max_length=20,required = False,widget=forms.TextInput(attrs={'placeholder':'Adress'}))
+
+    class Meta:
+        model = Contact
+        fields = ['first_name','last_name','phone','phone2','email','adress']
+

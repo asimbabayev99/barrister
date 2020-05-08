@@ -1,0 +1,84 @@
+{% extends 'barrister/barrister-base.html' %}
+
+
+{% block title %}
+   <title>Add contact</title> 
+{% endblock title %}
+    
+
+{% block links %}
+    {{block.super}}
+{% endblock links %}
+  
+
+{% block content %}
+<main class="page-content">
+    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+
+      <div class="welcome">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content text-center mb-3">
+                  <h2>Yeni kontakt</h2>
+                </div>
+              </div>
+            </div>
+            <form method="POST" action=''>
+              {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-4 input-group mb-4">
+                        {{ form.first_name }}
+                        <!-- <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Ad"> -->
+                        <div class="input-group-append">
+                            <div class="input-group-text"></div>
+                          </div>
+                      </div>
+                    <div class="form-group col-md-6 input-group mb-4">
+                        <!-- <input type="text" class="form-control" id="inputSurname" placeholder="Soyad"> -->
+                        {{ form.last_name }}
+                        <div class="input-group-append">
+                            <div class="input-group-text"><span class="fa fa-envelope"></span></div>
+                          </div>
+                      </div>
+                      <div class="form-group col-md-4 input-group mb-4">
+                        {{ form.email }}
+                        <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="Email"> -->
+                        <div class="input-group-append">
+                            <div class="input-group-text"><span class="fa fa-user"></span></div>
+                          </div>
+                      </div>
+                    <div class="form-group col-md-6 input-group mb-4">
+                        {{ form.phone }}
+                        <!-- <input type="tel" class="form-control" id="inputPhone" placeholder="Telefon"> -->
+                        <div class="input-group-append">
+                            <div class="input-group-text"><span class="fa fa-phone"></span></div>
+                          </div>
+                      </div>
+                      <div class="form-group col-md-4 input-group mb-4">
+                        {{ form.phone2 }}
+                        <div class="input-group-append">
+                            <div class="input-group-text"><span class="fa fa-phone"></span></div>
+                          </div>
+                      </div>
+                      <div class="form-group col-md-4 input-group mb-4">
+                        {{ form.adress }}
+                        <div class="input-group-append">
+                            <div class="input-group-text"><span class="fa fa-phone"></span></div>
+                          </div>
+                      </div>
+                
+                <button type="submit" class="btn btn-appointment float-right">Təsdiq</button>
+              </form>
+          </div>
+        </div>
+  </main>
+</div>
+ {% endblock content %} 
+
+
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock scripts %}
+    

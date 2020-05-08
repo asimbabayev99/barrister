@@ -465,3 +465,5 @@ def barrister_completed_tasks(request):
     }
 
     return render(request, 'barrister/completed_task.html', context=context)
+
+ 
