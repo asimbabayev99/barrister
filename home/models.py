@@ -470,3 +470,40 @@ class Contact(models.Model):
     email = models.CharField(max_length=50,blank=True,null=True)
     adress = models.CharField(max_length=50,blank=True,null=True)
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
+
+
+
+STATUS_CHOISES = [
+    ('Sent', 'Sent'),
+    ('Opened', 'Opened')
+]
+
+
+FOLDER_CHOICES = [
+    ('Inbox', 'Inbox'),
+    ('Draft', 'Draft'),
+    ('Delted', 'Deleted')
+]
+
+
+class Email(models.Model):
+    from = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, blank=False, null=False)
+    to = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, blank=False, null=False)
+    subject = models.CharField(max_length=128, blank=True, null=True)
+    content = models.RichTextField(_("content"), blank=True, null=True)
+    status = models.CharField(max_length=16, choises=STATUS_CHOISES)
+    date = models.DateTimeField(auto_now=True)
+
+
+class Attachmetn(models.Model):
+    email = models.ForeignKey(Email, on_delete=models.DO_NOTHING, related_name='emails', blank=False, null=False)
+    name = models.CharField(max_length=256, null=False, blank=False)
+    file = models.FileField(upload_to='attachment', null=False, blank=False)
+
+
+class Folder(models.Model):
+    name = models.CharField(max_length=32, choices=FOLDER_CHOICES, null=False, blank=False)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    email = models.ManyToManyField(Email)
+
+
