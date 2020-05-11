@@ -55,8 +55,7 @@ $(document).ready(function() {
       $(".checkbox_input_modal").prop("checked",false);
       $("input").prop("readonly", false);
       $("#hide_butun_gun").show();
-      $("#hide_butun_gun_1").show();
-      $("#event_name_input").css("width","65%")
+      $("#hide_butun_gun_1").show(); 
       
     },
     
@@ -76,19 +75,20 @@ $(document).ready(function() {
       $(".modal").find("#location_input").val(calEvent.mekan);  
       $(".modal").find("#end_hour_input").val(calEvent.hour);
       $(".modal").find("#begin_hour_input").val(calEvent.begin_hour);
-      $(".modal").find("#input_baslama_vaxti").val(calEvent.start.format('DD/MMM/YYYY'));
-      $(".modal").find("#input_bitme_vaxti").val(calEvent.end.format('DD/MMM/YYYY'));
+      $(".modal").find("#input_baslama_vaxti").val(calEvent.start.format('DD/MM/YYYY'));
+      $(".modal").find("#input_bitme_vaxti").val(calEvent.end.format('DD/MM/YYYY'));
       $(".checkbox_input_modal").val(calEvent.disabled_check);
       $("#save-event").hide();
       $("#select_box_baslig").html(calEvent.vaxt_divi);
       $("#select_box_alt_hisse").css("visibility","hidden");
       $("#choose_icon_button").prop("disabled", true);
-      $("#hide_butun_gun").hide();
-      $("#hide_butun_gun_1").hide();
+      if($("#location_input").val()==0) {
+        $("#location_input").val("Məkan yoxdur") ;
+      };
+      if("#")
       $("#select_box_baslig").css("cursor","default");
       $("#choose_icon_button").html(calEvent.ikonka);
       $("input").prop("readonly", true);
-      $("#event_name_input").css("width","90%")
       
 
     }
@@ -101,8 +101,8 @@ $(document).ready(function() {
 
   // $("#input_baslama_vaxti").datetimepicker({locale:'az'});
   // $("#input_bitme_vaxti").datetimepicker({locale:'az'});
-   $("#input_baslama_vaxti").datetimepicker({ format: 'DD/MMM/YYYY'});
-  $("#input_bitme_vaxti").datetimepicker({ format: 'DD/MMM/YYYY'});
+   $("#input_baslama_vaxti").datetimepicker({ format: 'DD/MM/YYYY',locale:'az'});
+  $("#input_bitme_vaxti").datetimepicker({ format: 'DD/MM/YYYY',locale:'az'});
   $("#begin_hour_input").datetimepicker({ format: 'HH:mm'});
   $("#end_hour_input").datetimepicker({ format: 'HH:mm'});
   
@@ -110,37 +110,42 @@ $(document).ready(function() {
 
   //click to save "save"
   $("#save-event").on("click", function(event) {
+    console.log('1- '+$("#input_baslama_vaxti").val()+'s<- ->e'+$("#input_bitme_vaxti").val())
     var title = $("#event_name_input").val();
-    if (title) {
+    var begin_gun,end_gun,bas_saat,bit_saat;
+    begin_gun = $("#input_baslama_vaxti").val();
+    end_gun = $("#input_bitme_vaxti").val();
+    bas_saat = $("#begin_hour_input").val();
+    bit_saat = $("#end_hour_input").val();
+    if (title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()<$("#input_bitme_vaxti").val() ) {
       var eventData = {
         title: title,
-        start: $("#input_baslama_vaxti").val()+' '+$("#begin_hour_input").val(),
-        end: $("#input_bitme_vaxti").val()+' '+$("#end_hour_input").val(),
+
+        // start: moment($("#input_baslama_vaxti").val()).utc().format('DD/MM/YYYY')+' '+$("#begin_hour_input").val(),
+        // end: moment($("#input_bitme_vaxti").val()).utc().format('DD/MM/YYYY')+' '+$("#end_hour_input").val(),
+        // start: $("#input_baslama_vaxti").val()+' '+$("#begin_hour_input").val(),
+        // end: $("#input_bitme_vaxti").val()+' '+$("#end_hour_input").val(),
+        start:moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY')+' '+$("#begin_hour_input").val(),      
+        end:moment($("#input_bitme_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY')+' '+$("#end_hour_input").val(),      
         mekan: $("#location_input").val(),
         hour : $("#end_hour_input").val(),
         begin_hour : $("#begin_hour_input").val(),
         disabled_check:$(".checkbox_input_modal").prop("disabled",true),
         vaxt_divi:$("#select_box_baslig").text(),
         ikonka:$("#choose_icon_button").html()
-
-        
-   
       };
       $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = true
     }
     $("#calendar-ms").fullCalendar("unselect");
 
     // Clear modal inputs
-    $(".modal")
-      .find("input")
-      .val("");
-    // hide modal
-    $(".modal").find($("#location_input")).val("");
-    $(".modal").find($("#end_hour_input")).val("");
-    $(".modal").find($("#begin_hour_input")).val("");
+    
+    if(title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()<$("#input_bitme_vaxti").val()   ) {
+     
     $(".modal").modal("hide");
-    
-    
+
+    }
+    if (title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()>=$("#input_bitme_vaxti").val() && $("#input_baslama_vaxti").val()!=0 && $("#input_bitme_vaxti").val()!=0) confirm("Başlama vaxtı bitmə vaxtına bərabər,və ya böyük olmamalıdır")
   });
   
 

@@ -66,6 +66,10 @@ $(window).on("load resize ", function() {
 // phone mask begin
 $(document).ready(function(){
   $("#telnum").mask("+ 994" +  " (xx) xxx-xx-xx");
+  $("#input_baslama_vaxti").mask("xx/xx/xxxx");
+  $("#input_bitme_vaxti").mask("xx/xx/xxxx");
+  $("#begin_hour_input").mask("xx:xx");
+  $("#end_hour_input").mask("xx:xx");
      });   
 // phone mask end
 
