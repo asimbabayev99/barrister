@@ -499,7 +499,7 @@ def email_view(request, folder=None):
 @login_required(login_url='/account/login')
 def single_email_view(request, email_id):
     email = get_object_or_404(Email.objects.all(), id=email_id)
-    if email.from != request.user and email.to != request.user:
+    if email.sender != request.user and email.receiver != request.user:
         raise Http404()
 
     context = {
@@ -536,7 +536,7 @@ def move_mail_to_folder(request, email_id):
 @login_required(login_url='account/login')
 def remove_email(request, email_id):
     email = get_object_or_404(Email.objects.all(), id=email_id)
-    if email.from != request.user and email.to != request.user:
+    if email.sender != request.user and email.receiver != request.user:
         return Http404()
 
     folder = Folder.objects.filter(name="Deleted", user=request.user)

@@ -487,11 +487,11 @@ FOLDER_CHOICES = [
 
 
 class Email(models.Model):
-    from = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, blank=False, null=False)
-    to = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, blank=False, null=False)
+    sender = models.ForeignKey(CustomUser, related_name='sender', on_delete=models.DO_NOTHING, blank=False, null=False)
+    receiver = models.ForeignKey(CustomUser, related_name='receiver', on_delete=models.DO_NOTHING, blank=False, null=False)
     subject = models.CharField(max_length=128, blank=True, null=True)
-    content = models.RichTextField(_("content"), blank=True, null=True)
-    status = models.CharField(max_length=16, choises=STATUS_CHOISES)
+    content = RichTextField(_("content"), blank=True, null=True)
+    status = models.CharField(max_length=16, choices=STATUS_CHOISES)
     date = models.DateTimeField(auto_now=True)
 
 
