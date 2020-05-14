@@ -14,11 +14,11 @@ urlpatterns = [
     path('password-reset/complete',PasswordResetCompleteView.as_view(template_name="account/password-reset-complate.html"),name="password_reset_complete"),
     
     # barrister related
-    path('musteriler/',musteriler,name='musteriler'),
-    path('advocat-user/',advocat_user,name='advocat-user'),
+    path('clients/', barrister_clients, name='barrister-clients'),
+    path('social-activity/', barrister_social_activity, name='barrister-social-activity'),
     path('users/list/', user_list_view, name='user-list'),
-    path('add-contact/',add_contact,name='add-contact'),
-    path('contact-list/',contact_list,name='contact-list'),
+    path('add-contact/', add_contact, name='add-contact'),
+    path('contact-list/', contact_list, name='contact-list'),
 
     # user related
     path('profile/', user_profile, name='user-profile'),
