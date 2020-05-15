@@ -174,9 +174,12 @@ def barrister_social_activity(request):
     return render(request,'barrister/social_activity.html',context)
 
 
+@login_required(login_url='/account/login')
 def barrister_clients(request):
     return render(request,'barrister/clients.html')
 
+
+@login_required(login_url='/account/login')
 def add_contact(request):
     form = ContactForm()
     if request.method == "POST":
@@ -195,6 +198,7 @@ def add_contact(request):
     return render(request,'barrister/add_contact.html',context={ 'form':form }) 
 
 
+@login_required(login_url='/account/login')
 def contact_list(request):
     contacts = Contact.objects.filter(user=request.user).order_by('id')
     return render(request,'barrister/contact_list.html',context={'contacts' : contacts})
