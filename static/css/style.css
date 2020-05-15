@@ -2196,8 +2196,6 @@ padding-left: 10px;
 
 /*email.html begin   */
 
-
-
 .poct_title {
   height: 60px;
   background-color: #CDBA6D;
@@ -2215,7 +2213,7 @@ padding-left: 10px;
 }
 
 .mail_sekil {
-  height: 30%;
+  height: 195px;
   width: 100%;
   background-color: red;
   background-image: url(img/hammer-620011_640.jpg);
@@ -2224,14 +2222,14 @@ padding-left: 10px;
 }
 
 .rgba_main {
-  height: 195px;
+  height: 100%;
   width: 100%;
   background-color: rgba(0,0,0,0.8);
   text-align: center;
   line-height: 195px;
 }
 .rgba_main button {
-  padding: 10px 50px;
+  padding: 10px 20px;
   font-size: 18px;
   border-radius: 0px;
   border-color: #CDBA6D;
@@ -2386,7 +2384,7 @@ padding-left: 10px;
   font-size: 17px;
   background-color: #CDBA6D;
   color: #3a3f48;
-  padding-left: 15px;
+  padding-left: 10px;
   line-height: 60px;
   width: 100%;
 }
@@ -2495,13 +2493,13 @@ padding-left: 10px;
 @media only screen and (max-width:600px) {
   .reply_main i {
 
-    font-size: 10px !important;
+    font-size: 7px !important;
   }
 }
 @media only screen and (max-width:600px) {
   .reply_main span {
 
-    font-size: 10px !important;
+    font-size: 8px !important;
   }
 }
 @media only screen and (max-width:600px) {
@@ -2513,6 +2511,23 @@ padding-left: 10px;
 @media only screen and (max-width:600px) {
   .fl_left_mail {
 
+    font-size: 10px !important;
+  }
+}
+@media only screen and (max-width:1344px) 
+{
+  .topic_mail {
+    font-size: 9px !important;
+  }
+
+  .mail_basligi {
+    font-size: 10px !important;
+  }
+  .reply_main span {
+    font-size: 8px !important;
+  }
+
+  .reply_main i {
     font-size: 10px !important;
   }
 }
