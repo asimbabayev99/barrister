@@ -502,7 +502,7 @@ def email_view(request, folder=None):
         'page_obj': page_obj
     }
 
-    return render(request, '', context=context)
+    return render(request, 'barrister/email.html', context=context)
 
 
 
@@ -555,3 +555,12 @@ def remove_email(request, email_id):
     email.delete()
 
     return JsonResponse({"detail": "email deleted"}, status=201)
+
+
+
+
+@login_required(login_url='account/login')
+def send_email(request):
+
+
+    return render(request, 'barrister/send_email.html')

@@ -34,7 +34,10 @@ urlpatterns = [
     path('barrister/completed-tasks/', barrister_completed_tasks, name='barrister-completed-tasks'),
     path('barrister/current-tasks/', barrister_current_tasks, name='barrister-current-tasks'),
     path('barrister/personal', barrister_personal, name='barrister-personal'),
-    path('barrister/skills', barrister_professional_skills, name='barrister-skills')
+    path('barrister/skills', barrister_professional_skills, name='barrister-skills'),
+
+    path('email/<str:folder>', email_view, name='email'),
+    path('email/send', send_email, name='send-email'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
