@@ -301,12 +301,12 @@ class ProfileUpdateForm(forms.ModelForm):
     gender = forms.ChoiceField(choices=GENDER_CHOICES, required=False, widget=forms.Select(attrs={
         'class': 'form-control'
     }))
-    work_summary = models.CharField(max_length=2014, required=False, widget=forms.Textarea(attrs={
+    work_summary = forms.CharField(max_length=2014, required=False, widget=forms.Textarea(attrs={
         'class': 'form-control'
     }))
-    biography = models.CharField(max_length=2014, required=False, widget=forms.Textarea(attrs={
+    biography = forms.CharField(max_length=2014, required=False, widget=forms.Textarea(attrs={
         'class': 'form-control'
     }))
-    job_category = forms.ModelChoiceField(queryset=JobCategory.objects.all(), widget=forms.Select(attrs={
+    job_category = forms.ModelChoiceField(required=False, queryset=JobCategory.objects.all(), widget=forms.Select(attrs={
         'class': 'form-element input-field',
     }))  
