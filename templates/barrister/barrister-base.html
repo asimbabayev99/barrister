@@ -113,13 +113,13 @@
                       <a href="##">Hesabım</a>
                     </li>
                     <li>
-                      <a href="##">Şəxsi məlumatlarım</a>
+                      <a href="{% url 'barrister-personal' %}">Şəxsi məlumatlarım</a>
                     </li>
                     <li>
-                      <a href="##">Peşəkar bacarıqlarım</a>
+                      <a href="{% url 'barrister-skills' %}">Peşəkar bacarıqlarım</a>
                     </li>
                     <li>
-                      <a href="{% url 'advocat-user' %}">Sosial aktivliyim</a>
+                      <a href="{% url 'barrister-social-activity' %}">Sosial aktivliyim</a>
                     </li>
                     <li>
                       <a href="##">Abunə haqqı</a>
@@ -191,7 +191,7 @@
                 </div>
               </li>
               <li>
-                <a href="{% url 'musteriler' %}">
+                <a href="{% url 'barrister-clients' %}">
                   <i class="fas fa-user-plus"></i>
                   <span>Müştərilər</span>
                 </a>

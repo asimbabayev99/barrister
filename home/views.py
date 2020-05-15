@@ -391,6 +391,8 @@ def add_task_view(request):
     
     return render(request, 'barrister/new-task.html', context=context)
 
+
+
 def barrister_personal(request):
     user = request.user
     form = UserUpdateForm(instance=user)
@@ -413,6 +415,15 @@ def barrister_personal(request):
 
     return render(request,'barrister/barrister-personal.html', context=context)    
 
+
+
+def barrister_professional_skills(request):
+
+    context = {
+
+    }
+
+    return render(request, 'barrister/professional-skills.html', context=context)
 
 
 
@@ -467,3 +478,80 @@ def barrister_completed_tasks(request):
     return render(request, 'barrister/completed_task.html', context=context)
 
  
+
+
+
+@login_required(login_url='/account/login')
+def email_view(request, folder=None):
+    if folder:
+        email_list = Folder.objects.filter(name=folder, user=request.user).select_related('email')
+    else:
+        email_list = Folder.objects.filter(name="Inbox", user=request.user).select_related('email')
+
+    page = request.GET.get('page')
+    try:
+        page = int(page)
+    except: 
+        page = 1
+
+    paginator = Paginator(email_list, 50)
+    page_obj = paginator.get_page(page)
+
+
+    context = {
+        'page_obj': page_obj
+    }
+
+    return render(request, '', context=context)
+
+
+
+
+@login_required(login_url='/account/login')
+def single_email_view(request, email_id):
+    email = get_object_or_404(Email.objects.all(), id=email_id)
+    if email.sender != request.user and email.receiver != request.user:
+        raise Http404()
+
+    context = {
+        'email': email
+    }
+
+    return render(request, '', context=context)
+
+
+@login_required(login_url='/account/login')
+def move_mail_to_folder(request, email_id):
+    email = get_object_or_404(Email.object.all(), id=email_id)
+
+    if request.method == "POST":
+        old_folder = request.POST.get('old_folder')
+        new_folder = request.POST.get('new_folder')
+
+        if old_folder and new_folder:
+            folder = Folder.objects.get(folder=folder)
+            folder.email.remove(email)
+            folder = Folder.objcets.get(folder=folder)
+            folder.email.add(email)
+            folder.save()
+
+            return JsonResonse({"detail": "Email moved to {0} folder".format(new_folder)}, status=201)
+        else:
+            return JsonReponse({"detail": "Bad request"}, status=400)
+
+    else:
+        return JsonReponse({"detail": "Bad request"}, status=400)
+
+
+
+@login_required(login_url='account/login')
+def remove_email(request, email_id):
+    email = get_object_or_404(Email.objects.all(), id=email_id)
+    if email.sender != request.user and email.receiver != request.user:
+        return Http404()
+
+    folder = Folder.objects.filter(name="Deleted", user=request.user)
+    folder.remove(email)
+    email.delete()
+
+    return JsonResponse({"detail": "email deleted"}, status=201)

@@ -33,7 +33,8 @@ urlpatterns = [
     path('barrister/new-task/', add_task_view, name='barrister-add-task'),
     path('barrister/completed-tasks/', barrister_completed_tasks, name='barrister-completed-tasks'),
     path('barrister/current-tasks/', barrister_current_tasks, name='barrister-current-tasks'),
-    path('barrister-personal', barrister_personal, name='barrister-personal')
+    path('barrister/personal', barrister_personal, name='barrister-personal'),
+    path('barrister/skills', barrister_professional_skills, name='barrister-skills')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

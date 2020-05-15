@@ -157,8 +157,9 @@ def user_profile(request):
     return render(request, 'barrister/barrister-admin.html')
 
 
-def advocat_user(request):
-    if  request.user.is_authenticated == False or request.user.role.name != "Barrister":
+@login_required(login_url='/account/login')
+def barrister_social_activity(request):
+    if request.user.role is None or request.user.role.name != "Barrister":
         return HttpResponse('<h1>Permission denied</h1>')
     last_publications = Publication.objects.filter(user=request.user).order_by('-date')[:3]
     form = PublicationForm()
@@ -170,12 +171,15 @@ def advocat_user(request):
             Publication.objects.create(user=request.user,text=text,file=file)
     form = PublicationForm()
     context={'form':form,'publications':last_publications}
-    return render(request,'barrister/advocat_user.html',context)
+    return render(request,'barrister/social_activity.html',context)
 
 
-def musteriler(request):
-    return render(request,'barrister/musteriler_special.html')
+@login_required(login_url='/account/login')
+def barrister_clients(request):
+    return render(request,'barrister/clients.html')
 
+
+@login_required(login_url='/account/login')
 def add_contact(request):
     form = ContactForm()
     if request.method == "POST":
@@ -194,6 +198,7 @@ def add_contact(request):
     return render(request,'barrister/add_contact.html',context={ 'form':form }) 
 
 
+@login_required(login_url='/account/login')
 def contact_list(request):
     contacts = Contact.objects.filter(user=request.user).order_by('id')
     return render(request,'barrister/contact_list.html',context={'contacts' : contacts})

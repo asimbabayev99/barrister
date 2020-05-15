@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'barrister',
         'USER': 'barrister',
         'PASSWORD': 'barrister',
-        'HOST': 'barrister.az',
+        'HOST': 'vmi388731.contaboserver.net',
         'PORT': '5432',
     }
 }
