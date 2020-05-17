@@ -3,107 +3,456 @@
 {% load static %}
 
 {% block title %}
-  <title>Barrister Admin</title>
+<title>Barrister Admin</title>
 {% endblock %}
 
 {% block links %}
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link
-    rel="shortcut icon"
-    href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
-    alt="Изображение Tim Treis с сайта Pixabay "
-    type="image/x-icon"
-  />
-  <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
-  <link
-    href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}"
-    rel="stylesheet"
-    media="print"
-  />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+  alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon" />
+<link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
+<link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet" />
+<link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<style>
+
+  /* Button used to open the contact form - fixed at the bottom of the page */
+  .open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+  }
+
+  /* The popup form - hidden by default */
+  .form-popup {
+    display: none;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    /* right: 15px; */
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 500px;
+    padding: 10px;
+    background-color: white;
+  }
+
+  /* Full-width input fields */
+  .form-container input[type=text],
+  .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* When the inputs get focus, do something */
+  .form-container input[type=text]:focus,
+  .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover,
+  .open-button:hover {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  function openForm() {
+    document.getElementById("experienceForm").style.display = "block";
+  }
+
+  function closeForm() {
+    document.getElementById("experienceForm").style.display = "none";
+  }
+
+  function openSkillForm(){
+    document.getElementById("skillForm").style.display = "block";
+  }
+
+  function closeSkillForm() {
+    document.getElementById("skillForm").style.display = "none";
+  }
+
+  function onChangeRange(value){
+    $("#progress-span").text(value);
+  }
+</script>
+
 {% endblock %}
 
-    
+
 {% block content %}
-  <main style="font-weight: bold; " class="page-content design perfo_body">
-    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
-      <div class="performance">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="content">
-                  <h2>Peşəkar bacarıqlar</h2>
-                </div>
-              </div>
-            </div>
+<main style="font-weight: bold; " class="page-content design perfo_body">
+  <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+  <div class="performance">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="content">
+            <h2>Peşəkar bacarıqlar</h2>
           </div>
         </div>
-        
-        <div class="statistics">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="box1">
-                  <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
-                  <h3>Təhsil</h3>
-                  <div class="info" style="padding-bottom: 10px;">
-                     
-                    <div class="p_raw"><p>Bakalavr - Bakı Dövlət Universitetinin (BDU) Hüquq fakültəsi; Hüquqşünaslıq ixtisası</p><hr></div>
-                    <br>
-                    <div class="p_raw"><p>Magistr - Bakı Dövlət Universitetinin (BDU) Hüquq fakültəsi; Cinayət hüququ, cinayət prosesi, kriminalistika və məhkəmə ekspertizası ixtisası</p><hr></div>
-                    <br>
-                    <div class="p_raw"><p>Doktorant -Bakı Dövlət Universitetinin (BDU) Cinayət prosesi; kriminalistika və məhkəmə ekspertizası; əməliyyat axtarış fəaliyyəti</p><hr></div>
-                    
-                    </div>
-                  
-                </div>
-                <div class="box2">
-                  <i class="fas fa-trophy win"></i>
-                  <h3>Muveffeqiyyetler</h3>
-                  <div class="info frame " style="padding-bottom: 10px;">
-                     <p class="title_law">Aile huququ</p>
-                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
-                    
-                     <p class="title_law">Cinayet huququ</p>
-                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+      </div>
+    </div>
+  </div>
 
-                    <p class="title_law">Dasinmaz Emlak huququ</p>
-                    <div class="faiz"><div class="faiz_ic"><p class="degree"  >68%</p></div></div>
+  <div class="statistics">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <input type="text" id="profile-input" profile-id="{{profile.id}}" hidden> 
+          <div class="box1" >
+            <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
+            <h3>Təhsil</h3>
+            <input type="button" value="+" id="new-exp">
+            <div id="experience-info" class="info" style="padding-bottom: 10px;">
+              {% for i in experiences %}
+              <div class="p_raw" data-id="{{i.id}}">
+                <p>
+                  <span class="start-date">{{i.start|date:"Y/m/d"}}</span>
+                  {% if i.end %}
+                  <span>-</span>
+                  <span class="end-date">{{i.end|date:"Y/m/d"}}</span>
+                  {% endif %}
+                </p>
+                <p class="experience-title">{{i.title}}</p>
+                <input type="button" class="delete-exp" data-id="{{i.id}}" value="delete">
+                <input type="button" class="edit-exp" data-id="{{i.id}}" value="edit">
+                <hr>
+              </div>
+              <br>
+              {% endfor %}
+            </div>
 
-
-                   
-</div>
-                 
+          </div>
+          <div class="box2">
+            <i class="fas fa-trophy win"></i>
+            <h3>Bacariqlar</h3>
+            <input type="button" id="new-skill" value="+">
+            <div class="info frame " style="padding-bottom: 10px;">
+              {% for skill in skills %}
+              <div class='p_raw'>
+                <p class="skill-name">{{skill.name}}</p>
+                <div class="faiz">
+                  <div class="faiz_ic">
+                    <p class="skill-progress">{{skill.progress}}%</p>
                   </div>
                 </div>
+                <input type="button" class="delete-skill" data-id="{{skill.id}}" value="delete">
+                <input type="button" class="edit-skill" data-id="{{skill.id}}" value="edit">
               </div>
-              
-              
+              {% endfor %}
             </div>
+
           </div>
         </div>
-        
-        
-  </main>
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+
+  <!-- popup for education and work experince data -->
+  <div class="form-popup" id="experienceForm">
+    <div class="form-container">
+      <h1>Melumati daxil edin</h1>
+
+      <label for="from"><b>From</b></label>
+      <input type="date" name="start" id='start-date' required>
+
+      <label for="to"><b>To</b></label>
+      <input type="date" name="end" id='end-date'>
+
+      <label for="experience"><b>Tehsil ve ya is tecrubesi</b></label>
+      <textarea rows="2" id="experience-title" placeholder="Experience description" name="experience" required>
+      </textarea>
+      
+      <button type="submit" class="btn" id="save-exp" >Save</button>
+      <button type="submit" class="btn" id="add-exp">Add</button>
+      <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+    </div>
+  </div>
+  <!-- end popup -->
+
+
+  <!-- popup for skills data -->
+  <div class="form-popup" id="skillForm">
+    <div class="form-container">
+      <h1>Melumat daxil edin</h1>
+
+      <label for="name"><b>Ad</b></label>
+      <input type="text" name="name" id='skill-name' required>
+
+      <label><b>Proqres</b> <span id="progress-span">50</span>/100 </label>
+      <input type="range" name="progress" id="skill-progress"  min="0" max="100" value="50" 
+          oninput="onChangeRange(this.value)" onchange="onChangeRange(this.value)" required/>
+      <br>
+      
+      <button type="submit" class="btn" id="save-skill">Save</button>
+      <button type="submit" class="btn" id="add-skill">Add</button>
+      <button type="submit" class="btn cancel" onclick="closeSkillForm()">Close</button>
+    </div>
+  </div>
+  <!-- end popup -->
+
+</main>
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-  <script src="{% static 'js/fullcalendar.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function addExperiece(data) {
+    str = "<div class='p_raw'>";
+    str += "<p>" + data.title + "</p>"
+    str += "<hr>"
+    str += "</div>"
+
+    $("#experience-info").append(str)
+  }
+
+  $(document).ready(function () {
+
+    // experience related function below
+
+    // opens and closes popup
+    $("#new-exp").on("click", function() {
+      $("#experienceForm").find("#add-exp").show();
+      $("#experienceForm").find("#save-exp").hide();
+      openForm();
+    })
+
+    // add data to database
+    $("#add-exp").on("click", function () {
+      data = {
+        'profile': $("#profile-input").attr("profile-id"),
+        'title': $('#experience-title').val(),
+        'start': $('#start-date').val(),
+        'end': $('#end-date').val()
+      }
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'POST',
+        url: '/api/experiences/',
+        data: data,
+        success: function (data, status, xhr) {
+          // handle success 
+        }
+      });
+    });
+
+    // delete data from database
+    $(".delete-exp").on("click", function() {
+      button = this
+      id = $(this).attr("data-id");
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'DELETE',
+        url: '/api/experiences/' + id,
+        success: function (data, status, xhr) {
+          $(button).parents('.p_raw').remove();
+        }
+      })
+    });
+
+    // fill data in popup 
+    $(".edit-exp").on("click", function() {
+      $("#experienceForm").find("#add-exp").hide();
+      $("#experienceForm").find("#save-exp").show();
+
+      div = $(this).parents('.p_raw');
+      title = div.find('.experience-title').text();
+      start = div.find('.start-date').text().toString().split("/").join("-");
+      end = div.find('.end-date').text().toString().split("/").join("-");
+
+      console.log(start + " " + end)
+
+      $("#experienceForm").attr('data-id', $(this).attr('data-id'))
+      $("#experienceForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
+      $("#experienceForm").find("#experience-title").val(title)
+      $("#experienceForm").find("#start-date").val(start);
+      $("#experienceForm").find("#end-date").val(end);  
+      
+      openForm();
+    });
+
+    // update data in database
+    $("#save-exp").on("click", function() {
+      div = $(this).parents('.p_raw')
+      id = $("#experienceForm").attr("data-id");
+      data = {
+        "id": id,
+        'profile': $("#experienceForm").attr('profile-id'),
+        'title': $('#experience-title').val(),
+        'start': $('#start-date').val(),
+        'end': $('#end-date').val()
+      }
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'PUT',
+        data: data,
+        url: '/api/experiences/' + id,
+        success: function (data, status, xhr) {
+          // hande success
+        }
+      })
+    })
+
+
+    // skills related function below
+
+    $("#new-skill").on("click", function() {
+      $("#skillForm").find("#add-skill").show();
+      $("#skillForm").find("#save-skill").hide();
+      openSkillForm();
+    })
+
+    $("#add-skill").on("click", function () {
+      data = {
+        'profile_id': $("#profile-input").attr("profile-id"),
+        'name': $('#skill-name').val(),
+        'progress': $('#skill-progress').val(),
+      }
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'POST',
+        url: '/api/skills/',
+        data: data,
+        success: function (data, status, xhr) {
+          addExperiece(data);
+        }
+      });
+    });
+
+    $(".edit-skill").on("click", function() {
+      $("#skillForm").find("#add-skill").hide();
+      $("#skillForm").find("#save-skill").show();
+
+      div = $(this).parents('.p_raw');
+      name = div.find('.skill-name').text();
+      progress = div.find('.skill-progress').text()
+
+      console.log(name + " " + progress)
+
+      $("#skillForm").attr('data-id', $(this).attr('data-id'))
+      $("#skillForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
+      $("#skillForm").find("#skill-name").val(name)
+      $("#skillForm").find("#skill-progress").val(parseInt(progress));
+      $("#skillForm").find("#progress-span").text(parseInt(progress))
+      
+      openSkillForm();
+    });
+
+    $("#save-skill").on("click", function() {
+      div = $(this).parents('.p_raw')
+      id = $("#skillForm").attr("data-id");
+      data = {
+        "id": id,
+        'profile_id': $("#skillForm").attr('profile-id'),
+        'name': $('#skill-name').val(),
+        'progress': $('#skill-progress').val()
+      }
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'PUT',
+        data: data,
+        url: '/api/skills/' + id,
+        success: function (data, status, xhr) {
+          // handle success
+        }
+      })
+    })
+
+
+    $(".delete-skill").on("click", function() {
+      button = this
+      id = $(this).attr("data-id");
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'DELETE',
+        url: '/api/skills/' + id,
+        success: function (data, status, xhr) {
+          $(button).parents('.p_raw').remove();
+        }
+      })
+    });
+
+
+  });
+</script>
 {% endblock %}

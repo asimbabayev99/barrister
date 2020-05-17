@@ -435,8 +435,14 @@ def barrister_personal(request):
 
 def barrister_professional_skills(request):
 
-    context = {
+    profile = request.user.profile
+    experiences = EducationAndWorkExperience.objects.filter(profile=profile)
+    skills = Skill.objects.filter(profile=profile)
 
+    context = {
+        "profile": profile,
+        "experiences": experiences,
+        "skills": skills,
     }
 
     return render(request, 'barrister/professional-skills.html', context=context)
