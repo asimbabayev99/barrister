@@ -73,7 +73,7 @@ def register_view(request):
             context = {
                 'form': form
             }
-            return render(request, 'account/login.html', context=context)
+            return redirect(reverse('login'))
 
     context = {
         "form": form,
