@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('is-masasi/',is_masasi,name='is-masasi'),
     path('barrister/dashboard/', is_masasi, name='barrister-dashboard'),
+    path('barrister/account/', barrister_account, name='barrister-account'),
     path('barrister/new-appointment/', new_appointment_view, name='barrister-new-appointment'),
     path('barrister/new-task/', add_task_view, name='barrister-add-task'),
     path('barrister/completed-tasks/', barrister_completed_tasks, name='barrister-completed-tasks'),

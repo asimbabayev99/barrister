@@ -45,41 +45,7 @@
               <div class="box-personal">
                 <form class="info_input" method="POST" action="">
                   {% csrf_token %}
-                  {{ form.as_p }}
-                  <!-- <div class="info-personal"> <label>Ad</label>
-                    <br>
-                    {{form.first_name}}
-
-                  </div>
-                  <div class="info-personal"> <label>Soyad</label>
-                    <br>
-                    {{form.last_name}}
-                  </div>
-  -->
-                  <!-- <div class="info-personal"><label>Cinsiyyet</label> <div style="
-                          font-size: 17px;
-                      ">
-                                          <label style="
-                          margin-right: 12px;
-                      ">Kisi</label><input type="radio" checked="" name="gender" value="Kisi" style="
-                          margin-right: 29px;
-                          height: 13px;
-                      "> 
-                                          <label style="
-                          margin-right: 12px;
-                      ">Qadin</label><input type="radio" name="gender" value="Qadin" style="
-                          margin-right: 29px;
-                          height: 13px;
-                      ">
-                    </div>
-                 </div>   -->
-
-                  <!-- <div class="info-personal"> <label>Ünvan</label>
-                    {{form.address}}
-                  </div>
-                  <div class="info-personal"> <label>Telefon</label>
-                    {{form.phone_number}}
-                  </div> -->
+                    {{ form.as_p }}
                   <div class="info-personal">
                     <div> <input type="submit" name="button" value="Yadda saxla" required="" class="button-personal">
                     </div>

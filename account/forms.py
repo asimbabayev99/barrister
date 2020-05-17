@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES, Role, JobCategory
+from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES, Role, JobCategory, Profile
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
@@ -223,15 +223,15 @@ class UserUpdateForm(forms.ModelForm):
     error_css_class = 'error'
   
     first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+        'class' : "form-control",
         'placeholder': "Ad"
     })) 
     last_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+        'class' : "form-control",
         'placeholder': "Soyad"
     })) 
     middle_name = forms.CharField(label='', max_length=32, required=False, widget=forms.TextInput(attrs={
-        'class': 'form-element input-field',
+        'class': 'form-control',
         'placeholder': 'Ata adı'
     }))
     address = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
@@ -310,3 +310,9 @@ class ProfileUpdateForm(forms.ModelForm):
     job_category = forms.ModelChoiceField(required=False, queryset=JobCategory.objects.all(), widget=forms.Select(attrs={
         'class': 'form-element input-field',
     }))  
+
+    class Meta:
+        model = Profile
+        fields = ('image', 'website', 'address', 'facebook_link', 'twitter_link', 'google_link', 'linkedin_link', 'gender',
+            'work_summary', 'biography', 'job_category'
+        )

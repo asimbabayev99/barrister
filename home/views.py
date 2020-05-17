@@ -3,7 +3,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from home.models import *
 from account.models import *
-from account.forms import UserForm, UserUpdateForm
+from account.forms import UserForm, UserUpdateForm, ProfileUpdateForm
 from home.forms import * 
 from django.utils.text import slugify
 from .models import News
@@ -392,26 +392,42 @@ def add_task_view(request):
     return render(request, 'barrister/new-task.html', context=context)
 
 
+@login_required(login_url='/account/login')
+def barrister_account(request):
+    form = UserUpdateForm(instance=request.user)
 
-def barrister_personal(request):
-    user = request.user
-    form = UserUpdateForm(instance=user)
-    
-    if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=user)
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.address = form.cleaned_data['address']
-            user.phone_number = form.cleaned_data['phone_number']
-            user.save()
-       
+            form.save()
 
-    form = UserUpdateForm(instance=user)
     context = {
         'form': form,
     }      
 
+    return render(request,'barrister/barrister-account.html', context=context)    
+
+    
+
+@login_required(login_url='/account/login')
+def barrister_personal(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    form = ProfileUpdateForm(instance=profile)
+    
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, instance=profile)
+        if form.is_valid():
+            # user.first_name = form.cleaned_data['first_name']
+            # user.last_name = form.cleaned_data['last_name']
+            # user.address = form.cleaned_data['address']
+            # user.phone_number = form.cleaned_data['phone_number']
+            # user.save()
+            form.save()
+
+    form = ProfileUpdateForm(instance=profile)
+    context = {
+        'form': form,
+    }      
 
     return render(request,'barrister/barrister-personal.html', context=context)    
 
