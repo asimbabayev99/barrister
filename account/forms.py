@@ -4,6 +4,9 @@ from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
 from .models import PHONE_PREFIXES, GENDER_CHOICES
+from django.core.validators import RegexValidator
+import re
+
 
 
 
@@ -221,15 +224,19 @@ class PasswordChangeForm(SetPasswordForm):
 
 class UserUpdateForm(forms.ModelForm):
     error_css_class = 'error'
+    error_messages = {
+        'phone_number_incorrect': "Phone number is not valid",
+        'fin_incorrect': 'Fin is not valid'
+    }
   
     first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
         'class' : "form-control",
         'placeholder': "Ad"
-    })) 
+    }))
     last_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
         'class' : "form-control",
         'placeholder': "Soyad"
-    })) 
+    }))
     middle_name = forms.CharField(label='', max_length=32, required=False, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Ata adı'
@@ -260,12 +267,35 @@ class UserUpdateForm(forms.ModelForm):
 
     field_order =  ('first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
 
+    def clean_phone_number(self):
+        """
+        Validate that the phone_number field is correct.
+        """
+        phone_number = self.cleaned_data["phone_number"]
+        if not re.match("^([0-9]){7}$", str(phone_number)):
+             raise forms.ValidationError(
+                self.error_messages['phone_number_incorrect'],
+                code='phone_number_incorrect',
+            )
+        return phone_number
+
+    def clean_fin(self):
+        """
+        Validate that the phone_number field is correct.
+        """
+        fin = self.cleaned_data["fin"]
+        if not re.match("^([0-9]|[a-zA-Z]){7}$", str(fin)):
+             raise forms.ValidationError(
+                self.error_messages['fin_incorrect'],
+                code='fin_incorrect',
+            )
+        return fin
 
     class Meta:
         model = CustomUser
         fields =  ('first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
 
-
+ 
 
 
 
