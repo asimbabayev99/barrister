@@ -418,7 +418,7 @@ def barrister_personal(request):
     form = ProfileUpdateForm(instance=profile)
     
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, instance=profile)
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             # user.first_name = form.cleaned_data['first_name']
             # user.last_name = form.cleaned_data['last_name']
