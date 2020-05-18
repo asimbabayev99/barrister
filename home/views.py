@@ -342,11 +342,13 @@ def attorneys_view(request):
 
 
 
+@login_required(login_url='/account/login')
 def is_masasi(request):
     return render(request,'barrister/barrister-admin.html')
 
 
 
+@login_required(login_url='/account/login')
 def new_appointment_view(request):
     form = AppointmentForm()
     message = ""
@@ -369,6 +371,7 @@ def new_appointment_view(request):
       
 
 
+@login_required(login_url='/account/login')
 def add_task_view(request):
     form = TaskForm()
     message = ""
@@ -433,6 +436,7 @@ def barrister_personal(request):
 
 
 
+@login_required(login_url='/account/login')
 def barrister_professional_skills(request):
 
     profile = request.user.profile
@@ -450,6 +454,7 @@ def barrister_professional_skills(request):
 
 
 
+@login_required(login_url='/account/login')
 def barrister_current_tasks(request):
     status = request.GET.get('status')
     if status:
@@ -476,6 +481,7 @@ def barrister_current_tasks(request):
 
 
 
+@login_required(login_url='/account/login')
 def barrister_completed_tasks(request):
     status = request.GET.get('status')
     if status:

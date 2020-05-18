@@ -45,7 +45,7 @@ django-rest-auth==0.9.5
 # django-timezone-field==4.0
 djangorestframework==3.9.4
 djangorestframework-simplejwt==4.3.0
-# djoser==2.0.3
+djoser==2.0.3
 # docker-py==1.10.6
 # docker-pycreds==0.4.0
 # docutils==0.15.2

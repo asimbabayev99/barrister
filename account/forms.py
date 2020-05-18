@@ -224,6 +224,10 @@ class PasswordChangeForm(SetPasswordForm):
 
 class UserUpdateForm(forms.ModelForm):
     error_css_class = 'error'
+    error_messages = {
+        'phone_number_incorrect': "Phone number is not valid",
+        'fin_incorrect': 'Fin is not valid'
+    }
   
     first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
         'class' : "form-control",
@@ -241,7 +245,7 @@ class UserUpdateForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Adress'
     }))
-    fin = forms.CharField(label='', max_length=10, validators=[RegexValidator(r'^([0-9]|[a-zA-Z]){7}$', message="Fin is not valid")], required=False, widget=forms.TextInput(attrs={
+    fin = forms.CharField(label='', max_length=10, required=False, widget=forms.TextInput(attrs={
         'class' : "form-control",
         'placeholder': "Fin"
     }))
@@ -255,9 +259,7 @@ class UserUpdateForm(forms.ModelForm):
     phone_prefix = forms.ChoiceField(choices=PHONE_PREFIXES, widget=forms.Select(attrs={
         'class': 'form-control',
     }))
-    phone_number = forms.IntegerField(required= True, 
-        # validators=[RegexValidator(r'^([0-9]){7}$', message="Phone number is not valid")],
-        widget=forms.NumberInput(attrs={
+    phone_number = forms.IntegerField(required= True, widget=forms.NumberInput(attrs={
         'class': 'form-control',
         'type' : 'text',
         'placeholder': 'Phone Number'
@@ -265,16 +267,29 @@ class UserUpdateForm(forms.ModelForm):
 
     field_order =  ('first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
 
-    # def clean_phone_number(self):
-    #     """
-    #     Validate that the phone_number field is correct.
-    #     """
-    #     if not re.match("^([0-9]){7}$", phone_number):
-    #          raise forms.ValidationError(
-    #             self.error_messages['Phone number is not valid'],
-    #             code='phone_number is not valid',
-    #         )
-    #     return phone_number
+    def clean_phone_number(self):
+        """
+        Validate that the phone_number field is correct.
+        """
+        phone_number = self.cleaned_data["phone_number"]
+        if not re.match("^([0-9]){7}$", str(phone_number)):
+             raise forms.ValidationError(
+                self.error_messages['phone_number_incorrect'],
+                code='phone_number_incorrect',
+            )
+        return phone_number
+
+    def clean_fin(self):
+        """
+        Validate that the phone_number field is correct.
+        """
+        fin = self.cleaned_data["fin"]
+        if not re.match("^([0-9]|[a-zA-Z]){7}$", str(fin)):
+             raise forms.ValidationError(
+                self.error_messages['fin_incorrect'],
+                code='fin_incorrect',
+            )
+        return fin
 
     class Meta:
         model = CustomUser
