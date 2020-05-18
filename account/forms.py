@@ -1,8 +1,9 @@
 from django import forms
-from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES, Role
+from .models import CustomUser, SERIYA_TYPES, PHONE_PREFIXES, Role, JobCategory, Profile
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
+from .models import PHONE_PREFIXES, GENDER_CHOICES
 
 
 
@@ -222,15 +223,15 @@ class UserUpdateForm(forms.ModelForm):
     error_css_class = 'error'
   
     first_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+        'class' : "form-control",
         'placeholder': "Ad"
     })) 
     last_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={
-        'class' : "form-element input-field",
+        'class' : "form-control",
         'placeholder': "Soyad"
     })) 
     middle_name = forms.CharField(label='', max_length=32, required=False, widget=forms.TextInput(attrs={
-        'class': 'form-element input-field',
+        'class': 'form-control',
         'placeholder': 'Ata adı'
     }))
     address = forms.CharField(label='', max_length=256, widget=forms.TextInput(attrs={
@@ -248,6 +249,9 @@ class UserUpdateForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Seriya'
     }))
+    phone_prefix = forms.ChoiceField(choices=PHONE_PREFIXES, widget=forms.Select(attrs={
+        'class': 'form-control',
+    }))
     phone_number = forms.IntegerField(required= True, widget=forms.NumberInput(attrs={
         'class': 'form-control',
         'type' : 'text',
@@ -260,3 +264,55 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields =  ('first_name', 'last_name', 'middle_name', 'address', 'fin', 'seriya_type', 'seriya', 'phone_number')
+
+
+
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    image = forms.ImageField(required=False)
+    website = forms.URLField(required=False, widget=forms.URLInput(attrs={
+        'class': 'form-control',
+    }))
+    website = forms.URLField(required=False, widget=forms.URLInput(attrs={
+        'class': 'form-control'
+    }))
+    address = forms.CharField(max_length=256, required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Address'
+    }))
+
+    # social networks
+    facebook_link = forms.URLField(required=False, widget=forms.URLInput(attrs={
+        'class': 'form-control',
+    }))
+    twitter_link = forms.URLField(required=False, widget=forms.URLInput(attrs={
+        'class': 'form-control',
+    }))
+    linkedin_link = forms.URLField(required=False, widget=forms.URLInput(attrs={
+        'class': 'form-control',
+    }))
+    google_link = forms.URLField(required=False, widget=forms.URLInput(attrs={
+        'class': 'form-control',
+    }))
+
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, required=False, widget=forms.Select(attrs={
+        'class': 'form-control'
+    }))
+    work_summary = forms.CharField(max_length=2014, required=False, widget=forms.Textarea(attrs={
+        'class': 'form-control'
+    }))
+    biography = forms.CharField(max_length=2014, required=False, widget=forms.Textarea(attrs={
+        'class': 'form-control'
+    }))
+    job_category = forms.ModelChoiceField(required=False, queryset=JobCategory.objects.all(), widget=forms.Select(attrs={
+        'class': 'form-element input-field',
+    }))  
+
+    class Meta:
+        model = Profile
+        fields = ('image', 'website', 'address', 'facebook_link', 'twitter_link', 'google_link', 'linkedin_link', 'gender',
+            'work_summary', 'biography', 'job_category'
+        )

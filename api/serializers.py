@@ -59,7 +59,7 @@ class EventCreateSerializer(serializers.ModelSerializer):
     
 
 
-class SkillSerializer(serializers.Serializer):
+class SkillSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(required=False)
     profile_id = serializers.IntegerField()
     name = serializers.CharField(max_length=32)
@@ -75,6 +75,10 @@ class SkillSerializer(serializers.Serializer):
 
         instance.save()
         return instance
+
+    class Meta:
+        model = Skill
+        fields = ('pk', 'profile_id', 'name', 'progress')
 
 
 class AwardSerializer(serializers.Serializer):
@@ -96,9 +100,9 @@ class AwardSerializer(serializers.Serializer):
 
 
 
-class ExperienceSerializer(serializers.Serializer):
+class ExperienceSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(required=False)
-    profile_id = models.IntegerField()
+    profile = models.IntegerField()
     title = serializers.CharField(max_length=256)
     start = serializers.DateField()
     end = serializers.DateField(required=False)
@@ -107,14 +111,17 @@ class ExperienceSerializer(serializers.Serializer):
         return EducationAndWorkExperience.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.profile_id = validated_data.get('profile_id', instance.profile_id)
+        instance.profile_id = validated_data.get('profile', instance.profile_id)
         instance.title = validated_data.get('title', instance.title)
         instance.start = validated_data.get('start', instance.start)
         instance.end = validated_data.get('end', instance.end)
 
         instance.save()
         return instance
-
+    
+    class Meta:
+        model = EducationAndWorkExperience
+        fields = ('pk', 'profile', 'title', 'start', 'end')
 
 
 class ProfileSerializer(serializers.ModelSerializer):

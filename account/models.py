@@ -144,7 +144,7 @@ class Skill(models.Model):
 class EducationAndWorkExperience(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
     title = models.CharField(max_length=256)
-    start = models.DateField(auto_now_add=True)
+    start = models.DateField()
     end = models.DateField(null=True)
 
     class Meta:

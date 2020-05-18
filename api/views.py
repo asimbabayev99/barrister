@@ -237,8 +237,8 @@ class ProfileCreate(APIView):
 
 class SkillAPIView(APIView):
 
-    authentication_classes = [ExampleAuth,]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         profile = request.GET.get('profile')
@@ -260,7 +260,7 @@ class SkillAPIView(APIView):
         serializer = SkillSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             skill_saved = serializer.save()
-        return Response({"success": "Skill '{}' created successfully".format(skill_saved.name)})
+        return Response(serializer.data)
     
 
     def put(self, request, pk):
@@ -271,7 +271,7 @@ class SkillAPIView(APIView):
         serializer = SkillSerializer(instance=saved_skill, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             skill_saved = serializer.save()
-        return Response({"success": "Skill '{}' updated successfully".format(skill_saved.name)})
+        return Response(serializer.data)
 
 
     def delete(self, request, pk):
@@ -339,7 +339,7 @@ class AwardAPIView(APIView):
 class ExperienceAPIView(APIView):
 
     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         profile = request.GET.get('profile')
@@ -354,14 +354,15 @@ class ExperienceAPIView(APIView):
 
     def post(self, request):
         data = request.data
-        profile = Profile.objects.get(id=data.get('profile_id'))
+        profile = Profile.objects.get(id=data.get('profile'))
         if request.user != profile.user:
             return Response({"detail": "Permission denied"}, status=403)
         # Create an experience from the above data
         serializer = ExperienceSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             experience_saved = serializer.save()
-        return Response({"success": "Experience '{}' created successfully".format(experience_saved.title)})
+        # return Response({"success": "Experience '{}' created successfully".format(experience_saved.title)})
+        return Response(serializer.data)
     
 
     def put(self, request, pk):
