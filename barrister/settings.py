@@ -173,3 +173,19 @@ EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+    'check_mails': {
+        'task': 'check_mails', 
+        'schedule': 1.0,
+    },
+}
