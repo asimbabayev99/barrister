@@ -19,80 +19,7 @@
 <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet" />
 <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-<style>
 
-  /* Button used to open the contact form - fixed at the bottom of the page */
-  .open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: fixed;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-  }
-
-  /* The popup form - hidden by default */
-  .form-popup {
-    display: none;
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    /* right: 15px; */
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-  }
-
-  /* Add styles to the form container */
-  .form-container {
-    max-width: 500px;
-    padding: 10px;
-    background-color: white;
-  }
-
-  /* Full-width input fields */
-  .form-container input[type=text],
-  .form-container input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
-  }
-
-  /* When the inputs get focus, do something */
-  .form-container input[type=text]:focus,
-  .form-container input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-
-  /* Set a style for the submit/login button */
-  .form-container .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px;
-    opacity: 0.8;
-  }
-
-  /* Add a red background color to the cancel button */
-  .form-container .cancel {
-    background-color: red;
-  }
-
-  /* Add some hover effects to buttons */
-  .form-container .btn:hover,
-  .open-button:hover {
-    opacity: 1;
-  }
-</style>
 
 <script>
   function openForm() {
@@ -127,7 +54,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="content">
-            <h2>Peşəkar bacarıqlar</h2>
+            <p class="title">Peşəkar bacarıqlar</p>
           </div>
         </div>
       </div>
@@ -139,10 +66,12 @@
       <div class="row">
         <div class="col-md-12">
           <input type="text" id="profile-input" profile-id="{{profile.id}}" hidden> 
-          <div class="box1" >
+          <div class="box1 col-12 col-xl-6" >
             <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
             <h3>Təhsil</h3>
-            <input type="button" value="+" id="new-exp">
+            <!-- <input type="button" class="btn btn-success" value="" id="new-exp"> -->
+            <!-- <button type="button" class="btn btn-success" id="new-exp"></button> -->
+            <i class="fas fa-plus add_icon" id="new-exp"></i>
             <div id="experience-info" class="info" style="padding-bottom: 10px;">
               {% for i in experiences %}
               <div class="p_raw" data-id="{{i.id}}">
@@ -154,8 +83,8 @@
                   {% endif %}
                 </p>
                 <p class="experience-title">{{i.title}}</p>
-                <input type="button" class="delete-exp" data-id="{{i.id}}" value="delete">
-                <input type="button" class="edit-exp" data-id="{{i.id}}" value="edit">
+                <input type="button" class="delete-exp style_btn btn btn-dark" data-id="{{i.id}}" value="Delete">
+                <input type="button" class="edit-exp style_btn btn btn-dark " data-id="{{i.id}}" value="Edit">
                 <hr>
               </div>
               <br>
@@ -163,10 +92,11 @@
             </div>
 
           </div>
-          <div class="box2">
+          <div class="box2 col-12 col-xl-6">
             <i class="fas fa-trophy win"></i>
             <h3>Bacariqlar</h3>
-            <input type="button" id="new-skill" value="+">
+            <!-- <input type="button" id="new-skill" value="+"> -->
+            <i class="fas fa-plus add_icon" id="new-skill"></i>
             <div class="info frame " style="padding-bottom: 10px;">
               {% for skill in skills %}
               <div class='p_raw'>
@@ -175,9 +105,9 @@
                   <div class="faiz_ic">
                     <p class="skill-progress">{{skill.progress}}%</p>
                   </div>
-                </div>
-                <input type="button" class="delete-skill" data-id="{{skill.id}}" value="delete">
-                <input type="button" class="edit-skill" data-id="{{skill.id}}" value="edit">
+                </div><br>
+                <input type="button" class="delete-skill  style_btn btn btn-dark" data-id="{{skill.id}}" value="delete">
+                <input type="button" class="edit-skill btn btn-dark style_btn" data-id="{{skill.id}}" value="edit">
               </div>
               {% endfor %}
             </div>
@@ -270,7 +200,7 @@
     str += "<p>" + data.title + "</p>"
     str += "<hr>"
     str += "</div>"
-
+      
     $("#experience-info").append(str)
   }
 

@@ -2074,17 +2074,19 @@ padding-left: 10px;
 /*Professional skills begin*/
 
 .performance {
-  color:#a18432;
+  color:#CDBA6D;
   
   }
   .performance .content {
     background-color: #191813d4;
-    padding: 15px;
-    margin-top: 25px;
+    padding: 0px;
+    height: 60px;
+    padding-left: 15px;
+    line-height: 60px;
   }
   
   .perfo_body{
-    color:#a18432;
+    color:#cdba6d;
     height:100vh;
   }
   
@@ -2118,28 +2120,32 @@ padding-left: 10px;
   .box1{
     float: left;
     background-color: #191813d4 !important; 
-    width: 50%;
-    height: 370px;
+    
+    min-height: 370px;
     padding-left: 10px;
-    color:#a18432;
+    color:#CDBA6D;
+    padding: 15px;
   }
   .box2{
     float: right;
     background-color: #191813d4 !important; 
-    width: 50%;
+    
     height: 370px;
     padding-left: 10px;
     border-left: 1px solid gold;
-    color:#a18432;
+    color:#CDBA6D;
+    padding: 15px;
   }
   
   .win{
     font-size: 25px!important;
-      margin-right: 20px!important;
+      margin-right: 10px!important;
+      transform: translate(0px,-2px);
   }
   .edu{
     font-size: 25px!important;
-      margin-right: 20px!important;
+      margin-right: 10px!important;
+      transform: translate(0px,-2px);
       background-color: transparent!important;
   }
   
@@ -2190,6 +2196,119 @@ padding-left: 10px;
     margin-left: 10px;
   }   
       
+  .open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    /* position: fixed; */
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+  }
+
+
+  /* The popup form - hidden by default */
+  .form-popup {
+    display: none;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    /* right: 15px; */
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 500px;
+    padding: 10px;
+    background-color: white;
+  }
+
+  /* Full-width input fields */
+  .form-container input[type=text],
+  .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* When the inputs get focus, do something */
+  .form-container input[type=text]:focus,
+  .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover,
+  .open-button:hover {
+    opacity: 1;
+  }
+
+  
+  .style_btn {
+    padding: 10px 40px; 
+    height: max-content !important;
+    width:  max-content !important;
+    border-radius: 0px;
+    background-color: #cdba6d;
+    color: #3a3f48;
+    border: #cdba6d;
+    text-transform: capitalize;
+    margin-top: 10px;
+  }
+
+  .style_btn:focus {
+    background-color: #cdba6d;
+    border: #cdba6d;
+  }
+
+  .style_btn:hover {
+    background-color: #cdba6d;
+  }
+
+.add_icon {
+  margin-left: 10px;font-size: 20px;transform: translate(0px,-2px);
+  cursor: pointer;
+}
+
+.content p[class="title"] {
+  font-size: 20px;
+  font-weight: 400;
+}  
+
+.style_btn_2 {
+  padding: 10px 40px; 
+    height: max-content !important;
+    width:  max-content !important;
+    border-radius: 0px;
+   margin-top: 10px;
+    text-transform: capitalize;
+
+}
 /*Professional skills end*/
 
 
@@ -2643,78 +2762,5 @@ padding-left: 10px;
 
 /*Professionals skills begin*/
 
-.open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
 
-/* The popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  top: 100px;
-  left: 50%;
-  /* right: 15px; */
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 500px;
-  padding: 10px;
-  background-color: white;
-}
-
-/* Full-width input fields */
-.form-container input[type=text],
-.form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus,
-.form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover,
-.open-button:hover {
-  opacity: 1;
-}
-
-.style_btn {
-
-}
 /*Professionals skills end*/
