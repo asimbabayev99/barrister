@@ -184,7 +184,7 @@ CELERY_TASK_SERIALIZER = 'json'
 
 from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
-    'check_mails': {
+    'check_mails_schedule': {
         'task': 'check_mails', 
         'schedule': 1.0,
     },
