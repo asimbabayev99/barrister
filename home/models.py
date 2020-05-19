@@ -486,6 +486,12 @@ FOLDER_CHOICES = [
 ]
 
 
+class EmailAccount(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    email = models.EmailField(null=False, blank=False)
+    password = models.CharField(max_length=64, null=False, blank=False)
+
+
 class Email(models.Model):
     sender = models.ForeignKey(CustomUser, related_name='sender', on_delete=models.DO_NOTHING, blank=False, null=False)
     receiver = models.ForeignKey(CustomUser, related_name='receiver', on_delete=models.DO_NOTHING, blank=False, null=False)
