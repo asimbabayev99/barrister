@@ -2078,7 +2078,7 @@ padding-left: 10px;
   
   }
   .performance .content {
-    background-color: #191813d4;
+    background-color: #3a3f48;
     padding: 0px;
     height: 60px;
     padding-left: 15px;
@@ -2109,7 +2109,8 @@ padding-left: 10px;
     
   }
   .box1 .info hr{
-    margin-top: 30px;
+    margin-top: 10px;
+    border: 1px solid #CDBA6D;
   }
   
   .remove{
@@ -2119,21 +2120,23 @@ padding-left: 10px;
   
   .box1{
     float: left;
-    background-color: #191813d4 !important; 
     
-    min-height: 370px;
+    /* min-height: 370px; */
     padding-left: 10px;
     color:#CDBA6D;
     padding: 15px;
+    border-right: 1px solid #CDBA6D;
+    
   }
   .box2{
     float: right;
-    background-color: #191813d4 !important; 
+    /* background-color: #191813d4 !important;  */
     
-    height: 370px;
+    /* height: 370px; */
     padding-left: 10px;
-    border-left: 1px solid gold;
+    
     color:#CDBA6D;
+    border-left: #CDBA6D 1px solid ;
     padding: 15px;
   }
   
@@ -2153,10 +2156,15 @@ padding-left: 10px;
     width: 60px;
     height: 25px;
     overflow: hidden;
-    margin-left: 10px;
+    
   
   }
   
+  @media only screen and(max-width:1200px) {
+    .box2 {
+      background-color: red !important;
+    }
+  }
   .box2 h3{
     display: inline-block;
   }
@@ -2167,8 +2175,8 @@ padding-left: 10px;
   .faiz{
     width: 90%;
     height: 25px;
-    border:1px solid #a18432;
-    background-color: #a18432;
+    border:1px solid #CDBA6D;
+    background-color: #CDBA6D;
     float: right;
     margin-right: 20px;
     margin-bottom: 15px;
@@ -2179,7 +2187,7 @@ padding-left: 10px;
    width:68%;
     height: 25px;
     border:1px solid gold;
-    background-color: #191813d4;
+    background-color: #3a3f48;
      border-radius: 10px;
     
   }
@@ -2187,8 +2195,8 @@ padding-left: 10px;
   .faiz p{
     text-align: center;
     margin: 0 auto;
-    transform: translateX(50%);
-    color: gold;
+    transform: translateX(40%);
+    color: #CDBA6D;
   }
   
   .title_law{
@@ -2247,48 +2255,42 @@ padding-left: 10px;
 
   /* Set a style for the submit/login button */
   .form-container .btn {
-    background-color: #4CAF50;
     color: white;
     padding: 16px 20px;
+    border-radius: 0px;
     border: none;
     cursor: pointer;
     width: 100%;
     margin-bottom: 10px;
-    opacity: 0.8;
+    
   }
 
-  /* Add a red background color to the cancel button */
-  .form-container .cancel {
-    background-color: red;
-  }
-
-  /* Add some hover effects to buttons */
-  .form-container .btn:hover,
-  .open-button:hover {
-    opacity: 1;
-  }
-
+#experienceForm input[type="date"] {
+  /* height: 40px; */
+  outline: none;
+  border: hidden;
+  border-bottom: 1px solid #3a3f48;
   
-  .style_btn {
-    padding: 10px 40px; 
-    height: max-content !important;
-    width:  max-content !important;
-    border-radius: 0px;
-    background-color: #cdba6d;
-    color: #3a3f48;
-    border: #cdba6d;
-    text-transform: capitalize;
-    margin-top: 10px;
-  }
+}
 
-  .style_btn:focus {
-    background-color: #cdba6d;
-    border: #cdba6d;
-  }
+#experienceForm button[type="submit"] {
+  margin-top: 10px;
+}
 
-  .style_btn:hover {
-    background-color: #cdba6d;
-  }
+#experienceForm textarea {
+  outline: none;
+  resize: none;
+  height: 80px;
+}
+  /* Add a red background color to the cancel button */
+  
+  /* Add some hover effects to buttons */
+  
+
+.experienceForm button{
+  margin-top: 10px;
+}
+
 
 .add_icon {
   margin-left: 10px;font-size: 20px;transform: translate(0px,-2px);
@@ -2306,6 +2308,7 @@ padding-left: 10px;
     width:  max-content !important;
     border-radius: 0px;
    margin-top: 10px;
+   margin-right: 10px;
     text-transform: capitalize;
 
 }
