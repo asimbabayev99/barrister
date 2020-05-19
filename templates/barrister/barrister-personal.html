@@ -43,7 +43,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="box-personal">
-                <form class="info_input" method="POST" action="">
+                <form class="info_input" method="POST" action="" enctype="multipart/form-data">
                   {% csrf_token %}
                   {{ form.as_p }}
                   <!-- <div class="info-personal"> <label>Ad</label>

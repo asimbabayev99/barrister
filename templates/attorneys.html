@@ -244,22 +244,13 @@
 																<div
 																	class="themestek-boxes-inner themestek-boxes-team-inner">
 
-																	<div
-																		class="row multi-columns-row themestek-boxes-row-wrapper">
-
+																	<div class="row multi-columns-row themestek-boxes-row-wrapper">
 																		{% for attorney in page_obj %}
-																		
-
-																		<div
-																			class="themestek-box-col-wrapper col-lg-4 col-sm-6 col-md-4 col-xs-12">
-																			<article
-																				class="themestek-box themestek-box-team themestek-teambox-style-3">
+																		<div class="themestek-box-col-wrapper col-lg-4 col-sm-6 col-md-4 col-xs-12">
+																			<article class="themestek-box themestek-box-team themestek-teambox-style-3">
 																				<div class="themestek-post-item">
-																					<div
-																						class="themestek-team-image-box">
-
-																						<span
-																							class="themestek-item-thumbnail">
+																					<div class="themestek-team-image-box">
+                                            <span class="themestek-item-thumbnail">
 																							<span
 																								class="themestek-item-thumbnail-inner">
 																								{% if attorney.profile.image %}
@@ -327,12 +318,13 @@
 																									class="themestek-box-title">
 
 																									<h4><a
-																											href="/team/lily-watson/"></a>
+																											href="{% url 'single-view' request.user.id %}">
 																										{% if attorney.first_name %}
 																										  {{attorney.first_name }} {{attorney.last_name}}
 																										{% else %}
 																										-
-																										{% endif %}
+                                                    {% endif %}
+                                                  </a>
 																									</h4>
 
 
