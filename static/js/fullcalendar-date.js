@@ -76,8 +76,8 @@ $(document).ready(function() {
       $(".modal").find("#location_input").val(calEvent.mekan);  
       $(".modal").find("#end_hour_input").val(calEvent.hour);
       $(".modal").find("#begin_hour_input").val(calEvent.begin_hour);
-      $(".modal").find("#input_baslama_vaxti").val(calEvent.start.format('DD/MMM/YYYY'));
-      $(".modal").find("#input_bitme_vaxti").val(calEvent.end.format('DD/MMM/YYYY'));
+      $(".modal").find("#input_baslama_vaxti").val(calEvent.start.format('DD/MM/YYYY'));
+      $(".modal").find("#input_bitme_vaxti").val(calEvent.end.format('DD/MM/YYYY'));
       $(".checkbox_input_modal").val(calEvent.disabled_check);
       $("#save-event").hide();
       $("#select_box_baslig").html(calEvent.vaxt_divi);
@@ -101,8 +101,8 @@ $(document).ready(function() {
 
   // $("#input_baslama_vaxti").datetimepicker({locale:'az'});
   // $("#input_bitme_vaxti").datetimepicker({locale:'az'});
-   $("#input_baslama_vaxti").datetimepicker({ format: 'DD/MMM/YYYY'});
-  $("#input_bitme_vaxti").datetimepicker({ format: 'DD/MMM/YYYY'});
+   $("#input_baslama_vaxti").datetimepicker({ format: 'DD/MM/YYYY',locale:'az'});
+  $("#input_bitme_vaxti").datetimepicker({ format: 'DD/MM/YYYY',locale:'az'});
   $("#begin_hour_input").datetimepicker({ format: 'HH:mm'});
   $("#end_hour_input").datetimepicker({ format: 'HH:mm'});
   
@@ -114,17 +114,14 @@ $(document).ready(function() {
     if (title) {
       var eventData = {
         title: title,
-        start: $("#input_baslama_vaxti").val()+' '+$("#begin_hour_input").val(),
-        end: $("#input_bitme_vaxti").val()+' '+$("#end_hour_input").val(),
+        start: moment($("#input_baslama_vaxti").val()).format("DD/MM/YYYY")+' '+$("#begin_hour_input").val(),
+        end: moment($("#input_bitme_vaxti").val()).format("DD/MM/YYYY")+' '+$("#end_hour_input").val(),
         mekan: $("#location_input").val(),
         hour : $("#end_hour_input").val(),
         begin_hour : $("#begin_hour_input").val(),
         disabled_check:$(".checkbox_input_modal").prop("disabled",true),
         vaxt_divi:$("#select_box_baslig").text(),
         ikonka:$("#choose_icon_button").html()
-
-        
-   
       };
       $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = true
     }
@@ -139,8 +136,6 @@ $(document).ready(function() {
     $(".modal").find($("#end_hour_input")).val("");
     $(".modal").find($("#begin_hour_input")).val("");
     $(".modal").modal("hide");
-    
-    
   });
   
 
