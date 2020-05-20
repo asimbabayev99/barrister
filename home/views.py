@@ -14,12 +14,10 @@ from django.contrib.auth import update_session_auth_hash
 from django.utils.translation import ugettext as _
 from shop.models import Basket
 
-
 from account.tasks import synchronize_mail
 
-def index_view(request):
-    synchronize_mail.delay(1, 1, 1)
 
+def index_view(request):
     barristers = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile', 'profile__job_category').order_by('-id')[:4]
     # print(profiles)
     
@@ -514,23 +512,26 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
-    if folder:
-        email_list = Folder.objects.filter(name=folder, user=request.user).select_related('email')
-    else:
-        email_list = Folder.objects.filter(name="Inbox", user=request.user).select_related('email')
 
-    page = request.GET.get('page')
-    try:
-        page = int(page)
-    except: 
-        page = 1
+    synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
 
-    paginator = Paginator(email_list, 50)
-    page_obj = paginator.get_page(page)
+    # if folder:
+    #     email_list = Folder.objects.filter(name=folder, user=request.user).select_related('email')
+    # else:
+    #     email_list = Folder.objects.filter(name="Inbox", user=request.user).select_related('email')
+
+    # page = request.GET.get('page')
+    # try:
+    #     page = int(page)
+    # except: 
+    #     page = 1
+
+    # paginator = Paginator(email_list, 50)
+    # page_obj = paginator.get_page(page)
 
 
     context = {
-        'page_obj': page_obj
+        # 'page_obj': page_obj
     }
 
     return render(request, 'barrister/email.html', context=context)
