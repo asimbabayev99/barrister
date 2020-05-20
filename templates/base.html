@@ -497,7 +497,14 @@
                                 class="themestek-attorco-icon-instagram"></i></a></li>
                         </ul>
                         {% if request.user.is_authenticated %}
-                        <div id="profile_icon" onclick="profile_click()">{{request.user.first_name|make_list|first}}</div>
+                        
+                        <div id="profile_icon" onclick="profile_click()">
+                          {% if request.user.profile.image %}
+                          <img src="{{ request.user.profile.image.url }}" width="45" height="48" style="border-radius: 50px;">
+                          {% else %}
+                          {{request.user.first_name|make_list|first}}
+                          {% endif %}
+                        </div>
                         {% endif %}
                         <div id="profile_menu" style="display: none;">
                           <p style="color:#cdba6d;font-size: 12px;line-height: 30px;margin-top: 10px;">Xoş

@@ -327,3 +327,242 @@ var myChart = new Chart(chart, {
 });
 
 })
+
+
+
+/** 
+ * Professionals skills begin
+*/
+
+function openForm() {
+  document.getElementById("experienceForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("experienceForm").style.display = "none";
+}
+
+function openSkillForm(){
+  document.getElementById("skillForm").style.display = "block";
+}
+
+function closeSkillForm() {
+  document.getElementById("skillForm").style.display = "none";
+}
+
+function onChangeRange(value){
+  $("#progress-span").text(value);
+}
+
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+function addExperiece(data) {
+  str = "<div class='p_raw'>";
+  str += "<p>" + data.title + "</p>"
+  str += "<hr>"
+  str += "</div>"
+    
+  $("#experience-info").append(str)
+}
+
+$(document).ready(function () {
+
+  // experience related function below
+
+  // opens and closes popup
+  $("#new-exp").on("click", function() {
+    $("#experienceForm").find("#add-exp").show();
+    $("#experienceForm").find("#save-exp").hide();
+    openForm();
+  })
+
+  // add data to database
+  $("#add-exp").on("click", function () {
+    data = {
+      'profile': $("#profile-input").attr("profile-id"),
+      'title': $('#experience-title').val(),
+      'start': $('#start-date').val(),
+      'end': $('#end-date').val()
+    }
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+      },
+      type: 'POST',
+      url: '/api/experiences/',
+      data: data,
+      success: function (data, status, xhr) {
+        // handle success 
+      }
+    });
+  });
+
+  // delete data from database
+  $(".delete-exp").on("click", function() {
+    button = this
+    id = $(this).attr("data-id");
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+      },
+      type: 'DELETE',
+      url: '/api/experiences/' + id,
+      success: function (data, status, xhr) {
+        $(button).parents('.p_raw').remove();
+      }
+    })
+  });
+
+  // fill data in popup 
+  $(".edit-exp").on("click", function() {
+    $("#experienceForm").find("#add-exp").hide();
+    $("#experienceForm").find("#save-exp").show();
+
+    div = $(this).parents('.p_raw');
+    title = div.find('.experience-title').text();
+    start = div.find('.start-date').text().toString().split("/").join("-");
+    end = div.find('.end-date').text().toString().split("/").join("-");
+
+    console.log(start + " " + end)
+
+    $("#experienceForm").attr('data-id', $(this).attr('data-id'))
+    $("#experienceForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
+    $("#experienceForm").find("#experience-title").val(title)
+    $("#experienceForm").find("#start-date").val(start);
+    $("#experienceForm").find("#end-date").val(end);  
+    
+    openForm();
+  });
+
+  // update data in database
+  $("#save-exp").on("click", function() {
+    div = $(this).parents('.p_raw')
+    id = $("#experienceForm").attr("data-id");
+    data = {
+      "id": id,
+      'profile': $("#experienceForm").attr('profile-id'),
+      'title': $('#experience-title').val(),
+      'start': $('#start-date').val(),
+      'end': $('#end-date').val()
+    }
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+      },
+      type: 'PUT',
+      data: data,
+      url: '/api/experiences/' + id,
+      success: function (data, status, xhr) {
+        // hande success
+      }
+    })
+  })
+
+
+  // skills related function below
+
+  $("#new-skill").on("click", function() {
+    $("#skillForm").find("#add-skill").show();
+    $("#skillForm").find("#save-skill").hide();
+    openSkillForm();
+  })
+
+  $("#add-skill").on("click", function () {
+    data = {
+      'profile_id': $("#profile-input").attr("profile-id"),
+      'name': $('#skill-name').val(),
+      'progress': $('#skill-progress').val(),
+    }
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+      },
+      type: 'POST',
+      url: '/api/skills/',
+      data: data,
+      success: function (data, status, xhr) {
+        addExperiece(data);
+      }
+    });
+  });
+
+  $(".edit-skill").on("click", function() {
+    $("#skillForm").find("#add-skill").hide();
+    $("#skillForm").find("#save-skill").show();
+
+    div = $(this).parents('.p_raw');
+    name = div.find('.skill-name').text();
+    progress = div.find('.skill-progress').text()
+
+    console.log(name + " " + progress)
+
+    $("#skillForm").attr('data-id', $(this).attr('data-id'))
+    $("#skillForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
+    $("#skillForm").find("#skill-name").val(name)
+    $("#skillForm").find("#skill-progress").val(parseInt(progress));
+    $("#skillForm").find("#progress-span").text(parseInt(progress))
+    
+    openSkillForm();
+  });
+
+  $("#save-skill").on("click", function() {
+    div = $(this).parents('.p_raw')
+    id = $("#skillForm").attr("data-id");
+    data = {
+      "id": id,
+      'profile_id': $("#skillForm").attr('profile-id'),
+      'name': $('#skill-name').val(),
+      'progress': $('#skill-progress').val()
+    }
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+      },
+      type: 'PUT',
+      data: data,
+      url: '/api/skills/' + id,
+      success: function (data, status, xhr) {
+        // handle success
+      }
+    })
+  })
+
+
+  $(".delete-skill").on("click", function() {
+    button = this
+    id = $(this).attr("data-id");
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+      },
+      type: 'DELETE',
+      url: '/api/skills/' + id,
+      success: function (data, status, xhr) {
+        $(button).parents('.p_raw').remove();
+      }
+    })
+  });
+
+
+});
+
+
+
+/** 
+ * Professionals skills end
+*/

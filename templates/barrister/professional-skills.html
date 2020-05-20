@@ -21,27 +21,6 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
 
-<script>
-  function openForm() {
-    document.getElementById("experienceForm").style.display = "block";
-  }
-
-  function closeForm() {
-    document.getElementById("experienceForm").style.display = "none";
-  }
-
-  function openSkillForm(){
-    document.getElementById("skillForm").style.display = "block";
-  }
-
-  function closeSkillForm() {
-    document.getElementById("skillForm").style.display = "none";
-  }
-
-  function onChangeRange(value){
-    $("#progress-span").text(value);
-  }
-</script>
 
 {% endblock %}
 
@@ -63,8 +42,8 @@
 
   <div class="statistics">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row" style="padding: 0px 15px;">
+        <div class="col-md-12" style="min-height: 300px;background-color: #3a3f48">
           <input type="text" id="profile-input" profile-id="{{profile.id}}" hidden> 
           <div class="box1 col-12 col-xl-6" >
             <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
@@ -83,8 +62,8 @@
                   {% endif %}
                 </p>
                 <p class="experience-title">{{i.title}}</p>
-                <input type="button" class="delete-exp style_btn btn btn-dark" data-id="{{i.id}}" value="Delete">
-                <input type="button" class="edit-exp style_btn btn btn-dark " data-id="{{i.id}}" value="Edit">
+                <input type="button" class="delete-exp style_btn_2 btn btn-secondary" data-id="{{i.id}}" value="Sil">
+                <input type="button" class="edit-exp style_btn_2 btn btn-success " data-id="{{i.id}}" value="Düzəlt">
                 <hr>
               </div>
               <br>
@@ -106,8 +85,8 @@
                     <p class="skill-progress">{{skill.progress}}%</p>
                   </div>
                 </div><br>
-                <input type="button" class="delete-skill  style_btn btn btn-dark" data-id="{{skill.id}}" value="delete">
-                <input type="button" class="edit-skill btn btn-dark style_btn" data-id="{{skill.id}}" value="edit">
+                <input type="button" class="delete-skill  style_btn_2 btn btn-secondary" data-id="{{skill.id}}" value="Sil">
+                <input type="button" class="edit-skill btn btn-success style_btn_2" data-id="{{skill.id}}" value="Düzəlt">
               </div>
               {% endfor %}
             </div>
@@ -124,21 +103,23 @@
   <!-- popup for education and work experince data -->
   <div class="form-popup" id="experienceForm">
     <div class="form-container">
-      <h1>Melumati daxil edin</h1>
+     
+        <h2>Melumati daxil edin</h2>
 
-      <label for="from"><b>From</b></label>
+      <label for="from"><b>Başlama vaxtı</b></label>
       <input type="date" name="start" id='start-date' required>
-
-      <label for="to"><b>To</b></label>
+      <br>
+      <label for="to"><b>Bitmə vaxtı</b></label>
       <input type="date" name="end" id='end-date'>
-
+      <br>
       <label for="experience"><b>Tehsil ve ya is tecrubesi</b></label>
       <textarea rows="2" id="experience-title" placeholder="Experience description" name="experience" required>
       </textarea>
       
-      <button type="submit" class="btn" id="save-exp" >Save</button>
-      <button type="submit" class="btn" id="add-exp">Add</button>
-      <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+      <button type="submit" class="btn btn-success" style="margin-top: 10px;" id="save-exp" >Yadda saxla</button>
+      <button type="submit" class="btn btn-success" id="add-exp">Əlavə et</button>
+      <button type="submit" class="btn btn-dark" onclick="closeForm()">Bağla</button>
+      
     </div>
   </div>
   <!-- end popup -->
@@ -147,19 +128,20 @@
   <!-- popup for skills data -->
   <div class="form-popup" id="skillForm">
     <div class="form-container">
-      <h1>Melumat daxil edin</h1>
+      <h2>Melumat daxil edin</h2>
 
       <label for="name"><b>Ad</b></label>
       <input type="text" name="name" id='skill-name' required>
 
-      <label><b>Proqres</b> <span id="progress-span">50</span>/100 </label>
+      <label><b>Nisbət</b> <span id="progress-span">50</span>/100 </label>
       <input type="range" name="progress" id="skill-progress"  min="0" max="100" value="50" 
           oninput="onChangeRange(this.value)" onchange="onChangeRange(this.value)" required/>
       <br>
-      
-      <button type="submit" class="btn" id="save-skill">Save</button>
-      <button type="submit" class="btn" id="add-skill">Add</button>
-      <button type="submit" class="btn cancel" onclick="closeSkillForm()">Close</button>
+
+      <button type="submit" class="btn btn-success" id="save-skill">Yadda saxla</button>
+      <button type="submit" class="btn btn-success" id="add-skill">Əlavə et</button>
+      <button type="submit" class="btn btn-dark" onclick="closeSkillForm()">Bağla</button>
+
     </div>
   </div>
   <!-- end popup -->
@@ -178,211 +160,4 @@
 <script src="{% static 'js/fullcalendar.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 
-<script>
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-
-  function addExperiece(data) {
-    str = "<div class='p_raw'>";
-    str += "<p>" + data.title + "</p>"
-    str += "<hr>"
-    str += "</div>"
-      
-    $("#experience-info").append(str)
-  }
-
-  $(document).ready(function () {
-
-    // experience related function below
-
-    // opens and closes popup
-    $("#new-exp").on("click", function() {
-      $("#experienceForm").find("#add-exp").show();
-      $("#experienceForm").find("#save-exp").hide();
-      openForm();
-    })
-
-    // add data to database
-    $("#add-exp").on("click", function () {
-      data = {
-        'profile': $("#profile-input").attr("profile-id"),
-        'title': $('#experience-title').val(),
-        'start': $('#start-date').val(),
-        'end': $('#end-date').val()
-      }
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie('csrftoken'),
-        },
-        type: 'POST',
-        url: '/api/experiences/',
-        data: data,
-        success: function (data, status, xhr) {
-          // handle success 
-        }
-      });
-    });
-
-    // delete data from database
-    $(".delete-exp").on("click", function() {
-      button = this
-      id = $(this).attr("data-id");
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie('csrftoken'),
-        },
-        type: 'DELETE',
-        url: '/api/experiences/' + id,
-        success: function (data, status, xhr) {
-          $(button).parents('.p_raw').remove();
-        }
-      })
-    });
-
-    // fill data in popup 
-    $(".edit-exp").on("click", function() {
-      $("#experienceForm").find("#add-exp").hide();
-      $("#experienceForm").find("#save-exp").show();
-
-      div = $(this).parents('.p_raw');
-      title = div.find('.experience-title').text();
-      start = div.find('.start-date').text().toString().split("/").join("-");
-      end = div.find('.end-date').text().toString().split("/").join("-");
-
-      console.log(start + " " + end)
-
-      $("#experienceForm").attr('data-id', $(this).attr('data-id'))
-      $("#experienceForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
-      $("#experienceForm").find("#experience-title").val(title)
-      $("#experienceForm").find("#start-date").val(start);
-      $("#experienceForm").find("#end-date").val(end);  
-      
-      openForm();
-    });
-
-    // update data in database
-    $("#save-exp").on("click", function() {
-      div = $(this).parents('.p_raw')
-      id = $("#experienceForm").attr("data-id");
-      data = {
-        "id": id,
-        'profile': $("#experienceForm").attr('profile-id'),
-        'title': $('#experience-title').val(),
-        'start': $('#start-date').val(),
-        'end': $('#end-date').val()
-      }
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie('csrftoken'),
-        },
-        type: 'PUT',
-        data: data,
-        url: '/api/experiences/' + id,
-        success: function (data, status, xhr) {
-          // hande success
-        }
-      })
-    })
-
-
-    // skills related function below
-
-    $("#new-skill").on("click", function() {
-      $("#skillForm").find("#add-skill").show();
-      $("#skillForm").find("#save-skill").hide();
-      openSkillForm();
-    })
-
-    $("#add-skill").on("click", function () {
-      data = {
-        'profile_id': $("#profile-input").attr("profile-id"),
-        'name': $('#skill-name').val(),
-        'progress': $('#skill-progress').val(),
-      }
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie('csrftoken'),
-        },
-        type: 'POST',
-        url: '/api/skills/',
-        data: data,
-        success: function (data, status, xhr) {
-          addExperiece(data);
-        }
-      });
-    });
-
-    $(".edit-skill").on("click", function() {
-      $("#skillForm").find("#add-skill").hide();
-      $("#skillForm").find("#save-skill").show();
-
-      div = $(this).parents('.p_raw');
-      name = div.find('.skill-name').text();
-      progress = div.find('.skill-progress').text()
-
-      console.log(name + " " + progress)
-
-      $("#skillForm").attr('data-id', $(this).attr('data-id'))
-      $("#skillForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
-      $("#skillForm").find("#skill-name").val(name)
-      $("#skillForm").find("#skill-progress").val(parseInt(progress));
-      $("#skillForm").find("#progress-span").text(parseInt(progress))
-      
-      openSkillForm();
-    });
-
-    $("#save-skill").on("click", function() {
-      div = $(this).parents('.p_raw')
-      id = $("#skillForm").attr("data-id");
-      data = {
-        "id": id,
-        'profile_id': $("#skillForm").attr('profile-id'),
-        'name': $('#skill-name').val(),
-        'progress': $('#skill-progress').val()
-      }
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie('csrftoken'),
-        },
-        type: 'PUT',
-        data: data,
-        url: '/api/skills/' + id,
-        success: function (data, status, xhr) {
-          // handle success
-        }
-      })
-    })
-
-
-    $(".delete-skill").on("click", function() {
-      button = this
-      id = $(this).attr("data-id");
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie('csrftoken'),
-        },
-        type: 'DELETE',
-        url: '/api/skills/' + id,
-        success: function (data, status, xhr) {
-          $(button).parents('.p_raw').remove();
-        }
-      })
-    });
-
-
-  });
-</script>
 {% endblock %}

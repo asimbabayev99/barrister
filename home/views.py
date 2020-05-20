@@ -15,8 +15,11 @@ from django.utils.translation import ugettext as _
 from shop.models import Basket
 
 
+from account.tasks import synchronize_mail
 
 def index_view(request):
+    synchronize_mail.delay(1, 1, 1)
+
     barristers = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile', 'profile__job_category').order_by('-id')[:4]
     # print(profiles)
     
