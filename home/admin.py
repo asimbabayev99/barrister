@@ -1,5 +1,9 @@
 from django.contrib import admin
-from home.models import Event, EventCategory, News, Publication, Comment , Task, Appointment, City , Contact
+from home.models import(
+    Event, EventCategory, News, Publication, 
+    Comment , Task, Appointment, City , Contact,
+    Email, EmailAccount, Attachment
+) 
 from django.contrib.admin import AdminSite 
 from django.shortcuts import HttpResponse
 
@@ -12,3 +16,7 @@ admin.site.register(Task)
 admin.site.register(Appointment)
 admin.site.register(City)
 admin.site.register(Contact)
+
+admin.site.register(Email)
+admin.site.register(EmailAccount)
+admin.site.register(Attachment)
