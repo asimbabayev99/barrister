@@ -513,7 +513,7 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
-    # synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
+    synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
 
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
         'folder', 'subject','sender', 'receiver', 'date', 'flag')

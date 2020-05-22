@@ -18,7 +18,7 @@ from home.models import EmailAccount, Email, Attachment
 def synchronize_mail(user_id, email_address, password):
     print("start to synchronize mail")
     user = CustomUser.objects.get(id=user_id)
-    email_acc, created = EmailAccount.objects.get_or_create(user=user, email=email, password=password)
+    email_acc, created = EmailAccount.objects.get_or_create(user=user, email=email_address, password=password)
 
     server = 'imap.yandex.ru'
     mail = imaplib.IMAP4_SSL(server)
@@ -82,7 +82,7 @@ def synchronize_mail(user_id, email_address, password):
                     attachment = Attachment(email=new_email, name=str(fileName))
                     attachment.save()
                     content = part.get_payload(decode=True)  
-                    attachment.file.save(str(fileName), ContentFile(str(content)))
+                    attachment.file.save(str(fileName), ContentFile(content))
                     attachment.save()
 
     return "email synchronized"
