@@ -159,3 +159,4 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['first_name','last_name','phone','phone2','email','adress']
 
+

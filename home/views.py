@@ -14,6 +14,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.utils.translation import ugettext as _
 from shop.models import Basket
 
+from django.core.mail import send_mail
 from account.tasks import synchronize_mail
 
 
@@ -512,26 +513,21 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
+    # synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
 
-    synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
+    emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
+        'folder', 'subject','sender', 'receiver', 'date', 'flag')
+    page = request.GET.get('page')
+    try:
+        page = int(page)
+    except: 
+        page = 1
 
-    # if folder:
-    #     email_list = Folder.objects.filter(name=folder, user=request.user).select_related('email')
-    # else:
-    #     email_list = Folder.objects.filter(name="Inbox", user=request.user).select_related('email')
-
-    # page = request.GET.get('page')
-    # try:
-    #     page = int(page)
-    # except: 
-    #     page = 1
-
-    # paginator = Paginator(email_list, 50)
-    # page_obj = paginator.get_page(page)
-
+    paginator = Paginator(emails, 50)
+    page_obj = paginator.get_page(page)
 
     context = {
-        # 'page_obj': page_obj
+        'page_obj': page_obj
     }
 
     return render(request, 'barrister/email.html', context=context)
@@ -594,5 +590,21 @@ def remove_email(request, email_id):
 @login_required(login_url='account/login')
 def send_email(request):
 
+    if request.method == "POST":
+        email_account = EmailAccount.objects.get(user=request.user)
+
+        subject = request.POST.get('subject', '')
+        receiver = request.POST.get('receiver')
+        content = request.POST.get('content')
+
+        send_mail(
+            subject,
+            content,
+            email_account.email,
+            [receiver],
+            auth_user = email_account.email,
+            auth_password = email_account.password,
+            fail_silently=False,
+        )
 
     return render(request, 'barrister/send_email.html')

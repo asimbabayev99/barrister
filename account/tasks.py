@@ -57,7 +57,8 @@ def synchronize_mail(user_id, email_address, password):
             # timestamp = email.utils.parsedate_tz(date)
 
             new_email, created = Email.objects.get_or_create(user=user, folder=folder, num=num, sender=sender, receiver=receiver, date=date)
-            print(new_email)
+            
+            print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
             if not created:
                 print("already created")
                 continue

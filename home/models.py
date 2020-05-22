@@ -513,7 +513,7 @@ class Email(models.Model):
     content = RichTextField(_("content"), blank=True, null=True)
     flag = models.CharField(max_length=64, choices=EMAIL_FLAGS)
     num = models.CharField(max_length=256)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(null=False, blank=False)
 
 
 class Attachment(models.Model):

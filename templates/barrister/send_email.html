@@ -244,13 +244,15 @@
                 <span>Elektron poçt göndər</span>
             </div>
 
+            <form action="" method="POST" >
             <div class="col-12 send_mail_content">
+              {% csrf_token %}
                 <div style="float: left;" class="col-10">
                 
-                    <input type="text" class="col-10 send_mail_input" placeholder="Kimə...">
-                    <input type="text" class="col-10 send_mail_input" placeholder="Mail başlığı...">
+                    <input type="text" name="receiver" class="col-10 send_mail_input" placeholder="Kimə...">
+                    <input type="text" name="subject" class="col-10 send_mail_input" placeholder="Mail başlığı...">
                     
-                    <textarea name="" class="" placeholder="Movzunu daxil edin..."></textarea></div>
+                <textarea name="content" class="" placeholder="Movzunu daxil edin..."></textarea></div>
                 <div class="send_mail_attach col-2">
                     <div class="image-upload">
                         <label for="file-input">
@@ -283,12 +285,12 @@
                 <div class="col-12 send_mail_bottom" style="float: left;">
                   
                         
-                        <button class="btn btn-outline-light" >Göndər</button>
+                        <button type="submit" class="btn btn-outline-light" >Göndər</button>
                         
                     
                 </div>
             </div>
-            
+            </form>
         </div>
     </div>
 
