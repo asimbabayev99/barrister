@@ -114,8 +114,8 @@ $(document).ready(function() {
     if (title) {
       var eventData = {
         title: title,
-        start: moment($("#input_baslama_vaxti").val()).format("DD/MM/YYYY")+' '+$("#begin_hour_input").val(),
-        end: moment($("#input_bitme_vaxti").val()).format("DD/MM/YYYY")+' '+$("#end_hour_input").val(),
+        start: moment($("#input_baslama_vaxti").val(),'DD/MM/YYYY').format("MM/DD/YYYY")+' '+$("#begin_hour_input").val(),
+        end: moment($("#input_bitme_vaxti").val(),'DD/MM/YYYY').format("MM/DD/YYYY")+' '+$("#end_hour_input").val(),
         mekan: $("#location_input").val(),
         hour : $("#end_hour_input").val(),
         begin_hour : $("#begin_hour_input").val(),
