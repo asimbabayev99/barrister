@@ -2364,11 +2364,12 @@ padding-left: 10px;
 
 .poct_title {
   height: 60px;
-  background-color: #CDBA6D;
+  background-color: rgba(171, 183, 183, 1);
   line-height: 60px;
   font-size: 20px;
   color: #3a3f48;
   margin-bottom: 20px;
+  padding: 0px;
 }
 
 .mail_left {
@@ -2387,26 +2388,6 @@ padding-left: 10px;
   background-size: cover;
 }
 
-.rgba_main {
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0,0,0,0.8);
-  text-align: center;
-  line-height: 195px;
-}
-.rgba_main button {
-  padding: 10px 20px;
-  font-size: 18px;
-  border-radius: 0px;
-  border-color: #CDBA6D;
-  color: #cdba6d;
-}
-
-.rgba_main button:hover  {
-  border-color: #CDBA6D;
-  color: #31353D;
-  background-color: #CDBA6D;
-}
 .poct_content {
   padding: 0px;
 }
@@ -2414,7 +2395,7 @@ padding-left: 10px;
 .poct_content div {
   padding-left: 10px;
   color: #333333;
-  background-color: #CDBA6D;
+  background-color: rgba(189, 195, 199, 1);
   height: 50px;
   font-weight: 500;
   font-size: 16px;
@@ -2428,7 +2409,7 @@ padding-left: 10px;
   float: right;
   
   width: 60px;
-  background-color: #3a3f48 !important;
+  background-color: #3a3f48 !important ;
   margin-top: 0px !important;
   padding-left: 23px !important;
   color: #CDBA6D !important;
@@ -2437,7 +2418,7 @@ padding-left: 10px;
 .middle_div {
   min-width: 100px;
   min-height: 200px;
-  background-color: #CDBA6D;
+  background-color: rgba(210, 215, 211, 1);
 }
 .mail_middle {
   /* background-color: #CDBA6D; */
@@ -2449,13 +2430,13 @@ padding-left: 10px;
 .search_mail input {
   margin-top: 10px;
   margin-bottom: 20px;
-  background-color: #CDBA6D;
+  background-color: rgba(210, 215, 211, 1);
   width: 80%;
   height: 40px;
   margin-left: 15px;
   outline: none;
   border: hidden;
-  border-bottom: 2px solid #3a3f48;
+  border-bottom: 1px solid #3a3f48;
 }
 
 .inbox_title span {
@@ -2471,24 +2452,26 @@ padding-left: 10px;
   border: 1px solid gray;
 }
 .time_inbox {
-  height: 60px;
-  background-color: lightgray;
+  height: 40px;
+  background-color: rgba(242, 241, 239, 1);
   width: 100%;
-  line-height: 60px;
+  line-height: 40px;
   font-size: 17px;
   padding-left: 15px;
   color: #3a3f48;
+  font-family: monospace;
 }
 
 .mails {
   height: 90px;
   width: 100%;
-  background-color: #F8F8F8;
-  border-bottom: 1px solid gray;
+  background-color:rgba(210, 215, 211, 1);
+  border-top: 1px solid rgba(242, 241, 239, 1);
   position: relative;
   padding-top: 10px;
   transition: 0.2s;
   overflow-y: auto;
+  cursor: pointer;
 }
 .mail_img {
   height: 60px;
@@ -2500,7 +2483,7 @@ padding-left: 10px;
   width: 60px;
   border-radius: 50%;
   margin-right: 20px;
-  background-color: red;
+
   float: left;
 }
 
@@ -2514,21 +2497,22 @@ padding-left: 10px;
 
 .mail_content {
   float: left;
-  font-size: 15px;
+  font-size: 11px;
   
 }
 
 .mail_content span[class="mail_name"] {
   color: #3a3f48 ;
-  font-size: 17px;
+  padding-top: 20px;
+  font-size: 13px;
 }
 
 .mail_content span[class="topic_mail"] {
-  font-size: 15px;
-  color: #F50057;
+  font-size: 11px;
+  color: rgba(108, 122, 137, 1);
 }
 .mails:hover {
-  border-left:5px solid #F50057 ;
+  border-left:5px solid rgba(242, 241, 239, 1) ;
 }
 
 .mail_right {
@@ -2536,37 +2520,37 @@ padding-left: 10px;
   padding-bottom: 20px;
   padding-left: 5px;
   padding-right: 0px;
-
+  
 }
 
 .reply_main {
   width: 100%;
   height: 60px;
-  background-color: #CDBA6D;
+  background-color: ;
 }
 
 .mail_basligi {
-  height: 60px;
+  height: 40px;
   font-size: 17px;
-  background-color: #CDBA6D;
+  background-color: rgba(210, 215, 211, 1);
   color: #3a3f48;
   padding-left: 10px;
-  line-height: 60px;
+  line-height: 40px;
   width: 100%;
 }
 
 .mail_topic {
   width: 100%;
   height: 90px;
-  background-color: #3a3f48;
+  background-color: rgba(149, 165, 166, 1);
   padding-top: 10px;
-  border-bottom: 5px solid #F50057;
+  /* border-bottom: 5px solid rgba(242, 241, 239, 1); */
 }
 
 .mail_sekil_yazi {
   height: 70px;
   width: 70px;
-  background-color: purple;
+  background-color: rgba(108, 122, 137, 1);
   border-radius: 50%;
   line-height: 70px;
   text-align: center;
@@ -2577,28 +2561,29 @@ padding-left: 10px;
 }
 .fl_left_mail {
   float: left;
-  color: #CDBA6D;
+  color: rgba(46, 49, 49, 1);
   margin-left: 20px;
   height: 90px;
   line-height:30px;
-  font-size: 17px;
-
+  font-size: 15px;
+  /* font-family: ; */
 }
 
 .mail_title_tekrar {
-  height: 50px;
+  height: 40px;
   width: 100%;
   float: left;
-  background-color: #CDBA6D;
-  line-height: 50px;
+  background-color: rgba(108, 122, 137, 1);
+  line-height: 40px;
   padding-left: 15px;
-  border-bottom: 3px solid #3a3f48;
+  color: white;
+  border-bottom: 1px solid white;
 }
 
 .mail_movzu_genis {
   width: 100%;
-  min-height: 380px;
-  background-color: #CDBA6D;
+  min-height: 410px;
+  background-color: rgba(210, 215, 211, 1);
   padding-left: 15px;
   padding-right: 15px;
   line-height: 30px;
@@ -2621,7 +2606,7 @@ padding-left: 10px;
 
 .reply_main {
   background-color: #F8F8F8;
-  color: #CDBA6D;
+  color: rgba(108, 122, 137, 1);
   line-height: 60px;
 }
 .reply_main i {
@@ -2697,11 +2682,27 @@ padding-left: 10px;
     font-size: 10px !important;
   }
 }
+@media only screen and (min-width:1360px) {
+  .topic_mail {
 
+    font-size: 11px !important;
+  }
+}
 
-
-
-
+.send_main {
+  width: 200px;
+  height: 60px;
+  line-height:60px ;
+  text-align: center;
+  cursor: pointer;
+  background-color: #EEE;
+  color: #3a3f48;
+  transition: 0.2s;
+}
+.send_main:hover {
+  
+  width: 250px;
+}
 /*email.html end   */
 
 
