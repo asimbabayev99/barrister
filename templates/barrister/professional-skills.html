@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-<title>Barrister Admin</title>
+<title>Barrister Professional Skills</title>
 {% endblock %}
 
 {% block links %}
@@ -26,7 +26,7 @@
 
 
 {% block content %}
-<main style="font-weight: bold; " class="page-content design perfo_body">
+<main  class="page-content design perfo_body">
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="performance">
     <div class="container-fluid">
@@ -43,14 +43,14 @@
   <div class="statistics">
     <div class="container-fluid">
       <div class="row" style="padding: 0px 15px;">
-        <div class="col-md-12" style="min-height: 300px;background-color: #3a3f48">
+        <div class="col-md-12 main_row_perfo" style="min-height: 300px" >
           <input type="text" id="profile-input" profile-id="{{profile.id}}" hidden> 
           <div class="box1 col-12 col-xl-6" >
-            <i class="fas fa-graduation-cap fa-fw bg-primary edu"></i>
+           
             <h3>Təhsil</h3>
             <!-- <input type="button" class="btn btn-success" value="" id="new-exp"> -->
-            <!-- <button type="button" class="btn btn-success" id="new-exp"></button> -->
-            <i class="fas fa-plus add_icon" id="new-exp"></i>
+            <button type="button" class="btn btn-light style_btn" id="new-exp">Yeni</button>
+            <!-- <i class="fas fa-plus add_icon" id="new-exp"></i> -->
             <div id="experience-info" class="info" style="padding-bottom: 10px;">
               {% for i in experiences %}
               <div class="p_raw" data-id="{{i.id}}">
@@ -61,10 +61,13 @@
                   <span class="end-date" >{{i.end|date:"Y/m/d"}}</span>
                   {% endif %}
                 </p>
+                <br>
                 <p class="experience-title">{{i.title}}</p>
-                <input type="button" class="delete-exp style_btn_2 btn btn-secondary" data-id="{{i.id}}" value="Sil">
-                <input type="button" class="edit-exp style_btn_2 btn btn-success " data-id="{{i.id}}" value="Düzəlt">
-                <hr>
+                <br>
+                <i class="delete-exp  far fa-trash-alt edit_icons trash_icon" data-id="{{i.id}}" value="Sil"></i>
+                <i class="edit-exp  far fa-edit  edit_icon"                data-id="{{i.id}}" value="Düzəlt"></i>
+                <br><br>
+                <hr >
               </div>
               <br>
               {% endfor %}
@@ -72,21 +75,21 @@
 
           </div>
           <div class="box2 col-12 col-xl-6">
-            <i class="fas fa-trophy win"></i>
+        
             <h3>Bacariqlar</h3>
             <!-- <input type="button" id="new-skill" value="+"> -->
-            <i class="fas fa-plus add_icon" id="new-skill"></i>
+           <button id="new-skill" class="btn btn-light style_btn">Yeni</button>
             <div class="info frame " style="padding-bottom: 10px;">
               {% for skill in skills %}
               <div class='p_raw'>
-                <p class="skill-name">{{skill.name}}</p>
+                <p class="skill-name">{{skill.name}} <p class="skill-progress cursive">{{skill.progress}}%</p></p>
                 <div class="faiz">
-                  <div class="faiz_ic">
-                    <p class="skill-progress">{{skill.progress}}%</p>
+                  <div class="faiz_ic" percent="{{skill.progress}}">
+                    
                   </div>
                 </div><br>
-                <input type="button" class="delete-skill  style_btn_2 btn btn-secondary" data-id="{{skill.id}}" value="Sil">
-                <input type="button" class="edit-skill btn btn-success style_btn_2" data-id="{{skill.id}}" value="Düzəlt">
+                <i  class="delete-skill   far fa-trash-alt trash_icon  data-id="{{skill.id}}" value="Sil"></i>
+                <i  class="edit-skill     far fa-edit edit_icon"               data-id="{{skill.id}}" value="Düzəlt"></i>
               </div>
               {% endfor %}
             </div>
@@ -133,8 +136,8 @@
       <label for="name"><b>Ad</b></label>
       <input type="text" name="name" id='skill-name' required>
 
-      <label><b>Nisbət</b> <span id="progress-span">50</span>/100 </label>
-      <input type="range" name="progress" id="skill-progress"  min="0" max="100" value="50" 
+      <label><b>Nisbət</b> <span id="progress-span" class="range_span" data-skill="{{i.skill}}">50</span>/100 </label>
+      <input type="range" name="progress" id="skill-progress" class="range_input" min="0" max="100" value="50" 
           oninput="onChangeRange(this.value)" onchange="onChangeRange(this.value)" required/>
       <br>
 
@@ -148,6 +151,7 @@
 
 </main>
 {% endblock %}
+
 
 {% block scripts %}
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
