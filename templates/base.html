@@ -497,7 +497,14 @@
                                 class="themestek-attorco-icon-instagram"></i></a></li>
                         </ul>
                         {% if request.user.is_authenticated %}
-                        <div id="profile_icon" onclick="profile_click()">{{request.user.first_name|make_list|first}}</div>
+                        
+                        <div id="profile_icon" onclick="profile_click()">
+                          {% if request.user.profile.image %}
+                          <img src="{{ request.user.profile.image.url }}" width="45" height="48" style="border-radius: 50px;">
+                          {% else %}
+                          {{request.user.first_name|make_list|first}}
+                          {% endif %}
+                        </div>
                         {% endif %}
                         <div id="profile_menu" style="display: none;">
                           <p style="color:#cdba6d;font-size: 12px;line-height: 30px;margin-top: 10px;">Xoş
@@ -539,12 +546,18 @@
                 <div class="site-header-main themestek-table container">
                   <div class="site-branding themestek-table-cell">
                     <div class="headerlogo themestek-logotype-image themestek-stickylogo-yes">
-                      <h1 class="site-title"><a class="home-link" href="{% url 'home' %}" title="barrister"><span
+                      <h1 class="site-title">
+                        <a class="home-link" href="{% url 'home' %}" title="barrister"><span
                             class="themestek-sc-logo themestek-sc-logo-type-image"><img
                               class="themestek-logo-img standardlogo" alt="barrister"
                               src="{% static 'uploads/2020/03/logo-removebg-preview.png' %}"><img
                               class="themestek-logo-img stickylogo" alt="barrister"
-                              src="{% static 'uploads/2020/03/logo-removebg-preview.png' %}"></span></a>
+                              src="{% static 'uploads/2020/03/logo-removebg-preview.png' %}"></span>
+                         </a>
+                         <a class="mobile-consulting themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md 
+                              themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes
+                               themestek-vc_btn3-color-skincolor" href="/calendar/" title="Müraciət üçün daxil ol" style="display: none;">Konsultasiya
+                         </a>
                       </h1>
                       <h2 class="site-description">barrister.az saytı</h2>
                     </div>

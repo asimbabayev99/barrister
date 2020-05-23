@@ -130,15 +130,6 @@ span.themestek-sc-logo.themestek-sc-logo-type-image {
 		.themestek-pre-header-wrapper{
 			display: block !important;
         }
-        .themestek-header-overlay .top-contact li:first-child{
-            display: none !important;;
-        }
-        .themestek-header-overlay .top-contact li:nth-child(2){
-            display: none !important;;
-        }
-        .themestek-header-overlay .top-contact li:nth-child(3){
-            display: none !important;;
-        }
         .themestek-header-overlay .top-contact li:nth-child(4){
             display: block !important;;
         }
@@ -1819,6 +1810,30 @@ div.nav-menu > ul li ul li a,
         padding: 15px 25px;
         font-weight: 500; 
         letter-spacing: 0; 
+    }
+    @media only screen and (max-width:768px){ 
+    .themestek-header-style-classic .themestek-vc_btn3.themestek-vc_btn3-size-md,
+    .themestek-header-overlay .themestek-vc_btn3.themestek-vc_btn3-size-md{
+        margin-top: 25px;
+        margin-left: 30%;
+        padding-left: 150px;
+        padding-right: 150px;
+     }
+     .mobile-consulting{
+         display: inline-block!important;
+     }
+    }
+     @media only screen and (max-width:400px){
+    .themestek-header-style-classic .themestek-vc_btn3.themestek-vc_btn3-size-md,
+    .themestek-header-overlay .themestek-vc_btn3.themestek-vc_btn3-size-md{
+        margin-top: 25px;
+        margin-left: 30%;
+        padding-left: 20px;
+        padding-right: 20px;
+     }
+     .mobile-consulting{
+         display: inline-block!important;
+     }
     }
 /* ********************** Responsive Menu Code END **************************** */
 /******************************************************/

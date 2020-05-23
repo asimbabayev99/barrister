@@ -84,8 +84,10 @@
               <div class='p_raw'>
                 <p class="skill-name">{{skill.name}} <p class="skill-progress cursive">{{skill.progress}}%</p></p>
                 <div class="faiz">
-                  <div class="faiz_ic" percent="{{skill.progress}}">
-                    
+
+                  <div class="faiz_ic" data-skill="{{i.id}}">
+                    <p class="skill-progress">{{skill.progress}}%</p>
+
                   </div>
                 </div><br>
                 <i  class="delete-skill   far fa-trash-alt trash_icon  data-id="{{skill.id}}" value="Sil"></i>
