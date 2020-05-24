@@ -422,14 +422,11 @@ def barrister_personal(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            # user.first_name = form.cleaned_data['first_name']
-            # user.last_name = form.cleaned_data['last_name']
-            # user.address = form.cleaned_data['address']
-            # user.phone_number = form.cleaned_data['phone_number']
-            # user.save()
+            # if request.POST.get('image-clear'):
+            #     print("clear image")
+            #     form.image = None
             form.save()
 
-    form = ProfileUpdateForm(instance=profile)
     context = {
         'form': form,
     }      

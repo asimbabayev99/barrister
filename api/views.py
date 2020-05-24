@@ -97,13 +97,13 @@ class EmailList(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Email.objects.filter(user=user)
+        return Email.objects.filter(user=user).prefetch_related('attachments')
     
-    serializer_class = EventCreateSerializer
+    serializer_class = EmailSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
-    filter_backends = [DjangoFilterBackend,OrderingFilter]
-    filterset_fields = ['sender', 'receiver']
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    # filterset_fields = ['sender', 'receiver']
     ordering_fields = ['date',]
 
 
@@ -114,14 +114,14 @@ class EmailDetail(APIView):
     
     def get_object(self,id):
         try:
-            event = Email.objects.get(id=id, user=self.request.user)
-            return event
+            email = Email.objects.get(id=id, user=self.request.user).prefetch_related('attachments')
+            return email
         except:
             raise serializers.ValidationError('event doesnt not exists')
 
     def get(self, request, id, format=None):
-        event = self.get_object(id)
-        serializer = EmailSerializer(event)
+        email = self.get_object(id)
+        serializer = EmailSerializer(email)
         return Response(serializer.data)
 
 
