@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  
   $("#calendar-ms").fullCalendar({
     customButtons: {
       printButton: {
@@ -8,6 +9,7 @@ $(document).ready(function() {
         }
       }
     },
+    
     header: {
       left: "prevYear,prev,next,nextYear",
       center: "title",
@@ -28,7 +30,7 @@ $(document).ready(function() {
     selectHelper: true,
     editable: true,
     eventLimit: true, // allow "more" link when too many events
-
+    
     select: function(start, end) {
       // Display the modal.
       // You could fill in the start and end fields based on the parameters
@@ -99,6 +101,7 @@ $(document).ready(function() {
       $(".mekan_input input").attr("readonly",true);
       $(".choose_icon_main span").css("cursor","default");
       $(".icon_slider").css("visibility","hidden");
+      
       // $(".choose").attr("readonly",true);
       
 
@@ -128,7 +131,20 @@ $(document).ready(function() {
     end_gun = $("#input_bitme_vaxti").val();
     bas_saat = $("#begin_hour_input").val();
     bit_saat = $("#end_hour_input").val();
-    if (title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()<$("#input_bitme_vaxti").val() ) {
+    var date1,date2,d1,d2,m1,m2,y1,y2,a1,a2;
+    date1= moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY');
+    date2=moment($("#input_bitme_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY');
+    a1=date1.split('/');
+    a2=date2.split('/');
+    d1=a1[1];
+    m1=a1[0];
+    y1=a1[2];
+    d2=a2[1];
+    m2=a2[0];
+    y2=a2[2];
+    var u2=y2 + "" +m2+"" + d2;
+    var u1= y1+""+m1+""+d1;
+    if (title && begin_gun && end_gun && bas_saat && bit_saat && u2>u1 ) {
       var eventData = {
         title: title,
 
@@ -150,13 +166,40 @@ $(document).ready(function() {
     $("#calendar-ms").fullCalendar("unselect");
 
     // Clear modal inputs
-    
-    if(title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()<$("#input_bitme_vaxti").val()   ) {
+    var date1,date2,d1,d2,m1,m2,y1,y2,a1,a2;
+    date1= moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY');
+    date2=moment($("#input_bitme_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY');
+    a1=date1.split('/');
+    a2=date2.split('/');
+    d1=a1[1];
+    m1=a1[0];
+    y1=a1[2];
+    d2=a2[1];
+    m2=a2[0];
+    y2=a2[2];
+    var u2=y2 + "" +m2+"" + d2;
+    var u1= y1+""+m1+""+d1;
+    if(u2>u1 ) {
      
     $(".modal").modal("hide");
+    var date1,date2,d1,d2,m1,m2,y1,y2,a1,a2;
+    date1= moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY');
+    date2=moment($("#input_bitme_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY');
+    a1=date1.split('/');
+    a2=date2.split('/');
+    d1=a1[1];
+    m1=a1[0];
+    y1=a1[2];
+    d2=a2[1];
+    m2=a2[0];
+    y2=a2[2];
+    console.log(u1 + " " + u2);
+    
 
     }
-    if (title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()>=$("#input_bitme_vaxti").val() && $("#input_baslama_vaxti").val()!=0 && $("#input_bitme_vaxti").val()!=0) confirm("Başlama vaxtı bitmə vaxtına bərabər,və ya böyük olmamalıdır")
+    if (title && begin_gun && end_gun && bas_saat && bit_saat && u1>=u2
+    && $("#input_baslama_vaxti").val()!=0 && $("#input_bitme_vaxti").val()!=0) 
+    confirm("Başlama vaxtı bitmə vaxtına bərabər,və ya böyük olmamalıdır")
   });
   
 
