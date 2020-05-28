@@ -56,7 +56,7 @@ $(document).ready(function() {
       $(".modal input").prop("readonly", false);
       $(".choose_icon_main span").css("cursor","pointer");
       $(".icon_slider").css("visibility","visible");
-      
+      $(".icon_slider").css("display","none");
     },
     
     eventRender: function(event, element) {
