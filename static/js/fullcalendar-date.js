@@ -34,29 +34,28 @@ $(document).ready(function() {
       // You could fill in the start and end fields based on the parameters
       $(".modal").modal("show");
 
-              
-      $(".modal").find("#event_name_input").val("");
-      $(".modal").find("#choose_icon_button").html('<i class="far fa-bell"></i>&downarrow;');
-      $(".modal").find("#select_box_baslig").val($("#vaxt_secimi").html());
-      $(".checkbox_input_modal").attr("disabled",false);
+                   
+      $(".modal").find(".add_event_name_main input").val("");
+      // $(".modal").find(".choose_icon_main span").html('<i class="far fa-bell"></i>&downarrow;');
+      // $(".modal").find("#select_box_baslig").val($("#vaxt_secimi").html());
+      $(".choose_all_day_main input").attr("disabled",false);
       $(".modal").find("#input_baslama_vaxti").val("");
       $(".modal").find("#input_bitme_vaxti").val("");
-      $(".modal").find("#location_input").val("");
+      $(".modal").find(".mekan_input input").val("");
       $(".modal").find("#begin_hour_input").val("");
       $(".modal").find("#end_hour_input").val(""); 
-      $("#select_box_alt_hisse").css("visibility","initial");
-      $("#select_box_alt_hisse").css("display","none");
-      $("#select_box_baslig").text("Vaxt seçin");
+      $(".select_bottom").css("visibility","initial");
+      $(".select_bottom").css("display","none");
+      $(".slide_main").text("Vaxt seçin");
       $("#begin_hour_input").prop("disabled",false);
       $("#end_hour_input").prop("disabled",false);
       $("#save-event").show();
-      $("#select_box_baslig").css("cursor","pointer");
-      $("#choose_icon_button").prop("disabled", false);
-      $(".checkbox_input_modal").prop("checked",false);
-      $("input").prop("readonly", false);
-      $("#hide_butun_gun").show();
-      $("#hide_butun_gun_1").show();
-      $("#event_name_input").css("width","65%")
+      $(".slide_main").css("cursor","pointer");
+      $(".choose_icon_main span").prop("disabled", false);
+      $(".choose_all_day_main input").prop("checked",false);
+      $(".modal input").prop("readonly", false);
+      $(".choose_icon_main span").css("cursor","pointer");
+      $(".icon_slider").css("visibility","visible");
       
     },
     
@@ -71,24 +70,33 @@ $(document).ready(function() {
     eventClick: function(calEvent, jsEvent) {
       // Display the modal and set event values.
       $(".modal").modal("show");
-
-      $(".modal").find("#event_name_input").val(calEvent.title);
-      $(".modal").find("#location_input").val(calEvent.mekan);  
+      $(".add_event_name_main input").attr("readonly",true);
+      $(".modal").find(".add_event_name_main input").val(calEvent.title);
+      $(".modal").find(".mekan_input input").val(calEvent.mekan);  
       $(".modal").find("#end_hour_input").val(calEvent.hour);
       $(".modal").find("#begin_hour_input").val(calEvent.begin_hour);
       $(".modal").find("#input_baslama_vaxti").val(calEvent.start.format('DD/MM/YYYY'));
       $(".modal").find("#input_bitme_vaxti").val(calEvent.end.format('DD/MM/YYYY'));
-      $(".checkbox_input_modal").val(calEvent.disabled_check);
+      $(".choose_all_day_main input").val(calEvent.disabled_check);
       $("#save-event").hide();
-      $("#select_box_baslig").html(calEvent.vaxt_divi);
-      $("#select_box_alt_hisse").css("visibility","hidden");
-      $("#choose_icon_button").prop("disabled", true);
-      $("#hide_butun_gun").hide();
-      $("#hide_butun_gun_1").hide();
-      $("#select_box_baslig").css("cursor","default");
-      $("#choose_icon_button").html(calEvent.ikonka);
-      $("input").prop("readonly", true);
-      $("#event_name_input").css("width","90%")
+      $(".slide_main").html(calEvent.vaxt_divi);
+      $(".select_bottom").css("visibility","hidden");
+      $(".choose_icon_main span").prop("disabled", true);
+      if($(".mekan_input input").val()==0) {
+        $(".mekan_input input").val("Məkan yoxdur");
+      };
+      
+      $(".slide_main").css("cursor","default");
+      $(".choose_icon_main span").html(calEvent.ikonka);
+      $("input").attr("readonly", true);
+      $("#end_hour_input").attr("readonly",true);
+      $("#begin_hour_input").attr("readonly",true);
+      $("#input_baslama_vaxti").prop("readonly",true);
+      $("#input_bitme_vaxti").attr("readonly",true);
+      $(".mekan_input input").attr("readonly",true);
+      $(".choose_icon_main span").css("cursor","default");
+      $(".icon_slider").css("visibility","hidden");
+      // $(".choose").attr("readonly",true);
       
 
     }
@@ -110,32 +118,42 @@ $(document).ready(function() {
 
   //click to save "save"
   $("#save-event").on("click", function(event) {
-    var title = $("#event_name_input").val();
-    if (title) {
+    console.log('1- '+$("#input_baslama_vaxti").val()+'s<- ->e'+$("#input_bitme_vaxti").val())
+    var title = $(".add_event_name_main input").val();
+    var begin_gun,end_gun,bas_saat,bit_saat;
+    begin_gun = $("#input_baslama_vaxti").val();
+    end_gun = $("#input_bitme_vaxti").val();
+    bas_saat = $("#begin_hour_input").val();
+    bit_saat = $("#end_hour_input").val();
+    if (title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()<$("#input_bitme_vaxti").val() ) {
       var eventData = {
         title: title,
-        start: moment($("#input_baslama_vaxti").val(),'DD/MM/YYYY').format("MM/DD/YYYY")+' '+$("#begin_hour_input").val(),
-        end: moment($("#input_bitme_vaxti").val(),'DD/MM/YYYY').format("MM/DD/YYYY")+' '+$("#end_hour_input").val(),
-        mekan: $("#location_input").val(),
+
+        // start: moment($("#input_baslama_vaxti").val()).utc().format('DD/MM/YYYY')+' '+$("#begin_hour_input").val(),
+        // end: moment($("#input_bitme_vaxti").val()).utc().format('DD/MM/YYYY')+' '+$("#end_hour_input").val(),
+        // start: $("#input_baslama_vaxti").val()+' '+$("#begin_hour_input").val(),
+        // end: $("#input_bitme_vaxti").val()+' '+$("#end_hour_input").val(),
+        start:moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY')+' '+$("#begin_hour_input").val(),      
+        end:moment($("#input_bitme_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY')+' '+$("#end_hour_input").val(),      
+        mekan: $(".mekan_main input").val(),
         hour : $("#end_hour_input").val(),
         begin_hour : $("#begin_hour_input").val(),
-        disabled_check:$(".checkbox_input_modal").prop("disabled",true),
-        vaxt_divi:$("#select_box_baslig").text(),
-        ikonka:$("#choose_icon_button").html()
+        disabled_check:$(".choose_all_day_main input").prop("disabled",true),
+        vaxt_divi:$(".slide_main").text(),
+        ikonka:$(".choose_icon_main span").html()
       };
       $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = true
     }
     $("#calendar-ms").fullCalendar("unselect");
 
     // Clear modal inputs
-    $(".modal")
-      .find("input")
-      .val("");
-    // hide modal
-    $(".modal").find($("#location_input")).val("");
-    $(".modal").find($("#end_hour_input")).val("");
-    $(".modal").find($("#begin_hour_input")).val("");
+    
+    if(title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()<$("#input_bitme_vaxti").val()   ) {
+     
     $(".modal").modal("hide");
+
+    }
+    if (title && begin_gun && end_gun && bas_saat && bit_saat && $("#input_baslama_vaxti").val()>=$("#input_bitme_vaxti").val() && $("#input_baslama_vaxti").val()!=0 && $("#input_bitme_vaxti").val()!=0) confirm("Başlama vaxtı bitmə vaxtına bərabər,və ya böyük olmamalıdır")
   });
   
 
@@ -144,7 +162,7 @@ $(document).ready(function() {
 });
 
 function check() {
-  if($(".checkbox_input_modal").is(":checked")){
+  if($(".choose_all_day_main input").is(":checked")){
     $("#end_hour_input").attr("disabled",true);
     $("#begin_hour_input").attr("disabled",true);
     $("#begin_hour_input").val("00:00");
@@ -167,3 +185,54 @@ function check() {
     //Code to disable checkbox after checked
     
   };}
+  $(function() {
+    $(".select_bottom").css("display","none");
+    $("#modal_main_divs, #modal_main_divs_2, #modal_main_div_3, .modal_time_icon").click(function() {
+        $(".select_bottom").slideUp(100)
+    });
+    $(".slide_main").click(function() {
+        $(".select_bottom").slideToggle()
+    });
+    $(".choose_icon_main").click(function() {
+        $(".icon_slider").slideToggle(200)
+    });
+    $(".title_modal, .add_event_name_main, .choose_all_day_main,#modal_main_div_3,.mekan_main,#modal_main_div_4,#modal_main_divs_2").click(function() {
+        $(".icon_slider").slideUp(200);
+        $(".less_icons").slideUp(100);
+          $(".less_main").slideUp();
+          $(".show_more").slideDown();
+
+    });
+    // $(".show_more a").
+    $(".show_more span").click(function() {
+      $(".less_icons").slideDown(200);
+      $(".show_more").slideUp(100);
+      $(".less_main").slideDown(200);
+
+    });
+    
+    $(".less_main span").click(function() {
+      $(".less_icons").slideUp(100);
+      $(".show_more").slideDown();
+      $(".less_main").slideUp()
+    });
+    $(".select_item").click(function() {
+      $(".select_bottom").slideUp(100);
+    });
+    for (let i = 1; i<9; i++) {
+      $("#time"+i).click(function() {
+        $(".slide_main").html($("#time"+i).html());
+      });
+      };
+    for (let i = 1; i <33; i++) {
+        $("#icon"+i).click(function() {
+          $(".choose_icon_main span").html($("#icon"+i).html());
+          $(".icon_slider").slideUp(100);
+          $(".less_icons").slideUp(100);
+          $(".less_main").slideUp();
+          $(".show_more").slideDown();
+        });
+        }
+
+
+});
