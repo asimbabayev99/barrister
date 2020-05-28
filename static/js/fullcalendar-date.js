@@ -38,7 +38,7 @@ $(document).ready(function() {
 
                    
       $(".modal").find(".add_event_name_main input").val("");
-      // $(".modal").find(".choose_icon_main span").html('<i class="far fa-bell"></i>&downarrow;');
+      $(".modal").find(".choose_icon_main span").html('<i class="fas fa-sort-amount-down-alt"></i>');
       // $(".modal").find("#select_box_baslig").val($("#vaxt_secimi").html());
       $(".choose_all_day_main input").attr("disabled",false);
       $(".modal").find("#input_baslama_vaxti").val("");
@@ -179,7 +179,7 @@ $(document).ready(function() {
     y2=a2[2];
     var u2=y2 + "" +m2+"" + d2;
     var u1= y1+""+m1+""+d1;
-    if(u2>u1 ) {
+    if(title && begin_gun && end_gun && bas_saat && bit_saat && u2>u1) {
      
     $(".modal").modal("hide");
     var date1,date2,d1,d2,m1,m2,y1,y2,a1,a2;
@@ -252,7 +252,7 @@ function check() {
     // $(".show_more a").
     $(".show_more span").click(function() {
       $(".less_icons").slideDown(200);
-      $(".show_more").slideUp(100);
+      $(".show_more").slideUp(100) ;
       $(".less_main").slideDown(200);
 
     });
