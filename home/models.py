@@ -3,6 +3,7 @@ from account.models import CustomUser
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 import random
+from datetime import datetime, date, timedelta
 
 from dateutil.rrule import (
     DAILY,
@@ -494,7 +495,8 @@ EMAIL_FLAGS = [
 FOLDER_CHOICES = [
     ('Inbox', 'Inbox'),
     ('Draft', 'Draft'),
-    ('Delted', 'Deleted')
+    ('Sent', 'Sent'),
+    ('Deleted', 'Deleted')
 ]
 
 
@@ -515,9 +517,17 @@ class Email(models.Model):
     num = models.CharField(max_length=256)
     date = models.DateTimeField(null=False, blank=False)
 
+    @property
+    def is_today(self):
+        return date.today() <= self.date
+
+    @property
+    def is_yesterday(self):
+        return date.today() - datetime.timedelta(days=1) <= self.date
+
 
 class Attachment(models.Model):
-    email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='emails', blank=False, null=False)
+    email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='attachments', blank=False, null=False)
     name = models.CharField(max_length=256, null=False, blank=False)
     file = models.FileField(upload_to='attachment', null=False, blank=False)
 

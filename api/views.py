@@ -92,6 +92,40 @@ class LoginView(APIView):
         
 
 
+
+class EmailList(ListAPIView):
+
+    def get_queryset(self):
+        user = self.request.user
+        return Email.objects.filter(user=user).prefetch_related('attachments')
+    
+    serializer_class = EmailSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    # filterset_fields = ['sender', 'receiver']
+    ordering_fields = ['date',]
+
+
+
+class EmailDetail(APIView):
+    authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated,]
+    
+    def get_object(self,id):
+        try:
+            email = Email.objects.get(id=id, user=self.request.user).prefetch_related('attachments')
+            return email
+        except:
+            raise serializers.ValidationError('event doesnt not exists')
+
+    def get(self, request, id, format=None):
+        email = self.get_object(id)
+        serializer = EmailSerializer(email)
+        return Response(serializer.data)
+
+
+
 class EventList(ListAPIView):
     def get_queryset(self):
 

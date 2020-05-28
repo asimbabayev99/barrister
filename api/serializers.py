@@ -3,7 +3,7 @@ from account.models import *
 from home.models import *
 from shop.models import *
 # from rest_framework.parsers import 
-
+from django.forms.fields import FileField
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -145,7 +145,7 @@ class ProfileCreateSerializer(serializers.ModelSerializer):
 
 class PublicationSerializer(serializers.Serializer):
     pk = serializers.IntegerField(required=False)
-    user_id = models.IntegerField()
+    user_id = serializers.IntegerField()
     text = serializers.CharField()
     file = serializers.FileField()
     date = serializers.DateTimeField()
@@ -186,8 +186,22 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
+class AttachmentSerializer(serializers.ModelSerializer):
+    file = FileField(max_length=None, allow_empty_file=False)
+
+    class Meta:
+        model = Attachment
+        # fields = ['name', ]
+        fields = '__all__'
 
 
+class EmailSerializer(serializers.ModelSerializer):
+    attachments = AttachmentSerializer(many=True)
+
+    class Meta:
+        model = Email
+        fields = '__all__'
+        # fields = ['folder', 'sender', 'receiver']
 
 
 class NewsSerializer(serializers.ModelSerializer):

@@ -422,14 +422,11 @@ def barrister_personal(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            # user.first_name = form.cleaned_data['first_name']
-            # user.last_name = form.cleaned_data['last_name']
-            # user.address = form.cleaned_data['address']
-            # user.phone_number = form.cleaned_data['phone_number']
-            # user.save()
+            # if request.POST.get('image-clear'):
+            #     print("clear image")
+            #     form.image = None
             form.save()
 
-    form = ProfileUpdateForm(instance=profile)
     context = {
         'form': form,
     }      
@@ -513,7 +510,7 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
-    synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
+    # synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
 
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
         'folder', 'subject','sender', 'receiver', 'date', 'flag')
