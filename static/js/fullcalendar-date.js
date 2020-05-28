@@ -57,6 +57,9 @@ $(document).ready(function() {
       $(".choose_icon_main span").css("cursor","pointer");
       $(".icon_slider").css("visibility","visible");
       $(".icon_slider").css("display","none");
+      $(".less_icons").css("display","none");
+      $(".less_main").css("display","none");
+      $(".show_more").slideDown();
     },
     
     eventRender: function(event, element) {
