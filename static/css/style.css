@@ -2623,14 +2623,14 @@ padding-left: 10px;
 
 .send_mail_title {
   height: 60px;
-  background-color: #CDBA6D;
+  background-color: #EEE;
   line-height: 60px;
   font-size: 20px;
   margin-bottom: 20px;
 }
 .send_mail_content {
   min-height: 400px;
-  background-color: #CDBA6D;
+  background-color: #EEE;
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
@@ -2640,7 +2640,7 @@ padding-left: 10px;
   height: 40px;
   outline: none;
   border: hidden;
-  background-color: #CDBA6D;
+  background-color: #EEE;
   border-bottom: 1px solid #3a3f48;
   margin-bottom: 10px;
   margin-left: 15px;
@@ -2660,7 +2660,7 @@ padding-left: 10px;
   text-align: justify;
   margin-left: 15px;
   width: 97%;
-  background-color: #cdba6d;
+  background-color: #EEE;
   outline: none;
   
 }
@@ -2671,7 +2671,7 @@ padding-left: 10px;
 
 .send_mail_bottom {
   height: 60px;
-  background-color: #3a3f48;
+  background-color: #F8F8F8;
   line-height: 60px;
   border-top: 2px solid #F50057;
 
@@ -2697,7 +2697,7 @@ padding-left: 10px;
   float:right;
   height: 600px;
   width: 50px;
-  background-color: #3a3f48;
+  background-color: #F8F8F8;
   text-align: center;
   padding-top: 20px;
   
@@ -2705,7 +2705,7 @@ padding-left: 10px;
 
 .send_mail_attach i {
   font-size: 20px;
-  color: #CDBA6D !important;
+  color: #F50057 !important;
   display: block;
   margin-bottom: 40px;
 }
@@ -2713,8 +2713,3 @@ padding-left: 10px;
 
 
 /*Send mail end  */
-
-/*Professionals skills begin*/
-
-
-/*Professionals skills end*/
