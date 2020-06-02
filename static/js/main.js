@@ -42,17 +42,32 @@ $("#newevent").click(function() {
 
 
 // choose file begin
-$('#chooseFile').bind('change', function () {
-  var filename = $("#chooseFile").val();
+$('#chooseFile2').bind('change', function () {
+  var filename = $("#chooseFile2").val();
   if (/^\s*$/.test(filename)) {
-    $(".file-upload").removeClass('active');
-    $("#noFile").text("No file chosen..."); 
+    $("#file1").removeClass('active');
+    $("#noFile1").text("No file chosen..."); 
   }
   else {
-    $(".file-upload").addClass('active');
-    $("#noFile").text(filename.replace("C:\\fakepath\\", "")); 
+    $("#file1").addClass('active');
+    $("#noFile1").text(filename.replace("C:\\fakepath\\", "")); 
   }
 });
+
+$('#chooseFile1').bind('change', function () {
+  var filename = $("#chooseFile1").val();
+  if (/^\s*$/.test(filename)) {
+    $("#file2").removeClass('active');
+    $("#noFile2").text("No file chosen..."); 
+  }
+  else {
+    $("#file2").addClass('active');
+    $("#noFile2").text(filename.replace("C:\\fakepath\\", "")); 
+  }
+});
+
+
+
 // choose file end
 
 // user-table begin
@@ -68,425 +83,265 @@ $(document).ready(function(){
   $("#telnum").mask("+ 994" +  " (xx) xxx-xx-xx");
   $("#input_baslama_vaxti").mask("xx/xx/xxxx");
   $("#input_bitme_vaxti").mask("xx/xx/xxxx");
+  $("#begin_hour_input").mask("xx:xx");
+  $("#end_hour_input").mask("xx:xx");
      });   
 // phone mask end
 
 
 
 
+  
+$(function () {
 
+  'use strict';
 
-$(document).ready(function() {
-  var pathname = window.location.pathname;
-  if (pathname.indexOf("/calendar/")==0 ){ 
-    $('body').css('overflow', 'hidden'); 
-    $('body').css('margin-top', '20px'); 
-  }  
-  // scrool trigger for click begin
- // https://gist.github.com/shlomohass/22249c0da0f53157dfe9#file-jquery-mousewheel-direction-capture-js
-$('#calendar-ms').on('mousewheel DOMMouseScroll', function(e){
-  if(typeof e.originalEvent.detail == 'number' && e.originalEvent.detail !== 0) {
-    if(e.originalEvent.detail > 0) {
-      $( ".fc-next-button" ).trigger( "click" );     
-    } else if(e.originalEvent.detail < 0){
-      $( ".fc-prev-button" ).trigger( "click" );     
-           
-    }
-  } else if (typeof e.originalEvent.wheelDelta == 'number') {
-    if(e.originalEvent.wheelDelta < 0) {
-      $( ".fc-next-button" ).trigger( "click" );     
-    } else if(e.originalEvent.wheelDelta > 0) {
-        $( ".fc-prev-button" ).trigger( "click" );
-    }
+  var aside = $('.side-nav'),
+      showAsideBtn = $('.show-side-btn'),
+      contents = $('#contents'),
+      _window = $(window)
+
+  showAsideBtn.on("click", function () {
+    $("#" + $(this).data('show')).toggleClass('show-side-nav');
+    contents.toggleClass('margin');
+  });
+
+  if (_window.width() <= 767) {
+    aside.addClass('show-side-nav');
   }
-}); 
-// scrool trigger for click end
 
-// Start chart
-var chart = document.getElementById('myChart');
-Chart.defaults.global.animation.duration = 2000; // Animation duration
-Chart.defaults.global.title.display = false; // Remove title
-Chart.defaults.global.title.text = "Chart"; // Title
-Chart.defaults.global.title.position = 'bottom'; // Title position
-Chart.defaults.global.defaultFontColor = '#999'; // Font color
-Chart.defaults.global.defaultFontSize = 10; // Font size for every label
-
-// Chart.defaults.global.tooltips.backgroundColor = '#FFF'; // Tooltips background color
-Chart.defaults.global.tooltips.borderColor = 'white'; // Tooltips border color
-Chart.defaults.global.legend.labels.padding = 0;
-Chart.defaults.scale.ticks.beginAtZero = true;
-Chart.defaults.scale.gridLines.zeroLineColor = 'rgba(255, 255, 255, 0.1)';
-Chart.defaults.scale.gridLines.color = 'rgba(255, 255, 255, 0.02)';
-Chart.defaults.global.legend.display = false;
-
-var myChart = new Chart(chart, {
-  type: 'bar',
-  data: {
-    labels: ["Yanvar", "Fevral", "Mart", "Aprel", "May", 'Iyun'],
-    datasets: [{
-      label: "Lost",
-      fill: false,
-      lineTension: 0,
-      data: [45, 25, 40, 20, 45, 20],
-      pointBorderColor: "#4bc0c0",
-      borderColor: '#4bc0c0',
-      borderWidth: 2,
-      showLine: true,
-    }, {
-      label: "Succes",
-      fill: false,
-      lineTension: 0,
-      startAngle: 2,
-      data: [20, 40, 20, 45, 25, 60],
-      // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
-      backgroundColor: "transparent",
-      pointBorderColor: "#ff6384",
-      borderColor: '#ff6384',
-      borderWidth: 2,
-      showLine: true,
-    }]
-  },
-});
-
-//  Chart ( 2 )
-var Chart2 = document.getElementById('myChart2').getContext('2d');
-var chart = new Chart(Chart2, {
-  type: 'line',
-  data: {
-    labels: ["January", "February", "March", "April", 'test', 'test', 'test', 'test'],
-    datasets: [{
-      label: "My First dataset",
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 79, 116)',
-      borderWidth: 2,
-      pointBorderColor: false,
-      data: [5, 10, 5, 8, 20, 30, 20, 10],
-      fill: false,
-      lineTension: .4,
-    }, {
-      label: "Month",
-      fill: false,
-      lineTension: .4,
-      startAngle: 2,
-      data: [20, 14, 20, 25, 10, 15, 25, 10],
-      // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
-      backgroundColor: "transparent",
-      pointBorderColor: "#4bc0c0",
-      borderColor: '#4bc0c0',
-      borderWidth: 2,
-      showLine: true,
-    }, {
-      label: "Month",
-      fill: false,
-      lineTension: .4,
-      startAngle: 2,
-      data: [40, 20, 5, 10, 30, 15, 15, 10],
-      // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
-      backgroundColor: "transparent",
-      pointBorderColor: "#ffcd56",
-      borderColor: '#ffcd56',
-      borderWidth: 2,
-      showLine: true,
-    }]
-  },
-
-  // Configuration options
-  options: {
-    title: {
-      display: false
+  _window.on('resize', function () {
+    if ($(window).width() > 767) {
+      aside.removeClass('show-side-nav');
     }
-  }
-});
+  });
 
-var chart = document.getElementById('chart3');
-var myChart = new Chart(chart, {
-  type: 'line',
-  data: {
-    labels: ["One", "Two", "Three", "Four", "Five", 'Six', "Seven", "Eight"],
-    datasets: [{
-      label: "Lost",
-      fill: false,
-      lineTension: .5,
-      pointBorderColor: "transparent",
-      pointColor: "white",
-      borderColor: '#d9534f',
-      borderWidth: 0,
-      showLine: true,
-      data: [0, 40, 10, 30, 10, 20, 15, 20],
-      pointBackgroundColor: 'transparent',
-    },{
-      label: "Lost",
-      fill: false,
-      lineTension: .5,
-      pointColor: "white",
-      borderColor: '#5cb85c',
-      borderWidth: 0,
-      showLine: true,
-      data: [40, 0, 20, 10, 25, 15, 30, 0],
-      pointBackgroundColor: 'transparent',
+  // dropdown menu in the side nav
+  var slideNavDropdown = $('.side-nav-dropdown');
+
+  $('.side-nav .categories li').on('click', function () {
+
+    var $this = $(this)
+
+    $this.toggleClass('opend').siblings().removeClass('opend');
+
+    if ($this.hasClass('opend')) {
+      $this.find('.side-nav-dropdown').slideToggle('fast');
+      $this.siblings().find('.side-nav-dropdown').slideUp('fast');
+    } else {
+      $this.find('.side-nav-dropdown').slideUp('fast');
+    }
+  });
+
+  $('.side-nav .close-aside').on('click', function () {
+    $('#' + $(this).data('close')).addClass('show-side-nav');
+    contents.removeClass('margin');
+  });
+
+
+  // Start chart
+  var chart = document.getElementById('myChart');
+  Chart.defaults.global.animation.duration = 2000; // Animation duration
+  Chart.defaults.global.title.display = false; // Remove title
+  Chart.defaults.global.title.text = "Chart"; // Title
+  Chart.defaults.global.title.position = 'bottom'; // Title position
+  Chart.defaults.global.defaultFontColor = '#999'; // Font color
+  Chart.defaults.global.defaultFontSize = 10; // Font size for every label
+
+  // Chart.defaults.global.tooltips.backgroundColor = '#FFF'; // Tooltips background color
+  Chart.defaults.global.tooltips.borderColor = 'white'; // Tooltips border color
+  Chart.defaults.global.legend.labels.padding = 0;
+  Chart.defaults.scale.ticks.beginAtZero = true;
+  Chart.defaults.scale.gridLines.zeroLineColor = 'rgba(255, 255, 255, 0.1)';
+  Chart.defaults.scale.gridLines.color = 'rgba(255, 255, 255, 0.02)';
+  Chart.defaults.global.legend.display = false;
+
+  var myChart = new Chart(chart, {
+    type: 'bar',
+    data: {
+      labels: ["Yanvar", "Fevral", "Mart", "Aprel", "May", 'Iyun'],
+      datasets: [{
+        label: "Lost",
+        fill: false,
+        lineTension: 0,
+        data: [45, 25, 40, 20, 45, 20],
+        pointBorderColor: "#4bc0c0",
+        borderColor: '#4bc0c0',
+        borderWidth: 2,
+        showLine: true,
+      }, {
+        label: "Succes",
+        fill: false,
+        lineTension: 0,
+        startAngle: 2,
+        data: [20, 40, 20, 45, 25, 60],
+        // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
+        backgroundColor: "transparent",
+        pointBorderColor: "#ff6384",
+        borderColor: '#ff6384',
+        borderWidth: 2,
+        showLine: true,
+      }]
     },
-               {
-                 label: "Lost",
-                 fill: false,
-                 lineTension: .5,
-                 pointColor: "white",
-                 borderColor: '#f0ad4e',
-                 borderWidth: 0,
-                 showLine: true,
-                 data: [10, 40, 20, 5, 35, 15, 35, 0],
-                 pointBackgroundColor: 'transparent',
-               },
-               {
-                 label: "Lost",
-                 fill: false,
-                 lineTension: .5,
-                 pointColor: "white",
-                 borderColor: '#337ab7',
-                 borderWidth: 0,
-                 showLine: true,
-                 data: [0, 30, 10, 25, 10, 40, 20, 0],
-                 pointBackgroundColor: 'transparent',
-               }]
+  });
+
+  //  Chart ( 2 )
+  var Chart2 = document.getElementById('myChart2').getContext('2d');
+  var chart = new Chart(Chart2, {
+    type: 'line',
+    data: {
+      labels: ["January", "February", "March", "April", 'test', 'test', 'test', 'test'],
+      datasets: [{
+        label: "My First dataset",
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 79, 116)',
+        borderWidth: 2,
+        pointBorderColor: false,
+        data: [5, 10, 5, 8, 20, 30, 20, 10],
+        fill: false,
+        lineTension: .4,
+      }, {
+        label: "Month",
+        fill: false,
+        lineTension: .4,
+        startAngle: 2,
+        data: [20, 14, 20, 25, 10, 15, 25, 10],
+        // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
+        backgroundColor: "transparent",
+        pointBorderColor: "#4bc0c0",
+        borderColor: '#4bc0c0',
+        borderWidth: 2,
+        showLine: true,
+      }, {
+        label: "Month",
+        fill: false,
+        lineTension: .4,
+        startAngle: 2,
+        data: [40, 20, 5, 10, 30, 15, 15, 10],
+        // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
+        backgroundColor: "transparent",
+        pointBorderColor: "#ffcd56",
+        borderColor: '#ffcd56',
+        borderWidth: 2,
+        showLine: true,
+      }]
+    },
+
+    // Configuration options
+    options: {
+      title: {
+        display: false
+      }
+    }
+  });
+
+  var chart = document.getElementById('chart3');
+  var myChart = new Chart(chart, {
+    type: 'line',
+    data: {
+      labels: ["One", "Two", "Three", "Four", "Five", 'Six', "Seven", "Eight"],
+      datasets: [{
+        label: "Lost",
+        fill: false,
+        lineTension: .5,
+        pointBorderColor: "transparent",
+        pointColor: "white",
+        borderColor: '#d9534f',
+        borderWidth: 0,
+        showLine: true,
+        data: [0, 40, 10, 30, 10, 20, 15, 20],
+        pointBackgroundColor: 'transparent',
+      },{
+        label: "Lost",
+        fill: false,
+        lineTension: .5,
+        pointColor: "white",
+        borderColor: '#5cb85c',
+        borderWidth: 0,
+        showLine: true,
+        data: [40, 0, 20, 10, 25, 15, 30, 0],
+        pointBackgroundColor: 'transparent',
+      },
+                 {
+                   label: "Lost",
+                   fill: false,
+                   lineTension: .5,
+                   pointColor: "white",
+                   borderColor: '#f0ad4e',
+                   borderWidth: 0,
+                   showLine: true,
+                   data: [10, 40, 20, 5, 35, 15, 35, 0],
+                   pointBackgroundColor: 'transparent',
+                 },
+                 {
+                   label: "Lost",
+                   fill: false,
+                   lineTension: .5,
+                   pointColor: "white",
+                   borderColor: '#337ab7',
+                   borderWidth: 0,
+                   showLine: true,
+                   data: [0, 30, 10, 25, 10, 40, 20, 0],
+                   pointBackgroundColor: 'transparent',
+                 }]
+    },
+  });
+
+});
+// Chart end
+
+document.getElementById("uploadBtn").onchange = function () {
+  document.getElementById("uploadFile").value = this.value.replace("C:\\fakepath\\", "");
+};
+
+// Inspiration: https://tympanus.net/codrops/2012/10/04/custom-drop-down-list-styling/
+
+
+function DropDown(el) {
+  this.dd = el;
+  this.placeholder = this.dd.children('span');
+  this.opts = this.dd.find('ul.drop li');
+  this.val = '';
+  this.index = -1;
+  this.initEvents();
+}
+
+DropDown.prototype = {
+  initEvents: function () {
+      var obj = this;
+      obj.dd.on('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).toggleClass('active');
+      });
+      obj.opts.on('click', function () {
+          var opt = $(this);
+          obj.val = opt.text();
+          obj.index = opt.index();
+          obj.placeholder.text(obj.val);
+          opt.siblings().removeClass('selected');
+          opt.filter(':contains("' + obj.val + '")').addClass('selected');
+      }).change();
   },
-});
-
-})
-
-
-
-/** 
- * Professionals skills begin
-*/
-
-function openForm() {
-  document.getElementById("experienceForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("experienceForm").style.display = "none";
-}
-
-function openSkillForm(){
-  document.getElementById("skillForm").style.display = "block";
-}
-
-function closeSkillForm() {
-  document.getElementById("skillForm").style.display = "none";
-}
-
-function onChangeRange(value){
-  $("#progress-span").text(value);
-}
-
-
-function getCookie(name) {
-  var cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i].trim();
-      // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
+  getValue: function () {
+      return this.val;
+  },
+  getIndex: function () {
+      return this.index;
   }
-  return cookieValue;
-}
+};
 
-function addExperiece(data) {
-  str = "<div class='p_raw'>";
-  str += "<p>" + data.title + "</p>"
-  str += "<hr>"
-  str += "</div>"
-    
-  $("#experience-info").append(str)
-}
-
-$(document).ready(function () {
-
-  // experience related function below
-
-  // opens and closes popup
-  $("#new-exp").on("click", function() {
-    $("#experienceForm").find("#add-exp").show();
-    $("#experienceForm").find("#save-exp").hide();
-    openForm();
-  })
-
-  // add data to database
-  $("#add-exp").on("click", function () {
-    data = {
-      'profile': $("#profile-input").attr("profile-id"),
-      'title': $('#experience-title').val(),
-      'start': $('#start-date').val(),
-      'end': $('#end-date').val()
-    }
-    $.ajax({
-      headers: {
-        "X-CSRFToken": getCookie('csrftoken'),
-      },
-      type: 'POST',
-      url: '/api/experiences/',
-      data: data,
-      success: function (data, status, xhr) {
-        // handle success 
-      }
-    });
+$(function () {
+  // create new variable for each menu
+  var dd1 = new DropDown($('#noble-gases'));
+  // var dd2 = new DropDown($('#other-gases'));
+  $(document).click(function () {
+      // close menu on document click
+      $('.wrap-drop').removeClass('active');
   });
-
-  // delete data from database
-  $(".delete-exp").on("click", function() {
-    button = this
-    id = $(this).attr("data-id");
-    $.ajax({
-      headers: {
-        "X-CSRFToken": getCookie('csrftoken'),
-      },
-      type: 'DELETE',
-      url: '/api/experiences/' + id,
-      success: function (data, status, xhr) {
-        $(button).parents('.p_raw').remove();
-      }
-    })
-  });
-
-  // fill data in popup 
-  $(".edit-exp").on("click", function() {
-    $("#experienceForm").find("#add-exp").hide();
-    $("#experienceForm").find("#save-exp").show();
-
-    div = $(this).parents('.p_raw');
-    title = div.find('.experience-title').text();
-    start = div.find('.start-date').text().toString().split("/").join("-");
-    end = div.find('.end-date').text().toString().split("/").join("-");
-
-    console.log(start + " " + end)
-
-    $("#experienceForm").attr('data-id', $(this).attr('data-id'))
-    $("#experienceForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
-    $("#experienceForm").find("#experience-title").val(title)
-    $("#experienceForm").find("#start-date").val(start);
-    $("#experienceForm").find("#end-date").val(end);  
-    
-    openForm();
-  });
-
-  // update data in database
-  $("#save-exp").on("click", function() {
-    div = $(this).parents('.p_raw')
-    id = $("#experienceForm").attr("data-id");
-    data = {
-      "id": id,
-      'profile': $("#experienceForm").attr('profile-id'),
-      'title': $('#experience-title').val(),
-      'start': $('#start-date').val(),
-      'end': $('#end-date').val()
-    }
-    $.ajax({
-      headers: {
-        "X-CSRFToken": getCookie('csrftoken'),
-      },
-      type: 'PUT',
-      data: data,
-      url: '/api/experiences/' + id,
-      success: function (data, status, xhr) {
-        // hande success
-      }
-    })
-  })
-
-
-  // skills related function below
-
-  $("#new-skill").on("click", function() {
-    $("#skillForm").find("#add-skill").show();
-    $("#skillForm").find("#save-skill").hide();
-    openSkillForm();
-  })
-
-  $("#add-skill").on("click", function () {
-    data = {
-      'profile_id': $("#profile-input").attr("profile-id"),
-      'name': $('#skill-name').val(),
-      'progress': $('#skill-progress').val(),
-    }
-    $.ajax({
-      headers: {
-        "X-CSRFToken": getCookie('csrftoken'),
-      },
-      type: 'POST',
-      url: '/api/skills/',
-      data: data,
-      success: function (data, status, xhr) {
-        addExperiece(data);
-      }
-    });
-  });
-
-  $(".edit-skill").on("click", function() {
-    $("#skillForm").find("#add-skill").hide();
-    $("#skillForm").find("#save-skill").show();
-
-    div = $(this).parents('.p_raw');
-    name = div.find('.skill-name').text();
-    progress = div.find('.skill-progress').text()
-
-    console.log(name + " " + progress)
-
-    $("#skillForm").attr('data-id', $(this).attr('data-id'))
-    $("#skillForm").attr('profile-id', $("#profile-input").attr("profile-id"));      
-    $("#skillForm").find("#skill-name").val(name)
-    $("#skillForm").find("#skill-progress").val(parseInt(progress));
-    $("#skillForm").find("#progress-span").text(parseInt(progress))
-    
-    openSkillForm();
-  });
-
-  $("#save-skill").on("click", function() {
-    div = $(this).parents('.p_raw')
-    id = $("#skillForm").attr("data-id");
-    data = {
-      "id": id,
-      'profile_id': $("#skillForm").attr('profile-id'),
-      'name': $('#skill-name').val(),
-      'progress': $('#skill-progress').val()
-    }
-    $.ajax({
-      headers: {
-        "X-CSRFToken": getCookie('csrftoken'),
-      },
-      type: 'PUT',
-      data: data,
-      url: '/api/skills/' + id,
-      success: function (data, status, xhr) {
-        // handle success
-      }
-    })
-  })
-
-
-  $(".delete-skill").on("click", function() {
-    button = this
-    id = $(this).attr("data-id");
-    $.ajax({
-      headers: {
-        "X-CSRFToken": getCookie('csrftoken'),
-      },
-      type: 'DELETE',
-      url: '/api/skills/' + id,
-      success: function (data, status, xhr) {
-        $(button).parents('.p_raw').remove();
-      }
-    })
-  });
-
-
 });
 
 
 
-/** 
- * Professionals skills end
-*/
+
+
