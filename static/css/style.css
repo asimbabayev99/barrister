@@ -2693,21 +2693,11 @@ padding-left: 10px;
     display: none;
 }
 
-.send_mail_attach {
-  float:right;
-  height: 600px;
-  width: 50px;
-  background-color: #F8F8F8;
-  text-align: center;
-  padding-top: 20px;
-  
-}
-
-.send_mail_attach i {
-  font-size: 20px;
-  color: #F50057 !important;
-  display: block;
-  margin-bottom: 40px;
+.attach_main {
+  height: 130px;
+  background-color: white;
+  float: left;
+  padding-top: 15px;
 }
 
 
