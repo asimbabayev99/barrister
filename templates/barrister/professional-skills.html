@@ -89,8 +89,9 @@
                     <p class="skill-progress">{{skill.progress}}%</p>
 
                   </div>
-                </div><br>
-                <i  class="delete-skill   far fa-trash-alt trash_icon  data-id="{{skill.id}}" value="Sil"></i>
+                </div>
+                <br>
+                <i  class="delete-skill   far fa-trash-alt trash_icon" data-id="{{skill.id}}" value="Sil"></i>
                 <i  class="edit-skill     far fa-edit edit_icon"               data-id="{{skill.id}}" value="Düzəlt"></i>
               </div>
               {% endfor %}
@@ -138,11 +139,10 @@
       <label for="name"><b>Ad</b></label>
       <input type="text" name="name" id='skill-name' required>
 
-      <label><b>Nisbət</b> <span id="progress-span" class="range_span" data-skill="{{i.skill}}">50</span>/100 </label>
+      <label><b>Nisbət</b> <span id="progress-span" class="range_span" id="range_span" data-percent="10">50</span>/100 </label>
       <input type="range" name="progress" id="skill-progress" class="range_input" min="0" max="100" value="50" 
           oninput="onChangeRange(this.value)" onchange="onChangeRange(this.value)" required/>
       <br>
-
       <button type="submit" class="btn btn-success" id="save-skill">Yadda saxla</button>
       <button type="submit" class="btn btn-success" id="add-skill">Əlavə et</button>
       <button type="submit" class="btn btn-dark" onclick="closeSkillForm()">Bağla</button>
