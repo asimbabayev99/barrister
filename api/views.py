@@ -103,7 +103,7 @@ class EmailList(ListAPIView):
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    # filterset_fields = ['sender', 'receiver']
+    search_fields = ['sender', 'receiver']
     ordering_fields = ['date',]
 
 
