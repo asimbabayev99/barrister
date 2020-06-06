@@ -40,4 +40,9 @@ urlpatterns = [
     path('email/send', send_email, name='send-email'),
     path('email/<str:folder>', email_view, name='email'),
 
+
+    url(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='atatchment-media'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

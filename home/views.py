@@ -605,3 +605,45 @@ def send_email(request):
         )
 
     return render(request, 'barrister/send_email.html')
+
+
+
+
+
+
+def attachment_media_access(request, path):
+    """
+    When trying to access :
+    myproject.com/media/uploads/passport.png
+
+    If access is authorized, the request will be redirected to
+    myproject.com/protected/media/uploads/passport.png
+
+    This special URL will be handle by nginx we the help of X-Accel
+    """
+
+    access_granted = False
+
+    user = request.user
+    if user.is_authenticated():
+        if user.is_staff:
+            # If admin, everything is granted
+            access_granted = True
+        else:
+            # For simple user, only their documents can be accessed
+            user_documents = [
+                # add here more allowed documents
+            ]
+
+            for doc in user_documents:
+                if path == doc.name:
+                    access_granted = True
+
+    if access_granted:
+        response = HttpResponse()
+        # Content-type will be detected by nginx
+        del response['Content-Type']
+        response['X-Accel-Redirect'] = '/protected/media/' + path
+        return response
+    else:
+        return HttpResponseForbidden('Not authorized to access this media.')
