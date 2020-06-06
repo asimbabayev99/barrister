@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from home.views import *
 
 from django.conf.urls.static import static
@@ -41,7 +41,7 @@ urlpatterns = [
     path('email/<str:folder>', email_view, name='email'),
 
 
-    url(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='atatchment-media'),
+    re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='atatchment-media'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
