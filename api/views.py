@@ -644,7 +644,21 @@ class BasketDetail(APIView):
         else:
             return Response({'detail':'You do not have permissions to delete this item'}, status=403)
             
-        
+
+class EmailAccountToken(APIView):
+    permission_classes = [IsAuthenticated,]
+    authentication_classes =  [SessionAuthentication,]
+    def post(self,request):
+        data = request.data
+        email = get_object_or_404(EmailAccount.objects.all(),user=request.user)
+        if email.token is not None:
+            return Response({'token':'exists'})
+        serializer = EmailAccountSerializer(data=request.data)
+        if serializer.is_valid():
+            email.token = serializer.validated_data['token']
+            email.save()
+            return Response({'token':'saved'})
+        return Response({'error':'occured'})
 
 
 
