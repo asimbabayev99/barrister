@@ -85,8 +85,73 @@ $(document).ready(function(){
   $("#input_bitme_vaxti").mask("xx/xx/xxxx");
   $("#begin_hour_input").mask("xx:xx");
   $("#end_hour_input").mask("xx:xx");
+    
+  // https://codepen.io/asrulnurrahim/pen/WOyzxy
+  var $uploadCrop,rawImg,tempFilename,imageId;
+  var readURL = function(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+              // $('.contragent_single_picture').attr('src', e.target.result);
+              $('.contragent_single_picture').addClass('ready');
+              $('#modal_image_pop').modal('show');
+              rawImg=e.target.result;
+          }
+  
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+  $uploadCrop = $('#upload_demo').croppie({
+    viewport: {
+      width: 120,
+      height: 120,
+      type: 'circle',
+      enableResize: true,
+      enableOrientation: true
+    },
+     boundary: {
+      width: 200,
+      height: 200
+  }
+  });
+  $('#modal_image_pop').on('shown.bs.modal', function(){
+    // alert('Shown pop');
+    $uploadCrop.croppie('bind', {
+          url: rawImg
+        }).then(function(){
+          console.log('jQuery bind complete');
+        });
+  });
+  $('.contragent_single_picture').on('change', function () {
+     imageId = $(this).data('id'); tempFilename = $(this).val();
+    $('#cancelCropBtn').data('id', imageId); readFile(this);
+ });
+
+  $('#cropImageBtn').on('click', function (ev) {
+    $uploadCrop.croppie('result', {
+      type: 'base64',
+      format: 'jpeg',
+      size: {width: 120, height: 120}
+    }).then(function (resp) {
+      $('.contragent_single_picture').attr('src', resp);
+      $('#modal_image_pop').modal('hide');
+    });
+
+  });
+  
+
+  $(".file-upload").on('change', function(){
+      readURL(this);
+  });
+  
+  $(".upload-button").on('click', function() {
+     $(".file-upload").click();
+  });
      });   
 // phone mask end
+
+
 
 
 
@@ -290,9 +355,6 @@ $(function () {
 });
 // Chart end
 
-document.getElementById("uploadBtn").onchange = function () {
-  document.getElementById("uploadFile").value = this.value.replace("C:\\fakepath\\", "");
-};
 
 // Inspiration: https://tympanus.net/codrops/2012/10/04/custom-drop-down-list-styling/
 
@@ -340,7 +402,4 @@ $(function () {
       $('.wrap-drop').removeClass('active');
   });
 });
-
-
-
 

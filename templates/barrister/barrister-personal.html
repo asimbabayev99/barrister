@@ -17,9 +17,11 @@
   <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
   <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet" />
   <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+  <!-- croppie -->
+  <link rel="stylesheet" href="{% static 'vendor/croppie/croppie.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   {% endblock links %}
 
     {% block content %}
@@ -46,6 +48,27 @@
                 <form class="info_input" method="POST" action="" enctype="multipart/form-data">
                   {% csrf_token %}
                   {{ form.as_p }}
+                  <div class="modal fade" id="modal_image_pop" aria-modal="true">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Small Modal</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div id="upload_demo" class="center-block"></div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" id="cancelCropBtn "class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" id="cropImageBtn" class="btn btn-primary">Yerləşdir</button>
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
                   <!-- <div class="info-personal"> <label>Ad</label>
                     <br>
                     {{form.first_name}}
@@ -101,6 +124,8 @@
 
   {% block scripts %}
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>
   <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
@@ -108,5 +133,7 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
+  <!-- croppie -->
+  <script src="{% static 'vendor/croppie/croppie.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
   {% endblock scripts %}

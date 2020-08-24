@@ -241,5 +241,9 @@ class BasketSerializer(serializers.ModelSerializer):
         fields = ['user','product','quantity']
 
 
+class EmailAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmailAccount
+        fields = ['token']
 
 

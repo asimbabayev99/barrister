@@ -13,6 +13,16 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.utils.translation import ugettext as _
 from shop.models import Basket
+import smtplib,ssl,base64
+from datetime import datetime
+from smtplib import SMTP
+from email.mime.multipart import MIMEMultipart,MIMEBase
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email import encoders
+from email.mime.application import MIMEApplication
+from os.path import basename , realpath
+
 
 from django.core.mail import send_mail
 from account.tasks import synchronize_mail
@@ -510,10 +520,13 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
-    # synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
-
+    if EmailAccount.objects.filter(user=request.user).exists() == False:
+        return HttpResponse('test')
+    
+    
+    
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
-        'folder', 'subject','sender', 'receiver', 'date', 'flag')
+         'subject','sender', 'receiver', 'date', 'flag')
     page = request.GET.get('page')
     try:
         page = int(page)
@@ -529,7 +542,7 @@ def email_view(request, folder=None):
 
     return render(request, 'barrister/email.html', context=context)
 
-
+# synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
 
 
 @login_required(login_url='/account/login')
@@ -586,23 +599,36 @@ def remove_email(request, email_id):
 
 @login_required(login_url='account/login')
 def send_email(request):
-
     if request.method == "POST":
+        print(request.POST)
         email_account = EmailAccount.objects.get(user=request.user)
+        email = email_account.email
+        access_token = email_account.token
+        message = "user={0}\@yandex.ru\001auth=Bearer {1}\001\001".format(email, access_token)
+        message_bytes = message.encode('utf-8')
+        base64_bytes = base64.b64encode(message_bytes)
+        base64_string = base64_bytes.decode('utf-8')
+        print(base64_string)
+        smtp_conn = smtplib.SMTP('smtp.yandex.com', 587)
+        smtp_conn.set_debuglevel(True)
+        smtp_conn.ehlo('test')
+        smtp_conn.starttls()
+        smtp_conn.docmd('AUTH', 'XOAUTH2 ' + base64_string)
+        msg = MIMEMultipart()
+        msg.attach(MIMEText(request.POST.get('content'),'plain'))
+        msg.add_header('From',email)
+        msg.add_header('To',request.POST.get('to'))
+        file_path = basename(request.POST['file'])
+        img_data = open(file_path,'rb').read()
+        image = MIMEImage(file_path,name=basename(img_data))
+        msg.attach(image)
 
-        subject = request.POST.get('subject', '')
-        receiver = request.POST.get('receiver')
-        content = request.POST.get('content')
-
-        send_mail(
-            subject,
-            content,
-            email_account.email,
-            [receiver],
-            auth_user = email_account.email,
-            auth_password = email_account.password,
-            fail_silently=False,
-        )
+        # print(file_path)
+        # with open(file_path,'rb') as fayl:
+        #     part = MIMEApplication(fayl.read(),basename(fayl))
+        # part['Content-Disposition'] = 'attachment; filename="%s"'% basename(file_path)
+        # msg.attach(part)
+        smtp_conn.sendmail(email,'azad.mammedov.93@mail.ru',msg.as_string())
 
     return render(request, 'barrister/send_email.html')
 

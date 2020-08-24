@@ -39,6 +39,7 @@ urlpatterns = [
     path('publication/',PublicationAPIView.as_view()),
     path('publication/<int:pk>',PublicationAPIView.as_view()),
     path('emails/', EmailList.as_view()),
-    path('emails/<int:pk>/', EmailDetail.as_view())
+    path('emails/<int:pk>/', EmailDetail.as_view()),
+    path('email/token/',EmailAccountToken.as_view())
 
 ]

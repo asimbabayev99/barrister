@@ -139,6 +139,7 @@
   
   
 {% block scripts %}
+  
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -148,4 +149,43 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
+    $(document).ready(function(){ 
+      var url =  $(location).attr('hash')
+      if(url.includes('access_token')){
+        console.log('true')
+        var token = url.substring(url.indexOf('n=')+2,url.indexOf('&t'))
+        $.ajax({
+          url : '/api/email/token/',
+          headers: { 
+        	"X-CSRFToken": getCookie('csrftoken'),
+        },
+          type: 'POST',
+          data : {
+            'token' : token
+          },
+          success: function(data){
+            console.log(data)
+          }
+        })
+
+      }
+      
+    })
+   </script>
 {% endblock %}
