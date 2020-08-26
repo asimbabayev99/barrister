@@ -601,7 +601,11 @@ from barrister.settings import STATIC_ROOT , MEDIA_ROOT
 @login_required(login_url='account/login')
 def send_email(request):
     if request.method == "POST":
-        email_account = EmailAccount.objects.get(user=request.user)
+        try:
+            email_account = EmailAccount.objects.get(user=request.user)
+        except:
+            return Http404
+
         if email_account.token is None:
             return redirect('https://oauth.yandex.com/authorize?response_type=token&client_id=7752b555854248a7b17a4800a475d157')
         email = email_account.email
@@ -622,13 +626,11 @@ def send_email(request):
         msg.add_header('To',request.POST.get('receiver'))
         if 'image' in request.FILES:
             for img in request.FILES.getlist('image'):
-                print(img.name)
-                basename = img.name
-                image = MIMEImage(img.read(),basename="{0}".format(basename))
+                image = MIMEImage(img.read(),basename="{0}".format(img.name), _subtype=re.sub('image/',"",img.content_type))
+                image.add_header('Content-Disposition', 'attachment; filename={0}'.format(img.name))
                 msg.attach(image)
         if 'file' in request.FILES:
             for fayl in request.FILES.getlist('file'):
-                print(fayl.content_type)
                 part = MIMEApplication(fayl.read(),basename=fayl.name,_subtype=re.sub('application/',"",fayl.content_type))
                 part['Content-Disposition'] = 'attachment; filename="{0}"'.format(fayl.name)
                 msg.attach(part)
