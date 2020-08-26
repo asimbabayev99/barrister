@@ -18,26 +18,30 @@
 
 <body id="login-body">
     <div class="container">
-        <div class="row mt-5">
-            <div class="col-md-7">
-                <div class="page">
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <h1>Daxil ol</h1>
-                        <p class='error'>{{errors.message}}</p>
-                        <div><input type="email" class="bir" name="email" placeholder=" Mail adresi daxil edin..." required></div>
-                        <div><input type="password" name="password" placeholder=" Şifrə daxil edin..."></div>
-                        <div> Şifrəni xatırla <input type="checkbox" class="remember" name=""></div>
-                        <div><a href="">Şifrəni unutmusunuz?</a></div>
-                        <div><input type="submit" name="" id="duyme" value="Daxil ol"></div>
-                        <a href='{% url "register" %}'>Qeydiyyat</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-
+      <div class="row mt-5">
+        <div class="col-md-7">
+        <div class="page">
+           <form action="" method="POST"> 
+             {% csrf_token %}
+             <h1>Daxil ol</h1>
+             <p class='error'>{{errors.message}}</p>
+             <div><input type="email" class="bir" name="email"  placeholder="Mail adresi daxil edin..." required></div>         
+             <div class="btn-group" style="overflow: hidden;">
+               <input placeholder="Şifrəni daxil edin" name="password" type="password" style="width: 261px;">
+               <div class="border-0" style="height: fit-content;"><i class="far fa-eye-slash"></i></div>
+             </div>
+             <div> Şifrəni xatırla <input type="checkbox" class="remember" name=""></div>
+             <div><a href="">Şifrəni unutmusunuz?</a></div>
+             <div><input type="submit" name="" id="duyme"   value="Daxil ol"></div>
+             <a href='{% url "register" %}'>Register</a>
+             
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ 
 
 
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
@@ -49,6 +53,26 @@
     <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+      $(function() {
+        $(".btn-group div").mousedown(function() {
+          $(".btn-group input").attr("type","text")
+          
+        });
+        $(".btn-group div").mouseup(function() {
+          setTimeout(function() {
+            $(".btn-group input").attr("type","password")
+          },1)
+        });
+        $(document).mouseup(function() {
+          setTimeout(function() {
+            $(".btn-group input").attr("type","password")
+          },1)
+        })
+      });
+    </script>
+</body>   
 
 </body>
 
