@@ -244,7 +244,7 @@
                 <span>Elektron poçt göndər</span>
             </div>
 
-            <form action="" method="POST" >
+            <form enctype="multipart/form-data" action="" method="POST" >
             <div class="col-12 send_mail_content">
               {% csrf_token %}
                 <div style="float: left;" class="col-10">
@@ -258,14 +258,14 @@
                     <div class="file-select">
                       <div class="file-select-button" id="fileName">Şəkil və ya Video daxil et</div>
                       <div class="file-select-name" id="noFile1">Fayl seçilməyib..</div> 
-                      <input type="file" name="file" id="chooseFile2" accept="image/*,video/*">
+                      <input type="file" name="image" id="chooseFile2" accept="image/*,video/*" multiple>
                     </div>
                   </div>
                   <div class="file-upload" id="file2">
                     <div class="file-select">
                       <div class="file-select-button" id="fileName">Mətn faylı daxil et</div>
                       <div class="file-select-name" id="noFile2">Fayl seçilməyib..</div> 
-                      <input type="file" name="chooseFile" id="chooseFile1" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                      <input type="file" name="file" id="chooseFile1" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                     </div>
                   </div>
                 </div>

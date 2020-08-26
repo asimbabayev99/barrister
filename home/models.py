@@ -505,6 +505,7 @@ class EmailAccount(models.Model):
     email = models.EmailField(null=False, blank=False)
     password = models.CharField(max_length=64, null=False, blank=False)
     token = models.CharField(max_length=100,blank=True,null=True)
+    
 
 class Email(models.Model):
     user = models.ForeignKey(CustomUser, related_name='emails', on_delete=models.CASCADE)
