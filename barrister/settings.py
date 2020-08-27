@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'shop',
     'rest_framework',
     'api',
+    'django_filters',
     'rest_framework.authtoken',
     'djoser',
     'ckeditor',
@@ -176,8 +177,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
@@ -185,7 +186,7 @@ CELERY_TASK_SERIALIZER = 'json'
 from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     # 'check_mails_schedule': {
-    #     'task': 'check_mails', 
+    #     'task': ' check_mails', 
     #     'schedule': 10.0,
     # },
 }

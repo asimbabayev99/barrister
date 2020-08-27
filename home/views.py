@@ -22,10 +22,11 @@ from email.mime.image import MIMEImage
 from email import encoders
 from email.mime.application import MIMEApplication
 from os.path import basename , realpath
-
-
+import os
 from django.core.mail import send_mail
 from account.tasks import synchronize_mail
+import re
+
 
 
 def index_view(request):
@@ -520,11 +521,10 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
-    if EmailAccount.objects.filter(user=request.user).exists() == False:
-        return HttpResponse('test')
-    
-    
-    
+    email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
+    if email_acc.token is None:
+        return redirect("https://oauth.yandex.com/authorize?response_type=token&client_id=7752b555854248a7b17a4800a475d157")
+    synchronize_mail.delay(email_acc.email,email_acc.token)
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
          'subject','sender', 'receiver', 'date', 'flag')
     page = request.GET.get('page')
@@ -542,7 +542,7 @@ def email_view(request, folder=None):
 
     return render(request, 'barrister/email.html', context=context)
 
-# synchronize_mail.delay(request.user.id, "asim.babayev@lua.az", "Babayev99")
+
 
 
 @login_required(login_url='/account/login')
@@ -596,40 +596,45 @@ def remove_email(request, email_id):
 
 
 
-
+from barrister.settings import STATIC_ROOT , MEDIA_ROOT
 @login_required(login_url='account/login')
 def send_email(request):
     if request.method == "POST":
-        print(request.POST)
-        email_account = EmailAccount.objects.get(user=request.user)
+        try:
+            email_account = EmailAccount.objects.get(user=request.user)
+        except:
+            return Http404
+
+        if email_account.token is None:
+            return redirect('https://oauth.yandex.com/authorize?response_type=token&client_id=7752b555854248a7b17a4800a475d157')
         email = email_account.email
         access_token = email_account.token
         message = "user={0}\@yandex.ru\001auth=Bearer {1}\001\001".format(email, access_token)
         message_bytes = message.encode('utf-8')
         base64_bytes = base64.b64encode(message_bytes)
         base64_string = base64_bytes.decode('utf-8')
-        print(base64_string)
         smtp_conn = smtplib.SMTP('smtp.yandex.com', 587)
-        smtp_conn.set_debuglevel(True)
+        smtp_conn.set_debuglevel(False)
         smtp_conn.ehlo('test')
         smtp_conn.starttls()
         smtp_conn.docmd('AUTH', 'XOAUTH2 ' + base64_string)
         msg = MIMEMultipart()
         msg.attach(MIMEText(request.POST.get('content'),'plain'))
         msg.add_header('From',email)
-        msg.add_header('To',request.POST.get('to'))
-        file_path = basename(request.POST['file'])
-        img_data = open(file_path,'rb').read()
-        image = MIMEImage(file_path,name=basename(img_data))
-        msg.attach(image)
-
-        # print(file_path)
-        # with open(file_path,'rb') as fayl:
-        #     part = MIMEApplication(fayl.read(),basename(fayl))
-        # part['Content-Disposition'] = 'attachment; filename="%s"'% basename(file_path)
-        # msg.attach(part)
-        smtp_conn.sendmail(email,'azad.mammedov.93@mail.ru',msg.as_string())
-
+        msg.add_header('Subject',request.POST.get('subject'))
+        msg.add_header('To',request.POST.get('receiver'))
+        if 'image' in request.FILES:
+            for img in request.FILES.getlist('image'):
+                image = MIMEImage(img.read(),basename="{0}".format(img.name), _subtype=re.sub('image/',"",img.content_type))
+                image.add_header('Content-Disposition', 'attachment; filename={0}'.format(img.name))
+                msg.attach(image)
+        if 'file' in request.FILES:
+            for fayl in request.FILES.getlist('file'):
+                part = MIMEApplication(fayl.read(),basename=fayl.name,_subtype=re.sub('application/',"",fayl.content_type))
+                part['Content-Disposition'] = 'attachment; filename="{0}"'.format(fayl.name)
+                msg.attach(part)
+        smtp_conn.sendmail(email,request.POST.get('receiver'),msg.as_string())
+        smtp_conn.close()
     return render(request, 'barrister/send_email.html')
 
 

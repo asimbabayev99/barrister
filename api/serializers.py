@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
+
 from shop.models import *
 # from rest_framework.parsers import 
 from django.forms.fields import FileField
@@ -247,3 +248,9 @@ class EmailAccountSerializer(serializers.ModelSerializer):
         fields = ['token']
 
 
+
+class EventSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Event
+        fields = "__all__"

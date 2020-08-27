@@ -134,12 +134,12 @@
 
 
   </main>
-  {% endblock %}
+  {% endblock content %}
   
   
   
 {% block scripts %}
-  
+  <script text="text/javascript" > alert('Test')</script>
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -165,8 +165,11 @@
       }
       return cookieValue;
     }
-    $(document).ready(function(){ 
+
+$(document).ready(function(){ 
+      console.log('test')
       var url =  $(location).attr('hash')
+      console.log('test')
       if(url.includes('access_token')){
         console.log('true')
         var token = url.substring(url.indexOf('n=')+2,url.indexOf('&t'))
@@ -174,18 +177,19 @@
           url : '/api/email/token/',
           headers: { 
         	"X-CSRFToken": getCookie('csrftoken'),
-        },
+                  },
           type: 'POST',
           data : {
             'token' : token
           },
           success: function(data){
-            console.log(data)
+            console.log(data);
           }
-        })
+        });
 
-      }
-      
-    })
-   </script>
-{% endblock %}
+      }  
+
+    });
+  </script>
+ 
+{% endblock scripts %}

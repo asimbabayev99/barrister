@@ -14,18 +14,42 @@ from account.models import CustomUser
 from home.models import EmailAccount, Email, Attachment
 
 
-@shared_task(name = "synchronize_mail")
-def synchronize_mail(user_id, email_address, password):
-    print("start to synchronize mail")
-    user = CustomUser.objects.get(id=user_id)
-    email_acc, created = EmailAccount.objects.get_or_create(user=user, email=email_address, password=password)
 
+def GenerateOAuth2String(email, access_token, base64_encode=True):
+  """Generates an IMAP OAuth2 authentication string.
+
+  See https://developers.google.com/google-apps/gmail/oauth2_overview
+
+  Args:
+    username: the username (email address) of the account to authenticate
+    access_token: An OAuth2 access token.
+    base64_encode: Whether to base64-encode the output.
+
+  Returns:
+    The SASL argument for the OAuth2 mechanism.
+  """
+  auth_string = 'user=%s\1auth=Bearer %s\1\1' % (email, access_token)
+  if base64_encode:
+    auth_string = base64.b64encode(auth_string)
+  return auth_string
+
+
+
+
+
+
+
+
+
+
+
+@shared_task(name = "synchronize_mail")
+def synchronize_mail(email_address, token):
+    print("start to synchronize mail")
     server = 'imap.yandex.ru'
     mail = imaplib.IMAP4_SSL(server)
-    mail.login(email_address, password)
-
+    mail.authenticate('XOAUTH',lambda x: GenerateOAuth2String(email_address,token))
     mail_folders = ['Inbox',]
-    
     # loop through mail folders
     for folder in mail_folders:
         mail.select(folder)
