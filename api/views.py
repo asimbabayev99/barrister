@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from dateutil.relativedelta import relativedelta
 from .serializers import *
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import AllowAny,IsAuthenticated, IsAdminUser
@@ -126,25 +127,6 @@ class EmailDetail(APIView):
 
 
 
-class EventList(ListAPIView):
-    def get_queryset(self):
-
-        user = self.request.user
-        return Event.objects.filter(user=user).order_by('start')
-
-    queryset = get_queryset 
-
-    serializer_class = EventCreateSerializer
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [ExampleAuth,]
-    filter_backends = [DjangoFilterBackend,OrderingFilter]
-    filterset_fields = ['category',]
-    ordering_fields = ['category',]
-
-
-
-
-
 class EventCreate(GenericAPIView):
     queryset = Event.objects.none()
     serializer_class = EventCreateSerializer
@@ -157,41 +139,6 @@ class EventCreate(GenericAPIView):
         event.save()
         return Response(serializer.data)
 
-
-
-class EventDetail(APIView):
-    authentication_classes = [ExampleAuth,]
-    permission_classes = [IsAuthenticated,]
-    
-    
-    def get_object(self,id):
-        try:
-            event = Event.objects.get(id=id,user=self.request.user)
-            return event
-        except:
-            raise serializers.ValidationError('event doesnt not exists')
-
-    def get(self,request,id,format=None):
-        event = self.get_object(id)
-        serializer = EventCreateSerializer(event)
-        return Response(serializer.data)
-    
-    def delete(self,request,id,format=None):
-        event = self.get_object(id)   
-        event.delete()
-        return Response({
-            "event":'deleted'
-        })
-    
-
-
-    
-    def put(self,request,id,format=None):
-        old_event = self.get_object(id)
-        serializer = EventCreateSerializer(instance=old_event,data=request.data,context={'request':request})
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
 
 
 
@@ -663,14 +610,78 @@ class EmailAccountToken(APIView):
 
 
     
+
+class EventListView(ListAPIView):
+
+    serializer_class = EventSerializer
+    # permission_classes = [IsAuthenticated,]
+    # authentication_classes = [SessionAuthentication,]
+    filter_backends = [DjangoFilterBackend,OrderingFilter]
+    filterset_fields = ['category',]
+    ordering_fields = ['category',]
+    pagination_class = None
+
+    def get_queryset(self):
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
+        if not start_date:
+            start_date = datetime(datetime.today().year, 1, 1)
+        if not end_date:
+            end_date = datetime(datetime.today().year, 12, 31)
+        return Event.objects.filter(end__date__gte=start_date, start__date__lte=end_date)
+
+
+
+class EventAPIView(APIView):
+
+    serializer_class = EventSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+
+    def get(self, request, id):
+        event = get_object_or_404(Event.objects.all(), id=id)
+        serializer = self.serializer_class(event)
+        return Response(serializer.data)
     
 
-    
+    def post(self, request):
+        # check permissions
+        user_permissions = request.user.get_group_permissions()
+        if 'home.add_event' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403) 
+
+        context = {
+            "request": self.request,
+        }
+        serializer = self.serializer_class(data=request.data, context=context)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response(serializer.errors, status=400)
 
 
+    def put(self, request, id):
+        # check permissions
+        saved_obj = get_object_or_404(ProductionFrozen.objects.all(), id=id)
+        user_permissions = request.user.get_group_permissions()
+        if 'home.change_event' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403)    
     
+        serializer = self.serializer_class(instance=saved_obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-    
 
-
-    
+    def delete(self, request, id):
+        # check permissions
+        obj = get_object_or_404(ProductionFrozen.objects.all(), id=id)
+        user_permissions = request.user.get_group_permissions()
+        if 'home.delete_event' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403)
+        # Get object with this id
+        obj.delete()
+        return Response({"message": "Object with id `{}` has been deleted.".format(id)}, status=204)

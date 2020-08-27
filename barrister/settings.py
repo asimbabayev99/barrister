@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'shop',
     'rest_framework',
     'api',
+    'django_filters',
     'rest_framework.authtoken',
     'djoser',
     'ckeditor',
