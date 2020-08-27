@@ -498,9 +498,9 @@
                         </ul>
                         {% if request.user.is_authenticated %}
                         
-                        <div id="profile_icon" onclick="profile_click()">
+                        <div id="profile_icon" style="border: 0px !important;" class="p-0 m-0">
                           {% if request.user.profile.image %}
-                          <img src="{{ request.user.profile.image.url }}" width="45" height="48" style="border-radius: 50px;">
+                          <img src="{{ request.user.profile.image.url }}"  style="border-radius: 50%;width: 48px;height: 48px;border: 1.3px solid #cdba6d;">
                           {% else %}
                           {{request.user.first_name|make_list|first}}
                           {% endif %}
@@ -1203,6 +1203,34 @@
         jQuery(sliderID).show().html(err);
       }
     }
+    var icon = document.querySelector("#profile_icon");
+    var menu = document.querySelector("#profile_menu");
+    var number = 1;
+
+    // icon.addEventListener("click",function() {
+    //   if(menu.style.display==="none") {
+    //     menu.style.display ="block";
+    //     number +=1;
+    //   } else {
+    //     // menu.style.display="none"
+    //   }
+    // })
+    icon.addEventListener("click",function() {
+      menu.style.display = "block"
+    })
+    document.addEventListener("click",function() {
+      if(number%2==1) {
+        null;
+        number+=1;
+      }else {
+        menu.style.display="none";
+        number+=1;
+      }
+    });
+    // menu.addEventListener("click",function() {
+    //   menu.style.display="block"
+    // })
+    
   </script>
   <link rel='stylesheet' id='themestek-footer-gfonts-css'
     href='https://fonts.googleapis.com/css?family=Abril+Fatface%7CArimo%3A700&amp;ver=1.0.0' media='all' />
