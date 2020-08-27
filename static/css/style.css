@@ -1991,20 +1991,20 @@ padding-left: 10px;
   color: #42474c;
   
   font-weight: 400;
-  border-left: 1px solid red !important;
+  /* border-left: 1px solid red !important; */
 }
 .vekil_main td {
-  border-left: #CDBA6D 1px solid !important;
-  height: 40px !important;
-  border-top: #CDBA6D 2px solid !important;
+  /* border-left: #CDBA6D 1px solid !important; */
+  /* height: 40px !important; */
+  /* border-top: #CDBA6D 2px solid !important; */
 }
 
 .vekil_main th {
-  border-bottom: #CDBA6D 2px solid !important;
+  /* border-bottom: #CDBA6D 2px solid !important; */
 }
 
 .border_left {
-  border-left: 5px solid #CDBA6D !important;
+  /* border-left: 5px solid #CDBA6D !important; */
 }
 
 
