@@ -452,7 +452,8 @@ class Appointment(models.Model):
             models.Index(fields=['user', ]),
         ]
 
-class Musteri(models.Model):
+
+class Client(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
     first_name = models.CharField(max_length=250,blank=True,null=True)
     last_name = models.CharField(max_length=250,blank=True,null=True)
@@ -460,6 +461,11 @@ class Musteri(models.Model):
     phone = models.CharField(max_length=20,blank=True,null=True)
     email = models.EmailField( max_length=254,blank=True,null=True)
     date = models.DateField(auto_now_add=False,blank=True,null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user',])
+        ]
 
 
 
