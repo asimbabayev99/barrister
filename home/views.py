@@ -23,7 +23,6 @@ from email import encoders
 from email.mime.application import MIMEApplication
 from os.path import basename , realpath
 import os
-import magic
 from django.core.mail import send_mail
 from account.tasks import synchronize_mail
 import re
