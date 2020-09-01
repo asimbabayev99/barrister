@@ -614,11 +614,11 @@ class EmailAccountToken(APIView):
 class EventListView(ListAPIView):
 
     serializer_class = EventSerializer
-    # permission_classes = [IsAuthenticated,]
-    # authentication_classes = [SessionAuthentication,]
-    filter_backends = [DjangoFilterBackend,OrderingFilter]
-    filterset_fields = ['category',]
-    ordering_fields = ['category',]
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    # filter_backends = [DjangoFilterBackend,OrderingFilter]
+    # filterset_fields = ['category',]
+    # ordering_fields = ['category',]
     pagination_class = None
 
     def get_queryset(self):
@@ -628,7 +628,7 @@ class EventListView(ListAPIView):
             start_date = datetime(datetime.today().year, 1, 1)
         if not end_date:
             end_date = datetime(datetime.today().year, 12, 31)
-        return Event.objects.filter(end__date__gte=start_date, start__date__lte=end_date)
+        return Event.objects.filter(user=self.request.user, end__date__gte=start_date, start__date__lte=end_date)
 
 
 
@@ -658,6 +658,7 @@ class EventAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=200)
         else:
+            print(serializer.errors)
             return Response(serializer.errors, status=400)
 
 

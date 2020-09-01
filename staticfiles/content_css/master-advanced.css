@@ -478,6 +478,12 @@ input[type="reset"]{
     display: inline-block;
     vertical-align: top;
 } 
+@media only screen and (max-width:767px){
+.themestek-pre-header-content .themestek-table-cell div{
+    display: none;
+    vertical-align: top;
+ } 
+}
 .site-header .themestek-topbar{
     position: relative;
     z-index: 10;
@@ -4016,6 +4022,7 @@ body.themestek-sidebar-bothright .site-content #sidebar-left.sidebar{
 ====================================================================
  ***/
 .social-icons {
+    float: right;
     list-style: none;   
     margin: 0px;
     padding: 0px;
