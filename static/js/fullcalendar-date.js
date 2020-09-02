@@ -1,5 +1,21 @@
 $(document).ready(function () {
 
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
   $("#calendar-ms").fullCalendar({
     customButtons: {
       printButton: {
@@ -65,13 +81,25 @@ $(document).ready(function () {
     },
 
     eventRender: function (event, element) {
-        if (event.color) {
-            element.css('background-color', event.color)
-        }
+      if (event.color) {
+        element.css('background-color', event.color)
+      }
       //dynamically prepend close button to event
-      element.find(".fc-content").prepend("<span class='closeon material-icons'>x&nbsp</span>");
+      element.find(".fc-content").prepend("<span data-id='" + event.id + "' class='closeon material-icons'>x&nbsp</span>");
       element.find(".closeon").on("click", function () {
-        $("#calendar-ms").fullCalendar("removeEvents", event._id);
+        id = $(this).attr('data-id')
+        $.ajax({
+          type: 'DELETE',
+          url: '/api/events/' + event.id + '/',
+          headers: { "X-CSRFToken": getCookie('csrftoken') },
+          success: function (data) {
+            $("#calendar-ms").fullCalendar("removeEvents", event._id);
+          },
+          error: function (jqXhr, textStatus, errorMessage) {
+            alert(errorMessage)
+          }
+        });
+        // $("#calendar-ms").fullCalendar("removeEvents", event._id);
       });
     },
 
@@ -135,7 +163,8 @@ $(document).ready(function () {
         hour: data[i].end.split(' ')[1],
         begin_hour: data[i].start.split(' ')[1],
         disabled_check: true,
-        color: data[i].category_color
+        color: data[i].category_color,
+        id: data[i].id
         // vaxt_divi: $(".slide_main").text(),
         // ikonka: $(".choose_icon_main span").html()
       };
@@ -177,21 +206,6 @@ $(document).ready(function () {
         vaxt_divi: $(".slide_main").text(),
         ikonka: $(".choose_icon_main span").html()
       };
-      function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-            }
-          }
-        }
-        return cookieValue;
-      }
       data = {
         'name': eventData.title,
         'category': 1,
@@ -205,7 +219,6 @@ $(document).ready(function () {
         url: '/api/events/',
         headers: { "X-CSRFToken": getCookie('csrftoken') },
         contentType: "application/json; charset=utf-8",
-        type: 'POST',
         data: JSON.stringify(data),
         success: function (data) {
           $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru

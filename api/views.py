@@ -664,7 +664,7 @@ class EventAPIView(APIView):
 
     def put(self, request, id):
         # check permissions
-        saved_obj = get_object_or_404(ProductionFrozen.objects.all(), id=id)
+        saved_obj = get_object_or_404(Event.objects.all(), id=id)
         user_permissions = request.user.get_group_permissions()
         if 'home.change_event' not in user_permissions:
             return Response({"detail": "Permission denied"}, status=403)    
@@ -679,7 +679,7 @@ class EventAPIView(APIView):
 
     def delete(self, request, id):
         # check permissions
-        obj = get_object_or_404(ProductionFrozen.objects.all(), id=id)
+        obj = get_object_or_404(Event.objects.all(), id=id)
         user_permissions = request.user.get_group_permissions()
         if 'home.delete_event' not in user_permissions:
             return Response({"detail": "Permission denied"}, status=403)
