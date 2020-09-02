@@ -65,6 +65,9 @@ $(document).ready(function () {
     },
 
     eventRender: function (event, element) {
+        if (event.color) {
+            element.css('background-color', event.color)
+        }
       //dynamically prepend close button to event
       element.find(".fc-content").prepend("<span class='closeon material-icons'>x&nbsp</span>");
       element.find(".closeon").on("click", function () {
@@ -122,15 +125,17 @@ $(document).ready(function () {
 
 
   $.get("/api/events/list/", function (data) {
+    console.log(data)
     for (i = 0; i < data.length; i++) {
       eventData = {
         title: data[i].name,
-        start: data[i].start.split('|')[0],
-        end: data[i].end.split('T')[0],
+        start: data[i].start,
+        end: data[i].end,
         mekan: data[i].location,
-        hour: data[i].end.split('T')[1],
-        begin_hour: data[i].start.split('T')[1],
+        hour: data[i].end.split(' ')[1],
+        begin_hour: data[i].start.split(' ')[1],
         disabled_check: true,
+        color: data[i].category_color
         // vaxt_divi: $(".slide_main").text(),
         // ikonka: $(".choose_icon_main span").html()
       };

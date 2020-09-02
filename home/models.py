@@ -147,6 +147,7 @@ class Rule(models.Model):
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=64)
+    color = models.CharField(max_length=16, null=False, blank=False)
     icon = models.ImageField(null=True, blank=True)
 
     def __str__(self):
@@ -179,7 +180,7 @@ class Event(models.Model):
         verbose_name=_("rule"),
         help_text=_("Select '----' for a one time only event."),
     )
-    remind_me = models.DateTimeField(null=True)
+    remind_me = models.DateTimeField(null=True, blank=True)
 
     class Meta: 
         indexes = [

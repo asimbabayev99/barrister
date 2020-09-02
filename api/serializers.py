@@ -250,6 +250,9 @@ class EmailAccountSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
+    category_color = serializers.CharField(source='category.color', read_only=True)
+    start = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
+    end = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
     class Meta:
         model = Event
