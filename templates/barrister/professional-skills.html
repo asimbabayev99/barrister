@@ -60,8 +60,8 @@
               <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
             <div>
-              <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
-              <i class="icon-skill icon-skill-edit far fa-edit"></i>
+              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+              <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"> </i>
             </div>
           </div>
           <div class="container-skills-and-education class-between">
@@ -73,8 +73,8 @@
               <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
             <div>
-              <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
-              <i class="icon-skill icon-skill-edit far fa-edit"></i>
+              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+              <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"></i>
             </div>
           </div>
         </div>
@@ -93,8 +93,8 @@
                 <div class="skill-range bg-dark"></div>
               </div>
               <span>
-                <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
-                <i class="icon-skill icon-skill-edit far fa-edit"></i>
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+                <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeSkill" data-toggle="modal"></i>
               </span>
             </div>
           </div>
@@ -108,8 +108,8 @@
                 <div class="skill-range skill-2 bg-dark"></div>
               </div>
               <span>
-                <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
-                <i class="icon-skill icon-skill-edit far fa-edit"></i>
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+                <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeSkill" data-toggle="modal"></i>
               </span>
             </div>
           </div>
@@ -145,7 +145,37 @@
           </div>
           <div class="form-group">
 
-            <button type="submit" class="btn btn-danger rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+            <button type="submit" class="btn btn-warning rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="changeEducation" tabindex="-1" role="dialog" aria-labelledby="addEducation"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
+      <div class="modal-content rounded-0 border-0">
+        <p class="modal-title mb-2 bg-success p-2">Təhsil də dəyişiklik et</p>
+        <div class="w-100 px-2">
+          <div class="form-group">
+            <label for="">Təhsilin başlama tarixi</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">Təhsilin bitmə tarixi</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">Bitirdiyi təhsil müəssisəsin adı</label>
+            <input type="text" placeholder="nümunə: Bakı Dövlət Universiteti" class="form-control">
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-primary rounded-0 btn-block">Yadda saxla</button>
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-warning rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
           </div>
         </div>
       </div>
@@ -175,8 +205,48 @@
           </div>
           <div class="form-group">
 
-            <button type="submit" class="btn btn-danger rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+            <button type="submit" class="btn btn-warning rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="changeSkill" tabindex="-1" role="dialog" aria-labelledby="addSkill" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
+      <div class="modal-content rounded-0 border-0">
+        <p class="modal-title mb-2 bg-success p-2">Bacarıq da dəyişiklik</p>
+        <div class="w-100 px-2">
+          <div class="form-group">
+            <label for="">Təhsilin başlama tarixi</label>
+            <input type="text" class="form-control" placeholder="Ad">
+          </div>
+          <div class="form-group">
+            <label for="">Təhsilin bitmə tarixi</label>
+            <input type="text" class="form-control" placeholder="Soyad">
+          </div>
+          <div class="form-group">
+            <label for="" class="class-between">Göstərici nisbəti <span id="range">50%</span></label>
+            <input type="range" class="form-control-range p-0">
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-primary rounded-0 btn-block">Yadda saxla</button>
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-warning rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="addSkill" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
+      <div class="modal-content rounded-0 border-0">
+        <p class="modal-title mb-2 bg-success p-2">Silmək istədyinizə əminsiz?</p>
+        <div class="p-2">
+          <button class="btn btn-block rounded-0 btn-warning" data-dismiss="modal">Davam et</button>
+          <button class="btn btn-block btn-primary rounded-0" data-dismiss="modal">Ləğv et</button>
         </div>
       </div>
     </div>
