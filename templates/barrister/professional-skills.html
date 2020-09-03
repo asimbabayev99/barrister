@@ -60,7 +60,8 @@
               <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
             <div>
-              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
+                data-toggle="modal"></i>
               <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"> </i>
             </div>
           </div>
@@ -73,7 +74,8 @@
               <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
             <div>
-              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
+                data-toggle="modal"></i>
               <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"></i>
             </div>
           </div>
@@ -93,7 +95,8 @@
                 <div class="skill-range bg-dark"></div>
               </div>
               <span>
-                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
+                  data-toggle="modal"></i>
                 <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeSkill" data-toggle="modal"></i>
               </span>
             </div>
@@ -108,7 +111,8 @@
                 <div class="skill-range skill-2 bg-dark"></div>
               </div>
               <span>
-                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete" data-toggle="modal"></i>
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
+                  data-toggle="modal"></i>
                 <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeSkill" data-toggle="modal"></i>
               </span>
             </div>
@@ -129,22 +133,20 @@
         <div class="w-100 px-2">
           <div class="form-group">
             <label for="">Təhsilin başlama tarixi</label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control start-date">
           </div>
           <div class="form-group">
             <label for="">Təhsilin bitmə tarixi</label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control end-date">
           </div>
           <div class="form-group">
             <label for="">Bitirdiyi təhsil müəssisəsin adı</label>
-            <input type="text" placeholder="nümunə: Bakı Dövlət Universiteti" class="form-control">
+            <input type="text" placeholder="nümunə: Bakı Dövlət Universiteti" class="form-control title">
           </div>
           <div class="form-group">
-
-            <button type="submit" class="btn btn-primary rounded-0 btn-block">Yadda saxla</button>
+            <button type="submit" class="btn btn-primary rounded-0 btn-block save-experience">Yadda saxla</button>
           </div>
           <div class="form-group">
-
             <button type="submit" class="btn btn-warning rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
           </div>
         </div>
@@ -267,14 +269,56 @@
 <script src="{% static 'js/fullcalendar.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script>
-  $(function () {
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
 
+  $(function () {
     $(".form-control-range").mousemove(function () {
       $("#range").text($(".form-control-range").val() + "" + "%")
     });
     $(".form-control-range").change(function () {
       $("#range").text($(".form-control-range").val() + "" + "%")
     });
+  });
+
+  $(document).ready(function () {
+    $('.save-experience').on("click", function () {
+      modal = $(this).parents('.modal')
+      data = {
+        "start": $(modal).find('.start-date').val(),
+        "end": $(modal).find('.end-date').val(),
+        "title": $(modal).find('.title').val()
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/api/experiences/',
+        headers: { "X-CSRFToken": getCookie('csrftoken') },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        success: function (data) {
+          $(modal).find('.start-date').val("")
+          $(modal).find('.end-date').val("")
+          $(modal).find('.title').val("")
+          $('#addEducation').modal('hide')
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          alert(errorMessage)
+        }
+      });
+    })
   });
 </script>
 
