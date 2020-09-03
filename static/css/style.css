@@ -2062,7 +2062,10 @@ padding-left: 10px;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 16px;
 }
-
+#confirmDelete, #changeEducation ,#changeSkill{
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+}
 .container-skills-and-education {
   background-color: rgba(189, 195, 199, 0.5);
   padding: 10px;
