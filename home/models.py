@@ -434,7 +434,6 @@ class City(models.Model):
 
 class Appointment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-
     first_name = models.CharField(max_length=32, null=False, blank=False)
     last_name = models.CharField(max_length=32, null=False, blank=False)
     middle_name = models.CharField(max_length=32, null=True, blank=True)
@@ -446,9 +445,7 @@ class Appointment(models.Model):
     detail = models.CharField(max_length=256, null=True, blank=True)
     date = models.DateField(null=False)
     time = models.TimeField(null=True, blank=True)
-
     created_date = models.DateTimeField(auto_now_add=True)
-
 
     class Meta:
         indexes = [
