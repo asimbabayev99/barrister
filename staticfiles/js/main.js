@@ -322,5 +322,12 @@ var myChart = new Chart(chart, {
                }]
   },
 });
+    
 
 })
+
+// $(document).ready(function() {
+//   $(".form-control-range").change(function () {
+//     $("#range").text($(".form-control-range").val() + "" + "%")
+//   });
+// }) 

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 body {
-  margin: 40px 10px;
+  /* margin: 40px 10px; */
   padding: 0;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
@@ -911,7 +911,7 @@ body {
 }
 
 .icon_slider {
-  height:400px;
+  min-height:150px;
   width:300px;
   /* background-color: wheat; */
   position: absolute;
@@ -1593,7 +1593,7 @@ opacity: 1;
 }
 /* media */
 @media only screen and (max-width: 600px) {
-  .cke_chrome{
+.cke_chrome{
    
   }
 }
@@ -2015,290 +2015,105 @@ padding-left: 10px;
 
 
 /*Professional skills begin*/
-.edit_icons {
+.skills-title {
+  background-color: rgba(189, 195, 199, 0.5);
+  padding: 10px 15px;
+  color: #404040;
   font-size: 20px;
-  margin: 0px 10px;
-  cursor: pointer;
 }
-
-.performance {
-  color:#CDBA6D;
-  color: rgba(46, 49, 49, 0.8);
-  
-  }
-  .performance .content {
-    background-color: rgba(189, 195, 199, 0.5)!important;
-    padding: 0px;
-    color: ;
-    height: 60px;
-    padding-left: 15px;
-    line-height: 60px;
-  }
-  
-  .perfo_body{
-    color:gray;
-    height:100vh;
-    
-  }
-  
-  
-  .frame{
-    width: 90%!important;
-    margin:10px 20px 20px 10px; 
-  }
-  .p_raw{
-    width: 100%;
-   
-    display: block;
-  }
-  
-  .box1 .info p{
-     width: 90%;
-     float: left;
-     margin: 0 0 0 10px;
-  
-    
-  }
-  .box1 .info hr{
-    
-    border: 1px solid rgba(189, 195, 199, 0.8);
-    
-  }
-  
-  .remove{
-    width: 20px; 
-    height: 20px;
-  }
-  
-  
-  .box1{
-    float: left;
-    /* background-color: rgba(189, 195, 199, 0.5); */
-    /* min-height: 370px; */
-    padding-left: 10px;
-    color:rgba(46, 49, 49, 0.8);
-    padding: 15px;
-    /* border-right: 1px solid rgba(255,255,255,0.3); */
-    
-  }
-  .box2{
-    float: right;
-    /* background-color: #191813d4 !important;  */
-    
-    /* height: 370px; */
-    padding-left: 10px;
-    
-    color:rgba(46,49, 49,0.8);
-    /* border-left: #CDBA6D 1px solid ; */
-    padding: 15px;
-  }
-  
-  .win{
-    font-size: 25px!important;
-      margin-right: 10px!important;
-      transform: translate(0px,-2px);
-  }
-  .edu{
-    font-size: 25px!important;
-      margin-right: 10px!important;
-      transform: translate(0px,-2px);
-      background-color: transparent!important;
-      color: rgba(46, 49, 49, 0.8);
-  }
-  
-  .box2 input{
-    width: 60px;
-    height: 25px;
-    overflow: hidden;
-    
-  
-  }
-  
-  @media only screen and(max-width:1200px) {
-    .box2 {
-      background-color: red !important;
-    }
-  }
-  .box2 h3{
-    display: inline-block;
-  }
-  .box1 h3{
-    display: inline-block;
-  }
-  
-  .faiz{
-    width: 100%;
-    height: 6px;
-   
-    background-color: #e8e8e9;
-    float: right;
-    
-    margin-bottom: 15px;
-    
-  }
-  
-  .faiz_ic{
-    
-    height: 6px;
-    
-    background-color: rgba(46, 49, 49, 0.8);
-    width: 60%;
- 
-    
-  }
-  
-  .cursive{ 
-    font-family: cursive;
-    margin: 0 auto;
-  /* ransform: translateX(40%); */
-    
-  }
-  
-  .title_law{
-    margin-top: 10px;
-    margin-left: 10px;
-  }   
-      
-  .open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    /* position: fixed; */
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-  }
-
-
-  /* The popup form - hidden by default */
-  .form-popup {
-    display: none;
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    /* right: 15px; */
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-  }
-
-  /* Add styles to the form container */
-  .form-container {
-    max-width: 500px;
-    padding: 10px;
-    background-color: white;
-  }
-
-  /* Full-width input fields */
-  .form-container input[type=text],
-  .form-container input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
-  }
-
-  /* When the inputs get focus, do something */
-  .form-container input[type=text]:focus,
-  .form-container input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-
-  /* Set a style for the submit/login button */
-  .form-container .btn {
-    color: white;
-    padding: 16px 20px;
-    border-radius: 0px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px;
-    
-  }
-
-#experienceForm input[type="date"] {
-  /* height: 40px; */
-  outline: none;
-  border: hidden;
-  border-bottom: 1px solid #3a3f48;
-  
+.skills-title-self {
+  color: #404040 !important;
+  font-size: 20px;
 }
-
-#experienceForm button[type="submit"] {
-  margin-top: 10px;
+.main-item-first {
+  background-color: rgba(189, 195, 199, 0.5);
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
-
-#experienceForm textarea {
-  outline: none;
-  resize: none;
-  height: 80px;
+.class-between {
+  display:  flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-
+.class-between button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+}
 .main_row_perfo {
   background-color: rgba(189, 195, 199, 0.5);
 }
-.style_btn {
-  border-radius: 0px;
-  transform: translate(10px,-2px);
-  float: right;
-  background-color: rgba(46,49, 49,0.8);
-  padding: 7px 20px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(46, 49, 49, 0.8);
-  color: rgba(46, 49, 49, 0.8);
+.modal-title {
+  font-size: 18px;
+  color: #404040 !important;
+  /* font-weight: bold; */
+  background-color: rgba(189, 195, 199, 0.5) !important;
+  color: #404040 !important;
+  text-align: center;
+}
+#addEducation {
+  font-size: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+#addEducation .form-control,#addSkill .form-control 
+{
+  box-shadow: none;
+}
+#addSkill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
 }
 
-.style_btn:hover {
-       background-color: rgba(0,0,0,0.1);
-       color: rgba(46, 49, 49, 0.8);
+.container-skills-and-education {
+  background-color: rgba(189, 195, 199, 0.5);
+  padding: 10px;
+  margin-top: 5px;
+}
+.skill-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
 
 }
-  /* Add a red background color to the cancel button */
-  
-  /* Add some hover effects to buttons */
-  
-
-.experienceForm button{
-  margin-top: 10px;
-}
-
-
-.add_icon {
-  margin-left: 10px;font-size: 20px;transform: translate(0px,-2px);
+.icon-skill {
+  font-size: 19px;
+  margin-right: 5px;
   cursor: pointer;
-  color: #673ab7;
-
+}
+.icon-skill-delete {
+  color:#b90107;
+}
+.icon-skill-edit {
+  color: seagreen;
+}
+.container-education {
+  background-color: rgba(189, 195, 199, 0.5);
+  padding: 10px;
+  margin-top: 5px;
 }
 
-.content p[class="title"] {
-  font-size: 20px;
-  font-weight: 400;
-}  
-
-.style_btn_2 {
-  padding: 10px 40px; 
-    height: max-content !important;
-    width:  max-content !important;
-    border-radius: 0px;
-   margin-top: 10px;
-   margin-right: 10px;
-    text-transform: capitalize;
+.range-skill {
+  height: 3px;
+  background-color: #eee;
+  width: 80%;
+}
+.skill-range {
+  width: 70%;
+  height: 3px;
+}
+.range-main {
+  margin-top: 5px;
+}
+.skill-1 {
+  width: 70%;
 
 }
-
-.trash_icon {
-  font-size: 25px;margin:15px 5px 0px 15px;color:#673ab7 ;
+.skill-2 {
+  width: 20%;
 }
 
-.edit_icon {
-  font-size: 25px;margin:10px 5px;color: #980303;
+.percent {
+  font-weight: bold;
 }
+
 /*Professional skills end*/
 
 
@@ -2307,7 +2122,7 @@ padding-left: 10px;
 
 .poct_title {
   height: 60px;
-  background-color: rgba(171, 183, 183, 1);
+  background-color: rgb(15, 190, 190);
   line-height: 60px;
   font-size: 20px;
   color: #3a3f48;

@@ -19,6 +19,9 @@
 <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet" />
 <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Oswald:wght@200;400&display=swap"
+  rel="stylesheet">
 
 
 
@@ -26,130 +29,158 @@
 
 
 {% block content %}
-<main  class="page-content design perfo_body">
+<main class="page-content design perfo_body">
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="performance">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 pl-0">
           <div class="content">
-            <p class="title">Peşəkar bacarıqlar</p>
+            <p class="title skills-title">Peşəkar bacarıqlar</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="statistics">
+  <div class="">
     <div class="container-fluid">
-      <div class="row" style="padding: 0px 15px;">
-        <div class="col-md-12 main_row_perfo" style="min-height: 300px" >
-          <input type="text" id="profile-input" profile-id="{{profile.id}}" hidden> 
-          <div class="box1 col-12 col-xl-6" >
-           
-            <h3>Təhsil</h3>
-            <!-- <input type="button" class="btn btn-success" value="" id="new-exp"> -->
-            <button type="button" class="btn btn-light style_btn" id="new-exp">Yeni</button>
-            <!-- <i class="fas fa-plus add_icon" id="new-exp"></i> -->
-            <div id="experience-info" class="info" style="padding-bottom: 10px;">
-              {% for i in experiences %}
-              <div class="p_raw" data-id="{{i.id}}">
-                <p>
-                  <span class="start-date">{{i.start|date:"Y/m/d"}}</span>
-                  {% if i.end %}
-                  <span>-</span>
-                  <span class="end-date" >{{i.end|date:"Y/m/d"}}</span>
-                  {% endif %}
-                </p>
-                <br>
-                <p class="experience-title">{{i.title}}</p>
-                <br>
-                <i class="delete-exp  far fa-trash-alt edit_icons trash_icon" data-id="{{i.id}}" value="Sil"></i>
-                <i class="edit-exp  far fa-edit  edit_icon"                data-id="{{i.id}}" value="Düzəlt"></i>
-                <br><br>
-                <hr >
-              </div>
-              <br>
-              {% endfor %}
-            </div>
-
+      <div class="row ">
+        <div class="col-md-6 main-item-first border-right border-dark">
+          <div class="class-between">
+            <span class="skills-title-self">Təhsil</span>
+            <button class="btn btn-light" data-toggle="modal" data-target="#addEducation">Əlavə et</button>
           </div>
-          <div class="box2 col-12 col-xl-6">
-        
-            <h3>Bacariqlar</h3>
-            <!-- <input type="button" id="new-skill" value="+"> -->
-           <button id="new-skill" class="btn btn-light style_btn">Yeni</button>
-            <div class="info frame " style="padding-bottom: 10px;">
-              {% for skill in skills %}
-              <div class='p_raw'>
-                <p class="skill-name">{{skill.name}} <p class="skill-progress cursive">{{skill.progress}}%</p></p>
-                <div class="faiz">
-
-                  <div class="faiz_ic" data-skill="{{i.id}}">
-                    <p class="skill-progress">{{skill.progress}}%</p>
-
-                  </div>
-                </div>
-                <br>
-                <i  class="delete-skill   far fa-trash-alt trash_icon" data-id="{{skill.id}}" value="Sil"></i>
-                <i  class="edit-skill     far fa-edit edit_icon"               data-id="{{skill.id}}" value="Düzəlt"></i>
-              </div>
-              {% endfor %}
+          <div class="container-skills-and-education class-between">
+            <div>
+              <span class="skill-time">27/09/2020 </span>
+              <span class="skill-time">- 27/09/2020</span>
+              <br>
+              <span class="skill-time">Baku State Universty</span>
+              <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
-
+            <div>
+              <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
+              <i class="icon-skill icon-skill-edit far fa-edit"></i>
+            </div>
+          </div>
+          <div class="container-skills-and-education class-between">
+            <div>
+              <span class="skill-time">27/09/2020 </span>
+              <span class="skill-time">- 27/09/2020</span>
+              <br>
+              <span class="skill-time">Baku State Universty</span>
+              <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
+            </div>
+            <div>
+              <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
+              <i class="icon-skill icon-skill-edit far fa-edit"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 main-item-first">
+          <div class="class-between">
+            <span class="skills-title-self">Bacarıqlar</span>
+            <button class="btn btn-light" data-target="#addSkill" data-toggle="modal">Əlavə et</button>
+          </div>
+          <div class="container-education">
+            <div class="class-between">
+              <span class="skill-time">John Doe</span>
+              <span class="skill-time percent">70%</span>
+            </div>
+            <div class="class-between range-main">
+              <div class="range-skill">
+                <div class="skill-range bg-dark"></div>
+              </div>
+              <span>
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
+                <i class="icon-skill icon-skill-edit far fa-edit"></i>
+              </span>
+            </div>
+          </div>
+          <div class="container-education">
+            <div class="class-between">
+              <span class="skill-time">John Doe</span>
+              <span class="skill-time percent">20%</span>
+            </div>
+            <div class="class-between range-main">
+              <div class="range-skill">
+                <div class="skill-range skill-2 bg-dark"></div>
+              </div>
+              <span>
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt"></i>
+                <i class="icon-skill icon-skill-edit far fa-edit"></i>
+              </span>
+            </div>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
   </div>
 
-  <!-- popup for education and work experince data -->
-  <div class="form-popup" id="experienceForm">
-    <div class="form-container">
-     
-        <h2>Melumati daxil edin</h2>
 
-      <label for="from"><b>Başlama vaxtı</b></label>
-      <input type="date" name="start" id='start-date' required>
-      <br>
-      <label for="to"><b>Bitmə vaxtı</b></label>
-      <input type="date" name="end" id='end-date'>
-      <br>
-      <label for="experience"><b>Tehsil ve ya is tecrubesi</b></label>
-      <textarea rows="2" id="experience-title" placeholder="Experience description" name="experience" required>
-      </textarea>
-      
-      <button type="submit" class="btn btn-success" style="margin-top: 10px;" id="save-exp" >Yadda saxla</button>
-      <button type="submit" class="btn btn-success" id="add-exp">Əlavə et</button>
-      <button type="submit" class="btn btn-dark" onclick="closeForm()">Bağla</button>
-      
+  <!-- Modal -->
+  <div class="modal fade" id="addEducation" tabindex="-1" role="dialog" aria-labelledby="addEducation"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
+      <div class="modal-content rounded-0 border-0">
+        <p class="modal-title mb-2 bg-success p-2">Təhsil əlavə et</p>
+        <div class="w-100 px-2">
+          <div class="form-group">
+            <label for="">Təhsilin başlama tarixi</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">Təhsilin bitmə tarixi</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">Bitirdiyi təhsil müəssisəsin adı</label>
+            <input type="text" placeholder="nümunə: Bakı Dövlət Universiteti" class="form-control">
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-primary rounded-0 btn-block">Yadda saxla</button>
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-danger rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- end popup -->
 
+  <div class="modal fade" id="addSkill" tabindex="-1" role="dialog" aria-labelledby="addSkill" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
+      <div class="modal-content rounded-0 border-0">
+        <p class="modal-title mb-2 bg-success p-2">Bacarıq əlavə et</p>
+        <div class="w-100 px-2">
+          <div class="form-group">
+            <label for="">Təhsilin başlama tarixi</label>
+            <input type="text" class="form-control" placeholder="Ad">
+          </div>
+          <div class="form-group">
+            <label for="">Təhsilin bitmə tarixi</label>
+            <input type="text" class="form-control" placeholder="Soyad">
+          </div>
+          <div class="form-group">
+            <label for="" class="class-between">Göstərici nisbəti <span id="range">50%</span></label>
+            <input type="range" class="form-control-range p-0">
+          </div>
+          <div class="form-group">
 
-  <!-- popup for skills data -->
-  <div class="form-popup" id="skillForm">
-    <div class="form-container">
-      <h2>Melumat daxil edin</h2>
+            <button type="submit" class="btn btn-primary rounded-0 btn-block">Yadda saxla</button>
+          </div>
+          <div class="form-group">
 
-      <label for="name"><b>Ad</b></label>
-      <input type="text" name="name" id='skill-name' required>
-
-      <label><b>Nisbət</b> <span id="progress-span" class="range_span" id="range_span" data-percent="10">50</span>/100 </label>
-      <input type="range" name="progress" id="skill-progress" class="range_input" min="0" max="100" value="50" 
-          oninput="onChangeRange(this.value)" onchange="onChangeRange(this.value)" required/>
-      <br>
-      <button type="submit" class="btn btn-success" id="save-skill">Yadda saxla</button>
-      <button type="submit" class="btn btn-success" id="add-skill">Əlavə et</button>
-      <button type="submit" class="btn btn-dark" onclick="closeSkillForm()">Bağla</button>
-
+            <button type="submit" class="btn btn-danger rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- end popup -->
 
 </main>
 {% endblock %}
@@ -165,5 +196,16 @@
 <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
 <script src="{% static 'js/fullcalendar.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script>
+  $(function () {
+
+    $(".form-control-range").mousemove(function () {
+      $("#range").text($(".form-control-range").val() + "" + "%")
+    });
+    $(".form-control-range").change(function () {
+      $("#range").text($(".form-control-range").val() + "" + "%")
+    });
+  });
+</script>
 
 {% endblock %}
