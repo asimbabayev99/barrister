@@ -254,6 +254,7 @@ class EventSerializer(serializers.ModelSerializer):
     start = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
     end = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
     class Meta:
         model = Event
         fields = "__all__"
