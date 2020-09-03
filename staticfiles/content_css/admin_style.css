@@ -130,15 +130,6 @@ span.themestek-sc-logo.themestek-sc-logo-type-image {
 		.themestek-pre-header-wrapper{
 			display: block !important;
         }
-        .themestek-header-overlay .top-contact li:first-child{
-            display: none !important;;
-        }
-        .themestek-header-overlay .top-contact li:nth-child(2){
-            display: none !important;;
-        }
-        .themestek-header-overlay .top-contact li:nth-child(3){
-            display: none !important;;
-        }
         .themestek-header-overlay .top-contact li:nth-child(4){
             display: block !important;;
         }
@@ -1820,6 +1811,30 @@ div.nav-menu > ul li ul li a,
         font-weight: 500; 
         letter-spacing: 0; 
     }
+    @media only screen and (max-width:768px){ 
+    .themestek-header-style-classic .themestek-vc_btn3.themestek-vc_btn3-size-md,
+    .themestek-header-overlay .themestek-vc_btn3.themestek-vc_btn3-size-md{
+        margin-top: 25px;
+        margin-left: 30%;
+        padding-left: 150px;
+        padding-right: 150px;
+     }
+     .mobile-consulting{
+         display: inline-block!important;
+     }
+    }
+     @media only screen and (max-width:400px){
+    .themestek-header-style-classic .themestek-vc_btn3.themestek-vc_btn3-size-md,
+    .themestek-header-overlay .themestek-vc_btn3.themestek-vc_btn3-size-md{
+        margin-top: 25px;
+        margin-left: 30%;
+        padding-left: 20px;
+        padding-right: 20px;
+     }
+     .mobile-consulting{
+         display: inline-block!important;
+     }
+    }
 /* ********************** Responsive Menu Code END **************************** */
 /******************************************************/
 /******************* Custom Code **********************/
@@ -1836,6 +1851,8 @@ blockquote{
     border-left: 1px solid #cdba6d;
 }
 /******************************************************/
+/* profile in menu begin */
+/* profile in menu end */
 #profile_icon{
      width:45px;
      height:45px;
@@ -1919,3 +1936,23 @@ height: 100%;
 .btn1:hover::before{
 width:100%;
 color: white;}
+/* profile in menu end */
+
+/* revslider style begin */
+#slider-1-slide-1-layer-1{
+	width: 400px !important;
+}
+#slider-1-slide-2-layer-1{
+	width: 400px !important;
+}
+/* revslider style end */
+
+/* last post style begin */
+.last-post-link{
+    width: 100%;
+}
+.post-padding{
+    padding-left:5px !important ;
+    padding-right:5px !important;
+}
+/* last post style end */

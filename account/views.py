@@ -159,8 +159,8 @@ def user_profile(request):
 
 @login_required(login_url='/account/login')
 def barrister_social_activity(request):
-    if request.user.role is None or request.user.role.name != "Barrister":
-        return HttpResponse('<h1>Permission denied</h1>')
+    # if request.user.role is None or request.user.role.name != "Barrister":
+    #     return HttpResponse('<h1>Permission denied</h1>')
     last_publications = Publication.objects.filter(user=request.user).order_by('-date')[:3]
     form = PublicationForm()
     if request.method == "POST":

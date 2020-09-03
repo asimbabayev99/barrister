@@ -147,6 +147,9 @@ class Rule(models.Model):
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=64)
+    color = models.CharField(max_length=16, null=False, blank=False)
+    icon = models.ImageField(null=True, blank=True)
+
     def __str__(self):
         return self.name
 
@@ -159,14 +162,14 @@ class EventCategory(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=32)
-    description = models.CharField(max_length=256)
+    description = models.CharField(max_length=256, null=True, blank=True)
     category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
     location = models.CharField(max_length=256)
     completed = models.BooleanField(default=False)
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    start = models.DateTimeField(auto_now_add=True)
-    end = models.DateTimeField(auto_now_add=True)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
 
     
     rule = models.ForeignKey(
@@ -177,7 +180,7 @@ class Event(models.Model):
         verbose_name=_("rule"),
         help_text=_("Select '----' for a one time only event."),
     )
-    remind_me = models.DateTimeField(null=True)
+    remind_me = models.DateTimeField(null=True, blank=True)
 
     class Meta: 
         indexes = [
