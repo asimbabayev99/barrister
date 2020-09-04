@@ -2,233 +2,260 @@
 {% load static %}
 
 {% block title %}
-  <title>Calendar</title>
+<title>Calendar</title>
 {% endblock title %}
 
 
 {% block links %}
-  {{ block.super }}
+{{ block.super }}
 {% endblock links %}
-  
-  
-      
-      {% block content %}
 
-      <main class="page-content">
-        <div class="container-fluid">
-          <div id='calendar-ms'></div>          
-          <div id='datepicker'></div>
-          <div class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-              <!-- <div class="modal-content border-0" style="height: 300px;padding: 0px;border-radius: 0rem;background-clip: content-box;"> -->
+
+
+{% block content %}
+
+<main class="page-content">
+  <div class="container-fluid">
+    <div id='calendar-ms'></div>
+    <div id='datepicker'></div>
+    <div class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <!-- <div class="modal-content border-0" style="height: 300px;padding: 0px;border-radius: 0rem;background-clip: content-box;"> -->
         <form action="" method="dialog">
-              
+
           <div class="modal-dialog" role="document">
             <div class="modal-content" style="border-radius: 0px;">
-              
               <div class="modal-body" style="border-radius: 0px;padding: 0px ;">
-  
-  
+
+
                 <!--Modal begining begin-->
-  
-                <div id="modal_main_divs" class="col-12 title_modal" >
-                    <div class="col-11 modal_title_main_left">
-                        <span>
-                          Boşluqları doldurun
-                        </span>
-                    </div>
-                    <div class="col-1 modal_title_right">
-                        <span data-dismiss="modal">X</span>
-                    </div>
-                </div>
-  
-  
-                <!--Modal begining end-->
-  
-                <!--Modal choosing icon and add name of title begin-->
-  
-  
-  
-              <div id="modal_main_divs" class="col-12">
-                  <div class="col-1 choose_icon_main">
-                      <span><i class="fas fa-sort-amount-down-alt"></i></span>
+
+                <div id="modal_main_divs" class="col-12 title_modal">
+                  <div class="col-11 modal_title_main_left">
+                    <span>
+                      Boşluqları doldurun
+                    </span>
                   </div>
-                  <div  class="icon_slider">
+                  <div class="col-1 modal_title_right">
+                    <span data-dismiss="modal">X</span>
+                  </div>
+                </div>
+
+
+                <!--Modal begining end-->
+
+                <!--Modal choosing icon and add name of title begin-->
+
+
+
+                <div id="modal_main_divs" class="col-12">
+                  <div class="col-1 choose_icon_main">
+                    <span><i class="fas fa-sort-amount-down-alt"></i></span>
+                  </div>
+                  <div class="icon_slider">
                     <div class="most_used_icons">
-                      <span id="icon1" class="span_icon"><i class="far fa-comments" onclick="" style="color: mediumvioletred;"></i></span>
-                    <span id="icon2"  class="span_icon"><i class="fas fa-music" style="color: indianred;"></i></span>
-                    <span id="icon3"  class="span_icon"><i class="far fa-handshake" style="color: red;"></i></span>
-                    <span id="icon4"  class="span_icon"><i class="fas fa-gavel" style="color: #3a3f48;"></i></span>
-                    
-                    <span id="icon19" class="span_icon"><i class="far fa-bookmark" style="color:#234232;"></i></span>
-                    
-                    <span id="icon15" class="span_icon"><i class="fas fa-phone-square-alt" style="color: maroon;"></i></i></span>
-                    <span id="icon7"  class="span_icon"><i class="fas fa-award" style="color: firebrick;"></i></i></span>
-                    <span id="icon8"  class="span_icon"><i class="fas fa-graduation-cap" style="color:lightslategrey;"></i></i></span>
-                      
-                    <span id="icon9"  class="span_icon"><i class="fas fa-camera-retro" style="color: darkorange;"></i></i></span>
-                    <span id="icon10"  class="span_icon"><i class="fas fa-trophy" style="color: gold;"></i></span>
+                      <span id="icon1" class="span_icon"><i class="far fa-comments" onclick=""
+                          style="color: mediumvioletred;"></i></span>
+                      <span id="icon2" class="span_icon"><i class="fas fa-music" style="color: indianred;"></i></span>
+                      <span id="icon3" class="span_icon"><i class="far fa-handshake" style="color: red;"></i></span>
+                      <span id="icon4" class="span_icon"><i class="fas fa-gavel" style="color: #3a3f48;"></i></span>
+
+                      <span id="icon19" class="span_icon"><i class="far fa-bookmark" style="color:#234232;"></i></span>
+
+                      <span id="icon15" class="span_icon"><i class="fas fa-phone-square-alt"
+                          style="color: maroon;"></i></i></span>
+                      <span id="icon7" class="span_icon"><i class="fas fa-award"
+                          style="color: firebrick;"></i></i></span>
+                      <span id="icon8" class="span_icon"><i class="fas fa-graduation-cap"
+                          style="color:lightslategrey;"></i></i></span>
+
+                      <span id="icon9" class="span_icon"><i class="fas fa-camera-retro"
+                          style="color: darkorange;"></i></i></span>
+                      <span id="icon10" class="span_icon"><i class="fas fa-trophy" style="color: gold;"></i></span>
                     </div>
                     <div class="show_more">
-                     <span>Daha çox</span>
+                      <span>Daha çox</span>
                     </div>
                     <div class="less_icons">
-                    <span id="icon11" class="span_icon"><i class="far fa-star" style="color:crimson;"></i></span>
-                    <span id="icon12" class="span_icon"><i class="far fa-user" style="color: royalblue;"></i></span>
-                    <span id="icon13" class="span_icon"><i class="fas fa-angle-double-up" style="color: royalblue;"></i></span>
-                    <!-- <span id="icon13" class="span_icon"><i class="fas fa-tv" style="color: purple;"></i></span> -->
-                    
-                    <span id="icon6"  class="span_icon"><i class="fas fa-project-diagram" style="color: orangered;"></i></i></span>
-                    <span id="icon14" class="span_icon"><i class="fab fa-buromobelexperte" style="color: crimson;"></i></span>
-                    <span id="icon16" class="span_icon"><i class="fas fa-folder-open" style="color: orange;"></i></i></span>
-                    <span id="icon17" class="span_icon"><i class="fas fa-envelope" style="color:lightseagreen ;"></i></i></span>
-                    <span id="icon18" class="span_icon"><i class="fas fa-list" style="color: deeppink;"></i></i></span>
-                    <span id="icon20" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span>
-                    <span id="icon21" class="span_icon"><i class="fab fa-buromobelexperte" style="color: crimson;"></i></span>
-                    <span id="icon22" class="span_icon"><i class="fas fa-folder-open" style="color: orange;"></i></i></span>
-                    <span id="icon23" class="span_icon"><i class="fas fa-envelope" style="color:lightseagreen ;"></i></i></span>
-                    <span id="icon24" class="span_icon"><i class="fas fa-list" style="color: deeppink;"></i></i></span>
-                    <span id="icon25" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span>
-                    <span id="icon26" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span>
-                    <span id="icon27" class="span_icon"><i class="fab fa-buromobelexperte" style="color: crimson;"></i></span>
-                    <span id="icon28" class="span_icon"><i class="fas fa-folder-open" style="color: orange;"></i></i></span>
-                    <span id="icon29" class="span_icon"><i class="fas fa-envelope" style="color:lightseagreen ;"></i></i></span>
-                    <span id="icon30" class="span_icon"><i class="fas fa-list" style="color: deeppink;"></i></i></span>
-                    <!-- <span id="icon31" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span> -->
-                    
-                    <span id="icon32"  class="span_icon"><i  class="far fa-money-bill-alt" style="color: teal;"></i></i></span>
+                      <span id="icon11" class="span_icon"><i class="far fa-star" style="color:crimson;"></i></span>
+                      <span id="icon12" class="span_icon"><i class="far fa-user" style="color: royalblue;"></i></span>
+                      <span id="icon13" class="span_icon"><i class="fas fa-angle-double-up"
+                          style="color: royalblue;"></i></span>
+                      <!-- <span id="icon13" class="span_icon"><i class="fas fa-tv" style="color: purple;"></i></span> -->
+
+                      <span id="icon6" class="span_icon"><i class="fas fa-project-diagram"
+                          style="color: orangered;"></i></i></span>
+                      <span id="icon14" class="span_icon"><i class="fab fa-buromobelexperte"
+                          style="color: crimson;"></i></span>
+                      <span id="icon16" class="span_icon"><i class="fas fa-folder-open"
+                          style="color: orange;"></i></i></span>
+                      <span id="icon17" class="span_icon"><i class="fas fa-envelope"
+                          style="color:lightseagreen ;"></i></i></span>
+                      <span id="icon18" class="span_icon"><i class="fas fa-list"
+                          style="color: deeppink;"></i></i></span>
+                      <span id="icon20" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span>
+                      <span id="icon21" class="span_icon"><i class="fab fa-buromobelexperte"
+                          style="color: crimson;"></i></span>
+                      <span id="icon22" class="span_icon"><i class="fas fa-folder-open"
+                          style="color: orange;"></i></i></span>
+                      <span id="icon23" class="span_icon"><i class="fas fa-envelope"
+                          style="color:lightseagreen ;"></i></i></span>
+                      <span id="icon24" class="span_icon"><i class="fas fa-list"
+                          style="color: deeppink;"></i></i></span>
+                      <span id="icon25" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span>
+                      <span id="icon26" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span>
+                      <span id="icon27" class="span_icon"><i class="fab fa-buromobelexperte"
+                          style="color: crimson;"></i></span>
+                      <span id="icon28" class="span_icon"><i class="fas fa-folder-open"
+                          style="color: orange;"></i></i></span>
+                      <span id="icon29" class="span_icon"><i class="fas fa-envelope"
+                          style="color:lightseagreen ;"></i></i></span>
+                      <span id="icon30" class="span_icon"><i class="fas fa-list"
+                          style="color: deeppink;"></i></i></span>
+                      <!-- <span id="icon31" class="span_icon"><i class="fas fa-check" style="color: seagreen;"></i></span> -->
+
+                      <span id="icon32" class="span_icon"><i class="far fa-money-bill-alt"
+                          style="color: teal;"></i></i></span>
                     </div>
                     <div class="less_main">
                       <span>Daha az</span>
                     </div>
                   </div>
-  
+
                   <div class="col-8 add_event_name_main">
-                      <input type="text"  autocomplete="off" required
-                      placeholder="Hadisə başlığını əlavə edin" oninvalid="this.setCustomValidity('Xatırlatma başlığı seçilməyib')"
+                    <input type="text" autocomplete="off" required placeholder="Hadisə başlığını əlavə edin"
+                      oninvalid="this.setCustomValidity('Xatırlatma başlığı seçilməyib')"
                       oninput="setCustomValidity('')">
                   </div>
-  
+
                   <div class="col-3 choose_all_day_main">
-                      <input type="checkbox" onclick="check()">
-                      <span>Bütün gün</span>
+                    <input type="checkbox" onclick="check()">
+                    <span>Bütün gün</span>
                   </div>
-  
-              </div>
+
+                </div>
                 <!--Modal choosing icon and add name of title end-->
-                
+
                 <!--In modal choose time with inputs-->
-  
-  
-  
+
+
+
                 <div id="modal_main_div_3" class="col-12">
-                  
-                    <div class="icon_part">
-                      <i class="far fa-clock stylish_icon"></i>
-                    </div>
-                    <div class="input_part">
-                      
-                      <input type="text" name="gun" id="input_baslama_vaxti" autocomplete="off" required
-                      placeholder="Başlama vaxtı" data-toggle="datetimepicker" data-target="#input_baslama_vaxti" class="datetimepicker-input"
-                      oninvalid="this.setCustomValidity('Xatırlatmanın başlama tarixi təyin olunmayıb')"  oninput="setCustomValidity('')"
-                     >
-                      <span>:dan</span>
-                      <input type="text" name="saat" id="begin_hour_input" required autocomplete="off"
-                      placeholder="Saat" data-toggle="datetimepicker" data-target="#begin_hour_input" class="datetimepicker-input"
-                       oninvalid="this.setCustomValidity('Xatırlatmanın başlama saatı təyin olunmayıb')"  oninput="setCustomValidity('')">
-                      
-                    </div>
-                    
-                    <div class="input_part_2">
-                      
-                      <input type="text" name="gun"   id="input_bitme_vaxti" autocomplete="off" placeholder="Bitmə vaxtı" 
-                      data-toggle="datetimepicker" data-target="#input_bitme_vaxti" class="datetimepicker-input" required
-                       oninvalid="this.setCustomValidity('Xatırlatmanın bitmə tarixi təyin olunmayıb')"  oninput="setCustomValidity('')">
-  
-                      <input type="text" name="saat" placeholder="Saat" id="end_hour_input" autocomplete="off" placeholder="Bitmə vaxtı" 
-                      data-toggle="datetimepicker" data-target="#end_hour_input" class="datetimepicker-input" required
-                       oninvalid="this.setCustomValidity('Xatırlatmanın bitmə tarixi təyin olunmayıb')"  oninput="setCustomValidity('')">
-                    </div>
-                  
-  
-                    
+
+                  <div class="icon_part">
+                    <i class="far fa-clock stylish_icon"></i>
+                  </div>
+                  <div class="input_part">
+
+                    <input type="text" name="gun" id="input_baslama_vaxti" autocomplete="off" required
+                      placeholder="Başlama vaxtı" data-toggle="datetimepicker" data-target="#input_baslama_vaxti"
+                      class="datetimepicker-input"
+                      oninvalid="this.setCustomValidity('Xatırlatmanın başlama tarixi təyin olunmayıb')"
+                      oninput="setCustomValidity('')">
+                    <span>:dan</span>
+                    <input type="text" name="saat" id="begin_hour_input" required autocomplete="off" placeholder="Saat"
+                      data-toggle="datetimepicker" data-target="#begin_hour_input" class="datetimepicker-input"
+                      oninvalid="this.setCustomValidity('Xatırlatmanın başlama saatı təyin olunmayıb')"
+                      oninput="setCustomValidity('')">
+
+                  </div>
+
+                  <div class="input_part_2">
+
+                    <input type="text" name="gun" id="input_bitme_vaxti" autocomplete="off" placeholder="Bitmə vaxtı"
+                      data-toggle="datetimepicker" data-target="#input_bitme_vaxti" class="datetimepicker-input"
+                      required oninvalid="this.setCustomValidity('Xatırlatmanın bitmə tarixi təyin olunmayıb')"
+                      oninput="setCustomValidity('')">
+
+                    <input type="text" name="saat" placeholder="Saat" id="end_hour_input" autocomplete="off"
+                      placeholder="Bitmə vaxtı" data-toggle="datetimepicker" data-target="#end_hour_input"
+                      class="datetimepicker-input" required
+                      oninvalid="this.setCustomValidity('Xatırlatmanın bitmə tarixi təyin olunmayıb')"
+                      oninput="setCustomValidity('')">
+                  </div>
+
+
+
                 </div>
-  
+
                 <!-- <br> -->
-  
-  
+
+
                 <!--In modal choose time with inputs-->
                 <!-- <div id="modal_main_divs" class="col-12" style="background-color: red;"> -->
-  
-                </div>
-                <div id="modal_main_divs" class="col-12 mekan_main" style="height: 50px;padding-bottom: 10px;">
-                  <div class="col-5 mekan_icon"><i class="fas fa-map-marked-alt stylish_icon"></i> Yer məkan daxil edin</div>
-                  <div class="col-7 mekan_input"><input type="text" placeholder="Məkan daxil edin" style="padding-left: 5px;"></div>
-                  
-                </div>
-                <!-- <div id="modal_main_divs" class="col-12" style="background-color: red;"> -->
-                  
-                <!-- </div> -->
-                <!-- <br -->
-                <div id="modal_main_div_4" class="col-12">
-                  <div class="col-4 modal_time_icon" >
-                    <i class="fas fa-history stylish_icon"></i> Xatırlatma seçin
-                  </div>
-                  <div class="col-5 modal_slide_main" style="padding: 0px;">
-                    <div class="col-12 slide_main" style="padding: 0px;"> Vaxt seçin</div>
-                    <div class="col-12 select_bottom">
-                      <div class="col-12 select_item" id="time1">5 dəqiqə əvvəl</div>
-                      <div class="col-12 select_item" id="time2">10 dəqiqə əvvəl</div>
-                      <div class="col-12 select_item" id="time3">15 dəqiqə əvvəl</div>
-                      <div class="col-12 select_item" id="time4">1 saat əvvəl</div>
-                      <div class="col-12 select_item" id="time5">6 saat əvvəl</div>
-                      <div class="col-12 select_item" id="time6">12 saat əvvəl</div>
-                      <div class="col-12 select_item" id="time7">1 gün əvvəl</div>
-                      <div class="col-12 select_item" id="time8">1 həftə əvvəl</div>
-                      <!-- <div class="col-12 select_item">10 deqiqe evvel</div> -->
-                    </div>
-                  </div>
-                  <div class="col-3 modal_time_icon" ></div>
-                  
-                </div>
-  
-                <!--Modal button part-->
-  
-  
-  
-                <div id="modal_main_divs_2" class="col-12">
-                  <a href="">Daha ətraflı</a>
-                  <button class="btn btn-secondary" id="save-event">Yadda saxla</button>
-                </div>
-  
-  
-  
-                <!--Modal button part-->
+
               </div>
-              
+              <div id="modal_main_divs" class="col-12 mekan_main" style="height: 50px;padding-bottom: 10px;">
+                <div class="col-5 mekan_icon"><i class="fas fa-map-marked-alt stylish_icon"></i> Yer məkan daxil edin
+                </div>
+                <div class="col-7 mekan_input"><input type="text" placeholder="Məkan daxil edin"
+                    style="padding-left: 5px;"></div>
+
+              </div>
+              <!-- <div id="modal_main_divs" class="col-12" style="background-color: red;"> -->
+
+              <!-- </div> -->
+              <!-- <br -->
+              <div id="modal_main_div_4" class="col-12">
+                <div class="col-4 modal_time_icon">
+                  <i class="fas fa-history stylish_icon"></i> Xatırlatma seçin
+                </div>
+                <div class="col-5 modal_slide_main" style="padding: 0px;">
+                  <div class="col-12 slide_main" style="padding: 0px;"> Vaxt seçin</div>
+                  <div class="col-12 select_bottom">
+                    <div class="col-12 select_item" id="time1">5 dəqiqə əvvəl</div>
+                    <div class="col-12 select_item" id="time2">10 dəqiqə əvvəl</div>
+                    <div class="col-12 select_item" id="time3">15 dəqiqə əvvəl</div>
+                    <div class="col-12 select_item" id="time4">1 saat əvvəl</div>
+                    <div class="col-12 select_item" id="time5">6 saat əvvəl</div>
+                    <div class="col-12 select_item" id="time6">12 saat əvvəl</div>
+                    <div class="col-12 select_item" id="time7">1 gün əvvəl</div>
+                    <div class="col-12 select_item" id="time8">1 həftə əvvəl</div>
+                    <!-- <div class="col-12 select_item">10 deqiqe evvel</div> -->
+                  </div>
+                </div>
+                <div class="col-3 modal_time_icon"></div>
+
+              </div>
+
+              <!--Modal button part-->
+
+
+
+              <div id="modal_main_divs_2" class="col-12">
+                <a href="">Daha ətraflı</a>
+                <button class="btn btn-secondary" id="save-event">Yadda saxla</button>
+              </div>
+
+
+
+              <!--Modal button part-->
             </div>
-          </form>
+
           </div>
-  
+        </form>
+      </div>
 
-        </div>
-          {% endblock content %}
-          
-          
-            
-          
-      {% block scripts %}           
-      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-      <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-      <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-      <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.min.js' %}"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-      <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-      <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-      <script src="{% static 'js/fullcalendar-date.js' %}"></script>
-      <script src="{% static 'js/main.js' %}"></script>
-      {% endblock scripts %}
-</body>   
 
-</html>
+    </div>
+    {% endblock content %}
+
+
+
+
+    {% block scripts %}
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+    <script src="{% static 'js/fullcalendar-date.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% endblock scripts %}
+    </body>
+
+    </html>

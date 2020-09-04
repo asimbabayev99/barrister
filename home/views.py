@@ -80,13 +80,17 @@ def single_view(request, id):
 
 @login_required(login_url='/account/login')
 def calendar_view(request):
+    categories = EventCategory.objects.all()
+
+    context = {
+        'categories': categories
+    }
+
+    return render(request, "calendar-date.html", context=context)
 
 
-    return render(request, "calendar-date.html", context={})
 
-
-
-
+@login_required(login_url='/account/login')
 def publication_add_view(request):
 
     form = PublicationForm()
@@ -140,7 +144,7 @@ def about_us_view(request):
 
 
 
-
+@login_required(login_url='/account/login')
 def admin_user_list(request):
 
     page = request.GET.get('page', 1)
@@ -160,7 +164,7 @@ def admin_user_list(request):
     return render(request, 'admin-panel/admin-UserList.html', context=context)
 
 
-
+@login_required(login_url='/account/login')
 def admin_user_add(request):
 
     message = None
@@ -202,7 +206,7 @@ def admin_user_add(request):
     return render(request, 'admin-panel/admin-AddUser.html', context=context)
 
 
-
+@login_required(login_url='/account/login')
 def admin_add_news(request):
 
     form = Newsform()
@@ -221,7 +225,7 @@ def admin_add_news(request):
     return render(request,'admin-panel/admin-AddNews.html',context={ 'form':form})
 
 
-
+@login_required(login_url='/account/login')
 def admin_news_list(request):
 
     page = request.GET.get('page', 1)
@@ -242,7 +246,7 @@ def admin_news_list(request):
     return render(request, 'admin-panel/admin_NewsList.html', context = context)
     
 
-
+@login_required(login_url='/account/login')
 def admin_news_update(request,slug):
     if request.user.is_superuser is False:
         return Http404()

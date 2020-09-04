@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
+
 from shop.models import *
 # from rest_framework.parsers import 
 from django.forms.fields import FileField
@@ -247,3 +248,13 @@ class EmailAccountSerializer(serializers.ModelSerializer):
         fields = ['token']
 
 
+
+class EventSerializer(serializers.ModelSerializer):
+    category_color = serializers.CharField(source='category.color', read_only=True)
+    start = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
+    end = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Event
+        fields = "__all__"
