@@ -37,7 +37,7 @@
         <div class="col-md-12 pl-0">
           <div class="content">
             <p class="title skills-title">Peşəkar bacarıqlar</p>
-            
+
           </div>
         </div>
       </div>
@@ -63,10 +63,10 @@
               <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
             <div>
-              <i data-id="{{obj.id}}" class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
-                data-toggle="modal"></i>
-              <i data-id="{{obj.id}}" class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation"
-                data-toggle="modal"> </i>
+              <i data-id="{{obj.id}}" class="icon-skill icon-skill-delete fa fa-trash-alt experience-delete"
+                data-target="#confirmDelete" data-toggle="modal"></i>
+              <i data-id="{{obj.id}}" class="icon-skill icon-skill-edit far fa-edit experience-edit"
+                data-target="#changeEducation" data-toggle="modal"> </i>
             </div>
           </div>
           {% endfor %}
@@ -233,7 +233,7 @@
       </div>
     </div>
   </div>
-  
+
 
 </main>
 {% endblock %}
@@ -300,11 +300,8 @@
       });
     });
 
-
-
-  });
-  $(function () {
-    $(".icon-skill-delete").click(function () {
+    $('.experience-delete').on("click", function () {
+      bttn = this
       swal({
         title: "Silmək istədiyinizə əminsiniz?",
         text: "",
@@ -314,14 +311,28 @@
       })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Uğurla silindi", {
-              icon: "success",
+            $.ajax({
+              type: 'DELETE',
+              url: '/api/experiences/' + $(bttn).attr('data-id'),
+              headers: { "X-CSRFToken": getCookie('csrftoken') },
+              success: function (data) {
+                swal("Uğurla silindi", {
+                  icon: "success",
+                });
+                $(bttn).parents('.container-skills-and-education').remove()
+              },
+              error: function (jqXhr, textStatus, errorMessage) {
+                swal("Xəta baş verdi", {
+                  icon: "warning"
+                });
+              }
             });
           } else {
             // swal("Fayl silinmədi!");
           }
         });
     })
+
   });
 </script>
 
