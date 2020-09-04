@@ -37,11 +37,13 @@
         <div class="col-md-12 pl-0">
           <div class="content">
             <p class="title skills-title">Peşəkar bacarıqlar</p>
+            
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <div class="">
     <div class="container-fluid">
@@ -63,7 +65,8 @@
             <div>
               <i data-id="{{obj.id}}" class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
                 data-toggle="modal"></i>
-              <i data-id="{{obj.id}}" class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"> </i>
+              <i data-id="{{obj.id}}" class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation"
+                data-toggle="modal"> </i>
             </div>
           </div>
           {% endfor %}
@@ -230,27 +233,19 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="addSkill" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
-      <div class="modal-content rounded-0 border-0">
-        <p class="modal-title mb-2 bg-success p-2">Silmək istədyinizə əminsiz?</p>
-        <div class="p-2">
-          <button class="btn btn-block rounded-0 btn-warning" data-dismiss="modal">Davam et</button>
-          <button class="btn btn-block btn-primary rounded-0" data-dismiss="modal">Ləğv et</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
 </main>
 {% endblock %}
 
 
 {% block scripts %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+<!-- <script src="{%static 'vendor/sweetAlert/sweetalert.min.js'} "></script> -->
 <script>
   function getCookie(name) {
     var cookieValue = null;
@@ -297,6 +292,7 @@
           $(modal).find('.end-date').val("");
           $(modal).find('.title').val("");
           $('#addEducation').modal("hide");
+
         },
         error: function (jqXhr, textStatus, errorMessage) {
           alert(errorMessage)
@@ -306,6 +302,26 @@
 
 
 
+  });
+  $(function () {
+    $(".icon-skill-delete").click(function () {
+      swal({
+        title: "Silmək istədiyinizə əminsiniz?",
+        text: "Əgər siz bu faylı silsəniz,geri qaytarılması mümkün olmayacaqdır!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Fayl uğurla silindi", {
+              icon: "success",
+            });
+          } else {
+            swal("Fayl silinmədi!");
+          }
+        });
+    })
   });
 </script>
 
