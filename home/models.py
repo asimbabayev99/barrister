@@ -483,7 +483,7 @@ class Contact(models.Model):
 EMAIL_FLAGS = [
     ('Answered', 'Answered'),
     ('Flagged', 'Flagged'),
-    ('Draft', 'Draft'),
+    ('Drafts', 'Drafts'),
     ('Deleted', 'Deleted'),
     ('Seen', 'Seen'),
     ('$Forwarded', '$Forwarded'),
@@ -500,7 +500,7 @@ EMAIL_FLAGS = [
 
 FOLDER_CHOICES = [
     ('Inbox', 'Inbox'),
-    ('Draft', 'Draft'),
+    ('Drafts', 'Drafts'),
     ('Sent', 'Sent'),
     ('Deleted', 'Deleted')
 ]

@@ -7,12 +7,12 @@ import imaplib
 import base64
 import os
 import email
-
-
+import mailparser
+from dateutil import parser
+import bs4
 # models
 from account.models import CustomUser
 from home.models import EmailAccount, Email, Attachment
-
 
 
 def GenerateOAuth2String(email, access_token, base64_encode=True):
@@ -48,66 +48,52 @@ def synchronize_mail(email_address, token):
     print("start to synchronize mail")
     server = 'imap.yandex.ru'
     mail = imaplib.IMAP4_SSL(server)
-    mail.authenticate('XOAUTH',lambda x: GenerateOAuth2String(email_address,token))
-    mail_folders = ['Inbox',]
-    # loop through mail folders
+    print(email_address,token,GenerateOAuth2String(email_address,token,base64_encode=False))
+    mail.authenticate('XOAUTH2',lambda x: GenerateOAuth2String(email_address,token,base64_encode=False))
+    mail_folders = ['Inbox','Drafts','Sent','Trash']
+    user = EmailAccount.objects.get(email=email_address).user
+
+    # loop th rough mail folders
     for folder in mail_folders:
-        mail.select(folder)
+        mail.select("{0}".format(folder))
+        print(folder)
         type, data = mail.search(None, 'ALL')
-        mail_ids = data[0]
-        id_list = mail_ids.split()
 
         # loop throught emails
         for num in data[0].split():
-            print(num)
+            
+            num = num.decode()
             typ, data = mail.fetch(num, '(RFC822)' )
             raw_email = data[0][1]
             # converts byte literal to string removing b''
-            
-            raw_email_string = raw_email.decode('utf-8')
-            email_message = email.message_from_string(raw_email_string)
-
-            subject = email_message['Subject']
-            subject = email.header.make_header(email.header.decode_header(subject))
-
-            sender = email_message['From'].split()
-            sender = sender[len(sender) - 1].replace('<', '').replace('>', '')
-
-            receiver = email_message['To'].split()
-            receiver = receiver[len(receiver) - 1].replace('<', '').replace('>', '')
-
-            date = email_message['Date']
-            date = datetime.strptime(date, '%a, %d %b %Y %X %z')
+          
+            email_message = mailparser.parse_from_bytes(raw_email)
+            subject = email_message.subject
+            sender = email_message.from_[0][1]
+            receiver = email_message.to[0][1]
+            date = email_message.date
+            print(subject)
             # timestamp = email.utils.parsedate_tz(date)
 
-            new_email, created = Email.objects.get_or_create(user=user, folder=folder, num=num, sender=sender, receiver=receiver, date=date)
+            new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
             
             print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
-            if not created:
+            if  not created:
                 print("already created")
                 continue
+            new_email.subject = subject
+            content = email_message.text_html[0] if email_message.text_html != [] else ""
+            new_email.content = content
+            new_email.save()
+            if email_message.attachments is not None:
+              for i in email_message.attachments:
+                attachment = Attachment(name=i['filename'],email=new_email)
+                attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))
+                attachment.save()
 
-            # downloading attachments
-            for part in email_message.walk():
-                if part.get_content_maintype() == 'text':
-                    content = part.get_payload(decode=True)
-                    new_email.content = content
-                    new_email.save()
+    
 
-                if part.get_content_maintype() == 'multipart':
-                    continue
-                if part.get('Content-Disposition') is None:
-                    continue
 
-                fileName = part.get_filename()
-                fileName = email.header.make_header(email.header.decode_header(fileName))
-
-                if bool(fileName):
-                    attachment = Attachment(email=new_email, name=str(fileName))
-                    attachment.save()
-                    content = part.get_payload(decode=True)  
-                    attachment.file.save(str(fileName), ContentFile(content))
-                    attachment.save()
 
     return "email synchronized"
 

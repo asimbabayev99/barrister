@@ -38,7 +38,7 @@ urlpatterns = [
     path('barrister/skills', barrister_professional_skills, name='barrister-skills'),
 
     path('email/send', send_email, name='send-email'),
-    path('email/<str:folder>', email_view, name='email'),
+    path('email/', email_view, name='email'),
 
 
     re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='atatchment-media'),
