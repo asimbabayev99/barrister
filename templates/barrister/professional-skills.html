@@ -307,18 +307,18 @@
     $(".icon-skill-delete").click(function () {
       swal({
         title: "Silmək istədiyinizə əminsiniz?",
-        text: "Əgər siz bu faylı silsəniz,geri qaytarılması mümkün olmayacaqdır!",
+        text: "",
         icon: "warning",
         buttons: true,
         dangerMode: true,
       })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Fayl uğurla silindi", {
+            swal("Uğurla silindi", {
               icon: "success",
             });
           } else {
-            swal("Fayl silinmədi!");
+            // swal("Fayl silinmədi!");
           }
         });
     })
