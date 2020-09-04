@@ -51,34 +51,22 @@
             <span class="skills-title-self">Təhsil</span>
             <button class="btn btn-light" data-toggle="modal" data-target="#addEducation">Əlavə et</button>
           </div>
+          {% for obj in experiences %}
           <div class="container-skills-and-education class-between">
             <div>
-              <span class="skill-time">27/09/2020 </span>
-              <span class="skill-time">- 27/09/2020</span>
+              <span class="skill-time">{{obj.start|date:"d/m/Y"}} </span>
+              <span class="skill-time">- {{obj.end|date:"d/m/Y"}}</span>
               <br>
-              <span class="skill-time">Baku State Universty</span>
+              <span class="skill-time">{{obj.title}}</span>
               <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
             </div>
             <div>
-              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
+              <i data-id="{{obj.id}}" class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
                 data-toggle="modal"></i>
-              <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"> </i>
+              <i data-id="{{obj.id}}" class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"> </i>
             </div>
           </div>
-          <div class="container-skills-and-education class-between">
-            <div>
-              <span class="skill-time">27/09/2020 </span>
-              <span class="skill-time">- 27/09/2020</span>
-              <br>
-              <span class="skill-time">Baku State Universty</span>
-              <!-- <button class="btn btn-danger rounded-0">Delete</button> -->
-            </div>
-            <div>
-              <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
-                data-toggle="modal"></i>
-              <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeEducation" data-toggle="modal"></i>
-            </div>
-          </div>
+          {% endfor %}
         </div>
         <div class="col-md-6 main-item-first">
           <div class="class-between">
@@ -125,8 +113,8 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="addEducation" tabindex="-1" role="dialog" aria-labelledby="addEducation"
-    aria-hidden="true">
+  <div class="modal fade" id="addEducation" profile-id="{{profile.id}}" tabindex="-1" role="dialog"
+    aria-labelledby="addEducation" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
       <div class="modal-content rounded-0 border-0">
         <p class="modal-title mb-2 bg-success p-2">Təhsil əlavə et</p>
@@ -262,11 +250,6 @@
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-<script src="{% static 'js/fullcalendar.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script>
   function getCookie(name) {
@@ -298,6 +281,7 @@
     $('.save-experience').on("click", function () {
       modal = $(this).parents('.modal')
       data = {
+        "profile": $(modal).attr('profile-id'),
         "start": $(modal).find('.start-date').val(),
         "end": $(modal).find('.end-date').val(),
         "title": $(modal).find('.title').val()
@@ -309,16 +293,19 @@
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(data),
         success: function (data) {
-          $(modal).find('.start-date').val("")
-          $(modal).find('.end-date').val("")
-          $(modal).find('.title').val("")
-          $('#addEducation').modal('hide')
+          $(modal).find('.start-date').val("");
+          $(modal).find('.end-date').val("");
+          $(modal).find('.title').val("");
+          $('#addEducation').modal("hide");
         },
         error: function (jqXhr, textStatus, errorMessage) {
           alert(errorMessage)
         }
       });
-    })
+    });
+
+
+
   });
 </script>
 
