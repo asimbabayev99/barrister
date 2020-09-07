@@ -259,3 +259,13 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = "__all__"
+
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(format="%m/%d/%Y")
+    time = serializers.TimeField(format="%H:%M")
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Appointment
+        fields = "__all__"

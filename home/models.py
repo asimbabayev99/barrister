@@ -444,7 +444,7 @@ class Appointment(models.Model):
     email = models.EmailField(max_length=256, null=True, blank=True)
     phone = models.CharField(max_length=16, null=True, blank=True)
     country = models.CharField(max_length=128, null=True, blank=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    city = models.CharField(max_length=32, null=True, blank=True)
     zip = models.CharField(max_length=8, null=True, blank=True)
     detail = models.CharField(max_length=256, null=True, blank=True)
     date = models.DateField(null=False)

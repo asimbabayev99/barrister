@@ -333,20 +333,20 @@ $(function () {
   $(".select_item").click(function () {
     $(".select_bottom").slideUp(100);
   });
+  
   for (let i = 1; i < 9; i++) {
     $("#time" + i).click(function () {
       $(".slide_main").html($("#time" + i).html());
     });
   };
-  for (let i = 1; i < 33; i++) {
-    $("#icon" + i).click(function () {
-      $(".choose_icon_main span").html($("#icon" + i).html());
-      $(".icon_slider").slideUp(100);
-      $(".less_icons").slideUp(100);
-      $(".less_main").slideUp();
-      $(".show_more").slideDown();
-    });
-  }
+
+  $('.span_icon').on("click", function () {
+    $(".choose_icon_main span").html($(this).html());
+    $(".icon_slider").slideUp(100);
+    $(".less_icons").slideUp(100);
+    $(".less_main").slideUp();
+    $(".show_more").slideDown();
+  })
 
 
 });
