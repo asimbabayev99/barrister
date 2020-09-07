@@ -265,6 +265,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     date = serializers.DateField(format="%m/%d/%Y")
     time = serializers.TimeField(format="%H:%M")
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+    status_name = serializers.CharField(source='appointmentstatus.name', read_only=True)
 
     class Meta:
         model = Appointment

@@ -436,6 +436,20 @@ class City(models.Model):
         ]
 
 
+
+class AppointmentStatus(models.Model):
+    name = models.CharField(max_length=32, null=False, blank=False, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', ])
+        ]    
+
+
+
 class Appointment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     first_name = models.CharField(max_length=32, null=False, blank=False)
@@ -449,6 +463,7 @@ class Appointment(models.Model):
     detail = models.CharField(max_length=256, null=True, blank=True)
     date = models.DateField(null=False)
     time = models.TimeField(null=True, blank=True)
+    # status = models.ForeignKey(AppointmentStatus, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
