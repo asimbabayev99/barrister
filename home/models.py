@@ -4,6 +4,8 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 import random
 from datetime import datetime, date, timedelta
+from django.core.validators import FileExtensionValidator
+
 
 from dateutil.rrule import (
     DAILY,
@@ -147,8 +149,10 @@ class Rule(models.Model):
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=64)
-    color = models.CharField(max_length=16, null=False, blank=False)
-    icon = models.ImageField(null=True, blank=True)
+    bg_color = models.CharField(max_length=16, null=False, blank=False)
+    text_color = models.CharField(max_length=16, null=False, blank=False)
+    icon = models.FileField(upload_to='event-categories/', validators=[FileExtensionValidator(allowed_extensions=['svg'])], null=False, blank=False)
+
 
     def __str__(self):
         return self.name
@@ -337,13 +341,13 @@ class News(models.Model):
             models.Index(fields=['slug',]),
         ]         
 
-
     # def unique_slug(self,slug):
     #     if News.objects.filter(slug=slug):
     #         index = random.randrange(0,20)
     #         new_slug = "%s-%s"%(slug,index)
     #         slug = self.unique_slug(slug=new_slug)
     #     return slug  
+
     def get_absolute_url(self):
         return reverse("admin-update-news", kwargs={"slug": self.slug})
     
