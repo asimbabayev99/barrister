@@ -4,6 +4,8 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 import random
 from datetime import datetime, date, timedelta
+from django.core.validators import FileExtensionValidator
+
 
 from dateutil.rrule import (
     DAILY,
@@ -147,8 +149,10 @@ class Rule(models.Model):
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=64)
-    color = models.CharField(max_length=16, null=False, blank=False)
-    icon = models.ImageField(null=True, blank=True)
+    bg_color = models.CharField(max_length=16, null=False, blank=False)
+    text_color = models.CharField(max_length=16, null=False, blank=False)
+    icon = models.FileField(upload_to='event-categories/', validators=[FileExtensionValidator(allowed_extensions=['svg'])], null=False, blank=False)
+
 
     def __str__(self):
         return self.name
@@ -337,13 +341,13 @@ class News(models.Model):
             models.Index(fields=['slug',]),
         ]         
 
-
     # def unique_slug(self,slug):
     #     if News.objects.filter(slug=slug):
     #         index = random.randrange(0,20)
     #         new_slug = "%s-%s"%(slug,index)
     #         slug = self.unique_slug(slug=new_slug)
     #     return slug  
+
     def get_absolute_url(self):
         return reverse("admin-update-news", kwargs={"slug": self.slug})
     
@@ -432,6 +436,20 @@ class City(models.Model):
         ]
 
 
+
+class AppointmentStatus(models.Model):
+    name = models.CharField(max_length=32, null=False, blank=False, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', ])
+        ]    
+
+
+
 class Appointment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     first_name = models.CharField(max_length=32, null=False, blank=False)
@@ -440,11 +458,12 @@ class Appointment(models.Model):
     email = models.EmailField(max_length=256, null=True, blank=True)
     phone = models.CharField(max_length=16, null=True, blank=True)
     country = models.CharField(max_length=128, null=True, blank=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    city = models.CharField(max_length=32, null=True, blank=True)
     zip = models.CharField(max_length=8, null=True, blank=True)
     detail = models.CharField(max_length=256, null=True, blank=True)
     date = models.DateField(null=False)
     time = models.TimeField(null=True, blank=True)
+    # status = models.ForeignKey(AppointmentStatus, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -483,7 +502,7 @@ class Contact(models.Model):
 EMAIL_FLAGS = [
     ('Answered', 'Answered'),
     ('Flagged', 'Flagged'),
-    ('Draft', 'Draft'),
+    ('Drafts', 'Drafts'),
     ('Deleted', 'Deleted'),
     ('Seen', 'Seen'),
     ('$Forwarded', '$Forwarded'),
@@ -500,7 +519,7 @@ EMAIL_FLAGS = [
 
 FOLDER_CHOICES = [
     ('Inbox', 'Inbox'),
-    ('Draft', 'Draft'),
+    ('Drafts', 'Drafts'),
     ('Sent', 'Sent'),
     ('Deleted', 'Deleted')
 ]

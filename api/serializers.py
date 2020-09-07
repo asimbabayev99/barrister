@@ -250,11 +250,23 @@ class EmailAccountSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
-    category_color = serializers.CharField(source='category.color', read_only=True)
+    category_bgcolor = serializers.CharField(source='category.bg_color', read_only=True)
+    category_textcolor = serializers.CharField(source='category.text_color', read_only=True)
     start = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
     end = serializers.DateTimeField(format="%m/%d/%Y %H:%M")
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
 
     class Meta:
         model = Event
+        fields = "__all__"
+
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(format="%m/%d/%Y")
+    time = serializers.TimeField(format="%H:%M")
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+    status_name = serializers.CharField(source='appointmentstatus.name', read_only=True)
+
+    class Meta:
+        model = Appointment
         fields = "__all__"

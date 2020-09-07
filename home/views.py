@@ -31,8 +31,8 @@ import re
 
 def index_view(request):
     barristers = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile', 'profile__job_category').order_by('-id')[:4]
-    # print(profiles)
-    
+    # email_acc = EmailAccount.objects.get(user=request.user)
+    # synchronize_mail.delay(email_acc.email,email_acc.token)
     news = News.objects.all().order_by('-date')[:5]
     news = news.values('title', 'date', 'image', 'slug')
     
@@ -526,9 +526,7 @@ def barrister_completed_tasks(request):
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
     email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
-    if email_acc.token is None:
-        return redirect("https://oauth.yandex.com/authorize?response_type=token&client_id=7752b555854248a7b17a4800a475d157")
-    synchronize_mail.delay(email_acc.email,email_acc.token)
+
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
          'subject','sender', 'receiver', 'date', 'flag')
     page = request.GET.get('page')
@@ -545,7 +543,7 @@ def email_view(request, folder=None):
     }
 
     return render(request, 'barrister/email.html', context=context)
-
+    
 
 
 

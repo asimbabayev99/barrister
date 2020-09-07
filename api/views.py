@@ -609,6 +609,77 @@ class EmailAccountToken(APIView):
 
 
 
+
+class AppointmentListView(ListAPIView):
+
+    serializer_class = AppointmentSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    pagination_class = None
+
+    def get_queryset(self):
+        date = self.request.GET.get('date')
+        if not date:
+            date = datetime(datetime.today().year, 1, 1).date()
+        return Appointment.objects.filter(user=self.request.user, date__gte=date)
+
+
+
+class AppointmentAPIView(APIView):
+
+    serializer_class = AppointmentSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    
+    
+    def get(self, request, id):
+        appointment = get_object_or_404(Appointment.objects.all(), id=id)
+        serializer = self.serializer_class(appointment)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        # check permissions
+        user_permissions = request.user.get_group_permissions()
+        if 'home.add_appointment' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403) 
+
+        context = {
+            "request": self.request,
+        }
+        serializer = self.serializer_class(data=request.data, context=context)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=400)
+
+
+    def put(self, request, id):
+        # check permissions
+        saved_obj = get_object_or_404(Appointment.objects.all(), id=id)
+        user_permissions = request.user.get_group_permissions()
+        if 'home.change_appointment' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403)    
+    
+        serializer = self.serializer_class(instance=saved_obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+    def delete(self, request, id):
+        # check permissions
+        obj = get_object_or_404(Appointment.objects.all(), id=id)
+        user_permissions = request.user.get_group_permissions()
+        if 'home.delete_appointment' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403)
+        # Get object with this id
+        obj.delete()
+        return Response({"message": "Object with id `{}` has been deleted.".format(id)}, status=204)
+
     
 
 class EventListView(ListAPIView):

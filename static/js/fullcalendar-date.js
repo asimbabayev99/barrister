@@ -81,8 +81,9 @@ $(document).ready(function () {
     },
 
     eventRender: function (event, element) {
-      if (event.color) {
-        element.css('background-color', event.color)
+      if (event.bgcolor) {
+        element.css('background-color', event.bgcolor)
+        element.css('color', event.textcolor)
       }
       //dynamically prepend close button to event
       element.find(".fc-content").prepend("<span data-id='" + event.id + "' class='closeon material-icons'>x&nbsp</span>");
@@ -163,7 +164,8 @@ $(document).ready(function () {
         hour: data[i].end.split(' ')[1],
         begin_hour: data[i].start.split(' ')[1],
         disabled_check: true,
-        color: data[i].category_color,
+        bgcolor: data[i].category_bgcolor,
+        textcolor: data[i].category_textcolor,
         id: data[i].id
         // vaxt_divi: $(".slide_main").text(),
         // ikonka: $(".choose_icon_main span").html()
@@ -331,20 +333,20 @@ $(function () {
   $(".select_item").click(function () {
     $(".select_bottom").slideUp(100);
   });
+  
   for (let i = 1; i < 9; i++) {
     $("#time" + i).click(function () {
       $(".slide_main").html($("#time" + i).html());
     });
   };
-  for (let i = 1; i < 33; i++) {
-    $("#icon" + i).click(function () {
-      $(".choose_icon_main span").html($("#icon" + i).html());
-      $(".icon_slider").slideUp(100);
-      $(".less_icons").slideUp(100);
-      $(".less_main").slideUp();
-      $(".show_more").slideDown();
-    });
-  }
+
+  $('.span_icon').on("click", function () {
+    $(".choose_icon_main span").html($(this).html());
+    $(".icon_slider").slideUp(100);
+    $(".less_icons").slideUp(100);
+    $(".less_main").slideUp();
+    $(".show_more").slideDown();
+  })
 
 
 });
