@@ -79,7 +79,7 @@ def single_view(request, id):
 
 
 @login_required(login_url='/account/login')
-def calendar_view(request):/
+def calendar_view(request):
     categories = EventCategory.objects.all()
 
     context = {
