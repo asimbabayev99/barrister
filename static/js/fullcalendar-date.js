@@ -151,7 +151,8 @@ $(document).ready(function () {
   $("#input_bitme_vaxti").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
   $("#begin_hour_input").datetimepicker({ format: 'HH:mm' });
   $("#end_hour_input").datetimepicker({ format: 'HH:mm' });
-
+  $("#date_input").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
+  $("#date_input").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
 
   $.get("/api/events/list/", function (data) {
     console.log(data)

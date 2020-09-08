@@ -1,6 +1,6 @@
 
 // sidebar js begin
-$(".sidebar-dropdown > a").click(function() {
+$(".sidebar-dropdown > a").click(function () {
   $(".sidebar-submenu").slideUp(200);
   if (
     $(this)
@@ -22,19 +22,19 @@ $(".sidebar-dropdown > a").click(function() {
   }
 });
 
-$("#close-sidebar").click(function() {
+$("#close-sidebar").click(function () {
   $(".page-wrapper").removeClass("toggled");
 });
-$("#show-sidebar").click(function() {
+$("#show-sidebar").click(function () {
   $(".page-wrapper").addClass("toggled");
 });
 
-$("#minicalendaricon").click(function() {
+$("#minicalendaricon").click(function () {
   $(".page-wrapper").addClass("toggled");
   $(".calendarr").addClass("active");
-  $(".calendaropen").css("display","block");
+  $(".calendaropen").css("display", "block");
 });
-$("#newevent").click(function() {
+$("#newevent").click(function () {
   $(".page-wrapper").addClass("toggled");
   $(".nevevent").addClass("active");
 });
@@ -46,11 +46,11 @@ $('#chooseFile2').bind('change', function () {
   var filename = $("#chooseFile2").val();
   if (/^\s*$/.test(filename)) {
     $("#file1").removeClass('active');
-    $("#noFile1").text("No file chosen..."); 
+    $("#noFile1").text("No file chosen...");
   }
   else {
     $("#file1").addClass('active');
-    $("#noFile1").text(filename.replace("C:\\fakepath\\", "")); 
+    $("#noFile1").text(filename.replace("C:\\fakepath\\", ""));
   }
 });
 
@@ -58,11 +58,11 @@ $('#chooseFile1').bind('change', function () {
   var filename = $("#chooseFile1").val();
   if (/^\s*$/.test(filename)) {
     $("#file2").removeClass('active');
-    $("#noFile2").text("No file chosen..."); 
+    $("#noFile2").text("No file chosen...");
   }
   else {
     $("#file2").addClass('active');
-    $("#noFile2").text(filename.replace("C:\\fakepath\\", "")); 
+    $("#noFile2").text(filename.replace("C:\\fakepath\\", ""));
   }
 });
 
@@ -71,36 +71,37 @@ $('#chooseFile1').bind('change', function () {
 // choose file end
 
 // user-table begin
-$(window).on("load resize ", function() {
+$(window).on("load resize ", function () {
   var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
+  $('.tbl-header').css({ 'padding-right': scrollWidth });
 }).resize();
 // user-table end
 
 
 // phone mask begin
-$(document).ready(function(){
-  $("#telnum").mask("+ 994" +  " (xx) xxx-xx-xx");
+$(document).ready(function () {
+  $("#telnum").mask("+ 994" + " (xx) xxx-xx-xx");
   $("#input_baslama_vaxti").mask("xx/xx/xxxx");
   $("#input_bitme_vaxti").mask("xx/xx/xxxx");
   $("#begin_hour_input").mask("xx:xx");
   $("#end_hour_input").mask("xx:xx");
-    
-  // https://codepen.io/asrulnurrahim/pen/WOyzxy
-  var $uploadCrop,rawImg,tempFilename,imageId;
-  var readURL = function(input) {
-      if (input.files && input.files[0]) {
-          var reader = new FileReader();
+  $("#phone_input").mask("(xxx) xxx-xx-xx")
 
-          reader.onload = function (e) {
-              // $('.contragent_single_picture').attr('src', e.target.result);
-              $('.contragent_single_picture').addClass('ready');
-              $('#modal_image_pop').modal('show');
-              rawImg=e.target.result;
-          }
-  
-          reader.readAsDataURL(input.files[0]);
+  // https://codepen.io/asrulnurrahim/pen/WOyzxy
+  var $uploadCrop, rawImg, tempFilename, imageId;
+  var readURL = function (input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $('.contragent_single_picture').attr('src', e.target.result);
+        $('.contragent_single_picture').addClass('ready');
+        $('#modal_image_pop').modal('show');
+        rawImg = e.target.result;
       }
+
+      reader.readAsDataURL(input.files[0]);
+    }
   }
   $uploadCrop = $('#upload_demo').croppie({
     viewport: {
@@ -110,45 +111,45 @@ $(document).ready(function(){
       enableResize: true,
       enableOrientation: true
     },
-     boundary: {
+    boundary: {
       width: 200,
       height: 200
-  }
+    }
   });
-  $('#modal_image_pop').on('shown.bs.modal', function(){
+  $('#modal_image_pop').on('shown.bs.modal', function () {
     // alert('Shown pop');
     $uploadCrop.croppie('bind', {
-          url: rawImg
-        }).then(function(){
-          console.log('jQuery bind complete');
-        });
+      url: rawImg
+    }).then(function () {
+      console.log('jQuery bind complete');
+    });
   });
   $('.contragent_single_picture').on('change', function () {
-     imageId = $(this).data('id'); tempFilename = $(this).val();
+    imageId = $(this).data('id'); tempFilename = $(this).val();
     $('#cancelCropBtn').data('id', imageId); readFile(this);
- });
+  });
 
   $('#cropImageBtn').on('click', function (ev) {
     $uploadCrop.croppie('result', {
       type: 'base64',
       format: 'jpeg',
-      size: {width: 120, height: 120}
+      size: { width: 120, height: 120 }
     }).then(function (resp) {
       $('.contragent_single_picture').attr('src', resp);
       $('#modal_image_pop').modal('hide');
     });
 
   });
-  
 
-  $(".file-upload").on('change', function(){
-      readURL(this);
+
+  $(".file-upload").on('change', function () {
+    readURL(this);
   });
-  
-  $(".upload-button").on('click', function() {
-     $(".file-upload").click();
+
+  $(".upload-button").on('click', function () {
+    $(".file-upload").click();
   });
-     });   
+});
 // phone mask end
 
 
@@ -156,15 +157,15 @@ $(document).ready(function(){
 
 
 
-  
+
 $(function () {
 
   'use strict';
 
   var aside = $('.side-nav'),
-      showAsideBtn = $('.show-side-btn'),
-      contents = $('#contents'),
-      _window = $(window)
+    showAsideBtn = $('.show-side-btn'),
+    contents = $('#contents'),
+    _window = $(window)
 
   showAsideBtn.on("click", function () {
     $("#" + $(this).data('show')).toggleClass('show-side-nav');
@@ -316,7 +317,7 @@ $(function () {
         showLine: true,
         data: [0, 40, 10, 30, 10, 20, 15, 20],
         pointBackgroundColor: 'transparent',
-      },{
+      }, {
         label: "Lost",
         fill: false,
         lineTension: .5,
@@ -327,28 +328,28 @@ $(function () {
         data: [40, 0, 20, 10, 25, 15, 30, 0],
         pointBackgroundColor: 'transparent',
       },
-                 {
-                   label: "Lost",
-                   fill: false,
-                   lineTension: .5,
-                   pointColor: "white",
-                   borderColor: '#f0ad4e',
-                   borderWidth: 0,
-                   showLine: true,
-                   data: [10, 40, 20, 5, 35, 15, 35, 0],
-                   pointBackgroundColor: 'transparent',
-                 },
-                 {
-                   label: "Lost",
-                   fill: false,
-                   lineTension: .5,
-                   pointColor: "white",
-                   borderColor: '#337ab7',
-                   borderWidth: 0,
-                   showLine: true,
-                   data: [0, 30, 10, 25, 10, 40, 20, 0],
-                   pointBackgroundColor: 'transparent',
-                 }]
+      {
+        label: "Lost",
+        fill: false,
+        lineTension: .5,
+        pointColor: "white",
+        borderColor: '#f0ad4e',
+        borderWidth: 0,
+        showLine: true,
+        data: [10, 40, 20, 5, 35, 15, 35, 0],
+        pointBackgroundColor: 'transparent',
+      },
+      {
+        label: "Lost",
+        fill: false,
+        lineTension: .5,
+        pointColor: "white",
+        borderColor: '#337ab7',
+        borderWidth: 0,
+        showLine: true,
+        data: [0, 30, 10, 25, 10, 40, 20, 0],
+        pointBackgroundColor: 'transparent',
+      }]
     },
   });
 
@@ -370,26 +371,26 @@ function DropDown(el) {
 
 DropDown.prototype = {
   initEvents: function () {
-      var obj = this;
-      obj.dd.on('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          $(this).toggleClass('active');
-      });
-      obj.opts.on('click', function () {
-          var opt = $(this);
-          obj.val = opt.text();
-          obj.index = opt.index();
-          obj.placeholder.text(obj.val);
-          opt.siblings().removeClass('selected');
-          opt.filter(':contains("' + obj.val + '")').addClass('selected');
-      }).change();
+    var obj = this;
+    obj.dd.on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).toggleClass('active');
+    });
+    obj.opts.on('click', function () {
+      var opt = $(this);
+      obj.val = opt.text();
+      obj.index = opt.index();
+      obj.placeholder.text(obj.val);
+      opt.siblings().removeClass('selected');
+      opt.filter(':contains("' + obj.val + '")').addClass('selected');
+    }).change();
   },
   getValue: function () {
-      return this.val;
+    return this.val;
   },
   getIndex: function () {
-      return this.index;
+    return this.index;
   }
 };
 
@@ -398,8 +399,21 @@ $(function () {
   var dd1 = new DropDown($('#noble-gases'));
   // var dd2 = new DropDown($('#other-gases'));
   $(document).click(function () {
-      // close menu on document click
-      $('.wrap-drop').removeClass('active');
+    // close menu on document click
+    $('.wrap-drop').removeClass('active');
   });
 });
 
+
+
+$(document).ready(function() {
+  $(".times-div .begin-time-choices").click(function() {
+    $(".times-div input").val($(this).text())
+  })
+  $(".times-div-2 .begin-time-choices").click(function() {
+    $(".times-div-2 input").val($(this).text())
+  })
+  $(".times-div-3 .begin-time-choices").click(function() {
+    $(".times-div-3 input").val($(this).text())
+  })
+})

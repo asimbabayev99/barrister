@@ -172,18 +172,21 @@
               </li>
               <li class="sidebar-dropdown">
                 <a href="#">
-                  <i class="far fa-calendar-check"></i>
+                  <i class="far fa-handshake"></i>
                   <span>Görüşlər</span>
                 </a>
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href="{% url 'calendar' %}">Təqvim</a>
+                      <a href="{% url 'calendar-appointments' %}">Təqvim</a>
                     </li>
-                   
                     <li>
-                      <a href="##">Filtrlər</a>
+                      <a href="{% url 'barrister-new-appointment' %}">Yeni görüş</a>
                     </li>
+                    <li>
+                      <a href="##">Ümumi görüşlər</a>
+                    </li> 
+                    
                   </ul>
                 </div>
               </li>
@@ -197,12 +200,7 @@
                     <li>
                       <a href="{% url 'calendar-events' %}">Təqvim</a>
                     </li>
-                    <li>
-                      <a href="{% url 'barrister-new-appointment' %}">Yeni görüş</a>
-                    </li>
-                    <li>
-                      <a href="##">Ümumi görüşlər</a>
-                    </li> 
+                 
                     <li>
                       <a href="##">Filtrlər</a>
                     </li>

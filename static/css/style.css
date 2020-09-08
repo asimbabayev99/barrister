@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Noto+Sans+JP&display=swap');
 body {
   /* margin: 40px 10px; */
   padding: 0;
@@ -2046,7 +2047,7 @@ padding-left: 10px;
   font-size: 18px;
   color: #404040 !important;
   /* font-weight: bold; */
-  background-color: rgba(189, 195, 199, 0.5) !important;
+  /* background-color: rgba(189, 195, 199, 0.5) !important; */
   color: #404040 !important;
   text-align: center;
 }
@@ -2560,5 +2561,109 @@ padding-left: 10px;
 
 /*Send mail end  */
 
+s
+/*----    Calendar appointments begin  ----*/
+.client-text {
+  color: gray;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 19px !important;
+  background-color: rebeccapurple;
+  
+}
+.calendar-modal {
+  padding-bottom: 0px;
+  font-family: 'Noto Sans JP', sans-serif;
+  /* font-size: 13px; */
+}
+.calendar-modal input {
+  box-shadow: none !important;
+  background-color: #eee;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.calendar-modal label {
+  color: gray !important;
+  font-size: 13px !important;
+}
+.calendar-modal input::placeholder  {
+  color: rgba(0, 0, 0, 0.5);
+}
+.calendar-modal input:focus {
+  background-color: hsla(197, 100%, 50%, 0.33) !important;
+  color: hsla(197, 100%, 26%, 0.91);
+  border-color: hsla(197, 100%, 26%, 0.91) !important;
+}
+.calendar-modal input:focus input::placeholder {
+  color: hsla(197, 100%, 26%, 0.91) !important;
+}
+.calendar-modal .dropdown-input {
+  padding-right: 5px;background-origin: content-box;background-size: 10px 10px;background-repeat: no-repeat;background-position: right;background-image: url('https://geniear.com/wp-content/uploads/2017/07/down-arrow-png-hd.png');
+  cursor: pointer;
+}
 
+.calendar-note {
+  color: hsla(197, 100%, 26%, 0.91);
+  cursor: pointer;
+}
+.calendar-note:hover {
+  color: hsla(197, 100%, 14%, 0.91);
+}
+.calendar-modal button {
+  /* padding: 4px 8px !important; */
+  font-size: 13px;
+}
 
+.calendar-modal .btn-light {
+  background-color: #eee;
+}
+.begin-time-main {
+  width: 100px;
+  height: 200px;
+  background-color: red;
+  position: absolute;
+  visibility: hidden;
+  transition: .2s;
+  opacity: 1;
+}
+
+.calendar-modal .drop .dropdown-menu {
+  min-width: 10px;
+  height: 200px;
+  overflow: auto;
+  padding: 0px;
+}
+.calendar-modal .times-div-3 .dropdown-menu {
+  min-width: 250px;
+  /* height: 200px; */
+  overflow: auto;
+  padding: 0px;
+}
+
+.begin-time-choices {
+  height: 33px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  padding-left: 10px;
+  
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+.times .begin-time-choices {
+  padding-right: 48px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.times-2 .begin-time-choices {
+  padding-right: 32px;
+}
+.begin-time-choices:hover {
+  background-color: hsla(197, 100%, 50%, 0.33);
+  color: hsla(197, 100%, 26%, 0.91);
+}
+
+.times-div-3 {
+  min-height: 10px !important ;
+}
+/*----    Calendar appointments end    ----*/
