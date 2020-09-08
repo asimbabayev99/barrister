@@ -2602,11 +2602,9 @@ s
 }
 
 .calendar-note {
-  color: hsla(197, 100%, 26%, 0.91);
-  cursor: pointer;
-}
-.calendar-note:hover {
-  color: hsla(197, 100%, 14%, 0.91);
+  color: gray;
+  /* cursor: pointer; */
+  font-size: 13px;
 }
 .calendar-modal button {
   /* padding: 4px 8px !important; */
@@ -2657,6 +2655,7 @@ s
 
 .times-2 .begin-time-choices {
   padding-right: 32px;
+  
 }
 .begin-time-choices:hover {
   background-color: hsla(197, 100%, 50%, 0.33);
@@ -2666,4 +2665,20 @@ s
 .times-div-3 {
   min-height: 10px !important ;
 }
+
+.calendar-form-group textarea {
+  max-height: 100px;
+  resize: vertical;
+  box-shadow: none !important;
+  font-size:14px ;
+  background-color: #eee;
+}
+
+.calendar-form-group textarea:focus {
+ background-color: #dce8fc;
+ color: hsla(197, 100%, 26%, 0.91);
+ border-color: hsla(197, 100%, 26%, 0.91);
+}
+
+
 /*----    Calendar appointments end    ----*/
