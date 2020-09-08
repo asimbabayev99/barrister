@@ -79,14 +79,26 @@ def single_view(request, id):
 
 
 @login_required(login_url='/account/login')
-def calendar_view(request):
+def calendar_events(request):
     categories = EventCategory.objects.all()
 
     context = {
         'categories': categories
     }
 
-    return render(request, "calendar-date.html", context=context)
+    return render(request, "calendar-events.html", context=context)
+
+
+
+@login_required(login_url='/account/login')
+def calendar_appointments(request):
+    statuses = AppointmentStatus.objects.all()
+
+    context = { 
+        'statuses': statuses
+    }
+
+    return render(request, 'calendar-appointments.html', context=context)
 
 
 
