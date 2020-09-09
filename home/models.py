@@ -442,7 +442,7 @@ class Contact(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=64)
     phone = models.CharField(max_length=16, null=True, blank=True)
-    email = models.CharField(max_length=50,blank=True,null=True)
+    email = models.EmailField(blank=True,null=True)
     adress = models.CharField(max_length=50,blank=True,null=True)
     date = models.DateTimeField(auto_now_add=True)
 
