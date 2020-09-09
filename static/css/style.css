@@ -2589,7 +2589,7 @@ s
   color: rgba(0, 0, 0, 0.5);
 }
 .calendar-modal input:focus {
-  background-color: hsla(197, 100%, 50%, 0.33) !important;
+  background-color: #dce8fc;
   color: hsla(197, 100%, 26%, 0.91);
   border-color: hsla(197, 100%, 26%, 0.91) !important;
 }
@@ -2649,12 +2649,12 @@ s
   border-bottom: 1px solid #ddd;
 }
 .times .begin-time-choices {
-  padding-right: 48px;
+  padding-right: 54px;
   color: rgba(0, 0, 0, 0.5);
 }
 
 .times-2 .begin-time-choices {
-  padding-right: 32px;
+  padding-right: 37px;
   
 }
 .begin-time-choices:hover {
@@ -2678,6 +2678,21 @@ s
  background-color: #dce8fc;
  color: hsla(197, 100%, 26%, 0.91);
  border-color: hsla(197, 100%, 26%, 0.91);
+}
+
+#time_input {
+  font-size: 14px;
+  background-color: #eee;
+}
+#time_input:focus {
+  background-color: #16c7ff;
+  color: hsla(197, 100%, 26%, 0.91);
+  border: 1px solid hsla(197, 100%, 26%, 0.91);
+}
+
+.calendar-modal .alert {
+  font-size: 13px;
+  display: none;
 }
 
 

@@ -24,29 +24,33 @@
         <div class="modal-content">
 
           <div class="modal-body calendar-modal">
+            <form>
             <span class="client-text" style="font-size: 16px;color: gray;">Client</span>
-            <div class="form-group my-2">
-              <input type="text" class="form-control" placeholder="Ad" name="" id="">
-            </div>
-            <div class="form-group my-2">
-              <input type="email" class="form-control" placeholder="E-mail" name="" id="">
-            </div>
-            <div class="form-group my-2">
-              <input type="tel" class="form-control"  placeholder="Telefon" name="" id="phone_input">
-            </div>
-            <div class="form-group my-2">
-              <input type="tel" class="form-control" placeholder="Ünvan" name="" id="">
-            </div>
             <div class="form-group">
+              <input   type="text" class="form-control" placeholder="Ad" name="" id="name_input" >
+              <div id="name_alert" class="alert mt-1 alert-dismissible alert-warning">
+                Bu sahə boş olmamalıdır
+              </div>
+            </div>
+            <div class="form-group my-2 mt-1">
+              <input  type="email" class="form-control" required placeholder="E-mail" name="" id="email_input">
+            </div>
+            <div class="form-group my-2">
+              <input type="tel"  class="form-control"  placeholder="Telefon" name="" id="phone_input">
+            </div>
+            <div class="form-group my-2">
+              <input type="text" class="form-control" placeholder="Ünvan" name="" id="address_input">
+            </div>
+            <div class="form-group mb-1">
               <div class="mr-3 float-left" style="width: 40%;">
-                <label for="">Date</label>
-                <input type="tex" class="form-control datetimepicker-input dropdown-input"  id="date_input" data-target="#date_input" data-toggle="datetimepicker"> 
+                <label for="">Gün</label>
+                <input type="tex"  class="form-control datetimepicker-input dropdown-input validation-date"  id="date_input" data-target="#date_input" data-toggle="datetimepicker"> 
               </div>
               <div class="float-left" style="width: 30%;">
                 <label for="">Saat</label>
                 <div class="dropdown drop times-div">
-                  <input  class="form-control dropdown-input " data-toggle="dropdown"/>
-                    
+                  <div required id="time_input" class="validation-time form-control dropdown-input " data-toggle="dropdown"></div>
+                  
                   <div class="dropdown-menu times">
                     <div class="begin-time-choices">00:00</div>
                     <div class="begin-time-choices">00:15</div>
@@ -145,12 +149,14 @@
                     
                   </div>
                 </div>
+                
               </div>
+            
               <div  style="width: 30%;" >
                 <label for="" class="mt-2">Müddət</label>
                 
                 <div class="dropdown drop times-div-2">
-                  <input  class="form-control dropdown-input " data-toggle="dropdown"/>
+                  <div id="time_input" class="validation-interval time-input form-control dropdown-input" data-toggle="dropdown"></div>
                     
                   <div class="dropdown-menu times-2">
                     <div class="begin-time-choices">5 dəq</div>
@@ -177,11 +183,15 @@
                 </div>
               </div>
             </div>
+            <div id="date-alert-2" class="alert  alert-dismissible alert-warning">
+             Gün, Saat və ya müddət seçilməyib
+            </div>
             <div class="form-group">
               <div >
                 <label for="" class="">Rezervasiya vəziyyəti</label>
                 <div class="dropdown  times-div-3">
-                  <input  class="form-control dropdown-input " data-toggle="dropdown"/>
+                  <div required id="time_input" class=" form-control dropdown-input validation-reserv" data-toggle="dropdown"></div>
+
                     
                   <div class="dropdown-menu times-2">
                     <div class="begin-time-choices">Təsdiqləndi</div>
@@ -189,6 +199,9 @@
                     <div class="begin-time-choices">Müştəri gəlmədi</div>
                     
                   </div>
+                </div>
+                <div id="last-alert" class="alert mt-1 alert-dismissible alert-warning ">
+                  Bu sahə boş olmamalıdır
                 </div>
               </div>
             </div>
@@ -202,9 +215,12 @@
             <div class="form-group">
               <div class="d-flex justify-content-end">
                 <button class="btn btn-light mr-1" data-dismiss="modal">Ləğv et</button>
-                <button class="btn btn-primary">Yadda saxla</button>
+                <button class="btn btn-primary calendar-save-button" >Yadda saxla</button>
               </div>
             </div>
+
+
+            </form>
           </div>
 
         </div>
@@ -229,6 +245,7 @@
     <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
     <script src="{% static 'js/fullcalendar-date.js' %}"></script>
+    <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     
     {% endblock scripts %}
