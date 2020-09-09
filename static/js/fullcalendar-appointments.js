@@ -49,7 +49,7 @@ $(document).ready(function () {
             $("#exampleModalLong").modal("hide");
             $.ajax({
                 type: "POST",
-                url: "api/appointments/",
+                url: "/api/appointments/",
                 headers: {
                     "X-CSRFToken": getCookie("csrftoken")
                 },
