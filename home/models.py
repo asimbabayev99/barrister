@@ -437,65 +437,44 @@ class City(models.Model):
 
 
 
-class AppointmentStatus(models.Model):
-    name = models.CharField(max_length=32, null=False, blank=False, unique=True)
 
-    def __str__(self):
-        return self.name
+class Contact(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=64)
+    phone = models.CharField(max_length=16, null=True, blank=True)
+    email = models.EmailField(blank=True,null=True)
+    adress = models.CharField(max_length=50,blank=True,null=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         indexes = [
-            models.Index(fields=['name', ])
-        ]    
+            models.Index(fields=['user', 'name']),
+        ]
 
+
+
+APPOINTMENT_STATUSES = [
+    ('completed', 'completed'),
+    ('not arrived', 'not arrived'),
+    ('arrived', 'arrived')
+]
 
 
 class Appointment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    first_name = models.CharField(max_length=32, null=False, blank=False)
-    last_name = models.CharField(max_length=32, null=False, blank=False)
-    middle_name = models.CharField(max_length=32, null=True, blank=True)
-    email = models.EmailField(max_length=256, null=True, blank=True)
-    phone = models.CharField(max_length=16, null=True, blank=True)
-    country = models.CharField(max_length=128, null=True, blank=True)
-    city = models.CharField(max_length=32, null=True, blank=True)
-    zip = models.CharField(max_length=8, null=True, blank=True)
+    contact = models.ForeignKey(Contact, on_delete=models.SET_NULL, null=True, blank=True)
+    status = models.CharField(max_length=32, choices=APPOINTMENT_STATUSES, null=False, blank=False)
     detail = models.CharField(max_length=256, null=True, blank=True)
-    date = models.DateField(null=False)
-    time = models.TimeField(null=True, blank=True)
-    # status = models.ForeignKey(AppointmentStatus, on_delete=models.CASCADE)
+    address = models.CharField(max_length=32, null=True, blank=True)
+    start = models.DateTimeField(null=False, blank=False)
+    end = models.DateTimeField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         indexes = [
-            models.Index(fields=['user', ]),
+            models.Index(fields=['user', 'status', 'start', 'end']),
         ]
 
-
-class Client(models.Model):
-    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
-    first_name = models.CharField(max_length=250,blank=True,null=True)
-    last_name = models.CharField(max_length=250,blank=True,null=True)
-    father_name = models.CharField(max_length=250,blank=True,null=True)
-    phone = models.CharField(max_length=20,blank=True,null=True)
-    email = models.EmailField( max_length=254,blank=True,null=True)
-    date = models.DateField(auto_now_add=False,blank=True,null=True)
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['user',])
-        ]
-
-
-
-class Contact(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50,blank=True,null=True)
-    phone = models.CharField(max_length=20)
-    phone2 = models.CharField(max_length=20,blank=True,null=True)
-    email = models.CharField(max_length=50,blank=True,null=True)
-    adress = models.CharField(max_length=50,blank=True,null=True)
-    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
 
 
 
