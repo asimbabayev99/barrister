@@ -468,8 +468,7 @@ class Appointment(models.Model):
     start = models.DateTimeField(null=False, blank=False)
     end = models.DateTimeField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
-    remind_me = models.DateTimeField(blank=True, null=True)    
-    # remind_me = models.DurationField(blank=True, null=True)
+    remind_me = models.DateTimeField(blank=True, null=True)  
 
     class Meta:
         indexes = [
