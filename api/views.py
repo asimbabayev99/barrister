@@ -656,7 +656,7 @@ class AppointmentAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=200)
         else:
-            logger.exception("Errors: " + str(serializer.errors))
+            print(serializer.errors)
             return Response(serializer.errors, status=400)
 
 
@@ -725,7 +725,7 @@ class ContactAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=200)
         else:
-            logger.exception("Errors: " + str(serializer.errors))
+            print(serializer.errors)
             return Response(serializer.errors, status=400)
 
     
@@ -741,7 +741,7 @@ class ContactAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            logger.exception("Errors: " + str(serializer.errors))
+            print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
@@ -803,7 +803,7 @@ class EventAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=200)
         else:
-            logger.exception("Errors: " + str(serializer.errors))
+            print(serializer.errors)
             return Response(serializer.errors, status=400)
 
 
@@ -819,7 +819,7 @@ class EventAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
-            logger.exception("Errors: " + str(serializer.errors))
+            print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 

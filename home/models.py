@@ -169,7 +169,6 @@ class Event(models.Model):
     description = models.CharField(max_length=256, null=True, blank=True)
     category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
     location = models.CharField(max_length=256)
-    completed = models.BooleanField(default=False)
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     start = models.DateTimeField()
@@ -469,6 +468,8 @@ class Appointment(models.Model):
     start = models.DateTimeField(null=False, blank=False)
     end = models.DateTimeField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
+    remind_me = models.DateTimeField(blank=True, null=True)    
+    # remind_me = models.DurationField(blank=True, null=True)
 
     class Meta:
         indexes = [
