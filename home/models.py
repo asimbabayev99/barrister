@@ -522,7 +522,7 @@ FOLDER_CHOICES = [
 class EmailAccount(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     email = models.EmailField(null=False, blank=False)
-    password = models.CharField(max_length=64, null=False, blank=False)
+
     token = models.CharField(max_length=100,blank=True,null=True)
     
 

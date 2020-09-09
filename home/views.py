@@ -33,7 +33,6 @@ def index_view(request):
     barristers = CustomUser.objects.filter(role__name='Barrister').prefetch_related('profile', 'profile__job_category').order_by('-id')[:4]
     news = News.objects.all().order_by('-date')[:5]
     news = news.values('title', 'date', 'image', 'slug')
-    synchronize_mail.delay()
     if request.user.is_authenticated:
         basket_count = Basket.objects.filter(user=request.user).count()
     else:
