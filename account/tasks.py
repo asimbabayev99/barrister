@@ -44,14 +44,19 @@ def GenerateOAuth2String(email, access_token, base64_encode=True):
 
 
 @shared_task(name = "synchronize_mail")
-def synchronize_mail(email_address, token):
+def synchronize_mail():
+  for email in EmailAccount.objects.all():
+
+
     print("start to synchronize mail")
     server = 'imap.yandex.ru'
     mail = imaplib.IMAP4_SSL(server)
-    print(email_address,token,GenerateOAuth2String(email_address,token,base64_encode=False))
-    mail.authenticate('XOAUTH2',lambda x: GenerateOAuth2String(email_address,token,base64_encode=False))
+    try:
+      mail.authenticate('XOAUTH2',lambda x: GenerateOAuth2String(email.email,email.token,base64_encode=False))
+    except:
+      continue
     mail_folders = ['Inbox','Drafts','Sent','Trash']
-    user = EmailAccount.objects.get(email=email_address).user
+    user = EmailAccount.objects.get(email=email.email).user
 
     # loop th rough mail folders
     for folder in mail_folders:
