@@ -89,10 +89,9 @@ def calendar_events(request):
 
 @login_required(login_url='/account/login')
 def calendar_appointments(request):
-    statuses = AppointmentStatus.objects.all()
 
     context = { 
-        'statuses': statuses
+        'statuses': APPOINTMENT_STATUSES,
     }
 
     return render(request, 'calendar-appointments.html', context=context)

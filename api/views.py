@@ -20,6 +20,7 @@ from django.contrib.auth.models import Permission
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import *
 from shop.models import *
+import logging
 
 
 class UserAPI(APIView):
@@ -646,7 +647,11 @@ class AppointmentAPIView(APIView):
         context = {
             "request": self.request,
         }
-        serializer = self.serializer_class(data=request.data, context=context)
+        if isinstance(request.data.get('contact'), dict):
+            serializer = AppointmentContactSerializer(data=request.data, context=context)
+        else:
+            serializer = self.serializer_class(data=request.data, context=context)
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=200)
@@ -680,16 +685,85 @@ class AppointmentAPIView(APIView):
         obj.delete()
         return Response({"message": "Object with id `{}` has been deleted.".format(id)}, status=204)
 
+
+
+
+
+class ContactListView(ListAPIView):
+
+    serializer_class = ContactSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    pagination_class = StandardResultsSetPagination
+
+    def get_queryset(self):
+        return Contact.objects.filter(user=request.user).order_by('-date')
+
+
+
+class ContactAPIView(APIView):
+    serializer_class = ContactSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+
+    def get(self, request, id):
+        contact = get_object_or_404(Contact.objects.all(), id=id)
+        serializer = self.serializer_class(contact)
+        return Response(serializer.data)
+
+    def post(self, request):
+        # check permissions
+        user_permissions = request.user.get_group_permissions()
+        if 'home.add_contact' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403) 
+
+        context = {
+            "request": self.request,
+        }
+        serializer = self.serializer_class(data=request.data, context=context)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=400)
+
+    
+    def put(self, request):
+        # check permissions
+        saved_obj = get_object_or_404(Contact.objects.all(), id=id)
+        user_permissions = request.user.get_group_permissions()
+        if 'home.change_contact' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403)    
+    
+        serializer = self.serializer_class(instance=saved_obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    def delete(self, request, id):
+        # check permissions
+        obj = get_object_or_404(Contact.objects.all(), id=id)
+        user_permissions = request.user.get_group_permissions()
+        if 'home.delete_contact' not in user_permissions:
+            return Response({"detail": "Permission denied"}, status=403)
+        # Get object with this id
+        obj.delete()
+        return Response({"message": "Object with id `{}` has been deleted.".format(id)}, status=204)
+
+
+
+
     
 
 class EventListView(ListAPIView):
-
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
-    # filter_backends = [DjangoFilterBackend,OrderingFilter]
-    # filterset_fields = ['category',]
-    # ordering_fields = ['category',]
     pagination_class = None
 
     def get_queryset(self):
@@ -745,6 +819,7 @@ class EventAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         else:
+            print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 
