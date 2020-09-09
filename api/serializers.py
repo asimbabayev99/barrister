@@ -261,10 +261,64 @@ class EventSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class AppointmentSerializer(serializers.ModelSerializer):
-    date = serializers.DateField(format="%m/%d/%Y")
-    time = serializers.TimeField(format="%H:%M")
+
+class ContactSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.email = validated_data.get('email', instance.email)
+        instance.address = validated_date.get('address', instance.address)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Contact
+        fields = '__all__'
+        
+    
+
+
+# serializer with nested contact serializer
+class AppointmentContactSerializer(serializers.ModelSerializer):
+    contact = ContactSerializer()
+    start = serializers.DateField(format="%d/%m/%Y %H:%M")
+    end = serializers.DateField(format="%d/%m/%Y %H:%M")
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
+    def update(self, instance, validated_data):
+        instance.status = validated_data.get('status', instance.status)
+        instance.detail = validated_data.get('detail', instance.detail)
+        instance.address = validated_data.get('address', instance.address)
+        instance.start = validated_data.get('start', instance.start)
+        instance.end = validated_data.get('end', instance.end)
+        instance.save()
+        return instance
+
+
+    class Meta:
+        model = Appointment
+        fields = '__all__'
+
+
+
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    start = serializers.DateField(format="%d/%m/%Y %H:%M")
+    end = serializers.DateField(format="%d/%m/%Y %H:%M")
+    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
+    def update(self,instance,validated_data):
+        instance.contact = validated_data.get('contact', instance.contact)
+        instance.status = validated_data.get('status', instance.status)
+        instance.detail = validated_data.get('detail', instance.detail)
+        instance.address = validated_data.get('address', instance.address)
+        instance.start = validated_data.get('start', instance.start)
+        instance.end = validated_data.get('end', instance.end)
+        instance.save()
+        return instance
+
 
     class Meta:
         model = Appointment

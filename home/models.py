@@ -444,6 +444,7 @@ class Contact(models.Model):
     phone = models.CharField(max_length=16, null=True, blank=True)
     email = models.CharField(max_length=50,blank=True,null=True)
     adress = models.CharField(max_length=50,blank=True,null=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         indexes = [
@@ -464,7 +465,7 @@ class Appointment(models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=32, choices=APPOINTMENT_STATUSES, null=False, blank=False)
     detail = models.CharField(max_length=256, null=True, blank=True)
-    
+    address = models.CharField(max_length=32, null=True, blank=True)
     start = models.DateTimeField(null=False, blank=False)
     end = models.DateTimeField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
