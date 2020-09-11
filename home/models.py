@@ -169,7 +169,6 @@ class Event(models.Model):
     description = models.CharField(max_length=256, null=True, blank=True)
     category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
     location = models.CharField(max_length=256)
-    completed = models.BooleanField(default=False)
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     start = models.DateTimeField()
