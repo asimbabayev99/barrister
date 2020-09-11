@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import api
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -176,7 +177,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-
+CELERY_IMPORTS = ('account.tasks',)
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
@@ -185,8 +186,8 @@ CELERY_TASK_SERIALIZER = 'json'
 
 from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
-    # 'check_mails_schedule': {
-    #     'task': ' check_mails', 
-    #     'schedule': 10.0,
-    # },
+    'synchronize_mail_schedule': {
+        'task': "synchronize_mail", 
+        'schedule': crontab(minute="*"),
+    },
 }

@@ -468,6 +468,8 @@ class Appointment(models.Model):
     start = models.DateTimeField(null=False, blank=False)
     end = models.DateTimeField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
+    remind_me = models.DateTimeField(blank=True, null=True)    
+    # remind_me = models.DurationField(blank=True, null=True)
 
     class Meta:
         indexes = [
@@ -506,7 +508,7 @@ FOLDER_CHOICES = [
 class EmailAccount(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     email = models.EmailField(null=False, blank=False)
-    password = models.CharField(max_length=64, null=False, blank=False)
+
     token = models.CharField(max_length=100,blank=True,null=True)
     
 
