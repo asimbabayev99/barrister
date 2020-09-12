@@ -40,7 +40,12 @@
                 <form>
 
                   <div class="form-group">
-                    <input autocomplete="off" type="text" class="form-control" placeholder="Ad" name="" id="name_input">
+                    <input autocomplete="off" type="text" class="form-control 2" placeholder="Ad" name="" id="name_input" style="position: relative;">
+                    <div class="auto-complete-name  text-muted shadow-lg border border-secondary rounded auto_comp" style="display: none;border-color: #555;padding: 10px !important;position: absolute;min-height: 40px;width: 90%;background-color: #ddd;">
+                      <span >musa</span>
+                      <br>
+                      <span >musahesenli02@gmail.com</span>
+                    </div>
                     <div id="name_alert" class="alert mt-1 al ert-dismissible alert-warning">
                       Bu sahə boş olmamalıdır
                     </div>
@@ -206,11 +211,11 @@
                     <div>
                       <label for="" class="">Rezervasiya vəziyyəti</label>
                       <div class="dropdown  times-div-3">
-                        <div required id="time_input" class=" form-control dropdown-input validation-reserv"
+                        <div required id="time_input" class=" form-control dropdown-input validation-reserv client-status"
                           data-toggle="dropdown"></div>
 
 
-                        <div class="dropdown-menu times-2">
+                        <div class="dropdown-menu times-2" id="chosen_1">
                           <div class="begin-time-choices">Təsdiqləndi</div>
                           <div class="begin-time-choices">Müştəri gəldi</div>
                           <div class="begin-time-choices">Müştəri gəlmədi</div>
@@ -328,10 +333,13 @@
                         
                       </div>
                     </div>
-                    <div  style="width: 90%;" class="pl-2">
-                      <input type="text" class="form-control" id="event_title" placeholder="Başlıq">
+                    <div  style="width: 90%;position: relative;" class="pl-2">
+                      <input autocomplete="off" type="text" required class="form-control" id="event_title" placeholder="Başlıq">
+                      
                     </div>
                   </div>
+                 
+                    
 
                   <div class="align-items-center d-flex my-1">
                     <input type="checkbox" name="" class="mr-2" id="whole_day_checkbox">
@@ -341,31 +349,34 @@
                   <div>
                     <div style="width: 60%;float: left;" class="form-group">
                       <label for="">Başlama tarixi</label>
-                      <input type="text" data-toggle="datetimepicker" data-target="#modal_2_begin" id="modal_2_begin" class="datetimepicker-input dropdown-input form-control">
+                      <input autocomplete="off" required type="text" data-toggle="datetimepicker" data-target="#modal_2_begin" id="modal_2_begin" class="datetimepicker-input dropdown-input form-control">
                     </div>
                     <div style="width: 40%;" class="float-left form-group pl-2">
                       <label for="">Saat</label>
-                      <input type="text" data-toggle="datetimepicker" data-target="#asim" id="asim" class="datetimepicker-input dropdown-input form-control">
+                      <input autocomplete="off" required type="text" data-toggle="datetimepicker" data-target="#asim" id="asim" class="datetimepicker-input dropdown-input form-control">
                     </div>
                   </div>
                   <div>
                     <div style="width: 60%;float: left;" class="form-group">
                       <label for="">Bitmə tarixi</label>
-                      <input type="text" data-toggle="datetimepicker" data-target="#modal_2_end" id="modal_2_end" class="datetimepicker-input dropdown-input form-control">
+                      <input autocomplete="off" required type="text" data-toggle="datetimepicker" data-target="#modal_2_end" id="modal_2_end" class="datetimepicker-input dropdown-input form-control">
                     </div>
                     <div style="width: 40%;" class="float-left form-group pl-2">
                       <label for="">Saat</label>
-                      <input type="text" data-toggle="datetimepicker" data-target="#modal_2_end_hour" id="modal_2_end_hour" class="datetimepicker-input dropdown-input form-control ">
+                      <input autocomplete="off" required type="text" data-toggle="datetimepicker" data-target="#modal_2_end_hour" id="modal_2_end_hour" class="datetimepicker-input dropdown-input form-control ">
                     </div>
                   </div>
+                  
                   <div class="form-group">
+                    
                     <label for="">Ünvan</label>
-                    <input type="text" name="" id="event_location" class="form-control">
+                    <input required autocomplete="off" type="text" name="" id="event_location" class="form-control">
+                    
                   </div>
                   <div class="form-group">
                     <label for="">Xatırlatma seçin</label>
                     <div class="dropdown  times-div-3">
-                      <div required id="time_input" class=" form-control dropdown-input validation-reserv"
+                      <div required id="time_input" class="form-control dropdown-input validation-reserv remember-timer"
                         data-toggle="dropdown">
                         15 dəq əvvəl
                       </div>
@@ -382,13 +393,12 @@
                         <div class="begin-time-choices">12 saat əvvəl</div>
                         <div class="begin-time-choices">1 gün əvvəl</div>
                         <div class="begin-time-choices">1 həftə əvvəl</div>
-
                       </div>
                     </div>
                   </div>
                   <div class="form-group align-items-center justify-content-end d-flex">
-                    <button class="btn btn-light mr-2" data-dismiss="modal">Ləğv et</button>
-                    <button class="btn btn-primary" id="modal_2_save" data-dismiss="modal">Yadda saxla</button>
+                    <button class="btn btn-light mr-2" data-dismiss="modal">Bağla</button>
+                    <button class="btn btn-primary" id="modal_2_save" >Yadda saxla</button>
                   </div>
 
                  
