@@ -2288,6 +2288,11 @@ s
   background-color: rebeccapurple;
   
 }
+
+.sidebar-menu {
+  font-family: 'Noto Sans JP', sans-serif !important;
+
+}
 .calendar-modal {
   padding-bottom: 0px;
   font-family: 'Noto Sans JP', sans-serif;
@@ -2544,4 +2549,76 @@ s
   /* background-color: rebeccapurple; */
   text-align: center;
 }
+
+
+.hidden_informations {
+  min-height: 40px;
+  width: 100%;
+  color: #555;
+  /* background-color: red; */
+}
+
+.hidden_informations input.form-control {
+  box-shadow: none;
+  background-color: #eee;
+  font-size: 13px;
+}
+
+.hidden_informations input.form-control:focus {
+  background-color: #dce8fc;
+  border: 1px solid hsla(197, 100%, 26%, 0.91);
+  color: hsla(197, 100%, 26%, 0.91);
+}
+
+.hidden_informations .part-main {
+  height: 50px;
+  width: 100%;
+  /* background-color: hsla(197, 100%, 26%, 0.91); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden_informations .parts {
+  height: 100%;
+  width: 25%;
+  font-size: 13px;
+  display: flex;
+  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.nearest-reservations {
+  height: 100px;
+  width: 100%;
+  /* background-color: hsla(197, 100%, 50%, 0.33); */
+}
+
+.nearest-reservations .differ-time {
+  font-size: 11px;
+  color: gray;
+}
+
+.nearest-reservations .bold-text {
+  font-weight: bold;
+}
+
+.nearest-reservations .names-main {
+  border-left: 3px solid #007bff;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.nearest-reservations .hours_main {
+  font-size: 13px;
+}
 /*Clients end */
+
+
+.user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
