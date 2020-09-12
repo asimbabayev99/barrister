@@ -262,7 +262,7 @@ $(document).ready(function () {
   //click to save "save"
   $(".calendar-modal #modal_2_save").on("click", function (event) {
     var title = $(".calendar-modal #event_title").val();
-    var begin_gun, end_gun, bas_saat, bit_saat,location_modal;
+    var begin_gun, end_gun, bas_saat, bit_saat, location_modal;
     begin_gun = $(".calendar-modal #modal_2_begin").val();
     end_gun = $(".calendar-modal #modal_2_end").val();
     bas_saat = $(".calendar-modal #asim").val();
@@ -395,17 +395,36 @@ $(document).ready(function () {
 })
 
 
-    // Modal 2 validation end
+// Modal 2 validation end
 
 
 
 //  Auto complete modal in 1 begin
-  $(document).ready(function() {
-    $(".modal_1_name_input").keyup(function() {
-      $(".auto_comp").css({
-        display : "block !important"
-      })
+$(document).ready(function () {
+  $("#name_input").keyup(function () {
+    if ($(this).val() !== 0) {
+      $(".auto_name").css({
+        display: "block"
+      });
+    if($(this).val().length ===0 ) {
+      $(".auto_name").css({
+        display: "none"
+      });
+    }
+    }
+  });
+
+  $(".auto_name").click(function() {
+    $(".auto-information").css({
+      display : "block"
+    });
+    $(this).css({
+      display : "none"
+    });
+    $("#name_input, #email_input,#phone_input,#address_input").css({
+      display : "none"
     })
   })
+})
 
 //  Auto complete modal in 1 end

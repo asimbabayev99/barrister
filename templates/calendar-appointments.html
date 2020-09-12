@@ -38,16 +38,26 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane mt-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <form>
-
                   <div class="form-group">
-                    <input autocomplete="off" type="text" class="form-control 2" placeholder="Ad" name="" id="name_input" style="position: relative;">
-                    <div class="auto-complete-name  text-muted shadow-lg border border-secondary rounded auto_comp" style="display: none;border-color: #555;padding: 10px !important;position: absolute;min-height: 40px;width: 90%;background-color: #ddd;">
-                      <span >musa</span>
-                      <br>
-                      <span >musahesenli02@gmail.com</span>
+                    <div type="text" class="auto-information form-control my-2" id="time_input"> Asim Babayev</div>
+                    <div type="text" class="auto-information my-2 form-control" id="time_input">musahesenli02@gmail.com</div>
+
+                  </div>
+                  <div class="form-group mt-1 mb-0">
+                    <input type="text" autocomplete="off" class="form-control" id="name_input" placeholder="Ad">
+                    <div class="card mt-1 p-2 auto_name">
+                      <div class="card-body d-flex p-0">
+                        <div class="auto-img">
+                          AB
+                        </div>
+                        <div class="pl-3">
+                          <h6>Asim Babayev</h6>
+                          <span class="blockquote-footer">musahesenli02@gmail.com</span>
+                        </div>
+                      </div>
                     </div>
-                    <div id="name_alert" class="alert mt-1 al ert-dismissible alert-warning">
-                      Bu sahə boş olmamalıdır
+                    <div class="alert mt-1 mb-1 alert-warning" id="name_alert">
+                      Ad məcburidir
                     </div>
                   </div>
                   <div class="form-group my-2 mt-1">
