@@ -404,16 +404,3 @@ $(function () {
   });
 });
 
-
-
-$(document).ready(function() {
-  $(".times-div .begin-time-choices").click(function() {
-    $(".times-div #time_input").text($(this).text())
-  })
-  $(".times-div-2 .begin-time-choices").click(function() {
-    $(".times-div-2 #time_input").text($(this).text())
-  })
-  $(".times-div-3 .begin-time-choices").click(function() {
-    $(".times-div-3 #time_input").text($(this).text())
-  })
-})

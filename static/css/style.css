@@ -699,288 +699,6 @@ body {
 
 
 
-/*Calendar date begin*/
-#modal_main_divs {
-  height: 40px;
-  background-color: white;
-  padding: 0px ;
-  /* border-bottom: 1px solid red; */
-  line-height: 40px;
-  
-
-}
-
-.modal_title_main_left {
-  height: 100%;
-  background-color: #F50057;
-  color: white;
-  float: left;
-  line-height: 40px;
-  
-}
-
-.modal_title_right {
-  background-color:#F50057;
-  height: 100%;
-  color: white;
-  font-family: monospace;
-  float: right;
-  text-align: center;
-  line-height: 40px;
-}
-
-.modal_title_right span {
-  cursor: pointer;
-}
-
-.choose_icon_main {
-  height: 100%;
-  background-color: white;
-  float: left;
-  text-align: center;
-  /* cursor: pointer; */
-  line-height: 40px;
-}
-
-.add_event_name_main {
-  height: 100%;
-  /* background-color: black; */
-  float: left;
-  padding: 0px;
-}
-
-.add_event_name_main input {
-  width: 100%;
-  height: 80%;
-  outline: none;
-  border: none;
-  padding-left: 5px;
-  border-bottom: 1px solid rgba(103, 128, 159, 1);
-}
-.choose_all_day_main {
-  float: left;
-  height: 100%;
-  line-height: 40px;
-  text-align: center;
-}
-
-.choose_all_day_main input {
-  transform: translate(0px,2px);
-}
-
-.button_div_in button {
-  border-radius: 0px;
-  float: right;
-
-}
-
-#modal_main_divs_2 {
-  height: 60px;
-  background-color: white;
-  line-height: 60px;
-  text-align: right;
-}
-
-#modal_main_divs_2 button {
-  border-radius: 0px;
-  padding: 5px 40px;
-  background-color: #F50057;
-  margin-left: 10px;
-}
-
-.icon_part {
-  height: 100%;
-  /* background-color: blue; */
-  float: left;
-  margin-top: 17px;
-  width: 6%;
-}
-#modal_main_div_3 {
-  height: 36px;
-  /* background-color: red; */
-}
-
-.input_part {
-  height: 100%;
-  width: 47%;
-  float: left;
-  margin-top: 17px;
-}
-
-.input_part_2 {
-  height: 100%;
-  /* background-color: khaki; */
-  float: left;
-  width: 47%;
-  margin-top: 17px;
-}
-
-.input_part input[name="gun"],.input_part_2 input[name="gun"] {
-  width: 47%;
-  margin-right: 4px;
-  float: left;
-  /* height: 83%; */
-  outline: none;
-  border: none;
-  border-bottom: 1px solid rgba(103, 128, 159, 1);
-
-}
-.input_part span {
-  padding-right: 10px;
-}
-.input_part input[name="saat"],.input_part_2 input[name="saat"] {
-  width: 21%;
-  margin-right: 13px;
-  float: left;
-  /* height: 83%; */
-  outline: none;
-  border: none;
-  border-bottom: 1px solid rgba(103, 128, 159, 1);
-}
-
-.modal_time_icon {
-  height: 100%;
-  line-height: 40px;
-  /* background-color: blue; */
-  float: left;
-}
-
-.modal_slide_main {
-  height: 100%;
-  line-height: 40px;
-  /* border: 1px solid lightgray; */
-  text-align: center;
-  cursor: pointer;
-  float: left;
-}
-
-.select_bottom {
-  height: 320px;
-  /* background-color: red; */
-  z-index: 100;
-  padding: 0px;
-  /* position: absolute; */
-}
-.select_item {
-  height: 40px;
-  line-height: 40px;
-  background-color: #EEE;
-  /* border-bottom: 1px solid #3a3f48; */
-  color: #3a3f48;
-  transition: 0.2s;
-  /* border: 1px solid ; */
-}
-
-.select_item:hover {
-  background-color: #CDBA6D;
-}
-.slide_main {
-  border: 1px solid lightgray;
-  height: 40px;
-}
-
-#modal_main_div_4 {
-  height: 40px;
-  /* background-color: red; */
-
-  padding: 0px ;
-  /* padding-top: 10px; */
-  /* border-bottom: 1px solid red; */
-  line-height: 40px;
-}
-
-.mekan_icon {
-  float: left;
-}
-
-.mekan_input {
-  float: left;
-  
-}
-
-.mekan_input input {
-  height: 36px !important;
-  width: 100%;
-  border: none;
-  outline: none;
-  border-bottom: 1px solid #3a3f48;
-}
-
-#mekan_main {
-  height: 50px !important;
-  padding-bottom: 10px !important;
-}
-
-.icon_slider {
-  min-height:150px;
-  width:300px;
-  /* background-color: wheat; */
-  position: absolute;
-  z-index: 100;
-  margin-top: 40px;
-  display: none;
-  /* padding: 10px; */
-}
-
-.icon_slider i {
-  font-size: 30px;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.show_more {
-  height: 40px;
-  width: 100%;
-  background-color: #EEE;
-  line-height: 40px;
-  padding-right: 15px;
-  text-align: right;
-}
-
-.most_used_icons {
-  height: 110px;width: 100%;background-color: #EEE;
-  padding: 10px;
-}
-
-
-.less_icons {
-  height: 210px;
-  width: 100%;
-  background-color: #EEE;
-  padding: 10px;
-  display: none;
-}
-
-.less_main {
-  height: 40px;
-  width: 100%;
-  line-height: 40px;
-  text-align: right;
-  background-color: #EEE;
-  padding-right: 15px;
-  display: none;
-}
-.less_main span {
-  cursor: pointer;
-  color: #3a3f48;
-}
-.show_more span {
-  cursor: pointer;
-  color: #3a3f48;
-}
-
-.stylish_icon {
-  color: #F50057;
-  font-size: 16px;
-  margin-right: 10px;
-}
-
-.choose_icon_main span {
-  color: #CDBA6D;
-  font-size: 17px;
-}
-/* calendar date end */
-
 
 
 
@@ -2570,6 +2288,11 @@ s
   background-color: rebeccapurple;
   
 }
+
+.sidebar-menu {
+  font-family: 'Noto Sans JP', sans-serif !important;
+
+}
 .calendar-modal {
   padding-bottom: 0px;
   font-family: 'Noto Sans JP', sans-serif;
@@ -2697,3 +2420,226 @@ s
 
 
 /*----    Calendar appointments end    ----*/
+
+/*Calendar date begin*/
+
+.icon-selected {
+  height: 40px;
+  width: 40px;
+  background-color: hsla(197, 100%, 26%, 0.91);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-content-main {
+  height: 200px;
+  width: 100%;
+  background-color: indianred;
+  position: absolute;
+  top : 40px
+}
+
+.icon-select-main {
+  
+  height: 35px;
+  min-width: 10%;
+}
+
+.icons-contents-main {
+  min-width: 250px;
+  padding: 10px;
+}
+
+.icons {
+  width: 38px;
+  height: 38px;
+  /* border: 1px solid #F50057; */
+  float: left;
+  flex-direction: column;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-select-main div.form-control {
+  padding: 0px;
+};
+
+
+
+
+
+/* calendar date end */
+
+/*Clients begin */
+.clients-content {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.header {
+  height: 60px;
+  background-color:#eee;
+  align-items: center;
+  font-size: 20px;
+  display: flex;
+  margin-left: 16px !important;
+  color: #303f48;
+}
+
+.img-in-clients {
+  height: 70px;
+  width: 70px;
+  background-color: #F50057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  /* font-weight: bold; */
+  color: #fff;
+  margin-right: 10px;
+  border-radius: 5px;
+  
+}
+
+.show_more_btn {
+  font-size: 13px;
+  padding: 4px 8px;
+  /* border-radius: 0px; */
+}
+
+.client-modal-information .header-modal {
+  height: 80px;
+  width: 100%;
+  padding: 5px 15px;
+  display: flex;
+  /* align-items: center; */
+  /* background-color: #eee; */
+}
+
+.client-modal-information .modal-title {
+  font-size: 15px;
+
+}
+
+.img-in-modal {
+  height: 65px;
+  width: 65px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  color: #303f48;
+  justify-content: center;
+}
+
+.client-modal-information .modal-title-name {
+  font-size: 16px;
+}
+
+.body-modal-part {
+  width: 25%;
+  height: 60px;
+  padding: 10px 0px;
+  /* background-color: rebeccapurple; */
+  text-align: center;
+}
+
+
+.hidden_informations {
+  min-height: 40px;
+  width: 100%;
+  color: #555;
+  /* background-color: red; */
+}
+
+.hidden_informations input.form-control {
+  box-shadow: none;
+  background-color: #eee;
+  font-size: 13px;
+}
+
+.hidden_informations input.form-control:focus {
+  background-color: #dce8fc;
+  border: 1px solid hsla(197, 100%, 26%, 0.91);
+  color: hsla(197, 100%, 26%, 0.91);
+}
+
+.hidden_informations .part-main {
+  height: 50px;
+  width: 100%;
+  /* background-color: hsla(197, 100%, 26%, 0.91); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden_informations .parts {
+  height: 100%;
+  width: 25%;
+  font-size: 13px;
+  display: flex;
+  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.nearest-reservations {
+  height: 100px;
+  width: 100%;
+  /* background-color: hsla(197, 100%, 50%, 0.33); */
+}
+
+.nearest-reservations .differ-time {
+  font-size: 11px;
+  color: gray;
+}
+
+.nearest-reservations .bold-text {
+  font-weight: bold;
+}
+
+.nearest-reservations .names-main {
+  border-left: 3px solid #007bff;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.nearest-reservations .hours_main {
+  font-size: 13px;
+}
+/*Clients end */
+
+
+.user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+.auto-img {
+  width: 48px;
+  height: 48px;
+  background-color: #10773d;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  color: #fff;
+}
+
+.auto_name {
+  display: none;
+}
+
+.auto-information {
+  display: none;
+}
