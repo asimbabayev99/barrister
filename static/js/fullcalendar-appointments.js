@@ -175,7 +175,31 @@ $(document).ready(function () {
       $(".modal").find(".calendar-modal #profile .dropdown-menu").css({
         visibility: "visible",
         opacity: "1"
-      })
+      });
+      $(".modal").find(".calendar-modal .auto_name").css({
+        display: "none"
+      });
+      $(".modal").find(".calendar-modal .auto-information").css({
+        display: "none"
+      });
+      $(".modal").find(".calendar-modal #name_input").css({
+        display: "block"
+      });
+      $(".modal").find(".calendar-modal #email_input").css({
+        display: "block"
+      });
+      $(".modal").find(".calendar-modal #phone_input").css({
+        display: "block"
+      });
+      $(".modal").find(".calendar-modal #address_input").css({
+        display: "block"
+      });
+      $(".modal").find(".calendar-modal .validation-reserv").text("");
+      $(".modal").find(".calendar-modal .validation-interval").text("");
+      $(".modal").find(".calendar-modal .text-area-modal").val("");
+      $(".modal").find(".calendar-modal .auto_name_2").css("display", "none");
+      $(".modal").find(".calendar-modal .alert").css("display", "none");
+
 
 
 
@@ -260,7 +284,58 @@ $(document).ready(function () {
   });
 
   //click to save "save"
+  $(".calendar-modal .calendar-save-button").on("click", function (event) {
+    var meeting_title, meeting_begin, meeting_end, meeting_email, meeting_phone, meeting_address, meeting_note, meeting_reservation;
+    meeting_title = $(".calendar-modal #home #name_input").val();
+    meeting_email = $(".calendar-modal #home #email_input").val();
+    meeting_address = $(".calendar-modal #home #address_input").val();
+    meeting_phone = $(".calendar-modal #home #phone_input").val();
+    meeting_reservation = $(".calendar-modal #home .validation-reserv").text();
+    meeting_begin = $().val();
+    meeting_end = null;
+    meeting_note = $(".calendar-modal #home .text-area-modal").val()
+    if(meeting_title && meeting_email && meeting_end && meeting_begin && meeting_phone && meeting_address && meeting_reservation) {
+      var eventData = {
+        meet_title : meeting_title,
+        meet_start : meeting_begin,
+        meet_end : meeting_end,
+        meet_email : meeting_email,
+        meet_address : meet_address,
+        meet_phone : meeting_phone,
+        meet_note : meeting_note,
+        meet_status : meeting_reservation
+      };
+      data = {
+        'name': eventData.meet_title,
+        'category': 1,
+        'meeting_start' : eventData.meet_start,
+        'meeting_end' : eventData.meet_end,
+        'address' : eventData.meet_address,
+        'meeting_email'  : eventData.meet_email,
+        'phone_number'  :eventData.phone,
+        'meet_note' : eventData.meeting_note,
+        'meet_status'  :eventData.meet_status
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/api/events/',
+        headers: { "X-CSRFToken": getCookie('csrftoken') },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        success: function (data) {
+          console.log(eventData);
+
+          $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          alert(errorMessage)
+        }
+      });
+    }
+
+  })
   $(".calendar-modal #modal_2_save").on("click", function (event) {
+
     var title = $(".calendar-modal #event_title").val();
     var begin_gun, end_gun, bas_saat, bit_saat, location_modal;
     begin_gun = $(".calendar-modal #modal_2_begin").val();
@@ -290,7 +365,6 @@ $(document).ready(function () {
         hour: $(".calendar-modal #profile #modal_2_end_hour").val(),
         begin_hour: $(".calendar-modal #profile #modal_2_begin_hour").val(),
         disabled_check: $(".choose_all_day_main input").prop("disabled", true),
-
         vaxt_divi: $(".slide_main").text(),
         ikonka: $(".choose_icon_main span").html()
       };
@@ -406,25 +480,43 @@ $(document).ready(function () {
       $(".auto_name").css({
         display: "block"
       });
-    if($(this).val().length ===0 ) {
-      $(".auto_name").css({
-        display: "none"
-      });
-    }
+      if ($(this).val().length === 0) {
+        $(".auto_name").css({
+          display: "none"
+        });
+      }
     }
   });
 
-  $(".auto_name").click(function() {
-    $(".auto-information").css({
-      display : "block"
+  $(".auto_name").click(function () {
+    $(".auto_name_2").css({
+      display: "block"
     });
     $(this).css({
-      display : "none"
+      display: "none"
     });
     $("#name_input, #email_input,#phone_input,#address_input").css({
-      display : "none"
+      display: "none"
+    })
+  });
+
+
+  $(".close-information").click(function () {
+    $(".calendar-modal #name_input").css({
+      display: "block"
+    });
+    $(".calendar-modal #address_input").css({
+      display: "block"
+    });
+    $(".calendar-modal .auto_name_2").css({
+      display: "none"
+    });
+    $(".calendar-modal #email_input, #phone_input").css({
+      display: "block"
     })
   })
+
+
 })
 
 //  Auto complete modal in 1 end
