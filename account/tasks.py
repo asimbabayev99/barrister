@@ -61,11 +61,12 @@ def synchronize_mail():
     # loop th rough mail folders
     for folder in mail_folders:
         mail.select("{0}".format(folder))
-        print(folder)
         type, data = mail.search(None, 'ALL')
-
-        # loop throught emails
-        for num in data[0].split():
+        try:
+          last_num = Email.objects.filter(folder=folder).order_by('-date')[0].num
+        except:
+          last_num = 0
+        for num in data[0].split()[::-1]:
             
             num = num.decode()
             typ, data = mail.fetch(num, '(RFC822)' )
@@ -77,15 +78,16 @@ def synchronize_mail():
             sender = email_message.from_[0][1]
             receiver = email_message.to[0][1]
             date = email_message.date
-            print(subject)
             # timestamp = email.utils.parsedate_tz(date)
 
             new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
-            
-            print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
-            if  not created:
-                print("already created")
-                continue
+            print('num:',num,'last_num:',last_num)
+            if num == last_num:
+              break
+            # print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
+            # if  not created:
+            #     print("already created")
+            #     continue
             new_email.subject = subject
             content = email_message.text_html[0] if email_message.text_html != [] else ""
             new_email.content = content
@@ -106,8 +108,8 @@ def synchronize_mail():
 
 @shared_task(name = "check_mails")
 def check_mails():
-
-    return "completed doing tasks"
+  
+  return "completed doing tasks"
 
 
 
