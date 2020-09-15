@@ -368,6 +368,14 @@ class ExperienceAPIView(APIView):
 
 
 
+class PublicationListView(ListAPIView):
+    queryset = Publication.objects.all()
+    serializer_class = PublicationSerializer
+    permission_classes = [AllowAny,]
+    
+
+
+
 
 
 class PublicationAPIView(APIView):
