@@ -115,7 +115,7 @@ def publication_add_view(request):
 
     context = {
         'form': form,
-    }
+    }  
 
     return render(request, 'xeber_elave_etmek_user_ucun.html', context=context)
 
