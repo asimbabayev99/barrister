@@ -8,6 +8,7 @@
 
 {% block links %}
 {{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">
 {% endblock links %}
 
 
@@ -17,23 +18,65 @@
 
   <div class="container-fluid clients-content">
     <div class="row">
-      <div class="col-12 header" >
+      <div class="col-12 header">
         <span>Müştərilər</span>
+      </div>
+      <div class="col-md-4 col-12 rounded-0 my-2">
+        <button class="btn btn-block btn-light rounded-0 border-0" data-toggle="modal" data-target="#addClient"
+          style="background-color: #eee;">Əlavə et</button>
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="addClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content p-3" id="clients_modal">
+            <form action="">
+              <div class="form-group">
+                <label for="">Ad</label>
+                <input required type="text" class="form-control" placeholder="Ad">
+              </div>
+              <div class="form-group">
+                <label for="">Email</label>
+                <input required type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="">Telefon</label>
+                <input required class="form-control client_phone" placeholder="Telefon">
+              </div>
+              <div class="form-group">
+                <label for="">Ünvan</label>
+                <input required type="text" class="form-control" placeholder="Ünvan">
+              </div>
+
+              <div class="form-group">
+                <label for="">Qeyd əlavə et</label>
+                <textarea name="" class="form-control"></textarea>
+              </div>
+              <div class="form-group d-flex justify-content-end pb-0 mb-0">
+                <button class="btn btn-light" data-dismiss="modal">Bağla</button>
+                <button class="btn btn-primary ml-2" type="submit">Yadda saxla</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
       <div class="col-12  my-2">
         <div class="row">
+
           <div class="col-md-12 col-lg-6 my-1">
-            <div class="card">
+            <div class="card hidden_main">
               <div class="card-outline" style="border-top: 3px solid #007bff;">
                 <div class="card-body">
-                  <div class="img-in-clients shadow-lg float-left">
+                  <div class="img-in-clients bg-success shadow-lg float-left">
                     MH
                   </div>
                   <div class="client-content pl-2 mb-2 float-left">
                     <p class="modal-title text-left">Musa Hesenov</p>
                     <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
                     <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
-                    
+
                   </div>
                   <div class="hidden_informations float-left my-1">
                     <div class="d-flex align-items-center justify-content-between">
@@ -62,7 +105,7 @@
                         0 <br>
                         Qeydlər
                       </div>
-                      
+
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="form-group my-2">
@@ -71,7 +114,7 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="nearest-reservations my-2">
-                      <span  class="p-0 mb-1 bold-text text-muted">Son görüşlər</span>
+                      <span class="p-0 mb-1 bold-text text-muted">Son görüşlər</span>
                       <br>
                       <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
                       <br>
@@ -88,128 +131,186 @@
                         </div>
                       </div>
                     </div>
-                    
+
                   </div>
                   <button class="btn btn-primary show_more_btn btn-block mt-3">Show more</button>
+                  <button class="btn btn-primary show_less_btn btn-block mt-3">Show less</button>
                 </div>
               </div>
             </div>
           </div>
 
-          
+
 
           <div class="col-md-12 col-lg-6 my-1">
-            <div class="card">
-              <div class="card-outline" style="border-top: 3px solid #343a40;">
+            <div class="card hidden_main">
+              <div class="card-outline" style="border-top: 3px solid #007bff;">
                 <div class="card-body">
-                  <div class="img-in-clients shadow-lg bg-success float-left">
-                    AM
+                  <div class="img-in-clients bg-info shadow-lg float-left">
+                    MH
                   </div>
                   <div class="client-content pl-2 mb-2 float-left">
-                    <p class="modal-title text-left">Azad Mammadov</p>
+                    <p class="modal-title text-left">Musa Hesenov</p>
                     <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
                     <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
-                    
+
                   </div>
-                  <button class="btn btn-dark show_more_btn btn-block mt-2">Show more</button>
+                  <div class="hidden_informations float-left my-1">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <span>Politcs<br>Confidentiality </span>
+                      <span>No</span>
+                    </div>
+                    <div class="d-flex my-2 align-items-center justify-content-between">
+                      <span>Marketing<br>Notices </span>
+                      <span>No</span>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="part-main">
+                      <div class="parts ">
+                        1 <br>
+                        Görüş sayı
+                      </div>
+                      <div class="parts">
+                        1 <br>
+                        Gəlmədi
+                      </div>
+                      <div class="parts">
+                        0 <br>
+                        Abunələr
+                      </div>
+                      <div class="parts">
+                        0 <br>
+                        Qeydlər
+                      </div>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="form-group my-2">
+                      <input type="text" class="form-control" placeholder="Qeyd əlavə et">
+                      <button class="btn btn-success btn-block show_more_btn my-1">Save</button>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="nearest-reservations my-2">
+                      <span class="p-0 mb-1 bold-text text-muted">Son görüşlər</span>
+                      <br>
+                      <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
+                      <br>
+                      <div class="my-2">
+                        <div class="float-left mr-4 my-1 hours_main">
+                          <span>08:00</span>
+                          <br>
+                          <span class="differ-time mb-2">09:00</span>
+                        </div>
+                        <div class="float-left my-1 names-main">
+                          <span>Asim Babayev</span>
+                          <br>
+                          <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <button class="btn btn-primary show_more_btn btn-block mt-3">Show more</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 my-1">
+            <div class="card hidden_main">
+              <div class="card-outline" style="border-top: 3px solid #007bff;">
+                <div class="card-body">
+                  <div class="img-in-clients bg-warning shadow-lg float-left">
+                    MH
+                  </div>
+                  <div class="client-content pl-2 mb-2 float-left">
+                    <p class="modal-title text-left">Musa Hesenov</p>
+                    <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
+                    <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
+
+                  </div>
+                  <div class="hidden_informations float-left my-1">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <span>Politcs<br>Confidentiality </span>
+                      <span>No</span>
+                    </div>
+                    <div class="d-flex my-2 align-items-center justify-content-between">
+                      <span>Marketing<br>Notices </span>
+                      <span>No</span>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="part-main">
+                      <div class="parts ">
+                        1 <br>
+                        Görüş sayı
+                      </div>
+                      <div class="parts">
+                        1 <br>
+                        Gəlmədi
+                      </div>
+                      <div class="parts">
+                        0 <br>
+                        Abunələr
+                      </div>
+                      <div class="parts">
+                        0 <br>
+                        Qeydlər
+                      </div>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="form-group my-2">
+                      <input type="text" class="form-control" placeholder="Qeyd əlavə et">
+                      <button class="btn btn-success btn-block show_more_btn my-1">Save</button>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="nearest-reservations my-2">
+                      <span class="p-0 mb-1 bold-text text-muted">Son görüşlər</span>
+                      <br>
+                      <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
+                      <br>
+                      <div class="my-2">
+                        <div class="float-left mr-4 my-1 hours_main">
+                          <span>08:00</span>
+                          <br>
+                          <span class="differ-time mb-2">09:00</span>
+                        </div>
+                        <div class="float-left my-1 names-main">
+                          <span>Asim Babayev</span>
+                          <br>
+                          <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <button class="btn btn-primary show_more_btn btn-block mt-3">Show more</button>
+
                 </div>
               </div>
             </div>
           </div>
 
 
-          <div class="col-md-4 my-1">
-            <div class="card">
-              <div class="card-outline" style="border-top: 3px solid #343a40;;">
-                <div class="card-body">
-                  <div class="img-in-clients shadow-lg bg-info float-left">
-                    A
-                  </div>
-                  <div class="client-content pl-2 mb-2 float-left">
-                    <p class="modal-title text-left">Asim</p>
-                    <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
-                    <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
-                    
-                  </div>
-                  <button class="btn btn-dark show_more_btn btn-block mt-2">Show more</button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 my-1">
-            <div class="card">
-              <div class="card-outline" style="border-top: 3px solid #343a40;">
-                <div class="card-body">
-                  <div class="img-in-clients shadow-lg bg-warning text-dark float-left">
-                    A
-                  </div>
-                  <div class="client-content pl-2 mb-2 float-left">
-                    <p class="modal-title text-left">Asim</p>
-                    <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
-                    <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
-                    
-                  </div>
-                  <button class="btn btn-dark show_more_btn btn-block mt-2">Show more</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
-          <div class="col-md-4 my-1">
-            <div class="card">
-              <div class="card-outline" style="border-top: 3px solid #343a40;">
-                <div class="card-body">
-                  <div class="img-in-clients shadow-lg bg-secondary  float-left">
-                    A
-                  </div>
-                  <div class="client-content pl-2 mb-2 float-left">
-                    <p class="modal-title text-left">Asim</p>
-                    <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
-                    <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
-                    
-                  </div>
-                  <button class="btn btn-dark show_more_btn btn-block mt-2">Show more</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
-          <div class="col-md-4 my-1">
-            <div class="card">
-              <div class="card-outline" style="border-top: 3px solid #343a40;">
-                <div class="card-body">
-                  <div class="img-in-clients shadow-lg bg-dark  float-left">
-                    A
-                  </div>
-                  <div class="client-content pl-2 mb-2 float-left">
-                    <p class="modal-title text-left">Asim</p>
-                    <p class="blockquote-footer pb-1 mb-1">musahesenov02@gmail.com</p>
-                    <p class="blockquote-footer pb-1 mb-1">+944559779779</p>
-                    
-                  </div>
-                  <button class="btn btn-dark show_more_btn btn-block mt-2" data-toggle="modal" data-target="#exampleModalCenter">Show more</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
-          
-          
-          
-          
-          
+
+
+
+
+
+
         </div>
-        
+
       </div>
     </div>
   </div>
-  
- 
+
+
 
 </main>
 
@@ -226,4 +327,5 @@
 <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
 <script src="{% static 'js/fullcalendar.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
 {% endblock scripts %}
