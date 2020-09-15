@@ -2479,7 +2479,7 @@ s
 
 /*Clients begin */
 .clients-content {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif !important;
 }
 
 .header {
@@ -2510,6 +2510,7 @@ s
 .show_more_btn {
   font-size: 13px;
   padding: 4px 8px;
+  font-family: 'Noto Sans JP', sans-serif !important;
   /* border-radius: 0px; */
 }
 
@@ -2642,4 +2643,8 @@ s
 
 .auto-information {
   display: none;
+}
+
+.clients-content {
+  font-family: 'Noto Sans JP', sans-serif !important;
 }
