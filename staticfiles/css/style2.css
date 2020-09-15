@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+.hidden_informations {
+    /* visibility: hidden; */
+    /* opacity: 0; */
+    display: none;
+    transition: 0.3s;
+}
+
+.show_less_btn {
+    display: none;
+    padding: 4px;
+    font-size: 13px;
+}
+
+#clients_modal {
+    font-family:  'Noto Sans JP', sans-serif !important;
+    font-size: 14px;
+}
+
+#clients_modal input.form-control,#clients_modal textarea.form-control {
+    background-color: #eee;
+    box-shadow: none;
+    font-size: 14px;
+    color: gray;
+}
+#clients_modal input.form-control:focus,#clients_modal textarea.form-control:focus {
+    background-color: #dce8fc;
+    border: 1px solid hsla(197, 100%, 26%, 0.91);
+    color: hsla(197, 100%, 26%, 0.91);
+}
+
+#clients_modal button {
+    padding: 6px 15px;
+    font-size: 13px;
+}
+

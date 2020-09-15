@@ -85,7 +85,8 @@ $(document).ready(function () {
   $("#input_bitme_vaxti").mask("xx/xx/xxxx");
   $("#begin_hour_input").mask("xx:xx");
   $("#end_hour_input").mask("xx:xx");
-  $("#phone_input").mask("(xxx) xxx-xx-xx")
+  $("#phone_input").mask("(xxx) xxx-xx-xx");
+  $(".client_phone").mask("(xxx) xxx-xx-xx");
 
   // https://codepen.io/asrulnurrahim/pen/WOyzxy
   var $uploadCrop, rawImg, tempFilename, imageId;
@@ -404,3 +405,16 @@ $(function () {
   });
 });
 
+$(document).ready(function() {
+  var isOpen = false;
+  
+  $(".hidden_main .show_more_btn").click(function() {
+    
+    
+    $($(this).parent().children()[2]).toggle();
+    
+     
+
+  });
+ 
+})
