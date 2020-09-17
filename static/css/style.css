@@ -2648,3 +2648,41 @@ s
 .clients-content {
   font-family: 'Noto Sans JP', sans-serif !important;
 }
+
+/* Laws begin */
+.btn-law {
+  font-size: 13px;
+  padding: 5px 15px;
+}
+
+.law_left_main {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px 15px;
+  color: #3a3f48;
+}
+
+.laws_content .form-control {
+  background-color: #eee;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.laws_content .form-control:focus {
+  background-color: #dce8fc;
+  border-color: hsla(197, 100%, 26%, 0.91);
+  color: hsla(197, 100%, 26%, 0.91);
+}
+
+.divScroll-institution label {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+.divScroll-institution label input {
+  margin-right: 5px;
+}
+/* Laws end */
