@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse ,get_object_or_404, redirect
+from .models import *
 # Create your views here.
 
 
@@ -8,7 +9,7 @@ def index(request):
 
 
 def codes(request):
-    codes = Code.objects.all().order_by('number').values('number', 'name', 'active')
+    codes = Code.objects.all().order_by('number').values('id', 'number', 'name', 'active')
     
     context = {
         'codes': codes
