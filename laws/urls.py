@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('index', index, name='laws-index'),
     path('codes', codes, name='laws-codes'),
+    path('code/<int:id>', code_single, name='laws-code-single'),
 
 ]
 

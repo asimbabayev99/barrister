@@ -5,5 +5,6 @@ from ckeditor.fields import RichTextField
 
 class Code(models.Model):
     name = models.CharField(max_length=128)
+    number = models.IntegerField()
     active = models.BooleanField(default=True)
     content = RichTextField()
