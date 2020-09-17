@@ -40,6 +40,7 @@ urlpatterns = [
     path('experiences/', ExperienceAPIView.as_view()),
 
     path('publication/',PublicationAPIView.as_view()),
+    path('publication/list',PublicationListView.as_view()),
     path('publication/<int:pk>',PublicationAPIView.as_view()),
 
     path('emails/', EmailList.as_view()),

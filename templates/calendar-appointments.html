@@ -39,9 +39,24 @@
               <div class="tab-pane mt-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <form>
                   <div class="form-group">
-                    <div type="text" class="auto-information form-control my-2" id="time_input"> Asim Babayev</div>
-                    <div type="text" class="auto-information my-2 form-control" id="time_input">musahesenli02@gmail.com</div>
-
+                    <div class="card mt-1 p-2 auto_name_2">
+                      <div class="card-body d-flex justify-content-between p-0">
+                        <div class="d-flex">
+                          <div class="auto-img">
+                            AB
+                          </div>
+                          <div class="pl-3">
+                            <h6>Asim Babayev</h6>
+                            <span class="blockquote-footer">musahesenli02@gmail.com</span>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="close close-information" style="cursor: pointer;font-size: 14px;">
+                            <span> &times;</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group mt-1 mb-0">
                     <input type="text" autocomplete="off" class="form-control" id="name_input" placeholder="Ad">
@@ -79,7 +94,9 @@
                       <label for="">Saat</label>
                       <div class="dropdown drop times-div">
                         <div required id="time_input" class="validation-time form-control dropdown-input "
-                          data-toggle="dropdown"></div>
+                          data-toggle="dropdown">
+                          00:15
+                        </div>
 
                         <div class="dropdown-menu times">
                           <div class="begin-time-choices">00:00</div>
@@ -187,7 +204,9 @@
 
                       <div class="dropdown drop times-div-2">
                         <div id="time_input" class="validation-interval time-input form-control dropdown-input"
-                          data-toggle="dropdown"></div>
+                          data-toggle="dropdown">
+                        15 dəq
+                        </div>
 
                         <div class="dropdown-menu times-2">
                           <div class="begin-time-choices">5 dəq</div>
@@ -222,7 +241,9 @@
                       <label for="" class="">Rezervasiya vəziyyəti</label>
                       <div class="dropdown  times-div-3">
                         <div required id="time_input" class=" form-control dropdown-input validation-reserv client-status"
-                          data-toggle="dropdown"></div>
+                          data-toggle="dropdown">
+                      
+                        </div>
 
 
                         <div class="dropdown-menu times-2" id="chosen_1">
@@ -241,7 +262,7 @@
                     <div class="">
                       <span class="mr-3 calendar-note">Qeyd əlavə edin</span>
                       
-                      <textarea class="form-control mt-2"></textarea>
+                      <textarea class="form-control mt-2 text-area-modal"></textarea>
                     </div>
                   </div>
                   <div class="form-group">

@@ -134,24 +134,21 @@ $(document).ready(function () {
       $(".choose_icon_main span").css("cursor", "default");
       $(".icon_slider").css("visibility", "hidden");
 
-      // $(".choose").attr("readonly",true);
-
 
     }
   });
 
-  // Bind the dates to datetimepicker.
-  // $("#input_baslama_vaxti, #input_bitme_vaxti").datetimepicker({format: 'DD/MMM/YYYY HH:MM'});
-  // $("#input_baslama_vaxti ").datetimepicker({format:'L LT'});
-  // $("#input_bitme_vaxti").datetimepicker({format:'L LT'});
-
-  // $("#input_baslama_vaxti").datetimepicker({locale:'az'});
-  // $("#input_bitme_vaxti").datetimepicker({locale:'az'});
   $("#input_baslama_vaxti").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
   $("#input_bitme_vaxti").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
   $("#begin_hour_input").datetimepicker({ format: 'HH:mm' });
   $("#end_hour_input").datetimepicker({ format: 'HH:mm' });
-
+  $("#date_input").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
+  $("#modal_2_begin").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
+  $("#modal_2_begin_hour").datetimepicker({ format: 'HH:mm', locale: 'az' });
+  $("#modal_2_end_hour").datetimepicker({ format: 'HH:mm', locale: 'az' });
+  $("#modal_2_end").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
+  
+  
 
   $.get("/api/events/list/", function (data) {
     console.log(data)
@@ -199,8 +196,8 @@ $(document).ready(function () {
     if (title && begin_gun && end_gun && bas_saat && bit_saat && u2 > u1) {
       var eventData = {
         title: title,
-        start: moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY') + ' ' + $("#begin_hour_input").val(),
         end: moment($("#input_bitme_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY') + ' ' + $("#end_hour_input").val(),
+        start: moment($("#input_baslama_vaxti").val(), 'DD/MM/YYYY').format('MM/DD/YYYY') + ' ' + $("#begin_hour_input").val(),
         mekan: $(".mekan_main input").val(),
         hour: $("#end_hour_input").val(),
         begin_hour: $("#begin_hour_input").val(),
