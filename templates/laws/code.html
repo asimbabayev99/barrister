@@ -1,0 +1,32 @@
+{% extends 'barrister/barrister-base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Musteriler</title>
+{% endblock title %}
+
+{% block links %}
+{{ block.super }}
+{% endblock links %}
+
+
+{% block content %}
+<main class="page-content design">
+    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+    {{code.content|safe}}
+</main>
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}

@@ -556,7 +556,7 @@
                          </a>
                          <a class="mobile-consulting themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md 
                               themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes
-                               themestek-vc_btn3-color-skincolor" href="/calendar/" title="Müraciət üçün daxil ol" style="display: none;">Konsultasiya
+                               themestek-vc_btn3-color-skincolor" href="{% url 'calendar' %}" title="Müraciət üçün daxil ol" style="display: none;">Konsultasiya
                          </a>
                       </h1>
                       <h2 class="site-description">barrister.az saytı</h2>
@@ -573,7 +573,7 @@
                               href="{% url 'barrister-dashboard' %}" target="_blank" title="İşlərinizi planlaşdırın">İş masası</a></div>
                           {% else %}
                           <a class="themestek-vc_general themestek-vc_btn3 themestek-vc_btn3-size-md themestek-vc_btn3-shape-square themestek-vc_btn3-style-outline themestek-vc_btn3-weight-yes themestek-vc_btn3-color-skincolor"
-                            href="{% url 'calendar-events' %}" title="Müraciət üçün daxil ol">Konsultasiya</a>
+                            href="{% url 'calendar' %}" title="Müraciət üçün daxil ol">Konsultasiya</a>
                         </div>
                         {% endif %}
                       </div>

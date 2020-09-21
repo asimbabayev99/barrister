@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'shop',
     'rest_framework',
     'api',
+    'laws',
     'django_filters',
     'rest_framework.authtoken',
     'djoser',

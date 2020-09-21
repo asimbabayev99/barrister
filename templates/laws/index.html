@@ -1,0 +1,637 @@
+{% extends 'barrister/barrister-base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Barrister | Laws</title>
+{% endblock title %}
+
+{% block links %}
+{{ block.super }}
+
+{% endblock links %}
+
+
+{% block content %}
+<main class="page-content design">
+    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+
+    <div class="container-fluid clients-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="header pl-2">
+                    Axtarış
+                </div>
+                <div class="form-group my-2 laws_content" style="padding-left: 32px;padding-right: 15px;">
+                    <form action="">
+                        <div class="row">
+                            <!-- laws search part left begin -->
+                            <div class="col-md-6  ">
+                                <div class="col-12 law_left_main mb-2">
+                                    <h1 class="blockquote">Ümumi</h1>
+                                    <div class="form-group">
+                                        <label for="number">Nömrəsi</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number">Dövlət qeydiyyatı nömrəsi</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number">Sözə görə</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="d-flex   d-flex align-items-end">
+                                            <div style="width: 60%;">
+                                                <label for="">Əhatə</label>
+                                                <select name="" class="form-control" id="">
+                                                    <option value="">Başlıqda</option>
+                                                    <option value="">Mətndə</option>
+                                                </select>
+                                            </div>
+                                            <div style="width: 40%;" class=" px-3 align-items-center d-flex h-100 ">
+                                                <input type="checkbox" name="" id="">
+                                                <span class="pl-1" for="">Dəqiq uyğunluq</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="d-flex   d-flex align-items-end">
+                                            <div style="width: 60%;">
+                                                <label for="">Sıralama</label>
+                                                <select class="form-control">
+                                                    <option value="1">Sənədin tarixi üzrə</option>
+                                                    <option value="2">Sənədin nömrəsi üzrə</option>
+                                                    <option value="3">Sənədin adı üzrə</option>
+                                                    <option value="4">Sənədin növü üzrə</option>
+                                                    <option value="5">Qəbul edən orqan üzrə</option>
+                                                    <option value="6">Sənədin statusu üzrə</option>
+                                                </select>
+                                            </div>
+                                            <div style="width: 40%;" class=" px-3 align-items-center d-flex h-100 ">
+                                                <input type="checkbox" name="" id="">
+                                                <span class="pl-1" for="">Azalmaya görə</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <h1 class="blockquote">Növü</h1>
+                                    <div style="height: 150px;overflow: auto;">
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Konstitusiya</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Konstitusiya Qanunu</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Qanun</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Fərman</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Sərəncam</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Qərar</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Qətnamə</span>
+                                        </div>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <input type="checkbox" class="ml-2">
+                                            <span class="pl-2">Müxtəlif orqanların aktları</span>
+                                        </div>
+    
+                                    </div>
+
+                                </div>
+                                <div class="col-12 pr-0 law_left_main mb-2">
+                                    <h1 class="blockquote">Qəbul edən orqan</h1>
+                                    <div class="form-group" style="height:250px;overflow:auto">
+                                        <div class="divScroll-institution">
+			    
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="1">
+                                           Azərbaycan Respublikasının Prezidenti</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="3">
+                                           Azərbaycan Respublikasının Milli Məclisi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="2">
+                                           Azərbaycan Respublikasının Nazirlər Kabineti</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="8">
+                                           Yerli İcra Hakimiyyəti orqanları</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="27">
+                                           Yerli özünüidarə orqanları</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="18">
+                                           Azərbaycan Respublikasının Ədliyyə Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="11">
+                                           Azərbaycan Respublikasının Maliyyə Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="9">
+                                           Azərbaycan Respublikasının Dövlət Gömrük Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="10">
+                                           Azərbaycan Respublikasının Əmək və Əhalinin Sosial Müdafiəsi Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="14">
+                                           Azərbaycan Respublikasının Qiymətli kağızlar üzrə dövlət komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="12">
+                                           Azərbaycan Respublikasının Mərkəzi Bank</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="19">
+                                           Azərbaycan Respublikasının Mərkəzi seçki komissiyası </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="22">
+                                           Azərbaycan Respublikasının Məhkəmə-hüquq şurası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="20">
+                                           Azərbaycan Respublikasının Konstitusiya məhkəməsi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="24">
+                                           Azərbaycan Respublikasının Ali məhkəmə</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="25">
+                                           İnsan hüquqları üzrə avropa məhkəməsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="21">
+                                           Azərbaycan Respublikasının Tarif (qiymət) şurası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="26">
+                                           BMT-nin təhlükəsizlik şurası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="13">
+                                           Müxtəlif orqanlar</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="15">
+                                           Azərbaycan Respublikasının Vergilər Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="17">
+                                           Referendum</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="71">
+                                           Azərbaycan Respublikasının Dövlət Miqrasiya Xidməti</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="72">
+                                           Milli Televiziya və Radio Şurası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="74">
+                                           Azərbaycan Respublikasının Nəqliyyat, Rabitə və Yüksək Texnologiyalar Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="75">
+                                           Azərbaycan Respublikasının Standartlaşdırma, Metrologiya və Patent üzrə Dövlət Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="76">
+                                           Azərbaycan Respublikasının Dövlət Sosial Müdafiə Fondu</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="77">
+                                           Azərbaycan Respublikasının Kənd Təsərrüfatı Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="78">
+                                           Azərbaycan Respublikasının Daxili İşlər Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="79">
+                                           Azərbaycan Respublikasının Dövlət Statistika Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="80">
+                                           Azərbaycan Respublikasının Mədəniyyət və Turizm Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="81">
+                                           Azərbaycan Respublikasının Milli Təhlükəsizlik Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="82">
+                                           Azərbaycan Respublikasının Əmlak Məsələləri Dövlət Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="83">
+                                           Azərbaycan Respublikasının Tələbə Qəbulu üzrə Dövlət Komissiyası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="84">
+                                           Azərbaycan Respublikasının İqtisadiyyat Nazirliyi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="85">
+                                           Azərbaycan Respublikasının Xarici İşlər Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="86">
+                                           Azərbaycan Respublikasının Dini Qurumlarla İş üzrə Dövlət Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="87">
+                                           Azərbaycan Respublikasının Dövlət Torpaq və Xəritəçəkmə Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="88">
+                                           Azərbaycan Respublikası Dövlət Şəhərsalma və Arxitektura Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="89">
+                                           Azərbaycan Respublikası Müəllif Hüquqları Agentliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="90">
+                                           Azərbaycan Respublikasının Səhiyyə Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="91">
+                                           Azərbaycan Respublikasının Prezidenti yanında Dövlət Qulluğu Məsələləri üzrə Komissiyası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="93">
+                                           Azərbaycan Respublikasının Qaçqınların və Məcburi Köçkünlərin İşləri üzrə Dövlət Komitəsi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="94">
+                                           Azərbaycan Respublikasının Prezidenti yanında Vətəndaşlara Xidmət və Sosial İnnovasiyalar üzrə Dövlət Agentliyi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="95">
+                                           Azərbaycan Respublikasının Dövlət Dəniz Administrasiyası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="96">
+                                           Azərbaycan Respublikasının Energetika Nazirliyi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="97">
+                                           Azərbaycan Respublikasının Ailə, Qadın və Uşaq Problemləri üzrə Dövlət Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="98">
+                                           Azərbaycan Respublikasının Ekologiya və Təbii Sərvətlər Nazirliyi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="99">
+                                           Azərbaycan Respublikasının Müdafiə Sənayesi Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="100">
+                                           Azərbaycan Respublikasının Dövlət Sərhəd Xidməti</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="101">
+                                           Azərbaycan Respublikasının Satınalmalar üzrə Dövlət Agentliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="102">
+                                           Azərbaycan Respublikasının Təhsil Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="103">
+                                           Fövqəladə Hallar Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="104">
+                                           Azərbaycan Respublikasının Səfərbərlik və Hərbi Xidmətə Çağırış üzrə Dövlət Xidməti</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="105">
+                                           Azərbaycan Respublikasının Diasporla İş üzrə Dövlət Komitəsi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="106">
+                                           Milli Arxiv İdarəsi </label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="107">
+                                           Azərbaycan Respublikasının Dövlət Təhlükəsizliyi Xidməti</label>
+                                            
+                                            <label class="d-flex align-items-center ">
+                                            <input type="checkbox" name="institution[]" value="108">
+                                           Azərbaycan Respublikasının Maliyyə Bazarlarına Nəzarət Palatası</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="109">
+                                           Azərbaycan Respublikasının Qida Təhlükəsizliyi Agentliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="110">
+                                           Dövlət Turizm Agentliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="111">
+                                           Gənclər və İdman Nazirliyi</label>
+                                            
+                                            <label>
+                                            <input type="checkbox" name="institution[]" value="112">
+                                           Nəqliyyat Nazirliyi</label>
+                                            
+                                            
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- laws search part left end -->
+
+                            <!-- laws search part right begin -->
+                            <div class="col-md-6  ">
+                                <div class="col-12 law_left_main mb-2">
+                                    <h1 class="blockquote">Tarixlər</h1>
+                                    <div class="form-group">
+                                        <label for="number">Qeydiyyat tarixi</label>
+                                        <input type="date" class="form-control"/>
+                                        <input type="date" class="form-control mt-1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number">Qəbul edilmə tarixi</label>
+                                        <input type="date" class="form-control"/>
+                                        <input type="date" class="form-control mt-1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number">Qüvvəyə minmə tarixi</label>
+                                        <input type="date" class="form-control"/>
+                                        <input type="date" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-12 law_left_main mb-2">
+                                    <h1 class="blockquote">Status</h1>
+                                    <div class="w-100 justify-content-between d-flex">
+                                        <div class="align-items-center d-flex">
+                                            <input type="radio" name="law" class="mr-2" id="">
+                                            <span>Qüvvədə olanlar</span>
+                                        </div>
+                                        <div class="align-items-center d-flex">
+                                            <input type="radio" name="law" class="mr-2" id="">
+                                            <span>Qüvvədə düşmüşlər</span>
+                                        </div>
+                                        <div class="align-items-center d-flex">
+                                            <input type="radio" name="law" class="mr-2" id="">
+                                            <span>Hamısı</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <h1 class="blockquote">Təsnifatlar</h1>
+                                    <div style="height: 411px;overflow: auto;">
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                           Dövlət Turizm Agentliyi
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Mülki qanunvericilik
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Nikah və ailə qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Mülki-prosessual qanunvericilik
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Arbitraj prosesi
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            İşədüzəlmə və əhalilnin məşgullugu haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Əmək Qanunvericiliyi
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Sosial sığorta və sosial təminat qanunvericiliyi
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Maliyyə və kredit qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Xalq təsərrufatının ümumi məsələri üzrə qanunverilicik
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Müəssisələr və sahibkarlıq fəalliyyəti haqqında qanunvericilik
+                                        </label>
+                                        
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Sənaye qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Əsaslı tikinti və əsaslı təmir haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Kənd təsərrüfatı və aqrar-sənaye kompleksləri haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Şəhərsalma və arxitektura qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Müstəqil Dövlətlər Birliyi ölkələrinin dövlətlərarası strukturları
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Ticarət qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Mənzil-kommunal təsərrüfatı və əhaliyə məişət xidməti haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Nəqliyyat və rabitə qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Təhsil qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Elm haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Mədəniyyət haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Vətəndaşların sağlamlığının mühafizəsi haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Əhalinin fiziki tərbiyəsi haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Ətraf təbii mühitin mühafizəsi və təbii ehtiyatlardan səmərəli istifadənin ümumi məsələləri üzrə qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Torpaq qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Yerin təki haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Meşələrin mühafizəsi və onlardan istifadə olunması haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Suların mühafizəsi və onlardan istifadə olunması barədə qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Heyvanlar aləminin mühafizəsi və ondan istifadə olunması barədə qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Atmosfer havasının mühafizəsi haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Geodeziya və kartoqrafiya haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Hidrometeorologiya haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Dövlət qulluğu haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Müdafiə qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Milli təhlükəsizlik haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Gömrük işi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            İctimai əsayişin mühafizəsi haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Məhkəmə. Ədliyyə. Prokurorluq
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Cinayət qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Cinayət-prosessual qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Cinayət-icra (islah-əmək) qanunvericiliyi
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            İnzibati məsuliyyət haqqında qanunvericilik
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Xarici siyasət və beynəlxalq münasibətlər
+                                        </label>
+                                        <label class="d-flex align-items-center mb-0 pb-0">
+                                            <input type="checkbox" class="mr-1" name="institution[]" value="110">
+                                            Beynəlxalq xüsusi hüquq və proses. Xarici iqtisadi münasibətlər
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- laws search part right end -->
+
+                            <div class="col-12 mt-3">
+                                <button class="btn btn-primary btn-law ">Yenidən</button>
+                                <button class="btn btn-success btn-law">Axtarış</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock scripts %}

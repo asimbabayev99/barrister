@@ -163,7 +163,7 @@ $(document).ready(function () {
     select: function (start, end) {
       // Display the modal.
       // You could fill in the start and end fields based on the parameters
-      $(".modal").modal("show");
+      $(".event_save").modal("show");
       $(".modal").find(".calendar-modal #event_title").val("");
       $(".modal").find(".calendar-modal .icon-content").html('<i class="fas fa-angle-down"></i>');
       $(".modal").find(".calendar-modal input").val("");
@@ -230,24 +230,28 @@ $(document).ready(function () {
     },
 
     eventClick: function (calEvent, jsEvent) {
+      console.log(calEvent)
+      if(calEvent.type == "event"){
+        $('#updateEvent').modal('show');
+      } else if(calEvent.type == "appointment") {
+        $('#updateAppointment').modal('show');
+      }
       // Display the modal and set event values.
-      $(".modal").modal("show");
-      $(".modal").find(".calendar-modal #profile #event_title").val(calEvent.title);
-      $(".modal").find(".calendar-modal #profile #event_location").val(calEvent.mekan);
-      $(".modal").find(".calendar-modal #profile #modal_2_end_hour").val(calEvent.hour);
-      $(".modal").find(".calendar-modal #profile #modal_2_begin_hour").val(calEvent.begin_hour);
-      $(".modal").find(".calendar-modal #profile #modal_2_begin").val(calEvent.start.format('DD/MM/YYYY'));
-      $(".modal").find(".calendar-modal #profile #modal_2_end").val(calEvent.end.format('DD/MM/YYYY'));
-      $(".modal").find(".calendar-modal #profile input").attr("disabled", true);
-      $(".modal").find(".calendar-modal #profile .dropdown-menu").css({
-        visibility: "hidden",
-        opacity: "0"
-      });
-      $(".modal").find(".calendar-modal #modal_2_save").css({
-        display: "none"
-      });
-
-
+      // $(".modal").modal("show");
+      // $(".modal").find(".calendar-modal #profile #event_title").val(calEvent.title);
+      // $(".modal").find(".calendar-modal #profile #event_location").val(calEvent.mekan);
+      // $(".modal").find(".calendar-modal #profile #modal_2_end_hour").val(calEvent.hour);
+      // $(".modal").find(".calendar-modal #profile #modal_2_begin_hour").val(calEvent.begin_hour);
+      // $(".modal").find(".calendar-modal #profile #modal_2_begin").val(calEvent.start.format('DD/MM/YYYY'));
+      // $(".modal").find(".calendar-modal #profile #modal_2_end").val(calEvent.end.format('DD/MM/YYYY'));
+      // $(".modal").find(".calendar-modal #profile input").attr("disabled", true);
+      // $(".modal").find(".calendar-modal #profile .dropdown-menu").css({
+      //   visibility: "hidden",
+      //   opacity: "0"
+      // });
+      // $(".modal").find(".calendar-modal #modal_2_save").css({
+      //   display: "none"
+      // });
 
     }
   });
@@ -261,11 +265,12 @@ $(document).ready(function () {
   $("#modal_2_end").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
 
 
-
+  // load event to calendar
   $.get("/api/events/list/", function (data) {
     console.log(data)
     for (i = 0; i < data.length; i++) {
       eventData = {
+        type: 'event',
         title: data[i].name,
         start: data[i].start,
         end: data[i].end,
@@ -281,6 +286,24 @@ $(document).ready(function () {
       };
       $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
     }
+  });
+
+  // load appointments to calendar
+  $.get("/api/appointments/list/", function (data) {
+    console.log(data)
+    // for (i = 0; i < data.length; i++) {
+    //   eventData = {
+    //     title: data[i].name,
+    //     start: data[i].start,
+    //     end: data[i].end,
+    //     mekan: data[i].location,
+    //     hour: data[i].end.split(' ')[1],
+    //     begin_hour: data[i].start.split(' ')[1],
+    //     id: data[i].id,
+    //     type: 'appointment'
+    //   };
+    //   $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+    // }
   });
 
   //click to save "save"

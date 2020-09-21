@@ -32,9 +32,8 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('shop/', include('shop.urls')),
     path('admin/', admin.site.urls),
-    path('api/',include('api.urls'))
-
-   
+    path('api/',include('api.urls')),
+    path('laws/', include('laws.urls')),   
 
 ]
 
