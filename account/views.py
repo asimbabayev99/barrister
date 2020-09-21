@@ -167,6 +167,7 @@ def barrister_social_activity(request):
         form = PublicationForm(request.POST,request.FILES or None)
         if form.is_valid():
             text = form.cleaned_data['text']
+            print(text)
             file = form.cleaned_data['file']
             Publication.objects.create(user=request.user,text=text,file=file)
     form = PublicationForm()

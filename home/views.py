@@ -111,6 +111,7 @@ def publication_add_view(request):
             new_post = Publication(**form.cleaned_data)
             new_post.user = request.user
             new_post.save()
+            
 
 
     context = {

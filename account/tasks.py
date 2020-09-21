@@ -69,6 +69,8 @@ def synchronize_mail():
         for num in data[0].split()[::-1]:
             
             num = num.decode()
+            if num == last_num:
+              break
             typ, data = mail.fetch(num, '(RFC822)' )
             raw_email = data[0][1]
             # converts byte literal to string removing b''
@@ -82,8 +84,7 @@ def synchronize_mail():
 
             new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
             print('num:',num,'last_num:',last_num)
-            if num == last_num:
-              break
+            
             # print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
             # if  not created:
             #     print("already created")
