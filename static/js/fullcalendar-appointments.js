@@ -125,6 +125,7 @@ $(document).ready(function () {
   // CAlendar data save begin
   $(".icons-contents-main .icons").click(function () {
     var icon = $(this);
+    $(".icon-content").attr('data-id', icon.attr('data-id'))
     $(".icon-content").html(icon.html())
   });
 
@@ -199,9 +200,6 @@ $(document).ready(function () {
       $(".modal").find(".calendar-modal .text-area-modal").val("");
       $(".modal").find(".calendar-modal .auto_name_2").css("display", "none");
       $(".modal").find(".calendar-modal .alert").css("display", "none");
-
-
-
 
     },
 
