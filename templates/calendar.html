@@ -398,12 +398,9 @@
                     <i class="fas fa-angle-down"></i>
                   </div>
                   <div class="dropdown-menu icons-contents-main">
-                    {% for i in categories %}
+                   {% for i in categories %}
                     <div class="icons" data-id="{{i.id}}">
                       <img src="{{i.icon.url}}" height="24" width="24" alt="{{i.name}}">
-                      <!-- <svg width="24" height="24" viewBox="0 0 24 24">
-                        <use xlink:href="{{i.icon.url}}"></use>
-                      </svg> -->
                     </div>
                     {% endfor %}
                   </div>
@@ -492,7 +489,7 @@
         <!-- Modal -->
         <div class="modal fade" id="updateAppointment" tabindex="-1" role="dialog"
           aria-hidden="true">
-          <div class="modal-dialog" id="id="myTabContent"" role="document">
+          <div class="modal-dialog" id="myTabContent" role="document">
             <div class="modal-content " style="max-width: 380px;">
               <div class="modal-body calendar-modal">
                 <form>
@@ -698,17 +695,13 @@
                     <div>
                       <label for="" class="">Rezervasiya vəziyyəti</label>
                       <div class="dropdown  times-div-3">
-                        <div required id="time_input"
+                        <div required id="status_input"
                           class=" form-control dropdown-input validation-reserv client-status" data-toggle="dropdown">
-
                         </div>
-
-
                         <div class="dropdown-menu times-2" id="chosen_1">
                           <div class="begin-time-choices">Təsdiqləndi</div>
                           <div class="begin-time-choices">Müştəri gəldi</div>
                           <div class="begin-time-choices">Müştəri gəlmədi</div>
-
                         </div>
                       </div>
                       <div id="last-alert" class="alert mt-1 alert-dismissible alert-warning ">
@@ -726,7 +719,7 @@
                   <div class="form-group">
                     <div class="d-flex justify-content-end">
                       <button class="btn btn-light mr-1" data-dismiss="modal">Ləğv et</button>
-                      <button class="btn btn-primary calendar-save-button">Yadda saxla</button>
+                      <button class="btn btn-primary calendar-edit-button">Yadda saxla</button>
                     </div>
                   </div>
 
@@ -742,23 +735,18 @@
 
 
     {% block scripts %}
-
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
     <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
     <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
     <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-
     {% endblock scripts %}
     </body>
 
