@@ -44,9 +44,9 @@ class PublicationForm(forms.ModelForm):
     
     text = forms.CharField(label='', widget=ckeditor.widgets.CKEditorWidget(attrs={
         'class': 'text',
-        'placeholder': 'Mənt'
+        'placeholder': 'Mətn'
     }),error_messages={'required':_('Bu xana boş ola bilməz')})
-    file = forms.FileField(label='', widget=forms.ClearableFileInput(attrs={
+    file = forms.FileField(label='',required=False, widget=forms.ClearableFileInput(attrs={
         'class': 'file file_upl bordered_upl'
     }))
     class Meta:
@@ -55,7 +55,7 @@ class PublicationForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(PublicationForm,self).clean()
         text = cleaned_data.get('text')
-        if len(text) < 50:
+        if len(text) < 50 or len(text) is None:
             self.add_error('text',_('Ən az 50 simvol olmalidir'))
 
 

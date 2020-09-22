@@ -406,15 +406,50 @@ $(function () {
 });
 
 $(document).ready(function() {
-  $("#timer_1").datetimepicker({format : "DD/MM/YYYY",locale: 'az'});
-
+  
   $(".hidden_main .show_more_btn").click(function() {
-    
-    
     $($(this).parent().children()[2]).toggle();
-    
-     
-
   });
- 
+  
+  // Open email types in email.html begin
+
+
+  var isTypeOpen = true;
+  $(".openTypes").click(function() {
+    $(".emailTypesContainer").slideToggle();
+    if(isTypeOpen) {
+      $(".openTypes").removeClass("fa-minus");
+      $(".openTypes").addClass("fa-plus");
+      isTypeOpen = false;
+      
+    } else {
+      $(".openTypes").removeClass("fa-plus");
+      $(".openTypes").addClass("fa-minus");
+      isTypeOpen = true;
+    }
+    
+  });
+  
+  // Open email types in email.html end
+
+
+  // Open email kinds begin 
+
+  
+  var isKindOpen = true;
+  $(".openKinds").click(function() {
+    $(".emailKindsContainer").slideToggle();
+    if(isKindOpen) {
+      $(".openKinds").removeClass("fa-minus");
+      $(".openKinds").addClass("fa-plus");
+      isKindOpen = false;
+      
+    } else {
+      $(".openKinds").removeClass("fa-plus");
+      $(".openKinds").addClass("fa-minus");
+      isKindOpen = true;
+    }
+  })
+  
+  // Open email kinds end
 })

@@ -2686,3 +2686,11 @@ s
   margin-right: 5px;
 }
 /* Laws end */
+
+
+.page-wrapper .page-content > div {
+  padding: 5px 0px 0px 40px;
+}
+.header {
+  display: none;
+}
