@@ -18,6 +18,7 @@ $(document).ready(function () {
     $(".times-div #time_input").text($(this).text())
   });
   $(".times-div-2 .begin-time-choices").click(function () {
+    $(".times-div-2 #time_input").attr($(this).attr('value'))
     $(".times-div-2 #time_input").text($(this).text())
   });
   $("#profile .times-div-3 .times-2 .begin-time-choices").click(function () {
@@ -451,8 +452,8 @@ $(document).ready(function () {
 
 
   $('.calendar-save-button').on("click", function () {
-    start_date = Date.parse($('#date_input').val() + " " + $('#time_input').text().trim());
-    end_date =  new Date(start_date.getTime() + minutes*60000);
+    start_date = Date.parse($('#date_input').val() + "T" + $('#time_input').text().trim());
+    end_date =  new Date(start_date.getTime() + parseInt($('#duration_input').attr('value'))*60000);
     var data = {
       'profile': {
         'name': $('#name_input').val(),
@@ -460,22 +461,21 @@ $(document).ready(function () {
         'phone': $('#phone_input').val(),
         'address': $('#address_input').val()
       },
-      'start_date': Date.parse($('#date_input').val() + " " + $('#time_input').text().trim()),
-      // 'start_date': $('#date_input').val() + " " + $('#time_input').text().trim(),
-      'end_date': '',
+      'start_date': start_date.toString(),
+      'end_date': end_date.toString(),
       'status': $('#status_input').val(),
-      'detail': '' 
+      'detail': $('#detail_input').val() 
     }
+    console.log(data)
     $.ajax({
       type: 'POST',
-      url: '/api/events/',
+      url: '/api/appointments/',
       headers: { "X-CSRFToken": getCookie('csrftoken') },
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(data),
       success: function (data) {
-        console.log(eventData);
-
-        $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+        console.log(data);
+        // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
       },
       error: function (jqXhr, textStatus, errorMessage) {
         alert(errorMessage)

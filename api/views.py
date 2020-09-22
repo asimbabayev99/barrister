@@ -630,7 +630,7 @@ class AppointmentListView(ListAPIView):
         date = self.request.GET.get('date')
         if not date:
             date = datetime(datetime.today().year, 1, 1).date()
-        return Appointment.objects.filter(user=self.request.user, date__gte=date)
+        return Appointment.objects.filter(user=self.request.user, start__gte=date)
 
 
 
