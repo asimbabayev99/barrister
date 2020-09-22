@@ -17,6 +17,11 @@
     font-size: 14px;
 }
 
+.show_more_btn {
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+
 #clients_modal input.form-control,#clients_modal textarea.form-control {
     background-color: #eee;
     box-shadow: none;

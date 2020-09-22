@@ -406,8 +406,8 @@ $(function () {
 });
 
 $(document).ready(function() {
-  var isOpen = false;
-  
+  $("#timer_1").datetimepicker({format : "DD/MM/YYYY",locale: 'az'});
+
   $(".hidden_main .show_more_btn").click(function() {
     
     
