@@ -13,7 +13,7 @@
 <main style="font-weight: bold;" class="page-content design">
     <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
       <form enctype="multipart/form-data" method="POST">
-
+        {{ form.media }}
         {% csrf_token %}
           <div class="container-fluid">
             <div class="row">
@@ -27,8 +27,19 @@
           <div class="col-md-12 vekil_main">
                 
                 <div class="col-12 vekil_yeni_fikir">
-                    {{ form.text }}
-                    {{ form.media }}
+                
+                  
+                  {% for field in form %}
+                    {{field}}
+                    
+                    <!-- {% for error in field.errors %}
+                    <span style="color:#dc3545; font-size: 12px; margin-left: 25px;" >{{error}}</span>
+                    {% endfor %}
+                       -->
+                  {% endfor %}
+                    
+                   
+
                 </div>
 
 
