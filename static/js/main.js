@@ -409,6 +409,11 @@ $(document).ready(function() {
   
   $(".hidden_main .show_more_btn").click(function() {
     $($(this).parent().children()[2]).toggle();
+    if($($(this).parent().children()[3]).text()==="Show more") {
+      $(this).text("Show less")
+    } else {
+      $(this).text("Show more")
+    }
   });
   
   // Open email types in email.html begin
