@@ -3,193 +3,254 @@
 {% load static %}
 
 {% block title %}
-  <title>Barrister Elelktron poçt</title>
+<title>Barrister Elelktron poçt</title>
 {% endblock %}
 
 {% block links %}
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
-      alt="Изображение Tim Treis с сайта Pixabay "
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
-    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet"/>
-    <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print"/>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  {% endblock %}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2016/07/31/20/54/calendar-1559935_1280.png"
+  alt="Изображение Tim Treis с сайта Pixabay " type="image/x-icon" />
+<link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
+<link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" rel="stylesheet" />
+<link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/email.css' %}" />
+
+{% endblock %}
 
 
 {% block content %}
 <main class="page-content design">
-    <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
-    <div class="container-fluid" style="padding-left: 70px;">
+  <div style="padding-left: 70px;" class="emailContent">
+    <h1>Inbox</h1>
+    <div class="container-fluid mt-4">
       <div class="row">
-          <div class="col-12 poct_title ">
-             <div class="send_main">
-               <span>Mail Gonder</span>
-             </div>
-          </div>
+        <div class="col-12 col-md-3 pl-0">
+          <button class="btn btn-block btn-warning emailComposeButton mb-2">Compose</button>
+          <ul class="list-group emailListGroup">
+            <li class="list-group-item d-flex align-items-center justify-content-between emailFirstList">
+              <span>Folders</span>
+              <span><i class="fas fa-minus openTypes"></i></span>
+            </li>
+            <div class="emailTypesContainer">
+              <a href="#" class="rounded-0 border-top-0 list-group-item emailBetweenContext">
+                <span><i class="fas fa-inbox mr-2"></i> Inbox</span>
+                <span class="badge d-flex align-items-center badge-primary">10</span>
+              </a>
+              <a href="#!" class="list-group-item emailBetweenContext">
+                <span><i class="far fa-envelope mr-2"></i> Sent</span>
+                <span class="badge d-flex align-items-center badge-success">10</span>
+              </a>
+              <a href="#!" class="list-group-item emailBetweenContext">
+                <span><i class="far fa-file-alt mr-2"></i> Draft</span>
+  
+              </a>
+              <a href="#!" class="list-group-item emailBetweenContext">
+                <span><i class="fas fa-filter mr-2"></i> Junk</span>
+  
+              </a>
+              <a href="#!" class="list-group-item emailBetweenContext">
+                <span><i class="fas fa-trash-alt mr-2"></i> Trash</span>
+                <span class="badge d-flex align-items-center badge-secondary">10</span>
+              </a>
+            </div>
+          </ul>
+          <div class="list-group emailListGroup mt-2">
+            <li class="list-group-item d-flex align-items-center justify-content-between emailFirstList">
+              <span>Kinds</span>
+              <span><i class="fas fa-minus openKinds"></i></span>
+            </li>
+            <div class="emailKindsContainer">
+              <a href="#!" class="rounded-0 border-top-0 list-group-item emailBetweenContext">
+                <span><i class="fas fa-circle text-danger mr-2"></i> Important</span>
+  
+              </a>
+              <a href="#!" class="list-group-item emailBetweenContext">
+                <span><i class="fas fa-circle text-primary mr-2"></i> Social</span>
+  
+              </a>
+              <a href="#!" class="list-group-item emailBetweenContext">
+                <span><i class="fas fa-circle text-warning mr-2"></i> Promotions</span>
+  
+              </a>
+            </div>
 
+          </div>
+        </div>
+        <div class="col-12  col-md-9 pl-0">
+          <ul class="list-group">
+            <li class="list-group-item emailFirstList emailBetweenContext">
+              <span>Inbox</span>
+              <span>
+                <div class="input-group emailSearchPart">
+                  <input type="text" class="form-control" placeholder="Search in mail" aria-label="Recipient's username"
+                    aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                  </div>
+                </div>
+              </span>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+              <div class="d-flex emailButtonGroups">
+                <div class="mr-2">
+                  <input type="checkbox" name="" id="">
+                </div>
+                <div class="noRounded1">
+                  <i class="fas fa-trash-alt"></i>
+                </div>
+                <div class="noRounded2">
+                  <i class="fas fa-reply"></i>
+                </div>
+                <div class="noRounded3">
+                  <i class="fas fa-share"></i>
+                </div>
+                <div class="ml-2">
+                  <i class="fas fa-sync-alt"></i>
+                </div>
+              </div>
+              <div class="d-flex emailButtonGroups">
+                <span>1-3/3</span>
+                <div class="mx-2">
+                  <i class="fas fa-angle-left"></i>
+                </div>
+                <div>
+                  <i class="fas fa-angle-right"></i>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <div class="d-flex h-100 w-100 align-items-center justify-content-between">
+                
+                <span class="d-flex align-items-center">
+                  <input type="checkbox" name="" id="">
+                  <span class="emailNameTitle">Alexander Piece</span>
+                  <span class="emailSubject">
+                    Need Work
+
+                  </span>
+
+                  <span class="emailContentShort">
+                    Trying to find a solution to this problem...
+                  </span>
+                </span>
+                <span>
+                  5 mins ago
+                </span>
+
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <div class="d-flex h-100 w-100 align-items-center justify-content-between">
+
+                <span class="d-flex align-items-center">
+                  <input type="checkbox" name="" id="">
+                  <span class="emailNameTitle">Alexander Piece</span>
+                  <span class="emailSubject">
+                    Need Work
+
+                  </span>
+
+                  <span class="emailContentShort">
+                    Trying to find a solution to this problem...
+                  </span>
+                </span>
+                <span>
+                  5 mins ago
+                </span>
+
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <div class="d-flex h-100 w-100 align-items-center justify-content-between">
+
+                <span class="d-flex align-items-center">
+                  <input type="checkbox" name="" id="">
+                  <span class="emailNameTitle">Alexander Piece</span>
+                  <span class="emailSubject">
+                    Need Work
+
+                  </span>
+
+                  <span class="emailContentShort">
+                    Trying to find a solution to this problem...
+                  </span>
+                </span>
+                <span>
+                  5 mins ago
+                </span>
+
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      
-  </div>
-  <div class="container-fluid" style="padding-left: 70px;">
-      <div class="row">
-       
-          <div class="col-xl-4 col-12 mail_middle" >
-            <div class="middle_div">
-             <div class="search_mail">
-                 <input type="text" placeholder="Maildə axtar..."> <i class="fas fa-sync"></i>
-             </div>
-
-             <div class="col-xl-4 col-12 mail_middle" >
-               <div class="middle_div">
-                <div class="search_mail">
-                    <input type="text" placeholder="Maildə axtar..."> <i class="fas fa-sync"></i>
-                </div>
-                <div class="inbox_main" >
-                    <div class="inbox_title">
-                        <span>Gələnlər qutusu</span>
-                    </div>
-                    <div class="divforhr">
-                        <hr align="left"> 
-                    </div>
-                    <div style="height: 517px;overflow: auto;">
-                        <div class="time_inbox">
-                            <span>Dünən</span>
-                        </div>
-                        {% for email in page_obj %}
-                        <div class="mails">
-                          <div class="mail_img"></div>
-                            <div class="mail_content">
-                              <span class="mail_name">{{email.sender}}</span><br>
-                              {% if email.subject %}
-                                <span class="mail_title">{{email.subject}}</span><br>
-                              {% else %}
-                                <span class="mail_title">Başlıq yoxdur</span><br>
-                              {% endif %}
-                              <!-- <span class="topic_mail"><em>Can you help me for registiration..</em></span> -->
-                            </div>
-                          </div>
-                        {% endfor %}
-                        
-                        
-                        <div class="time_inbox">
-                            <span>13.11.2020</span>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-                </div>
-<!-- >>>>>>> 7f205d871d13567956679638e8480113ebe3cd76 -->
-             </div>
-             </div>
-          </div>
-          <div class="col-xl-7 col-12 mail_right">
-             <div class="reply_main">
-               <!--BU hisselerde reply delete fayllari olacaq-->
-               <div style="float: right;padding-right: 5px;">
-                 <i class="fas fa-reply" ></i> <span>Cavab ver</span>
-               <i class="far fa-trash-alt"></i><span>Sil</span>
-               <i class="fas fa-arrow-right"></i><span>Yönləndir</span>
-               <i class="fas fa-archive"></i><span>Arxivə al</span>
-               </div>
-             </div>
-
-             <div class="mail_basligi">
-               <span>Yeni mesaj : "<b>Help me</b>"</span>
-             </div>
-
-             <div class="mail_topic">
-               
-               <div class="mail_sekil_yazi">JD</div>
-               <div class="fl_left_mail">
-                 <span>User of Barrister : </span>
-                 <span> John Doe</span><br>
-                 <span>unknown@gmail.com</span>
-               
-               
-               </div>
-               
-          </div>
-          <div class="mail_title_tekrar"><span>Help me</span></div>
-          <div class="mail_movzu_genis">
-            <span>Greetings Dear Friends, <br>
-             You know, in the last few days, I've prepared a comprehensive tutorial about Docker. You can use the reference link below the last video on my YouTube channel 
-             to reach my training at the ideal price (24.99). There are 9 hours left until the end of the link. <br><br>
-             Note: YouTube user name: volkantasci</span>
-             
-          </div>
-          
-      </div>
+    </div>
   </div>
 
 
-  </main>
-  {% endblock content %}
-  
-  
-  
+</main>
+{% endblock content %}
+
+
+
 {% block scripts %}
-  <script text="text/javascript" > alert('Test')</script>
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-  <script src="{% static 'js/fullcalendar.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-  <script>
-    function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-              var cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
       }
-      return cookieValue;
+    }
+    return cookieValue;
+  }
+
+  $(document).ready(function () {
+    console.log('test')
+    var url = $(location).attr('hash')
+    console.log('test')
+    if (url.includes('access_token')) {
+      console.log('true')
+      var token = url.substring(url.indexOf('n=') + 2, url.indexOf('&t'))
+      $.ajax({
+        url: '/api/email/token/',
+        headers: {
+          "X-CSRFToken": getCookie('csrftoken'),
+        },
+        type: 'POST',
+        data: {
+          'token': token
+        },
+        success: function (data) {
+          console.log(data);
+        }
+      });
+
     }
 
-$(document).ready(function(){ 
-      console.log('test')
-      var url =  $(location).attr('hash')
-      console.log('test')
-      if(url.includes('access_token')){
-        console.log('true')
-        var token = url.substring(url.indexOf('n=')+2,url.indexOf('&t'))
-        $.ajax({
-          url : '/api/email/token/',
-          headers: { 
-        	"X-CSRFToken": getCookie('csrftoken'),
-                  },
-          type: 'POST',
-          data : {
-            'token' : token
-          },
-          success: function(data){
-            console.log(data);
-          }
-        });
+  });
+</script>
 
-      }  
-
-    });
-  </script>
- 
 {% endblock scripts %}

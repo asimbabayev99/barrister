@@ -148,7 +148,6 @@ $(document).ready(function () {
   $("#modal_2_end_hour").datetimepicker({ format: 'HH:mm', locale: 'az' });
   $("#modal_2_end").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
   
-  
 
   $.get("/api/events/list/", function (data) {
     console.log(data)

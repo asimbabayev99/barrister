@@ -125,6 +125,7 @@ $(document).ready(function () {
   // CAlendar data save begin
   $(".icons-contents-main .icons").click(function () {
     var icon = $(this);
+    $(".icon-content").attr('data-id', icon.attr('data-id'))
     $(".icon-content").html(icon.html())
   });
 
@@ -200,9 +201,6 @@ $(document).ready(function () {
       $(".modal").find(".calendar-modal .auto_name_2").css("display", "none");
       $(".modal").find(".calendar-modal .alert").css("display", "none");
 
-
-
-
     },
 
     eventRender: function (event, element) {
@@ -231,9 +229,9 @@ $(document).ready(function () {
 
     eventClick: function (calEvent, jsEvent) {
       console.log(calEvent)
-      if(calEvent.type == "event"){
+      if (calEvent.type == "event") {
         $('#updateEvent').modal('show');
-      } else if(calEvent.type == "appointment") {
+      } else if (calEvent.type == "appointment") {
         $('#updateAppointment').modal('show');
       }
       // Display the modal and set event values.
@@ -267,7 +265,7 @@ $(document).ready(function () {
 
   // load event to calendar
   $.get("/api/events/list/", function (data) {
-    console.log(data)
+    // console.log(data)
     for (i = 0; i < data.length; i++) {
       eventData = {
         type: 'event',
@@ -281,8 +279,6 @@ $(document).ready(function () {
         bgcolor: data[i].category_bgcolor,
         textcolor: data[i].category_textcolor,
         id: data[i].id
-        // vaxt_divi: $(".slide_main").text(),
-        // ikonka: $(".choose_icon_main span").html()
       };
       $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
     }
@@ -317,27 +313,27 @@ $(document).ready(function () {
     meeting_begin = $().val();
     meeting_end = null;
     meeting_note = $(".calendar-modal #home .text-area-modal").val()
-    if(meeting_title && meeting_email && meeting_end && meeting_begin && meeting_phone && meeting_address && meeting_reservation) {
+    if (meeting_title && meeting_email && meeting_end && meeting_begin && meeting_phone && meeting_address && meeting_reservation) {
       var eventData = {
-        meet_title : meeting_title,
-        meet_start : meeting_begin,
-        meet_end : meeting_end,
-        meet_email : meeting_email,
-        meet_address : meet_address,
-        meet_phone : meeting_phone,
-        meet_note : meeting_note,
-        meet_status : meeting_reservation
+        meet_title: meeting_title,
+        meet_start: meeting_begin,
+        meet_end: meeting_end,
+        meet_email: meeting_email,
+        meet_address: meet_address,
+        meet_phone: meeting_phone,
+        meet_note: meeting_note,
+        meet_status: meeting_reservation
       };
       data = {
         'name': eventData.meet_title,
         'category': 1,
-        'meeting_start' : eventData.meet_start,
-        'meeting_end' : eventData.meet_end,
-        'address' : eventData.meet_address,
-        'meeting_email'  : eventData.meet_email,
-        'phone_number'  :eventData.phone,
-        'meet_note' : eventData.meeting_note,
-        'meet_status'  :eventData.meet_status
+        'meeting_start': eventData.meet_start,
+        'meeting_end': eventData.meet_end,
+        'address': eventData.meet_address,
+        'meeting_email': eventData.meet_email,
+        'phone_number': eventData.phone,
+        'meet_note': eventData.meeting_note,
+        'meet_status': eventData.meet_status
       };
       $.ajax({
         type: 'POST',
@@ -346,8 +342,7 @@ $(document).ready(function () {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(data),
         success: function (data) {
-          console.log(eventData);
-
+          // console.log(eventData);
           $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
         },
         error: function (jqXhr, textStatus, errorMessage) {
@@ -358,7 +353,6 @@ $(document).ready(function () {
 
   })
   $(".calendar-modal #modal_2_save").on("click", function (event) {
-
     var title = $(".calendar-modal #event_title").val();
     var begin_gun, end_gun, bas_saat, bit_saat, location_modal;
     begin_gun = $(".calendar-modal #modal_2_begin").val();
@@ -389,12 +383,13 @@ $(document).ready(function () {
         begin_hour: $(".calendar-modal #profile #modal_2_begin_hour").val(),
         disabled_check: $(".choose_all_day_main input").prop("disabled", true),
         vaxt_divi: $(".slide_main").text(),
-        ikonka: $(".choose_icon_main span").html()
+        ikonka: $(".choose_icon_main span").html(),
+        category: $('.icon-content').attr('data-id'),
       };
 
       data = {
         'name': eventData.title,
-        'category': 1,
+        'category': eventData.category,
         'description': '',
         'location': eventData.mekan,
         'start': moment($(".calendar-modal #modal_2_begin").val(), 'DD/MM/YYYY').format('YYYY-MM-DD') + 'T' + $('#modal_2_end_hour').val(),
@@ -454,6 +449,40 @@ $(document).ready(function () {
       confirm("Başlama vaxtı bitmə vaxtına bərabər,və ya böyük olmamalıdır")
   });
 
+
+  $('.calendar-save-button').on("click", function () {
+    start_date = Date.parse($('#date_input').val() + " " + $('#time_input').text().trim());
+    end_date =  new Date(start_date.getTime() + minutes*60000);
+    var data = {
+      'profile': {
+        'name': $('#name_input').val(),
+        'email': $('#email_input').val(),
+        'phone': $('#phone_input').val(),
+        'address': $('#address_input').val()
+      },
+      'start_date': Date.parse($('#date_input').val() + " " + $('#time_input').text().trim()),
+      // 'start_date': $('#date_input').val() + " " + $('#time_input').text().trim(),
+      'end_date': '',
+      'status': $('#status_input').val(),
+      'detail': '' 
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/api/events/',
+      headers: { "X-CSRFToken": getCookie('csrftoken') },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(data),
+      success: function (data) {
+        console.log(eventData);
+
+        $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+      },
+      error: function (jqXhr, textStatus, errorMessage) {
+        alert(errorMessage)
+      }
+    }); 
+
+  })
 
   // $("textarea").autosize();
 

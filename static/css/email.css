@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+.emailContent {
+    color:  #3a3f48;
+    font-family:  'Noto Sans JP', sans-serif !important;
+}
+
+.emailContent h1 {
+    font-size: 25px !important;
+}
+
+.emailComposeButton {
+    font-size: 14px;
+    background-color: #cdba6d;
+    border-color: #ccb03f;
+    box-shadow: none !important;
+}
+
+.emailComposeButton:focus {
+    background-color: #ccb03f;
+}
+
+.emailComposeButton:hover {
+    background-color: #ccb03f;
+}
+
+.emailFirstList {
+    border-top: 3px solid #cdba6d;
+}
+
+.emailBetweenContext {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.emailSearchPart input {
+    box-shadow: none !important;
+    font-size: 13px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    height: 30px !important;
+    border-color: #cdba6d;
+}
+.emailSearchPart input:focus {
+    border-color:#ccb03f ;
+}
+.emailSearchPart .input-group-text {
+    background-color: #cdba6d;
+    cursor: pointer;
+
+}
+.emailButtonGroups {
+    display: flex;
+    align-items: center;
+}
+
+.emailListGroup a {
+    color: #3a3f48 !important;
+    text-decoration: none;
+}
+.emailListGroup a.list-group-item:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+.emailButtonGroups div {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    transition: 0.2s;
+}
+.emailButtonGroups div:hover {
+    background-color: #ddd;
+}
+.emailButtonGroups .noRounded1 {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.emailButtonGroups .noRounded3 {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.emailButtonGroups .noRounded2 {
+    border-radius: 0;
+}
+
+.emailNameTitle {
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 700;
+}
+.openTypes, .openKinds {
+    cursor: pointer;
+}
+.emailSubject {
+    margin-left: 10px;
+    color: gray;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.emailContentShort {
+    margin-left: 10px;
+}
