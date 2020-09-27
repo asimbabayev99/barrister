@@ -536,7 +536,6 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
-    
     email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
     get_last_mails.delay(email_acc.email,email_acc.token)
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
