@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from account.models import CustomUser
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
@@ -535,6 +536,9 @@ class Attachment(models.Model):
     email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='attachments', blank=False, null=False)
     name = models.CharField(max_length=256, null=False, blank=False)
     file = models.FileField(upload_to='attachment', null=False, blank=False)
+    def get_absolute_url(self):
+        return self.file.url
+    
 
 
 # class Folder(models.Model):

@@ -30,12 +30,12 @@
                 
                   
                   {% for field in form %}
-                    {{field}}
-                    
-                    <!-- {% for error in field.errors %}
+                    {{field}}   
+                    {% for error in field.errors %}
+                    <div>
                     <span style="color:#dc3545; font-size: 12px; margin-left: 25px;" >{{error}}</span>
+                    </div>
                     {% endfor %}
-                       -->
                   {% endfor %}
                     
                    
@@ -50,7 +50,7 @@
                     <label for="file-input" class="label_icon">
                       <i class="fas fa-photo-video"></i>
                     </label>
-                    <span class="pdf_span">{{ form.fayl }}</span>
+                    <!-- <span class="pdf_span">{{ form.fayl }}</span> -->
                   </div>
                 </div>
                    <div class="col-md-6 col-xs-12 confirm_button">

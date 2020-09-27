@@ -7,6 +7,7 @@ from account.forms import UserForm, UserUpdateForm, ProfileUpdateForm
 from home.forms import * 
 from django.utils.text import slugify
 from .models import News
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
@@ -24,7 +25,7 @@ from email.mime.application import MIMEApplication
 from os.path import basename , realpath
 import os
 from django.core.mail import send_mail
-from account.tasks import synchronize_mail
+from account.tasks import synchronize_mail , get_last_mails
 import re
 
 
@@ -535,8 +536,9 @@ def barrister_completed_tasks(request):
 
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
+    
     email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
-
+    get_last_mails.delay(email_acc.email,email_acc.token)
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
          'subject','sender', 'receiver', 'date', 'flag')
     page = request.GET.get('page')
@@ -654,39 +656,51 @@ def send_email(request):
 
 
 
-def attachment_media_access(request, path):
-    """
-    When trying to access :
-    myproject.com/media/uploads/passport.png
+# def attachment_media_access(request, path):
+#     """
+#     When trying to access :
+#     myproject.com/media/uploads/passport.png
 
-    If access is authorized, the request will be redirected to
-    myproject.com/protected/media/uploads/passport.png
+#     If access is authorized, the request will be redirected to
+#     myproject.com/protected/media/uploads/passport.png
 
-    This special URL will be handle by nginx we the help of X-Accel
-    """
+#     This special URL will be handle by nginx we the help of X-Accel
+#     """
 
-    access_granted = False
+#     access_granted = False
 
-    user = request.user
-    if user.is_authenticated():
-        if user.is_staff:
-            # If admin, everything is granted
-            access_granted = True
-        else:
-            # For simple user, only their documents can be accessed
-            user_documents = [
-                # add here more allowed documents
-            ]
+#     user = request.user
+#     if user.is_authenticated():
+#         if user.is_staff:
+#             # If admin, everything is granted
+#             access_granted = True
+#         else:
+#             # For simple user, only their documents can be accessed
+#             user_documents = [
+#                 # add here more allowed documents
+#             ]
 
-            for doc in user_documents:
-                if path == doc.name:
-                    access_granted = True
+#             for doc in user_documents:
+#                 if path == doc.name:
+#                     access_granted = True
 
-    if access_granted:
-        response = HttpResponse()
-        # Content-type will be detected by nginx
-        del response['Content-Type']
-        response['X-Accel-Redirect'] = '/protected/media/' + path
-        return response
-    else:
-        return HttpResponseForbidden('Not authorized to access this media.')
+#     if access_granted:
+#         response = HttpResponse()
+#         # Content-type will be detected by nginx
+#         del response['Content-Type']
+#         response['X-Accel-Redirect'] = '/protected/media/' + path
+#         return response
+#     else:
+#         return HttpResponseForbidden('Not authorized to access this media.')
+
+
+def attachment_media_access(request,path): 
+    file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
+
+
