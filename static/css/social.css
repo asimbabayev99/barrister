@@ -40,11 +40,12 @@ h4 {
 
 .moreNewsImg img {
     width: 100%;
-    height: 250px;
+    min-height: 250px;
     border-radius: 8px;
     object-fit: cover;
 }
 
 .newsText {
     font-size: 0.9rem;
+    overflow: auto;
 }
