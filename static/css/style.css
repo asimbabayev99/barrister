@@ -2694,3 +2694,14 @@ s
 .header {
   display: none;
 }
+
+
+/* Social activity begin */
+.headerMain {
+  background-color: #eee;
+  color: #3a3f48;
+  padding: 10px;
+  font-size: 18px;
+} 
+
+/* Social activity end */

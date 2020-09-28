@@ -1,0 +1,50 @@
+.card-img {
+    height: 150px;
+    object-fit: cover;
+}
+.blockquote-footer {
+    font-size: 0.8rem;
+}
+small { 
+    font-weight: 600;
+    font-size: .7rem;
+}
+.btn-warning {
+    background-color: #cdba6d;
+    border-color: #cdba6d;
+}
+.btn {
+    padding: 4px;
+    font-size: 0.7rem;
+}
+
+.deleteButton {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3a3f48;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+}
+h4 {
+    font-size: 18px;
+}
+
+.moreNewsImg img {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.newsText {
+    font-size: 0.9rem;
+}
