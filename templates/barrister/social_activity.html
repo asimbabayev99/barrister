@@ -14,131 +14,199 @@
   
   <main class="page-content design" >
     <div class="container-fluid">
-      <header class="headerMain">Sosial Paylaşımlar</header>
+      
       <section>
         <div class="container my-4">
-          <div class="row">          
-              <div class="col-12">
-                <header class="moreNewsHeader">
-                  <h3>Son Paylaşım</h1>
-                  <p><i class="far fa-clock"></i> 22.02.2020</p>
-                  <p><i class="far fa-map"></i> Azerbaijan, Baku</p>
-                </header>
-                <div class="moreNewsImg">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img class="" src="https://bkwebdesigns.b-cdn.net/wp-content/uploads/2018/09/Law-Firm-Website-Marketing-Best-Lawyer-Advocate-Web-Solutions.jpg" alt="">
-                    </div>
-                    <div class="col-md-6 newsText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum deleniti expedita, vero libero quos neque 
-                      sequi ut? In fuga natus eum? Dolorum sint ratione doloribus laboriosam nam aut consequuntur debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam quae possimus natus reiciendis repellat, et ipsam reprehenderit ea neque amet maiores nisi cum nostrum, ex, tenetur sequi laborum numquam iure!Voluptates in illo officiis exercitationem minima voluptas voluptate! Sequi quisquam voluptatum ipsum corrupti. Soluta odit tempore, sed optio ipsam, eveniet ab itaque ipsum fugit, corrupti quibusdam voluptatem eum voluptates nostrum!
+          <div class="row">
+            <header class="headerMain col-12 my-3 mt-0">Yeni Paylaşım</header>
+            <!-- Part to write new mail by Azad start Create it inside of div-->
+            <div class="col-12 my-2">
+              <textarea name="" class="form-control col-12" style="height: 300px;"></textarea>
 
-                      <button class="btn btn-danger btn-block mt-2">Delete</button>
-                    </div>
+            </div>
+
+            <!-- Part to write new mail by Azad start -->
+            
+            <div class="col-12">
+              <div class="input-group file-input-group" data-controller="file-input">
+                <div class="input-group-prepend">
+                  <label class="btn btn-secondary mb-0 d-flex align-items-center justify-content-center" for="customFile">Fayl Seçin</label>
+                </div>
+                <input class="form-control" type="text" placeholder="No file selected" readonly data-target="file-input.value">
+                <input type="file" class="form-control" id="customFile" data-target="file-input.input" data-action="file-input#display">
+                
+              </div>
+            </div>
+            <div class="col-12 my-2">
+              <button class="btn-block btn btn-warning">
+                Paylaş
+              </button>
+            </div>
+
+            <header class="headerMain col-12 my-2 mt-4">Son Paylaşımlar</header>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
+                  </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
                   </div>
                 </div>
-                <header class="mt-2">
-                  <h3>Digər Paylaşımlar</h1>
-                </header>
-              </div>
-              
-              <div class="col-md-4 my-2">
-                  <div class="card">
-                      <img src="https://bkwebdesigns.b-cdn.net/wp-content/uploads/2018/09/Law-Firm-Website-Marketing-Best-Lawyer-Advocate-Web-Solutions.jpg" class="card-img" alt="news_img">
-                      <div class="deleteButton">
-                          <i class="fas fa-times"></i>
-                      </div>
-                      <div class="card-body">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <blockquote class="blockquote-footer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ducimus?</blockquote>
-                          <small class=""> <i class="far fa-clock mr-2"></i> 22.05.2020 - 14:31</small>
-                          <br>
-                          <small class=""> <i class="far fa-map mr-2"></i> Azerbaijan, Baku  </small>
-                          <button class="btn-block mt-2 btn btn-warning">Read more</button>
-                      </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
                   </div>
+                </div>
               </div>
-              <div class="col-md-4 my-2">
-                  <div class="card">
-                      <img src="https://www.incimages.com/uploaded_files/image/1920x1080/GettyImages-1145456936_400263.png" class="card-img" alt="news_img">
-                      <div class="deleteButton">
-                          <i class="fas fa-times"></i>
-                      </div>
-                      <div class="card-body">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <blockquote class="blockquote-footer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ducimus?</blockquote>
-                          <small class=""> <i class="far fa-clock mr-2"></i> 22.05.2020 - 14:31</small>
-                          <br>
-                          <small class=""> <i class="far fa-map mr-2"></i> Azerbaijan, Baku  </small>
-                          <button class="btn-block mt-2 btn btn-warning">Read more</button>
-                      </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
                   </div>
-              </div>
-              <div class="col-md-4 my-2">
-                  <div class="card">
-                      <img src="https://www.latestlaws.com/media/2017/07/Indefinite-fast-by-Advocate.jpg" class="card-img" alt="news_img">
-                      <div class="deleteButton">
-                          <i class="fas fa-times"></i>
-                      </div>
-                      <div class="card-body">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <blockquote class="blockquote-footer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ducimus?</blockquote>
-                          <small class=""> <i class="far fa-clock mr-2"></i> 22.05.2020 - 14:31</small>
-                          <br>
-                          <small class=""> <i class="far fa-map mr-2"></i> Azerbaijan, Baku  </small>
-                          <button class="btn-block mt-2 btn btn-warning">Read more</button>
-                      </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
                   </div>
-              </div>
-              <div class="col-md-4 my-2">
-                  <div class="card">
-                      <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="news_img">
-                      <div class="deleteButton">
-                          <i class="fas fa-times"></i>
-                      </div>
-                      <div class="card-body">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <blockquote class="blockquote-footer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ducimus?</blockquote>
-                          <small class=""> <i class="far fa-clock mr-2"></i> 22.05.2020 - 14:31</small>
-                          <br>
-                          <small class=""> <i class="far fa-map mr-2"></i> Azerbaijan, Baku  </small>
-                          <button class="btn-block mt-2 btn btn-warning">Read more</button>
-                      </div>
+                </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
                   </div>
+                </div>
               </div>
-              <div class="col-md-4 my-2">
-                  <div class="card">
-                      <img src="https://www.redcross.org.au/getmedia/e1b6fd80-7628-4865-8c79-b544d3074974/Dig-Advocates-web.jpg.aspx" class="card-img" alt="news_img">
-                      <div class="deleteButton">
-                          <i class="fas fa-times"></i>
-                      </div>
-                      <div class="card-body">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <blockquote class="blockquote-footer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ducimus?</blockquote>
-                          <small class=""> <i class="far fa-clock mr-2"></i> 22.05.2020 - 14:31</small>
-                          <br>
-                          <small class=""> <i class="far fa-map mr-2"></i> Azerbaijan, Baku  </small>
-                          <button class="btn-block mt-2 btn btn-warning">Read more</button>
-                      </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
                   </div>
-              </div>
-              <div class="col-md-4 my-2">
-                  <div class="card">
-                      <img src="https://bkwebdesigns.b-cdn.net/wp-content/uploads/2018/09/Law-Firm-Website-Marketing-Best-Lawyer-Advocate-Web-Solutions.jpg" class="card-img" alt="news_img">
-                      <div class="deleteButton">
-                          <i class="fas fa-times"></i>
-                      </div>
-                      <div class="card-body">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <blockquote class="blockquote-footer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ducimus?</blockquote>
-                          <small class=""> <i class="far fa-clock mr-2"></i> 22.05.2020 - 14:31</small>
-                          <br>
-                          <small class=""> <i class="far fa-map mr-2"></i> Azerbaijan, Baku  </small>
-                          <button class="btn-block mt-2 btn btn-warning">Read more</button>
-                      </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
                   </div>
+                </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
+                  </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
+                  </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
+                  </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="card">
+                <div class="headerMain card-header">
+                  <div class="headerImg">
+                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="">
+                  </div>
+                  <div class="headerPerson ml-2">
+                    <h6 class="m-0 p-0 mb-1">Musa Hesenli</h6>
+                    <small><i class="far fa-clock"></i> 22.04.2020, <i class="far fa-map"></i> Azerbaijan, Baku</small>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Facere, ab. Assumenda nihil nulla exercitationem optio nisi dignissimos ipsam tempora amet.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis veniam repellat reiciendis, quibusdam optio error iste accusamus dolorem dolores corrupti illo, autem eos architecto aliquam?
+                  </p>
+                  <img src="https://blog.ipleaders.in/wp-content/uploads/2020/04/default-lawyers-5.jpg" class="card-img" alt="">
+                  <div class="mt-2">
+                    <button class="btn btn-warning btn-block">Paylaşımı silin</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
       </section>
     </div>
@@ -147,7 +215,7 @@
 
 {% block scripts %} 
   {{ block.super }}
-
+  <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
   <script>
     function getCookie(name) {
       var cookieValue = null;
@@ -167,9 +235,6 @@
 
     function copydiv(arr){
       i = 0 
-      
-      
-      
       let original = $('#div')[0]
       original.children('span.span_metn_post_lorem').text(JSON.stringify(arr['text']))
 
@@ -208,8 +273,26 @@
     };
 });
 
+class FileInputController extends Stimulus.Controller {
+  static get targets() {
+    return ['value', 'input']
+  }
+  
+  display(evt) {
+    const fileName = evt.target.value.split('\\').pop();
+    
+    if (this.valueTarget.nodeName == 'INPUT') {
+      this.valueTarget.placeholder = fileName;
+    } else {
+      this.valueTarget.innerHTML = fileName;
+    }
+  }
+}
+
+const application = Stimulus.Application.start()
+application.register('file-input', FileInputController)
 
 
 
-  </script> 
+</script> 
 {% endblock scripts %}

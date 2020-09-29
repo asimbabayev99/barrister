@@ -49,3 +49,31 @@ h4 {
     font-size: 0.9rem;
     overflow: auto;
 }
+
+.headerImg img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.headerImg, .headerPerson {
+    float: left;
+}
+
+.card-body img { 
+    object-fit: cover;
+    height: 250px;
+}
+
+.file-input-group input[type="file"] {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+}
+
+input, textarea {
+    box-shadow: none !important;
+}
