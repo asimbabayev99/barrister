@@ -31,7 +31,7 @@
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
-  <body style="background-color: #384554">
+  <body>
     <div class="page-wrapper chiller-theme toggled">
       <div id="show-sidebar">
         <a
@@ -246,81 +246,81 @@
       </nav>
 
       <main class="page-content design">
-        <div class="container-fluid main_container" style="padding-left: 70px">
-          <div class="row">
-            <div class="col-12 send_mail_title">
-              <span>Elektron poçt göndər</span>
-            </div>
-
-            <form enctype="multipart/form-data" action="" method="POST">
-              <div class="col-12 send_mail_content">
-                {% csrf_token %}
-                <div style="float: left" class="col-10">
-                  <input
-                    type="text"
-                    name="receiver"
-                    class="col-10 send_mail_input"
-                    placeholder="Kimə..."
-                  />
-                  <input
-                    type="text"
-                    name="subject"
-                    class="col-10 send_mail_input"
-                    placeholder="Mail başlığı..."
-                  />
-
-                  <input
-                    name="content"
-                    class="col-10 send_mail_input"
-                    placeholder="Movzunu daxil edin..."
-                  />
-                </div>
-                <div class="col-12 attach_main">
-                  <div
-                    class="file-upload"
-                    id="file1"
-                    style="margin-bottom: 20px"
-                  >
-                    <div class="file-select">
-                      <div class="file-select-button" id="fileName">
-                        Şəkil və ya Video daxil et
-                      </div>
-                      <div class="file-select-name" id="noFile1">
-                        Fayl seçilməyib..
-                      </div>
-                      <input
-                        type="file"
-                        name="image"
-                        id="chooseFile2"
-                        accept="image/*,video/*"
-                        multiple
-                      />
-                    </div>
-                  </div>
-                  <div class="file-upload" id="file2">
-                    <div class="file-select">
-                      <div class="file-select-button" id="fileName">
-                        Mətn faylı daxil et
-                      </div>
-                      <div class="file-select-name" id="noFile2">
-                        Fayl seçilməyib..
-                      </div>
-                      <input
-                        type="file"
-                        name="file"
-                        id="chooseFile1"
-                        accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 send_mail_bottom" style="float: left">
-                  <button type="submit" class="btn btn-outline-dark">
-                    Göndər
-                  </button>
-                </div>
+        <div class="container-fluid" style="padding-left: 70px">
+          <div class="row m-0 p-0">
+            <header class="col-12 mb-2">
+              <h2>Yeni Mail</h1>
+            </header>
+            <div class="col-12">
+             <div class="card">
+              <div class="card-header">
+                <h4 class="p-0 m-0">Mövzu</h3>
               </div>
-            </form>
+              <div class="card-body">
+                <form action="" method="POST">
+                  <div class="form-group">
+                    <label for="">Mail ünvanı</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Başlıq</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Mövzu</label>
+                    <textarea name="" style="height: 150px;" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-12 attach_main">
+                      <div
+                        class="file-upload"
+                        id="file1"
+                        style="margin-bottom: 20px"
+                      >
+                        <div class="file-select">
+                          <div class="file-select-button" id="fileName">
+                            Şəkil və ya Video daxil et
+                          </div>
+                          <div class="file-select-name" id="noFile1">
+                            Fayl seçilməyib..
+                          </div>
+                          <input
+                            type="file"
+                            name="image"
+                            id="chooseFile2"
+                            accept="image/*,video/*"
+                            multiple
+                          />
+                        </div>
+                      </div>
+                      <div class="file-upload" id="file2">
+                        <div class="file-select">
+                          <div class="file-select-button" id="fileName">
+                            Mətn faylı daxil et
+                          </div>
+                          <div class="file-select-name" id="noFile2">
+                            Fayl seçilməyib..
+                          </div>
+                          <input
+                            type="file"
+                            name="file"
+                            id="chooseFile1"
+                            accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-block btn-warning" id="sendMailButton">
+                      Göndər
+                    </button>
+                  </div>
+                </form>
+              </div>
+             </div>
+            </div>
+            
           </div>
         </div>
       </main>
