@@ -80,6 +80,7 @@ class Matter(models.Model):
     name = models.CharField(max_length=256)
     number = models.IntegerField()
     chapter = models.ForeignKey(Chapter, related_name='chapters', on_delete=models.CASCADE)
+    content = RichTextField()
 
     def __str__(self):
         return str(self.number) + "." + self.name

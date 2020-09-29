@@ -493,7 +493,7 @@ $(document).ready(function () {
 
 // Modal 2 validation begin
 $(document).ready(function () {
-  $("#modal_2_save").click(function () {
+  $("#modal_2_save").click(function () {w
     if ($("#event_title").val().length === 0) {
       $("#name_alert_modal_2").css("display", "block");
     } else {
