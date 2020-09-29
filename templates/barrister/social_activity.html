@@ -38,7 +38,7 @@
               </div>
             </div>
             <div class="col-12 my-2">
-              <button class="btn-block btn btn-warning">
+              <button class="btn-block btn btn-warning" id="sharePostButton">
                 Paylaş
               </button>
             </div>
@@ -273,11 +273,11 @@
     };
 });
 
+// Input file begin
 class FileInputController extends Stimulus.Controller {
   static get targets() {
     return ['value', 'input']
   }
-  
   display(evt) {
     const fileName = evt.target.value.split('\\').pop();
     
@@ -288,11 +288,23 @@ class FileInputController extends Stimulus.Controller {
     }
   }
 }
-
 const application = Stimulus.Application.start()
 application.register('file-input', FileInputController)
+// Input file end
 
-
-
+$(document).ready(function() {
+  $("#sharePostButton").click(function() {
+    $.ajax({
+    type : "POST",
+    url : "unknown",
+    data: {
+      content : $("textarea").val(),
+      time : new Date().toLocaleDateString
+    }
+  }).catch(error,function() {
+    console.log(error)
+  })
+  })
+})
 </script> 
 {% endblock scripts %}
