@@ -187,22 +187,22 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-class AttachmentSerializer(serializers.ModelSerializer):
-    file = FileField(max_length=None, allow_empty_file=False)
+# class AttachmentSerializer(serializers.ModelSerializer):
+#     file = FileField(max_length=None, allow_empty_file=False)
 
-    class Meta:
-        model = Attachment
-        # fields = ['name', ]
-        fields = '__all__'
+#     class Meta:
+#         model = Attachment
+#         # fields = ['name', ]
+#         fields = '__all__'
 
 
-class EmailSerializer(serializers.ModelSerializer):
-    attachments = AttachmentSerializer(many=True)
+# class EmailSerializer(serializers.ModelSerializer):
+#     attachments = AttachmentSerializer(many=True)
 
-    class Meta:
-        model = Email
-        fields = '__all__'
-        # fields = ['folder', 'sender', 'receiver']
+#     class Meta:
+#         model = Email
+#         fields = '__all__'
+#         # fields = ['folder', 'sender', 'receiver']
 
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -323,3 +323,20 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = "__all__"
+
+
+class AttachmentSerializer(serializers.ModelSerializer):
+    url = serializers.CharField(source='get_absolute_url',read_only=True)
+
+    class Meta:
+        model = Attachment
+        fields = ['name','url']
+
+
+class EmailSerializer(serializers.ModelSerializer):
+    attachments = AttachmentSerializer(many=True,read_only=True)
+    class Meta:
+        model = Email
+        fields = ['folder','sender','receiver','subject','content','flag','date','num','date','attachments']
+        # fields = "__all__"
+

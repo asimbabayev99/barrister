@@ -454,7 +454,8 @@ $(document).ready(function() {
       $(".openKinds").addClass("fa-minus");
       isKindOpen = true;
     }
-  })
+  });
+  fetch("email/").then(response => response.json())
   
   // Open email kinds end
 })

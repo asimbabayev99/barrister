@@ -42,7 +42,7 @@ urlpatterns = [
     path('email/', email_view, name='email'),
 
 
-    re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='atatchment-media'),
+    re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='attachment-media'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

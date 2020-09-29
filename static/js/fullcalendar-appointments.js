@@ -44,11 +44,9 @@ $(document).ready(function () {
   $("#date_input").datetimepicker({ format: 'DD/MM/YYYY', locale: 'az' });
   $(".calendar-save-button").on("click", function (e) {
     var a = 1;
-
     e.preventDefault();
     if ($("#name_input").val().length === 0) {
       $("#name_alert").show();
-
     };
     if ($(".time-input").text().length === 0 || $(".validation-time").text().length === 0 || $(".validation-date").val().length === 0) {
       $("#date-alert-2").show()
@@ -56,12 +54,8 @@ $(document).ready(function () {
     if ($(".validation-reserv").text().length === 0) {
       $("#last-alert").show()
     };
-
-
     if ($("#name_input").val().length > 0) {
       $("#name_alert").hide();
-
-
     };
     if ($(".validation-date").val().length > 0 && $(".validation-time").text().length > 0 && $(".validation-interval").text().length > 0) {
       $("#date-alert-2").hide();
@@ -69,7 +63,6 @@ $(document).ready(function () {
     if ($(".validation-reserv").text().length > 0) {
       $("#last-alert").hide();
     };
-
     if ($("#name_input").val().length > 0 && $(".validation-date").val().length > 0 && $(".validation-time").text().length > 0 && $(".validation-interval").text().length > 0 && $(".validation-reserv").text().length > 0) {
       $("#exampleModalLong").modal("hide");
       $.ajax({
@@ -196,6 +189,7 @@ $(document).ready(function () {
       $(".modal").find(".calendar-modal #address_input").css({
         display: "block"
       });
+      
       $(".modal").find(".calendar-modal .validation-reserv").text("");
       $(".modal").find(".calendar-modal .validation-interval").text("");
       $(".modal").find(".calendar-modal .text-area-modal").val("");
