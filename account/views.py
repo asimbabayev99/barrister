@@ -164,19 +164,22 @@ def barrister_social_activity(request):
     #     return HttpResponse('<h1>Permission denied</h1>')
     last_publications = Publication.objects.filter(user=request.user).order_by('-date')[:3]
     form = PublicationForm()
-    error =  ""
+    err =  ""
     if request.method == "POST":
         form = PublicationForm(request.POST,request.FILES or None)
         if form.is_valid():
+            print(form.cleaned_data)
             text = form.cleaned_data['text']
             file = form.cleaned_data['file']
+            print(file)
             Publication.objects.create(user=request.user,text=text,file=file)
         else:
-            err = form['text'].errors.as_text().split("*")
+            err = form['text'].errors.as_text().strip('*').split("\n")[0]
             print(err)
+            
 
     form = PublicationForm()
-    context={'form':form,'publications':last_publications,'error':err[1].strip()}
+    context={'form':form,'publications':last_publications,'error':err}
     return render(request,'barrister/social_activity.html',context)
 
 

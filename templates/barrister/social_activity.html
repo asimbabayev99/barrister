@@ -14,7 +14,7 @@
   
   <main class="page-content design" >
     <div class="container-fluid">
-     <form method="POST" action=""> 
+     <form enctype="multipart/form-data" method="POST" action=""> 
        {% csrf_token %}
       <section>
         <div class="container my-4">
@@ -37,15 +37,7 @@
             <!-- Part to write new mail by Azad start -->
             
             <div class="col-12">
-              <div class="input-group file-input-group" data-controller="file-input">
-                <div class="input-group-prepend">
-                  <label class="btn btn-secondary mb-0 d-flex align-items-center justify-content-center" for="customFile">Fayl Seçin</label>
-                </div>
-                <input class="form-control" type="text" placeholder="No file selected" readonly data-target="file-input.value">
-                <!-- <input type="file" class="form-control" id="customFile" data-target="file-input.input" data-action="file-input#display">-->
-                {{form.file}}
-                
-              </div>
+              {{form.file}}
             </div>
             <div class="col-12 my-2">
               <button class="btn-block btn btn-warning" id="sharePostButton">

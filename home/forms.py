@@ -49,10 +49,7 @@ class PublicationForm(forms.Form):
     }),error_messages={'required':_('Bu xana boş ola bilməz')})
     file = forms.FileField(label='',required=False, widget=forms.ClearableFileInput(attrs={
         'type':'file',
-        'class': 'form-control',
-        'id':'customFile',
-        'data-target':'file-input.input',
-        'data-action':'file-input#display'
+        'class': 'form-control-file',
     }))
     def clean(self):
         cleaned_data = super(PublicationForm,self).clean()
