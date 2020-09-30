@@ -2708,3 +2708,7 @@ s
   border-color: #cdba6d;
   font-size: 13px;
 }
+
+#preLoader {
+  display: flex;
+}
