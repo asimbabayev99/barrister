@@ -39,25 +39,32 @@ class Newsform(forms.ModelForm):
 
 
 
-class PublicationForm(forms.ModelForm):
+class PublicationForm(forms.Form):
     error_css_class = 'error'
     
     text = forms.CharField(label='', widget=ckeditor.widgets.CKEditorWidget(attrs={
-        'class': 'text',
-        'placeholder': 'Mətn'
+        'class': 'form-control col-12',
+        'style':'height : 300px;'
     }),error_messages={'required':_('Bu xana boş ola bilməz')})
     file = forms.FileField(label='',required=False, widget=forms.ClearableFileInput(attrs={
-        'class': 'file file_upl bordered_upl'
+        'type':'file',
+        'class': 'form-control',
+        'id':'customFile',
+        'data-target':'file-input.input',
+        'data-action':'file-input#display'
     }))
-    class Meta:
-        model = Publication
-        fields = ['text','file']
-    def clean(self):
-        cleaned_data = super(PublicationForm,self).clean()
-        text = cleaned_data.get('text')
+    # def clean(self):
+    #     cleaned_data = super(PublicationForm,self).clean()
+    #     text = cleaned_data.get('text')
+    #     print(text)
+    #     if len(text) < 50 or len(text) is None:
+    #         print('test')
+    #         self.add_error('text','Ən az 50 simvol olmalidir')
+    def clean_text(self):
+        text = self.cleaned_data.get('text')
+        print(text)
         if len(text) < 50 or len(text) is None:
-            self.add_error('text',_('Ən az 50 simvol olmalidir'))
-
+            self.add_error('text','en az 50 simvol olmalidir')
 
 
 class TaskForm(forms.ModelForm):

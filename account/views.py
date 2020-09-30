@@ -168,7 +168,10 @@ def barrister_social_activity(request):
         if form.is_valid():
             text = form.cleaned_data['text']
             file = form.cleaned_data['file']
+            print(text)
             Publication.objects.create(user=request.user,text=text,file=file)
+        else:
+            print(form['text'].errors)
     form = PublicationForm()
     context={'form':form,'publications':last_publications}
     return render(request,'barrister/social_activity.html',context)

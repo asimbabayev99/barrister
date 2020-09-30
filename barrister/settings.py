@@ -138,7 +138,11 @@ USE_TZ = True
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': None,
+        'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
+                ["Maximize"]],
     },
 }
 
@@ -189,6 +193,6 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'synchronize_mail_schedule': {
         'task': "synchronize_mail", 
-        'schedule': crontab(hour="*",minute="*"),
+        'schedule': crontab(minute="*"),
     },
 }

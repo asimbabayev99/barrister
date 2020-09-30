@@ -14,17 +14,18 @@
   
   <main class="page-content design" >
     <div class="container-fluid">
-      
+     <form method="POST" action=""> 
+       {% csrf_token %}
       <section>
         <div class="container my-4">
           <div class="row">
             <header class="headerMain col-12 my-3 mt-0">Yeni Paylaşım</header>
             <!-- Part to write new mail by Azad start Create it inside of div-->
             <div class="col-12 my-2">
-              <textarea name="" class="form-control col-12" style="height: 300px;"></textarea>
-
+              {{form.media}}
+              <!-- <textarea name="" class="form-control col-12" style="height: 300px;"></textarea> -->
+              {{form.text}}
             </div>
-
             <!-- Part to write new mail by Azad start -->
             
             <div class="col-12">
@@ -33,7 +34,8 @@
                   <label class="btn btn-secondary mb-0 d-flex align-items-center justify-content-center" for="customFile">Fayl Seçin</label>
                 </div>
                 <input class="form-control" type="text" placeholder="No file selected" readonly data-target="file-input.value">
-                <input type="file" class="form-control" id="customFile" data-target="file-input.input" data-action="file-input#display">
+                <!-- <input type="file" class="form-control" id="customFile" data-target="file-input.input" data-action="file-input#display">-->
+                {{form.file}}
                 
               </div>
             </div>
@@ -42,7 +44,7 @@
                 Paylaş
               </button>
             </div>
-
+          </form>
             <header class="headerMain col-12 my-2 mt-4">Son Paylaşımlar</header>
             <div class="col-md-6 my-2">
               <div class="card">
