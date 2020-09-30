@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
 from django.urls import reverse
 from account.models import *
 from account.forms import *
+from django.utils.html import escape , strip_tags
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
@@ -163,17 +164,19 @@ def barrister_social_activity(request):
     #     return HttpResponse('<h1>Permission denied</h1>')
     last_publications = Publication.objects.filter(user=request.user).order_by('-date')[:3]
     form = PublicationForm()
+    error =  ""
     if request.method == "POST":
         form = PublicationForm(request.POST,request.FILES or None)
         if form.is_valid():
             text = form.cleaned_data['text']
             file = form.cleaned_data['file']
-            print(text)
             Publication.objects.create(user=request.user,text=text,file=file)
         else:
-            print(form['text'].errors)
+            err = form['text'].errors.as_text().split("*")
+            print(err)
+
     form = PublicationForm()
-    context={'form':form,'publications':last_publications}
+    context={'form':form,'publications':last_publications,'error':err[1].strip()}
     return render(request,'barrister/social_activity.html',context)
 
 
