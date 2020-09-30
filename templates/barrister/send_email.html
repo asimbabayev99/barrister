@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' 5}" />
-    <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/owl.theme.default.min.css' %}"
+    />
     <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
     <link
       href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
@@ -28,73 +31,78 @@
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
-  <body style="background-color: #384554;">
+  <body>
     <div class="page-wrapper chiller-theme toggled">
-    <div id="show-sidebar">
-      <a
-        title="Genişləndirmək"
-        id="show-sidebar"
-        class="btn btn-sm btn-dark"
-        href="#"
-      >
-        <i class="fas fa-bars"></i>
-      </a>
+      <div id="show-sidebar">
+        <a
+          title="Genişləndirmək"
+          id="show-sidebar"
+          class="btn btn-sm btn-dark"
+          href="#"
+        >
+          <i class="fas fa-bars"></i>
+        </a>
 
-      <a title="Yeni hadisə" id="newevent" class="btn btn-sm btn-dark" href="#">
-        <i class="fa fa-calendar-plus"></i>
-      </a>
+        <a
+          title="Yeni hadisə"
+          id="newevent"
+          class="btn btn-sm btn-dark"
+          href="#"
+        >
+          <i class="fa fa-calendar-plus"></i>
+        </a>
 
-      <a
-        title="Təqvim"
-        id="minicalendaricon"
-        class="btn btn-sm btn-dark"
-        href="#"
-      >
-        <i class="fa fa-calendar"></i>
-      </a>
-    </div>
+        <a
+          title="Təqvim"
+          id="minicalendaricon"
+          class="btn btn-sm btn-dark"
+          href="#"
+        >
+          <i class="fa fa-calendar"></i>
+        </a>
+      </div>
 
-    <nav id="sidebar" class="sidebar-wrapper">
-      <div class="sidebar-content">
-        <div class="sidebar-brand">
-          <a href="#">Təqvim</a>
-          <div id="close-sidebar">
-            <i class="fas fa-times"></i>
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <a href="#">Təqvim</a>
+            <div id="close-sidebar">
+              <i class="fas fa-times"></i>
+            </div>
           </div>
-        </div>
-        <div class="sidebar-header">
-          <div class="user-pic">
-            <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
-            <img
-              class="img-responsive img-rounded"
-              src="img/person-311292_640.png"
-              alt="User picture"
-            />
+          <div class="sidebar-header">
+            <div class="user-pic">
+              <!-- Изображение Clker-Free-Vector-Images с сайта Pixabay  -->
+              <img
+                class="img-responsive img-rounded"
+                src="img/person-311292_640.png"
+                alt="User picture"
+              />
+            </div>
+            <div class="user-info">
+              <span class="user-name">Admin </span>
+              <span class="user-role">Administrator</span>
+              <span class="user-status">
+                <i class="fa fa-circle"></i>
+                <span>Online</span>
+              </span>
+            </div>
           </div>
-          <div class="user-info">
-            <span class="user-name">Admin </span>
-            <span class="user-role">Administrator</span>
-            <span class="user-status">
-              <i class="fa fa-circle"></i>
-              <span>Online</span>
-            </span>
-          </div>
-        </div>
-        <!-- sidebar-header  -->
-        
-        <div class="sidebar-menu">
-          <ul>
-            <li class="header-menu">
-              <span></span>
-            </li>
+          <!-- sidebar-header  -->
 
-            <li>
-              <a href="admin-Dashboard.html">
+          <div class="sidebar-menu">
+            <ul>
+              <li class="header-menu">
+                <span></span>
+              </li>
+
+              <li>
+                <a href="admin-Dashboard.html">
                   <i class="fa fa-home"></i>
                   <span>Əsas səhifə</span>
                 </a>
-            </li>
-            <li class="sidebar-dropdown">
+              </li>
+              <li class="sidebar-dropdown">
                 <a href="#">
                   <i class="fas fa-user-alt"></i>
                   <span>Mənim səhifəm</span>
@@ -175,7 +183,7 @@
                     </li>
                     <li>
                       <a href="##">Ümumi görüşlər</a>
-                    </li> 
+                    </li>
                     <li>
                       <a href="##">Filtrlər</a>
                     </li>
@@ -188,114 +196,144 @@
                   <span>Müştərilər</span>
                 </a>
               </li>
-              <li >
+              <li>
                 <a href="#">
                   <i class="far fa-folder-open"></i>
                   <span>Sənədlər</span>
                 </a>
               </li>
-          </ul>
+            </ul>
+          </div>
+          <!-- sidebar-menu  -->
         </div>
-        <!-- sidebar-menu  -->
-      </div>
-      <!-- sidebar-content-->
-      <div class="sidebar-footer notes">
-        <a href="#">
+        <!-- sidebar-content-->
+        <div class="sidebar-footer notes">
+          <a href="#">
             <i class="fas fa-pager"></i>
-          <span class="badge badge-pill badge-warning notification">3</span>
-        </a>
-        <a href="#">
-          <i class="fa fa-envelope"></i>
-          <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#">
+            <span class="badge badge-pill badge-warning notification">3</span>
+          </a>
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+          </a>
+          <a href="#">
             <i class="fas fa-list-ol"></i>
             <span class="badge badge-pill badge-warning notification">3</span>
           </a>
-        <a href="#">
+          <a href="#">
             <i class="far fa-sticky-note"></i>
-          <span class="badge badge-pill badge-success notification">2</span>
-        </a>
-        <a href="#">
+            <span class="badge badge-pill badge-success notification">2</span>
+          </a>
+          <a href="#">
             <i class="fas fa-users"></i>
             <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#">
+          </a>
+          <a href="#">
             <i class="fas fa-file-contract"></i>
             <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-      </div>
-
-      <div class="sidebar-footer settings">
-        <a href="#">
-          <i class="fa fa-cog"></i>
-          <span class="badge-sonar"></span>
-        </a>
-        <a href="#">
-          <i class="fa fa-power-off"></i>
-        </a>
-      </div> 
-    </nav>
-    
-<main class="page-content design">
-    <div class="container-fluid main_container" style="padding-left: 70px;">
-        <div class="row">
-            <div class="col-12 send_mail_title">
-                <span>Elektron poçt göndər</span>
-            </div>
-
-            <form enctype="multipart/form-data" action="" method="POST" >
-            <div class="col-12 send_mail_content">
-              {% csrf_token %}
-                <div style="float: left;" class="col-10">
-                
-                    <input type="text" name="receiver" class="col-10 send_mail_input" placeholder="Kimə...">
-                    <input type="text" name="subject" class="col-10 send_mail_input" placeholder="Mail başlığı...">
-                    
-                <input name="content" class="col-10 send_mail_input" placeholder="Movzunu daxil edin..."></div>
-                <div class="col-12 attach_main">
-                  <div class="file-upload" id="file1" style="margin-bottom: 20px;">
-                    <div class="file-select">
-                      <div class="file-select-button" id="fileName">Şəkil və ya Video daxil et</div>
-                      <div class="file-select-name" id="noFile1">Fayl seçilməyib..</div> 
-                      <input type="file" name="image" id="chooseFile2" accept="image/*,video/*" multiple>
-                    </div>
-                  </div>
-                  <div class="file-upload" id="file2">
-                    <div class="file-select">
-                      <div class="file-select-button" id="fileName">Mətn faylı daxil et</div>
-                      <div class="file-select-name" id="noFile2">Fayl seçilməyib..</div> 
-                      <input type="file" name="file" id="chooseFile1" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 send_mail_bottom" style="float: left;">
-                  
-                        
-                        <button type="submit" class="btn btn-outline-dark" >Göndər</button>
-                        
-                    
-                </div>
-            </div>
-            </form>
+          </a>
         </div>
+
+        <div class="sidebar-footer settings">
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span class="badge-sonar"></span>
+          </a>
+          <a href="#">
+            <i class="fa fa-power-off"></i>
+          </a>
+        </div>
+      </nav>
+
+      <main class="page-content design">
+        <div class="container-fluid" style="padding-left: 70px">
+          <div class="row m-0 p-0">
+            <header class="col-12 mb-2">
+              <h2>Yeni Mail</h1>
+            </header>
+            <div class="col-12">
+             <div class="card">
+              <div class="card-header">
+                <h4 class="p-0 m-0">Mövzu</h3>
+              </div>
+              <div class="card-body">
+                <form action="" method="POST">
+                  <div class="form-group">
+                    <label for="">Mail ünvanı</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Başlıq</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Mövzu</label>
+                    <textarea name="" style="height: 150px;" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-12 attach_main">
+                      <div
+                        class="file-upload"
+                        id="file1"
+                        style="margin-bottom: 20px"
+                      >
+                        <div class="file-select">
+                          <div class="file-select-button" id="fileName">
+                            Şəkil və ya Video daxil et
+                          </div>
+                          <div class="file-select-name" id="noFile1">
+                            Fayl seçilməyib..
+                          </div>
+                          <input
+                            type="file"
+                            name="image"
+                            id="chooseFile2"
+                            accept="image/*,video/*"
+                            multiple
+                          />
+                        </div>
+                      </div>
+                      <div class="file-upload" id="file2">
+                        <div class="file-select">
+                          <div class="file-select-button" id="fileName">
+                            Mətn faylı daxil et
+                          </div>
+                          <div class="file-select-name" id="noFile2">
+                            Fayl seçilməyib..
+                          </div>
+                          <input
+                            type="file"
+                            name="file"
+                            id="chooseFile1"
+                            accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-block btn-warning" id="sendMailButton">
+                      Göndər
+                    </button>
+                  </div>
+                </form>
+              </div>
+             </div>
+            </div>
+            
+          </div>
+        </div>
+      </main>
     </div>
 
-  </main>
-  </div>
-  
-  
-  
-
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-  <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-  <script src="{% static 'js/fullcalendar.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-</body>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+    <script src="{% static 'js/fullcalendar.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>
- 
