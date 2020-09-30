@@ -64,7 +64,7 @@
             </div>
             <div>
               <i data-id="{{obj.id}}" class="icon-skill icon-skill-delete fa fa-trash-alt experience-delete"
-                data-target="#confirmDelete" data-toggle="modal"></i>
+                ></i>
               <i data-id="{{obj.id}}" class="icon-skill icon-skill-edit far fa-edit experience-edit"
                 data-target="#changeEducation" data-toggle="modal"> </i>
             </div>
@@ -86,7 +86,7 @@
                 <div class="skill-range bg-dark"></div>
               </div>
               <span>
-                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target="#confirmDelete"
+                <i class="icon-skill icon-skill-delete fa fa-trash-alt" data-target=""
                   data-toggle="modal"></i>
                 <i class="icon-skill icon-skill-edit far fa-edit" data-target="#changeSkill" data-toggle="modal"></i>
               </span>
@@ -204,7 +204,36 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="changeSkill" tabindex="-1" role="dialog" aria-labelledby="addSkill" aria-hidden="true">
+  <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDelete" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
+      <div class="modal-content rounded-0 border-0">
+        <p class="modal-title mb-2 bg-success p-2">Bacarıq da dəyişiklik</p>
+        <div class="w-100 px-2">
+          <div class="form-group">
+            <label for="">Təhsilin başlama tarixi</label>
+            <input type="text" class="form-control" placeholder="Ad">
+          </div>
+          <div class="form-group">
+            <label for="">Təhsilin bitmə tarixi</label>
+            <input type="text" class="form-control" placeholder="Soyad">
+          </div>
+          <div class="form-group">
+            <label for="" class="class-between">Göstərici nisbəti <span id="range">50%</span></label>
+            <input type="range" class="form-control-range p-0">
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-primary rounded-0 btn-block">Yadda saxla</button>
+          </div>
+          <div class="form-group">
+
+            <button type="submit" class="btn btn-warning rounded-0 btn-block" data-dismiss="modal">Ləğv et</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="changeSkill" tabindex="-1" role="dialog" aria-labelledby="changeSkill" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px !important;">
       <div class="modal-content rounded-0 border-0">
         <p class="modal-title mb-2 bg-success p-2">Bacarıq da dəyişiklik</p>
