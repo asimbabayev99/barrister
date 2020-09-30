@@ -168,14 +168,11 @@ def barrister_social_activity(request):
     if request.method == "POST":
         form = PublicationForm(request.POST,request.FILES or None)
         if form.is_valid():
-            print(form.cleaned_data)
             text = form.cleaned_data['text']
             file = form.cleaned_data['file']
-            print(file)
             Publication.objects.create(user=request.user,text=text,file=file)
         else:
             err = form['text'].errors.as_text().strip('*').split("\n")[0]
-            print(err)
             
 
     form = PublicationForm()
