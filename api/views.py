@@ -125,6 +125,8 @@ class EmailDetail(APIView):
         email = self.get_object(id)
         serializer = EmailSerializer(email)
         return Response(serializer.data)
+        
+
 
 
 
