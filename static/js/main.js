@@ -80,13 +80,14 @@ $(window).on("load resize ", function () {
 
 // phone mask begin
 $(document).ready(function () {
+  $("#clientPhoneInput").mask("(xxx) xxx-xx-xx");
   $("#telnum").mask("+ 994" + " (xx) xxx-xx-xx");
   $("#input_baslama_vaxti").mask("xx/xx/xxxx");
   $("#input_bitme_vaxti").mask("xx/xx/xxxx");
   $("#begin_hour_input").mask("xx:xx");
   $("#end_hour_input").mask("xx:xx");
   $("#phone_input").mask("(xxx) xxx-xx-xx");
-  $(".client_phone").mask("(xxx) xxx-xx-xx");
+
 
   // https://codepen.io/asrulnurrahim/pen/WOyzxy
   var $uploadCrop, rawImg, tempFilename, imageId;
@@ -411,7 +412,7 @@ $(document).ready(function() {
     $($(this).parent().children()[2]).toggle();
     if($($(this).parent().children()[3]).text()==="Show more") {
       $(this).text("Show less")
-    } else {
+    } else if($($(this).parent().children()[3]).text()==="Show less") {
       $(this).text("Show more")
     }
   });
@@ -455,7 +456,7 @@ $(document).ready(function() {
       isKindOpen = true;
     }
   });
-  fetch("email/").then(response => response.json())
+  
   
   // Open email kinds end
 })

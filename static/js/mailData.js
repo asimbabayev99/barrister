@@ -18,13 +18,20 @@ $(document).ready(function () {
     .then((response) => response.json())
     .then((json) =>{
         json.forEach(element => {
-            $("#mailContent").append('<li class="list-group-item d-flex align-items-center"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id=""><span class="emailNameTitle">' + element.username +'</span><span class="emailSubject">' + element.name +'</span><span class="emailContentShort">' + element.company.catchPhrase +'</span></span><span>' + element.id + '</span></li>'   )
+            $("#mailContent").append('<li class="list-group-item d-flex align-items-center"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.username +'</span><span class="emailSubject">' + element.name +'</span><span class="emailContentShort">' + element.company.catchPhrase +'</span></span><span>' + element.id + '</span></li>'   )
         });
     });
   fetch("emails/")
   .then((response) => response.json())
   .then((json) => {
       console.log(json)
+  });
+  $("#checkboxMain").click(function() {
+      if($("#mailCheckboxes").is(":checked")) {
+        $(this).attr("checked",false);
+      } else {
+        $(this).attr("checked",true)
+      }
   })
   
 });

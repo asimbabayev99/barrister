@@ -2587,7 +2587,7 @@ s
 }
 
 .nearest-reservations {
-  height: 100px;
+  min-height: 80px;
   width: 100%;
   /* background-color: hsla(197, 100%, 50%, 0.33); */
 }
