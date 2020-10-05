@@ -64,7 +64,8 @@ def synchronize_mail():
         try:
           database_emails = frozenset(list(Email.objects.filter(folder=folder).values_list('num')))
           actual_emails = frozenset(data[0].split())
-          print(actual_emails.difference(database_emails))
+          print("difference",actual_emails.difference(database_emails))
+
 
           last_num = Email.objects.filter(folder=folder).order_by('-date')[0].num
         except:
@@ -94,9 +95,14 @@ def synchronize_mail():
             # if  not created:
             #     print("already created")
             #     continue
+            if subject is None:
+              subject = "No subject"
+            
             new_email.subject = subject
             content = email_message.text_html[0] if email_message.text_html != [] else ""
+            print("content=",content)
             new_email.content = content
+            new_email.folder = folder
             new_email.save()
             if email_message.attachments is not None:
               for i in email_message.attachments:
