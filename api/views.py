@@ -111,8 +111,8 @@ class EmailList(ListAPIView):
 
 
 class EmailDetail(APIView):
-    authentication_classes = [SessionAuthentication,]
-    permission_classes = [IsAuthenticated,]
+    # authentication_classes = [SessionAuthentication,]
+    # permission_classes = [IsAuthenticated,]
     
     def get_object(self,id):
         try:
@@ -125,6 +125,7 @@ class EmailDetail(APIView):
         email = self.get_object(id)
         serializer = EmailSerializer(email)
         return Response(serializer.data)
+
         
 
 
