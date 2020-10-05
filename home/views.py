@@ -703,3 +703,7 @@ def attachment_media_access(request,path):
     raise Http404
 
 
+def mail_content_view(request):
+    return render(request,'mailContent.html')
+
+

@@ -1,9 +1,16 @@
-{% extends 'barrister/barrister-base.html' %} {% load static %} {% block title
-%}
+{% extends 'barrister/barrister-base.html' %}
+
+{% load static %} 
+{% block title %}
 <title>Musteriler</title>
-{% endblock title %} {% block links %} {{ block.super }}
+{% endblock title %}
+
+{% block links %}
+{{ block.super }}
 <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
-{% endblock links %} {% block content %}
+{% endblock links %}
+
+{% block content %}
 <main class="page-content design">
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
 
@@ -14,8 +21,9 @@
     </div>
   </div>
 </main>
+{% endblock content %}
 
-{% endblock content %} {% block scripts %}
+{% block scripts %}
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -25,5 +33,4 @@
 <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
 <script src="{% static 'js/fullcalendar.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
-
 {% endblock scripts %}

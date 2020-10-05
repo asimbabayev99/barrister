@@ -40,6 +40,8 @@ urlpatterns = [
 
     path('email/send', send_email, name='send-email'),
     path('email/', email_view, name='email'),
+    path('mailcontent/',mail_content_view,name="mailcontent"),
+
 
 
     re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='attachment-media'),

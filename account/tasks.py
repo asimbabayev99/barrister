@@ -64,7 +64,7 @@ def synchronize_mail():
         try:
           database_emails = frozenset(list(Email.objects.filter(folder=folder).values_list('num')))
           actual_emails = frozenset(data[0].split())
-          print("difference",actual_emails.difference(database_emails))
+          print('folder=',folder,"difference",actual_emails.difference(database_emails))
 
 
           last_num = Email.objects.filter(folder=folder).order_by('-date')[0].num
@@ -73,14 +73,13 @@ def synchronize_mail():
         for num in data[0].split()[::-1]:
             
             num = num.decode()
-            print(num,last_num)
             if num == last_num:
               break
             typ, data = mail.fetch(num, '(RFC822)' )
             raw_email = data[0][1]
             # converts byte literal to string removing b''
-          
             email_message = mailparser.parse_from_bytes(raw_email)
+            print(email_message)
             subject = email_message.subject
             sender = email_message.from_[0][1]
             receiver = email_message.to[0][1]
@@ -180,24 +179,24 @@ def get_last_mails(email,token):
 
 
 
-@shared_task(name = "check_mails")
-def check_mails():
-  server = 'imap.yandex.ru'
-  mail = imaplib.IMAP4_SSL(server)
-  try:
-    mail.authenticate('XOAUTH2',lambda x: GenerateOAuth2String(email,token,base64_encode=False))
-  except:
-    print('CANT CONNECT IMAP SERVER')
-  num_list = Email.objects.values_list('num')
-  mail_folders = ['Inbox','Drafts','Sent','Trash']
-  for folder in mail_folders:
-    mail.select("{0}".format(folder))
-    type,data = mail.search(None,'ALL')
-    for num in num_list:
-      if num not in set(data[0].split()):
-        Email.objects.get(num=num).delete()
-      else:
-        continue
+# @shared_task(name = "check_mails")
+# def check_mails():
+#   server = 'imap.yandex.ru'
+#   mail = imaplib.IMAP4_SSL(server)
+#   try:
+#     mail.authenticate('XOAUTH2',lambda x: GenerateOAuth2String(email,token,base64_encode=False))
+#   except:
+#     print('CANT CONNECT IMAP SERVER')
+#   num_list = Email.objects.values_list('num')
+#   mail_folders = ['Inbox','Drafts','Sent','Trash']
+#   for folder in mail_folders:
+#     mail.select("{0}".format(folder))
+#     type,data = mail.search(None,'ALL')
+#     for num in num_list:
+#       if num not in set(data[0].split()):
+#         Email.objects.get(num=num).delete()
+#       else:
+#         continue
 
 
 
