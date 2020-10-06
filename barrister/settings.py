@@ -92,12 +92,14 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'barrister',
-        'USER': 'barrister',
-        'PASSWORD': 'barrister',
-        'HOST': 'vmi388731.contaboserver.net',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':'db.sqlite3'
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'barrister',
+        # 'USER': 'barrister',
+        # 'PASSWORD': 'barrister',
+        # 'HOST': 'vmi388731.contaboserver.net',
+        # 'PORT': '5432',
     }
 }
 
@@ -138,7 +140,11 @@ USE_TZ = True
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': None,
+        'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
+                ["Maximize"]],
     },
 }
 
@@ -189,6 +195,6 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'synchronize_mail_schedule': {
         'task': "synchronize_mail", 
-        'schedule': crontab(hour="*",minute="*"),
+        'schedule': crontab(minute="*"),
     },
 }

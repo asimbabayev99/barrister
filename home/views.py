@@ -23,10 +23,10 @@ from email.mime.image import MIMEImage
 from email import encoders
 from email.mime.application import MIMEApplication
 from os.path import basename , realpath
-import os
 from django.core.mail import send_mail
 from account.tasks import synchronize_mail , get_last_mails
 import re
+import os
 
 
 
@@ -701,5 +701,9 @@ def attachment_media_access(request,path):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+
+
+def mail_content_view(request):
+    return render(request,'mailContent.html')
 
 

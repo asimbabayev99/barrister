@@ -2587,7 +2587,7 @@ s
 }
 
 .nearest-reservations {
-  height: 100px;
+  min-height: 80px;
   width: 100%;
   /* background-color: hsla(197, 100%, 50%, 0.33); */
 }
@@ -2707,4 +2707,8 @@ s
   padding: 6px;
   border-color: #cdba6d;
   font-size: 13px;
+}
+
+#preLoader {
+  display: flex;
 }

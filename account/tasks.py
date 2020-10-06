@@ -9,7 +9,6 @@ import os
 import email
 import mailparser
 from dateutil import parser
-import bs4
 # models
 from account.models import CustomUser
 from home.models import EmailAccount, Email, Attachment
@@ -60,44 +59,48 @@ def synchronize_mail():
 
     # loop th rough mail folders
     for folder in mail_folders:
-        mail.select("{0}".format(folder))
-        type, data = mail.search(None, 'ALL')
-        try:
-          last_num = Email.objects.filter(folder=folder).order_by('-date')[0].num
-        except:
-          last_num = 0
-        for num in data[0].split()[::-1]:
-            
-            num = num.decode()
-            if num == last_num:
-              break
-            typ, data = mail.fetch(num, '(RFC822)' )
-            raw_email = data[0][1]
-            # converts byte literal to string removing b''
-          
-            email_message = mailparser.parse_from_bytes(raw_email)
-            subject = email_message.subject
-            sender = email_message.from_[0][1]
-            receiver = email_message.to[0][1]
-            date = email_message.date
-            # timestamp = email.utils.parsedate_tz(date)
 
-            new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
-            print('num:',num,'last_num:',last_num)
-            
-            # print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
-            # if  not created:
-            #     print("already created")
-            #     continue
-            new_email.subject = subject
-            content = email_message.text_html[0] if email_message.text_html != [] else ""
-            new_email.content = content
-            new_email.save()
-            if email_message.attachments is not None:
-              for i in email_message.attachments:
-                attachment = Attachment(name=i['filename'],email=new_email)
-                attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))
-                attachment.save()
+      
+      mail.select("{0}".format(folder))
+      type, data = mail.search(None, 'ALL')
+      try:
+        database_emails = frozenset(list(Email.objects.filter(folder=folder).values_list('num')))
+        actual_emails = frozenset(data[0].split())
+        last_num = Email.objects.filter(folder=folder).order_by('-date')[0].num
+      except:
+        last_num = 0
+      for num in data[0].split()[::-1]:
+
+        num = num.decode()
+        if num == last_num:
+          break
+        typ, data = mail.fetch(num, '(RFC822)' )
+        raw_email = data[0][1]
+        # converts byte literal to string removing b''
+        email_message = mailparser.parse_from_bytes(raw_email)
+        subject = email_message.subject
+        sender = email_message.from_[0][1]
+        receiver = email_message.to[0][1]
+        date = email_message.date
+        print('subject=',subject,'sender=',sender,'receiver=',receiver)
+        # timestamp = email.utils.parsedate_tz(date)
+        new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
+        print(created)
+        if created:
+          continue
+        print('test')
+        if subject is None:
+          subject = "No subject"
+        new_email.subject = subject
+        content = email_message.text_html[0] if email_message.text_html != [] else ""
+        new_email.content = content
+        new_email.folder = folder
+        new_email.save()
+        if email_message.attachments is not None:
+          for i in email_message.attachments:
+            attachment = Attachment(name=i['filename'],email=new_email)
+            attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))
+            attachment.save()
 
     
 
@@ -145,6 +148,8 @@ def get_last_mails(email,token):
         # timestamp = email.utils.parsedate_tz(date)
 
         new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
+        if created:
+          continue
         print('num:',num,'last_num:',last_num)
             
         # print("folder=", folder, "num=", num, "sender=", sender, "receiver=", receiver, "date=", date)
@@ -164,6 +169,40 @@ def get_last_mails(email,token):
 
   
   return "completed doing tasks"
+
+
+
+
+# @shared_task(name = "check_mails")
+# def check_mails():
+#   server = 'imap.yandex.ru'
+#   mail = imaplib.IMAP4_SSL(server)
+#   try:
+#     mail.authenticate('XOAUTH2',lambda x: GenerateOAuth2String(email,token,base64_encode=False))
+#   except:
+#     print('CANT CONNECT IMAP SERVER')
+#   num_list = Email.objects.values_list('num')
+#   mail_folders = ['Inbox','Drafts','Sent','Trash']
+#   for folder in mail_folders:
+#     mail.select("{0}".format(folder))
+#     type,data = mail.search(None,'ALL')
+#     for num in num_list:
+#       if num not in set(data[0].split()):
+#         Email.objects.get(num=num).delete()
+#       else:
+#         continue
+
+
+
+
+
+
+
+
+
+   
+   
+
 
 
 

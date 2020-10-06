@@ -1,30 +1,28 @@
 $(document).ready(function () {
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != "") {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = jQuery.trim(cookies[i]);
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) == name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
+  var isDataCame = false;
+  if(isDataCame === false) {
+    $("#mailContent").append('<li id="preLoader" class="list-group-item align-items-center justify-content-center"><div class="spinner-grow float-left"  role="status"><span class="sr-only"> Loading...</span></div> <div class="float-left  h-100 d-flex align-items-center"> Loading...</div></li>')
   }
-  fetch("https://jsonplaceholder.typicode.com/users")
+  fetch("http://127.0.0.1:8000/api/emails/")
     .then((response) => response.json())
-    .then((json) =>{
+    .then((json) => {
+        if(Object.keys(json).length === 0 ) {
+          isDataCame = true;
+          $("#preLoader").css("display","none");
+          $("#mailContent").append('<li id="preLoader" class="list-group-item align-items-center justify-content-center">Mail Yoxdur...</li>')
+        }
         json.forEach(element => {
-            $("#mailContent").append('<li class="list-group-item d-flex align-items-center"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id=""><span class="emailNameTitle">' + element.username +'</span><span class="emailSubject">' + element.name +'</span><span class="emailContentShort">' + element.company.catchPhrase +'</span></span><span>' + element.id + '</span></li>'   )
+            $("#mailContent").append('<li class="list-group-item d-flex align-items-center"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span><span class="emailContentShort">' + element.num +'</span></span><span>' + element.folder + '</span></li>');
+            isDataCame = true;
+            $("#preLoader").css("display","none");
         });
     });
-  fetch("emails/")
-  .then((response) => response.json())
-  .then((json) => {
-      console.log(json)
+  $("#checkboxMain").click(function() {
+      if($("#mailCheckboxes").is(":checked")) {
+        $(this).attr("checked",false);
+      } else {
+        $(this).attr("checked",true)
+      }
   })
   
 });

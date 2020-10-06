@@ -436,8 +436,6 @@ $(document).ready(function () {
       m2 = a2[0];
       y2 = a2[2];
       console.log(u1 + " " + u2);
-
-
     }
     if (title && begin_gun && end_gun && bas_saat && bit_saat && u1 >= u2
       && $("#input_baslama_vaxti").val() != 0 && $("#input_bitme_vaxti").val() != 0)

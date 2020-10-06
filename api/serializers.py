@@ -337,6 +337,6 @@ class EmailSerializer(serializers.ModelSerializer):
     attachments = AttachmentSerializer(many=True,read_only=True)
     class Meta:
         model = Email
-        fields = ['folder','sender','receiver','subject','content','flag','date','num','date','attachments']
+        fields = ['id','folder','sender','receiver','subject','content','flag','date','num','date','attachments']
         # fields = "__all__"
 

@@ -43,7 +43,7 @@
               </div>
               <div class="form-group">
                 <label for="">Telefon</label>
-                <input required class="form-control client_phone" placeholder="Telefon">
+                <input required class="form-control client_phone" id="clientPhoneInput" placeholder="Telefon">
               </div>
               <div class="form-group">
                 <label for="">Ünvan</label>
@@ -88,6 +88,65 @@
                       <span>No</span>
                     </div>
                     <div class="dropdown-divider"></div>
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Qeydlər</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Son Görüşlər</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane py-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="form-group my-2">
+                            <p>Qeyd yoxdur</p>
+                            <input type="text" class="form-control" placeholder="Qeyd əlavə et">
+                            <button class="btn btn-light btn-block save_btn_clients my-1">Save</button>
+                          </div>
+                        </div>
+                       
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                          <div class="nearest-reservations my-2">
+                            
+                            <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
+                            <br>
+                            <div class="my-2">
+                              <div class="float-left mr-4 my-1 hours_main">
+                                <span>08:00</span>
+                                <br>
+                                <span class="differ-time mb-2">09:00</span>
+                              </div>
+                              <div class="float-left my-1 names-main">
+                                <span>Asim Babayev</span>
+                                <br>
+                                <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="dropdown-divider"></div>
+                          <div class="nearest-reservations my-2">
+                            
+                            <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
+                            <br>
+                            <div class="my-2">
+                              <div class="float-left mr-4 my-1 hours_main">
+                                <span>08:00</span>
+                                <br>
+                                <span class="differ-time mb-2">09:00</span>
+                              </div>
+                              <div class="float-left my-1 names-main">
+                                <span>Asim Babayev</span>
+                                <br>
+                                <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    
+                    <div class="dropdown-divider"></div>
                     <div class="part-main">
                       <div class="parts ">
                         1 <br>
@@ -105,32 +164,10 @@
                         0 <br>
                         Qeydlər
                       </div>
-
                     </div>
                     <div class="dropdown-divider"></div>
-                    <div class="form-group my-2">
-                      <input type="text" class="form-control" placeholder="Qeyd əlavə et">
-                      <button class="btn btn-light btn-block show_more_btn my-1">Save</button>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="nearest-reservations my-2">
-                      <span class="p-0 mb-1 bold-text text-muted">Son görüşlər</span>
-                      <br>
-                      <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
-                      <br>
-                      <div class="my-2">
-                        <div class="float-left mr-4 my-1 hours_main">
-                          <span>08:00</span>
-                          <br>
-                          <span class="differ-time mb-2">09:00</span>
-                        </div>
-                        <div class="float-left my-1 names-main">
-                          <span>Asim Babayev</span>
-                          <br>
-                          <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
-                        </div>
-                      </div>
-                    </div>
+                    
+                    
 
                   </div>
                   <button class="btn btn-light show_more_btn btn-block mt-3">Show more</button>
@@ -183,6 +220,7 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="form-group my-2">
+                      <p>Qeyd yoxdur</p>
                       <input type="text" class="form-control" placeholder="Qeyd əlavə et">
                       <button class="btn btn-light btn-block show_more_btn my-1">Save</button>
                     </div>
@@ -218,9 +256,6 @@
       </div>
     </div>
   </div>
-
-
-
 </main>
 
 {% endblock content %}
