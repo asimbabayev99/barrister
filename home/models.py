@@ -501,7 +501,7 @@ FOLDER_CHOICES = [
     ('Inbox', 'Inbox'),
     ('Drafts', 'Drafts'),
     ('Sent', 'Sent'),
-    ('Deleted', 'Deleted')
+    ('Trash', 'Trash')
 ]
 
 

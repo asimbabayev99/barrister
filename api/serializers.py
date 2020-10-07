@@ -340,3 +340,13 @@ class EmailSerializer(serializers.ModelSerializer):
         fields = ['id','folder','sender','receiver','subject','content','flag','date','num','date','attachments']
         # fields = "__all__"
 
+class EmailFolderMoveSerializer(serializers.Serializer):
+    uid = serializers.CharField(required=True)
+    from_folder =serializers.CharField(required=True)
+    to_folder = serializers.CharField(required=True)
+
+
+class EmailDeleteSerializer(serializers.Serializer):
+    uid = serializers.CharField(required=True)
+    folder = serializers.CharField(required=True)
+    
