@@ -46,6 +46,7 @@ urlpatterns = [
     path('emails/', EmailList.as_view()),
     path('emails/<int:pk>/', EmailDetail.as_view()),
     path('email/token/',EmailAccountToken.as_view()),
+    path('email/move/folder/',EmailFolderMove.as_view()),
 
     path('events/list/', EventListView.as_view()),
     path('events/', EventAPIView.as_view()),

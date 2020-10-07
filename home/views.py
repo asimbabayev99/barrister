@@ -692,13 +692,13 @@ def send_email(request):
 #     else:
 #         return HttpResponseForbidden('Not authorized to access this media.')
 
-
+import pathlib
 def attachment_media_access(request,path): 
     file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            response = HttpResponse(fh.read() , content_type="application/{}".format(type.strip('.')))
+            # response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
 

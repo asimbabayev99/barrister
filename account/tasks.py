@@ -35,6 +35,26 @@ def GenerateOAuth2String(email, access_token, base64_encode=True):
 
 
 
+@shared_task(name='move_mail_folder')
+def move_mail_folder(email,token,mail_uid,from_folder,to_folder):
+  mail = imaplib.IMAP4_SSL('imap.yandex.ru')
+  mail.authenticate('XOAUTH2',lambda x:GenerateOAuth2String(email,token,base64_encode=False))
+  mail.select('{}'.format(from_folder))
+  mail.copy(mail_uid.encode(),'{}'.format(to_folder))
+  mail.store(mail_uid.encode(),'+FLAGS','\\Deleted')
+  result = mail.expunge()[0]
+  return result
+
+  
+@shared_task(name='delete_mail')
+def delete_mail(email,token,mail_uid,folder):
+  mail = imaplib.IMAP4_SSL('imap.yandex.ru')
+  mail.authenticate('XOAUTH2',lambda X: GenerateOAuth2String(email,token))
+  mail.select("{}".format(folder))
+  mail.store(mail_uid.encode(),'+FLAGS','\\Deleted')
+  result = mail.expunge()[0]
+  return result
+
 
 
 
@@ -45,8 +65,7 @@ def GenerateOAuth2String(email, access_token, base64_encode=True):
 @shared_task(name = "synchronize_mail")
 def synchronize_mail():
   for email in EmailAccount.objects.all():
-
-
+    break
     print("start to synchronize mail")
     server = 'imap.yandex.ru'
     mail = imaplib.IMAP4_SSL(server)
@@ -83,12 +102,9 @@ def synchronize_mail():
         receiver = email_message.to[0][1]
         date = email_message.date
         print('subject=',subject,'sender=',sender,'receiver=',receiver)
-        # timestamp = email.utils.parsedate_tz(date)
         new_email, created = Email.objects.get_or_create(folder=folder,user=user,num=num, sender=sender, receiver=receiver, date=date)
-        print(created)
         if created:
           continue
-        print('test')
         if subject is None:
           subject = "No subject"
         new_email.subject = subject
@@ -106,7 +122,7 @@ def synchronize_mail():
 
 
 
-    return "email synchronized"
+  return "email synchronized"
 
 
 

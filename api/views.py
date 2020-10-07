@@ -20,6 +20,7 @@ from django.contrib.auth.models import Permission
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import *
 from shop.models import *
+from account.tasks import *
 import logging
 
 
@@ -94,37 +95,6 @@ class LoginView(APIView):
         
 
 
-
-class EmailList(ListAPIView):
-
-    def get_queryset(self):
-        user = self.request.user
-        return Email.objects.filter(user=user).prefetch_related('attachments')
-    
-    serializer_class = EmailSerializer
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [SessionAuthentication,]
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
-    search_fields = ['sender', 'receiver']
-    ordering_fields = ['date',]
-
-
-
-class EmailDetail(APIView):
-    # authentication_classes = [SessionAuthentication,]
-    # permission_classes = [IsAuthenticated,]
-    
-    def get_object(self,id):
-        try:
-            email = Email.objects.get(id=id, user=self.request.user).prefetch_related('attachments')
-            return email
-        except:
-            raise serializers.ValidationError('event doesnt not exists')
-
-    def get(self, request, id, format=None):
-        email = self.get_object(id)
-        serializer = EmailSerializer(email)
-        return Response(serializer.data)
 
         
 
@@ -843,3 +813,84 @@ class EventAPIView(APIView):
         # Get object with this id
         obj.delete()
         return Response({"message": "Object with id `{}` has been deleted.".format(id)}, status=204)
+
+
+
+class EmailList(ListAPIView):
+
+    def get_queryset(self):
+        user = self.request.user
+        return Email.objects.filter(user=user).prefetch_related('attachments')
+    
+    serializer_class = EmailSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    search_fields = ['sender', 'receiver']
+    ordering_fields = ['date',]
+
+
+
+class EmailDetail(APIView):
+    # authentication_classes = [SessionAuthentication,]
+    # permission_classes = [IsAuthenticated,]
+    
+    def get_object(self,id):
+        try:
+            email = Email.objects.get(id=id, user=self.request.user).prefetch_related('attachments')
+            return email
+        except:
+            raise serializers.ValidationError('event doesnt not exists')
+
+    def get(self, request, id, format=None):
+        email = self.get_object(id)
+        serializer = EmailSerializer(email)
+        return Response(serializer.data)
+
+class EmailFolderMove(APIView):
+    
+    def post(self,request):
+        start = datetime.now()
+        serializer = EmailFolderMoveSerializer(data=request.data)
+        serializer.is_valid()
+        # email = get_object_or_404(Email.objects.all(),num=serializer.validated_data['uid'])
+        mail_uid = serializer.validated_data['uid']
+        from_folder = serializer.validated_data['from_folder']
+        to_folder = serializer.validated_data['to_folder']
+        # move_mail_folder.delay('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',email.num,from_folder,to_folder)
+        mail = imaplib.IMAP4_SSL('imap.yandex.ru')
+        mail.authenticate('XOAUTH2',lambda x:GenerateOAuth2String('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',base64_encode=False))
+        mail.select('{}'.format(from_folder))
+        typ , data = mail.search(None,'ALL')
+        print(data[0].split())
+        # print(mail.copy(mail_uid.encode(),'{}'.format(to_folder)))
+        # mail.store(mail_uid.encode(),'+FLAGS','\\Deleted')
+        result = mail.expunge()
+        mail.store(mail_uid.encode(),'+X-GM-LABELS','\\Trash')
+        if result[0] == "OK" and result[1][0] != None:
+            # email.folder = to_folder
+            # email.save()
+            end = datetime.now() - start
+            return Response({'email':'moved from {0} folder to {1} succesfully in {2}'.format(from_folder,to_folder,end)}) 
+        return Response({'email':'not moved'})
+
+class EmailDeleteView(APIView):
+
+    def post(self,request):
+        start = datetime.now()
+        serializer = EmailDeleteSerializer(data=request.data)
+        serializer.is_valid()
+        uid = serializer.validated_data['uid']
+        folder = serializer.validated_data['folder']
+        mail = imaplib.IMAP4_SSL('imap.yandex.ru')
+        mail.select("{}".format(folder))
+        mail.store(uid.encode(),'+FLAGS','\\Deleted')
+        result = mail.expunge()
+        if result[0] == "OK" and result[1][0] != None:
+            email = Email.objects.get(num=uid,folder=folder)
+            email.delete()
+            time = datetime.now() - start
+            return Response({'email':'deleted in {}'.format(time)})
+        return Response({'email':'not deleted some error occured'})
+        
+

@@ -209,3 +209,6 @@ def contact_list(request):
     contacts = Contact.objects.filter(user=request.user).order_by('id')
     return render(request,'barrister/contact_list.html',context={'contacts' : contacts})
 
+
+def social_activity_list(request):
+    return render(request,'socialActivity.html')
