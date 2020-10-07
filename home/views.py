@@ -692,18 +692,43 @@ def send_email(request):
 #     else:
 #         return HttpResponseForbidden('Not authorized to access this media.')
 
-import pathlib
-def attachment_media_access(request,path): 
-    file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read() , content_type="application/{}".format(type.strip('.')))
-            # response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    raise Http404
+
 
 
 def mail_content_view(request):
     return render(request,'mailContent.html')
 
+
+
+
+#check file is image or not for content-type in response
+from PIL import Image
+def is_image(file_path):
+    try:
+        i = Image.open(file_path)
+        return True
+
+    except:
+        return False
+
+
+
+import pathlib
+def attachment_media_access(request,path): 
+    
+    file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
+    
+    if os.path.exists(file_path):
+        print(is_image(file_path))
+        if is_image(file_path):
+            with open(file_path,'rb') as img:
+                response = HttpResponse(img.read(),content_type='image/jpeg')
+                return response
+        else:
+            type = pathlib.Path(file_path).suffix
+            with open(file_path, 'rb') as fh:
+                response = HttpResponse(fh.read() , content_type="application/{}".format(type.strip('.')))
+                # response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+                return response
+    raise Http404
 

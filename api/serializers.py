@@ -349,4 +349,3 @@ class EmailFolderMoveSerializer(serializers.Serializer):
 class EmailDeleteSerializer(serializers.Serializer):
     uid = serializers.CharField(required=True)
     folder = serializers.CharField(required=True)
-    
