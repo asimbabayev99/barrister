@@ -12,7 +12,7 @@ $(document).ready(function () {
           $("#mailContent").append('<li id="preLoader" class="list-group-item align-items-center justify-content-center">Mail Yoxdur...</li>')
         }
         json.forEach(element => {
-            $("#mailContent").append('<li class="list-group-item d-flex align-items-center"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span><span class="emailContentShort">' + element.num +'</span></span><span>' + element.folder + '</span></li>');
+            $("#mailContent").append('<li class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span><span class="emailContentShort">' + element.num +'</span></span><span>' + element.folder + '</span></li>');
             isDataCame = true;
             $("#preLoader").css("display","none");
         });
