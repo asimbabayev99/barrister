@@ -692,10 +692,13 @@ def send_email(request):
 #     else:
 #         return HttpResponseForbidden('Not authorized to access this media.')
 
-
+def social_activity_list(request):
+    publications = Publication.objects.all().order_by('date')
+    return render(request,'socialActivity.html')
 
 
 def mail_content_view(request):
+
     return render(request,'mailContent.html')
 
 

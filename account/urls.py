@@ -17,7 +17,8 @@ urlpatterns = [
     path('clients/', barrister_clients, name='barrister-clients'),
 
     path('social-activity/', barrister_social_activity, name='barrister-social-activity'),
-    path('social-activity-list/',social_activity_list,name='social-activity-list'),
+    
+
     path('users/list/', user_list_view, name='user-list'),
     path('add-contact/', add_contact, name='add-contact'),
     path('contact-list/', contact_list, name='contact-list'),

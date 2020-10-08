@@ -38,6 +38,8 @@ urlpatterns = [
     path('barrister/personal', barrister_personal, name='barrister-personal'),
     path('barrister/skills', barrister_professional_skills, name='barrister-skills'),
 
+    path('social-activity-single/',social_activity_list,name='social-activity-list'),
+
     path('email/send', send_email, name='send-email'),
     path('email/', email_view, name='email'),
     path('mailcontent/',mail_content_view,name="mailcontent"),
