@@ -861,15 +861,17 @@ class EmailFolderMove(APIView):
         mail = imaplib.IMAP4_SSL('imap.yandex.ru')
         mail.authenticate('XOAUTH2',lambda x:GenerateOAuth2String('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',base64_encode=False))
         mail.select('{}'.format(from_folder))
-        typ , data = mail.search(None,'ALL')
-        print(data[0].split())
-        # print(mail.copy(mail_uid.encode(),'{}'.format(to_folder)))
-        # mail.store(mail_uid.encode(),'+FLAGS','\\Deleted')
+        print(mail.copy(mail_uid.encode(),'{}'.format(to_folder)))
+        print(mail.store(mail_uid.encode(),'+FLAGS','\\Deleted'))
         result = mail.expunge()
-        mail.store(mail_uid.encode(),'+X-GM-LABELS','\\Trash')
         if result[0] == "OK" and result[1][0] != None:
-            # email.folder = to_folder
-            # email.save()
+            mail.select("{}".format(to_folder))
+            typ,data = mail.search(None,'All')
+            new_folder_uid = data[0].split()[-1].decode()
+            email = Email.objects.get(num=mail_uid,folder=from_folder)
+            email.num = new_folder_uid
+            email.folder = to_folder
+            email.save()
             end = datetime.now() - start
             return Response({'email':'moved from {0} folder to {1} succesfully in {2}'.format(from_folder,to_folder,end)}) 
         return Response({'email':'not moved'})
