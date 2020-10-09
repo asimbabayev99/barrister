@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
- {% load static %} 
+{% load home_filters %}
+ {% load static %}
+ {% load bleach_tags %}
  {% block title %}
 <title>Barrister.az | Sosial Paylaşımlar</title>
 {% endblock %}
@@ -126,111 +128,114 @@
             <!-- .entry-header -->
             <div class="container my-2" style="margin-bottom: 20px">
               <div class="row">
-                <div class="col-md-6">
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="socialImg">
-                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
-                      </div>
-                      <p class="card-title">Musa Hesenli</p>
-                    </div>
-                    <div class="card-body">
-                      <div class="card-image">
-                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
-                      </div>
-                      <div class="card-header">
-                        <p class="card-title card-content">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
-                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
-                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
-                            ratione non ullam ipsa modi nostrum ex itaque 
-                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
-                        </p>
-                      </div>
-                      <div class="card-header border-top-0">
-                        <p class="card-title">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
-                          <span class="time">Tarix : 22.12.2020, </span>
-                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
-                          <span class="time">Azərbaycan, Bakı</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="socialImg">
-                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
-                      </div>
-                      <p class="card-title">Musa Hesenli</p>
-                    </div>
-                    <div class="card-body">
-                      <div class="card-image">
-                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
-                      </div>
-                      <div class="card-header">
-                        <p class="card-title card-content">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
-                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
-                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
-                            ratione non ullam ipsa modi nostrum ex itaque 
-                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
-                        </p>
-                      </div>
-                      <div class="card-header border-top-0">
-                        <p class="card-title">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
-                          <span class="time">Tarix : 22.12.2020, </span>
-                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
-                          <span class="time">Azərbaycan, Bakı</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="socialImg">
-                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
-                      </div>
-                      <p class="card-title">Musa Hesenli</p>
-                    </div>
-                    <div class="card-body">
-                      <div class="card-image">
-                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
-                      </div>
-                      <div class="card-header">
-                        <p class="card-title card-content">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
-                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
-                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
-                            ratione non ullam ipsa modi nostrum ex itaque 
-                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
-                        </p>
-                      </div>
-                      <div class="card-header border-top-0">
-                        <p class="card-title">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
-                          <span class="time">Tarix : 22.12.2020, </span>
-                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
-                          <span class="time">Azərbaycan, Bakı</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 
+                {% for publication in publications %}
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="socialImg">
+                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
+                      </div>
+                      <p class="card-title">{{publication.user.first_name}} {{publication.user.last_name}}</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-image">
+                        <img src="{{publication.file.url}}" alt="social image">
+                      </div>
+                      <div class="card-header">
+                        <p class="card-title card-content">
+                         {{publication.text|strip|safe}}
+                        </p>
+                      </div>
+                      <div class="card-header border-top-0">
+                        <p class="card-title">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
+                          <span class="time">Tarix : {publication.date} </span>
+                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
+                          <span class="time">Azərbaycan, Bakı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="socialImg">
+                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
+                      </div>
+                      <p class="card-title">Musa Hesenli</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-image">
+                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
+                      </div>
+                      <div class="card-header">
+                        <p class="card-title card-content">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
+                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
+                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
+                            ratione non ullam ipsa modi nostrum ex itaque 
+                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
+                        </p>
+                      </div>
+                      <div class="card-header border-top-0">
+                        <p class="card-title">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
+                          <span class="time">Tarix : 22.12.2020, </span>
+                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
+                          <span class="time">Azərbaycan, Bakı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="socialImg">
+                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
+                      </div>
+                      <p class="card-title">Musa Hesenli</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-image">
+                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
+                      </div>
+                      <div class="card-header">
+                        <p class="card-title card-content">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
+                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
+                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
+                            ratione non ullam ipsa modi nostrum ex itaque 
+                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
+                        </p>
+                      </div>
+                      <div class="card-header border-top-0">
+                        <p class="card-title">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
+                          <span class="time">Tarix : 22.12.2020, </span>
+                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
+                          <span class="time">Azərbaycan, Bakı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
               </div>
               <div class="col-12 d-flex align-items-center justify-content-center">
                 <ul class="pagination">
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
+                  
+                  {% for page in publications|pagination %}
+                  
+                  {% if page == "..." %}
+                  <li><a href="#">...</a></li>  
+                  {% endif %}
+                  <li class="{% if page == publication.number %} active {% endif %} "><a href="/social-activity-list/?page={{page}}">{{page}}</a></li>
+                  {% endfor %}
+                    
+                  
                 </ul>
               </div>
             </div>

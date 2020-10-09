@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'ckeditor',
+    'django_bleach',
     'django_cleanup'
 ]
 

@@ -14,7 +14,7 @@ urlpatterns = [
     path('barrister/<int:id>', single_view, name='single-view'),
     path('about-us/', about_us_view, name='about-us'),
 
-    path('publication/add', publication_add_view, name='publication-add'),
+    # path('publication/add', publication_add_view, name='publication-add')
     
     path('blog-grid/', blog_grid_view, name='blog-grid'),
     path('blog-large/',blog_large_view,name='blog-large'),
@@ -38,7 +38,7 @@ urlpatterns = [
     path('barrister/personal', barrister_personal, name='barrister-personal'),
     path('barrister/skills', barrister_professional_skills, name='barrister-skills'),
 
-    path('social-activity-single/',social_activity_list,name='social-activity-list'),
+    path('social-activity-list/',social_activity_list,name='social-activity-list'),
 
     path('email/send', send_email, name='send-email'),
     path('email/', email_view, name='email'),
