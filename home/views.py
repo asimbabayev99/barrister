@@ -100,37 +100,6 @@ def calendar(request):
 
 
 
-@login_required(login_url='/account/login')
-def publication_add_view(request):
-
-    form = PublicationForm()
-    # if request.user.role is None or  request.user.role.name is not "Barrister":
-    #     raise Http404()
-
-    if request.method == "POST":
-        form = PublicationForm(request.POST,request.FILES)
-        if form.is_valid():
-            new_post = Publication(**form.cleaned_data)
-            new_post.user = request.user
-            new_post.save()
-            
-
-
-    context = {
-        'form': form,
-    }  
-
-    return render(request, 'xeber_elave_etmek_user_ucun.html', context=context)
-
-
-
-def publication_show_view(request):   
-    
-    publications = Publication.objects.all().order_by("-date")[:10]
-    context = {
-        "publications":publications
-    }
-    return render(request, context=context)
 
 
 
@@ -692,10 +661,22 @@ def send_email(request):
 #     else:
 #         return HttpResponseForbidden('Not authorized to access this media.')
 
+def social_activity_list(request):
+    publications = Publication.objects.all().order_by('date')
+    paginator = Paginator(publications,7)
+    page_number = request.GET.get('page')
+    try:
+        publications = paginator.get_page(page_number)
+    except:
+        publications = paginator.get_page(1)
+    
+    context = {'publications':publications}
+    return render(request,'socialActivity.html',context=context)
 
 
 
 def mail_content_view(request):
+
     return render(request,'mailContent.html')
 
 

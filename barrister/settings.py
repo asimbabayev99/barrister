@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'ckeditor',
+    'django_bleach',
     'django_cleanup'
 ]
 
@@ -197,6 +198,6 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'synchronize_mail_schedule': {
         'task': "synchronize_mail", 
-        'schedule': timedelta(minutes=30)
+        'schedule': crontab(minute='*')
     },
 }
