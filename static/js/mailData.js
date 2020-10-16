@@ -20,12 +20,14 @@ $(document).ready(function () {
         $(".mailListGroup").click(function(){
           console.log($(this).attr("id"));
           var mail = $(this).attr("id");
+         
           json.forEach(element => {
             if(element.id == mail) {
+              // $("#" + mail).css("background","#007bff");
               $(".mailSubject").text(element.sender);
               $(".mailSender").text(element.sender);
               $(".mailDate").text(element.date);
-              $(".mailMovzu").text(element.content)
+              $(".mailMovzu").html(element.content)
 
             }
           })

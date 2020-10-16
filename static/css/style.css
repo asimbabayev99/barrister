@@ -2713,3 +2713,6 @@ s
   display: flex;
 }
 
+.mailListGroup {
+  user-select: none;
+}
