@@ -847,6 +847,9 @@ class EmailDetail(APIView):
         serializer = EmailSerializer(email)
         return Response(serializer.data)
 
+
+import imapclient
+
 class EmailFolderMove(APIView):
     
     def post(self,request):
@@ -854,27 +857,24 @@ class EmailFolderMove(APIView):
         serializer = EmailFolderMoveSerializer(data=request.data)
         serializer.is_valid()
         # email = get_object_or_404(Email.objects.all(),num=serializer.validated_data['uid'])
-        mail_uid = serializer.validated_data['uid']
+        mail_uids = serializer.validated_data['uid']
+        print(mail_uids)
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
-        # move_mail_folder.delay('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',email.num,from_folder,to_folder)
-        mail = imaplib.IMAP4_SSL('imap.yandex.ru')
-        mail.authenticate('XOAUTH2',lambda x:GenerateOAuth2String('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',base64_encode=False))
-        mail.select('{}'.format(from_folder))
-        print(mail.copy(mail_uid.encode(),'{}'.format(to_folder)))
-        print(mail.store(mail_uid.encode(),'+FLAGS','\\Deleted'))
-        result = mail.expunge()
-        if result[0] == "OK" and result[1][0] != None:
-            mail.select("{}".format(to_folder))
-            typ,data = mail.search(None,'All')
-            new_folder_uid = data[0].split()[-1].decode()
-            email = Email.objects.get(num=mail_uid,folder=from_folder)
-            email.num = new_folder_uid
-            email.folder = to_folder
-            email.save()
-            end = datetime.now() - start
-            return Response({'email':'moved from {0} folder to {1} succesfully in {2}'.format(from_folder,to_folder,end)}) 
-        return Response({'email':'not moved'})
+        client = imapclient.IMAPClient('imap.yandex.ru')
+        print(client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E'))
+        client.select_folder('{}'.format(from_folder))
+        result = client.move(mail_uids,to_folder)
+        client.select_folder(to_folder)
+        new_folder_mails = client.search('All')
+        #adding last mails to database
+        for i in new_folder_mails[len(new_folder_mails)-len(mail_uids):len(new_folder_mails)]:
+            
+
+        return ValidationError('mail not moved')
+        
+        
+
 
 class EmailDeleteView(APIView):
 
@@ -882,17 +882,17 @@ class EmailDeleteView(APIView):
         start = datetime.now()
         serializer = EmailDeleteSerializer(data=request.data)
         serializer.is_valid()
-        uid = serializer.validated_data['uid']
+        messages_list = serializer.validated_data['uids']
+        print(messages_list)
         folder = serializer.validated_data['folder']
-        mail = imaplib.IMAP4_SSL('imap.yandex.ru')
-        mail.select("{}".format(folder))
-        mail.store(uid.encode(),'+FLAGS','\\Deleted')
-        result = mail.expunge()
-        if result[0] == "OK" and result[1][0] != None:
-            email = Email.objects.get(num=uid,folder=folder)
-            email.delete()
-            time = datetime.now() - start
-            return Response({'email':'deleted in {}'.format(time)})
-        return Response({'email':'not deleted some error occured'})
-        
-
+        client = zimapclient.IMAPClient('imap.yandex.ru')
+        try:
+            client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+        except:
+            raise ValidationError('auth error')
+        client.select_folder(folder) 
+        client.delete_messages(messages_list)
+        for i in messages_list:
+            Email.objects.filter(num=i,folder=folder).delete() 
+        end = datetime.now() - start
+        return Response({'emails':'deleted in {}'.format(end)})

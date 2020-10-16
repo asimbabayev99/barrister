@@ -5,7 +5,7 @@ from django.shortcuts import HttpResponse
 
 
 class EmailAdmin(ModelAdmin):
-    list_display = ('sender','subject','folder','date')
+    list_display = ('sender','subject','folder','date','num')
     list_filter =('folder','date')
 
 
