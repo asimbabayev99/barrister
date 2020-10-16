@@ -341,11 +341,11 @@ class EmailSerializer(serializers.ModelSerializer):
         # fields = "__all__"
 
 class EmailFolderMoveSerializer(serializers.Serializer):
-    uid = serializers.CharField(required=True)
+    uids = serializers.ListField(child=serializers.CharField(required=True))
     from_folder =serializers.CharField(required=True)
     to_folder = serializers.CharField(required=True)
 
 
 class EmailDeleteSerializer(serializers.Serializer):
-    uid = serializers.CharField(required=True)
+    uids = serializers.ListField(child=serializers.CharField(required=True))
     folder = serializers.CharField(required=True)

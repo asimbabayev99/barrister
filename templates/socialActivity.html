@@ -50,12 +50,13 @@
   .card-image {
     width: 100%;
     height: 200px;
+    object-fit: cover;
     margin: 5px 0px;
   }
   .card-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 200px;
+    object-fit: contain;
   }
   .card-content {
     font-size: 13px;
@@ -143,14 +144,14 @@
                         <img src="{{publication.file.url}}" alt="social image">
                       </div>
                       <div class="card-header">
-                        <p class="card-title card-content">
-                         {{publication.text|strip|safe}}
+                        <p class="card-title card-content m-0 p-0">
+                         {{publication.text|safe}}
                         </p>
                       </div>
                       <div class="card-header border-top-0">
                         <p class="card-title">
                           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
-                          <span class="time">Tarix : {publication.date} </span>
+                          <span class="time">Tarix : {{publication.date}} </span>
                           <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
                           <span class="time">Azərbaycan, Bakı</span>
                         </p>
