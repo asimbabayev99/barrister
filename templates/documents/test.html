@@ -1,11 +1,233 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'barrister/barrister-admin.html' %}
+{% load static %}
+
+{% block title %}
+<title>Calendar</title>
+{% endblock title %}
+
+
+{% block links %}
+{{ block.super }}
+{% endblock links %}
+
+
+
+{% block content %}
+<style>
+    .havingChildExpand {
+        display: none;
+    }
+    .childrenList {
+        display: none;
+    }
+</style>
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row m-0 p-0">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="">Search In Documents</span>
+                </div>
+                <div class="card-body">
+                    <!-- <form action="" method="POST"> -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userİnformation">
+                                        İstifadəçi
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Ad soyad ata adı">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userİnformation">
+                                        Ünvan
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userİnformation">
+                                        Telefon
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Cinsi</label>
+                                    <select name="" class="form-control" id="">
+                                        <option value="man">Kişi</option>
+                                        <option value="man">Qadın</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userİnformation">
+                                        Cavabdeh
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Ad soyad ata adı">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userİnformation">
+                                        Ünvan
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userİnformation">
+                                        Telefon
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Cinsi</label>
+                                    <select name="" class="form-control" id="">
+                                        <option value="man">Kişi</option>
+                                        <option value="man">Qadın</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="dropdown-divider"></div> -->
+                            
+                            <div class="col-12">
+                                <button class="btn btn-primary">Təstiq et</button>
+                            </div>
+                        </div>
+                        <div class="row" id="app">
+                            <div class="col-md-6">
+                                <hr>
+                                <div class="form-group">
+                                    <label for="">Uşağınız varmı</label>
+                                    <select name="" class="form-control" id="isHaveChildren">
+                                        <option value="none" disabled selected>Seçin</option>
+                                        <option value="yes">Bəli</option>
+                                        <option value="no">Xeyr</option>
+                                    </select>
+                                </div>
+                                <div class="form-group havingChildExpand">
+                                    <h3 for="" class="">Əlavə et</h3>
+                                    <div class="form-group">
+                                        <label for="">Ad, Soyad</label>
+                                        <input type="text" class="form-control childName" placeholder="Ad...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Doğum tarixi</label>
+                                        <input type="date" class="form-control childBorn" placeholder="Doğum tarixi...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Cins</label>
+                                        <select name="" class="form-control childGender" id="">
+                                            <option value="" disabled selected>Seçin</option>
+                                            <option value="Kişi">Kişi</option>
+                                            <option value="Qadın">Qadın</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Aliment tələb edirsiniz</label>
+                                        <select name="" id="" class="form-control childRequest">
+                                            <option value="Bəli">Bəli</option>
+                                            <option value="Xeyr">Xeyr</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block addChild" type="reset">Əlavə et</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 childrenList">
+                                <hr>
+                                <label for="">Uşaqların siyahısı</label>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Ad</th>
+                                            <th>Doğum tarixi</th>
+                                            <th>Cins</th>
+                                            <th>Aliment</th>
+                                            <th>Düzəliş</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="childrenTable">
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+
+    {% endblock content %}
+
+
+
+
+    {% block scripts %}
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+    <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
+    <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>  
+    <script>
+        $(document).ready(function() {
+            $("#isHaveChildren").on("change", function() {
+                if($("#isHaveChildren").val() === "no") {
+                    $(".havingChildExpand").css("display","none");
+                    $(".childrenList").css("display","none")
+                } else if($("#isHaveChildren").val() === "yes") {
+                    $(".havingChildExpand").css("display","block");
+                    $(".childrenList").css("display","block")
+                }
+            });
+
+            var childrenArray = [];
+            $(".addChild").click(function() {
+                let child = {
+                    name : $(".childName").val(),
+                    wasBorn : $(".childBorn").val(),
+                    childGender : $(".childGender").val(),
+                    childRequest : $(".childRequest").val()
+                };
+                // alert("Yeah")
+                console.log(child);
+                childrenArray.push(child);
+                console.log(childrenArray);
+                let element = childrenArray[childrenArray.length-1];
+                if(child.name.length > 0 && child.wasBorn.length > 0 && child.childGender.length > 0 && child.childRequest.length > 0) {
+                    $(".childrenTable").append("<tr> <td>"+ element.name +"</td> <td>"+ element.wasBorn +"</td><td>" + element.childGender + "</td><td>"+element.childRequest +"</td>"+ "<td><button id='"+ childrenArray.length +"'  class='btn btn-danger deleteOneChild'>Sil</button></td>" + "</tr>")
+                    $(".deleteOneChild").click(function() {
+                        let deletingItem = $(this)[0].id - 1;
+                        childrenArray.splice(deletingItem,1);
+                        console.log(deletingItem);
+                        console.log("musa");
+                        console.log($(this).parent());
+                        $(this).parent().parent().remove()
+                    })
+                }
+            });
+            
+
+
+        });
+        
+    </script>
+    {% endblock scripts %}
+    </body>
+
+    </html>
