@@ -869,11 +869,7 @@ class EmailFolderMove(APIView):
         new_folder_mails = client.search('All')
         #adding last mails to database
         # for i in new_folder_mails[len(new_folder_mails)-len(mail_uids):len(new_folder_mails)]:
-<<<<<<< HEAD
         
-=======
-            
->>>>>>> c441c521d999bd20ba0e5cac535f95414765a828
 
         return ValidationError('mail not moved')
         
