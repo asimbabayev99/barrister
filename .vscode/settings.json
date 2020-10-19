@@ -1,8 +1,4 @@
 {
     "liveServer.settings.port": 5501,
-<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\asus\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
-=======
-    "python.pythonPath": "C:\\Python\\python.exe"
->>>>>>> fe25a68b9087d8b6e78766500fac0dd3f6b90578
 }
