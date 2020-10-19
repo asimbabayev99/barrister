@@ -12,37 +12,49 @@ $(document).ready(function () {
           $("#mailContent").append('<li id="preLoader" class="list-group-item align-items-center justify-content-center">Mail Yoxdur...</li>')
         }
         json.forEach(element => {
-            $("#mailContent").append('<li id="'+ element.id +'" class="list-group-item d-flex align-items-center mailListGroup"><div class="asim d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span><span class="emailContentShort">' + element.num +'</span></span><span>' + element.folder + '</span></li>');
-            isDataCame = true;
-            $("#preLoader").css("display","none");
+
+            if(element.folder === "Inbox")
+            {
+              $("#mailContent").append('<li id="'+ element.id +'" class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span></span></li>');
+              isDataCame = true;
+              $("#preLoader").css("display","none");
+            }
             
         });
         $(".mailListGroup").click(function(){
           console.log($(this).attr("id"));
           var mail = $(this).attr("id");
-         
           json.forEach(element => {
             if(element.id == mail) {
               // $("#" + mail).css("background","#007bff");
               $(".mailSubject").text(element.sender);
               $(".mailSender").text(element.sender);
               $(".mailDate").text(element.date);
-              $(".mailMovzu").html(element.content)
+              $(".mailMovzu").html(element.content);
+              let mailSender = element.sender.split('');
+              let color = ["purple","blue","green","maroon","darkorange"];
+              $(".emailImage").text(mailSender[0].toUpperCase() + '' + mailSender[1].toUpperCase());
+              let rNumber = Math.floor(Math.random()*5);
+              console.log(rNumber)
+              $(".emailImage").css({
+                backgroundColor : color[rNumber]
+              })          
 
             }
           })
-
-
-          
+                   
         });
+        
         
     });
   $("#checkboxMain").click(function() {
-      if($("#mailCheckboxes").is(":checked")) {
-        $(this).attr("checked",false);
-      } else {
-        $(this).attr("checked",true)
-      }
+      
+        if($("#checkboxMain").is(":checked")) {
+          $(".checkBoxMails").attr("checked", true)
+        } else {
+          $(".checkBoxMails").attr("checked", false)
+        }
+      
   }) 
   
 });
