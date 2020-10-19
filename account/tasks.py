@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 from datetime import timezone, datetime
-
+import  time
 from django.core.files.base import ContentFile
 import imaplib
 import imapclient
@@ -48,13 +48,21 @@ def move_mail_folder(email,token,mail_uid,from_folder,to_folder):
 
   
 @shared_task(name='delete_mail')
-def delete_mail(email,token,mail_uid,folder):
-  mail = imaplib.IMAP4_SSL('imap.yandex.ru')
-  mail.authenticate('XOAUTH2',lambda X: GenerateOAuth2String(email,token))
-  mail.select("{}".format(folder))
-  mail.store(mail_uid.encode(),'+FLAGS','\\Deleted')
-  result = mail.expunge()[0]
-  return result
+def delete_mail(mail_uids,folder):
+  client = imapclient.IMAPClient('imap.yandex.ru')
+  client.oauth2_login('azadmammedov@yandex.ru','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+  client.select_folder(folder)
+  print(client.search('All'))
+  print(client.delete_messages(mail_uids))
+  time.sleep(5)
+  print(client.search('All'))
+  for i in mail_uids:
+    Email.objects.filter(num=i,folder=folder,flag='Deleted').delete()
+  return 'emails deleted'
+
+
+
+
 
 
 
@@ -69,20 +77,17 @@ def synchronize_mail():
     print("start to synchronize mail")
     server = 'imap.yandex.ru'
     mail = imapclient.IMAPClient('imap.yandex.ru')
-
     try:
       mail.oauth2_login(email.email,email.token)
     except:
       continue
     mail_folders = ['Inbox','Drafts','Sent','Trash']
     user = EmailAccount.objects.get(email=email.email).user
-
-
     # loop th rough mail folders
     for folder in mail_folders:
-
       mail.select_folder(folder)
       messages = mail.search('ALL')
+
       #remove deleted emails from database
       a = Email.objects.filter(folder=folder).last().num
       last_num = a if a != None else 0 
@@ -121,8 +126,6 @@ def synchronize_mail():
           new_email.sender = sender
           new_email.receiver = receiver
           new_email.date = date 
-
-
           if subject is None:
             subject = "No subject"
           new_email.subject = subject
@@ -135,7 +138,7 @@ def synchronize_mail():
               attachment = Attachment(name=i['filename'],email=new_email)
               attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))
               attachment.save()
-
+         
 
 
   return "email synchronized"
