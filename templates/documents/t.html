@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <input class='form-group' name='applicant-name' type='text' id='applicant-name'>
+    <select class='form-group' name='applicant-gender' id='applicant-gender'>
+        <option value=''>Secin</option>
+        <option value='male'>kisi</option>
+        <option value='female'>qadin</option>
+    </select>
+    <select name='has_children' id='has_children'>
+        <option value=''>Secin</option>
+        <option value='yes'>beli</option>
+        <option value='no'>xeyr</option>
+    </select>
+    <div id='child' class='form-group' style='display: none;'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Adi</th>
+                    <th>Cinsi</th>
+                </tr>
+            </thead>
+            <tbody id="table_child">
+        </table>
+        <input name='child_name' id='child_name' class='child_name' type='text' placeholder='Adi'>
+        <select name='child_gender' id='child_gender' class='child_gender' placeholder='Cinsi'>
+            <option value=''>Secin</option>
+            <option value='male'>kisi</option>
+            <option value='female'>qadin</option>
+        </select>
+
+        <input type="button" value='Əlavə et' id="add_child">
+    </div>
+    <input type="submit" id="submit_button" value="Submit">
+
+    <script>
+        $('#has_children').on('change', function () {
+            val = $('#has_children').val();
+            switch (val) {
+                case 'yes':
+                    $("#child").css("display", "block");
+                    break;
+                default:
+                    $("#child").css("display", "none");
+                    break;
+            }
+        }); $('#add_child').on('click', function () {
+            var child_name = $('#child_name').val();
+            var child_gender = $('#child_gender').val(); $('#table_child').append("<tr><td class='child_name'>" + child_name + "</td><td class='child_gender'>" + child_gender + "</td><td><button class='btn btn-danger delete_child'>Sil</button></td></tr>");
+            $('.delete_child').click(function () { $(this).parents('tr').remove(); })
+        });
+        $('#submit_button').on('click', function () {
+            var child = [];
+            $('#table_child tr').each(function () {
+                child.push({
+                    'child_name': $(this).find('.child_name').text()
+                    , 'child_gender': $(this).find('.child_gender').text()
+                });
+            });
+            var data = {
+                'applicant-name': $('#applicant-name').val()
+                , 'applicant-gender': $('#applicant-gender').val(), 'child': child, 'has_children': $('#has_children').val()
+            }
+            console.log(data)
+        });
+    </script>
+</body>
+
+</html>
