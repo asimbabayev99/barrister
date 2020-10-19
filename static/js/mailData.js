@@ -14,7 +14,7 @@ $(document).ready(function () {
         json.forEach(element => {
 
             if(element.folder === "Inbox")
-            {
+            { 
               $("#mailContent").append('<li id="'+ element.id +'" class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span></span></li>');
               isDataCame = true;
               $("#preLoader").css("display","none");
@@ -29,7 +29,11 @@ $(document).ready(function () {
               // $("#" + mail).css("background","#007bff");
               $(".mailSubject").text(element.sender);
               $(".mailSender").text(element.sender);
-              $(".mailDate").text(element.date);
+              $(".mailSubjectExpand").text(element.subject)
+              let time = element.date.split("-");
+              let endTime = time[2].split("");
+              let wholeTime = time[0] + "-" + time[1]+ "-" + endTime[0] + "" + endTime[1]
+              $(".mailDate").text(wholeTime);
               $(".mailMovzu").html(element.content);
               let mailSender = element.sender.split('');
               let color = ["purple","blue","green","maroon","darkorange"];

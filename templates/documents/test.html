@@ -217,13 +217,18 @@
                 childrenArray.push(child);
                 let element = childrenArray[childrenArray.length-1];
                 if(child.name.length > 0 && child.wasBorn.length > 0 && child.childGender.length > 0 && child.childRequest.length > 0) {
-                    $(".childrenTable").append("<tr> <td>"+ element.name +"</td> <td>"+ element.wasBorn +"</td><td>" + element.childGender + "</td><td>"+element.childRequest +"</td>"+ "<td><button id='"+ childrenArray.length +"'  class='btn btn-danger deleteOneChild'>Sil</button></td>" + "</tr>")
+                    $(".childrenTable").append("<tr> <td>"+ element.name +"</td> <td>"+ element.wasBorn +"</td><td>" + element.childGender + "</td><td>"+element.childRequest +"</td>"+ "<td><button id='"+ childrenArray.length +"'  class='btn btn-danger btn-sm deleteOneChild'>Sil</button></td>" + "</tr>")
                     $(".deleteOneChild").click(function() {
                         let deletingItem = $(this)[0].id - 1;
                         childrenArray.splice(deletingItem,1);
-                        $(this).parent().parent().remove()
+                        $(this).parent().parent().remove();
+                    
                     })
                 }
+                        $(".childName").val("");
+                        $(".childBorn").val("");
+                        $(".childGender").val("");
+                        $(".childRequest").val()
             });
             
 
