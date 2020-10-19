@@ -20,6 +20,14 @@
     .childrenList {
         display: none;
     }
+    .form-control-sm {
+        background-color: rgba(0,0,0,.03);
+    }
+    .form-control-sm:focus {
+        background-color:  #dce8fc;
+        color: hsla(197, 100%, 26%, 0.91);
+        border-color: hsla(197, 100%, 26%, 0.91) !important;
+    }
 </style>
 <main class="page-content">
   <div class="container-fluid">
@@ -37,23 +45,23 @@
                                     <label for="userİnformation">
                                         İstifadəçi
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Ad soyad ata adı">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ad soyad ata adı">
                                 </div>
                                 <div class="form-group">
                                     <label for="userİnformation">
                                         Ünvan
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
                                 </div>
                                 <div class="form-group">
                                     <label for="userİnformation">
                                         Telefon
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Cinsi</label>
-                                    <select name="" class="form-control" id="">
+                                    <select name="" class="form-control form-control-sm" id="">
                                         <option value="man">Kişi</option>
                                         <option value="man">Qadın</option>
                                     </select>
@@ -65,23 +73,23 @@
                                     <label for="userİnformation">
                                         Cavabdeh
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Ad soyad ata adı">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ad soyad ata adı">
                                 </div>
                                 <div class="form-group">
                                     <label for="userİnformation">
                                         Ünvan
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
                                 </div>
                                 <div class="form-group">
                                     <label for="userİnformation">
                                         Telefon
                                     </label>
-                                    <input type="text" class="form-control" placeholder="Ünvan">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Cinsi</label>
-                                    <select name="" class="form-control" id="">
+                                    <select name="" class="form-control form-control-sm" id="">
                                         <option value="man">Kişi</option>
                                         <option value="man">Qadın</option>
                                     </select>
@@ -89,16 +97,14 @@
                             </div>
                             <!-- <div class="dropdown-divider"></div> -->
                             
-                            <div class="col-12">
-                                <button class="btn btn-primary">Təstiq et</button>
-                            </div>
+                            
                         </div>
                         <div class="row" id="app">
                             <div class="col-md-6">
                                 <hr>
                                 <div class="form-group">
                                     <label for="">Uşağınız varmı</label>
-                                    <select name="" class="form-control" id="isHaveChildren">
+                                    <select name="" class="form-control form-control-sm" id="isHaveChildren">
                                         <option value="none" disabled selected>Seçin</option>
                                         <option value="yes">Bəli</option>
                                         <option value="no">Xeyr</option>
@@ -108,15 +114,15 @@
                                     <h3 for="" class="">Əlavə et</h3>
                                     <div class="form-group">
                                         <label for="">Ad, Soyad</label>
-                                        <input type="text" class="form-control childName" placeholder="Ad...">
+                                        <input type="text" class="form-control form-control-sm childName" placeholder="Ad...">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Doğum tarixi</label>
-                                        <input type="date" class="form-control childBorn" placeholder="Doğum tarixi...">
+                                        <input type="date" class="form-control form-control-sm childBorn" placeholder="Doğum tarixi...">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Cins</label>
-                                        <select name="" class="form-control childGender" id="">
+                                        <select name="" class="form-control form-control-sm childGender" id="">
                                             <option value="" disabled selected>Seçin</option>
                                             <option value="Kişi">Kişi</option>
                                             <option value="Qadın">Qadın</option>
@@ -124,13 +130,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">Aliment tələb edirsiniz</label>
-                                        <select name="" id="" class="form-control childRequest">
+                                        <select name="" id="" class="form-control form-control-sm childRequest">
                                             <option value="Bəli">Bəli</option>
                                             <option value="Xeyr">Xeyr</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-block addChild" type="reset">Əlavə et</button>
+                                        <button class="btn btn-primary btn-sm btn-block addChild" type="reset">Əlavə et</button>
                                     </div>
                                     
                                 </div>
@@ -152,6 +158,9 @@
                                        
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary btn-sm">Təstiq et</button>
                             </div>
                         </div>
                     <!-- </form> -->
@@ -205,21 +214,21 @@
                     childRequest : $(".childRequest").val()
                 };
                 // alert("Yeah")
-                console.log(child);
                 childrenArray.push(child);
-                console.log(childrenArray);
                 let element = childrenArray[childrenArray.length-1];
                 if(child.name.length > 0 && child.wasBorn.length > 0 && child.childGender.length > 0 && child.childRequest.length > 0) {
-                    $(".childrenTable").append("<tr> <td>"+ element.name +"</td> <td>"+ element.wasBorn +"</td><td>" + element.childGender + "</td><td>"+element.childRequest +"</td>"+ "<td><button id='"+ childrenArray.length +"'  class='btn btn-danger deleteOneChild'>Sil</button></td>" + "</tr>")
+                    $(".childrenTable").append("<tr> <td>"+ element.name +"</td> <td>"+ element.wasBorn +"</td><td>" + element.childGender + "</td><td>"+element.childRequest +"</td>"+ "<td><button id='"+ childrenArray.length +"'  class='btn btn-danger btn-sm deleteOneChild'>Sil</button></td>" + "</tr>")
                     $(".deleteOneChild").click(function() {
                         let deletingItem = $(this)[0].id - 1;
                         childrenArray.splice(deletingItem,1);
-                        console.log(deletingItem);
-                        console.log("musa");
-                        console.log($(this).parent());
-                        $(this).parent().parent().remove()
+                        $(this).parent().parent().remove();
+                    
                     })
                 }
+                        $(".childName").val("");
+                        $(".childBorn").val("");
+                        $(".childGender").val("");
+                        $(".childRequest").val()
             });
             
 
