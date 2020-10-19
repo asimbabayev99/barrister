@@ -17,6 +17,7 @@
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
@@ -115,28 +116,14 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown emailSidebar">
                 <a href="#">
                   <i class="far fa-envelope"></i>
                   <span>Elektron poçt</span>
                 </a>
-                <div class="sidebar-submenu">
-                  <ul>
-                    <li>
-                      <a href="/email/">Daxil olanlar(İnbox)</a>
-                    </li>
-                    <li>
-                      <a href="/email/Draft">Qaralama(Draft)</a>
-                    </li>
-                    <li>
-                      <a href="/email/Draft">Zibil qutusu(Recycle bin)</a>
-                    </li>
-                    <li>
-                      <a href="/email/send">Göndərilənlər(Sent Mail)</a>
-                    </li>
-                    <li>
-                      <a href="##">İmza</a>
-                    </li>
+                <div class="sidebar-submenu emailSubmenu">
+                  <ul class="emailListUl">
+                    <li><a href="/email/">Daxil olanlar(İnbox)</a></li>
                   </ul>
                 </div>
               </li>
@@ -223,42 +210,12 @@
         <!-- sidebar-menu  -->
       </div>
       <!-- sidebar-content-->
-      <div class="sidebar-footer notes">
-        <a href="#" title="səhifəm">
-            <i class="fas fa-pager"></i>
-          <span class="badge badge-pill badge-warning notification">3</span>
-        </a>
-        <a href="#" title="email">
-          <i class="fa fa-envelope"></i>
-          <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#" title="tapşırıq">
-            <i class="fas fa-list-ol"></i>
-            <span class="badge badge-pill badge-warning notification">3</span>
-          </a>
-        <a href="#" title="gündəliyim">
-            <i class="far fa-sticky-note"></i>
-          <span class="badge badge-pill badge-success notification">2</span>
-        </a>
-        <a href="#" title="istidəçilər">
-            <i class="fas fa-users"></i>
-            <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#" title="sənədlər">
-            <i class="fas fa-file-contract"></i>
-            <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-      </div>
+      
 
-      <div class="sidebar-footer settings">
-        <a href="#">
-          <i class="fa fa-cog"></i>
-          <span class="badge-sonar"></span>
-        </a>
-        <a href="#">
-          <i class="fa fa-power-off"></i>
-        </a>
-      </div> 
+      <div class="sidebar-footer settings d-flex align-items-center bg-secondary p-3">
+        <span class="text-light" class="blockquote-footer" style="font-family: cursive;">Created by <a class="text-light" href="http://lua.az">LUA Group</a></span>
+      </div>
+      
     </nav>
     
   {% block content %}
