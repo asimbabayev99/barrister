@@ -3,7 +3,7 @@ $(document).ready(function () {
   if(isDataCame === false) {
     $("#mailContent").append('<li id="preLoader" class="list-group-item align-items-center justify-content-center"><div class="spinner-grow float-left"  role="status"><span class="sr-only"> Loading...</span></div> <div class="float-left  h-100 d-flex align-items-center"> Loading...</div></li>')
   }
-  fetch("http://127.0.0.1:8000/api/emails/")
+  fetch("http://127.0.0.1:8000/api/emails/?folder=Inbox")
     .then((response) => response.json())
     .then((json) => {
         if(Object.keys(json).length === 0 ) {

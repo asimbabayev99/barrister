@@ -24,6 +24,7 @@ from account.tasks import *
 import logging
 
 
+
 class UserAPI(APIView):
     serializer_class = UserSerializer
     permission_classes = [IsAdminUser, ]
@@ -820,13 +821,14 @@ class EmailList(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Email.objects.filter(user=user).prefetch_related('attachments')
+        return Email.objects.all().prefetch_related('attachments')
     
     serializer_class = EmailSerializer
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [SessionAuthentication,]
+    # permission_classes = [IsAuthenticated,AllowAny]
+    # authentication_classes = [SessionAuthentication,]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    search_fields = ['sender', 'receiver']
+    filterset_fields = ['sender', 'receiver','folder','flag']
+    search_fields = ['sender', 'receiver','folder','flag']
     ordering_fields = ['date',]
 
 
@@ -853,6 +855,7 @@ import imapclient
 class EmailFolderMove(APIView):
     
     def post(self,request):
+
         start = datetime.now()
         serializer = EmailFolderMoveSerializer(data=request.data)
         serializer.is_valid()
@@ -871,7 +874,7 @@ class EmailFolderMove(APIView):
         # for i in new_folder_mails[len(new_folder_mails)-len(mail_uids):len(new_folder_mails)]:
         
 
-        return ValidationError('mail not moved')
+        return Response()
         
         
 
@@ -883,16 +886,12 @@ class EmailDeleteView(APIView):
         serializer = EmailDeleteSerializer(data=request.data)
         serializer.is_valid()
         messages_list = serializer.validated_data['uids']
-        print(messages_list)
         folder = serializer.validated_data['folder']
-        client = zimapclient.IMAPClient('imap.yandex.ru')
-        try:
-            client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
-        except:
-            raise ValidationError('auth error')
-        client.select_folder(folder) 
-        client.delete_messages(messages_list)
         for i in messages_list:
-            Email.objects.filter(num=i,folder=folder).delete() 
+            email = Email.objects.get(num=i,folder=folder)
+            email.flag = 'Deleted'
+            email.save()
+            print(email.flag)
+        delete_mail.delay(messages_list,folder)
         end = datetime.now() - start
         return Response({'emails':'deleted in {}'.format(end)})
