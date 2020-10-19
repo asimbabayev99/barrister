@@ -18,6 +18,8 @@ $(document).ready(function () {
               $("#mailContent").append('<li id="'+ element.id +'" class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span></span></li>');
               isDataCame = true;
               $("#preLoader").css("display","none");
+            } else {
+              console.log(element.folder)
             }
             
         });
