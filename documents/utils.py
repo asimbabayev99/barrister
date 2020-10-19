@@ -189,6 +189,13 @@ class Parser:
 
         return result
 
+    
+    def get_content(self, data):
+        html, js = self.parse(data)
+        json = self.submit_info(data)
+        js = "<script>\n" + js + "\n" + json + "\n</script>"
+        return html, js
+
 
 
 
@@ -284,10 +291,10 @@ documents = {
 
 
 
-parser = Parser()
-html, js = parser.parse(documents['nikah'])
-json = parser.submit_info(documents['nikah'])
-# print(json)
-js = "<script>\n" + js + "\n" + json + "\n</script>"
-# print(html)
-print(js)
+# parser = Parser()
+# html, js = parser.parse(documents['nikah'])
+# json = parser.submit_info(documents['nikah'])
+# # print(json)
+# js = "<script>\n" + js + "\n" + json + "\n</script>"
+# # print(html)
+# print(js)

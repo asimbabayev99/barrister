@@ -22,9 +22,11 @@
           <input type="text" class="form-control form-control-sm" placeholder="Axtar..">
         </div>
       </div>
+      {% for i in templates %}
       <div class="col-12 list-group">
-        <div class="list-group-item"><a href="">Nikahın pozulması</a></div>
+        <div class="list-group-item"><a href="{% url 'single-document-template' i.id %}">{{i.name}}</a></div>
       </div>
+      {% endfor %}
     </div>
   </div>
 </main>
