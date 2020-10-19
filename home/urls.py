@@ -41,12 +41,15 @@ urlpatterns = [
     path('social-activity-list/',social_activity_list,name='social-activity-list'),
 
     path('email/send', send_email, name='send-email'),
+    path('email_draft/',email_draft),
+    path('email_trash/',email_trash),
     path('email/', email_view, name='email'),
     path('mailcontent/',mail_content_view,name="mailcontent"),
 
 
 
     re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='attachment-media'),
+    re_path(r'view/(?P<path>.*)',)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

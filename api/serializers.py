@@ -327,6 +327,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
 class AttachmentSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url',read_only=True)
+    view_url = serializers.CharField(source='get_view_url',read_only=True)
 
     class Meta:
         model = Attachment
