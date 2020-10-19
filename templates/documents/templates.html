@@ -17,42 +17,44 @@
 <main class="page-content">
   <div class="container-fluid">
     <div class="row m-0 p-0">
-        <div class="col-md-4 pl-0">
-            <div class="form-group">
-                <input type="text" class="form-control form-control-sm" placeholder="Axtar..">
-            </div>
+      <div class="col-md-4 pl-0">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-sm" placeholder="Axtar..">
         </div>
-        <div class="col-12 list-group">
-            <div class="list-group-item"><a href="">Azad Besbantovdu r</a></div>
-        </div>
+      </div>
+      {% for i in templates %}
+      <div class="col-12 list-group">
+        <div class="list-group-item"><a href="{% url 'single-document-template' i.id %}">{{i.name}}</a></div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </main>
 
-    {% endblock content %}
+{% endblock content %}
 
 
 
 
-    {% block scripts %}
+{% block scripts %}
 
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-    <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
-    <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>  
-    
-    {% endblock scripts %}
-    </body>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
+<script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
-    </html>
+{% endblock scripts %}
+</body>
+
+</html>
