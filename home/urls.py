@@ -48,8 +48,8 @@ urlpatterns = [
 
 
 
-    re_path(r'^media/attachment/(?P<path>.*)', attachment_media_access, name='attachment-media'),
-    re_path(r'view/(?P<path>.*)',)
+    re_path(r'^media/attachment/(?P<path>.*)', attachment_media_download, name='attachment-media'),
+    re_path(r'view/(?P<path>.*)',attachment_media_download)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

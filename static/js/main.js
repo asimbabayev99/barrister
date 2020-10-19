@@ -459,4 +459,5 @@ $(document).ready(function() {
   
   
   // Open email kinds end
-})
+});
+
