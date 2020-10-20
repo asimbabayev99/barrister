@@ -95,6 +95,11 @@
   {{ block.super }}
   <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
   <script>
+      $(function() {
+      $(".myPageSidebar").addClass("active");
+      $(".myPageSubMenu").slideDown()
+    })
+  
     function getCookie(name) {
       var cookieValue = null;
       if (document.cookie && document.cookie !== '') {
@@ -184,5 +189,7 @@ $(document).ready(function() {
   })
   })
 })
+
+
 </script> 
 {% endblock scripts %}

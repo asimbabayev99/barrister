@@ -91,12 +91,12 @@
                   <span>Əsas səhifə</span>
                 </a>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar-dropdown myPageSidebar">
                 <a href="#">
                   <i class="fas fa-user-alt"></i>
                   <span>Mənim səhifəm</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu myPageSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'barrister-account' %}">Hesabım</a>
@@ -110,9 +110,9 @@
                     <li>
                       <a href="{% url 'barrister-social-activity' %}">Sosial aktivliyim</a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a href="##">Abunə haqqı</a>
-                    </li>
+                    </li> -->
                   </ul>
                 </div>
               </li>
@@ -127,12 +127,12 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown taskSidebar">
                 <a href="#">
                   <i class="fas fa-tasks"></i>
                   <span>Tapşırıqlar</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu taskSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'barrister-add-task' %}">Yeni tapşırıq</a>
@@ -146,15 +146,15 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown meetingSidebar">
                 <a href="#">
                   <i class="far fa-handshake"></i>
                   <span>Görüşlər</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu meetingSubMenu">
                   <ul>
-                    <li>
-                      <a href="{% url 'calendar' %}">Təqvim</a>
+                    <li class="active">
+                      <a href="{% url 'calendar' %}" class="meetingCalendarLink">Təqvim</a>
                     </li>
                     <li>
                       <a href="{% url 'barrister-new-appointment' %}">Yeni görüş</a>
@@ -166,12 +166,12 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown lawsSidebar">
                 <a href="#">
                   <i class="fas fa-gavel"></i>
                   <span>Qanunvericilik</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu lawsSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'laws-index' %}">Elektron baza</a>

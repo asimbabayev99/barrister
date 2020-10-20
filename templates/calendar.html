@@ -747,6 +747,16 @@
     <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
     <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      $(function() {
+        $(".meetingSidebar").addClass("active");
+        $(".meetingSubMenu").css("display","block");
+        $(".meetingCalendarLink").css({
+          color: "#16c7ff",
+          textShadow:"0px 0px 10px rgba(22, 199, 255, 0.5)" 
+        })
+      })
+    </script>
     {% endblock scripts %}
     </body>
 

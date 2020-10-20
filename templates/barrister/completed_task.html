@@ -170,4 +170,10 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    $(function() {
+        $(".taskSidebar").addClass("active");
+        $(".taskSubMenu").css("display","block")
+      })
+  </script>
 {% endblock %}
