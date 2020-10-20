@@ -1,11 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends 'barrister/barrister-admin.html' %}
+{% load static %}
+
+{% block title %}
+<title>Calendar</title>
+{% endblock title %}
+
+
+{% block links %}
+{{ block.super }}
+{% endblock links %}
+
+
+
+{% block content %}
+
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row m-0 p-0">
+      <div class="col-md-4 pl-0">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-sm" placeholder="Axtar..">
+        </div>
+      </div>
+      {% for i in templates %}
+      <div class="col-12 list-group">
+        <div class="list-group-item"><a href="{% url 'single-document-template' i.id %}">{{i.name}}</a></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
+
+
+
+
+{% block scripts %}
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
+<script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock scripts %}
 </body>
+
 </html>

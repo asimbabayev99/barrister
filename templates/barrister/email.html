@@ -28,6 +28,7 @@
 
 {% block content %}
 
+
 <main class="page-content design">
   <div style="padding-left: 70px;" class="emailContent">
     <h1>Inbox</h1>
@@ -186,6 +187,15 @@
     }
     
   });
+
+  $(function() {
+    $(".emailSidebar").addClass("active");
+    if($(".emailSidebar").hasClass("active")) {
+      $(".emailSubmenu").css("display", "block")
+    };
+    $(".emailListUl").append('<li><a href="#">Qaralama(Draft)</a></li><li><a  href="#">Zibil qutusu(Recycle bin)</a></li><li><a href="#">Göndərilənlər(Sent Mail)</a></li><li><a href="#">İmza</a></li>')
+  });
+
 
 </script>
 
