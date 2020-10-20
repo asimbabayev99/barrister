@@ -695,7 +695,7 @@ def is_image(file_path):
 
 
 import pathlib
-def attachment_media_download(request,path): 
+def attachment_media_download(request,path,content_type): 
     
     file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
     
@@ -704,6 +704,7 @@ def attachment_media_download(request,path):
         if is_image(file_path):
             with open(file_path,'rb') as img:
                 response = HttpResponse(img.read(),content_type='image/jpeg')
+                response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
                 return response
         else:
             type = pathlib.Path(file_path).suffix
@@ -713,9 +714,11 @@ def attachment_media_download(request,path):
                 return response
     raise Http404
 
-# def attachment_meda_view(request,path):
-#     if os.path.exists(path):
-
+#  def attachment_meda_view(request,path):
+#      if os.path.exists(path):
+#          if is_image(file_path):
+#              with open(file_path,'r') as img:
+#                  response  = HttpResponse(img.read(),content_type="image/{}".format(img.))
 
 
 def email_draft(request):
