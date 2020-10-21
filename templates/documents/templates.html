@@ -53,7 +53,12 @@
 <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
 <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
-
+<script>
+  $(function() {
+    $(".documentsSidebar").addClass("active");
+    $(".documentsSubMenu").css("display","block")
+  })
+</script>
 {% endblock scripts %}
 </body>
 

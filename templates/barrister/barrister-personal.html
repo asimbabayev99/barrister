@@ -136,4 +136,10 @@
   <!-- croppie -->
   <script src="{% static 'vendor/croppie/croppie.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    $(function() {
+      $(".myPageSidebar").addClass("active");
+      $(".myPageSubMenu").css("display", "block")
+    })
+  </script>
   {% endblock scripts %}
