@@ -42,7 +42,7 @@ $(document).ready(function () {
 
 
         // Click to the sidebar DRAFTS choice to look at only DRAFTS emails begin 
-
+        
         $(".drafts").click(function() {
           $(".mailContent .list-group-item").remove();
           json.forEach(element => {
@@ -55,6 +55,8 @@ $(document).ready(function () {
         // Click to the sidebar DRAFTS choice to look at only DRAFTS emails end
 
         $(".mailListGroup").click(function(){
+          $(".defaultMail").show(200);
+          $(".insteadMailImage").hide(100)
           console.log($(this).attr("id"));
           var mail = $(this).attr("id");
           json.forEach(element => {

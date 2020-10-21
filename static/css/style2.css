@@ -97,3 +97,22 @@
     background-color: #eee;
 } 
 
+.defaultMail {
+    display: none;
+}
+
+.insteadMailImage {
+    height: 80vh;
+    border-top: 3px solid #cdba6d;
+    background-color: #eee;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #303f48;
+    font-size: 30px;
+    background-image: url("./mail.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
