@@ -26,11 +26,16 @@ def single_template_view(request, id):
         c = Context(request.POST)
         html = t.render(c)
         return HttpResponse(html)
+    else:
+        t = Template(template.content)
+        c = Context(request.POST)
+        content = t.render(c)
 
     context = {
         'template': template,
         'html_content': html,
         'js_content': js,
+        'content': content,
     }
 
     return render(request, 'documents/single_template.html', context=context)
