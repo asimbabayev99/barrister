@@ -398,7 +398,6 @@ $(document).ready(function () {
         data: JSON.stringify(data),
         success: function (data) {
           console.log(eventData);
-
           $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
         },
         error: function (jqXhr, textStatus, errorMessage) {

@@ -91,12 +91,12 @@
                   <span>Əsas səhifə</span>
                 </a>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar-dropdown myPageSidebar">
                 <a href="#">
                   <i class="fas fa-user-alt"></i>
                   <span>Mənim səhifəm</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu myPageSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'barrister-account' %}">Hesabım</a>
@@ -117,22 +117,22 @@
                 </div>
               </li>
               <li class="sidebar-dropdown emailSidebar">
-                <a href="#">
+                <a href="/email/" class="emailNavigator">
                   <i class="far fa-envelope"></i>
                   <span>Elektron poçt</span>
                 </a>
                 <div class="sidebar-submenu emailSubmenu">
                   <ul class="emailListUl">
-                    <li><a href="/email/">Daxil olanlar(İnbox)</a></li>
+                    
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown taskSidebar">
                 <a href="#">
                   <i class="fas fa-tasks"></i>
                   <span>Tapşırıqlar</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu taskSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'barrister-add-task' %}">Yeni tapşırıq</a>
@@ -146,15 +146,15 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown meetingSidebar">
                 <a href="#">
                   <i class="far fa-handshake"></i>
                   <span>Görüşlər</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu meetingSubMenu">
                   <ul>
-                    <li>
-                      <a href="{% url 'calendar' %}">Təqvim</a>
+                    <li class="active">
+                      <a href="{% url 'calendar' %}" class="meetingCalendarLink">Təqvim</a>
                     </li>
                     <li>
                       <a href="{% url 'barrister-new-appointment' %}">Yeni görüş</a>
@@ -166,12 +166,12 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown lawsSidebar">
                 <a href="#">
                   <i class="fas fa-gavel"></i>
                   <span>Qanunvericilik</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu lawsSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'laws-index' %}">Elektron baza</a>
@@ -188,18 +188,18 @@
                   <span>Müştərilər</span>
                 </a>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown documentsSidebar">
                 <a href="#">
                   <i class="far fa-folder-open"></i>
                   <span>Sənədlər</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu documentsSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'documents-templates' %}">Şablonlar</a>
                     </li>
                     <li>
-                      <a href="">Mənim sənədlərim</a>
+                      <a href="#">Mənim sənədlərim</a>
                     </li>                    
                   </ul>
                 </div>
@@ -212,8 +212,8 @@
       <!-- sidebar-content-->
       
 
-      <div class="sidebar-footer settings d-flex align-items-center bg-secondary p-3">
-        <span class="text-light" class="blockquote-footer" style="font-family: cursive;">Created by <a class="text-light" href="http://lua.az">LUA Group</a></span>
+      <div class="sidebar-footer settings d-flex align-items-center p-3">
+        <span class="text-secondary" class="blockquote-footer" style="font-family: cursive;">Created by <a class="text-light" href="http://lua.az">LUA Group</a></span>
       </div>
       
     </nav>

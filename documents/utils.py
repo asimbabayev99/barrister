@@ -76,7 +76,10 @@ class Parser:
 
 
     def get_input_data(self, data):
-        html = "<input {0} >\n".format(" ".join([key + "='" + str(value) + "'" for key, value in data.get('attrs', {}).items() ]) )
+        label = ""
+        if data.get('label'):
+            label = "<label for={0} >{1}</label>\n".format(data.get('attrs', {}).get('id'), data.get('label'))
+        html = label + "<input {0} >\n".format(" ".join([key + "='" + str(value) + "'" for key, value in data.get('attrs', {}).items() ]) )
         js = ""
         return html, js
 
@@ -87,7 +90,10 @@ class Parser:
         #     raise Exception('Id not found for select element')
         attrs = " ".join([key + "='" + str(value) + "'" for key, value in data.get('attrs', {}).items() ])
         options = "\n".join(["\t<option value='{0}'>{1}</option>".format(op[0], op[1]) for op in data.get('options', []) ])
-        html = "<select {0}>\n{1}</select>\n".format(attrs, options)
+        label = ""
+        if data.get('label'):
+            label = "<label for={0}>{1}</label>\n".format(select_id, data.get('label'))
+        html = label + "<select {0}>\n{1}</select>\n".format(attrs, options)
 
         temp = []
         for key, value in data.get('on_select', {}).items():
@@ -170,10 +176,10 @@ class Parser:
                     js = temp_js + loop
                     results.append(result)
                 else:
-                    nodes = data.get('nodes', [])
+                    nodes = i.get('nodes', [])
                     j, r = self.get_json(nodes)
                     js += j
-                    results.append(r)
+                    results.append(",".join(r))
         return js, results
 
 
@@ -184,7 +190,10 @@ class Parser:
         js, res = self.get_json(data)
         result = "$('#submit_button').on('click', function() {"
         result += js
-        result += "var data = {" + ",".join(res) + "}"
+
+        result += "var data = {" + ",".join(res) + "}\n"
+        # result += "console.log(data);\n"
+        result += "send_data(data);\n"
         result += "});"
 
         return result
@@ -193,7 +202,8 @@ class Parser:
     def get_content(self, data):
         html, js = self.parse(data)
         json = self.submit_info(data)
-        js = "<script>\n" + js + "\n" + json + "\n</script>"
+        # js = "<script>\n" + js + "\n" + json + "\n</script>"
+        js = js + "\n" + json
         return html, js
 
 
@@ -289,6 +299,10 @@ documents = {
     ]
 }
 
+# import json
+
+# j = json.dumps(documents['nikah'])
+# print(j)
 
 
 # parser = Parser()

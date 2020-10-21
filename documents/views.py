@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from documents.models import *
 from documents.utils import Parser, documents
-from django.template import Template
+from django.template import Template, Context
+import json
 
 # Create your views here.
 
@@ -18,18 +19,23 @@ def temlates_view(request):
 
 def single_template_view(request, id):
     template = get_object_or_404(Document.objects.all(), id=id)
-    html, js = Parser().get_content(documents['nikah'])
+    html, js = Parser().get_content(template.conf)
 
     if request.method == "POST":
-        t = template.Template(content)
-        c = template.Context(request.data)
+        t = Template(template.content)
+        c = Context(request.POST)
         html = t.render(c)
-        return html
+        return HttpResponse(html)
+    else:
+        t = Template(template.content)
+        c = Context(request.POST)
+        content = t.render(c)
 
     context = {
         'template': template,
         'html_content': html,
         'js_content': js,
+        'content': content,
     }
 
     return render(request, 'documents/single_template.html', context=context)
