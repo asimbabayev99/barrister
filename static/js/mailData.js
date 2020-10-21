@@ -54,6 +54,19 @@ $(document).ready(function () {
         
         // Click to the sidebar DRAFTS choice to look at only DRAFTS emails end
 
+        // Click in menu Trash to delete message begin
+
+        $(".deleteMessage").click(function() {
+          $(".mailContent .list-group-item").remove();
+          json.forEach(element => {
+            if(element.folder === "Trash") {
+              $("#mailContent").append('<li id="'+ element.id +'" class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span></span></li>');
+            }
+          })
+        })
+
+        // Click in menu Trash to delete message end
+
         $(".mailListGroup").click(function(){
           $(".defaultMail").show(200);
           $(".insteadMailImage").hide(100)
