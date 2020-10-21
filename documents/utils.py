@@ -192,7 +192,7 @@ class Parser:
         result += js
 
         result += "var data = {" + ",".join(res) + "}\n"
-        result += "console.log(data);\n"
+        # result += "console.log(data);\n"
         result += "send_data(data);\n"
         result += "});"
 
