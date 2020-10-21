@@ -693,32 +693,39 @@ def is_image(file_path):
         return False
 
 
+import magic
+from home.models import Attachment
+import mimetypes
 
-import pathlib
-def attachment_media_download(request,path,content_type): 
-    
-    file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
-    
-    if os.path.exists(file_path):
-        print(is_image(file_path))
-        if is_image(file_path):
-            with open(file_path,'rb') as img:
-                response = HttpResponse(img.read(),content_type='image/jpeg')
-                response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-                return response
-        else:
-            type = pathlib.Path(file_path).suffix
-            with open(file_path, 'rb') as fh:
-                response = HttpResponse(fh.read() , content_type="application/{}".format(type.strip('.')))
-                response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-                return response
+def attachment_media_download(request,path):
+    path = 'media/'+path
+    file_name = os.path.basename(path)
+    if os.path.exists(path):
+        with open(path,'rb') as fayl:
+            response = HttpResponse(fayl.read(),content_type='{}'.format(magic.from_file(path,mime=True)))
+            response['Content-type']  = mimetypes.guess_type(path)
+            response['Content-Disposition'] = 'attachment; filename=' + file_name
+            response['Content-length'] = len(fayl.read()) 
+            return response
     raise Http404
 
-#  def attachment_meda_view(request,path):
-#      if os.path.exists(path):
-#          if is_image(file_path):
-#              with open(file_path,'r') as img:
-#                  response  = HttpResponse(img.read(),content_type="image/{}".format(img.))
+
+def attachment_media_view(request,path):
+    docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
+    if os.path.splitext(path)[1] in docs_list:
+        context = {'path':request.get_host()+'/'+path}
+        return render(request,'docx_viewer.html',context=context)
+    if os.path.exists(path):
+        file_name = os.path.basename(path)
+        with open(path,'rb') as fayl:
+            response = HttpResponse(fayl.read())
+            response['Content-type']  = mimetypes.guess_type(path)
+            response['Content-length'] = len(fayl.read())
+            return response
+    return Http404
+
+
+    
 
 
 def email_draft(request):
