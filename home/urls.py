@@ -46,10 +46,12 @@ urlpatterns = [
     path('email/', email_view, name='email'),
     path('mailcontent/',mail_content_view,name="mailcontent"),
 
+    re_path(r'view/(?P<path>.*)', attachment_media_view, name='attachment-view'),
 
 
-    re_path(r'^media/attachment/(?P<path>.*)', attachment_media_download, name='attachment-media'),
-    # re_path(r'view/(?P<path>.*)',attachment_media_download) 
+
+    re_path(r'media/(?P<path>.*)', attachment_media_download, name='attachment-download'),
+    # re_path(r'view/(?P<path>.*)',attachment_media_download,name='attachment-view') 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

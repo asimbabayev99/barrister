@@ -89,8 +89,10 @@ def synchronize_mail():
       messages = mail.search('ALL')
 
       #remove deleted emails from database
-      a = Email.objects.filter(folder=folder).last().num
-      last_num = a if a != None else 0 
+      try:
+        last_num = Email.objects.filter(folder=folder).last().num
+      except:
+        last_num = 0 
       print(last_num) 
       db_uids = set([int(x[0]) for x in Email.objects.filter(folder=folder).order_by('num').values_list('num')])
       actual_uids = set(mail.fetch(messages,'RFC822').keys())
@@ -135,8 +137,11 @@ def synchronize_mail():
           new_email.save()
           if email_message.attachments is not None:
             for i in email_message.attachments:
+              print(i['filename'])
+              if Attachment.objects.filter(name=i['filename']).exists():
+                continue
               attachment = Attachment(name=i['filename'],email=new_email)
-              attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))
+              attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))              
               attachment.save()
          
 

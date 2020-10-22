@@ -536,8 +536,21 @@ class Attachment(models.Model):
     email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='attachments', blank=False, null=False)
     name = models.CharField(max_length=256, null=False, blank=False)
     file = models.FileField(upload_to='attachment', null=False, blank=False)
+    
+    def __str__(self):
+        return self.name
+
     def get_absolute_url(self):
         return self.file.url
+
+    def save(self):
+        self.name = self.file.name.replace('attachment/',"")
+        super().save()
+
+    def get_view_url(self):
+        return '/view'+self.file.url
+
+
     
 
 

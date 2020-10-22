@@ -326,12 +326,12 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
-    url = serializers.CharField(source='get_absolute_url',read_only=True)
+    download_url = serializers.CharField(source='get_absolute_url',read_only=True)
     view_url = serializers.CharField(source='get_view_url',read_only=True)
 
     class Meta:
         model = Attachment
-        fields = ['name','url']
+        fields = ['name','download_url','view_url']
 
 
 class EmailSerializer(serializers.ModelSerializer):
