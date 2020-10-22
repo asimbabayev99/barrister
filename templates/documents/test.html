@@ -94,6 +94,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <hr>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="">Nikahın bağlanmasının tarixi</label>
+                                        <input type="date" id="marriage_date" class="form-control form-control-sm" >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Qeydiyyat şöbəsi</label>
+                                        <input type="text" id="marriage_address" class="form-control form-control-sm" >
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="">Uşağınız varmı</label>
                                     <select name="has_children" class="form-control form-control-sm" id="has_children">
@@ -102,8 +112,16 @@
                                         <option value="no">Xeyr</option>
                                     </select>
                                 </div>
-                                <div class="col-md-12 children_expand" style="display: none;">
+                                <div class="children_expand" style="display: none;">
                                     <hr>
+                                    <div class="form-group">
+                                        <label for="demands_aliment">İddiaçı aliment tələb edir?</label>
+                                        <select id="demands_aliment" class="form-control form-control-sm">
+                                            <option value="">Seçin</option>
+                                            <option value="Bəli">Bəli</option>
+                                            <option value="Xeyir">Xeyir</option>
+                                        </select>
+                                    </div>
                                     <label for="">Uşaqların siyahısı</label>
                                     <table class="table table-striped table-bordered">
                                         <thead>
@@ -112,7 +130,6 @@
                                                 <th>Doğum tarixi</th>
                                                 <th>Cins</th>
                                                 <th>İddiaçı ilə qalacaq</th>
-                                                <th>Aliment</th>
                                                 <th>Düzəliş</th>
                                             </tr>
                                         </thead>
@@ -143,14 +160,6 @@
                                         <div class="form-group">
                                             <label for="">İddiaçı ilə qalacaq</label>
                                             <select name="child_stay" id="child_stay" class="form-control form-control-sm child_stay">
-                                                <option value="">Seçin</option>
-                                                <option value="Bəli">Bəli</option>
-                                                <option value="Xeyr">Xeyr</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Aliment tələb edirsiniz</label>
-                                            <select name="child_aliment" id="child_aliment" class="form-control form-control-sm child_aliment">
                                                 <option value="">Seçin</option>
                                                 <option value="Bəli">Bəli</option>
                                                 <option value="Xeyr">Xeyr</option>
@@ -214,7 +223,7 @@
             let stay = $("#child_stay").val() || "";
             let aliment = $('#child_aliment').val() || "";
 
-            $("#children_table").append("<tr> <td class='child_name'>" + name + "</td> <td class='child_date'>" + date + "</td><td class='child_gender'>" + gender + "</td><td class='child_stay'>" + stay + "</td><td class='child_aliment'>" + aliment + "</td><td><button class='btn btn-danger btn-sm delete_child'>Sil</button></td>" + "</tr>");
+            $("#children_table").append("<tr> <td class='child_name'>" + name + "</td> <td class='child_date'>" + date + "</td><td class='child_gender'>" + gender + "</td><td class='child_stay'>" + stay + "</td><td><button class='btn btn-danger btn-sm delete_child'>Sil</button></td>" + "</tr>");
             $(".delete_child").click(function () {
                 $(this).parents('tr').remove();
             })
@@ -234,7 +243,6 @@
                     "date": $(this).find(".child_date").text(),
                     "gender": $(this).find(".child_date").text(),
                     "stay": $(this).find(".child_date").text(),
-                    "aliment": $(this).find(".child_aliment").text(),
                 });
             });
             var data = {
@@ -245,8 +253,11 @@
                 "defendant_name": $("#defendant_name").val(),
                 "defendant_address": $("#defendant_address").val(),
                 "defendant_gender": $("#defendant_gender").val(),
+                "marriage_date": $("#marriage_date").val(),
+                "marriage_address": $("#marriage_address").val(),
                 "has_children": $("#has_children").val(),
-                "children": children
+                "children": children,
+                "demands_aliment": $("#demands_aliment").val()
             }
             send_data(data);
         });

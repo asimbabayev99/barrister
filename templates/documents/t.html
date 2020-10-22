@@ -1,77 +1,585 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
+{% load document_filters %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.3.4.2 (Linux)" />
+	<meta name="author" content="hp" />
+	<meta name="created" content="2014-06-12T10:36:00" />
+	<meta name="changedby"
+		content="&#1055;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100; Windows" />
+	<meta name="changed" content="2020-10-07T06:44:00" />
+	<meta name="AppVersion" content="15.0000" />
+	<meta name="Company" content="Microsoft" />
+	<meta name="DocSecurity" content="0" />
+	<meta name="HyperlinksChanged" content="false" />
+	<meta name="LinksUpToDate" content="false" />
+	<meta name="ScaleCrop" content="false" />
+	<meta name="ShareDoc" content="false" />
+	<style type="text/css">
+		@page {
+			size: 8.27in 11.69in;
+			margin-left: 1.18in;
+			margin-right: 0.59in;
+			margin-top: 0.79in;
+			margin-bottom: 0.49in
+		}
+
+		p {
+			text-align: justify;
+			margin: 0;
+			direction: ltr;
+			line-height: 115%;
+			text-align: left;
+			orphans: 2;
+			widows: 2;
+			background: transparent
+		}
+	</style>
 </head>
 
-<body>
-    <input class='form-group' name='applicant-name' type='text' id='applicant-name'>
-    <select class='form-group' name='applicant-gender' id='applicant-gender'>
-        <option value=''>Secin</option>
-        <option value='male'>kisi</option>
-        <option value='female'>qadin</option>
-    </select>
-    <select name='has_children' id='has_children'>
-        <option value=''>Secin</option>
-        <option value='yes'>beli</option>
-        <option value='no'>xeyr</option>
-    </select>
-    <div id='child' class='form-group' style='display: none;'>
-        <table>
-            <thead>
-                <tr>
-                    <th>Adi</th>
-                    <th>Cinsi</th>
-                </tr>
-            </thead>
-            <tbody id="table_child">
-        </table>
-        <input name='child_name' id='child_name' class='child_name' type='text' placeholder='Adi'>
-        <select name='child_gender' id='child_gender' class='child_gender' placeholder='Cinsi'>
-            <option value=''>Secin</option>
-            <option value='male'>kisi</option>
-            <option value='female'>qadin</option>
-        </select>
+<body lang="ru-RU" link="#000080" vlink="#800000" dir="ltr">
+	<p style="text-align: justify; margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 13pt"><span lang="az-Latn-AZ"><b>ABSERON
+						RAYON MƏHKƏMƏSINƏ</b></span></font>
+		</font>
+	</p>
+	<p lang="az-Latn-AZ" style="text-align: justify;" style="margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<br />
 
-        <input type="button" value='Əlavə et' id="add_child">
-    </div>
-    <input type="submit" id="submit_button" value="Submit">
+	</p>
+	<p style="text-align: justify; margin-left: 3.25in; margin-bottom: 0in; line-height: 100%"><a name="_GoBack"></a>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Iddiaçi</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">:
+					{{applicant_name|is_null:20}}</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>&Uuml;nvan</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">:
+					{{applicant_address|is_null:20}}</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Tel.:
+					{{applicant_phone|is_null:20}}</span></font>
+		</font>
+	</p>
+	<p lang="az-Latn-AZ" style="text-align: justify;" style="margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<br />
 
-    <script>
-        $('#has_children').on('change', function () {
-            val = $('#has_children').val();
-            switch (val) {
-                case 'yes':
-                    $("#child").css("display", "block");
-                    break;
-                default:
-                    $("#child").css("display", "none");
-                    break;
-            }
-        }); $('#add_child').on('click', function () {
-            var child_name = $('#child_name').val();
-            var child_gender = $('#child_gender').val(); $('#table_child').append("<tr><td class='child_name'>" + child_name + "</td><td class='child_gender'>" + child_gender + "</td><td><button class='btn btn-danger delete_child'>Sil</button></td></tr>");
-            $('.delete_child').click(function () { $(this).parents('tr').remove(); })
-        });
-        $('#submit_button').on('click', function () {
-            var child = [];
-            $('#table_child tr').each(function () {
-                child.push({
-                    'child_name': $(this).find('.child_name').text()
-                    , 'child_gender': $(this).find('.child_gender').text()
-                });
-            });
-            var data = {
-                'applicant-name': $('#applicant-name').val()
-                , 'applicant-gender': $('#applicant-gender').val(), 'child': child, 'has_children': $('#has_children').val()
-            }
-            console.log(data)
-        });
-    </script>
+	</p>
+	<p style="text-align: justify; margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Cavabdeh:
+					</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">{{defendant_name|is_null:20}}</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; margin-left: 3.25in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>&Uuml;nvan:</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">{{defendant_address|is_null:20}}</span></font>
+		</font>
+	</p>
+	<p style="margin-right: 4.43in; margin-bottom: 0in; line-height: 100%">
+		&ldquo;<font face="Times New Roman, serif">
+            {% if demands_aliment %}
+            <font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">nikah&#305;n
+                pozulmas&#305; v&#601; aliment t&#601;l&#601;bin&#601; dair&rdquo;</span></font>
+            {% else %}
+            <font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">nikahın
+                pozulmasına dair&rdquo;</span></font> 
+            {% endif %}
+		</font>
+	</p>
+	<p align="center" style="text-align:center; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="4" style="font-size: 14pt"><span style="text-align: center;"
+					lang="az-Latn-AZ"><b>&#304;DD&#304;A
+						&#399;R&#304;Z&#399;S&#304;</b></span></font>
+		</font>
+	</p>
+	<p lang="az-Latn-AZ" align="center" style="margin-bottom: 0in; line-height: 100%">
+		<br />
+
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Cavabdeh
+					{{ defendant_name|is_null:20 }} il&#601; ail&#601; quraraq, nikah&#305;m&#305;z&#305;
+					{{marriage_date|year_suffix}} il tarixind&#601; {{marriage_address|is_null:25}} Qeydiyyat &#351;&ouml;b&#601;sinin nikah&#305;n ba&#287;lanmas&#305;
+					haqq&#305;nda akt qeydl&#601;ri kitab&#305;nda X n&ouml;mr&#601;li
+					qeyd il&#601; r&#601;smil&#601;&#351;dirmi&#351;ik.</span></font>
+		</font>
+    </p>
+    {% if has_children %}
+    <p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Birg&#601;
+                    nikahdan
+                    {% for child in children %}
+                        , {{child.date|year_suffix}} il t&#601;v&#601;ll&uuml;dl&uuml; 
+                        {% if child.gender == "Kişi" %} oğlumuz {% else %} qızımız {% endif %}
+                        {{ child.name|to_list:1}}
+                    {% endfor %}
+                    d&uuml;nyaya g&#601;lmi&#351;l&#601;r.</span></font>
+		</font>
+	</p>
+    {% endif %}
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Ail&#601;
+					h&#601;yat&#305;m&#305;z&#305;n ilk g&uuml;nl&#601;rind&#601;n
+					cavabdehl&#601; m&uuml;nasib&#601;tl&#601;rimiz normal olsa da,
+					sonradan m&uuml;nasib&#601;tl&#601;rimiz soyumu&#351;dur. Buna s&#601;b&#601;b
+					cavabdehl&#601; xasiyy&#601;tl&#601;rimizin uy&#287;un g&#601;lm&#601;m&#601;sidir.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">D&#601;f&#601;l&#601;rl&#601;
+					m&uuml;nasib&#601;tl&#601;rimizi d&uuml;z&#601;lm&#601;k v&#601; bir
+					ail&#601; kimi ya&#351;ama&#287;a c&#601;hd g&ouml;st&#601;rs&#601;k
+					d&#601;, bunun n&#601;tic&#601;si olmam&#305;&#351;d&#305;r. Haz&#305;rda
+					m&#601;n u&#351;aqlarla birg&#601; cavabdehd&#601;n ayr&#305;
+					ya&#351;ay&#305;r&#305;q, ail&#601;miz da&#287;&#305;l&#305;b, onun
+					b&#601;rpas&#305; m&uuml;mk&uuml;n deyil, nikah&#305;m&#305;z formal
+					xarakter da&#351;&#305;y&#305;r. Bu s&#601;b&#601;bd&#601;n d&#601;
+					ayr&#305;lma&#287;a q&#601;rar vermi&#351;ik.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Az&#601;rbaycan
+						Respublikas&#305;n&#305;n Ail&#601; M&#601;c&#601;ll&#601;sinin
+						20.1-ci madd&#601;sin&#601;</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, &#601;r-arvad&#305;n birg&#601; ya&#351;amas&#305;n&#305;n
+					v&#601; ail&#601;nin saxlanmas&#305;n&#305;n qeyri-m&uuml;mk&uuml;nl&uuml;y&uuml;
+					m&#601;hk&#601;m&#601; t&#601;r&#601;find&#601;n m&uuml;&#601;yy&#601;n
+					edildikd&#601;, nikah m&#601;hk&#601;m&#601; qaydas&#305;nda pozulur.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>H&#601;min
+						M&#601;c&#601;ll&#601;nin 22.2-ci madd&#601;sin&#601;</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, &#601;r-arvad aras&#305;nda sazi&#351; olmad&#305;qda,
+					m&#601;hk&#601;m&#601;, bo&#351;anmadan sonra yetkinlik ya&#351;&#305;na
+					&ccedil;atmayan u&#351;aqlar&#305;n valideynl&#601;rind&#601;n
+					hans&#305;n&#305;n yan&#305;nda qald&#305;&#287;&#305;n&#305;,
+					u&#351;aqlar &uuml;&ccedil;&uuml;n alimentin hans&#305; valideynd&#601;n
+					v&#601; hans&#305; miqdarda tutuldu&#287;unu m&uuml;&#601;yy&#601;n
+					etm&#601;lidir.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span style="text-align: justify;" lang="az-Latn-AZ"><b>H&#601;min
+						M&#601;c&#601;ll&#601;nin 58.2-ci madd&#601;sin&#601; </b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">&#601;sas&#601;n,
+					valideynl&#601;r u&#351;aqlar&#305;n&#305;n t&#601;rbiy&#601;sin&#601;,
+					sa&#287;laml&#305;&#287;&#305;na v&#601; onlar&#305;n psixi, fiziki,
+					m&#601;n&#601;vi inki&#351;af&#305;na g&ouml;r&#601; m&#601;suliyy&#601;t
+					da&#351;&#305;y&#305;rlar.</span></font>
+		</font>
+	</p>
+	<p  style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span style="text-align: justify;" lang="az-Latn-AZ"><b>H&#601;min
+						M&#601;c&#601;ll&#601;nin 75.1-ci v&#601; 75.4-c&uuml; madd&#601;l&#601;rin&#601;
+					</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span style="text-align: justify;" lang="az-Latn-AZ">&#601;sas&#601;n,
+					valideynl&#601;r u&#351;aqlar&#305;n&#305; saxlama&#287;a
+					borcludurlar. Valideynl&#601;r u&#351;aqlar&#305;n&#305; saxlamad&#305;qda
+					u&#351;aqlar&#305;n saxlanmas&#305; &uuml;&ccedil;&uuml;n v&#601;sait
+					(aliment) valideynl&#601;rd&#601;n m&#601;hk&#601;m&#601; qaydas&#305;nda
+					tutulur.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>H&#601;min
+						M&#601;c&#601;ll&#601;nin 78.1-ci madd&#601;sin&#601;</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, valideynl&#601;r aras&#305;nda yetkinlik ya&#351;&#305;na
+					&ccedil;atmayan u&#351;aqlara aliment &ouml;d&#601;nilm&#601;si
+					bar&#601;d&#601; sazi&#351; yoxdursa, el&#601;c&#601; d&#601; aliment
+					verm&#601;y&#601; borclu olan valideynin qazanc&#305; (g&#601;liri)
+					qeyri-m&uuml;nt&#601;z&#601;m, d&#601;yi&#351;&#601;n olarsa, ya da
+					qazanc&#305;n (g&#601;lirin) ham&#305;s&#305;n&#305; v&#601; ya bir
+					hiss&#601;sini h&#601;min valideyn natura v&#601; ya xarici valyuta
+					il&#601; al&#305;rsa, yaxud onun qazanc&#305; v&#601; ya sair g&#601;liri
+					yoxdursa, habel&#601; alimentin valideynin qazanc&#305;ndan
+					(g&#601;lirind&#601;n) m&uuml;&#601;yy&#601;n hiss&#601; kimi
+					tutulmas&#305; m&uuml;mk&uuml;n olmad&#305;&#287;&#305;, &ccedil;&#601;tinlik
+					t&ouml;r&#601;tdiyi v&#601; t&#601;r&#601;fl&#601;rd&#601;n birinin
+					mara&#287;&#305;n&#305; &#601;h&#601;miyy&#601;tli d&#601;r&#601;c&#601;d&#601;
+					pozdu&#287;u ba&#351;qa hallarda, u&#351;aqlar&#305;n saxlanmas&#305;
+					&uuml;&ccedil;&uuml;n v&#601;sait tutulmas&#305;n&#305; t&#601;l&#601;b
+					ed&#601;n &#351;&#601;xsin xahi&#351;i il&#601; alimentin miqdar&#305;
+					m&#601;hk&#601;m&#601; t&#601;r&#601;find&#601;n h&#601;r ay
+					&ouml;d&#601;nilm&#601;li olan sabit pul m&#601;bl&#601;&#287;ind&#601;
+					m&uuml;&#601;yy&#601;n edil&#601; bil&#601;r.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>&quot;U&#351;aq
+						h&uuml;quqlar&#305; haqq&#305;nda&quot; Az&#601;rbaycan Respublikas&#305;
+						Qanununun 5-ci madd&#601;sin&#601; </b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">&#601;sas&#601;n,
+					d&ouml;vl&#601;t orqanlar&#305;, b&uuml;t&uuml;n fiziki v&#601;
+					h&uuml;quqi &#351;&#601;xsl&#601;r &ouml;z f&#601;aliyy&#601;tind&#601;
+					u&#351;aqlar&#305;n m&#601;nafel&#601;rini &uuml;st&uuml;n tutmal&#305;,
+					onlar&#305;n h&uuml;quqlar&#305;n&#305;n t&#601;min olunmas&#305;na
+					&#351;&#601;rait yaratmal&#305;d&#305;rlar. Az&#601;rbaycan
+					Respublikas&#305;n&#305;n normativ h&uuml;quqi aktlar&#305; v&#601;
+					m&uuml;vafiq orqanlar&#305;n q&#601;rarlar&#305; u&#351;aq
+					m&#601;nafel&#601;rin&#601; zidd olmamal&#305; v&#601; onlar&#305;n
+					icras&#305; u&#351;aqlar&#305;n h&#601;yat&#305;na, inki&#351;af&#305;na
+					v&#601; t&#601;rbiy&#601;sin&#601; z&#601;r&#601;r g&#601;tirm&#601;m&#601;lidir.
+					U&#351;a&#287;&#305;n h&uuml;quq v&#601; m&#601;nafel&#601;rini
+					m&#601;hdudla&#351;d&#305;ran h&#601;r hans&#305; &#601;qd
+					etibars&#305;zd&#305;r.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>H&#601;min
+						Qanunun </b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>19-cu
+						madd&#601;sin&#601;</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, valideynl&#601;rin u&#351;a&#287;&#305;n
+					t&#601;rbiy&#601;sind&#601; b&#601;rab&#601;r h&uuml;quq v&#601;
+					v&#601;zif&#601;l&#601;ri var. Onlar u&#351;a&#287;&#305; sa&#287;lam
+					b&ouml;y&uuml;tm&#601;li, &uuml;mumb&#601;&#351;&#601;ri v&#601;
+					milli d&#601;y&#601;rl&#601;r &#601;sas&#305;nda t&#601;rbiy&#601;
+					etm&#601;li,m&uuml;st&#601;qil h&#601;yata haz&#305;rlamal&#305;d&#305;rlar.
+					U&#351;a&#287;&#305;n qabiliyy&#601;tinin inki&#351;af etdirilm&#601;si,
+					onun maddi v&#601; m&#601;n&#601;vi t&#601;l&#601;batlar&#305;n&#305;n
+					t&#601;min edilm&#601;si, h&uuml;quq v&#601; m&#601;nafel&#601;rinin
+					m&uuml;hafiz&#601;si valideynl&#601;rin &#601;sas v&#601;zif&#601;l&#601;ridir.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>H&#601;min
+						Qanunun 13-c&uuml; madd&#601;sin&#601;</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, u&#351;a&#287;&#305;n Az&#601;rbaycan
+					Respublikas&#305;n&#305;n qanunvericiliyi il&#601; m&uuml;&#601;yy&#601;n
+					edilmi&#351; minimum dolanacaq x&#601;rcl&#601;rind&#601;n az olmayan
+					maddi t&#601;minat almaq h&uuml;ququ vard&#305;r.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>2020-ci
+						ilin yanvar&#305;n 1-d&#601;n q&uuml;vv&#601;y&#601; minmi&#351;
+						29.11.2019-cu il tarixli &ldquo;Az&#601;rbaycan Respublikas&#305;nda
+						2020-ci il &uuml;&ccedil;&uuml;n ya&#351;ay&#305;&#351; minimumu
+						haqq&#305;nda&rdquo; Az&#601;rbaycan</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+				</span></font>
+		</font><b>
+			<font face="Times New Roman, serif">
+				<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Respublikas&#305;n&#305;n</span></font>
+			</font>
+		</b>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><span style="font-weight: normal">
+					</span></span></font>
+		</font><b>
+			<font face="Times New Roman, serif">
+				<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Qanununa
+					</span></font>
+			</font>
+		</b>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><span
+						style="font-weight: normal">&#601;sas&#601;n,
+					</span></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">2020-ci
+					il &uuml;&ccedil;&uuml;n ya&#351;ay&#305;&#351; minimumu u&#351;aqlar
+					&uuml;&ccedil;&uuml;n 170 manat m&#601;bl&#601;&#287;ind&#601;
+					m&uuml;&#601;yy&#601;n edilmi&#351;dir.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Az&#601;rbaycan
+						Respublikas&#305;n&#305;n Konstitusiyas&#305;n&#305;n 17-ci
+						madd&#601;sinin VI-c&#305; b&#601;ndin&#601; </b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">&#601;sas&#601;n,
+					u</span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">&#351;aq
+					h&uuml;quqlar&#305;n&#305;n h&#601;yata ke&ccedil;irilm&#601;sin&#601;
+					d&ouml;vl&#601;t n&#601;zar&#601;t edir.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Az&#601;rbaycan
+						Respublikas&#305;n&#305;n M&uuml;lki Prosessual M&#601;c&#601;ll&#601;sinin
+						4.1-ci madd&#601;sin&#601;</b></span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, b&uuml;t&uuml;n fiziki v&#601; h&uuml;quqi &#351;&#601;xsl&#601;r
+					&ouml;zl&#601;rinin qanunla qorunan h&uuml;quq v&#601; azadl&#305;qlar&#305;n&#305;,
+					el&#601;c&#601; d&#601; maraqlar&#305;n&#305; qorumaq v&#601; t&#601;min
+					etm&#601;k m&#601;qs&#601;di il&#601; qanunla m&uuml;&#601;yy&#601;n
+					edilmi&#351; qaydada m&#601;hk&#601;m&#601; m&uuml;dafi&#601;sind&#601;n
+					istifad&#601; etm&#601;k h&uuml;ququna malikdirl&#601;r.</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>H&#601;min
+						M&#601;c&#601;ll&#601;nin 36.3-c&uuml; v&#601; 36.5-ci madd&#601;l&#601;rin&#601;</b></span>
+			</font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					&#601;sas&#601;n, alimentin al&#305;nmas&#305; v&#601; atal&#305;&#287;&#305;n
+					m&uuml;&#601;yy&#601;n edilm&#601;si haqq&#305;nda v&#601; iddia&ccedil;&#305;n&#305;n
+					yan&#305;nda yetkinlik ya&#351;&#305;na &ccedil;atmayan u&#351;aqlar
+					olduqda v&#601; ya iddia&ccedil;&#305; s&#601;hh&#601;tin&#601; g&ouml;r&#601;
+					cavabdehin ya&#351;ad&#305;&#287;&#305; yer&#601; getm&#601;y&#601;
+					&ccedil;&#601;tinlik &ccedil;&#601;kdikd&#601; d&#601; nikah&#305;n
+					pozulmas&#305; haqq&#305;ndak&#305; iddialar iddia&ccedil;&#305;n&#305;n
+					ya&#351;ad&#305;&#287;&#305; yer&#601; g&ouml;r&#601; veril&#601;
+					bil&#601;r. </span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Yuxar&#305;da
+						g&ouml;st&#601;ril&#601;n h&uuml;quq normalar&#305;na v&#601; i&#351;in
+						faktiki hallar&#305;na &#601;saslanaraq, Az&#601;rbaycan
+						Respublikas&#305;n&#305;n M&uuml;lki Prosessual v&#601; Ail&#601;
+						M&#601;c&#601;ll&#601;l&#601;rinin t&#601;l&#601;bl&#601;rini r&#601;hb&#601;r
+						tutaraq, M&#601;hk&#601;m&#601;d&#601;n</b></span></font>
+		</font>
+	</p>
+	<p lang="az-Latn-AZ" style="text-align: justify;" style="text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<br />
+
+	</p>
+	<p align="center" style="text-align: center; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span style="text-align: center;" lang="az-Latn-AZ"><b style="text-align: center;">XAH&#304;&#350;
+						ED&#304;R&#399;M:</b></span></font>
+		</font>
+	</p>
+	<p lang="az-Latn-AZ" align="center" style="margin-bottom: 0in; line-height: 100%">
+		<br />
+
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">iddia
+					t&#601;min edilsin,</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
+					X X o&#287;lu </span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">il&#601;
+					aram&#305;zda </span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X.X.X-cu
+					il tarixind&#601; Bak&#305; &#351;&#601;h&#601;ri X rayonu Qeydiyyat
+					&#351;&ouml;b&#601;sinin nikah&#305;n ba&#287;lanmas&#305; haqq&#305;nda
+					akt qeydl&#601;ri kitab&#305;nda X </span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">n&ouml;mr&#601;
+					il&#601; qeyd edilmi&#351; nikah&#305;n pozulmas&#305; bar&#601;d&#601;,</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">birg&#601;
+					nikahdan </span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X.X.X-c&uuml;
+					il t&#601;v&#601;ll&uuml;dl&uuml; X X X o&#287;lunun v&#601; X.X.X-ci
+					il t&#601;v&#601;ll&uuml;dl&uuml; X X</span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					X q&#305;z&#305;n&#305;n m&#601;nim yan&#305;mda qalmalar&#305;
+					bar&#601;d&#601; v&#601;</span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
+					X X o&#287;lunun v&#601; X X</span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					X q&#305;z&#305;n&#305;n yetkinlik ya&#351;&#305;na &ccedil;atana
+					kimi saxlan&#305;lmalar&#305; &uuml;&ccedil;&uuml;n </span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
+					X X</span></font>
+		</font>
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+					o&#287;lundan, h&#601;r u&#351;aq &uuml;&ccedil;&uuml;n ayda 170 (y&uuml;z
+					yetmi&#351;) manat sabit pul m&#601;bl&#601;&#287;ind&#601; alimentin
+					tutulmas&#305; bar&#601;d&#601; q&#601;tnam&#601; q&#601;bul edilsin.</span></font>
+		</font>
+	</p>
+	<p lang="az-Latn-AZ" style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+		<br />
+
+	</p>
+	<p  style="text-align: justify; margin-left: 0.39in; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>Qo&#351;ma:</b></span></font>
+		</font>
+	</p>
+	<ol>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">&#304;ddia
+							&#601;riz&#601;sinin sur&#601;ti;</span></font>
+				</font>
+			</p>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">&#350;&#601;xsiyy&#601;t
+							v&#601;siq&#601;min sur&#601;ti;</span></font>
+				</font>
+			</p>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Cavabdehin
+							&#351;&#601;xsiyy&#601;t v&#601;siq&#601;sinin sur&#601;ti;</span></font>
+				</font>
+			</p>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Nikah
+							haqq&#305;nda &#351;&#601;had&#601;tnam&#601;nin notariat qaydada
+							t&#601;sdiq edilmi&#351; sur&#601;ti;</span></font>
+				</font>
+			</p>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
+							X X o&#287;lunun do&#287;um haqq&#305;nda &#351;&#601;had&#601;tnam&#601;sinin
+							notariat qaydada t&#601;sdiq edilmi&#351; sur&#601;ti;</span></font>
+				</font>
+			</p>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
+							X</span></font>
+				</font>
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+							X q&#305;z&#305;n&#305;n </span></font>
+				</font>
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">do&#287;um
+							haqq&#305;nda &#351;&#601;had&#601;tnam&#601;sinin notariat qaydada
+							t&#601;sdiq edilmi&#351; sur&#601;ti;</span></font>
+				</font>
+			</p>
+		<li>
+			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+				<font face="Times New Roman, serif">
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">D&ouml;vl&#601;t
+							r&uuml;sumunun &ouml;d&#601;nilm&#601;si bar&#601;d&#601; q&#601;bz.</span></font>
+				</font>
+			</p>
+	</ol>
+	<p lang="az-Latn-AZ" style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+		<br />
+
+	</p>
+	<p lang="az-Latn-AZ" style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+		<br />
+
+	</p>
+	<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>H&ouml;rm&#601;tl&#601;,</b></span></font>
+		</font>
+	</p>
+	<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
+		<font face="Times New Roman, serif">
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>iddia&ccedil;&#305;
+						X X _______________ &ldquo;____&rdquo;__________2020-ci il</b></span></font>
+		</font>
+	</p>
+	<!-- <div title="footer">
+		<p align="right" style="margin-top: 0.26in; margin-bottom: 0in; line-height: 100%">
+			<span style="background: #c0c0c0">
+				<sdfield type=PAGE subtype=RANDOM format=PAGE>2</sdfield>
+			</span></p>
+	</div> -->
 </body>
 
 </html>
