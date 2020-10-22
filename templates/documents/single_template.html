@@ -8,12 +8,6 @@
 
 {% block links %}
 {{ block.super }}
-
-{% endblock links %}
-
-
-
-{% block content %}
 <style>
     .form-control-sm {
         background-color: rgba(0, 0, 0, .03);
@@ -25,6 +19,11 @@
         border-color: hsla(197, 100%, 26%, 0.91) !important;
     }
 </style>
+{% endblock links %}
+
+
+
+{% block content %}
 <body>
     <main class="page-content">
         <div class="container-fluid">
@@ -34,7 +33,10 @@
                         <div class="card-header">
                             <span class="">{{template.name}}</span>
                         </div>
-                        {{html_content|safe}}
+                        <div class="card-body">
+                            {{ template.form_html|safe }}
+                        </div>
+                        <!-- {{html_content|safe}} -->
                     </div>
                     <div class="col-12 pl-0 mt-2">
                         <button id="save_file" class="mb-0 btn btn-primary btn-sm px-5">Yüklə</button>
@@ -82,7 +84,8 @@
             }
             return cookieValue;
         }
-        {{ js_content|safe }}
+        // {{ js_content|safe }}
+        {{ template.form_js|safe }}
         function send_data(data) {
             $.ajax({
                 type: "POST",
@@ -90,7 +93,7 @@
                 headers: {
                     "X-CSRFToken": getCookie("csrftoken")
                 },
-                data: data,
+                data: JSON.stringify(data),
                 error: function (jqXhr, textStatus, errorMessage) {
                     alert(errorMessage)
                 },
