@@ -17,226 +17,244 @@
     .havingChildExpand {
         display: none;
     }
+
     .childrenList {
         display: none;
     }
+
     .form-control-sm {
-        background-color: rgba(0,0,0,.03);
+        background-color: rgba(0, 0, 0, .03);
     }
+
     .form-control-sm:focus {
-        background-color:  #dce8fc;
+        background-color: #dce8fc;
         color: hsla(197, 100%, 26%, 0.91);
         border-color: hsla(197, 100%, 26%, 0.91) !important;
     }
 </style>
 <main class="page-content">
-  <div class="container-fluid">
-    <div class="row m-0 p-0">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <span class="">Search In Documents</span>
-                </div>
-                <div class="card-body">
-                    <!-- <form action="" method="POST"> -->
+    <div class="container-fluid">
+        <div class="row m-0 p-0">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="">Search In Documents</span>
+                    </div>
+                    <div class="card-body">
+                        <!-- <form action="" method="POST"> -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="userİnformation">
-                                        İstifadəçi
-                                    </label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ad soyad ata adı">
+                                    <label for="applicant_name">İddiaçı</label>
+                                    <input id="applicant_name" name="applicant_name" type="text"
+                                        class="form-control form-control-sm" placeholder="Ad soyad ata adı">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userİnformation">
-                                        Ünvan
-                                    </label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
+                                    <label for="applicant_address">İddiaçı ünvanı</label>
+                                    <input id="applicant_address" name="applicant_address" type="text"
+                                        class="form-control form-control-sm" placeholder="Ünvan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userİnformation">
-                                        Telefon
-                                    </label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
+                                    <label for="applicant_phone">İddiaçı ünvanı</label>
+                                    <input id="applicant_phone" name="applicant_phone" type="text"
+                                        class="form-control form-control-sm" placeholder="Telefon">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Cinsi</label>
-                                    <select name="" class="form-control form-control-sm" id="">
-                                        <option value="man">Kişi</option>
-                                        <option value="man">Qadın</option>
+                                    <label for="applicant_gender">İddiaçı cinsi</label>
+                                    <select id="applicant_gender" name="applicant_gender" type="text"
+                                        class="form-control form-control-sm" placeholder="Cins">
+                                        <option value="">Seçin</option>
+                                        <option value="Kişi">Kişi</option>
+                                        <option value="Qadın">Qadın</option>
                                     </select>
                                 </div>
-
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="userİnformation">
-                                        Cavabdeh
-                                    </label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ad soyad ata adı">
+                                    <label for="defendant_name">Cavabdeh</label>
+                                    <input id="defendant_name" name="defendant_name" type="text"
+                                        class="form-control form-control-sm" placeholder="Ad soyad ata adı">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userİnformation">
-                                        Ünvan
-                                    </label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
+                                    <label for="defendant_address">Cavabdeh ünvanı</label>
+                                    <input id="defendant_address" name="defendant_address" type="text"
+                                        class="form-control form-control-sm" placeholder="Ünvan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userİnformation">
-                                        Telefon
-                                    </label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ünvan">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Cinsi</label>
-                                    <select name="" class="form-control form-control-sm" id="">
-                                        <option value="man">Kişi</option>
-                                        <option value="man">Qadın</option>
+                                    <label for="defendant_gender">Cavabdeh cinsi</label>
+                                    <select id="defendant_gender" name="defendant_gender" type="text"
+                                        class="form-control form-control-sm" placeholder="Cins">
+                                        <option value="">Seçin</option>
+                                        <option value="Kişi">Kişi</option>
+                                        <option value="Qadın">Qadın</option>
                                     </select>
                                 </div>
                             </div>
-                            <!-- <div class="dropdown-divider"></div> -->
-                            
-                            
                         </div>
-                        <div class="row" id="app">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <hr>
                                 <div class="form-group">
                                     <label for="">Uşağınız varmı</label>
-                                    <select name="" class="form-control form-control-sm" id="isHaveChildren">
+                                    <select name="has_children" class="form-control form-control-sm" id="has_children">
                                         <option value="none" disabled selected>Seçin</option>
                                         <option value="yes">Bəli</option>
                                         <option value="no">Xeyr</option>
                                     </select>
                                 </div>
-                                <div class="form-group havingChildExpand">
-                                    <h3 for="" class="">Əlavə et</h3>
-                                    <div class="form-group">
-                                        <label for="">Ad, Soyad</label>
-                                        <input type="text" class="form-control form-control-sm childName" placeholder="Ad...">
+                                <div class="col-md-12 children_expand" style="display: none;">
+                                    <hr>
+                                    <label for="">Uşaqların siyahısı</label>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Ad Soyad</th>
+                                                <th>Doğum tarixi</th>
+                                                <th>Cins</th>
+                                                <th>İddiaçı ilə qalacaq</th>
+                                                <th>Aliment</th>
+                                                <th>Düzəliş</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="children_table">
+    
+                                        </tbody>
+                                    </table>
+                                    <div class="col-md-6 form-group children">
+                                        <h3 for="" class="">Əlavə et</h3>
+                                        <div class="form-group">
+                                            <label for="child_name">Ad, Soyad</label>
+                                            <input type="text" id="child_name" class="form-control form-control-sm child_ame"
+                                                placeholder="Ad Soyad">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Doğum tarixi</label>
+                                            <input type="date" id="child_date" class="form-control form-control-sm child_date"
+                                                placeholder="Doğum tarixi...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Cins</label>
+                                            <select id="child_gender" class="form-control form-control-sm childGender child_gender">
+                                                <option value="" disabled selected>Seçin</option>
+                                                <option value="Kişi">Kişi</option>
+                                                <option value="Qadın">Qadın</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">İddiaçı ilə qalacaq</label>
+                                            <select name="child_stay" id="child_stay" class="form-control form-control-sm child_stay">
+                                                <option value="">Seçin</option>
+                                                <option value="Bəli">Bəli</option>
+                                                <option value="Xeyr">Xeyr</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Aliment tələb edirsiniz</label>
+                                            <select name="child_aliment" id="child_aliment" class="form-control form-control-sm child_aliment">
+                                                <option value="">Seçin</option>
+                                                <option value="Bəli">Bəli</option>
+                                                <option value="Xeyr">Xeyr</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-sm btn-block add_child" type="reset">Əlavə
+                                                et</button>
+                                        </div>
+    
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Doğum tarixi</label>
-                                        <input type="date" class="form-control form-control-sm childBorn" placeholder="Doğum tarixi...">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Cins</label>
-                                        <select name="" class="form-control form-control-sm childGender" id="">
-                                            <option value="" disabled selected>Seçin</option>
-                                            <option value="Kişi">Kişi</option>
-                                            <option value="Qadın">Qadın</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Aliment tələb edirsiniz</label>
-                                        <select name="" id="" class="form-control form-control-sm childRequest">
-                                            <option value="Bəli">Bəli</option>
-                                            <option value="Xeyr">Xeyr</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-primary btn-sm btn-block addChild" type="reset">Əlavə et</button>
-                                    </div>
-                                    
                                 </div>
                             </div>
-                            <div class="col-md-6 childrenList">
-                                <hr>
-                                <label for="">Uşaqların siyahısı</label>
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Ad</th>
-                                            <th>Doğum tarixi</th>
-                                            <th>Cins</th>
-                                            <th>Aliment</th>
-                                            <th>Düzəliş</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="childrenTable">
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary btn-sm">Təstiq et</button>
-                            </div>
                         </div>
-                    <!-- </form> -->
+                        <!-- </form> -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-  </div>
 </main>
 
-    {% endblock content %}
+{% endblock content %}
 
 
 
 
-    {% block scripts %}
+{% block scripts %}
 
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
-    <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
-    <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
-    <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>  
-    <script>
-        $(document).ready(function() {
-            $("#isHaveChildren").on("change", function() {
-                if($("#isHaveChildren").val() === "no") {
-                    $(".havingChildExpand").css("display","none");
-                    $(".childrenList").css("display","none")
-                } else if($("#isHaveChildren").val() === "yes") {
-                    $(".havingChildExpand").css("display","block");
-                    $(".childrenList").css("display","block")
-                }
-            });
-
-            var childrenArray = [];
-            $(".addChild").click(function() {
-                let child = {
-                    name : $(".childName").val(),
-                    wasBorn : $(".childBorn").val(),
-                    childGender : $(".childGender").val(),
-                    childRequest : $(".childRequest").val()
-                };
-                // alert("Yeah")
-                childrenArray.push(child);
-                let element = childrenArray[childrenArray.length-1];
-                if(child.name.length > 0 && child.wasBorn.length > 0 && child.childGender.length > 0 && child.childRequest.length > 0) {
-                    $(".childrenTable").append("<tr> <td>"+ element.name +"</td> <td>"+ element.wasBorn +"</td><td>" + element.childGender + "</td><td>"+element.childRequest +"</td>"+ "<td><button id='"+ childrenArray.length +"'  class='btn btn-danger btn-sm deleteOneChild'>Sil</button></td>" + "</tr>")
-                    $(".deleteOneChild").click(function() {
-                        let deletingItem = $(this)[0].id - 1;
-                        childrenArray.splice(deletingItem,1);
-                        $(this).parent().parent().remove();
-                    
-                    })
-                }
-                        $(".childName").val("");
-                        $(".childBorn").val("");
-                        $(".childGender").val("");
-                        $(".childRequest").val()
-            });
-            
-
-
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
+<script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $("#has_children").on("change", function () {
+            if ($(this).val() === "no") {
+                $(".children_expand").css("display", "none");
+            } else if ($(this).val() === "yes") {
+                $(".children_expand").css("display", "block");
+            } else {
+                $(".children_expand").css("display", "block");
+            }
         });
-        
-    </script>
-    {% endblock scripts %}
-    </body>
 
-    </html>
+        $(".add_child").click(function () {
+            let name = $("#child_name").val() || "";
+            let date = $("#child_date").val() || "";
+            let gender = $("#child_gender").val() || "";
+            let stay = $("#child_stay").val() || "";
+            let aliment = $('#child_aliment').val() || "";
+
+            $("#children_table").append("<tr> <td class='child_name'>" + name + "</td> <td class='child_date'>" + date + "</td><td class='child_gender'>" + gender + "</td><td class='child_stay'>" + stay + "</td><td class='child_aliment'>" + aliment + "</td><td><button class='btn btn-danger btn-sm delete_child'>Sil</button></td>" + "</tr>");
+            $(".delete_child").click(function () {
+                $(this).parents('tr').remove();
+            })
+
+            $("#child_name").val("");
+            $("#child_date").val("");
+            $("#child_gender").val("");
+            $("#child_stay").val("");
+            $("#child_aliment").val("");
+        });
+
+        $("#submit_button").on("click", function() {
+            let children = [];
+            $("#children_table tr").each(function() {
+                children.push({
+                    "name":$(this).find(".child_name").text(),
+                    "date": $(this).find(".child_date").text(),
+                    "gender": $(this).find(".child_date").text(),
+                    "stay": $(this).find(".child_date").text(),
+                    "aliment": $(this).find(".child_aliment").text(),
+                });
+            });
+            var data = {
+                "applicant_name": $("#applicant_name").val(),
+                "applicant_address": $("#applicant_address").val(),
+                "applicant_gender": $("#applicant_gender").val(),
+                "applicant_phone": $("#applicant_phone").val(),
+                "defendant_name": $("#defendant_name").val(),
+                "defendant_address": $("#defendant_address").val(),
+                "defendant_gender": $("#defendant_gender").val(),
+                "has_children": $("#has_children").val(),
+                "children": children
+            }
+            send_data(data);
+        });
+
+    });
+
+</script>
+{% endblock scripts %}
+</body>
+
+</html>

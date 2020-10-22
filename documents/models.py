@@ -4,9 +4,18 @@ from django.contrib.postgres.fields import JSONField
 
 
 class Document(models.Model):
+    # name and content
     name = models.CharField(max_length=128, null=False, blank=False)
     content = models.TextField()
+
+    # html and js for form fill
+    form_html = models.TextField()
+    form_js = models.TextField()
+
+    # json configuration to build dynamically
     conf = JSONField()
+
+    # created date
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

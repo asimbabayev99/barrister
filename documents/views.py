@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, Http404
 from documents.models import *
 from documents.utils import Parser, documents
 from django.template import Template, Context
@@ -19,13 +19,18 @@ def temlates_view(request):
 
 def single_template_view(request, id):
     template = get_object_or_404(Document.objects.all(), id=id)
-    html, js = Parser().get_content(template.conf)
+    # html, js = Parser().get_content(template.conf)
 
-    if request.method == "POST":
-        t = Template(template.content)
-        c = Context(request.POST)
-        html = t.render(c)
-        return HttpResponse(html)
+    if request.is_ajax():
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            t = Template(template.content)
+            c = Context(data)
+            print(data)
+            html = t.render(c)
+            return HttpResponse(html)
+        else:
+            return Http404()
     else:
         t = Template(template.content)
         c = Context(request.POST)
@@ -33,8 +38,8 @@ def single_template_view(request, id):
 
     context = {
         'template': template,
-        'html_content': html,
-        'js_content': js,
+        # 'html_content': html,
+        # 'js_content': js,
         'content': content,
     }
 
