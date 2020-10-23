@@ -14,12 +14,13 @@ $(document).ready(function () {
     }
     return cookieValue;
   }
-  $(".times-div .begin-time-choices").click(function () {
-    $(".times-div #time_input").text($(this).text())
+  $(".beginChoices .begin-time-choices").click(function () {
+    $(".beginChoices #time_input").text($(this).text())
+    // console.log($(".beginChoices #time_input").text())
   });
-  $(".times-div-2 .begin-time-choices").click(function () {
-    $(".times-div-2 #time_input").attr($(this).attr('value'))
-    $(".times-div-2 #time_input").text($(this).text())
+  $(".intervalChoices .begin-time-choices").click(function () {
+    $(".intervalChoices #time_input").attr($(this).attr('value'))
+    $(".intervalChoices #time_input").text($(this).text())
   });
   $("#profile .times-div-3 .times-2 .begin-time-choices").click(function () {
     $(".times-div-3  .remember-timer").text($(this).text())
@@ -65,33 +66,6 @@ $(document).ready(function () {
     };
     if ($("#name_input").val().length > 0 && $(".validation-date").val().length > 0 && $(".validation-time").text().length > 0 && $(".validation-interval").text().length > 0 && $(".validation-reserv").text().length > 0) {
       $("#exampleModalLong").modal("hide");
-      $.ajax({
-        type: "POST",
-        url: "/api/appointments/",
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken")
-        },
-        data: {
-          'contact': {
-            'name': $("#name_input").val(),
-            'phone': $("#phone_input").val(),
-            'email': $("#email_input").val(),
-            'address': '',
-          },
-          'status': $('.validation-reserv').val(),
-          'address': $('#address_input').val(),
-          'start': $(".validation-date").val() + ' ' + $(".validation-time"),
-          'end': $(".validation-date").val()
-        },
-        error: function (jqXhr, textStatus, errorMessage) {
-
-          alert(errorMessage)
-        },
-        success: function (data) {
-
-        }
-
-      })
     };
 
   });
@@ -298,55 +272,7 @@ $(document).ready(function () {
   });
 
   //click to save "save"
-  $(".calendar-modal .calendar-save-button").on("click", function (event) {
-    var meeting_title, meeting_begin, meeting_end, meeting_email, meeting_phone, meeting_address, meeting_note, meeting_reservation;
-    meeting_title = $(".calendar-modal #home #name_input").val();
-    meeting_email = $(".calendar-modal #home #email_input").val();
-    meeting_address = $(".calendar-modal #home #address_input").val();
-    meeting_phone = $(".calendar-modal #home #phone_input").val();
-    meeting_reservation = $(".calendar-modal #home .validation-reserv").text();
-    meeting_begin = $().val();
-    meeting_end = null;
-    meeting_note = $(".calendar-modal #home .text-area-modal").val()
-    if (meeting_title && meeting_email && meeting_end && meeting_begin && meeting_phone && meeting_address && meeting_reservation) {
-      var eventData = {
-        meet_title: meeting_title,
-        meet_start: meeting_begin,
-        meet_end: meeting_end,
-        meet_email: meeting_email,
-        meet_address: meet_address,
-        meet_phone: meeting_phone,
-        meet_note: meeting_note,
-        meet_status: meeting_reservation
-      };
-      data = {
-        'name': eventData.meet_title,
-        'category': 1,
-        'meeting_start': eventData.meet_start,
-        'meeting_end': eventData.meet_end,
-        'address': eventData.meet_address,
-        'meeting_email': eventData.meet_email,
-        'phone_number': eventData.phone,
-        'meet_note': eventData.meeting_note,
-        'meet_status': eventData.meet_status
-      };
-      $.ajax({
-        type: 'POST',
-        url: '/api/events/',
-        headers: { "X-CSRFToken": getCookie('csrftoken') },
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(data),
-        success: function (data) {
-          // console.log(eventData);
-          $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
-        },
-        error: function (jqXhr, textStatus, errorMessage) {
-          alert(errorMessage)
-        }
-      });
-    }
-
-  })
+ 
   $(".calendar-modal #modal_2_save").on("click", function (event) {
     var title = $(".calendar-modal #event_title").val();
     var begin_gun, end_gun, bas_saat, bit_saat, location_modal;
@@ -443,7 +369,8 @@ $(document).ready(function () {
 
 
   $('.calendar-save-button').on("click", function () {
-    start_date = Date.parse($('#date_input').val() + "T" + $('#time_input').text().trim());
+    let beginingTime = $(".validation-date").val().split("/");
+    start_date = new Date(beginingTime[2] + "-" + beginingTime[1] + "-" + beginingTime[0] + " " + $(".beginChoices #time_input").text().trim()+":00");
     end_date =  new Date(start_date.getTime() + parseInt($('#duration_input').attr('value'))*60000);
     var data = {
       'profile': {
@@ -454,7 +381,7 @@ $(document).ready(function () {
       },
       'start_date': start_date.toString(),
       'end_date': end_date.toString(),
-      'status': $('#status_input').val(),
+      'status': $('.times-div-3 .validation-reserv').text(),
       'detail': $('#detail_input').val() 
     }
     console.log(data)
@@ -469,7 +396,7 @@ $(document).ready(function () {
         // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
       },
       error: function (jqXhr, textStatus, errorMessage) {
-        alert(errorMessage)
+        // alert(errorMessage)
       }
     }); 
 
