@@ -198,7 +198,7 @@
     if($(".emailSidebar").hasClass("active")) {
       $(".emailSubmenu").css("display", "block")
     };
-    $(".emailListUl").append('<li><a href="/email/" class="inbox">Daxil olanlar(İnbox)</a></li><li><a href="#">Qaralama(Draft)</a></li><li><a  href="#">Zibil qutusu(Recycle bin)</a></li><li><a href="#">Göndərilənlər(Sent Mail)</a></li><li><a href="#">İmza</a></li>');
+    $(".emailListUl").append('<li><a href="/email/" class="inbox">Daxil olanlar(İnbox)</a></li><li><a href="#" class="drafts">Qaralama(Draft)</a></li><li><a class="deleteMessage" href="#">Zibil qutusu(Recycle bin)</a></li><li><a class="sendingMails" href="#">Göndərilənlər(Sent Mail)</a></li><li><a href="#">İmza</a></li>');
     $(".emailNavigator").attr("href","#")
   });
 
