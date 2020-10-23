@@ -204,31 +204,31 @@
 
                       <div class="dropdown drop times-div-2">
                         <div id="time_input" class="validation-interval time-input form-control dropdown-input"
-                          data-toggle="dropdown">
-                          15 dəq
+                          data-toggle="dropdown" value="">
+                          15 dəq  
                         </div>
 
                         <div class="dropdown-menu times-2">
-                          <div class="begin-time-choices">5 dəq</div>
-                          <div class="begin-time-choices">10 dəq</div>
-                          <div class="begin-time-choices">15 dəq</div>
-                          <div class="begin-time-choices">30 dəq</div>
-                          <div class="begin-time-choices">45 dəq</div>
-                          <div class="begin-time-choices">60 dəq</div>
-                          <div class="begin-time-choices">75 dəq</div>
-                          <div class="begin-time-choices">90 dəq</div>
-                          <div class="begin-time-choices">105 dəq</div>
-                          <div class="begin-time-choices">2 saat</div>
-                          <div class="begin-time-choices">3 saat</div>
-                          <div class="begin-time-choices">4 saat</div>
-                          <div class="begin-time-choices">5 saat</div>
-                          <div class="begin-time-choices">6 saat</div>
-                          <div class="begin-time-choices">7 saat</div>
-                          <div class="begin-time-choices">8 saat</div>
-                          <div class="begin-time-choices">9 saat</div>
-                          <div class="begin-time-choices">10 saat</div>
-                          <div class="begin-time-choices">11 saat</div>
-                          <div class="begin-time-choices">12 saat</div>
+                          <div class="begin-time-choices" value="5">45 dəq</div>
+                          <div class="begin-time-choices" value="10">10 dəq</div>
+                          <div class="begin-time-choices" value="15">15 dəq</div>
+                          <div class="begin-time-choices" value="30">30 dəq</div>
+                          <div class="begin-time-choices" value="45">45 dəq</div>
+                          <div class="begin-time-choices" value="60">60 dəq</div>
+                          <div class="begin-time-choices" value="75">75 dəq</div>
+                          <div class="begin-time-choices" value="90">90 dəq</div>
+                          <div class="begin-time-choices" value="105">105 dəq</div>
+                          <div class="begin-time-choices" value="120">2 saat</div>
+                          <div class="begin-time-choices" value="180">3 saat</div>
+                          <div class="begin-time-choices" value="240">4 saat</div>
+                          <div class="begin-time-choices" value="300">5 saat</div>
+                          <div class="begin-time-choices" value="360">6 saat</div>
+                          <div class="begin-time-choices" value="420">7 saat</div>
+                          <div class="begin-time-choices" value="480">8 saat</div>
+                          <div class="begin-time-choices" value="540">9 saat</div>
+                          <div class="begin-time-choices" value="600">10 saat</div>
+                          <div class="begin-time-choices" value="660">11 saat</div>
+                          <div class="begin-time-choices" value="720">12 saat</div>
                         </div>
                       </div>
                     </div>
@@ -262,7 +262,7 @@
                     <div class="">
                       <span class="mr-3 calendar-note">Qeyd əlavə edin</span>
 
-                      <textarea class="form-control mt-2 text-area-modal"></textarea>
+                      <textarea id="detail_input" class="form-control mt-2 text-area-modal"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
@@ -747,6 +747,16 @@
     <!-- <script src="{% static 'js/fullcalendar-date.js' %}"></script> -->
     <script src="{% static 'js/fullcalendar-appointments.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      $(function() {
+        $(".meetingSidebar").addClass("active");
+        $(".meetingSubMenu").css("display","block");
+        $(".meetingCalendarLink").css({
+          color: "#16c7ff",
+          textShadow:"0px 0px 10px rgba(22, 199, 255, 0.5)" 
+        })
+      })
+    </script>
     {% endblock scripts %}
     </body>
 

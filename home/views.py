@@ -23,10 +23,10 @@ from email.mime.image import MIMEImage
 from email import encoders
 from email.mime.application import MIMEApplication
 from os.path import basename , realpath
-import os
 from django.core.mail import send_mail
 from account.tasks import synchronize_mail , get_last_mails
 import re
+import os
 
 
 
@@ -100,37 +100,6 @@ def calendar(request):
 
 
 
-@login_required(login_url='/account/login')
-def publication_add_view(request):
-
-    form = PublicationForm()
-    # if request.user.role is None or  request.user.role.name is not "Barrister":
-    #     raise Http404()
-
-    if request.method == "POST":
-        form = PublicationForm(request.POST,request.FILES)
-        if form.is_valid():
-            new_post = Publication(**form.cleaned_data)
-            new_post.user = request.user
-            new_post.save()
-            
-
-
-    context = {
-        'form': form,
-    }  
-
-    return render(request, 'xeber_elave_etmek_user_ucun.html', context=context)
-
-
-
-def publication_show_view(request):   
-    
-    publications = Publication.objects.all().order_by("-date")[:10]
-    context = {
-        "publications":publications
-    }
-    return render(request, context=context)
 
 
 
@@ -692,14 +661,76 @@ def send_email(request):
 #     else:
 #         return HttpResponseForbidden('Not authorized to access this media.')
 
+def social_activity_list(request):
+    publications = Publication.objects.all().order_by('date')
+    paginator = Paginator(publications,7)
+    page_number = request.GET.get('page')
+    try:
+        publications = paginator.get_page(page_number)
+    except:
+        publications = paginator.get_page(1)
+    
+    context = {'publications':publications}
+    return render(request,'socialActivity.html',context=context)
 
-def attachment_media_access(request,path): 
-    file_path = os.path.join(settings.MEDIA_ROOT+"/attachment/", path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+
+
+def mail_content_view(request):
+
+    return render(request,'mailContent.html')
+
+
+
+
+#check file is image or not for content-type in response
+from PIL import Image
+def is_image(file_path):
+    try:
+        i = Image.open(file_path)
+        return True
+
+    except:
+        return False
+
+
+import magic
+from home.models import Attachment
+import mimetypes
+
+def attachment_media_download(request,path):
+    path = 'media/'+path
+    file_name = os.path.basename(path)
+    if os.path.exists(path):
+        with open(path,'rb') as fayl:
+            response = HttpResponse(fayl.read(),content_type='{}'.format(magic.from_file(path,mime=True)))
+            response['Content-type']  = mimetypes.guess_type(path)
+            response['Content-Disposition'] = 'attachment; filename=' + file_name
+            response['Content-length'] = len(fayl.read()) 
             return response
     raise Http404
 
 
+def attachment_media_view(request,path):
+    docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
+    if os.path.splitext(path)[1] in docs_list:
+        context = {'path':request.get_host()+'/'+path}
+        return render(request,'docx_viewer.html',context=context)
+    if os.path.exists(path):
+        file_name = os.path.basename(path)
+        with open(path,'rb') as fayl:
+            response = HttpResponse(fayl.read())
+            response['Content-type']  = mimetypes.guess_type(path)
+            response['Content-length'] = len(fayl.read())
+            return response
+    return Http404
+
+
+    
+
+
+def email_draft(request):
+    return render(request,'email_draft.html')
+
+def email_trash(request):
+    return render(request,'email_trash.html')
+    

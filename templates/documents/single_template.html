@@ -1,0 +1,131 @@
+{% extends 'barrister/barrister-admin.html' %}
+{% load static %}
+
+{% block title %}
+<title>Calendar</title>
+{% endblock title %}
+
+
+{% block links %}
+{{ block.super }}
+<style>
+    .form-control-sm {
+        background-color: rgba(0, 0, 0, .03);
+    }
+
+    .form-control-sm:focus {
+        background-color: #dce8fc;
+        color: hsla(197, 100%, 26%, 0.91);
+        border-color: hsla(197, 100%, 26%, 0.91) !important;
+    }
+</style>
+{% endblock links %}
+
+
+
+{% block content %}
+<body>
+    <main class="page-content">
+        <div class="container-fluid">
+            <div class="row m-0 p-0">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="">{{template.name}}</span>
+                        </div>
+                        <div class="card-body">
+                            {{ template.form_html|safe }}
+                        </div>
+                        <!-- {{html_content|safe}} -->
+                    </div>
+                    <div class="col-12 pl-0 mt-2">
+                        <button id="save_file" class="mb-0 btn btn-primary btn-sm px-5">Yüklə</button>
+                        <button id="submit_button" class="mb-0 float-right btn btn-primary btn-sm px-5">Təstiq et</button>
+                    </div>
+                </div>
+                <div class="col-12 mt-3 mb-4 justify-content-center d-flex">
+                    <div class="border border-dark rounded-1" style="padding: 20mm 15mm 20mm 30mm; min-height:29.7cm; width:21cm;" id="preview-docx">
+                        {{content|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}
+
+
+{% block scripts %}
+    <!-- <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.maskedinput.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/html-docx.js' %}"></script>
+    <script src="{% static 'js/FileSaver.js' %}"></script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        // {{ js_content|safe }}
+        {{ template.form_js|safe }}
+        function send_data(data) {
+            $.ajax({
+                type: "POST",
+                url: "",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                data: JSON.stringify(data),
+                error: function (jqXhr, textStatus, errorMessage) {
+                    alert(errorMessage)
+                },
+                success: function (data) {
+                    $('#preview-docx').html(data);
+                    var orientation = "portrait";
+                    var margins = {
+                        top: 2 * 1440 / 2.54,
+                        bottom: 2 * 1440 / 2.54,
+                        left: 3 * 1440 / 2.54,
+                        right: 1.5 * 1440 / 2.54,
+                    }
+                    // var converted = htmlDocx.asBlob(data, { orientation: orientation, margins: margins });
+                    // saveAs(converted, 'test.docx');
+                }
+            });
+        }
+        $("#save_file").on("click", function() {
+            html = $('#preview-docx').html();
+            var orientation = "portrait";
+            var margins = {
+                top: 2 * 1440 / 2.54,
+                bottom: 2 * 1440 / 2.54,
+                left: 3 * 1440 / 2.54,
+                right: 1.5 * 1440 / 2.54,
+            }
+            var converted = htmlDocx.asBlob(html, { orientation: orientation, margins: margins });
+            saveAs(converted, '{{template.name}}.docx');
+        })
+    </script>
+
+    {% endblock scripts %}
+</body>
+
+</html>

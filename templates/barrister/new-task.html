@@ -117,9 +117,16 @@
       </div>
     </div>
   </main>
+  
   {% endblock content %}
   <!-- </div> -->
     
     {% block scripts %}
     {{ block.super }}
+    <script>
+      $(function() {
+        $(".taskSidebar").addClass("active");
+        $(".taskSubMenu").css("display","block")
+      })
+    </script>
     {% endblock scripts %}

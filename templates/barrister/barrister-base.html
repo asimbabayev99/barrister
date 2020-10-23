@@ -17,6 +17,7 @@
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
@@ -90,12 +91,12 @@
                   <span>Əsas səhifə</span>
                 </a>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar-dropdown myPageSidebar">
                 <a href="#">
                   <i class="fas fa-user-alt"></i>
                   <span>Mənim səhifəm</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu myPageSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'barrister-account' %}">Hesabım</a>
@@ -115,34 +116,23 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
-                <a href="#">
+              <li class="sidebar-dropdown emailSidebar">
+                <a href="/email/" class="emailNavigator">
                   <i class="far fa-envelope"></i>
                   <span>Elektron poçt</span>
                 </a>
-                <div class="sidebar-submenu">
-                  <ul>
-                    <li>
-                      <a href="/email/">Daxil olanlar(İnbox)</a>
-                    </li>
-                    <li>
-                      <a href="/email/Draft">Qaralama(Draft)</a>
-                    </li>
-                    <li>
-                      <a href="/email/send">Göndərilənlər(Sent Mail)</a>
-                    </li>
-                    <li>
-                      <a href="##">İmza</a>
-                    </li>
+                <div class="sidebar-submenu emailSubmenu">
+                  <ul class="emailListUl">
+                    
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown taskSidebar">
                 <a href="#">
                   <i class="fas fa-tasks"></i>
                   <span>Tapşırıqlar</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu taskSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'barrister-add-task' %}">Yeni tapşırıq</a>
@@ -156,15 +146,15 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown meetingSidebar">
                 <a href="#">
                   <i class="far fa-handshake"></i>
                   <span>Görüşlər</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu meetingSubMenu">
                   <ul>
-                    <li>
-                      <a href="{% url 'calendar' %}">Təqvim</a>
+                    <li class="active">
+                      <a href="{% url 'calendar' %}" class="meetingCalendarLink">Təqvim</a>
                     </li>
                     <li>
                       <a href="{% url 'barrister-new-appointment' %}">Yeni görüş</a>
@@ -176,12 +166,12 @@
                   </ul>
                 </div>
               </li>
-              <li class="sidebar-dropdown">
+              <li class="sidebar-dropdown lawsSidebar">
                 <a href="#">
                   <i class="fas fa-gavel"></i>
-                  <span>Qanunlar</span>
+                  <span>Qanunvericilik</span>
                 </a>
-                <div class="sidebar-submenu">
+                <div class="sidebar-submenu lawsSubMenu">
                   <ul>
                     <li>
                       <a href="{% url 'laws-index' %}">Elektron baza</a>
@@ -198,55 +188,38 @@
                   <span>Müştərilər</span>
                 </a>
               </li>
-              <li >
+              <li class="sidebar-dropdown documentsSidebar">
                 <a href="#">
                   <i class="far fa-folder-open"></i>
                   <span>Sənədlər</span>
                 </a>
+                <div class="sidebar-submenu documentsSubMenu">
+                  <ul>
+                    <li>
+                      <a href="{% url 'documents-templates' %}">Şablonlar</a>
+                    </li>
+                    <li>
+                      <a href="#">Mənim sənədlərim</a>
+                    </li>                    
+                  </ul>
+                </div>
               </li>
+              
           </ul>
         </div>
         <!-- sidebar-menu  -->
       </div>
       <!-- sidebar-content-->
-      <div class="sidebar-footer notes">
-        <a href="#" title="səhifəm">
-            <i class="fas fa-pager"></i>
-          <span class="badge badge-pill badge-warning notification">3</span>
-        </a>
-        <a href="#" title="email">
-          <i class="fa fa-envelope"></i>
-          <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#" title="tapşırıq">
-            <i class="fas fa-list-ol"></i>
-            <span class="badge badge-pill badge-warning notification">3</span>
-          </a>
-        <a href="#" title="gündəliyim">
-            <i class="far fa-sticky-note"></i>
-          <span class="badge badge-pill badge-success notification">2</span>
-        </a>
-        <a href="#" title="istidəçilər">
-            <i class="fas fa-users"></i>
-            <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#" title="sənədlər">
-            <i class="fas fa-file-contract"></i>
-            <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-      </div>
+      
 
-      <div class="sidebar-footer settings">
-        <a href="#">
-          <i class="fa fa-cog"></i>
-          <span class="badge-sonar"></span>
-        </a>
-        <a href="#">
-          <i class="fa fa-power-off"></i>
-        </a>
-      </div> 
+      <div class="sidebar-footer settings d-flex align-items-center p-3">
+        <span class="text-secondary" class="blockquote-footer" style="font-family: cursive;">Created by <a class="text-light" href="http://lua.az">LUA Group</a></span>
+      </div>
+      
     </nav>
-    
+    <!-- <div class="navbar navbar-dark bg-dark sticky-top" style="background-color: #fff;">
+      <a href="" class="navbar-brand">Home</a>
+    </div> -->
   {% block content %}
 
 

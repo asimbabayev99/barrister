@@ -20,70 +20,24 @@
 <link href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 <link rel="stylesheet" href="{% static 'css/email.css' %}" />
+<link rel="stylesheet" href="{% static 'css/style2.css' %}" />
 
 {% endblock %}
 
 
+
 {% block content %}
+
+
 <main class="page-content design">
+  
   <div style="padding-left: 70px;" class="emailContent">
+    
     <h1>Inbox</h1>
     <div class="container-fluid mt-4">
       <div class="row">
-        <div class="col-12 col-md-3 pl-0">
-          <button class="btn btn-block btn-warning emailComposeButton mb-2">Compose</button>
-          <ul class="list-group emailListGroup">
-            <li class="list-group-item d-flex align-items-center justify-content-between emailFirstList">
-              <span>Folders</span>
-              <span><i class="fas fa-minus openTypes"></i></span>
-            </li>
-            <div class="emailTypesContainer">
-              <a href="#" class="rounded-0 border-top-0 list-group-item emailBetweenContext">
-                <span><i class="fas fa-inbox mr-2"></i> Inbox</span>
-                <span class="badge d-flex align-items-center badge-primary">10</span>
-              </a>
-              <a href="#!" class="list-group-item emailBetweenContext">
-                <span><i class="far fa-envelope mr-2"></i> Sent</span>
-                <span class="badge d-flex align-items-center badge-success">10</span>
-              </a>
-              <a href="#!" class="list-group-item emailBetweenContext">
-                <span><i class="far fa-file-alt mr-2"></i> Draft</span>
-  
-              </a>
-              <a href="#!" class="list-group-item emailBetweenContext">
-                <span><i class="fas fa-filter mr-2"></i> Junk</span>
-  
-              </a>
-              <a href="#!" class="list-group-item emailBetweenContext">
-                <span><i class="fas fa-trash-alt mr-2"></i> Trash</span>
-                <span class="badge d-flex align-items-center badge-secondary">10</span>
-              </a>
-            </div>
-          </ul>
-          <div class="list-group emailListGroup mt-2 mb-2">
-            <li class="list-group-item d-flex align-items-center justify-content-between emailFirstList">
-              <span>Kinds</span>
-              <span><i class="fas fa-minus openKinds"></i></span>
-            </li>
-            <div class="emailKindsContainer">
-              <a href="#!" class="rounded-0 border-top-0 list-group-item emailBetweenContext">
-                <span><i class="fas fa-circle text-danger mr-2"></i> Important</span>
-  
-              </a>
-              <a href="#!" class="list-group-item emailBetweenContext">
-                <span><i class="fas fa-circle text-primary mr-2"></i> Social</span>
-  
-              </a>
-              <a href="#!" class="list-group-item emailBetweenContext">
-                <span><i class="fas fa-circle text-warning mr-2"></i> Promotions</span>
-  
-              </a>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-12  col-md-9 pl-0">
-          <ul class="list-group" id="mailContent">
+        <div class="col-12 col-md-4 pl-0 pr-0">
+          <ul class="list-group">
             <li class="list-group-item emailFirstList emailBetweenContext">
               <span>Inbox</span>
               <span>
@@ -126,12 +80,60 @@
             </li>
             
           </ul>
+          <div style="height: 80vh;overflow: auto;" id="mailContent">
+                     
+          </div>
+        </div>
+        <div class="col-md-8 col-12 defaultMail">
+            <div class="card col-12 p-0">
+              <div class="card-header align-items-center d-flex">
+                <div class="emailImage">
+                  MH
+                </div>
+                <div class="mailSubject">
+                  Lorem ipsum dolor sit amet.
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="list-group">
+                  <div class="list-group-item">
+                    Kimdən : <a href="" class="mailSender">musahesenov2@gmail.com</a>
+                  </div>
+                  <div class="list-group-item">
+                    Başlıq : <span class="text-primary mailSubjectExpand">Lorem, ipsum dolor.</span>
+                  </div>
+                  <div class="list-group-item">
+                    Tarix : <a href="" class="mailDate">22.02.2020</a>
+                  </div>
+                  <div class="list-group-item mailMovzu" style="max-height: 80vh;overflow: auto;min-height: auto;">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam temporibus omnis possimus inventore,
+                     est natus illum accusamus debitis minima. Officia delectus ab dolorum expedita temporibus. Nobis id doloribus
+                      ipsa saepe.Perferendis, neque ipsam dolore facere distinctio iste nostrum magni aspernatur nobis eos excepturi nemo mollitia? E
+                    ius quas, aliquid impedit ipsa molestias assumenda similique delectus architecto qui ullam nihil natus vero!
+                  </div>
+                  <div class="list-group-item d-flex">
+                    <div class="emailFiles">
+                      <button class="btn btn-dark downloadButton"><i class="fas fa-download"></i></button>
+                    </div>
+                    
+                    <!-- <div class="emailFiles d-flex">
+                      <button class="btn btn-dark align-self-end mr-2 mb-2 ml-auto"><i class="fas fa-download"></i></button>
+                    </div> -->
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <div class="col-md-8 col-12">
+          <div class="insteadMailImage col-12">
+            <h1>Choose message from left to see message</h1>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-
 </main>
 {% endblock content %}
 
@@ -188,8 +190,19 @@
       });
 
     }
-
+    
   });
+
+  $(function() {
+    $(".emailSidebar").addClass("active");
+    if($(".emailSidebar").hasClass("active")) {
+      $(".emailSubmenu").css("display", "block")
+    };
+    $(".emailListUl").append('<li><a href="/email/" class="inbox">Daxil olanlar(İnbox)</a></li><li><a href="#" class="drafts">Qaralama(Draft)</a></li><li><a class="deleteMessage" href="#">Zibil qutusu(Recycle bin)</a></li><li><a class="sendingMails" href="#">Göndərilənlər(Sent Mail)</a></li><li><a href="#">İmza</a></li>');
+    $(".emailNavigator").attr("href","#")
+  });
+
+
 </script>
 
 {% endblock scripts %}

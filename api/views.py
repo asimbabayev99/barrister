@@ -20,7 +20,9 @@ from django.contrib.auth.models import Permission
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import *
 from shop.models import *
+from account.tasks import *
 import logging
+
 
 
 class UserAPI(APIView):
@@ -95,36 +97,6 @@ class LoginView(APIView):
 
 
 
-class EmailList(ListAPIView):
-
-    def get_queryset(self):
-        user = self.request.user
-        return Email.objects.filter(user=user).prefetch_related('attachments')
-    
-    serializer_class = EmailSerializer
-    permission_classes = [IsAuthenticated,]
-    authentication_classes = [SessionAuthentication,]
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
-    search_fields = ['sender', 'receiver']
-    ordering_fields = ['date',]
-
-
-
-class EmailDetail(APIView):
-    authentication_classes = [SessionAuthentication,]
-    permission_classes = [IsAuthenticated,]
-    
-    def get_object(self,id):
-        try:
-            email = Email.objects.get(id=id, user=self.request.user).prefetch_related('attachments')
-            return email
-        except:
-            raise serializers.ValidationError('event doesnt not exists')
-
-    def get(self, request, id, format=None):
-        email = self.get_object(id)
-        serializer = EmailSerializer(email)
-        return Response(serializer.data)
         
 
 
@@ -632,7 +604,7 @@ class AppointmentListView(ListAPIView):
         date = self.request.GET.get('date')
         if not date:
             date = datetime(datetime.today().year, 1, 1).date()
-        return Appointment.objects.filter(user=self.request.user, date__gte=date)
+        return Appointment.objects.filter(user=self.request.user, start__gte=date)
 
 
 
@@ -842,3 +814,84 @@ class EventAPIView(APIView):
         # Get object with this id
         obj.delete()
         return Response({"message": "Object with id `{}` has been deleted.".format(id)}, status=204)
+
+
+
+class EmailList(ListAPIView):
+
+    def get_queryset(self):
+        user = self.request.user
+        return Email.objects.all().prefetch_related('attachments')
+    
+    serializer_class = EmailSerializer
+    # permission_classes = [IsAuthenticated,AllowAny]
+    # authentication_classes = [SessionAuthentication,]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ['sender', 'receiver','folder','flag']
+    search_fields = ['sender', 'receiver','folder','flag']
+    ordering_fields = ['date',]
+
+
+
+class EmailDetail(APIView):
+    # authentication_classes = [SessionAuthentication,]
+    # permission_classes = [IsAuthenticated,]
+    
+    def get_object(self,id):
+        try:
+            email = Email.objects.get(id=id, user=self.request.user).prefetch_related('attachments')
+            return email
+        except:
+            raise serializers.ValidationError('event doesnt not exists')
+
+    def get(self, request, id, format=None):
+        email = self.get_object(id)
+        serializer = EmailSerializer(email)
+        return Response(serializer.data)
+
+
+import imapclient
+
+class EmailFolderMove(APIView):
+    
+    def post(self,request):
+
+        start = datetime.now()
+        serializer = EmailFolderMoveSerializer(data=request.data)
+        serializer.is_valid()
+        # email = get_object_or_404(Email.objects.all(),num=serializer.validated_data['uid'])
+        mail_uids = serializer.validated_data['uid']
+        print(mail_uids)
+        from_folder = serializer.validated_data['from_folder']
+        to_folder = serializer.validated_data['to_folder']
+        client = imapclient.IMAPClient('imap.yandex.ru')
+        print(client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E'))
+        client.select_folder('{}'.format(from_folder))
+        result = client.move(mail_uids,to_folder)
+        client.select_folder(to_folder)
+        new_folder_mails = client.search('All')
+        #adding last mails to database
+        # for i in new_folder_mails[len(new_folder_mails)-len(mail_uids):len(new_folder_mails)]:
+        
+
+        return Response()
+        
+        
+
+
+class EmailDeleteView(APIView):
+
+    def post(self,request):
+        start = datetime.now()
+        serializer = EmailDeleteSerializer(data=request.data)
+        serializer.is_valid()
+        messages_list = serializer.validated_data['uids']
+        folder = serializer.validated_data['folder']
+        for i in messages_list:
+            email = Email.objects.get(num=i,folder=folder)
+            email.flag = 'Deleted'
+            email.save()
+            print(email.flag)
+        delete_mail.delay(messages_list,folder)
+        end = datetime.now() - start
+        return Response({'emails':'deleted in {}'.format(end)})

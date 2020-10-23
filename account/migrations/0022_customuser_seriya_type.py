@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='customuser',
             name='seriya_type',
-            field=models.CharField(choices=[('AZE', 'AZE'), ('AA', 'AA')], default=django.utils.timezone.now, max_length=5),
+            field=models.CharField(choices=[('AZE', 'AZE'), ('AA', 'AA')], default='AZE', max_length=5),
             preserve_default=False,
         ),
     ]

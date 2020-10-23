@@ -117,4 +117,10 @@
   
   {% block scripts %}
    {{ block.super }}
+   <script>
+    $(function() {
+      $(".meetingSidebar").addClass("active");
+      $(".meetingSubMenu").css("display","block")
+    })
+  </script>
   {% endblock scripts %}

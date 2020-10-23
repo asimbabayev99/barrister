@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load home_filters %}
+ {% load static %}
+ {% load bleach_tags %}
+ {% block title %}
+<title>Barrister.az | Sosial Paylaşımlar</title>
+{% endblock %}
+ {% block links %} 
+ {{ block.super }}
+ {% endblock %}
+{% block header-content %}
+<style>
+  .card-header {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+
+  }
+  .card-title {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+
+  }
+  .socialImg {
+    width: 50px;
+    height: 50px;
+    background-color: royalblue;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #cdba6d;
+
+  }
+  .socialImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .card-body {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top: 0px;
+    padding: 8px;
+  }
+  .card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin: 5px 0px;
+  }
+  .card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+  
+  .card-content {
+    font-size: 13px;
+    text-align: justify;
+
+  }
+  .border-top-0 {
+    border-top: 0px;
+  }
+  .time {
+    padding-left: 5px;
+  }
+  .col-md-6 {
+    margin: 10px 0px;
+  }
+</style>
+<div
+  class="themestek-titlebar-wrapper themestek-bg themestek-bgcolor-transparent themestek-titlebar-align-allleft themestek-textcolor-white themestek-bgimage-yes"
+>
+  <div class="themestek-titlebar-wrapper-bg-layer themestek-bg-layer"></div>
+  <div class="themestek-titlebar entry-header">
+    <div class="themestek-titlebar-inner-wrapper">
+      <div class="themestek-titlebar-main">
+        <div class="container">
+          <div class="themestek-titlebar-main-inner">
+            <div class="entry-title-wrapper">
+              <div class="container">
+                <h1 class="entry-title">Sosial Paylaşımlar</h1>
+              </div>
+            </div>
+            <div class="breadcrumb-wrapper">
+              <div class="container">
+                <div class="breadcrumb-wrapper-inner">
+                  <!-- Breadcrumb NavXT output --><span
+                    ><a title="Go to barrister." href="" class="home"
+                      ><i class="fa fa-home"></i
+                      ><span class="hide">barrister</span></a
+                    ></span
+                  >
+                  <span class="themestek-bread-sep"> &nbsp; &rarr; &nbsp;</span
+                  ><span class="post post-page current-item"
+                    >Sosial Paylaşımlar</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- .themestek-titlebar-main -->
+    </div>
+    <!-- .themestek-titlebar-inner-wrapper -->
+  </div>
+  <!-- .themestek-titlebar -->
+</div>
+<!-- .themestek-titlebar-wrapper -->
+{% endblock %} {% block content %}
+<div id="content-wrapper" class="site-content-wrapper">
+  <div id="content" class="site-content">
+    <div id="content-inner" class="site-content-inner">
+      <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+          <article
+            id="post-6669"
+            class="post-6669 page type-page status-publish hentry"
+          >
+            <header class="single-entry-header themestek-hide">
+              <h2 class="entry-title">Haqqımızda</h2>
+            </header>
+            <!-- .entry-header -->
+            <div class="container my-2" style="margin-bottom: 20px">
+              <div class="row">
+                
+                {% for publication in publications %}
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="socialImg">
+                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
+                      </div>
+                      <p class="card-title">{{publication.user.first_name}} {{publication.user.last_name}}</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-image">
+                        <img src="{{publication.file.url}}" alt="social image">
+                      </div>
+                      <div class="card-header">
+                        <p class="card-title card-content m-0 p-0">
+                         {{publication.text|safe}}
+                        </p>
+                      </div>
+                      <div class="card-header border-top-0">
+                        <p class="card-title">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
+                          <span class="time">Tarix : {{publication.date}} </span>
+                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
+                          <span class="time">Azərbaycan, Bakı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="socialImg">
+                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
+                      </div>
+                      <p class="card-title">Musa Hesenli</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-image">
+                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
+                      </div>
+                      <div class="card-header">
+                        <p class="card-title card-content">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
+                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
+                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
+                            ratione non ullam ipsa modi nostrum ex itaque 
+                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
+                        </p>
+                      </div>
+                      <div class="card-header border-top-0">
+                        <p class="card-title">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
+                          <span class="time">Tarix : 22.12.2020, </span>
+                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
+                          <span class="time">Azərbaycan, Bakı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="socialImg">
+                        <img src="https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2018-12/Mere-Abrams-Edited.jpg" alt="">
+                      </div>
+                      <p class="card-title">Musa Hesenli</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-image">
+                        <img src="https://www.golegal.co.za/wp-content/uploads/2015/06/Law-1.jpg" alt="social image">
+                      </div>
+                      <div class="card-header">
+                        <p class="card-title card-content">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam labore nesciunt
+                           illo odit saepe accusantium beatae voluptate alias voluptas eligendi esse sit incidunt quaerat, 
+                           hic maiores nobis ea! Porro, quo.Odio nesciunt sint, provident, similique hic, eligendi ipsum beatae
+                            ratione non ullam ipsa modi nostrum ex itaque 
+                          veniam pariatur tempora numquam quae magnam recusandae rerum alias saepe at! Quidem, tenetur!
+                        </p>
+                      </div>
+                      <div class="card-header border-top-0">
+                        <p class="card-title">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>
+                          <span class="time">Tarix : 22.12.2020, </span>
+                          <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
+                          <span class="time">Azərbaycan, Bakı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <div class="col-12 d-flex align-items-center justify-content-center">
+                <ul class="pagination">
+                  
+                  {% for page in publications|pagination %}
+                  
+                  {% if page == "..." %}
+                  <li><a href="#">...</a></li>  
+                  {% endif %}
+                  <li class="{% if page == publication.number %} active {% endif %} "><a href="/social-activity-list/?page={{page}}">{{page}}</a></li>
+                  {% endfor %}
+                    
+                  
+                </ul>
+              </div>
+            </div>
+          </article>
+          <!-- #post-## -->
+        </main>
+        <!-- #main .site-main -->
+      </div>
+      <!-- #primary .content-area -->
+    </div>
+    <!-- .site-content-inner -->
+  </div>
+  <!-- .site-content -->
+</div>
+<!-- .site-content-wrapper -->
+{% endblock %} {% block scripts %} {{ block.super }} {% endblock %}

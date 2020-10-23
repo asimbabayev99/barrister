@@ -2712,3 +2712,7 @@ s
 #preLoader {
   display: flex;
 }
+
+.mailListGroup {
+  user-select: none;
+}

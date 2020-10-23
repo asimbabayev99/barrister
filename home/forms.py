@@ -1,4 +1,5 @@
 from django import forms
+
 from home.models import News, Publication, Task, TASK_STATUS, Appointment, City , Contact
 # from ckeditor import widgets
 import ckeditor
@@ -48,23 +49,20 @@ class PublicationForm(forms.Form):
     }),error_messages={'required':_('Bu xana boş ola bilməz')})
     file = forms.FileField(label='',required=False, widget=forms.ClearableFileInput(attrs={
         'type':'file',
-        'class': 'form-control',
-        'id':'customFile',
-        'data-target':'file-input.input',
-        'data-action':'file-input#display'
+        'class': 'form-control-file',
     }))
-    # def clean(self):
-    #     cleaned_data = super(PublicationForm,self).clean()
-    #     text = cleaned_data.get('text')
+    def clean(self):
+        cleaned_data = super(PublicationForm,self).clean()
+        text = cleaned_data.get('text')
+        if text is None or len(text) < 50:
+            print('test')
+            self.add_error('text','Ən az 50 simvol olmalidir')
+            
+    # def clean_text(self):
+    #     text = self.cleaned_data.get('text')
     #     print(text)
     #     if len(text) < 50 or len(text) is None:
-    #         print('test')
-    #         self.add_error('text','Ən az 50 simvol olmalidir')
-    def clean_text(self):
-        text = self.cleaned_data.get('text')
-        print(text)
-        if len(text) < 50 or len(text) is None:
-            self.add_error('text','en az 50 simvol olmalidir')
+    #         self.add_error('text','en az 50 simvol olmalidir')
 
 
 class TaskForm(forms.ModelForm):

@@ -42,3 +42,77 @@
     box-shadow: none !important;
     font-size: 13px;
 }
+
+.emailImage {
+    width: 50px;
+    height: 50px;
+    background-color: purple;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50%;
+    float: left;
+    margin-right: 5px;
+}
+
+.mailContent {
+    float: left;
+    font-size: 1.25rem;
+    margin-left: 5px;
+}
+
+.emailFiles {
+    width: 140px;
+    height: 140px;
+    border-radius: 4px;
+    background-color: #dc3545;
+    float: left;
+    margin-right: 5px;
+}
+
+.emailButtonGroups div{
+    float: left;
+    background-color: #eee;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    box-shadow: 4px 4px 40px #ddd;
+    align-items: center;
+    border: 1px solid #ddd;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.noRounded2 {
+    margin-right: 5px;
+}
+
+.noRounded1 {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.mailListGroup:hover {
+    background-color: #eee;
+} 
+
+.defaultMail {
+    display: none;
+}
+
+.insteadMailImage {
+    height: 80vh;
+    border-top: 3px solid #cdba6d;
+    background-color: #eee;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #303f48;
+    font-size: 30px;
+    background-image: url("./mail.jpg");
+    background-position: center;
+    background-size: cover;
+}
+

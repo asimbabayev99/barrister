@@ -6,9 +6,9 @@ import email.message
 
 
 imap = imaplib.IMAP4_SSL('imap.yandex.ru')
-login = imap.login('support@lua.az','support123')
+login = imap.login('asim.babayev@lua.az', getpass.getpass())
 imap_list = imap.list()
-s
+
 print(login)
 print(imap_list)
 

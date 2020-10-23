@@ -79,7 +79,6 @@ $(document).ready(function () {
       $(".less_main").css("display", "none");
       $(".show_more").slideDown();
     },
-
     eventRender: function (event, element) {
       if (event.bgcolor) {
         element.css('background-color', event.bgcolor)

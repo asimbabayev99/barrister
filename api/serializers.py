@@ -326,11 +326,12 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
-    url = serializers.CharField(source='get_absolute_url',read_only=True)
+    download_url = serializers.CharField(source='get_absolute_url',read_only=True)
+    view_url = serializers.CharField(source='get_view_url',read_only=True)
 
     class Meta:
         model = Attachment
-        fields = ['name','url']
+        fields = ['name','download_url','view_url']
 
 
 class EmailSerializer(serializers.ModelSerializer):
@@ -340,3 +341,12 @@ class EmailSerializer(serializers.ModelSerializer):
         fields = ['id','folder','sender','receiver','subject','content','flag','date','num','date','attachments']
         # fields = "__all__"
 
+class EmailFolderMoveSerializer(serializers.Serializer):
+    uids = serializers.ListField(child=serializers.CharField(required=True))
+    from_folder =serializers.CharField(required=True)
+    to_folder = serializers.CharField(required=True)
+
+
+class EmailDeleteSerializer(serializers.Serializer):
+    uids = serializers.ListField(child=serializers.CharField(required=True))
+    folder = serializers.CharField(required=True)
