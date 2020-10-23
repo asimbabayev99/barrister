@@ -104,13 +104,19 @@
                                         <input type="text" id="marriage_address" class="form-control form-control-sm" >
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Uşağınız varmı</label>
-                                    <select name="has_children" class="form-control form-control-sm" id="has_children">
-                                        <option value="none" disabled selected>Seçin</option>
-                                        <option value="yes">Bəli</option>
-                                        <option value="no">Xeyr</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="certificate_number">Nikah şəhadətnaməsinin nömrəsi</label>
+                                        <input type="text" id="certificate_number" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Iddiaçının uşaqları varmı?</label>
+                                        <select name="has_children" class="form-control form-control-sm" id="has_children">
+                                            <option value="none" disabled selected>Seçin</option>
+                                            <option value="yes">Bəli</option>
+                                            <option value="no">Xeyr</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="children_expand" style="display: none;">
                                     <hr>
@@ -126,7 +132,7 @@
                                     <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Ad Soyad</th>
+                                                <th>Soyad, Ad, Ata adı</th>
                                                 <th>Doğum tarixi</th>
                                                 <th>Cins</th>
                                                 <th>İddiaçı ilə qalacaq</th>
@@ -140,9 +146,9 @@
                                     <div class="col-md-6 form-group children">
                                         <h3 for="" class="">Əlavə et</h3>
                                         <div class="form-group">
-                                            <label for="child_name">Ad, Soyad</label>
+                                            <label for="child_name">Soyad, Ad, Ata adı</label>
                                             <input type="text" id="child_name" class="form-control form-control-sm child_ame"
-                                                placeholder="Ad Soyad">
+                                                placeholder="Soyad, Ad, Ata adı">
                                         </div>
                                         <div class="form-group">
                                             <label for="">Doğum tarixi</label>
@@ -241,8 +247,8 @@
                 children.push({
                     "name":$(this).find(".child_name").text(),
                     "date": $(this).find(".child_date").text(),
-                    "gender": $(this).find(".child_date").text(),
-                    "stay": $(this).find(".child_date").text(),
+                    "gender": $(this).find(".child_gender").text(),
+                    "stay": $(this).find(".child_stay").text(),
                 });
             });
             var data = {
@@ -255,6 +261,7 @@
                 "defendant_gender": $("#defendant_gender").val(),
                 "marriage_date": $("#marriage_date").val(),
                 "marriage_address": $("#marriage_address").val(),
+                "certificate_number": $("#certificate_number").val(),
                 "has_children": $("#has_children").val(),
                 "children": children,
                 "demands_aliment": $("#demands_aliment").val()

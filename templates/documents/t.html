@@ -124,7 +124,7 @@
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">Cavabdeh
 					{{ defendant_name|is_null:20 }} il&#601; ail&#601; quraraq, nikah&#305;m&#305;z&#305;
 					{{marriage_date|year_suffix}} il tarixind&#601; {{marriage_address|is_null:25}} Qeydiyyat &#351;&ouml;b&#601;sinin nikah&#305;n ba&#287;lanmas&#305;
-					haqq&#305;nda akt qeydl&#601;ri kitab&#305;nda X n&ouml;mr&#601;li
+					haqq&#305;nda akt qeydl&#601;ri kitab&#305;nda {{certificate_number|is_null:3}} n&ouml;mr&#601;li
 					qeyd il&#601; r&#601;smil&#601;&#351;dirmi&#351;ik.</span></font>
 		</font>
     </p>
@@ -135,10 +135,10 @@
                     nikahdan
                     {% for child in children %}
                         , {{child.date|year_suffix}} il t&#601;v&#601;ll&uuml;dl&uuml; 
-                        {% if child.gender == "Kişi" %} oğlumuz {% else %} qızımız {% endif %}
+                        {% if child.gender == "Kişi" %} oğlumuz {% elif child.gender == "Qadın" %} qızımız {% else %} ________ {% endif %}
                         {{ child.name|to_list:1}}
                     {% endfor %}
-                    d&uuml;nyaya g&#601;lmi&#351;l&#601;r.</span></font>
+                    d&uuml;nyaya g&#601;lmi&#351;{% if children|length == 1 %}di{% else %}l&#601;r{% endif %}.</span></font>
 		</font>
 	</p>
     {% endif %}
@@ -429,49 +429,60 @@
 	</p>
 	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
 		<font face="Times New Roman, serif">
-			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
-					X X o&#287;lu </span></font>
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">{{defendant_name|is_null:20}}</span></font>
 		</font>
 		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">il&#601;
 					aram&#305;zda </span></font>
 		</font>
 		<font face="Times New Roman, serif">
-			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X.X.X-cu
-					il tarixind&#601; Bak&#305; &#351;&#601;h&#601;ri X rayonu Qeydiyyat
+			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">{{marriage_date|year_suffix}}
+					il tarixind&#601; {{marriage_address|is_null:30}} Qeydiyyat
 					&#351;&ouml;b&#601;sinin nikah&#305;n ba&#287;lanmas&#305; haqq&#305;nda
-					akt qeydl&#601;ri kitab&#305;nda X </span></font>
+					akt qeydl&#601;ri kitab&#305;nda {{certificate_number|is_null:3}} </span></font>
 		</font>
 		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">n&ouml;mr&#601;
-					il&#601; qeyd edilmi&#351; nikah&#305;n pozulmas&#305; bar&#601;d&#601;,</span></font>
+					il&#601; qeyd edilmi&#351; nikah&#305;n pozulmas&#305; bar&#601;d&#601;{% if children|if_any:'stay' %} qətnamə qəbul edilsin. {% else %}, {% endif %}
+				</span>
+			</font>
 		</font>
 	</p>
+	
+	{% if children|if_any:'stay' %}
 	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
 		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">birg&#601;
 					nikahdan </span></font>
 		</font>
 		<font face="Times New Roman, serif">
-			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X.X.X-c&uuml;
-					il t&#601;v&#601;ll&uuml;dl&uuml; X X X o&#287;lunun v&#601; X.X.X-ci
-					il t&#601;v&#601;ll&uuml;dl&uuml; X X</span></font>
-		</font>
-		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
-					X q&#305;z&#305;n&#305;n m&#601;nim yan&#305;mda qalmalar&#305;
-					bar&#601;d&#601; v&#601;</span></font>
+				{% for child in children %}
+					{{child.date|year_suffix}} il t&#601;v&#601;ll&uuml;dl&uuml; {{ child.name|to_list:0|is_null:7 }} {{ child_name|to_list:1|is_null:7 }} {{ child_name|to_list:2|is_null:7 }} 
+					{% if child.gender == "Kişi" %} oğlunun {% else %} qızının {% endif %}
+					{% if not forloop.last %} və {% endif %}
+				{% endfor %}
+				m&#601;nim yan&#305;mda qalmalar&#305; bar&#601;d&#601; {% if demands_aliment %} v&#601; {% else %} qətnamə qəbul edilsin. {% endif %}</span></font>
 		</font>
 	</p>
+	{% endif %}
+
+	{% if demands_aliment %}
 	<p style="text-align: justify; text-indent: 0.39in; margin-bottom: 0in; line-height: 100%">
 		<font face="Times New Roman, serif">
-			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
-					X X o&#287;lunun v&#601; X X</span></font>
-		</font>
-		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
-					X q&#305;z&#305;n&#305;n yetkinlik ya&#351;&#305;na &ccedil;atana
-					kimi saxlan&#305;lmalar&#305; &uuml;&ccedil;&uuml;n </span></font>
+				{% set is_first = 'true' %}
+				{% for child in children %}
+					{% if child.stay == "Bəli" %}
+						{% if is_first == 'false'  %} və {% endif %}
+						{{child.date|year_suffix}} il t&#601;v&#601;ll&uuml;dl&uuml; {{ child.name|to_list:0|is_null:7 }} {{ child_name|to_list:1|is_null:7 }} {{ child_name|to_list:2|is_null:7 }} 
+						{% if child.gender == "Kişi" %} oğlunun {% else %} qızının {% endif %}
+						{% set is_first = 'false' %}
+					{% endif %}
+				{% endfor %}
+				yetkinlik ya&#351;&#305;na &ccedil;atana kimi saxlan&#305;lma 
+				{% if children|length == 1 %}sı{% else %}ları{% endif %} &uuml;&ccedil;&uuml;n 
+			</span></font>
 		</font>
 		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
@@ -481,9 +492,11 @@
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
 					o&#287;lundan, h&#601;r u&#351;aq &uuml;&ccedil;&uuml;n ayda 170 (y&uuml;z
 					yetmi&#351;) manat sabit pul m&#601;bl&#601;&#287;ind&#601; alimentin
-					tutulmas&#305; bar&#601;d&#601; q&#601;tnam&#601; q&#601;bul edilsin.</span></font>
+					tutulmas&#305; bar&#601;d&#601; qətnamə qəbul edilsin.</span></font>
 		</font>
 	</p>
+	{% endif %}
+
 	<p lang="az-Latn-AZ" style="text-align: justify; margin-bottom: 0in; line-height: 100%">
 		<br />
 
@@ -523,30 +536,19 @@
 							t&#601;sdiq edilmi&#351; sur&#601;ti;</span></font>
 				</font>
 			</p>
+		</li>
+		{% for child in children %}
 		<li>
 			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
 				<font face="Times New Roman, serif">
-					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
-							X X o&#287;lunun do&#287;um haqq&#305;nda &#351;&#601;had&#601;tnam&#601;sinin
+					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
+						{{ child.name|to_list:0|is_null:7 }} {{ child_name|to_list:1|is_null:7 }} {{ child_name|to_list:2|is_null:7 }}
+						{% if child.gender == "Kişi" %} oğlunun {% else %} qızının {% endif %} do&#287;um haqq&#305;nda &#351;&#601;had&#601;tnam&#601;sinin
 							notariat qaydada t&#601;sdiq edilmi&#351; sur&#601;ti;</span></font>
 				</font>
 			</p>
-		<li>
-			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
-				<font face="Times New Roman, serif">
-					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">X
-							X</span></font>
-				</font>
-				<font face="Times New Roman, serif">
-					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">
-							X q&#305;z&#305;n&#305;n </span></font>
-				</font>
-				<font face="Times New Roman, serif">
-					<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ">do&#287;um
-							haqq&#305;nda &#351;&#601;had&#601;tnam&#601;sinin notariat qaydada
-							t&#601;sdiq edilmi&#351; sur&#601;ti;</span></font>
-				</font>
-			</p>
+		</li>
+		{% endfor %}
 		<li>
 			<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
 				<font face="Times New Roman, serif">
@@ -554,6 +556,7 @@
 							r&uuml;sumunun &ouml;d&#601;nilm&#601;si bar&#601;d&#601; q&#601;bz.</span></font>
 				</font>
 			</p>
+		</li>
 	</ol>
 	<p lang="az-Latn-AZ" style="text-align: justify; margin-bottom: 0in; line-height: 100%">
 		<br />
@@ -571,7 +574,7 @@
 	<p style="text-align: justify; margin-bottom: 0in; line-height: 100%">
 		<font face="Times New Roman, serif">
 			<font size="3" style="font-size: 12pt"><span lang="az-Latn-AZ"><b>iddia&ccedil;&#305;
-						X X _______________ &ldquo;____&rdquo;__________2020-ci il</b></span></font>
+						{{applicant_name|is_null:5}} _______________ &ldquo;____&rdquo;__________2020-ci il</b></span></font>
 		</font>
 	</p>
 	<!-- <div title="footer">
