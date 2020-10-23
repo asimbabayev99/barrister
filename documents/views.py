@@ -26,7 +26,7 @@ def single_template_view(request, id):
             data = json.loads(request.body)
             t = Template(template.content)
             c = Context(data)
-            print(data)
+            # print(data)
             html = t.render(c)
             return HttpResponse(html)
         else:
