@@ -178,11 +178,7 @@ def barrister_social_activity(request):
     form = PublicationForm()
     context={'form':form,'publications':last_publications,'error':err}
     return render(request,'barrister/social_activity.html',context)
-
-
-@login_required(login_url='/account/login')
-def barrister_clients(request):
-    return render(request,'barrister/clients.html')
+    
 
 
 @login_required(login_url='/account/login')
