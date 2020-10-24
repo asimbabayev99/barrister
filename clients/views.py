@@ -4,6 +4,6 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/account/login')
-def index_view(request):
+def index(request):
     
     return render(request,'clients/index.html')

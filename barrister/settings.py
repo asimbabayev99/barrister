@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'laws',
     'documents',
     'clients',
+    'chat',
     'django_filters',
     'rest_framework.authtoken',
     'djoser',
@@ -84,7 +85,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'barrister.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -199,10 +199,24 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 
+
+
 from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'synchronize_mail_schedule': {
         'task': "synchronize_mail", 
         'schedule': timedelta(minutes=1)
+    },
+}
+
+
+
+ASGI_APPLICATION = 'barrister.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
     },
 }

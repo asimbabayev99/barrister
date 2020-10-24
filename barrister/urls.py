@@ -37,6 +37,7 @@ urlpatterns = [
     path('laws/', include('laws.urls')),  
     path('documents/', include('documents.urls')),
     path('clients/', include('clients.urls')),
+    path('chat/', include('chat.urls')),
 
 ]
 

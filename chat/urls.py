@@ -3,5 +3,5 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', index, name='barrister-clients'),
+    path('<int:user_id>', index, name='chat-index'),
 ]
