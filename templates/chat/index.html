@@ -1,3 +1,90 @@
+{% extends 'barrister/barrister-base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Musteriler</title>
+{% endblock title %}
+
+{% block links %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+{% endblock links %}
+
+
+{% block content %}
+<main class="page-content design">
+  <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+  <div class="container-fluid clients-content">
+    <div class="row mr-0">
+      <div class="col-12 header">
+        <span>Müştərilər</span>
+      </div>
+
+      <div class="col-12  my-2">
+        <div class="row">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+    var roomName = '{{ room_name }}';
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        document.querySelector('#chat-log').value += (message + '\n');
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.querySelector('#chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+{% endblock scripts %}
+
+
+
+
+<!-- 
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -44,4 +131,4 @@
         messageInputDom.value = '';
     };
 </script>
-</html>
+</html> -->
