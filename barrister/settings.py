@@ -224,5 +224,5 @@ ASGI_APPLICATION = 'barrister.routing.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
-   }
+    }
 }
