@@ -28,6 +28,7 @@ router = routers.DefaultRouter()
 # router.register(r'skills', SkillView, basename="Skill")
 
 urlpatterns = [
+    
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     path('shop/', include('shop.urls')),
@@ -35,6 +36,8 @@ urlpatterns = [
     path('api/',include('api.urls')),
     path('laws/', include('laws.urls')),  
     path('documents/', include('documents.urls')),
+    path('clients/', include('clients.urls')),
+    path('chat/', include('chat.urls')),
 
 ]
 

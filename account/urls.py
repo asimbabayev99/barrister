@@ -14,8 +14,6 @@ urlpatterns = [
     path('password-reset/complete',PasswordResetCompleteView.as_view(template_name="account/password-reset-complate.html"),name="password_reset_complete"),
     
     # barrister related
-    path('clients/', barrister_clients, name='barrister-clients'),
-
     path('social-activity/', barrister_social_activity, name='barrister-social-activity'),
     
 
