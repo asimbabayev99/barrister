@@ -370,8 +370,10 @@ $(document).ready(function () {
 
   $('.calendar-save-button').on("click", function () {
     let beginingTime = $(".validation-date").val().split("/");
+    let timeInterval = parseInt($(".validation-interval").text().split(" ")[0])
     start_date = new Date(beginingTime[2] + "-" + beginingTime[1] + "-" + beginingTime[0] + " " + $(".beginChoices #time_input").text().trim()+":00");
-    end_date =  new Date(start_date.getTime() + parseInt($('#duration_input').attr('value'))*60000);
+    end_date =  new Date(start_date.getTime() + timeInterval*60000);
+        
     var data = {
       'profile': {
         'name': $('#name_input').val(),
@@ -379,8 +381,8 @@ $(document).ready(function () {
         'phone': $('#phone_input').val(),
         'address': $('#address_input').val()
       },
-      'start_date': start_date.toString(),
-      'end_date': end_date.toString(),
+      'start_date': start_date.toISOString(),
+      'end_date': end_date.toISOString(),
       'status': $('.times-div-3 .validation-reserv').text(),
       'detail': $('#detail_input').val() 
     }
@@ -396,7 +398,7 @@ $(document).ready(function () {
         // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
       },
       error: function (jqXhr, textStatus, errorMessage) {
-        // alert(errorMessage)
+        alert(errorMessage)
       }
     }); 
 
