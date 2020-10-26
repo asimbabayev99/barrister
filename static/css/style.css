@@ -282,7 +282,7 @@ body {
 
 @media screen and (min-width: 768px) {
   .page-wrapper.toggled .page-content {
-    padding-left: 300px;
+    padding-left: 270px;
   }
 }
 /*----------------show sidebar button----------------*/
@@ -552,7 +552,7 @@ body {
   display: inline-block;
   width: 100%;
   padding-left: 0px;
-  padding-top: 5px;
+  /* padding-top: 5px; */
 }
 
 .page-wrapper .page-content > div {
@@ -2684,7 +2684,7 @@ s
 
 
 .page-wrapper .page-content > div {
-  padding: 5px 0px 0px 40px;
+  padding: 0px 0px 0px 0px;
 }
 .header {
   display: none;
@@ -2716,3 +2716,38 @@ s
 .mailListGroup {
   user-select: none;
 }
+
+/* Email content begin */
+
+.mailContainer {
+  width: 100%;
+  height: 100vh;
+  background-image: url("./mail.jpg");
+  background-color: #007bff;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+.mailContainer .col-md-4, .mailContainer .col-md-8 {
+  float: left;
+  
+}
+
+.mailContainer .inboxHeader {
+  min-height: 20vh;
+  background-color: green;
+  /* padding-left: 15px; */
+}
+.mailContainer .inboxHeader .btn {
+  background-color: #cdba6d;
+  border-color: #cdba6d;
+}
+
+.mailContainer .inboxContent {
+  height:75vh;
+  background-color: red;
+  /* overflow: auto; */
+
+}
+
+/* Email content end   */

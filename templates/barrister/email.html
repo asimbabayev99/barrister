@@ -30,9 +30,7 @@
 
 
 <main class="page-content design">
-  
-  <div style="padding-left: 70px;" class="emailContent">
-    
+  <div class="emailContent">
     <h1>Inbox</h1>
     <div class="container-fluid mt-4">
       <div class="row">
@@ -80,12 +78,12 @@
             </li>
             
           </ul>
-          <div style="height: 80vh;overflow: auto;" id="mailContent">
+          <div style="height: 84vh;overflow: auto;background-color: #ffffff;" id="mailContent">
                      
           </div>
         </div>
         <div class="col-md-8 col-12 defaultMail">
-            <div class="card col-12 p-0">
+            <div class="card col-12 p-0" style="height: 100vh;overflow: auto;">
               <div class="card-header align-items-center d-flex">
                 <div class="emailImage">
                   MH
@@ -198,8 +196,22 @@
     if($(".emailSidebar").hasClass("active")) {
       $(".emailSubmenu").css("display", "block")
     };
-    $(".emailListUl").append('<li><a href="/email/" class="inbox">Daxil olanlar(İnbox)</a></li><li><a href="#">Qaralama(Draft)</a></li><li><a  href="#">Zibil qutusu(Recycle bin)</a></li><li><a href="#">Göndərilənlər(Sent Mail)</a></li><li><a href="#">İmza</a></li>');
+    $(".emailListUl").append('<li><a href="/email/" class="inbox">Daxil olanlar(İnbox)</a></li><li><a href="#" class="drafts">Qaralama(Draft)</a></li><li><a class="deleteMessage" href="#">Zibil qutusu(Recycle bin)</a></li><li><a class="sendingMails" href="#">Göndərilənlər(Sent Mail)</a></li><li><a href="#">İmza</a></li>');
     $(".emailNavigator").attr("href","#")
+    if($(".page-wrapper").hasClass("toggled")) {
+        $(".emailContent").css("padding-left",'0px')
+      }else {
+        $($(".emailContent").css("padding-left",'40px'))
+      }
+    $(window).click(function() {
+      if($(".page-wrapper").hasClass("toggled")) {
+        $(".emailContent").css("padding-left",'0px')
+      }else {
+        $($(".emailContent").css("padding-left",'40px'))
+      }
+    })
+    
+    $(".inboxContent").css("height",headerHeight + "vh")
   });
 
 
