@@ -94,15 +94,15 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':'db.sqlite3'
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME':'db.sqlite3'
 
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'test',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'asim',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'barrister',
+        'USER': 'postgres',
+        'PASSWORD': 'luagroup',
+        'HOST': 'barrister.az',
+        'PORT': '5432',
     }
 }
 
@@ -195,9 +195,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 
 from celery.schedules import crontab
-CELERY_BEAT_SCHEDULE = {
-    'synchronize_mail_schedule': {
-        'task': "synchronize_mail", 
-        'schedule': timedelta(minutes=1)
-    },
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'synchronize_mail_schedule': {
+#         'task': "synchronize_mail", 
+#         'schedule': timedelta(minutes=1)
+#     },
+# }

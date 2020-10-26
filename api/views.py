@@ -851,30 +851,31 @@ class EmailDetail(APIView):
 
 
 import imapclient
-
+from account.tasks import move_mail_folder , delete_mail
 class EmailFolderMove(APIView):
     
     def post(self,request):
-
-        start = datetime.now()
+        client = imapclient.IMAPClient('imap.yandex.ru')
+        client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
         serializer = EmailFolderMoveSerializer(data=request.data)
         serializer.is_valid()
-        # email = get_object_or_404(Email.objects.all(),num=serializer.validated_data['uid'])
-        mail_uids = serializer.validated_data['uid']
-        print(mail_uids)
+        mail_uids = serializer.validated_data['uids']
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
-        client = imapclient.IMAPClient('imap.yandex.ru')
-        print(client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E'))
-        client.select_folder('{}'.format(from_folder))
-        result = client.move(mail_uids,to_folder)
+        client.select_folder(from_folder)
+        client.add_flags(mail_uids,'SEEN')
+        client.move(mail_uids,to_folder)
         client.select_folder(to_folder)
-        new_folder_mails = client.search('All')
-        #adding last mails to database
-        # for i in new_folder_mails[len(new_folder_mails)-len(mail_uids):len(new_folder_mails)]:
+        new_uids = client.search(["SEEN",'Recent'])
+        for i in mail_uids:
+            email = Email.objects.get(num=i,folder=from_folder)
+            email.folder = to_folder
+            email.flag = "Flagged"
+            email.save()
         
+        move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',from_folder,to_folder,mail_uids,new_uids)
 
-        return Response()
+        return Response({'mails':'moved succesfully'})
         
         
 
