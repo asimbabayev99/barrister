@@ -24,7 +24,7 @@ from email import encoders
 from email.mime.application import MIMEApplication
 from os.path import basename , realpath
 from django.core.mail import send_mail
-from account.tasks import synchronize_mail , get_last_mails
+from account.tasks import synchronize_mail
 import re
 import os
 
@@ -605,6 +605,8 @@ def send_email(request):
         msg.add_header('From',email)
         msg.add_header('Subject',request.POST.get('subject'))
         msg.add_header('To',request.POST.get('receiver'))
+        msg.add_header('Cc',request.POST.get('cc'))
+        msg.add_header('Bcc',request.POST.get('bcc') )
         if 'image' in request.FILES:
             for img in request.FILES.getlist('image'):
                 image = MIMEImage(img.read(),basename="{0}".format(img.name), _subtype=re.sub('image/',"",img.content_type))
@@ -698,7 +700,7 @@ from home.models import Attachment
 import mimetypes
 
 def attachment_media_download(request,path):
-    path = 'media/'+path
+    path=request.get_full_path()
     file_name = os.path.basename(path)
     if os.path.exists(path):
         with open(path,'rb') as fayl:

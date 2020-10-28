@@ -334,11 +334,19 @@ class AttachmentSerializer(serializers.ModelSerializer):
         fields = ['name','download_url','view_url']
 
 
+class ReceiverSerializer(serializers.ModelSerializer):
+    receiver = serializers.CharField(source='receiver_email',read_only=True)
+    class Meta:
+        model = Receiver
+        fields = ['receiver','email']
+
+
 class EmailSerializer(serializers.ModelSerializer):
     attachments = AttachmentSerializer(many=True,read_only=True)
+    receivers = ReceiverSerializer(many=True,read_only=True)
     class Meta:
         model = Email
-        fields = ['id','folder','sender','receiver','subject','content','flag','date','num','date','attachments']
+        fields = ['id','folder','sender','receiver','subject','content','flag','date','num','date','attachments','receivers']
         # fields = "__all__"
 
 class EmailFolderMoveSerializer(serializers.Serializer):
