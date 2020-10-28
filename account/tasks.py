@@ -37,13 +37,20 @@ def GenerateOAuth2String(email, access_token, base64_encode=True):
 
 
 @shared_task(name='move_mail_folder')
-def move_mail_folder(email,token,from_folder,to_folder,mail_uids,new_uids ): 
-  for i in range(len(mail_uids)):
-    email = Email.objects.get(folder=to_folder,num=mail_uids[i],flag='Flagged')
-    email.num = new_uids[i]
-    email.flag = "Seen"
+def move_mail_folder(email,token,to_folder,mail_uids):
+  client = imapclient.IMAPClient('imap.yandex.ru')
+  client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+  client.select_folder(to_folder)
+  mails = client.search(['Flagged'])
+  print(mails)
+  print(mail_uids)
+  for i in range(len(mails)):
+    email = Email.objects.get(num=mail_uids[i],folder=to_folder,flag='Flagged')
+    email.num = mails[i]
+    email.flag = 'Seen'
     email.save()
-  return "Test"
+  client.remove_flags(mails,'\Flagged')
+  return "Mails moved"
   
   
 
@@ -53,14 +60,8 @@ def delete_mail(mail_uids,folder):
   client = imapclient.IMAPClient('imap.yandex.ru')
   client.oauth2_login('azadmammedov@yandex.ru','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
   client.select_folder(folder)
-  print(client.search('All'))
   print(client.delete_messages(mail_uids))
-  Email.objects.filter(num__in=mail_uids,folder=folder).delete()
   return 'emails deleted'
-
-
-
-
 
 
 
@@ -79,7 +80,7 @@ def synchronize_mail():
       mail.oauth2_login(email.email,email.token)
     except:
       continue
-    mail_folders = ['Inbox','Drafts','Sent','Trash']
+    mail_folders = ['Inbox','Drafts','Sent','Spam','Trash']
     user = EmailAccount.objects.get(email=email.email).user
     # loop th rough mail folders
     for folder in mail_folders:
@@ -148,20 +149,60 @@ def synchronize_mail():
 
 @shared_task(name = "get_last_mail")
 def get_last_mails(email,token):
+  account = EmailAccount.objects.get(email=email,token=token)
+
   print("getting last mails")
   client = imapclient.IMAPClient('imap.yandex.ru')
   client.oauth2_login(email,token)
-  try:
-    last_num = Email.objects.last().num
-  except:
-    last_num = 0
-  client.select_folder('Inbox')
-  messages = client.search('UNSEEN')
-  for uid, message_data in mail.fetch(messages,'RFC822').items():
-    raw_email = message_data['RFC822'.encode()]
-    email_message = mailparser.parse_from_bytes(raw_email)
-    email = Email()
-    # email
+  mail_folders = ['Inbox','Spam',]
+  user = EmailAccount.objects.get(email=email).user
+  # loop th rough mail folders
+  for folder in mail_folders:
+    client.select_folder(folder)
+    messages = client.search(['NEW','NOT','Flagged'])
+    try:
+      last_num = Email.objects.filter(folder=folder).last().num
+    except:
+      last_num = 0 
+    print(last_num) 
+    print(messages)
+    for uid, message_data in client.fetch(messages,'RFC822').items():
+      if int(last_num) < uid:   
+        raw_email = message_data['RFC822'.encode()]
+        email_message = mailparser.parse_from_bytes(raw_email)
+        created = False
+        try:
+          new_email = Email.objects.get(folder=folder,user=user,num=uid, sender=sender, receiver=receiver, date=date)
+          created=True
+        except:
+          new_email = Email()
+        if created:
+          continue
+        new_email.user = user
+        new_email.num = uid
+        new_email.sender = email_message.from_[0][1]
+        new_email.date = email_message.date 
+        
+        new_email.subject = email_message.subject if email_message.subject != "" else 'No subject'
+        content = email_message.text_html[0] if email_message.text_html != [] else ""
+        new_email.content = content
+        new_email.folder = folder
+        new_email.flag = 'Unseen'
+        new_email.save()
+        for i in email_message.to:
+          Receiver.objects.create(email=new_email,receiver=i[1])
+        if email_message.attachments is not None:
+          for i in email_message.attachments:
+            print(i['filename'])
+            if Attachment.objects.filter(name=i['filename'],email=new_email).exists():
+              continue
+            attachment = Attachment(name=i['filename'],email=new_email)
+            attachment.file.save(i['filename'],ContentFile(base64.b64decode(i['payload'])))              
+            attachment.save()
+   
+  
+  return 'Last mails saved'
+  
 
   
 
