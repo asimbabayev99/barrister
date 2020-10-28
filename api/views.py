@@ -856,29 +856,33 @@ class EmailFolderMove(APIView):
     
     def post(self,request):
         client = imapclient.IMAPClient('imap.yandex.ru')
-        client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+        try:
+            client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+        except:
+            raise ValidationError('an error occured in yandex mail server')
         serializer = EmailFolderMoveSerializer(data=request.data)
         serializer.is_valid()
         mail_uids = serializer.validated_data['uids']
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
-        client.select_folder(from_folder)
-        client.add_flags(mail_uids,'SEEN')
-        client.move(mail_uids,to_folder)
-        client.select_folder(to_folder)
-        new_uids = client.search(["SEEN",'Recent'])
-        for i in mail_uids:
-            email = Email.objects.get(num=i,folder=from_folder)
+        if Email.objects.filter(num__in=mail_uids,folder=to_folder,flag='Flagged').exists():
+            move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
+            return Response({'mails':'processing'})
+        for i in mail_uids:           
+            try:
+                email = Email.objects.get(num=i,folder=from_folder)
+            except:
+                return Response({'this emails'})
             email.folder = to_folder
             email.flag = "Flagged"
-            email.save()
-        
-        move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',from_folder,to_folder,mail_uids,new_uids)
-
+            email.save()        
+        client.select_folder(from_folder)
+        client.add_flags(mail_uids,'\Flagged')
+        client.move(mail_uids,to_folder)
+        move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
         return Response({'mails':'moved succesfully'})
         
         
-
 
 class EmailDeleteView(APIView):
 
@@ -888,11 +892,20 @@ class EmailDeleteView(APIView):
         serializer.is_valid()
         messages_list = serializer.validated_data['uids']
         folder = serializer.validated_data['folder']
-        for i in messages_list:
-            email = Email.objects.get(num=i,folder=folder)
-            email.flag = 'Deleted'
-            email.save()
-            print(email.flag)
+        Email.objects.filter(num__in=messages_list).delete()
         delete_mail.delay(messages_list,folder)
         end = datetime.now() - start
         return Response({'emails':'deleted in {}'.format(end)})
+
+class EmailChangeFlag(APIView):
+    def post(self,request):
+        serializer = EmailFlagSerializer(data=request.data)
+        serializer.is_valid()
+        uids = serializer.validated_data['uid']
+        folder = serializer.validated_data['folder']
+        flag = serializer.validated_data['flag']
+        for i in uids:
+            email = Email.objects.filter(num=i,folder=folder)
+            email.flag = flag
+            email.save()
+        return Response({'email':'flag changed'})
