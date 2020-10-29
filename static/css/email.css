@@ -25,6 +25,7 @@
 
 .emailFirstList {
     border-top: 3px solid #cdba6d;
+    border-top-right-radius: 0px !important;
 }
 
 .emailBetweenContext {

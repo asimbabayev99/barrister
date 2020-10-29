@@ -105,7 +105,9 @@
     height: 100vh;
     border-top: 3px solid #cdba6d;
     background-color: #eee;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     display: flex;
     align-items: center;
     justify-content: center;

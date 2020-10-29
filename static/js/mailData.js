@@ -1,9 +1,6 @@
 $(document).ready(function () {
   var isDataCame = false,
     inbox = [],
-    drafts = [],
-    recycleBin = [],
-    sent = [],
     deleteJson = {};
   if (isDataCame === false) {
     $("#mailContent").append(
@@ -22,7 +19,6 @@ $(document).ready(function () {
       }
       json.forEach((element) => {
         if (element.folder === "Inbox") {
-          inbox.push(element);
           $("#mailContent").append(
             "<li  num=" +
               element.num +
@@ -35,26 +31,22 @@ $(document).ready(function () {
               element.sender +
               '</span><span class="emailSubject">' +
               element.subject +
-              "</span></span></li>"
+              "</span></span>"+
+              "</li>"
+
           );
+
           isDataCame = true;
           $("#preLoader").css("display", "none");
-        } else if (element.folder === "Drafts") {
-          drafts.push(element);
-        } else if (element.folder === "Trash") {
-          recycleBin.push(element);
-        } else if (element.folder === "Sent") {
-          sent.push(element);
-        }
+        } 
       });
 
       // Click to the sidebar DRAFTS choice to look at only DRAFTS emails begin
 
       $(".drafts").click(function () {
         $("#mailContent").html("");
-        drafts.forEach((element) => {
+        json.forEach((element) => {
           if (element.folder === "Drafts") {
-            // $("#mailContent").append('<li id="'+ element.id +'" class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="" id="mailCheckboxes"><span class="emailNameTitle">' + element.sender +'</span><span class="emailSubject">' + element.subject +'</span></span></li>');
             $("#mailContent").append(
               "<li num=" +
                 element.num +
@@ -127,17 +119,21 @@ $(document).ready(function () {
             uids: deletingMessagesIds,
             folder: folder,
           };
-          // console.log(deleteJson)
+          
         });
       });
 
       // Click to the sidebar DRAFTS choice to look at only DRAFTS emails end
 
+
+
+      //***********************  Sent mails begin  ********************** */
       $(".sendingMails").click(function () {
         $("#mailContent").html("");
-        sent.forEach((element) => {
-          $("#mailContent").append(
-            "<li num=" +
+        json.forEach((element) => {
+          if(element.folder == "Sent") {
+            $("#mailContent").append(
+              "<li num=" +
               element.num +
               ' id="' +
               element.id +
@@ -148,53 +144,60 @@ $(document).ready(function () {
               '</span><span class="emailSubject">' +
               element.subject +
               "</span></span></li>"
-          );
-          $(".mailListGroup").click(function () {
-            $(".defaultMail").show(200);
-            $(".insteadMailImage").hide(100);
-            var mail = $(this).attr("id");
-            json.forEach((element) => {
-              if (element.id == mail) {
-                $(".mailSubject").text(element.sender);
-                $(".mailSender").text(element.sender);
-                $(".mailSubjectExpand").text(element.subject);
-                let time = element.date.split("-");
-                let endTime = time[2].split("");
-                let wholeTime =
+              );
+            }
+            $(".mailListGroup").click(function () {
+              $(".defaultMail").show(200);
+              $(".insteadMailImage").hide(100);
+              var mail = $(this).attr("id");
+              json.forEach((element) => {
+                if (element.id == mail) {
+                  $(".mailSubject").text(element.sender);
+                  $(".mailSender").text(element.sender);
+                  $(".mailSubjectExpand").text(element.subject);
+                  let time = element.date.split("-");
+                  let endTime = time[2].split("");
+                  let wholeTime =
                   time[0] + "-" + time[1] + "-" + endTime[0] + "" + endTime[1];
-                $(".mailDate").text(wholeTime);
-                $(".mailMovzu").html(element.content);
-                let mailSender = element.sender.split("");
-                let color = ["purple", "blue", "green", "maroon", "darkorange"];
-                $(".emailImage").text(
-                  mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
-                );
-                let rNumber = Math.floor(Math.random() * 5);
-                $(".emailImage").css({
-                  backgroundColor: color[rNumber],
+                  $(".mailDate").text(wholeTime);
+                  $(".mailMovzu").html(element.content);
+                  let mailSender = element.sender.split("");
+                  let color = ["purple", "blue", "green", "maroon", "darkorange"];
+                  $(".emailImage").text(
+                    mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
+                    );
+                    let rNumber = Math.floor(Math.random() * 5);
+                    $(".emailImage").css({
+                      backgroundColor: color[rNumber],
+                    });
+                  }
                 });
+              });
+            });
+            deletingMessagesIds = [];
+            folder = "";
+            $(".checkBoxMails").click(function () {
+              folder = $(this).attr("name");
+              let id = $(this).parent().parent().parent().attr("num");
+              if ($(this).is(":checked")) {
+                deletingMessagesIds.push(id);
+              } else {
+                let index = deletingMessagesIds.indexOf(id);
+                deletingMessagesIds.splice(index, 1);
               }
+              deleteJson = {
+                uids: deletingMessagesIds,
+                folder: folder,
+              };
+              // console.log(deleteJson)
             });
           });
-        });
-        deletingMessagesIds = [];
-        folder = "";
-        $(".checkBoxMails").click(function () {
-          folder = $(this).attr("name");
-          let id = $(this).parent().parent().parent().attr("num");
-          if ($(this).is(":checked")) {
-            deletingMessagesIds.push(id);
-          } else {
-            let index = deletingMessagesIds.indexOf(id);
-            deletingMessagesIds.splice(index, 1);
-          }
-          deleteJson = {
-            uids: deletingMessagesIds,
-            folder: folder,
-          };
-          // console.log(deleteJson)
-        });
-      });
+          
+
+          
+      //***********************  Sent mails end  ********************** */
+
+
 
       // Click in menu Trash to delete message begin
 
@@ -294,7 +297,7 @@ $(document).ready(function () {
       $(".mailListGroup").click(function () {
         $(".defaultMail").show(200);
         $(".insteadMailImage").hide(100);
-
+        $(".file_container").html("")
         var mail = $(this).attr("id");
 
         json.forEach((element) => {
@@ -313,6 +316,12 @@ $(document).ready(function () {
             $(".emailImage").text(
               mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
             );
+            if(element.attachments.length > 0) {
+
+              $(".file_container").append("<a href='" + element.attachments[0].download_url+"'> File </a>")
+            }
+            
+            // console.log(element.attachments[0].view_url)
           }
         });
 
