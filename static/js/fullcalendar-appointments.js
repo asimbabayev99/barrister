@@ -381,9 +381,9 @@ $(document).ready(function () {
         'phone': $('#phone_input').val(),
         'address': $('#address_input').val()
       },
-      'start_date': start_date.toISOString(),
-      'end_date': end_date.toISOString(),
-      'status': $('.times-div-3 .validation-reserv').text(),
+      'start': start_date.toISOString(),
+      'end': end_date.toISOString(),
+      'status': $('.validation_input_meeting').text(),
       'detail': $('#detail_input').val() 
     }
     console.log(data)
