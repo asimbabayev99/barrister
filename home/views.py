@@ -708,7 +708,7 @@ def attachment_media_download(request,path):
         with open(path,'rb') as fayl:
             response = HttpResponse(fayl.read(),content_type='{}'.format(magic.from_file(path,mime=True)))
             response['Content-type']  = mimetypes.guess_type(path)
-            response['Content-Disposition'] = 'attachment; filename=' + file_name 
+            response['Content-Disposition'] = 'attachment; filename=' + file_name
             return response
     raise Http404
 
@@ -720,10 +720,11 @@ def attachment_media_view(request,path):
     #     return render(request,'docx_viewer.html',context=context)
     if os.path.exists(path):
         file_name = os.path.basename(path)
+        print(file_name)
         with open(path,'rb') as fayl:
-            response = HttpResponse(fayl.read())
-            response['Content-type']  = mimetypes.guess_type(path)
-            response['Content-length'] = len(fayl.read())
+            response = HttpResponse(fayl.read(),content_type=mimetypes.guess_type(path)[0])
+            response['Content-type']  = mimetypes.guess_type(path)[0]
+            response["Content-Disposition"] = "filename={}".format(file_name)
             return response
     return Http404
 
