@@ -317,7 +317,7 @@ $(document).ready(function () {
               mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
             );
             if(element.attachments.length > 0) {
-              $(".file_container").append('<object data="http://127.0.0.1:8000/email/" width="500" height="200">')
+              $(".file_container").append('<embed src="' +element.attachments[0].view_url +'" width="500" height="200"></embed>')
               $(".file_container").append("<a href='" + element.attachments[0].download_url+"'> File </a>")
             }
             
