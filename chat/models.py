@@ -19,7 +19,7 @@ class Message(models.Model):
 
 class Attachment(models.Model):
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
-    file = models.FileField(null=False, blank=False)
+    file = models.FileField(upload_to='chat/attachments/', null=False)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
