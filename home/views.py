@@ -508,7 +508,7 @@ from account.tasks import get_last_mails
 @xframe_options_exempt
 def email_view(request, folder=None):
     email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
-    get_last_mails.delay(email_acc.email,email_acc.token)
+    # get_last_mails.delay(email_acc.email,email_acc.token)
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
          'subject','sender', 'receiver', 'date', 'flag')
     page = request.GET.get('page')
@@ -621,6 +621,7 @@ def send_email(request):
                 msg.attach(part)
         smtp_conn.sendmail(email,request.POST.get('receiver'),msg.as_string())
         smtp_conn.close()
+        
     return render(request, 'barrister/send_email.html')
 
 
@@ -702,23 +703,23 @@ from home.models import Attachment
 import mimetypes
 
 def attachment_media_download(request,path):
-    path=request.get_full_path()
+    path='media/'+path
+    print(path)
     file_name = os.path.basename(path)
     if os.path.exists(path):
         with open(path,'rb') as fayl:
             response = HttpResponse(fayl.read(),content_type='{}'.format(magic.from_file(path,mime=True)))
             response['Content-type']  = mimetypes.guess_type(path)
-            response['Content-Disposition'] = 'attachment; filename=' + file_name
-            response['Content-length'] = len(fayl.read()) 
+            response['Content-Disposition'] = 'attachment; filename=' + file_name 
             return response
     raise Http404
 
 
 def attachment_media_view(request,path):
-    docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
-    if os.path.splitext(path)[1] in docs_list:
-        context = {'path':request.get_host()+'/'+path}
-        return render(request,'docx_viewer.html',context=context)
+    # docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
+    # if os.path.splitext(path)[1] in docs_list:
+    #     context = {'path':request.get_host()+'/'+path}
+    #     return render(request,'docx_viewer.html',context=context)
     if os.path.exists(path):
         file_name = os.path.basename(path)
         with open(path,'rb') as fayl:

@@ -851,7 +851,7 @@ class EmailDetail(APIView):
 
 
 import imapclient
-from account.tasks import move_mail_folder , delete_mail
+from account.tasks import delete_mail
 class EmailFolderMove(APIView):
     
     def post(self,request):
@@ -879,23 +879,12 @@ class EmailFolderMove(APIView):
         client.select_folder(from_folder)
         client.add_flags(mail_uids,'\Flagged')
         client.move(mail_uids,to_folder)
-        move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
+        # move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
         return Response({'mails':'moved succesfully'})
         
         
 
-class EmailDeleteView(APIView):
 
-    def post(self,request):
-        start = datetime.now()
-        serializer = EmailDeleteSerializer(data=request.data)
-        serializer.is_valid()
-        messages_list = serializer.validated_data['uids']
-        folder = serializer.validated_data['folder']
-        Email.objects.filter(num__in=messages_list).delete()
-        delete_mail.delay(messages_list,folder)
-        end = datetime.now() - start
-        return Response({'emails':'deleted in {}'.format(end)})
 
 class EmailChangeFlag(APIView):
     def post(self,request):
@@ -904,8 +893,21 @@ class EmailChangeFlag(APIView):
         uids = serializer.validated_data['uid']
         folder = serializer.validated_data['folder']
         flag = serializer.validated_data['flag']
-        for i in uids:
-            email = Email.objects.filter(num=i,folder=folder)
-            email.flag = flag
-            email.save()
+        for i in Email.objects.filter(num__in=uids,folder=folder):
+            i.flag = flag
+            i.save()
+    
         return Response({'email':'flag changed'})
+
+class EmailDeleteView(APIView):
+    def post(self,request):
+        folders = {'Inbox':[],'Sent':[],'Draft':[]}
+        serializer  = EmailDeleteSerializer(data = request.data)
+        serializer.is_valid()
+        deleted_uids = serializer.validated_data['uids']
+        emails = Email.objects.filter(num__in=deleted_uids)
+        for folder,uids in folders.items():
+            uids = [x[0] for x in emails.filter(folder=folder).values_list('num')]  
+        emails.delete
+        delete_mail.delay(folders)
+        return Response({'emails':'deleted'})

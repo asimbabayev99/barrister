@@ -574,11 +574,11 @@ class Attachment(models.Model):
 
 
     
+class EmailContact(models.Model):
+    email = models.EmailField(null=False,blank=False)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=False,blank=False)
 
-
-# class Folder(models.Model):
-#     name = models.CharField(max_length=32, choices=FOLDER_CHOICES, null=False, blank=False)
-#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-#     email = models.ManyToManyField(Email)
-
+    def __str__(self):
+        return self.email
+    
 
