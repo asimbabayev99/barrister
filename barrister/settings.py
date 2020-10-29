@@ -92,8 +92,8 @@ WSGI_APPLICATION = 'barrister.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME':'db.sqlite3'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':'db.sqlite3'
 
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': 'test',
@@ -103,12 +103,12 @@ DATABASES = {
         # 'PORT': '5432',
 
         
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'barrister',
-        'USER': 'barrister',
-        'PASSWORD': 'barrister',
-        'HOST': 'barrister.az',
-        'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'barrister',
+        # 'USER': 'barrister',
+        # 'PASSWORD': 'barrister',
+        # 'HOST': 'barrister.az',
+        # 'PORT': '5432',
     }
 }
 
@@ -203,12 +203,12 @@ CELERY_TASK_SERIALIZER = 'json'
 
 
 from celery.schedules import crontab
-# CELERY_BEAT_SCHEDULE = {
-#     'synchronize_mail_schedule': {
-#         'task': "synchronize_mail", 
-#         'schedule': timedelta(minutes=1)
-#     },
-# }
+CELERY_BEAT_SCHEDULE = {
+    'synchronize_mail_schedule': {
+        'task': "synchronize_mail", 
+        'schedule': timedelta(minutes=1)
+    },
+}
 
 
 

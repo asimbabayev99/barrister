@@ -714,10 +714,10 @@ def attachment_media_download(request,path):
 
 
 def attachment_media_view(request,path):
-    docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
-    if os.path.splitext(path)[1] in docs_list:
-        context = {'path':request.get_host()+'/'+path}
-        return render(request,'docx_viewer.html',context=context)
+    # docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
+    # if os.path.splitext(path)[1] in docs_list:
+    #     context = {'path':request.get_host()+'/'+path}
+    #     return render(request,'docx_viewer.html',context=context)
     if os.path.exists(path):
         file_name = os.path.basename(path)
         with open(path,'rb') as fayl:
