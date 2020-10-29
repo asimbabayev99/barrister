@@ -15,53 +15,39 @@ from account.models import CustomUser
 from home.models import EmailAccount, Email, Attachment , Receiver
 
 
-def GenerateOAuth2String(email, access_token, base64_encode=True):
-  """Generates an IMAP OAuth2 authentication string.
-
-  See https://developers.google.com/google-apps/gmail/oauth2_overview
-
-  Args:
-    username: the username (email address) of the account to authenticate
-    access_token: An OAuth2 access token.
-    base64_encode: Whether to base64-encode the output.
-
-  Returns:
-    The SASL argument for the OAuth2 mechanism.
-  """
-  auth_string = 'user=%s\1auth=Bearer %s\1\1' % (email, access_token)
-  if base64_encode:
-    auth_string = base64.b64encode(auth_string)
-  return auth_string
 
 
-
-
-@shared_task(name='move_mail_folder')
-def move_mail_folder(email,token,to_folder,mail_uids):
-  client = imapclient.IMAPClient('imap.yandex.ru')
-  client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
-  client.select_folder(to_folder)
-  mails = client.search(['Flagged'])
-  print(mails)
-  print(mail_uids)
-  for i in range(len(mails)):
-    email = Email.objects.get(num=mail_uids[i],folder=to_folder,flag='Flagged')
-    email.num = mails[i]
-    email.flag = 'Seen'
-    email.save()
-  client.remove_flags(mails,'\Flagged')
-  return "Mails moved"
+# @shared_task(name='move_mail_folder')
+# def move_mail_folder(email,token,to_folder,mail_uids):
+#   client = imapclient.IMAPClient('imap.yandex.ru')
+#   client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+#   client.select_folder(to_folder)
+#   mails = client.search(['Flagged'])
+#   print(mails)
+#   print(mail_uids)
+#   for i in range(len(mails)):
+#     email = Email.objects.get(num=mail_uids[i],folder=to_folder,flag='Flagged')
+#     email.num = mails[i]
+#     email.flag = 'Seen'
+#     email.save()
+#   client.remove_flags(mails,'\Flagged')
+#   return "Mails moved"
   
   
 
   
 @shared_task(name='delete_mail')
-def delete_mail(mail_uids,folder):
+def delete_mail(folders):
   client = imapclient.IMAPClient('imap.yandex.ru')
   client.oauth2_login('azadmammedov@yandex.ru','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
-  client.select_folder(folder)
-  print(client.delete_messages(mail_uids))
-  return 'emails deleted'
+  for folder,uids in folders.items():
+    client.select_folder(folder)
+    client.delete_messages(uids)
+  
+  return "Mails deleted"
+
+
+
 
 
 

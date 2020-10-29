@@ -701,7 +701,8 @@ from home.models import Attachment
 import mimetypes
 
 def attachment_media_download(request,path):
-    path=request.get_full_path()
+    path='media/'+path
+    print(path)
     file_name = os.path.basename(path)
     if os.path.exists(path):
         with open(path,'rb') as fayl:

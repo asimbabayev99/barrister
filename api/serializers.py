@@ -355,7 +355,7 @@ class EmailFolderMoveSerializer(serializers.Serializer):
 
 class EmailDeleteSerializer(serializers.Serializer):
     uids = serializers.ListField(child=serializers.CharField(required=True))
-    folder = serializers.CharField(required=True)
+    # folder = serializers.CharField(required=True)
 
 class EmailFlagSerializer(serializers.Serializer):
     uids = serializers.ListField(child=serializers.CharField(required=True))
