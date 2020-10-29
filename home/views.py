@@ -708,8 +708,7 @@ def attachment_media_download(request,path):
         with open(path,'rb') as fayl:
             response = HttpResponse(fayl.read(),content_type='{}'.format(magic.from_file(path,mime=True)))
             response['Content-type']  = mimetypes.guess_type(path)
-            response['Content-Disposition'] = 'attachment; filename=' + file_name
-            response['Content-length'] = len(fayl.read()) 
+            response['Content-Disposition'] = 'attachment; filename=' + file_name 
             return response
     raise Http404
 
