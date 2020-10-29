@@ -150,8 +150,6 @@ def synchronize_mail():
 @shared_task(name = "get_last_mail")
 def get_last_mails(email,token):
   account = EmailAccount.objects.get(email=email,token=token)
-
-  print("getting last mails")
   client = imapclient.IMAPClient('imap.yandex.ru')
   client.oauth2_login(email,token)
   mail_folders = ['Inbox','Spam',]
@@ -164,8 +162,6 @@ def get_last_mails(email,token):
       last_num = Email.objects.filter(folder=folder).last().num
     except:
       last_num = 0 
-    print(last_num) 
-    print(messages)
     for uid, message_data in client.fetch(messages,'RFC822').items():
       if int(last_num) < uid:   
         raw_email = message_data['RFC822'.encode()]

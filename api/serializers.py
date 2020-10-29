@@ -305,8 +305,6 @@ class AppointmentContactSerializer(serializers.ModelSerializer):
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
-    start = serializers.DateField(format="%d/%m/%Y %H:%M")
-    end = serializers.DateField(format="%d/%m/%Y %H:%M")
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
 
     def update(self,instance,validated_data):
