@@ -256,19 +256,17 @@ $(document).ready(function () {
   // load appointments to calendar
   $.get("/api/appointments/list/", function (data) {
     console.log(data)
-    // for (i = 0; i < data.length; i++) {
-    //   eventData = {
-    //     title: data[i].name,
-    //     start: data[i].start,
-    //     end: data[i].end,
-    //     mekan: data[i].location,
-    //     hour: data[i].end.split(' ')[1],
-    //     begin_hour: data[i].start.split(' ')[1],
-    //     id: data[i].id,
-    //     type: 'appointment'
-    //   };
-    //   $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
-    // }
+    for (i = 0; i < data.length; i++) {
+      eventData = {
+        start: data[i].start,
+        end: data[i].end,
+        address: data[i].address,
+        phone : data[i].phone,
+        id: data[i].id,
+        type: 'appointment'
+      };
+      $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+    }
   });
 
   //click to save "save"
@@ -375,7 +373,7 @@ $(document).ready(function () {
     end_date =  new Date(start_date.getTime() + timeInterval*60000);
         
     var data = {
-      'profile': {
+      'contact': {
         'name': $('#name_input').val(),
         'email': $('#email_input').val(),
         'phone': $('#phone_input').val(),
