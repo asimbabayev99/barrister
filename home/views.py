@@ -18,6 +18,7 @@ import smtplib,ssl,base64
 from datetime import datetime
 from smtplib import SMTP
 from email.mime.multipart import MIMEMultipart,MIMEBase
+from django.views.decorators.clickjacking import xframe_options_exempt
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email import encoders
@@ -504,6 +505,7 @@ def barrister_completed_tasks(request):
 
 from account.tasks import get_last_mails
 @login_required(login_url='/account/login')
+@xframe_options_exempt
 def email_view(request, folder=None):
     email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
     # get_last_mails.delay(email_acc.email,email_acc.token)
@@ -708,7 +710,7 @@ def attachment_media_download(request,path):
         with open(path,'rb') as fayl:
             response = HttpResponse(fayl.read(),content_type='{}'.format(magic.from_file(path,mime=True)))
             response['Content-type']  = mimetypes.guess_type(path)
-            response['Content-Disposition'] = 'attachment; filename=' + file_name 
+            response['Content-Disposition'] = 'attachment; filename=' + file_name
             return response
     raise Http404
 
@@ -720,10 +722,11 @@ def attachment_media_view(request,path):
     #     return render(request,'docx_viewer.html',context=context)
     if os.path.exists(path):
         file_name = os.path.basename(path)
+        print(file_name)
         with open(path,'rb') as fayl:
-            response = HttpResponse(fayl.read())
-            response['Content-type']  = mimetypes.guess_type(path)
-            response['Content-length'] = len(fayl.read())
+            response = HttpResponse(fayl.read(),content_type=mimetypes.guess_type(path)[0])
+            response['Content-type']  = mimetypes.guess_type(path)[0]
+            response["Content-Disposition"] = "filename={}".format(file_name)
             return response
     return Http404
 
