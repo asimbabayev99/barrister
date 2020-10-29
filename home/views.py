@@ -506,7 +506,7 @@ from account.tasks import get_last_mails
 @login_required(login_url='/account/login')
 def email_view(request, folder=None):
     email_acc , created = EmailAccount.objects.get_or_create(user=request.user)
-    get_last_mails.delay(email_acc.email,email_acc.token)
+    # get_last_mails.delay(email_acc.email,email_acc.token)
     emails = Email.objects.filter(user=request.user, folder=folder).order_by('-date').values(
          'subject','sender', 'receiver', 'date', 'flag')
     page = request.GET.get('page')
@@ -619,6 +619,7 @@ def send_email(request):
                 msg.attach(part)
         smtp_conn.sendmail(email,request.POST.get('receiver'),msg.as_string())
         smtp_conn.close()
+        
     return render(request, 'barrister/send_email.html')
 
 
