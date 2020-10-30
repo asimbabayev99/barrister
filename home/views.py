@@ -715,6 +715,7 @@ def attachment_media_download(request,path):
     raise Http404
 
 
+@xframe_options_exempt
 def attachment_media_view(request,path):
    
     if os.path.exists(path):
