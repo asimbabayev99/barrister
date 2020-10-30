@@ -715,6 +715,7 @@ def attachment_media_download(request,path):
     raise Http404
 
 
+@xframe_options_exempt
 def attachment_media_view(request,path):
     # docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
     # if os.path.splitext(path)[1] in docs_list:
