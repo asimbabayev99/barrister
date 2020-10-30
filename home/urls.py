@@ -52,7 +52,7 @@ urlpatterns = [
 
     re_path(r'media/(?P<path>.*)', attachment_media_download, name='attachment-download'),
     # re_path(r'view/(?P<path>.*)',attachment_media_download,name='attachment-view') 
-
+    path('docviewer/',viewer_test)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

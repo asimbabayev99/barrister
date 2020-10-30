@@ -716,22 +716,20 @@ def attachment_media_download(request,path):
 
 
 def attachment_media_view(request,path):
-    # docs_list = ['.docx','.doc','.xls','.ppt','.csv',]
-    # if os.path.splitext(path)[1] in docs_list:
-    #     context = {'path':request.get_host()+'/'+path}
-    #     return render(request,'docx_viewer.html',context=context)
+   
     if os.path.exists(path):
         file_name = os.path.basename(path)
         print(file_name)
         with open(path,'rb') as fayl:
             response = HttpResponse(fayl.read(),content_type=mimetypes.guess_type(path)[0])
             response['Content-type']  = mimetypes.guess_type(path)[0]
-            response["Content-Disposition"] = "filename={}".format(file_name)
+            response["Content-Disposition"] = "filename={}".format(file_name) 
             return response
     return Http404
 
 
-    
+def viewer_test(request):
+    return render(request,'docx_viewer.html')    
 
 
 def email_draft(request):
