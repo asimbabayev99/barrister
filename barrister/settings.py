@@ -203,13 +203,13 @@ CELERY_TASK_SERIALIZER = 'json'
 
 
 from celery.schedules import crontab
-CELERY_BEAT_SCHEDULE = {
-    'synchronize_mail_schedule': {
-        'task': "synchronize_mail", 
-        'schedule': timedelta(minutes=1)
-    },
-}
-
+# CELERY_BEAT_SCHEDULE = {
+#     'synchronize_mail_schedule': {
+#         'task': "synchronize_mail", 
+#         'schedule': timedelta(minutes=1)
+#     },
+# }
+ 
 
 
 ASGI_APPLICATION = 'barrister.routing.application'
