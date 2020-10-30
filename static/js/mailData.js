@@ -337,6 +337,9 @@ $(document).ready(function () {
                     $(this).attr("url")
                   );
                 });
+                $(".save_as").click(function() {
+                  
+                })
               }
 
               /// If txt file do this end

@@ -865,20 +865,19 @@ class EmailFolderMove(APIView):
         mail_uids = serializer.validated_data['uids']
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
-        if Email.objects.filter(num__in=mail_uids,folder=to_folder,flag='Flagged').exists():
-            move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
-            return Response({'mails':'processing'})
-        for i in mail_uids:           
+        client.select_folder(from_folder)
+        client.move(mail_uids,to_folder)
+        client.select_folder(to_folder)
+        new_uids = client.search(['RECENT','NOT','UNSEEN'])
+        for i in range(len(new_uids)):           
             try:
-                email = Email.objects.get(num=i,folder=from_folder)
+                email = Email.objects.get(num=mail_uids[i],folder=from_folder)
             except:
                 return Response({'this emails'})
             email.folder = to_folder
-            email.flag = "Flagged"
+            email.flag = "Seen"
+            email.num = new_uids[i]
             email.save()        
-        client.select_folder(from_folder)
-        client.add_flags(mail_uids,'\Flagged')
-        client.move(mail_uids,to_folder)
         # move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
         return Response({'mails':'moved succesfully'})
         

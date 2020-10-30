@@ -1,0 +1,41 @@
+apache servere django qosmaq:
+1 python 3 yukle
+2 pip3 le modullari yukle
+3 pip3 le virtualenv yukle
+4 her hansi bir yerde env papkasi acmaq adini env qoymaq
+5 sudo a2ensite myproject.conf
+5 restart elemek 
+
+note sudo tail error.logu gormek ucun
+
+ 
+---------------------------------------------
+1 conf faylinde Wsgini commente alirsan(1 ci)
+2 sudo certbot -d www.lua.az -d lua.az
+3 uncomment step 1
+4 teze acilan fileda da wsgi ni commentden cixar
+5 sudo systemctl reload apache2.service
+-------------------------------------------------------------------------------------------------------------
+binary search sort olunmus arrayda arrayi yariya bolerek gedir
+----------------------------------------------------------------
+azadmammedov1@outlook.com
+
+---------------------------------
+ssupp0rt12345
+------------------
+mysql parol luagroup1
+server parol Luagroup1
+
+
+
+987424488540-a373ekvd62jbaoffoiqsh1eal76lcfbs.apps.googleusercontent.com
+
+
+
+https://github.com/azad-mammedov/Intelpro.git
+
+
+
+
+
+62.171.163.247:63045

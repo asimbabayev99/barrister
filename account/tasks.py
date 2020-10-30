@@ -17,21 +17,21 @@ from home.models import EmailAccount, Email, Attachment , Receiver
 
 
 
-# @shared_task(name='move_mail_folder')
-# def move_mail_folder(email,token,to_folder,mail_uids):
-#   client = imapclient.IMAPClient('imap.yandex.ru')
-#   client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
-#   client.select_folder(to_folder)
-#   mails = client.search(['Flagged'])
-#   print(mails)
-#   print(mail_uids)
-#   for i in range(len(mails)):
-#     email = Email.objects.get(num=mail_uids[i],folder=to_folder,flag='Flagged')
-#     email.num = mails[i]
-#     email.flag = 'Seen'
-#     email.save()
-#   client.remove_flags(mails,'\Flagged')
-#   return "Mails moved"
+@shared_task(name='move_mail_folder')
+def move_mail_folder(email,token,to_folder,mail_uids):
+  client = imapclient.IMAPClient('imap.yandex.ru')
+  client.oauth2_login('azadmammedov@yandex.com','AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E')
+  client.select_folder(to_folder)
+  mails = client.search(['Flagged'])
+  print(mails)
+  print(mail_uids)
+  for i in range(len(mails)):
+    email = Email.objects.get(num=mail_uids[i],folder=to_folder,flag='Flagged')
+    email.num = mails[i]
+    email.flag = 'Seen'
+    email.save()
+  client.remove_flags(mails,'\Flagged')
+  return "Mails moved"
   
   
 
@@ -66,7 +66,7 @@ def synchronize_mail():
       mail.oauth2_login(email.email,email.token)
     except:
       continue
-    mail_folders = ['Inbox','Drafts','Sent','Spam','Trash']
+    mail_folders = ['Inbox','Drafts','Sent','Spam']
     user = EmailAccount.objects.get(email=email.email).user
     # loop th rough mail folders
     for folder in mail_folders:
@@ -143,7 +143,7 @@ def get_last_mails(email,token):
   # loop th rough mail folders
   for folder in mail_folders:
     client.select_folder(folder)
-    messages = client.search(['NEW','NOT','Flagged'])
+    messages = client.search(['UNSEEN','NOT','Flagged'])
     try:
       last_num = Email.objects.filter(folder=folder).last().num
     except:
