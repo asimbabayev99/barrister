@@ -299,7 +299,20 @@ $(document).ready(function () {
         $(".insteadMailImage").hide(100);
         $(".file_container").html("")
         var mail = $(this).attr("id");
-
+        var num = $(this).attr("num")
+        $(".mailListGroup").each(element =>{
+          if( $(this).attr("num") == num ){
+            $(this).addClass("bg-primary text-light")
+          }
+        })
+        $(".mailListGroup").each(function(){
+          if($(this)[0].id == mail) {
+            $(this).addClass("bg-primary text-light")
+          } else {
+            $(this).removeClass("bg-primary text-light")
+          }
+        }
+        )
         json.forEach((element) => {
           if (element.id == mail) {
             $(".mailSubject").text(element.sender);
