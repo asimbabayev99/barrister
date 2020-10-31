@@ -209,7 +209,7 @@ from celery.schedules import crontab
 #         'schedule': timedelta(minutes=1)
 #     },
 # }
-
+ 
 
 
 ASGI_APPLICATION = 'barrister.routing.application'
