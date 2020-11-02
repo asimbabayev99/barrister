@@ -1,5 +1,8 @@
 from django.db import models
 from account.models import CustomUser
+import uuid
+import os
+from django.conf import settings
 # Create your models here.
 
 
@@ -18,10 +21,27 @@ class Message(models.Model):
         ]
 
 
+
+
+# def path_and_rename(path):
+#     def wrapper(instance, filename):
+#         ext = filename.split('.')[-1]
+#         filename = '{}.{}'.format(uuid.uuid1(), ext)
+#         return os.path.join(path, filename)
+#     return wrapper
+
+
+def path_and_rename(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = '{}.{}'.format(uuid.uuid1(), ext)
+    return 'chat/attachments/' + filename
+    # return os.path.join(settings.MEDIA_ROOT, 'chat', 'attachments', filename)
+
+
 class Attachment(models.Model):
-    message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    message = models.OneToOneField(Message, related_name='attachment', on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
-    file = models.FileField(upload_to='chat/attachments/', null=True)
+    file = models.FileField(upload_to=path_and_rename, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
