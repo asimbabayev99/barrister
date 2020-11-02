@@ -46,6 +46,7 @@ def synchronize_mail():
     print("start to synchronize mail")
     server = 'imap.yandex.ru'
     mail = imapclient.IMAPClient('imap.yandex.ru')
+    print(email.email,email.token)
     try:
       mail.oauth2_login(email.email,email.token)
     except:
@@ -57,12 +58,13 @@ def synchronize_mail():
       mail.select_folder(folder)
       messages = mail.search('All')
       #remove deleted emails from database
+      emails =Email.objects.filter(folder=folder,user=user)
       try:
-        last_num = Email.objects.filter(folder=folder).last().num
+        last_num = emails.last().num
       except:
         last_num = 0 
       print(last_num) 
-      db_uids = set([int(x[0]) for x in Email.objects.filter(folder=folder).order_by('num').values_list('num')])
+      db_uids = set([int(x[0]) for x in emails.order_by('num').values_list('num')])
       actual_uids = set(mail.fetch(messages,'RFC822').keys())
       print('-'*30)
       print('folder:',folder)
@@ -70,7 +72,7 @@ def synchronize_mail():
       print('actual:',actual_uids)
       print('difference:',db_uids.difference(actual_uids))
       for i in db_uids.difference(actual_uids):
-        Email.objects.filter(folder=folder,num=i).delete()
+        emails.filter(num=i).delete()
       print('-'*30)
       # messages = mail.search('UNSEEN')
       print(messages)
