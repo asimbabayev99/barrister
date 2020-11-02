@@ -807,9 +807,11 @@ $(document).ready(function () {
           deletingMessagesIds.splice(index, 1);
         }
         deleteJson = {
-          uids: deletingMessagesIds,
-          folder: folder,
-          flag: "Deleted",
+
+          "uids": deletingMessagesIds,
+          "folder": folder,
+          "flag" : "Deleted"
+
         };
       });
 
@@ -836,22 +838,24 @@ $(document).ready(function () {
         }
       })
     })
+    
+    console.log(JSON.stringify(deleteJson));
     $.ajax({
-      type: "POST",
-      url: "/api/email/change/flag",
-      headers: { "X-CSRFToken": getCookie("csrftoken") },
-      body: {
-        deleteJson,
-      },
+      type: 'POST',
+      url: '/api/email/change/flag',
+      headers: { "X-CSRFToken": getCookie('csrftoken') },
+      data : JSON.stringify(deleteJson),
       contentType: "application/json; charset=utf-8",
 
       success: function (data) {
-        console.log("success");
+
+        console.log(data)
       },
 
-      error: function (jqXhr, textStatus, errorMessage) {
-        // alert(errorMessage);
-      },
+      error: function (data,jqXhr, textStatus, errorMessage) {
+          console.log(data)
+      }
+
     });
   });
 });
