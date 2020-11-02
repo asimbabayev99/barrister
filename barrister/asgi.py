@@ -8,7 +8,7 @@ import chat.routing
 
 from chat.consumers import AdminChatConsumer, PublicChatConsumer
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "barrister.settings")
 
 application = ProtocolTypeRouter({
     # Django's ASGI application to handle traditional HTTP requests
