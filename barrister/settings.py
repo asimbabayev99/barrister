@@ -211,7 +211,7 @@ CELERY_BEAT_SCHEDULE = {
  
 
 
-ASGI_APPLICATION = 'barrister.routing.application'
+# ASGI_APPLICATION = 'barrister.routing.application'
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
