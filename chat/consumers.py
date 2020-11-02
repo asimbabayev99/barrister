@@ -1,5 +1,7 @@
 from asgiref.sync import async_to_sync
+from django.core.files import File
 from channels.generic.websocket import AsyncWebsocketConsumer
+from django.conf import settings
 from account.models import CustomUser
 from chat.models import Message, Attachment
 from datetime import datetime
@@ -8,7 +10,7 @@ import base64
 import json
 import os
 import uuid
-from django.conf import settings
+# from channels.layers import get_channel_layer
 
 
 @database_sync_to_async
@@ -39,11 +41,14 @@ def delete_message(**data):
 @database_sync_to_async
 def save_attachment(**data):
     message_id = data.get('message_id')
-    name = data.get('name')
-    upload_file = data.get('file')
-    attachment = Attachment(message_id=message_id, name=name)
+    original_name =  data.get('original_name')
+    filename = data.get('filename')
+    path = data.get('path')
+    upload_file = open(path, 'rb')
+    
+    attachment = Attachment(message_id=message_id, name=original_name)
+    attachment.file.name = path.replace(settings.MEDIA_ROOT, '') 
     attachment.save()
-    attachment.file.save(name, File(upload_file))
 
     attachment.save()
     return attachment
@@ -73,6 +78,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         data = json.loads(text_data)
+        # print(data)
         message_type = data.get('type')
         action = data.get('action')
 
@@ -85,7 +91,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             if action == 'post':
                 message = data['message']
                 # Store message.
-                msg = await save_message(message=message, sender=sender.id, receiver=receiver.id)
+                msg = await save_message(message=message, sender=sender, receiver=receiver)
             elif action == "delete":
                 message = ""
                 id = data['id']
@@ -118,42 +124,51 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'id': msg.id,
                     'message': message,
                     'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
-                    'sender': sender.id,
-                    'receiver': receiver.id
+                    'sender': sender,
+                    'receiver': receiver
                 }
             )
         # if message type is file
-        elif message_type == "file" or True:
-            if action == "prepare":
-                await self.channel_layer.group_send(
-                    self.room_group_name,
-                    {
-                        'type': 'handle_json',
-                        'sender': sender,
-                        'receiver': receiver,
-                        'file_name': data.get('file_name'),
-                        'file_size': data.get('file_size'),
-                    }
-                )
-            elif action == "progress" or True:
-                await self.channel_layer.group_send(
-                    self.room_group_name,
-                    {
-                        'type': 'handle_chunk',
-                        'file_size': data.get('file_size'),
-                        'sender': sender,
-                        'receiver': receiver,
-                        'data': data.get('data'),
-                    }
-                )
-            elif action == "post":
-                pass
+        elif message_type == "file":
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_file_message',
+                    'action': action,
+                    'id': data['id'],
+                    'message': data['message'],
+                    'filename': data['filename'],
+                    'url': data['url'],
+                    'date': data['date'],
+                    'sender': sender,
+                    'receiver': receiver
+                }
+            )
+            # if action == "prepare":
+            #     channel_layer = get_channel_layer()
+            #     await channel_layer.send(self.channel_name, {
+            #         'type': 'handle_json',
+            #         'sender': sender,
+            #         'receiver': receiver,
+            #         'file_name': data.get('file_name'),
+            #         'file_size': data.get('file_size'),
+            #     })
+                
+            # elif action == "progress":
+            #     channel_layer = get_channel_layer()
+            #     await channel_layer.send(self.channel_name, {
+            #         'type': 'handle_chunk',
+            #         'file_size': data.get('file_size'),
+            #         'sender': sender,
+            #         'receiver': receiver,
+            #         'data': data.get('data'),
+            #     })
         else: 
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
                     'type': 'handle_error',
-                    'error_message': 'Exception. message_action  be one of these: text, file'
+                    'error_message': 'Message action should be one of these: text, file'
                 }
             )
 
@@ -168,12 +183,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # create file with uuid1 name in media/chat/attachments/ path
         name, extension = os.path.splitext(filename)
-        path = os.path.join(settings.MEDIA_ROOT, 'chat', 'attachments', str(uuid.uuid1()) + extension)
+        name = str(uuid.uuid1()) + extension
+        path = os.path.join(settings.MEDIA_ROOT, 'chat', 'attachments', name)
         f = open(path, 'wb')
 
         # save temporaly file in session
         self.session = {
-            'filename': filename,
+            'original_name': filename,
+            'filename': name,
             'upload_size': size,
             'upload_file': f,
             'sender': sender,
@@ -184,6 +201,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # inform user to send file data
         await self.send(text_data=json.dumps({
             'success': True,
+            'type': 'file',
             'action': 'progress',
             'file_size': 0,
         }))
@@ -210,32 +228,45 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         percent = round((size / upload_size) * 100)
 
-        await self.send(text_data=json.dumps({
-            'action': 'progress',
-            'percent': percent,
-            'file_size': size
-        }))
-
-        if size >= upload_size:
+        
+        if size < upload_size:
+            await self.send(text_data=json.dumps({
+                'success': True,
+                'type': 'file',
+                'action': 'progress',
+                'percent': percent,
+                'file_size': size
+            }))
+        else:
             # self.session['upload_file'].flush()
-            self.session['upload_file'].close()
+            original_name = self.session['original_name']
             filename = self.session['filename']
-            msg = await save_message(sender=sender, receiver=receiver, message='')
-            attch = await save_attachment(message_id=msg.id, name=filename, file=self.session['upload_file'])
-            print("created")
-            print("-"*50)
-            # file_name = await self.handle_complete(self.session['upload_file'])
+            self.session['upload_file'].close()
 
-            # await self.send(text_data=json.dumps({
-            #     'action': 'complete',
-            #     'file_size': size,
-            #     'file_name': file_name
-            # }, close=True))
+            # save attachment
+            msg = await save_message(sender=sender, receiver=receiver, message='')
+            attch = await save_attachment(message_id=msg.id, filename=filename, original_name=original_name, path=self.session['path'])
+
+            # print("created")
+            # print("-"*50)
+
+            await self.send(text_data=json.dumps({
+                'success': True,
+                'message': msg.text,
+                'type': 'file',
+                'action': 'complete',
+                'date': str(attch.date),
+                'file_size': size,
+                'filename': original_name,
+                'file_link': attch.file.url,
+                'sender': sender.id,
+                'receiver': receiver.id,
+            }))
         
     
     async def chat_message(self, event):
         message = event['message']
-        message_type = event['message_type']
+        # message_type = event['type']
         sender = event['sender']
         action = event['action']
         receiver = event['receiver']
@@ -245,11 +276,35 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'success': True,
             'message': message,
-            'type': message_type,
+            'type': 'text',
             'action': action,
             'date': date,
             'sender': sender.id,
             'receiver': receiver.id
+        }))
+
+    
+    async def chat_file_message(self, event):
+        id = event['id']
+        action = event['action']
+        message = event['message']
+        sender = event['sender']
+        receiver = event['receiver']
+        filename = event['filename']
+        url = event['url']
+        date = event['date']
+
+        await self.send(text_data=json.dumps({
+            'success': True,
+            'action': action,
+            'id': id,
+            'message': message,
+            'type': 'file',
+            'filename': filename,
+            'sender': sender.id,
+            'receiver': receiver.id,
+            'url': url,
+            'date': date
         }))
 
     
