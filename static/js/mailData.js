@@ -341,6 +341,11 @@ $(document).ready(function () {
             $(".emailImage").text(
               mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
             );
+<<<<<<< HEAD
+            if(element.attachments.length > 0) {
+              $(".file_container").append('<iframe src="' +element.attachments[0].view_url +'" width="150" height="150"></iframe>')
+              $(".file_container").append("<a href='" + element.attachments[0].download_url+"'> File </a>")
+=======
             if (element.attachments.length > 0) {
               /// If txt file do this begin
 
@@ -376,6 +381,7 @@ $(document).ready(function () {
               }
 
               // If Image file do this end
+>>>>>>> 2d898184bc856c590f8667505d9df9fb45bfc284
             }
 
             // console.log(element.attachments[0].view_url)

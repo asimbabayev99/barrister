@@ -339,26 +339,26 @@
               <div class="mesgs">
                 <div class="msg_history">
                   {% for message in messages %}
-                    {% if message.sender == request.user %}
-                    <div class="outgoing_msg">
-                      <div class="sent_msg">
+                  {% if message.sender == request.user %}
+                  <div class="outgoing_msg">
+                    <div class="sent_msg">
+                      <p>{{message.text}}</p>
+                      <span class="time_date">{{message.date}}</span>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="incoming_msg">
+                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png"
+                        alt="sunil">
+                    </div>
+                    <div class="received_msg">
+                      <div class="received_withd_msg">
                         <p>{{message.text}}</p>
                         <span class="time_date">{{message.date}}</span>
                       </div>
                     </div>
-                    {% else %}
-                    <div class="incoming_msg">
-                      <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png"
-                          alt="sunil">
-                      </div>
-                      <div class="received_msg">
-                        <div class="received_withd_msg">
-                          <p>{{message.text}}</p>
-                          <span class="time_date">{{message.date}}</span>
-                        </div>
-                      </div>
-                    </div>
-                    {% endif %}
+                  </div>
+                  {% endif %}
                   {% endfor %}
                 </div>
                 <div class="type_msg">
@@ -366,6 +366,7 @@
                     <input type="text" class="write_msg" id="chat-message-input" placeholder="Type a message" />
                     <button class="msg_send_btn" id="chat-message-submit" type="button"><i class="fa fa-paper-plane-o"
                         aria-hidden="true"></i></button>
+                    <input type="file" id="input_file">
                   </div>
                 </div>
               </div>
@@ -400,34 +401,82 @@
     'ws://' + window.location.host +
     '/ws/chat/' + roomName + '/');
 
+
+  var load_data = function (index) {
+    var end = index + 1000000;
+    console.log("end = " + end)
+    if (index >= this.file.size) return;
+    if (end > this.file.size) end = this.file.size;
+
+    // chatSocket.send(this.file.slice(index, end));
+    var reader = new FileReader();
+    reader.onload = function () {
+      // var content = event.target.result;
+      var content = reader.result;
+      // console.log(content)
+      console.log(end / 1000000)
+      content = btoa(content)
+      chatSocket.send(JSON.stringify({
+        'message': '',
+        'message_type': 'file',
+        'action': 'progress',
+        'data': content
+      }));
+    };
+
+    reader.readAsBinaryString(this.file.slice(index, end));
+    // reader.readAsArrayBuffer(this.file.slice(index, end));
+
+  }.bind(this);
+
+
+  $("#input_file").change(function () {
+    file = $("#input_file").get(0).files[0];
+    console.log(file)
+    this.file = file
+    chatSocket.send(JSON.stringify({
+      'message': '',
+      'message_type': 'file',
+      'message_action': 'post',
+      'file_name': file.name,
+      'file_size': file.size,
+      'action': 'prepare',
+    }));
+  });
+
   chatSocket.onmessage = function (e) {
     var data = JSON.parse(e.data);
+    console.log(data)
     var message = data['message'];
     var sender = data['sender'];
     var date = data['date'];
-    if(sender == current_user){
+    var action = data['action']
+    if (sender == current_user) {
       document.querySelector('.msg_history').innerHTML += (
-        "<div class='outgoing_msg'>" + 
-          "<div class='sent_msg'>" + 
-            "<p>" + message + "</p>" + 
-            "<span class='time_date'>" + date + "</span>" + 
-          "</div>" + 
+        "<div class='outgoing_msg'>" +
+        "<div class='sent_msg'>" +
+        "<p>" + message + "</p>" +
+        "<span class='time_date'>" + date + "</span>" +
+        "</div>" +
         "</div>"
       )
     } else {
       document.querySelector('.msg_history').innerHTML += (
-        "<div class='incoming_msg'>" + 
-          "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" + 
-          "<div class='received_msg'>" + 
-            "<div class='received_withd_msg'>" +
-              "<p>" + message + "</p>" + 
-              "<span class='time_date'>" + date + "</span>" +
-            "</div>" +
-          "</div>" +
+        "<div class='incoming_msg'>" +
+        "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
+        "<div class='received_msg'>" +
+        "<div class='received_withd_msg'>" +
+        "<p>" + message + "</p>" +
+        "<span class='time_date'>" + date + "</span>" +
+        "</div>" +
+        "</div>" +
         "</div>"
-      ); 
+      );
     }
-    document.querySelector('#chat-log').value += (message + '\n');
+    if (action == 'progress') {
+      load_data(data.file_size);
+    }
+    // document.querySelector('#chat-log').value += (message + '\n');
   };
 
   chatSocket.onclose = function (e) {
@@ -446,8 +495,8 @@
     var message = messageInputDom.value;
     chatSocket.send(JSON.stringify({
       'message': message,
-      'message_type': 'text',
-      'message_action': 'post'
+      'type': 'text',
+      'action': 'post'
     }));
 
     messageInputDom.value = '';
