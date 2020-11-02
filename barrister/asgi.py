@@ -12,7 +12,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
 application = ProtocolTypeRouter({
     # Django's ASGI application to handle traditional HTTP requests
-    "http": get_asgi_application()
+    "http": get_asgi_application(),
 
     # WebSocket chat handler
     "websocket": AuthMiddlewareStack(
