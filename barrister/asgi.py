@@ -6,8 +6,6 @@ from django.conf.urls import url
 from django.core.asgi import get_asgi_application
 import chat.routing
 
-from chat.consumers import AdminChatConsumer, PublicChatConsumer
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "barrister.settings")
 
 application = ProtocolTypeRouter({
