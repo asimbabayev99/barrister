@@ -821,11 +821,11 @@ class EmailList(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Email.objects.all().prefetch_related('attachments')
+        return Email.objects.filter(user=user).prefetch_related('attachments')
     
     serializer_class = EmailSerializer
-    # permission_classes = [IsAuthenticated,AllowAny]
-    # authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['sender', 'receiver','folder','flag']
     search_fields = ['sender', 'receiver','folder','flag']
@@ -865,20 +865,18 @@ class EmailFolderMove(APIView):
         mail_uids = serializer.validated_data['uids']
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
-        emails = Email.objects.filter(num__in=mail_uids).filter(folder=from_folder)
+        emails = Email.objects.filter(num__in=mail_uids).filter(folder=from_folder).order_by('-num')
         client.select_folder(from_folder)
         client.move(mail_uids,to_folder)
         client.select_folder(to_folder)
-        new_uids = client.search(['RECENT','NOT','UNSEEN'])
+        new_uids = client.search(['RECENT','NOT','UNSEEN'])[::-1]
+        print(new_uids)
+        print(emails)
         for index,email in enumerate(emails):       
             email.folder = to_folder
             email.flag = 'Seen'
             email.num = new_uids[index]
             email.save()
-        print(client.search('Recent'))
-        print(client.close_folder())
-        print(client.select_folder(to_folder))
-        print(client.search('Recent'))
         return Response({'mails':'moved succesfully'})
         
         

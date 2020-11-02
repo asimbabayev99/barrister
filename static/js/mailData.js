@@ -1,4 +1,25 @@
 $(document).ready(function () {
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+
+
+
+
+
   var isDataCame = false,
     inbox = [],
     deleteJson = {};
@@ -7,7 +28,15 @@ $(document).ready(function () {
       '<li id="preLoader" class="list-group-item align-items-center justify-content-center"><div class="spinner-grow float-left"  role="status"><span class="sr-only"> Loading...</span></div> <div class="float-left  h-100 d-flex align-items-center"> Loading...</div></li>'
     );
   }
-  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date")
+  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date",{
+    headers:{
+      'X-CSRFToken':getCookie('csrftoken')
+    }
+
+
+
+
+  })
     .then((response) => response.json())
     .then((json) => {
       if (Object.keys(json).length === 0) {
@@ -19,6 +48,17 @@ $(document).ready(function () {
       }
       json.forEach((element) => {
         if (element.folder === "Inbox") {
+          var subjectLen = element.subject.length
+          var subjectString = "";
+          if(subjectLen > 15) {
+            
+            for(let i = 0;i<15;i++) {
+              subjectString += element.subject[i]
+            }
+            subjectString += "..."
+          }else {
+            subjectString = element.subject
+          }
           $("#mailContent").append(
             "<li  num=" +
               element.num +
@@ -30,7 +70,7 @@ $(document).ready(function () {
               '" id="mailCheckboxes"><span class="emailNameTitle">' +
               element.sender +
               '</span><span class="emailSubject">' +
-              element.subject +
+              subjectString +
               "</span></span>" +
               "</li>"
           );
@@ -126,6 +166,7 @@ $(document).ready(function () {
       //***********************  Sent mails begin  ********************** */
       $(".sendingMails").click(function () {
         $("#mailContent").html("");
+
         json.forEach((element) => {
           if (element.folder == "Sent") {
             $("#mailContent").append(
@@ -202,7 +243,7 @@ $(document).ready(function () {
                 element.num +
                 ' id="' +
                 element.id +
-                '" class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="' +
+                '"class="list-group-item d-flex align-items-center mailListGroup"><div class="d-flex h-100 w-100 align-items-center justify-content-between"><span class="d-flex align-items-center"><input type="checkbox" class="checkBoxMails" name="' +
                 element.folder +
                 '" id="mailCheckboxes"><span class="emailNameTitle">' +
                 element.sender +
@@ -243,13 +284,6 @@ $(document).ready(function () {
                       "" +
                       endTime[1];
                     let mailSender = element.sender.split("");
-                    let color = [
-                      "purple",
-                      "blue",
-                      "green",
-                      "maroon",
-                      "darkorange",
-                    ];
                     $(".emailImage").html(
                       mailSender[0].toUpperCase() +
                         "" +
@@ -290,6 +324,7 @@ $(document).ready(function () {
         $(".defaultMail").show(200);
         $(".insteadMailImage").hide(100);
         $(".file_container .list-group").html("");
+        $(".file_container .file_image").html("")
         var mail = $(this).attr("id");
         var num = $(this).attr("num");
         $(".mailListGroup").each((element) => {
@@ -309,6 +344,8 @@ $(document).ready(function () {
             $(".mailSubject").text(element.sender);
             $(".mailSubject").attr("id", mail);
             $(".mailSender").text(element.sender);
+            let subjectLen = element.subject.length
+            
             $(".mailSubjectExpand").text(element.subject);
             let time = element.date.split("-");
             let endTime = time[2].split("");
@@ -320,53 +357,79 @@ $(document).ready(function () {
             $(".emailImage").text(
               mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
             );
-<<<<<<< HEAD
-            if(element.attachments.length > 0) {
-              $(".file_container").append('<iframe src="' +element.attachments[0].view_url +'" width="150" height="150"></iframe>')
-              $(".file_container").append("<a href='" + element.attachments[0].download_url+"'> File </a>")
-=======
             if (element.attachments.length > 0) {
               /// If txt file do this begin
-
-              if (element.attachments[0].view_url.endsWith(".txt")) {
-                $(".file_container .list-group").append(
-                  "<li class='list-group-item d-flex align-items-center justify-content-between'><span>Mətn faylı</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
-                   "https://docs.google.com/gview?url=" + element.attachments[0].view_url + "&embedded=true" +
-                    " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
-                    element.attachments[0].download_url +
-                    "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
-                );
-                $(".show_modal_email").click(function () {
-                  $("#file_showing_modal .modal-body iframe").attr(
-                    "src",
-                    $(this).attr("url")
+              // console.log(element.attachments)
+              var attachment = []
+              element.attachments.forEach(element => {
+                if (element.view_url.endsWith(".txt")) {
+                  $(".file_container .list-group").append(
+                    "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" + element.name + "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                     "" + element.view_url  +
+                      " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                      element.download_url +
+                      "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
                   );
-                });
-              }
+                  $(".show_modal_email").click(function () {
+                    $("#file_showing_modal .modal-body iframe").removeClass("d-none")
+                    $("#file_showing_modal .modal-body .email_image").addClass("d-none")
+                    $("#file_showing_modal .modal-body iframe").attr(
+                      "src",
+                      $(this).attr("url")
+                    );
+                  });
+                  
+                }
+                else if (
+                  element.view_url.endsWith(".jpg") ||
+                  element.view_url.endsWith(".png") ||
+                  element.view_url.endsWith(".jpeg")
+                ) {
+                  
+                  $(".file_container .file_image").append("" 
+                  + "<div class='col-md-6  col-lg-4 mb-3' style='height:150px;position:relative'>" +
+                  
+                  "<img style='height : 100%;object-fit:cover;position:relative;' class='w-100 mail_image' src="+ element.view_url +">"+
 
-              /// If txt file do this end
-
-              // If Image file do this begin
-              else if (
-                element.attachments[0].view_url.endsWith(".jpg") ||
-                element.attachments[0].view_url.endsWith(".png") ||
-                element.attachments[0].view_url.endsWith(".jpeg")
-              ) {
-                $(".file_container .file_image").append("" 
-                + "<div class='col-md-6 col-lg-4'>" +
-                "<img style='height : "+ $(this).parent().css("width") +"' class='w-100' src="+ element.attachments[0].view_url +"></img>" +
-                "</div>"
-                + "");
-              }
-
-              // If Image file do this end
->>>>>>> 2d898184bc856c590f8667505d9df9fb45bfc284
-            }
-
-            // console.log(element.attachments[0].view_url)
+                  "<button data-toggle='modal' data-target='#file_showing_modal' url="+ element.view_url +" class='show_modal_email_image btn btn-sm btn-dark absolute_email_btn_2 mr-3'><i class='fas fa-eye'></i></button>" +
+                  "<a href="+ element.download_url +"><button class='btn btn-sm btn-dark absolute_email_btn'><i class='fas fa-download'></i></button></a>" + 
+                  "</img>" +
+                  "</div>"
+                  + "");
+                  $(".show_modal_email_image").click(function () {
+                    $("#file_showing_modal .modal-body iframe").addClass("d-none");
+                    $("#file_showing_modal .modal-body .email_image").removeClass("d-none")
+                    $("#file_showing_modal .modal-body .email_image").html("" +
+                    "<img style='width:100%; height:100%;object-fit:contain' src=" + $(this).attr("url") + "></img>" +
+                    "")
+                  });
+                }
+                else if(element.view_url.endsWith(".rar") || element.view_url.endsWith(".zip")) {
+                  $(".file_container .list-group").append(
+                    "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" + element.name +" <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                      element.download_url +
+                      "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                  );
+                }
+                else if(element.view_url.endsWith(".docx") || element.view_url.endsWith(".ppt") || element.view_url.endsWith(".xls") ) {
+                  $(".file_container .list-group").append(
+                    "<li class='list-group-item d-flex align-items-center justify-content-between'><span>"+ element.name + "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                     "" + element.view_url  +
+                      " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                      element.download_url +
+                      "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                  );
+                } else {
+                  $(".file_container .list-group").append(
+                    "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" + element.name +" <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                      element.download_url +
+                      "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                  );
+                }
+              }) }             
           }
         });
-
+        
         var deletingMessagesIds = [];
         var folder;
       });
@@ -387,8 +450,9 @@ $(document).ready(function () {
         deleteJson = {
           uids: deletingMessagesIds,
           folder: folder,
+          flag : "Deleted"
         };
-        // console.log(deleteJson)
+        
       });
 
       // Choose mails with checkbox to delete end
@@ -404,7 +468,31 @@ $(document).ready(function () {
       $(".checkBoxMails").attr("checked", false);
     }
   });
+
+
+
   $(".noRounded1").click(function () {
     console.log(deleteJson);
+    $.ajax({
+      type: 'POST',
+      url: '/api/email/change/flag',
+      headers: { "X-CSRFToken": getCookie('csrftoken') },
+      body : {
+        deleteJson
+      },
+      contentType: "application/json; charset=utf-8",
+      
+      success: function (data) {
+        console.log("success")
+      },
+
+      error: function (jqXhr, textStatus, errorMessage) {
+        alert(errorMessage)
+      }
+    });
   });
+
+
+
+
 });
