@@ -821,11 +821,11 @@ class EmailList(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Email.objects.all().prefetch_related('attachments')
+        return Email.objects.filter(user=user).prefetch_related('attachments')
     
     serializer_class = EmailSerializer
-    # permission_classes = [IsAuthenticated,AllowAny]
-    # authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['sender', 'receiver','folder','flag']
     search_fields = ['sender', 'receiver','folder','flag']
@@ -865,20 +865,18 @@ class EmailFolderMove(APIView):
         mail_uids = serializer.validated_data['uids']
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
+        emails = Email.objects.filter(num__in=mail_uids).filter(folder=from_folder).order_by('-num')
         client.select_folder(from_folder)
         client.move(mail_uids,to_folder)
         client.select_folder(to_folder)
-        new_uids = client.search(['RECENT','NOT','UNSEEN'])
-        for i in range(len(new_uids)):           
-            try:
-                email = Email.objects.get(num=mail_uids[i],folder=from_folder)
-            except:
-                return Response({'this emails'})
+        new_uids = client.search(['RECENT','NOT','UNSEEN'])[::-1]
+        print(new_uids)
+        print(emails)
+        for index,email in enumerate(emails):       
             email.folder = to_folder
-            email.flag = "Seen"
-            email.num = new_uids[i]
-            email.save()        
-        # move_mail_folder.delay('azadmammedov@yandex.com', 'AgAAAAA9U6WoAAZmeTTDasOXdE9usp_-zAmOL_E',to_folder,mail_uids)
+            email.flag = 'Seen'
+            email.num = new_uids[index]
+            email.save()
         return Response({'mails':'moved succesfully'})
         
         
@@ -889,9 +887,10 @@ class EmailChangeFlag(APIView):
     def post(self,request):
         serializer = EmailFlagSerializer(data=request.data)
         serializer.is_valid()
-        uids = serializer.validated_data['uid']
+        uids = serializer.validated_data['uids']
         folder = serializer.validated_data['folder']
         flag = serializer.validated_data['flag']
+        print(uids)
         for i in Email.objects.filter(num__in=uids,folder=folder):
             i.flag = flag
             i.save()
@@ -900,13 +899,14 @@ class EmailChangeFlag(APIView):
 
 class EmailDeleteView(APIView):
     def post(self,request):
-        folders = {'Inbox':[],'Sent':[],'Draft':[]}
+        folders = {'Inbox':[],'Sent':[],'Drafts':[],'Spam':[]}
         serializer  = EmailDeleteSerializer(data = request.data)
         serializer.is_valid()
         deleted_uids = serializer.validated_data['uids']
         emails = Email.objects.filter(num__in=deleted_uids)
-        for folder,uids in folders.items():
-            uids = [x[0] for x in emails.filter(folder=folder).values_list('num')]  
-        emails.delete
+        print(emails)
+        for folder in folders.keys():
+            folders[folder] = [x.num for x in emails.filter(folder=folder,flag="Deleted")]  
+        emails.delete()
         delete_mail.delay(folders)
         return Response({'emails':'deleted'})

@@ -102,7 +102,6 @@ DATABASES = {
         # 'HOST': 'localhost',
         # 'PORT': '5432',
 
-        
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': 'barrister',
         # 'USER': 'barrister',
@@ -206,10 +205,10 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'synchronize_mail_schedule': {
         'task': "synchronize_mail", 
-        'schedule': timedelta(minutes=1)
+        'schedule': timedelta(minutes=2)
     },
 }
-
+ 
 
 
 ASGI_APPLICATION = 'barrister.routing.application'

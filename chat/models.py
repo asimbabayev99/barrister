@@ -3,6 +3,7 @@ from account.models import CustomUser
 # Create your models here.
 
 
+
 class Message(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='sender_messages', null=False, blank=False)
     receiver = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='receiver_messages', null=False, blank=False)
@@ -19,7 +20,8 @@ class Message(models.Model):
 
 class Attachment(models.Model):
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='chat/attachments/', null=False)
+    name = models.CharField(max_length=256)
+    file = models.FileField(upload_to='chat/attachments/', null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
