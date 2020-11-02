@@ -1,4 +1,25 @@
 $(document).ready(function () {
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+
+
+
+
+
   var isDataCame = false,
     inbox = [],
     deleteJson = {};
@@ -7,7 +28,15 @@ $(document).ready(function () {
       '<li id="preLoader" class="list-group-item align-items-center justify-content-center"><div class="spinner-grow float-left"  role="status"><span class="sr-only"> Loading...</span></div> <div class="float-left  h-100 d-flex align-items-center"> Loading...</div></li>'
     );
   }
-  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date")
+  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date",{
+    headers:{
+      'X-CSRFToken':getCookie('csrftoken')
+    }
+
+
+
+
+  })
     .then((response) => response.json())
     .then((json) => {
       if (Object.keys(json).length === 0) {
