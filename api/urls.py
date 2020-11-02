@@ -44,6 +44,7 @@ urlpatterns = [
     path('publication/<int:pk>',PublicationAPIView.as_view()),
 
     path('emails/', EmailList.as_view()),
+    path('emails/trash/list/',EmailTrashList.as_view()),
     path('email/move/folder/',EmailFolderMove.as_view()),
     path('email/delete/',EmailDeleteView.as_view()),
     path('email/change/flag',EmailChangeFlag.as_view()),
