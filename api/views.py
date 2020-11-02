@@ -821,7 +821,7 @@ class EmailList(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Email.objects.filter(user=user).prefetch_related('attachments')
+        return Email.objects.filter(user=user).exclude(flag="Deleted").prefetch_related('attachments')
     
     serializer_class = EmailSerializer
     permission_classes = [IsAuthenticated,]
@@ -830,6 +830,19 @@ class EmailList(ListAPIView):
     filterset_fields = ['sender', 'receiver','folder','flag']
     search_fields = ['sender', 'receiver','folder','flag']
     ordering_fields = ['date',]
+
+class EmailTrashList(ListAPIView):
+    def get_queryset(self):
+        user=  self.request.user
+        return Email.objects.filter(user=user).filter(flag='Deleted')
+    serializer_class = EmailSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ['sender', 'receiver','folder',]
+    search_fields = ['sender', 'receiver','folder',]
+    ordering_fields = ['date',]
+
 
 
 
@@ -894,7 +907,6 @@ class EmailChangeFlag(APIView):
         for i in Email.objects.filter(num__in=uids,folder=folder):
             i.flag = flag
             i.save()
-    
         return Response({'email':'flag changed'})
 
 class EmailDeleteView(APIView):
