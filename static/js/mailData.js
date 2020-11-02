@@ -1,24 +1,19 @@
 $(document).ready(function () {
   function getCookie(name) {
     var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
+      }
     }
     return cookieValue;
   }
-
-
-
-
-
 
   var isDataCame = false,
     inbox = [],
@@ -28,14 +23,10 @@ $(document).ready(function () {
       '<li id="preLoader" class="list-group-item align-items-center justify-content-center"><div class="spinner-grow float-left"  role="status"><span class="sr-only"> Loading...</span></div> <div class="float-left  h-100 d-flex align-items-center"> Loading...</div></li>'
     );
   }
-  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date",{
-    headers:{
-      'X-CSRFToken':getCookie('csrftoken')
-    }
-
-
-
-
+  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date", {
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+    },
   })
     .then((response) => response.json())
     .then((json) => {
@@ -48,16 +39,15 @@ $(document).ready(function () {
       }
       json.forEach((element) => {
         if (element.folder === "Inbox") {
-          var subjectLen = element.subject.length
+          var subjectLen = element.subject.length;
           var subjectString = "";
-          if(subjectLen > 15) {
-            
-            for(let i = 0;i<15;i++) {
-              subjectString += element.subject[i]
+          if (subjectLen > 15) {
+            for (let i = 0; i < 15; i++) {
+              subjectString += element.subject[i];
             }
-            subjectString += "..."
-          }else {
-            subjectString = element.subject
+            subjectString += "...";
+          } else {
+            subjectString = element.subject;
           }
           $("#mailContent").append(
             "<li  num=" +
@@ -102,12 +92,29 @@ $(document).ready(function () {
             $(".mailListGroup").click(function () {
               $(".defaultMail").show(200);
               $(".insteadMailImage").hide(100);
+              $(".file_container .list-group").html("");
+              $(".file_container .file_image").html("");
               var mail = $(this).attr("id");
+              var num = $(this).attr("num");
+              $(".mailListGroup").each((element) => {
+                if ($(this).attr("num") == num) {
+                  $(this).addClass("bg-primary text-light");
+                }
+              });
+              $(".mailListGroup").each(function () {
+                if ($(this)[0].id == mail) {
+                  $(this).addClass("bg-primary text-light");
+                } else {
+                  $(this).removeClass("bg-primary text-light");
+                }
+              });
               json.forEach((element) => {
                 if (element.id == mail) {
                   $(".mailSubject").text(element.sender);
-                  $(".mailSubject").attr("id", element.id);
+                  $(".mailSubject").attr("id", mail);
                   $(".mailSender").text(element.sender);
+                  let subjectLen = element.subject.length;
+
                   $(".mailSubjectExpand").text(element.subject);
                   let time = element.date.split("-");
                   let endTime = time[2].split("");
@@ -122,24 +129,119 @@ $(document).ready(function () {
                   $(".mailDate").text(wholeTime);
                   $(".mailMovzu").html(element.content);
                   let mailSender = element.sender.split("");
-                  let color = [
-                    "purple",
-                    "blue",
-                    "green",
-                    "maroon",
-                    "darkorange",
-                  ];
                   $(".emailImage").text(
                     mailSender[0].toUpperCase() +
                       "" +
                       mailSender[1].toUpperCase()
                   );
-                  let rNumber = Math.floor(Math.random() * 5);
-                  $(".emailImage").css({
-                    backgroundColor: color[rNumber],
-                  });
+                  if (element.attachments.length > 0) {
+                    /// If txt file do this begin
+                    // console.log(element.attachments)
+                    var attachment = [];
+                    element.attachments.forEach((element) => {
+                      if (element.view_url.endsWith(".txt")) {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                            "" +
+                            element.view_url +
+                            " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                        $(".show_modal_email").click(function () {
+                          $(
+                            "#file_showing_modal .modal-body iframe"
+                          ).removeClass("d-none");
+                          $(
+                            "#file_showing_modal .modal-body .email_image"
+                          ).addClass("d-none");
+                          $("#file_showing_modal .modal-body iframe").attr(
+                            "src",
+                            $(this).attr("url")
+                          );
+                        });
+                      } else if (
+                        element.view_url.endsWith(".jpg") ||
+                        element.view_url.endsWith(".png") ||
+                        element.view_url.endsWith(".jpeg")
+                      ) {
+                        $(".file_container .file_image").append(
+                          "" +
+                            "<div class='col-md-6  col-lg-4 mb-3' style='height:150px;position:relative'>" +
+                            "<img style='height : 100%;object-fit:cover;position:relative;' class='w-100 mail_image' src=" +
+                            element.view_url +
+                            ">" +
+                            "<button data-toggle='modal' data-target='#file_showing_modal' url=" +
+                            element.view_url +
+                            " class='show_modal_email_image btn btn-sm btn-dark absolute_email_btn_2 mr-3'><i class='fas fa-eye'></i></button>" +
+                            "<a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark absolute_email_btn'><i class='fas fa-download'></i></button></a>" +
+                            "</img>" +
+                            "</div>" +
+                            ""
+                        );
+                        $(".show_modal_email_image").click(function () {
+                          $("#file_showing_modal .modal-body iframe").addClass(
+                            "d-none"
+                          );
+                          $(
+                            "#file_showing_modal .modal-body .email_image"
+                          ).removeClass("d-none");
+                          $(
+                            "#file_showing_modal .modal-body .email_image"
+                          ).html(
+                            "" +
+                              "<img style='width:100%; height:100%;object-fit:contain' src=" +
+                              $(this).attr("url") +
+                              "></img>" +
+                              ""
+                          );
+                        });
+                      } else if (
+                        element.view_url.endsWith(".rar") ||
+                        element.view_url.endsWith(".zip")
+                      ) {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                      } else if (
+                        element.view_url.endsWith(".docx") ||
+                        element.view_url.endsWith(".ppt") ||
+                        element.view_url.endsWith(".xls")
+                      ) {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                            "" +
+                            element.view_url +
+                            " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                      } else {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                      }
+                    });
+                  }
                 }
               });
+
+              var deletingMessagesIds = [];
+              var folder;
             });
           }
         });
@@ -186,11 +288,29 @@ $(document).ready(function () {
           $(".mailListGroup").click(function () {
             $(".defaultMail").show(200);
             $(".insteadMailImage").hide(100);
+            $(".file_container .list-group").html("");
+            $(".file_container .file_image").html("");
             var mail = $(this).attr("id");
+            var num = $(this).attr("num");
+            $(".mailListGroup").each((element) => {
+              if ($(this).attr("num") == num) {
+                $(this).addClass("bg-primary text-light");
+              }
+            });
+            $(".mailListGroup").each(function () {
+              if ($(this)[0].id == mail) {
+                $(this).addClass("bg-primary text-light");
+              } else {
+                $(this).removeClass("bg-primary text-light");
+              }
+            });
             json.forEach((element) => {
               if (element.id == mail) {
                 $(".mailSubject").text(element.sender);
+                $(".mailSubject").attr("id", mail);
                 $(".mailSender").text(element.sender);
+                let subjectLen = element.subject.length;
+
                 $(".mailSubjectExpand").text(element.subject);
                 let time = element.date.split("-");
                 let endTime = time[2].split("");
@@ -199,16 +319,115 @@ $(document).ready(function () {
                 $(".mailDate").text(wholeTime);
                 $(".mailMovzu").html(element.content);
                 let mailSender = element.sender.split("");
-                let color = ["purple", "blue", "green", "maroon", "darkorange"];
                 $(".emailImage").text(
                   mailSender[0].toUpperCase() + "" + mailSender[1].toUpperCase()
                 );
-                let rNumber = Math.floor(Math.random() * 5);
-                $(".emailImage").css({
-                  backgroundColor: color[rNumber],
-                });
+                if (element.attachments.length > 0) {
+                  /// If txt file do this begin
+                  // console.log(element.attachments)
+                  var attachment = [];
+                  element.attachments.forEach((element) => {
+                    if (element.view_url.endsWith(".txt")) {
+                      $(".file_container .list-group").append(
+                        "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                          element.name +
+                          "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                          "" +
+                          element.view_url +
+                          " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                          element.download_url +
+                          "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                      );
+                      $(".show_modal_email").click(function () {
+                        $("#file_showing_modal .modal-body iframe").removeClass(
+                          "d-none"
+                        );
+                        $(
+                          "#file_showing_modal .modal-body .email_image"
+                        ).addClass("d-none");
+                        $("#file_showing_modal .modal-body iframe").attr(
+                          "src",
+                          $(this).attr("url")
+                        );
+                      });
+                    } else if (
+                      element.view_url.endsWith(".jpg") ||
+                      element.view_url.endsWith(".png") ||
+                      element.view_url.endsWith(".jpeg")
+                    ) {
+                      $(".file_container .file_image").append(
+                        "" +
+                          "<div class='col-md-6  col-lg-4 mb-3' style='height:150px;position:relative'>" +
+                          "<img style='height : 100%;object-fit:cover;position:relative;' class='w-100 mail_image' src=" +
+                          element.view_url +
+                          ">" +
+                          "<button data-toggle='modal' data-target='#file_showing_modal' url=" +
+                          element.view_url +
+                          " class='show_modal_email_image btn btn-sm btn-dark absolute_email_btn_2 mr-3'><i class='fas fa-eye'></i></button>" +
+                          "<a href=" +
+                          element.download_url +
+                          "><button class='btn btn-sm btn-dark absolute_email_btn'><i class='fas fa-download'></i></button></a>" +
+                          "</img>" +
+                          "</div>" +
+                          ""
+                      );
+                      $(".show_modal_email_image").click(function () {
+                        $("#file_showing_modal .modal-body iframe").addClass(
+                          "d-none"
+                        );
+                        $(
+                          "#file_showing_modal .modal-body .email_image"
+                        ).removeClass("d-none");
+                        $("#file_showing_modal .modal-body .email_image").html(
+                          "" +
+                            "<img style='width:100%; height:100%;object-fit:contain' src=" +
+                            $(this).attr("url") +
+                            "></img>" +
+                            ""
+                        );
+                      });
+                    } else if (
+                      element.view_url.endsWith(".rar") ||
+                      element.view_url.endsWith(".zip")
+                    ) {
+                      $(".file_container .list-group").append(
+                        "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                          element.name +
+                          " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                          element.download_url +
+                          "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                      );
+                    } else if (
+                      element.view_url.endsWith(".docx") ||
+                      element.view_url.endsWith(".ppt") ||
+                      element.view_url.endsWith(".xls")
+                    ) {
+                      $(".file_container .list-group").append(
+                        "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                          element.name +
+                          "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                          "" +
+                          element.view_url +
+                          " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                          element.download_url +
+                          "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                      );
+                    } else {
+                      $(".file_container .list-group").append(
+                        "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                          element.name +
+                          " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                          element.download_url +
+                          "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                      );
+                    }
+                  });
+                }
               }
             });
+
+            var deletingMessagesIds = [];
+            var folder;
           });
         });
         deletingMessagesIds = [];
@@ -236,6 +455,9 @@ $(document).ready(function () {
 
       $(".deleteMessage").click(function () {
         $("#mailContent").html("");
+        $.get("/api/trash/list",function(data,status) {
+          console.log(status)
+        })
         json.forEach((element) => {
           if (element.folder === "Trash") {
             $("#mailContent").append(
@@ -252,51 +474,157 @@ $(document).ready(function () {
                 "</span></span></li>"
             );
             $(".mailListGroup").click(function () {
-              $(".mailSubject").html(
-                '<div class="spinner-grow text-dark" role="status"><span class="sr-only">Loading...</span></div>'
-              );
-              $(".mailSender").html(
-                '<div class="spinner-grow spinner-grow-sm text-dark" role="status"><span class="sr-only">Loading...</span></div>'
-              );
-
-              $(".mailSubjectExpand").html("");
-              $(".mailDate").html("");
-              $(".mailMovzu").html("");
-              setTimeout(() => {
-                $(".defaultMail").show(200);
-                $(".insteadMailImage").hide(100);
-                var mail = $(this).attr("id");
-                json.forEach((element) => {
-                  if (element.id == mail) {
-                    $(".mailSubject").text(element.sender);
-                    $(".mailSender").text(element.sender);
-                    $(".mailSubjectExpand").text(element.subject);
-                    $(".mailDate").text(wholeTime);
-                    $(".mailMovzu").html(element.content);
-                    let time = element.date.split("-");
-                    let endTime = time[2].split("");
-                    let wholeTime =
-                      time[0] +
-                      "-" +
-                      time[1] +
-                      "-" +
-                      endTime[0] +
+              $(".defaultMail").show(200);
+              $(".insteadMailImage").hide(100);
+              $(".file_container .list-group").html("");
+              $(".file_container .file_image").html("");
+              var mail = $(this).attr("id");
+              var num = $(this).attr("num");
+              $(".mailListGroup").each((element) => {
+                if ($(this).attr("num") == num) {
+                  $(this).addClass("bg-primary text-light");
+                }
+              });
+              $(".mailListGroup").each(function () {
+                if ($(this)[0].id == mail) {
+                  $(this).addClass("bg-primary text-light");
+                } else {
+                  $(this).removeClass("bg-primary text-light");
+                }
+              });
+              json.forEach((element) => {
+                if (element.id == mail) {
+                  $(".mailSubject").text(element.sender);
+                  $(".mailSubject").attr("id", mail);
+                  $(".mailSender").text(element.sender);
+                  let subjectLen = element.subject.length;
+                  $(".mailSubjectExpand").text(element.subject);
+                  let time = element.date.split("-");
+                  let endTime = time[2].split("");
+                  let wholeTime =
+                    time[0] +
+                    "-" +
+                    time[1] +
+                    "-" +
+                    endTime[0] +
+                    "" +
+                    endTime[1];
+                  $(".mailDate").text(wholeTime);
+                  $(".mailMovzu").html(element.content);
+                  let mailSender = element.sender.split("");
+                  $(".emailImage").text(
+                    mailSender[0].toUpperCase() +
                       "" +
-                      endTime[1];
-                    let mailSender = element.sender.split("");
-                    $(".emailImage").html(
-                      mailSender[0].toUpperCase() +
-                        "" +
-                        mailSender[1].toUpperCase()
-                    );
-                    let rNumber = Math.floor(Math.random() * 5);
-
-                    $(".emailImage").css({
-                      backgroundColor: color[rNumber],
+                      mailSender[1].toUpperCase()
+                  );
+                  if (element.attachments.length > 0) {
+                    /// If txt file do this begin
+                    // console.log(element.attachments)
+                    var attachment = [];
+                    element.attachments.forEach((element) => {
+                      if (element.view_url.endsWith(".txt")) {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                            "" +
+                            element.view_url +
+                            " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                        $(".show_modal_email").click(function () {
+                          $(
+                            "#file_showing_modal .modal-body iframe"
+                          ).removeClass("d-none");
+                          $(
+                            "#file_showing_modal .modal-body .email_image"
+                          ).addClass("d-none");
+                          $("#file_showing_modal .modal-body iframe").attr(
+                            "src",
+                            $(this).attr("url")
+                          );
+                        });
+                      } else if (
+                        element.view_url.endsWith(".jpg") ||
+                        element.view_url.endsWith(".png") ||
+                        element.view_url.endsWith(".jpeg")
+                      ) {
+                        $(".file_container .file_image").append(
+                          "" +
+                            "<div class='col-md-6  col-lg-4 mb-3' style='height:150px;position:relative'>" +
+                            "<img style='height : 100%;object-fit:cover;position:relative;' class='w-100 mail_image' src=" +
+                            element.view_url +
+                            ">" +
+                            "<button data-toggle='modal' data-target='#file_showing_modal' url=" +
+                            element.view_url +
+                            " class='show_modal_email_image btn btn-sm btn-dark absolute_email_btn_2 mr-3'><i class='fas fa-eye'></i></button>" +
+                            "<a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark absolute_email_btn'><i class='fas fa-download'></i></button></a>" +
+                            "</img>" +
+                            "</div>" +
+                            ""
+                        );
+                        $(".show_modal_email_image").click(function () {
+                          $("#file_showing_modal .modal-body iframe").addClass(
+                            "d-none"
+                          );
+                          $(
+                            "#file_showing_modal .modal-body .email_image"
+                          ).removeClass("d-none");
+                          $(
+                            "#file_showing_modal .modal-body .email_image"
+                          ).html(
+                            "" +
+                              "<img style='width:100%; height:100%;object-fit:contain' src=" +
+                              $(this).attr("url") +
+                              "></img>" +
+                              ""
+                          );
+                        });
+                      } else if (
+                        element.view_url.endsWith(".rar") ||
+                        element.view_url.endsWith(".zip")
+                      ) {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                      } else if (
+                        element.view_url.endsWith(".docx") ||
+                        element.view_url.endsWith(".ppt") ||
+                        element.view_url.endsWith(".xls")
+                      ) {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                            "" +
+                            element.view_url +
+                            " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                      } else {
+                        $(".file_container .list-group").append(
+                          "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                            element.name +
+                            " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                            element.download_url +
+                            "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
+                        );
+                      }
                     });
                   }
-                });
-              }, 1000);
+                }
+              });
+
+              var deletingMessagesIds = [];
+              var folder;
             });
           }
         });
@@ -324,7 +652,7 @@ $(document).ready(function () {
         $(".defaultMail").show(200);
         $(".insteadMailImage").hide(100);
         $(".file_container .list-group").html("");
-        $(".file_container .file_image").html("")
+        $(".file_container .file_image").html("");
         var mail = $(this).attr("id");
         var num = $(this).attr("num");
         $(".mailListGroup").each((element) => {
@@ -344,8 +672,8 @@ $(document).ready(function () {
             $(".mailSubject").text(element.sender);
             $(".mailSubject").attr("id", mail);
             $(".mailSender").text(element.sender);
-            let subjectLen = element.subject.length
-            
+            let subjectLen = element.subject.length;
+
             $(".mailSubjectExpand").text(element.subject);
             let time = element.date.split("-");
             let endTime = time[2].split("");
@@ -360,76 +688,107 @@ $(document).ready(function () {
             if (element.attachments.length > 0) {
               /// If txt file do this begin
               // console.log(element.attachments)
-              var attachment = []
-              element.attachments.forEach(element => {
+              var attachment = [];
+              element.attachments.forEach((element) => {
                 if (element.view_url.endsWith(".txt")) {
                   $(".file_container .list-group").append(
-                    "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" + element.name + "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
-                     "" + element.view_url  +
+                    "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                      element.name +
+                      "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                      "" +
+                      element.view_url +
                       " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
                       element.download_url +
                       "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
                   );
                   $(".show_modal_email").click(function () {
-                    $("#file_showing_modal .modal-body iframe").removeClass("d-none")
-                    $("#file_showing_modal .modal-body .email_image").addClass("d-none")
+                    $("#file_showing_modal .modal-body iframe").removeClass(
+                      "d-none"
+                    );
+                    $("#file_showing_modal .modal-body .email_image").addClass(
+                      "d-none"
+                    );
                     $("#file_showing_modal .modal-body iframe").attr(
                       "src",
                       $(this).attr("url")
                     );
                   });
-                  
-                }
-                else if (
+                } else if (
                   element.view_url.endsWith(".jpg") ||
                   element.view_url.endsWith(".png") ||
                   element.view_url.endsWith(".jpeg")
                 ) {
-                  
-                  $(".file_container .file_image").append("" 
-                  + "<div class='col-md-6  col-lg-4 mb-3' style='height:150px;position:relative'>" +
-                  
-                  "<img style='height : 100%;object-fit:cover;position:relative;' class='w-100 mail_image' src="+ element.view_url +">"+
-
-                  "<button data-toggle='modal' data-target='#file_showing_modal' url="+ element.view_url +" class='show_modal_email_image btn btn-sm btn-dark absolute_email_btn_2 mr-3'><i class='fas fa-eye'></i></button>" +
-                  "<a href="+ element.download_url +"><button class='btn btn-sm btn-dark absolute_email_btn'><i class='fas fa-download'></i></button></a>" + 
-                  "</img>" +
-                  "</div>"
-                  + "");
+                  $(".file_container .file_image").append(
+                    "" +
+                      "<div class='col-md-6  col-lg-4 mb-3' style='height:150px;position:relative'>" +
+                      "<img style='height : 100%;object-fit:cover;position:relative;' class='w-100 mail_image' src=" +
+                      element.view_url +
+                      ">" +
+                      "<button data-toggle='modal' data-target='#file_showing_modal' url=" +
+                      element.view_url +
+                      " class='show_modal_email_image btn btn-sm btn-dark absolute_email_btn_2 mr-3'><i class='fas fa-eye'></i></button>" +
+                      "<a href=" +
+                      element.download_url +
+                      "><button class='btn btn-sm btn-dark absolute_email_btn'><i class='fas fa-download'></i></button></a>" +
+                      "</img>" +
+                      "</div>" +
+                      ""
+                  );
                   $(".show_modal_email_image").click(function () {
-                    $("#file_showing_modal .modal-body iframe").addClass("d-none");
-                    $("#file_showing_modal .modal-body .email_image").removeClass("d-none")
-                    $("#file_showing_modal .modal-body .email_image").html("" +
-                    "<img style='width:100%; height:100%;object-fit:contain' src=" + $(this).attr("url") + "></img>" +
-                    "")
+                    $("#file_showing_modal .modal-body iframe").addClass(
+                      "d-none"
+                    );
+                    $(
+                      "#file_showing_modal .modal-body .email_image"
+                    ).removeClass("d-none");
+                    $("#file_showing_modal .modal-body .email_image").html(
+                      "" +
+                        "<img style='width:100%; height:100%;object-fit:contain' src=" +
+                        $(this).attr("url") +
+                        "></img>" +
+                        ""
+                    );
                   });
-                }
-                else if(element.view_url.endsWith(".rar") || element.view_url.endsWith(".zip")) {
+                } else if (
+                  element.view_url.endsWith(".rar") ||
+                  element.view_url.endsWith(".zip")
+                ) {
                   $(".file_container .list-group").append(
-                    "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" + element.name +" <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                    "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                      element.name +
+                      " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
                       element.download_url +
                       "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
                   );
-                }
-                else if(element.view_url.endsWith(".docx") || element.view_url.endsWith(".ppt") || element.view_url.endsWith(".xls") ) {
+                } else if (
+                  element.view_url.endsWith(".docx") ||
+                  element.view_url.endsWith(".ppt") ||
+                  element.view_url.endsWith(".xls")
+                ) {
                   $(".file_container .list-group").append(
-                    "<li class='list-group-item d-flex align-items-center justify-content-between'><span>"+ element.name + "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
-                     "" + element.view_url  +
+                    "<li class='list-group-item d-flex align-items-center justify-content-between'><span>" +
+                      element.name +
+                      "</span><span><button class='mr-3 btn btn-sm btn-dark show_modal_email' url=" +
+                      "" +
+                      element.view_url +
                       " data-toggle='modal' data-target='#file_showing_modal'><i class='fas fa-eye'></i></button><a href=" +
                       element.download_url +
                       "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
                   );
                 } else {
                   $(".file_container .list-group").append(
-                    "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" + element.name +" <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
+                    "<li class='list-group-item alert-warning d-flex align-items-center justify-content-between'><span>" +
+                      element.name +
+                      " <br><small>Bu faylı görmək mümkün deyil</small> </span><span><a href=" +
                       element.download_url +
                       "><button class='btn btn-sm btn-dark'><i class='fas fa-download'></i></button></a></span></li>"
                   );
                 }
-              }) }             
+              });
+            }
           }
         });
-        
+
         var deletingMessagesIds = [];
         var folder;
       });
@@ -450,9 +809,8 @@ $(document).ready(function () {
         deleteJson = {
           uids: deletingMessagesIds,
           folder: folder,
-          flag : "Deleted"
+          flag: "Deleted",
         };
-        
       });
 
       // Choose mails with checkbox to delete end
@@ -464,35 +822,36 @@ $(document).ready(function () {
   $("#checkboxMain").click(function () {
     if ($("#checkboxMain").is(":checked")) {
       $(".checkBoxMails").attr("checked", true);
+      
     } else {
       $(".checkBoxMails").attr("checked", false);
     }
   });
 
-
-
   $(".noRounded1").click(function () {
-    console.log(deleteJson);
+    deleteJson.uids.forEach(element => {
+      $(".mailListGroup").each(function() {
+        if($(this).attr("num") === element ) {
+          $(this).remove()
+        }
+      })
+    })
     $.ajax({
-      type: 'POST',
-      url: '/api/email/change/flag',
-      headers: { "X-CSRFToken": getCookie('csrftoken') },
-      body : {
-        deleteJson
+      type: "POST",
+      url: "/api/email/change/flag",
+      headers: { "X-CSRFToken": getCookie("csrftoken") },
+      body: {
+        deleteJson,
       },
       contentType: "application/json; charset=utf-8",
-      
+
       success: function (data) {
-        console.log("success")
+        console.log("success");
       },
 
       error: function (jqXhr, textStatus, errorMessage) {
-        alert(errorMessage)
-      }
+        // alert(errorMessage);
+      },
     });
   });
-
-
-
-
 });
