@@ -205,7 +205,7 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'synchronize_mail_schedule': {
         'task': "synchronize_mail", 
-        'schedule': timedelta(minutes=1)
+        'schedule': timedelta(hours=1)
     },
 }
  
