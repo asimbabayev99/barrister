@@ -8,9 +8,11 @@ import json
 
 
 def temlates_view(request):
+    groups = DocumentGroup.objects.all().prefetch_related('documents')
     templates = Document.objects.all()
 
     context = {
+        'groups': groups,
         'templates': templates,
     }
 
