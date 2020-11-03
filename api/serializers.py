@@ -56,7 +56,7 @@ class EventCreateSerializer(serializers.ModelSerializer):
     class Meta:
         models = Event
         fields = ['user','name','description','location','completed','category']
-
+ 
     
 
 
@@ -283,9 +283,10 @@ class ContactSerializer(serializers.ModelSerializer):
 # serializer with nested contact serializer
 class AppointmentContactSerializer(serializers.ModelSerializer):
     contact = ContactSerializer()
-    start = serializers.DateField(format="%d/%m/%Y %H:%M")
-    end = serializers.DateField(format="%d/%m/%Y %H:%M")
+    # start = serializers.DateField(format="%d/%m/%Y %H:%M")
+    # end = serializers.DateField(format="%d/%m/%Y %H:%M")
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+
 
     def update(self, instance, validated_data):
         instance.status = validated_data.get('status', instance.status)
