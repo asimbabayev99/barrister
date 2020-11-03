@@ -258,13 +258,14 @@
               </div>
               <div class="card-body">
                 <form action="" method="POST">
+                  {% csrf_token %}
                   <div class="form-group">
                     <label for="">Mail ünvanı</label>
                     <input type="text" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="">Başlıq</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="subject" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="">Mövzu</label>
