@@ -22,9 +22,14 @@
           <input type="text" class="form-control form-control-sm" placeholder="Axtar..">
         </div>
       </div>
-      {% for i in templates %}
-      <div class="col-12 list-group">
-        <div class="list-group-item"><a href="{% url 'single-document-template' i.id %}">{{i.name}}</a></div>
+      {% for group in groups %}
+      <div class="col-12 list-group" data-toggle="collapse" data-target="#item_{{group.id}}">
+        <div class="list-group-item d-flex justify-content-between align-items-center"><a class="text-dark" >{{group.name}}</a><i class="fas fa-angle-down"></i></div>
+      </div>
+      <div class="list-group col-12 rounded-0 collapse" id="item_{{group.id}}">
+        {% for j in group.documents.all %}
+        <div class="pl-5 list-group-item rounded-0 border-top-0 d-flex justify-content-between align-items-center"><a class="text-dark" href="{% url 'single-document-template' j.id %}">{{j.name}}</a></div>
+        {% endfor %}
       </div>
       {% endfor %}
     </div>
