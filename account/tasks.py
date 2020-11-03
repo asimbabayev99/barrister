@@ -130,6 +130,7 @@ def get_last_mails(email,token):
   for folder in mail_folders:
     client.select_folder(folder)
     messages = client.search(['UNSEEN','NOT','Flagged'])
+    print(messages)
     try:
       last_num = Email.objects.filter(folder=folder).last().num
     except:

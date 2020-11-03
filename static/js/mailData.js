@@ -1064,9 +1064,10 @@ $(document).ready(function () {
   // When click spam button add mails to spam folder begin 
 
   $(".spam_button").click(function() {
-    c$.ajax({
+    console.log(deleteJson.deletingMessagesIds)
+    $.ajax({
       type: 'POST',
-      url: /* Your url */ ,
+      url: "/api/email/move/folder/",
       headers: { "X-CSRFToken": getCookie('csrftoken') },
       data : JSON.stringify(deleteJson),
       contentType: "application/json; charset=utf-8",
