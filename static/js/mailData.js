@@ -16,7 +16,7 @@ $(document).ready(function () {
   }
 
   var isDataCame = false,
-    inbox = [],
+    
     deleteJson = {};
   if (isDataCame === false) {
     $("#mailContent").append(
@@ -1060,4 +1060,26 @@ $(document).ready(function () {
 
     });
   });
+
+  // When click spam button add mails to spam folder begin 
+
+  $(".spam_button").click(function() {
+    c$.ajax({
+      type: 'POST',
+      url: /* Your url */ ,
+      headers: { "X-CSRFToken": getCookie('csrftoken') },
+      data : JSON.stringify(deleteJson),
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        console.log(data)
+      },
+      error: function (data,jqXhr, textStatus, errorMessage) {
+          console.log(data)
+      }
+    });
+  })
+
+
+  // When click spam button add mails to spam folder begin 
+
 });
