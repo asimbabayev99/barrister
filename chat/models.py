@@ -22,15 +22,6 @@ class Message(models.Model):
 
 
 
-
-# def path_and_rename(path):
-#     def wrapper(instance, filename):
-#         ext = filename.split('.')[-1]
-#         filename = '{}.{}'.format(uuid.uuid1(), ext)
-#         return os.path.join(path, filename)
-#     return wrapper
-
-
 def path_and_rename(instance, filename):
     ext = filename.split('.')[-1]
     filename = '{}.{}'.format(uuid.uuid1(), ext)
