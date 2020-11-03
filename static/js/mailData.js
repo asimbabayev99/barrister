@@ -16,7 +16,7 @@ $(document).ready(function () {
   }
 
   var isDataCame = false,
-    inbox = [],
+    
     deleteJson = {};
   if (isDataCame === false) {
     $("#mailContent").append(
