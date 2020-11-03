@@ -1064,7 +1064,7 @@ $(document).ready(function () {
   // When click spam button add mails to spam folder begin 
 
   $(".spam_button").click(function() {
-    c$.ajax({
+    $.ajax({
       type: 'POST',
       url: /* Your url */ ,
       headers: { "X-CSRFToken": getCookie('csrftoken') },
