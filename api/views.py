@@ -878,18 +878,20 @@ class EmailFolderMove(APIView):
         mail_uids = serializer.validated_data['uids']
         from_folder = serializer.validated_data['from_folder']
         to_folder = serializer.validated_data['to_folder']
-        emails = Email.objects.filter(num__in=mail_uids).filter(folder=from_folder).order_by('-num')
-        client.select_folder(from_folder)
-        client.move(mail_uids,to_folder)
-        client.select_folder(to_folder)
-        new_uids = client.search(['RECENT','NOT','UNSEEN'])[::-1]
-        print(new_uids)
+        emails = Email.objects.filter(num__in=mail_uids,).filter(folder=from_folder).order_by('-num')
+        print(mail_uids)
         print(emails)
-        for index,email in enumerate(emails):       
-            email.folder = to_folder
-            email.flag = 'Seen'
-            email.num = new_uids[index]
-            email.save()
+        # client.select_folder(from_folder)
+        # client.move(mail_uids,to_folder)
+        # client.select_folder(to_folder)
+        # new_uids = client.search(['RECENT','NOT','UNSEEN'])[::-1]
+        # print(new_uids)
+        # print(emails)
+        # for index,email in enumerate(emails):       
+        #     email.folder = to_folder
+        #     email.flag = 'Seen'
+        #     email.num = new_uids[index]
+        #     email.save()
         return Response({'mails':'moved succesfully'})
         
         

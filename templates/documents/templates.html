@@ -28,7 +28,7 @@
       </div>
       <div class="list-group col-12 rounded-0 collapse" id="item_{{group.id}}">
         {% for j in group.documents.all %}
-        <div class="pl-5 list-group-item rounded-0 border-top-0 d-flex justify-content-between align-items-center"><a class="text-dark" href="{% url 'single-document-template' j.id %}">{{j.name}}</a></div>
+        <div class="pl-4 list-group-item rounded-0 border-top-0 d-flex justify-content-between align-items-center"><a class="text-dark" href="{% url 'single-document-template' j.id %}">{{j.name}}</a></div>
         {% endfor %}
       </div>
       {% endfor %}

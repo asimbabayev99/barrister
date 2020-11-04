@@ -31,6 +31,9 @@
         color: hsla(197, 100%, 26%, 0.91);
         border-color: hsla(197, 100%, 26%, 0.91) !important;
     }
+    .table td {
+        vertical-align: inherit;
+    }
 </style>
 <main class="page-content">
     <div class="container-fluid">
@@ -140,43 +143,26 @@
                                             </tr>
                                         </thead>
                                         <tbody id="children_table">
-    
+                                            <tr>
+                                                <td><input type="text" id="child_name" class="form-control form-control-sm child_ame"
+                                                    placeholder="Soyad, Ad, Ata adı"></td>
+                                                <td><input type="date" id="child_date" class="form-control form-control-sm child_date"
+                                                    placeholder="Doğum tarixi..."></td>
+                                                <td><select id="child_gender" class="form-control form-control-sm childGender child_gender">
+                                                    <option value="" disabled selected>Seçin</option>
+                                                    <option value="Kişi">Kişi</option>
+                                                    <option value="Qadın">Qadın</option>
+                                                </select></td>
+                                                <td><select name="child_stay" id="child_stay" class="form-control form-control-sm child_stay">
+                                                    <option value="">Seçin</option>
+                                                    <option value="Bəli">Bəli</option>
+                                                    <option value="Xeyr">Xeyr</option>
+                                                </select></td>
+                                                <td><button class="btn btn-primary btn-sm btn-block add_child" type="reset">Əlavə et</button></td>
+                                            </tr>
                                         </tbody>
                                     </table>
-                                    <div class="col-md-6 form-group children">
-                                        <h3 for="" class="">Əlavə et</h3>
-                                        <div class="form-group">
-                                            <label for="child_name">Soyad, Ad, Ata adı</label>
-                                            <input type="text" id="child_name" class="form-control form-control-sm child_ame"
-                                                placeholder="Soyad, Ad, Ata adı">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Doğum tarixi</label>
-                                            <input type="date" id="child_date" class="form-control form-control-sm child_date"
-                                                placeholder="Doğum tarixi...">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Cins</label>
-                                            <select id="child_gender" class="form-control form-control-sm childGender child_gender">
-                                                <option value="" disabled selected>Seçin</option>
-                                                <option value="Kişi">Kişi</option>
-                                                <option value="Qadın">Qadın</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">İddiaçı ilə qalacaq</label>
-                                            <select name="child_stay" id="child_stay" class="form-control form-control-sm child_stay">
-                                                <option value="">Seçin</option>
-                                                <option value="Bəli">Bəli</option>
-                                                <option value="Xeyr">Xeyr</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <button class="btn btn-primary btn-sm btn-block add_child" type="reset">Əlavə
-                                                et</button>
-                                        </div>
-    
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -229,7 +215,12 @@
             let stay = $("#child_stay").val() || "";
             let aliment = $('#child_aliment').val() || "";
 
-            $("#children_table").append("<tr> <td class='child_name'>" + name + "</td> <td class='child_date'>" + date + "</td><td class='child_gender'>" + gender + "</td><td class='child_stay'>" + stay + "</td><td><button class='btn btn-danger btn-sm delete_child'>Sil</button></td>" + "</tr>");
+            $("#children_table").append("<tr> <td class='child_name'>" +
+                name + "</td> <td class='child_date'>" + date +
+                "</td><td class='child_gender'>" + gender +
+                "</td><td class='child_stay'>" + stay +
+                "</td><td><button class='btn btn-danger btn-block btn-sm delete_child'>Sil</button></td>" +
+                "</tr>");
             $(".delete_child").click(function () {
                 $(this).parents('tr').remove();
             })
