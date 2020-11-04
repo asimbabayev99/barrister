@@ -73,6 +73,10 @@ $(document).ready(function () {
       // Click to the sidebar DRAFTS choice to look at only DRAFTS emails begin
 
       $(".drafts").click(function () {
+        $(".spam_button").removeClass("d-block");
+        if(!$(".spam_button").hasClass("d-none")) {
+          $(".spam_button").addClass("d-none")
+        }
         $("#mailContent").html("");
         json.forEach((element) => {
           if (element.folder === "Drafts") {
@@ -267,8 +271,12 @@ $(document).ready(function () {
 
       //***********************  Sent mails begin  ********************** */
       $(".sendingMails").click(function () {
+        $(".spam_button").removeClass("d-block");
+        if(!$(".spam_button").hasClass("d-none")) {
+          $(".spam_button").addClass("d-none")
+        }
         $("#mailContent").html("");
-
+        $(".spam_button").addClass("d-none")
         json.forEach((element) => {
           if (element.folder == "Sent") {
             $("#mailContent").append(
@@ -451,6 +459,11 @@ $(document).ready(function () {
 
       //***********************  Sent mails end  ********************** */
       $(".spam_mails").click(function(){
+        $(".spam_button").addClass("fa-inbox");
+        $(".span_button").removeClass("fa-exclamation-circle, d-none");
+        if(!$(".spam_button").hasClass("d-block")) {
+          $(".spam_button").addClass("d-block")
+        }
         $("#mailContent").html("");
         var delete_mail
         fetch("/api/emails/?ordering=-date&folder=Spam")
@@ -652,6 +665,9 @@ $(document).ready(function () {
 
       $(".deleteMessage").click(function () {
         $("#mailContent").html("");
+        if(!$(".spam_button").hasClass("d-none")) {
+          $(".spam_button").addClass("d-block")
+        }
         var delete_mail
         fetch("/api/emails/trash/list")
         .then(response => response.json())
