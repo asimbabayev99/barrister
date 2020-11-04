@@ -74,16 +74,43 @@
 .accept {
     width: 60%;
     display: block;
-    background-color: darkmagenta;
+    background-color: rgba(0,0,0,0.05);
+    font-size: 0.8rem;
     padding:5px;
-    color: #fff;
+    color: #303f48;
     margin-bottom: 3px;
+    border-radius: 5px;
 }
 
 .send {
     width: 60%;
     display: block;
-    background-color: darkolivegreen;
+    background-color: rgb(13, 76, 119);
     padding: 5px;
     margin-bottom: 3px;
+    color: #fff;
+    font-size: 0.8rem;
+    border-radius: 3px;
+}
+.textareaElement {
+    width: 300px;
+    min-height: 17px;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: none;
+    padding: 5px 10px;
+    
+  }
+
+.modal-footer .btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    background-color: rgb(13, 76, 119);
 }

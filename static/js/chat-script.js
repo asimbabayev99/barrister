@@ -6,4 +6,5 @@ $(document).ready(function() {
             return 0
         }
     })
+    $("textarea").autogrow();
 })
