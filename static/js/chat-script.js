@@ -1,8 +1,9 @@
 $(document).ready(function() {
-    $(".chat-menu-toggle").on("click",function() {
-        $(".animation-chat-container").hide(300)
-    });
-    $(".message-with-btn").on("click",function() {
-        $(".animation-chat-container").show()
+    $(".fa-paperclip").click(function() {
+        if(confirm("Are you sure")) {
+            return 0
+        } else {
+            return 0
+        }
     })
 })

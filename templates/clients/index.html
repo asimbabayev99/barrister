@@ -183,16 +183,18 @@
       </div>
     </div>
   </div>
+  <button data-toggle="modal" data-target="#modal_aside_right" class="btn btn-primary" type="button">  Modal aside right  </button>
+
 </main>
-<div class="container-fluid animation-chat-container">
-  <div class="chat-container col-md-6 p-0 col-lg-5">
+<!-- <div class="container-fluid animation-chat-container">
+  <div class="chat-container col-md-6 p-0  col-lg-5">
     <div class="col-12 p-0 px-0">
       
       <div class="messages-main">
         <i class="fas fa-times pl-3 chat-menu-toggle"></i>
         <div class="dropdown-divider"></div>
       </div>
-      <div class="messages-input-main justify-content-between col-12 p-0 d-flex align-items-center px-3">
+      <div class="messages-input-main justify-content-between col-12 p-0 d-flex align-items-center  px-3">
         
           <input type="text" placeholder="Write your message here" class="form-control">
           <div>
@@ -207,6 +209,35 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div id="modal_aside_right" class="modal fixed-left fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog col-md-6 p-0 col-lg-5 modal-dialog-aside" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <button type="button" class="close" style="outline: none;" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </h5>
+        
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer justify-content-between">
+          <textarea type="text" style="width: 70%;" style="height: 38px;" placeholder="Write your message here" class="form-control"></textarea>
+          <div>
+            <button class="btn btn-primary">
+              <i class="fas fa-paperclip"></i>
+            </button>
+            <button class="btn ml-2 btn-primary">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+      </div>
+    </div>
+  </div> <!-- modal-bialog .// -->
 </div>
 
 {% endblock content %}
