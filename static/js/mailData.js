@@ -23,7 +23,7 @@ $(document).ready(function () {
       '<li id="preLoader" class="list-group-item align-items-center justify-content-center"><div class="spinner-grow float-left"  role="status"><span class="sr-only"> Loading...</span></div> <div class="float-left  h-100 d-flex align-items-center"> Loading...</div></li>'
     );
   }
-  fetch("http://127.0.0.1:9000/api/emails/?ordering=-date", {
+  fetch("http://127.0.0.1:8000/api/emails/?ordering=-date", {
     headers: {
       "X-CSRFToken": getCookie("csrftoken"),
     },
@@ -1064,10 +1064,9 @@ $(document).ready(function () {
   // When click spam button add mails to spam folder begin 
 
   $(".spam_button").click(function() {
-    console.log(deleteJson)
     // $.ajax({
     //   type: 'POST',
-    //   // url: /* Your url */ ,
+    //   url: "/api/email/move/folder/",
     //   headers: { "X-CSRFToken": getCookie('csrftoken') },
     //   data : JSON.stringify(deleteJson),
     //   contentType: "application/json; charset=utf-8",
@@ -1079,7 +1078,6 @@ $(document).ready(function () {
     //   }
     // });
   })
-
 
   // When click spam button add mails to spam folder begin 
 
