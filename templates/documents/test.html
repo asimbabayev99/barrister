@@ -31,6 +31,7 @@
         color: hsla(197, 100%, 26%, 0.91);
         border-color: hsla(197, 100%, 26%, 0.91) !important;
     }
+
     .table td {
         vertical-align: inherit;
     }
@@ -100,11 +101,11 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="">Nikahın bağlanmasının tarixi</label>
-                                        <input type="date" id="marriage_date" class="form-control form-control-sm" >
+                                        <input type="date" id="marriage_date" class="form-control form-control-sm">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="">Qeydiyyat şöbəsi</label>
-                                        <input type="text" id="marriage_address" class="form-control form-control-sm" >
+                                        <input type="text" id="marriage_address" class="form-control form-control-sm">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -114,7 +115,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="">Iddiaçının uşaqları varmı?</label>
-                                        <select name="has_children" class="form-control form-control-sm" id="has_children">
+                                        <select name="has_children" class="form-control form-control-sm"
+                                            id="has_children">
                                             <option value="none" disabled selected>Seçin</option>
                                             <option value="yes">Bəli</option>
                                             <option value="no">Xeyr</option>
@@ -141,28 +143,35 @@
                                                 <th>İddiaçı ilə qalacaq</th>
                                                 <th>Düzəliş</th>
                                             </tr>
+
                                         </thead>
-                                        <tbody id="children_table">
-                                            <tr>
-                                                <td><input type="text" id="child_name" class="form-control form-control-sm child_ame"
+                                        <tr>
+                                            <td><input type="text" id="child_name"
+                                                    class="form-control form-control-sm child_ame"
                                                     placeholder="Soyad, Ad, Ata adı"></td>
-                                                <td><input type="date" id="child_date" class="form-control form-control-sm child_date"
+                                            <td><input type="date" id="child_date"
+                                                    class="form-control form-control-sm child_date"
                                                     placeholder="Doğum tarixi..."></td>
-                                                <td><select id="child_gender" class="form-control form-control-sm childGender child_gender">
+                                            <td><select id="child_gender"
+                                                    class="form-control form-control-sm childGender child_gender">
                                                     <option value="" disabled selected>Seçin</option>
                                                     <option value="Kişi">Kişi</option>
                                                     <option value="Qadın">Qadın</option>
                                                 </select></td>
-                                                <td><select name="child_stay" id="child_stay" class="form-control form-control-sm child_stay">
+                                            <td><select name="child_stay" id="child_stay"
+                                                    class="form-control form-control-sm child_stay">
                                                     <option value="">Seçin</option>
                                                     <option value="Bəli">Bəli</option>
                                                     <option value="Xeyr">Xeyr</option>
                                                 </select></td>
-                                                <td><button class="btn btn-primary btn-sm btn-block add_child" type="reset">Əlavə et</button></td>
-                                            </tr>
+                                            <td><button class="btn btn-primary btn-sm btn-block add_child"
+                                                    type="reset">Əlavə et</button></td>
+                                        </tr>
+                                        <tbody id="children_table">
+
                                         </tbody>
                                     </table>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -232,11 +241,11 @@
             $("#child_aliment").val("");
         });
 
-        $("#submit_button").on("click", function() {
+        $("#submit_button").on("click", function () {
             let children = [];
-            $("#children_table tr").each(function() {
+            $("#children_table tr").each(function () {
                 children.push({
-                    "name":$(this).find(".child_name").text(),
+                    "name": $(this).find(".child_name").text(),
                     "date": $(this).find(".child_date").text(),
                     "gender": $(this).find(".child_gender").text(),
                     "stay": $(this).find(".child_stay").text(),
