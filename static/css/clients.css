@@ -70,3 +70,20 @@
 .modal.fixed-left .modal-dialog-aside{ margin-left:auto;  transform: translateX(100%); }
 .modal.fixed-right .modal-dialog-aside{ margin-right:auto; transform: translateX(-100%); }
 .modal.show .modal-dialog-aside{ transform: translateX(0);  }
+
+.accept {
+    width: 60%;
+    display: block;
+    background-color: darkmagenta;
+    padding:5px;
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+.send {
+    width: 60%;
+    display: block;
+    background-color: darkolivegreen;
+    padding: 5px;
+    margin-bottom: 3px;
+}
