@@ -1080,19 +1080,24 @@ $(document).ready(function () {
   // When click spam button add mails to spam folder begin 
 
   $(".spam_button").click(function() {
-    // $.ajax({
-    //   type: 'POST',
-    //   url: "/api/email/move/folder/",
-    //   headers: { "X-CSRFToken": getCookie('csrftoken') },
-    //   data : JSON.stringify(deleteJson),
-    //   contentType: "application/json; charset=utf-8",
-    //   success: function (data) {
-    //     console.log(data)
-    //   },
-    //   error: function (data,jqXhr, textStatus, errorMessage) {
-    //       console.log(data)
-    //   }
-    // });
+    let jsonObject = {
+      "from_folder" : deleteJson.folder,
+      "uids" : deleteJson.uids,
+      "to_folder" : "Spam"
+    }
+    $.ajax({
+      type: 'POST',
+      url: "/api/email/move/folder/",
+      headers: { "X-CSRFToken": getCookie('csrftoken') },
+      data : JSON.stringify(jsonObject),
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        console.log(data)
+      },
+      error: function (data,jqXhr, textStatus, errorMessage) {
+          console.log(data)
+      }
+    });
   })
 
   // When click spam button add mails to spam folder begin 
