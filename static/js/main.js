@@ -500,6 +500,7 @@ $(document).ready(function () {
         "' class='fas open-collapse fa-ellipsis-h'></i>" +
         "</td>" +
         "</tr>"
+        
     );
     $(".select_status").on("change", function () {
       $(this).parent().attr("class", "");
