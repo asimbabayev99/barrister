@@ -3,7 +3,17 @@ from account.models import CustomUser
 import uuid
 import os
 from django.conf import settings
+from account.models import CustomUser
 # Create your models here.
+
+
+
+class Channel(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    channel_name = models.CharField(max_length=128, null=False, blank=False)
+
+    def __str__(self):
+        return self.channel_name
 
 
 

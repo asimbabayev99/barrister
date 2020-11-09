@@ -3,7 +3,7 @@ from django.core.files import File
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.conf import settings
 from account.models import CustomUser
-from chat.models import Message, Attachment
+from chat.models import Message, Attachment, Channel
 from datetime import datetime
 from channels.db import database_sync_to_async
 import base64
@@ -56,10 +56,11 @@ def save_attachment(**data):
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        # print("connect")
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
 
+
+        Channel(user=self['scope'].user, channel_name=self.channel_name).save()
         # Join room group
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -69,6 +70,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
+        Channel.objects.filter(user=self.scope['user'], channel_name=self.channel_name).delete()
+
         # Leave room group
         await self.channel_layer.group_discard(
             self.room_group_name,
