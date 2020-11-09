@@ -7,8 +7,10 @@ $(document).ready(function () {
     }
   });
 
-  var roomName = "{{ room_name }}";
-  var current_user = "{{request.user.id}}";
+  // var roomName = "{{ room_name }}";
+  // var current_user = "{{request.user.id}}";
+  var roomName = "1-5";
+  var current_user = "1";
   var chatSocket = new WebSocket(
     "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
   );
@@ -83,47 +85,44 @@ $(document).ready(function () {
     formData.append("file", file);
     // const data_ = JSON.stringify(data)
     // formData.append('data', data);
-    
-    $.ajax({
-      type: "POST",
-      url: "/chat/upload_file/{{receiver}}/",
-      headers: { "X-CSRFToken": getCookie("csrftoken") },
-      contentType: false,
-      processData: false,
-      data: formData,
-      xhr: function () {
-        var xhr = new window.XMLHttpRequest();
-        xhr.upload.addEventListener("progress", uploadProgressHandler, false);
-        xhr.addEventListener("load", loadHandler, false);
-        xhr.addEventListener("error", errorHandler, false);
-        xhr.addEventListener("abort", abortHandler, false);
-
-        return xhr;
-      },
-      success: function (data) {
-        chatSocket.send(
-          JSON.stringify({
-            type: "file",
-            action: "post",
-            id: data.id,
-            message: data.message,
-            filename: data.filename,
-            url: data.url,
-            date: data.date,
-          })
-        );
-      },
-      error: function (jqXhr, textStatus, errorMessage) {
-        alert(errorMessage);
-      },
-    });
-    // chatSocket.send(JSON.stringify({
-    //   'message': '',
-    //   'type': 'file',
-    //   'file_name': file.name,
-    //   'file_size': file.size,
-    //   'action': 'prepare',
-    // }));
+    $("#modal_aside_top .modal-header span span").text(file.name)
+    $("#modal_aside_top .modal-body p span").text(file.size)
+    $("#modal_aside_top").modal("show");
+    $("#send_confirm_btn").click(function(){
+      $.ajax({
+        type: "POST",
+        url: "/chat/upload_file/{{receiver}}/",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+        contentType: false,
+        processData: false,
+        data: formData,
+        xhr: function () {
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", uploadProgressHandler, false);
+          xhr.addEventListener("load", loadHandler, false);
+          xhr.addEventListener("error", errorHandler, false);
+          xhr.addEventListener("abort", abortHandler, false);
+          return xhr;
+        },
+        success: function (data) {
+          chatSocket.send(
+            JSON.stringify({
+              type: "file",
+              action: "post",
+              id: data.id,
+              message: data.message,
+              filename: data.filename,
+              url: data.url,
+              date: data.date,
+            })
+          );
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          alert(errorMessage);
+        },
+      });
+    }) 
+      
   });
 
   chatSocket.onmessage = function (e) {
@@ -132,7 +131,13 @@ $(document).ready(function () {
 
     if (data.type == "text" && data.action == "post") {
       if (data.sender == current_user) {
-        document.querySelector(".msg_history").innerHTML +=
+        $("#modal_aside_right .modal-body").animate(
+          {
+            scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
+          },
+          1000
+        );
+        document.querySelector("#modal_aside_right .modal-body").innerHTML +=
           "<div class='outgoing_msg'>" +
           "<div class='sent_msg'>" +
           "<p>" +
@@ -144,7 +149,13 @@ $(document).ready(function () {
           "</div>" +
           "</div>";
       } else {
-        document.querySelector(".msg_history").innerHTML +=
+        $("#modal_aside_right .modal-body").animate(
+          {
+            scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
+          },
+          1000
+        );
+        document.querySelector("#modal_aside_right .modal-body").innerHTML +=
           "<div class='incoming_msg'>" +
           "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
           "<div class='received_msg'>" +
@@ -168,7 +179,15 @@ $(document).ready(function () {
       // }
       if (data.action == "post") {
         if (data.sender == current_user) {
-          document.querySelector(".msg_history").innerHTML +=
+          $("#modal_aside_right .modal-body").animate(
+            {
+              scrollTop: $("#modal_aside_right .modal-body").prop(
+                "scrollHeight"
+              ),
+            },
+            1000
+          );
+          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
             "<div class='outgoing_msg'>" +
             "<div class='sent_msg'>" +
             "<p><a href='" +
@@ -185,7 +204,15 @@ $(document).ready(function () {
             "</div>" +
             "</div>";
         } else {
-          document.querySelector(".msg_history").innerHTML +=
+          $("#modal_aside_right .modal-body").animate(
+            {
+              scrollTop: $("#modal_aside_right .modal-body").prop(
+                "scrollHeight"
+              ),
+            },
+            1000
+          );
+          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
             "<div class='incoming_msg'>" +
             "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
             "<div class='received_msg'>" +
@@ -215,14 +242,15 @@ $(document).ready(function () {
 
   document.querySelector("#chat-message-input").focus();
   document.querySelector("#chat-message-input").onkeyup = function (e) {
-    if (e.keyCode === 13) {
-      // enter, return
-      document.querySelector("#chat-message-submit").click();
-    }
+    // if (e.keyCode === 13) {
+    //   // enter, return
+    //   // document.querySelector("#chat-message-submit").click();
+    // }
   };
 
   document.querySelector("#chat-message-submit").onclick = function (e) {
     var messageInputDom = document.querySelector("#chat-message-input");
+
     var message = messageInputDom.value;
     chatSocket.send(
       JSON.stringify({
@@ -231,7 +259,18 @@ $(document).ready(function () {
         action: "post",
       })
     );
-
+    $("textarea").css("height", "38px");
     messageInputDom.value = "";
   };
+});
+
+$(function () {
+  $("textarea")
+    .each(function () {
+      this.setAttribute("style", "height:" + 38 + "px;");
+    })
+    .on("input", function () {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
+    });
 });

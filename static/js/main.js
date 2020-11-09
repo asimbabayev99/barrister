@@ -459,5 +459,43 @@ $(document).ready(function() {
   
   
   // Open email kinds end
+
+
+  // clients table collapsing begin 
+
+ $(".open-collapse").click(function() {
+
+   let id = $(this).attr("data-target");
+   let newId = id.replace("#","");
+   $(".client-table tr").each(function() {
+     if($(this).attr("id") == newId) {
+      $(this).toggle(300)
+     }
+   })
+ })
+
+ $("#add_new_client_btn").click(function() {
+   let client_name = $("#new_client_name").val();
+   let client_email = $("#new_client_email").val();
+   let client_phone = $("#clientPhoneInput").val();
+   let client_address = $("#new_client_address").val();
+   let client_id = Math.floor(Math.random() * 100000)
+   console.log(client_id)
+   
+   $("#client_table").prepend(
+     "<tr>" +
+     "<td>"     +
+     client_name +
+     "</td>"    +
+     "<td>" + client_email  + "</td>" +
+     "<td>" +  client_phone + "</td>" +
+     "<td class = 'table-success'>" + "Aktiv" + "</td>" +
+     "<td class = 'text-center'>" + "<i class = ' far fa-comments' data-toggle = 'modal' data-target = '#modal_aside_right'></i>" + "</td>" +
+     "<td class='text-center'>" + "<i data-target='#active_table_" + client_id + "' class='fas open-collapse fa-ellipsis-h'></i>" + "</td>" + 
+     "</tr>"
+
+   )
+ })
+  // clients table collapsing end 
 });
 
