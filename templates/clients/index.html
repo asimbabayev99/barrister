@@ -296,14 +296,15 @@
         <textarea placeholder="Type, paste, cut text here..." class="form-control textareaElement" id="chat-message-input"></textarea>
         
           <div>
-            <button class="btn btn-primary">
+            <label class="btn btn-primary" for="input_file">
+              <input type="file" style="display: none;" id="input_file" name="input_file">
               <i class="fas fa-paperclip"></i>
-            </button>
+            </label>
             <button class="btn ml-2 btn-primary" id="chat-message-submit">
               <i class="fas fa-paper-plane"></i>
             </button>
           </div>
-        <input type="file" id="input_file" class="form-control-file">
+        <!-- <input type="file" id="input_file" class="form-control-file"> -->
       </div>
     </div>
   </div> <!-- modal-bialog .// -->
@@ -317,7 +318,7 @@
           <span class="lead">File name: <span></span></span>
       </div>
       <div class="modal-body"> 
-        <p>File-Size : <span></span> kb</p>
+        <p>File-Size : <span></span></p>
         <!-- <p class="lead">File-number : 3</p> -->
       </div>
       <div class="modal-footer">

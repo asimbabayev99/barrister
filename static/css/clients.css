@@ -408,3 +408,10 @@ img {
 #cancel_confirm_btn {
   background-color: #ff1505;
 }
+
+#modal_aside_top .modal-body {
+  background-image: url("./mail.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+}

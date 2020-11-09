@@ -86,8 +86,20 @@ $(document).ready(function () {
     // const data_ = JSON.stringify(data)
     // formData.append('data', data);
     $("#modal_aside_top .modal-header span span").text(file.name)
-    $("#modal_aside_top .modal-body p span").text(file.size)
+    let kb = (file.size / 1024).toString().split(".")[0]
+    let mb;
+    if(kb > 1000) {
+      mb = (kb / 1024).toString().split(".")[0] + " mb"
+    } else {
+      mb = kb + " kb"
+    }
+    $("#modal_aside_top .modal-body p span").text(mb)
     $("#modal_aside_top").modal("show");
+    if(kb > 5000) {
+      $("#send_confirm_btn").attr("disabled", true)
+    } else {
+      $("#send_confirm_btn").attr("disabled", false)
+    }
     $("#send_confirm_btn").click(function(){
       $.ajax({
         type: "POST",
