@@ -95,6 +95,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME':'db.sqlite3'
 
+<<<<<<< HEAD
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': 'test',
         # 'USER': 'postgres',
@@ -102,6 +103,8 @@ DATABASES = {
         # 'HOST': 'localhost',
         # 'PORT': '5432',
 
+=======
+>>>>>>> 8f70fd51c673e48fd596f1dc0181f86d640750ad
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'barrister',
         'USER': 'barrister',
