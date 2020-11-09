@@ -97,12 +97,15 @@
                       <td>Musa Hesenli</td>
                       <td>musahesenli02@gmail.com</td>
                       <td>0559777756</td>
-                      <td class="table-dropdown">
-                        <div class="status-key">
-                          <span>Aktiv</span>
-                          <span><i class="fas fa-angle-down"></i></span>
-                        </div>
-                        <div class="status-angle"></div>
+                      <td class="table-dropdown py-0">
+                        <select class="form-control select_status" id="select_status">
+                          <option  value="success">Success</option>
+                          <option value="warning">Warning</option>
+                          <option value="danger">Danger</option>
+                          <option value="dark">Dark</option>
+                          <option value="secondary">Secondary</option>
+                          <option value="primary">Primary</option>
+                        </select>
                       </td>
                       <td class="text-center"><i data-toggle="modal" data-target="#modal_aside_right" class="far fa-comments"></i></td>
                       <td class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
@@ -340,9 +343,9 @@
 
 {% block scripts %}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>

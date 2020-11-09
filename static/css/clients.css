@@ -384,22 +384,7 @@ img {
     font-family: 'Barlow', sans-serif;
 }
 
-.table-dropdown {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.table-dropdown .status-key {
-  width: 100%;
-  /* line-height: 30px; */
-  height: 30px;
-  /* background-color: #28ca71; */
-  color: #28ca71;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-}
 
 #send_confirm_btn {
   background-color: #325d88;
@@ -414,4 +399,9 @@ img {
   background-position: center;
   background-size: cover;
   height: 300px;
+}
+
+.table-dropdown select {
+  border: none !important;
+  outline: none;
 }
