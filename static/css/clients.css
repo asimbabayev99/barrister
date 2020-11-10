@@ -405,3 +405,19 @@ img {
   border: none !important;
   outline: none;
 }
+
+.client_expanding_information {
+  height: 400px;
+  /* background: #eee; */
+  padding: 15px;
+}
+
+.tab-pane {
+  padding: 10px 0;
+}
+
+.work-main-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

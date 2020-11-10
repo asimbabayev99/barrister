@@ -471,8 +471,8 @@ $(document).ready(function () {
     console.log(client_id);
 
     $("#client_table").prepend(
-      "<tr>" +
-        "<td>" +
+      "<tr class='main_tr'>" +
+        "<td class = 'name'>" +
         client_name +
         "</td>" +
         "<td>" +
@@ -528,7 +528,7 @@ $(document).ready(function () {
       border: "none",
     });
     $(this)
-      .parents("td")
+      .parent()
       .addClass("table-" + $(this).val());
     $(this).parents("td").addClass("py-0");
     if ($(this).parent().hasClass("table-dark")) {
@@ -538,4 +538,64 @@ $(document).ready(function () {
     }
   });
   // clients table collapsing end
+
+
+  // clients table searching begin
+  $("#search_client_input").keyup(function(e){
+    let value = $(this).val().toLowerCase()
+    $(".main_tr").each(function(){
+    if($(this).children("td.name").text().toLowerCase().includes(value)) {
+        $(this).css("display", "table-row")
+        $(this).children().css("display","table-cell")
+      }
+    else {
+        $(this).css("display", "none")
+        // $(this).children().css("display","block")
+      }
+    })
+  })
+  // clients table searching end
+
+
+  // Client new work adding begin 
+  $(".works_modal #add_new_work").click(function() {
+    let work_name = $(".works_modal #new_client_work_name").val()
+    let work_status = $(".works_modal #new_client_work_status").val()
+    $(".works_modal #new_client_work_name").val("")
+    $(".works_modal #new_client_work_status").val("")
+    $("#work_table_body").append( 
+    "<tr>" +
+    "<td>"+ work_name +"</td>" +
+    "<td class='table-dropdown py-0'>"+ 
+    '<select class="form-control select_status" id="new_client_work_status">' +
+            '<option value='+ work_status +'>'+ work_status +'</option>' +
+            '<option value="success">Success</option>' +
+            '<option value="warning">Warning</option>' +
+            '<option value="danger">Danger</option>' +
+            '<option value="dark">Dark</option>' +
+            '<option value="secondary">Secondary</option>' +
+            '<option value="primary">Primary</option>' +
+    '</select></td>' +
+    
+    "</tr>"
+    )
+    $(".select_status").on("change", function () {
+      $(this).parent().attr("class", "");
+      $(this).attr("class", "form-control");
+      $(this).css({
+        backgroundColor: $(this).parent().css("background-color"),
+        border: "none",
+      });
+      $(this)
+        .parent()
+        .addClass("table-" + $(this).val());
+      $(this).parent().addClass("py-0");
+      if ($(this).parent().hasClass("table-dark")) {
+        $(this).css("color", "#dc3545");
+      } else {
+        $(this).css("color", "#303f48");
+      }
+    });
+  })
+  // Client new work adding end 
 });
