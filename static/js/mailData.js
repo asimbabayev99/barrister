@@ -453,14 +453,15 @@ $(document).ready(function () {
             uids: deletingMessagesIds,
             folder: folder,
           };
-          // console.log(deleteJson)
+          // console.log(deleteJson) 
         });
       });
 
       //***********************  Sent mails end  ********************** */
       $(".spam_mails").click(function(){
         $(".spam_button").addClass("fa-inbox");
-        $(".span_button").removeClass("fa-exclamation-circle, d-none");
+        $(".span_button").removeClass("d-none");
+        $(".span_button").removeClass("fa-exclamation-circle");
         if(!$(".spam_button").hasClass("d-block")) {
           $(".spam_button").addClass("d-block")
         }
@@ -1092,6 +1093,13 @@ $(document).ready(function () {
       data : JSON.stringify(jsonObject),
       contentType: "application/json; charset=utf-8",
       success: function (data) {
+        jsonObject.uids.forEach(element => {
+          $(".mailListGroup").each(function() {
+            if($(this).attr("num") === element ) {
+              $(this).remove()
+            }
+          })
+        })
         console.log(data)
       },
       error: function (data,jqXhr, textStatus, errorMessage) {
