@@ -38,7 +38,13 @@ def year_suffix(value):
 
     return datetime.strftime(date, "%d.%m.%Y") + suffix
 
-
+@register.filter
+def full_name_suffix(value):
+    if value[-1] == 'u':
+        return value+'nun'
+    else:
+        return value+'nın'
+        
 
 @register.filter
 def to_list(value, i):
