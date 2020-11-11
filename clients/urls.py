@@ -4,5 +4,5 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='barrister-clients'),
-    path("documents/", client_documents , name = 'barrister-clients-documents')
+    path("documents/<int:id>", client_documents , name = 'barrister-clients-documents')
 ]

@@ -8,6 +8,6 @@ def index(request):
     return render(request,'clients/index.html')
 
 # @login_required(login_url = "/account/login")
-def client_documents(request):
+def client_documents(request,id):
     # Davay ala işdə
     return render(request,"clients/documents.html")
