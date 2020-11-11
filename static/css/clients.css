@@ -407,9 +407,10 @@ img {
 }
 
 .client_expanding_information {
-  height: 400px;
+  /* height: 400px; */
   /* background: #eee; */
-  padding: 15px;
+  padding: 15px 0;
+  
 }
 
 .tab-pane {
@@ -490,4 +491,8 @@ button.close {
 .file_preview_iframe {
   width: 100%;
   height: 15rem;
+}
+
+.work-name {
+  font-size: 15px;
 }
