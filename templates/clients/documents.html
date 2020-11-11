@@ -1,0 +1,100 @@
+{% extends 'barrister/barrister-base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Musteriler</title>
+{% endblock title %}
+
+{% block links %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+<link rel="stylesheet" href="{% static 'css/clients.css' %}">
+
+<style>
+  .table td, .table th {
+    vertical-align: inherit;
+  }
+  i {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+</style>
+{% endblock links %}
+
+
+{% block content %}
+<main class="page-content design " style="background-color: #fff;">
+  <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+  <div class="container-fluid clients-content">
+    <div class='row mt-3 mr-0'>
+    <div class="col-12">
+        <h1>Sənədlər: İşin adı</h1>
+        <hr>
+    </div>
+    <div class="col-md-4">
+      <div class="file_main">
+        <button class="file_preview btn" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
+        <a href="#"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
+      </div>
+    </div>
+  </div>
+  
+</main>
+
+<!-- File preview modal begin -->
+<div class="modal fade" id="preview_file_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe src="https://youtube.com" frameborder="0" class="file_preview_iframe"></iframe>
+      </div>
+      <div class="modal-footer m-0">
+        <button type="button" class="btn modal_dismiss_btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn modal_download_btn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- File preview modal end   -->
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+  $(function() {
+    if($(".page-wrapper").hasClass("toggled")) {
+        $(".clients-content").css("padding-left",'0px')
+      }else {
+        $(".clients-content").css("padding-left",'40px')
+      }
+    $(window).click(function() {
+      if($(".page-wrapper").hasClass("toggled")) {
+        $(".clients-content").css("padding-left",'0px')
+      }else {
+        $(".clients-content").css("padding-left",'40px')
+      }
+    })
+  })
+</script>
+{% endblock scripts %}

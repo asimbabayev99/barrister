@@ -421,3 +421,63 @@ img {
   align-items: center;
   justify-content: space-between;
 }
+
+.file_main {
+  height: 200px;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  position: relative;
+}
+
+.file_preview {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  background-color: #05728f;
+  color: #fff;
+  /* border-radius: 5px; */
+  /* padding: 10px; */
+  position: absolute;
+  bottom: 10px;
+  right: 70px;
+}
+.file_download:hover , .file_preview:hover {
+  color: #eee;
+}
+.file_download {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  background-color: rgba(0, 161, 108, 0.849);
+  color: #fff;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  /* border-radius: 5px; */
+  /* padding: 10px; */
+}
+
+.modal_dismiss_btn {
+  background-color: #05728f;
+  box-shadow : none;
+  color: #fff;
+}
+.modal_download_btn {
+  background-color: rgba(0, 161, 108, 0.849);
+  box-shadow : none;
+  color: #fff;
+}
+
+.modal_download_btn:hover , .modal_dismiss_btn:hover {
+  color: #eee;
+}
+
+button.close {
+  outline: none ;
+}
+
+.file_preview_iframe {
+  width: 100%;
+  height: 15rem;
+}
