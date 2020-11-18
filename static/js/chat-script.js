@@ -8,11 +8,9 @@ $(document).ready(function () {
   });
 
   // var roomName = "{{ room_name }}";
-  // var current_user = "{{request.user.id}}";
-  var roomName = "1-5";
-  var current_user = "1";
+  var current_user = $("#current_user_id").attr('user_id');
   var chatSocket = new WebSocket(
-    "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
+    "ws://" + window.location.host + "/ws/chat/" + current_user + "/"
   );
   var load_data = function (index) {
     var end = index + 1000000;
@@ -140,7 +138,6 @@ $(document).ready(function () {
   chatSocket.onmessage = function (e) {
     var data = JSON.parse(e.data);
     console.log(data);
-
     if (data.type == "text" && data.action == "post") {
       if (data.sender == current_user) {
         $("#modal_aside_right .modal-body").animate(
@@ -181,6 +178,7 @@ $(document).ready(function () {
           "</div>" +
           "</div>" +
           "</div>";
+         
       }
     } else if (data.type == "file") {
       // if (data.action == 'progress') {
@@ -269,6 +267,7 @@ $(document).ready(function () {
         message: message,
         type: "text",
         action: "post",
+        receiver: $('.person-title').attr('chat_id') 
       })
     );
     $("textarea").css("height", "38px");

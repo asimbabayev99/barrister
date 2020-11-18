@@ -25,12 +25,12 @@
 
 
 {% block content %}
-<main class="page-content design " style="background-color: #fff;">
+<main  class="page-content design" style="background-color: #fff;">
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="container-fluid clients-content">
     <div class="row mr-0">
       <div class="col-12 header">
-        <span>Müştərilər</span>
+        <span id="current_user_id" user_id = "{{request.user.id}}">Müştərilər</span>
       </div>
       <div class="col-md-4 col-12 rounded-0 my-2">
         <button class="btn btn-block btn-light rounded-0 border-0" data-toggle="modal" data-target="#addClient"
@@ -96,24 +96,27 @@
                 </thead>
                 <tbody id="client_table">
                   <div class="collapse_main">
+                    
+                    {% for client in active_clients %}    
                     <tr class="main_tr">
-                      <td class="name">Musa Hesenli</td>
-                      <td>musahesenli02@gmail.com</td>
-                      <td>0559777756</td>
+                      <td class="name">{{client.first_name}} {{client.last_name}}</td>
+                      <td>{{client.email}}</td>
+                      <td>{{client.phone}}</td>
                       <td class="table-dropdown py-0">
                         <select class="form-control select_status" id="select_status">
-                          <option  value="success">Success</option>
-                          <option value="warning">Warning</option>
-                          <option value="danger">Danger</option>
-                          <option value="dark">Dark</option>
-                          <option value="secondary">Secondary</option>
-                          <option value="primary">Primary</option>
+                          <option  value="success" selected >Aktiv</option>
+                          <option value="warning">Qeyri-Aktiv</option>
                         </select>
                       </td>
-                      <td class="text-center"><i data-toggle="modal" data-target="#modal_aside_right" class="far fa-comments"></i></td>
-                      <td class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
+                      
+                      
+                      <td class="text-center">
+                        {% if client.is_user == True %}
+                        <i onclick="modal_show('{{client.first_name}}','{{client.last_name}}','{{client.phone}}','{{client.get_user_id}}')" class="far fa-comments"></i></td>
+                        {% endif %} 
+                      <td onclick="page_redirect('{{client.id}}')" class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
                     </tr>
-                    
+                    {% endfor %}
                   </div>
                  
                   
@@ -141,14 +144,22 @@
                   </tr>
                 </thead>
                 <tbody>
+                  
+                  {% for inactive in inactive_clients %}
                   <tr>
-                    <td>Musa Hesenli</td>
-                    <td>musahesenli02@gmail.com</td>
-                    <td>0559777756</td>
-                    <td class="table-danger">Deaktiv</td>
+                    <td>{{inactive.first_name}} {{inactive.last_name}}</td>
+                    <td>{{inactive.email}}</td>
+                    <td>{{inactive.phone}}</td>
+                    <td class="table-dropdown py-0">
+                      <select class="form-control select_status" id="select_status">
+                        <option  value="success">Aktiv</option>
+                        <option value="warning" selected>Qeyri-Aktiv</option>
+                      </select>
+                    </td>
                     <td><i class="fas fa-sms"></i></td>
                     <!-- <td><button class="btn btn-info btn-sm">Daha çox</button></td> -->
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -278,6 +289,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="{% static 'js/chat-script.js'%}"></script>
 <script>
+  function page_redirect(id){
+    window.open(location.href + 'documents/'+id)
+  }
+  function modal_show(first_name,last_name,phone,id=null){
+    $('.person-title').text(first_name+" "+last_name)
+    $('.person-title').attr('chat_id',id)
+    $('.person-number').text(phone)
+    $('#modal_aside_right').modal('show')
+    }
+
+
+
+
   $(function() {
     if($(".page-wrapper").hasClass("toggled")) {
         $(".clients-content").css("padding-left",'0px')

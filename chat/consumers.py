@@ -1,4 +1,4 @@
-from asgiref.sync import async_to_sync
+from asgiref.sync import async_to_sync , sync_to_async
 from django.core.files import File
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.conf import settings
@@ -11,6 +11,9 @@ import json
 import os
 import uuid
 # from channels.layers import get_channel_layer
+
+    
+
 
 
 @database_sync_to_async
@@ -53,14 +56,67 @@ def save_attachment(**data):
     attachment.save()
     return attachment
 
+@database_sync_to_async
+def save_channel(**data):
+    user = data.get('user')
+    channel = data.get('channel_name')
+    channel = Channel(user=user,channel_name=channel)
+    print(channel)
+    channel.save()
+    return Channel
+
+@database_sync_to_async
+def delete_channel(**data):
+    user = data.get('user')
+    channel = data.get('channel_name')
+
+    Channel.objects.filter(user=user,channel_name=channel).delete()
+    return 'deleted'
+
+
+@database_sync_to_async
+def get_channels(**data):
+    sender = data.get('sender')
+    receiver = data.get('receiver')
+    channels =  Channel.objects.filter(user__in=[sender,receiver])
+    return channels
+
+
+
+# @sync_to_async
+# def send_message(**data):
+#     obj = data.get('obj')
+#     channels = data.get('channels')
+#     print(channels)
+#     message_type = data.get('message_type')
+#     message = data.get('message')
+#     action = data.get('action')
+#     msg = data.get('msg')
+#     sender = data.get('sender')
+#     receiver = data.get('receiver')
+#     for channel in channels:
+#         obj.channel_layer.send(channel.channel_name,
+#         {
+#             'type': 'chat_message',
+#             'message_type': message_type,
+#             'action': action,
+#             'id': msg.id,
+#             'message': message,
+#             'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
+#             'sender': sender,
+#             'receiver': receiver
+
+#         })
+
+
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
+        await save_channel(user=self.scope['user'],channel_name = self.channel_name)
 
-
-        Channel(user=self['scope'].user, channel_name=self.channel_name).save()
         # Join room group
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -70,31 +126,56 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        Channel.objects.filter(user=self.scope['user'], channel_name=self.channel_name).delete()
-
+        await delete_channel(user=self.scope['user'],channel_name = self.channel_name)
         # Leave room group
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
+    
+    def send_message(self,**data):
+        channels = data.get('channels')
+        message_type = data.get('message_type')
+        message = data.get('message')
+        action = data.get('action')
+        msg = data.get('msg')
+        sender = data.get('sender')
+        receiver = data.get('receiver')
+        for channel in channels:
+            print(channel.channel_name)
+            print(self.channel_layer.send(channel.channel_name,
+            {
+                'type': 'chat_message',
+                'message_type': message_type,
+                'action': action,
+                'id': msg.id,
+                'message': message,
+                'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
+                'sender': sender,
+                'receiver': receiver
+
+            }))
+
+
+
 
     # Receive message from WebSocket
     async def receive(self, text_data):
         data = json.loads(text_data)
-        # print(data)
         message_type = data.get('type')
         action = data.get('action')
-
-        receiver = self.room_name.replace(str(self.scope['user'].id), '').replace('-', '')
-        receiver = CustomUser.objects.get(id=int(receiver))
+        receiver = data.get('receiver')
+        receiver = await database_sync_to_async(CustomUser.objects.get)(id = int(receiver))
         sender = self.scope['user']
-
+        channels = await get_channels(receiver=receiver,sender=sender)
         # if message type is text
         if message_type == 'text':
             if action == 'post':
                 message = data['message']
+                print(message)
                 # Store message.
                 msg = await save_message(message=message, sender=sender, receiver=receiver)
+
             elif action == "delete":
                 message = ""
                 id = data['id']
@@ -109,7 +190,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     )   
             else:
                 # if wrong message action is wrong then send error message
-                await self.channel_layer.group_send(
+
+               await self.channel_layer.group_send(
                     self.room_group_name,
                     {
                         'type': 'handle_error',
@@ -117,20 +199,26 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     }
                 )
 
-            # Send message to room group
-            await self.channel_layer.group_send(
-                self.room_group_name,
-                {
-                    'type': 'chat_message',
-                    'message_type': message_type,
-                    'action': action,
-                    'id': msg.id,
-                    'message': message,
-                    'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
-                    'sender': sender,
-                    'receiver': receiver
-                }
-            )
+            
+            
+
+            await sync_to_async(self.send_message)(message_type=message_type,action=action,msg=msg,sender=sender,receiver=receiver,message=message,channels=channels)
+            # self.channel_layer.send(
+            #         channel.name,
+            #             {
+            #             'type': 'chat_message',
+            #             'message_type': message_type,
+            #             'action': action,
+            #             'id': msg.id,
+            #             'message': message,
+            #             'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
+            #             'sender': sender,
+            #             'receiver': receiver
+            #         }
+            #     )
+        
+
+
         # if message type is file
         elif message_type == "file":
             await self.channel_layer.group_send(
