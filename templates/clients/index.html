@@ -112,7 +112,11 @@
                       
                       <td class="text-center">
                         {% if client.is_user == True %}
-                        <i onclick="modal_show('{{client.first_name}}','{{client.last_name}}','{{client.phone}}','{{client.get_user_id}}')" class="far fa-comments"></i></td>
+                        <i onclick="modal_show('{{client.first_name}}','{{client.last_name}}','{{client.phone}}','{{client.get_user_id}}')" class="far fa-comments"></i>
+                        <sup>
+                          <span class="badge badge-pill badge-primary">3</span>
+                        </sup>
+                      </td>
                         {% endif %} 
                       <td onclick="page_redirect('{{client.id}}')" class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
                     </tr>
