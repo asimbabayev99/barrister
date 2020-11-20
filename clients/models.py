@@ -63,5 +63,8 @@ class CaseDocument(models.Model):
         indexes = [
             models.Index(fields=['case', 'name']),
         ]
+    # @property
+    def download_url(self):
+        return '/clients/document'+self.document.url
  
 

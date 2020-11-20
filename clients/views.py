@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse , Http404
 from django.contrib.auth.decorators import login_required
 from .models import *
-
+import os
+import mimetypes
 
 @login_required(login_url='/account/login')
 def index(request):
@@ -17,4 +18,15 @@ def index(request):
 def client_documents(request,id):
     client = get_object_or_404(Client.objects.all(),pk=id)
     cases = client.case.all()
-    return render(request,"clients/documents.html")
+    context={'cases':cases}
+    return render(request,"clients/documents.html",context=context)
+
+def case_document_download(request,path):
+    file_name  = os.path.basename(path)
+    if os.path.exists(path):
+        with open(path,"wb+") as document:
+            response = HttpResponse(document.read(),content_type=mimetypes.guess_type(path)[0])
+            response['Content-type']  = mimetypes.guess_type(path)[0]
+            response["Content-Disposition"] = "filename={}".format(file_name) 
+            return response
+    return Http404

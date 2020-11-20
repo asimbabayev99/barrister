@@ -112,18 +112,23 @@
                         </tr>
                       </thead>
                       <tbody id="work_table_body">
+                        
+                        {% for case in cases %}
+                          
+                       
+                          
                         <tr>
                           <td>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero, debitis.
+                            {{case.name}}
                           </td>
                           <td class="table-dropdown py-0">
                             <select class="form-control select_status" id="select_status">
-                              <option  value="success">Success</option>
-                              <option value="warning">Warning</option>
+                              <option  value="success" selected>{{case.status}}</option>
+                              <!-- <option value="warning">Warning</option>
                               <option value="danger">Danger</option>
                               <option value="dark">Dark</option>
                               <option value="secondary">Secondary</option>
-                              <option value="primary">Primary</option>
+                              <option value="primary">Primary</option> -->
                             </select>
                           </td>
                           
@@ -131,18 +136,21 @@
                         <tr>
                           <td colspan="2">
                             <div class="row p-0 m-0">
-                              {% if documents %}
+                              {% if  case.document %}
+                              
+                              {% for document in case.document.all %}
+                  
                                 <div class="col-12">
-                                  <h2 class="lead work-name">{{ i.work_name }}</h1>
+                                  <h2 class="lead work-name">Test</h1>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                   <div class="file_main">
-                                    <p class="blockquote-footer file_name">{{ i.name }}</p>
-                                    <button class="file_preview btn" show_url = "{{ i.show_url }}" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
-                                    <a href="{{ i.download_url }}"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
+                                    <p class="blockquote-footer file_name">{{ document.name }}</p>
+                                    <button class="file_preview btn" show_url = "{{ document.url }}" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
+                                    <a href="{{ document.download_url }}"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
                                   </div>
                                 </div>
-                                
+                                {% endfor %}
                                 {% else %}
                                 <div class="col-12">
                                   <div class="alert alert-warning">Sənəd yoxdur</div>
@@ -151,6 +159,7 @@
                             </div>
                           </td>
                         </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
@@ -181,7 +190,7 @@
         </button>
       </div>
       <div class="modal-body p-0">
-        <iframe src="https://youtube.com" frameborder="0" class="file_preview_iframe"></iframe>
+        <iframe src="/Viewerjs/#http://127.0.0.1:8000/clients/document/media/case-documents/senedler-ucun-test.docx" frameborder="0" class="file_preview_iframe"></iframe>
       </div>
       <div class="modal-footer m-0">
         <button type="button" class="btn modal_dismiss_btn" data-dismiss="modal">Close</button>

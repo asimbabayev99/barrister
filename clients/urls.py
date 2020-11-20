@@ -4,5 +4,8 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='barrister-clients'),
-    path("documents/<int:id>", client_documents , name = 'barrister-clients-documents')
+    path("client/<int:id>", client_documents , name = 'barrister-clients-documents'),
+
+    #document download
+    path('document/<str:path>',case_document_download,name='document-download')
 ]
