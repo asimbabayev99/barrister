@@ -1,11 +1,11 @@
 $(document).ready(function () {
-  $(".fa-paperclip").click(function () {
-    if (confirm("Are you sure")) {
-      return 0;
-    } else {
-      return 0;
-    }
-  });
+  // $(".fa-paperclip").click(function () {
+  //   if (confirm("Are you sure")) {
+  //     return 0;
+  //   } else {
+  //     return 0;
+  //   }
+  // });
 
   // var roomName = "{{ room_name }}";
   var current_user = $("#current_user_id").attr('user_id');

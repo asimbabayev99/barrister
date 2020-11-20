@@ -71,6 +71,7 @@ def delete_channel(**data):
     channel = data.get('channel_name')
 
     Channel.objects.filter(user=user,channel_name=channel).delete()
+    print('channel deleted')
     return 'deleted'
 
 
@@ -79,7 +80,7 @@ def get_channels(**data):
     sender = data.get('sender')
     receiver = data.get('receiver')
     channels =  Channel.objects.filter(user__in=[sender,receiver])
-    return channels
+    return list(channels)
 
 
 
@@ -122,7 +123,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-
         await self.accept()
 
     async def disconnect(self, close_code):
@@ -141,11 +141,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         msg = data.get('msg')
         sender = data.get('sender')
         receiver = data.get('receiver')
-        for channel in channels:
-            print(channel.channel_name)
-            print(self.channel_layer.send(channel.channel_name,
+        print(channels)
+        # for channel in channels:
+        self.channel_layer.send(channels.channel_name,
             {
-                'type': 'chat_message',
+                'type': self.chat_message,
                 'message_type': message_type,
                 'action': action,
                 'id': msg.id,
@@ -154,7 +154,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'sender': sender,
                 'receiver': receiver
 
-            }))
+            })
 
 
 
@@ -202,20 +202,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
             
             
 
-            await sync_to_async(self.send_message)(message_type=message_type,action=action,msg=msg,sender=sender,receiver=receiver,message=message,channels=channels)
-            # self.channel_layer.send(
-            #         channel.name,
-            #             {
-            #             'type': 'chat_message',
-            #             'message_type': message_type,
-            #             'action': action,
-            #             'id': msg.id,
-            #             'message': message,
-            #             'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
-            #             'sender': sender,
-            #             'receiver': receiver
-            #         }
-            #     )
+            # await sync_to_async(self.send_message)(message_type=message_type,action=action,msg=msg,sender=sender,receiver=receiver,message=message,channels=channels)
+            for channel in channels:
+                await self.channel_layer.send(
+                    channel.channel_name,
+                        {
+                        'type': 'chat_message',
+                        'message_type': message_type,
+                        'action': action,
+                        'id': msg.id,
+                        'message': message,
+                        'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
+                        'sender': sender,
+                        'receiver': receiver
+                    }
+                )
         
 
 
@@ -362,6 +363,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         action = event['action']
         receiver = event['receiver']
         date = event['date']
+        print('chat_message',message)
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
