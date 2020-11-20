@@ -102,7 +102,7 @@
                             <input placeholder="Axtar" type="text" class="form-control form-control-sm">
                           </td>
                           <td colspan="2">
-                            <button class="btn btn-block btn-sm btn-success" data-toggle="modal" data-target="#modal_aside_top_2">Yeni iş əlavə et</button>
+                            <button class="btn btn-block btn-sm btn-success" data-toggle="modal" data-target="#add_new_work">Yeni iş əlavə et</button>
                           </td>
                         </tr>
                         <tr>
@@ -118,12 +118,8 @@
                           </td>
                           <td class="table-dropdown py-0">
                             <select class="form-control select_status" id="select_status">
-                              <option  value="success">Success</option>
-                              <option value="warning">Warning</option>
-                              <option value="danger">Danger</option>
-                              <option value="dark">Dark</option>
-                              <option value="secondary">Secondary</option>
-                              <option value="primary">Primary</option>
+                              <option  value="success">Aktiv</option>
+                              <option value="warning">Qeyri-aktiv</option>
                             </select>
                           </td>
                           
@@ -187,6 +183,36 @@
         <button type="button" class="btn modal_dismiss_btn" data-dismiss="modal">Close</button>
         <button type="button" class="btn modal_download_btn">Save changes</button>
       </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="add_new_work" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Yeni iş əlavə et</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="dialog" id="work_form">
+        <div class="modal-body">
+        <div class="form-group">
+          <label for="">İşin adı</label>
+          <input type="text" class="form-control" id="work_name_input" placeholder="İşin adı" required>
+        </div>
+        <div class="form-group">
+          <label for="">İşin statusu</label>
+          <select type="text" class="form-control" id="work_status" placeholder="İşin status">
+            <option value="success">Aktiv</option>
+            <option value="danger">Qeyri-aktiv</option>
+          </select>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
