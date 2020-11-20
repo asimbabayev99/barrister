@@ -133,28 +133,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
     
-    def send_message(self,**data):
-        channels = data.get('channels')
-        message_type = data.get('message_type')
-        message = data.get('message')
-        action = data.get('action')
-        msg = data.get('msg')
-        sender = data.get('sender')
-        receiver = data.get('receiver')
-        print(channels)
-        # for channel in channels:
-        self.channel_layer.send(channels.channel_name,
-            {
-                'type': self.chat_message,
-                'message_type': message_type,
-                'action': action,
-                'id': msg.id,
-                'message': message,
-                'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
-                'sender': sender,
-                'receiver': receiver
-
-            })
 
 
 
@@ -168,12 +146,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         receiver = await database_sync_to_async(CustomUser.objects.get)(id = int(receiver))
         sender = self.scope['user']
         channels = await get_channels(receiver=receiver,sender=sender)
+        
         # if message type is text
         if message_type == 'text':
             if action == 'post':
                 message = data['message']
                 # Store message.
-                msg = await save_message(message=message, sender=sender, receiver=receiver)
+                msg = await save_message(message=message, sender=sender, receiver=receiver,viewed=False)
 
             elif action == "delete":
                 message = ""
@@ -199,8 +178,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 )
 
             
-            
-
             # await sync_to_async(self.send_message)(message_type=message_type,action=action,msg=msg,sender=sender,receiver=receiver,message=message,channels=channels)
             for channel in channels:
                 await self.channel_layer.send(

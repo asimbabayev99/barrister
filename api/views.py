@@ -22,7 +22,7 @@ from rest_framework.parsers import *
 from shop.models import *
 from account.tasks import *
 import logging
-
+from django.db.models import Q
 
 
 class UserAPI(APIView):
@@ -924,3 +924,13 @@ class EmailDeleteView(APIView):
         emails.delete()
         delete_mail.delay(folders)
         return Response({'emails':'deleted'})
+
+from chat.models import Message
+
+class MessageListView(ListAPIView):
+    def get_queryset(self):
+        user = self.request.user
+        return Message.objects.filter(Q(sender=user)|Q(receiver=user))
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]

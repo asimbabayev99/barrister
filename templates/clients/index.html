@@ -116,8 +116,9 @@
                         <sup>
                           <span class="badge badge-pill badge-primary">3</span>
                         </sup>
+                        {% endif %}
                       </td>
-                        {% endif %} 
+                       
                       <td onclick="page_redirect('{{client.id}}')" class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
                     </tr>
                     {% endfor %}
@@ -160,8 +161,16 @@
                         <option value="warning" selected>Qeyri-Aktiv</option>
                       </select>
                     </td>
-                    <td><i class="fas fa-sms"></i></td>
-                    <!-- <td><button class="btn btn-info btn-sm">Daha çox</button></td> -->
+                    <td class="text-center">
+                      {% if inactive.is_user == True %}
+                      <i onclick="modal_show('{{inactive.first_name}}','{{inactive.last_name}}','{{inactive.phone}}','{{inactive.get_user_id}}')" class="far fa-comments"></i>
+                      <sup>
+                        <span class="badge badge-pill badge-primary">3</span>
+                      </sup>
+                      {% endif %} 
+                    </td>
+                      
+                    <td onclick="page_redirect('{{inactive.id}}')" class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
                   </tr>
                   {% endfor %}
                 </tbody>
