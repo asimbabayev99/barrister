@@ -558,44 +558,26 @@ $(document).ready(function () {
 
 
   // Client new work adding begin 
-  $(".works_modal #add_new_work").click(function() {
-    let work_name = $(".works_modal #new_client_work_name").val()
-    let work_status = $(".works_modal #new_client_work_status").val()
-    $(".works_modal #new_client_work_name").val("")
-    $(".works_modal #new_client_work_status").val("")
-    $("#work_table_body").append( 
-    "<tr>" +
-    "<td>"+ work_name +"</td>" +
-    "<td class='table-dropdown py-0'>"+ 
-    '<select class="form-control select_status" id="new_client_work_status">' +
-            '<option value='+ work_status +'>'+ work_status +'</option>' +
-            '<option value="success">Success</option>' +
-            '<option value="warning">Warning</option>' +
-            '<option value="danger">Danger</option>' +
-            '<option value="dark">Dark</option>' +
-            '<option value="secondary">Secondary</option>' +
-            '<option value="primary">Primary</option>' +
-    '</select></td>' +
-    
-    "</tr>"
+  $("#work_form").on("submit", function() {
+    let work_name = $("#work_name_input").val()
+    let work_status = $("#work_status").val()
+    let other_status = null
+    if(work_status == "success") {
+      other_status == "Danger"
+    } else {
+      other_status = "Success"
+    }
+    $("#work_table_body").append(
+      "<tr>" +
+      "<td>"+ work_name +"</td>" +
+      "<td>" +
+      "<select>" +
+      "<option>" + work_status +"</option>" +
+      "<option>" + other_status +"</option>" +
+      "</select>" +
+      +"</td>" +
+      "</tr>"
     )
-    $(".select_status").on("change", function () {
-      $(this).parent().attr("class", "");
-      $(this).attr("class", "form-control");
-      $(this).css({
-        backgroundColor: $(this).parent().css("background-color"),
-        border: "none",
-      });
-      $(this)
-        .parent()
-        .addClass("table-" + $(this).val());
-      $(this).parent().addClass("py-0");
-      if ($(this).parent().hasClass("table-dark")) {
-        $(this).css("color", "#dc3545");
-      } else {
-        $(this).css("color", "#303f48");
-      }
-    });
   })
   // Client new work adding end 
 });
