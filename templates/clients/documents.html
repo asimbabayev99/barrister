@@ -114,9 +114,6 @@
                       <tbody id="work_table_body">
                         
                         {% for case in cases %}
-                          
-                       
-                          
                         <tr>
                           <td>
                             {{case.name}}
@@ -208,7 +205,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="dialog" id="work_form">
+      <form method="dialog" >
         <div class="modal-body">
         <div class="form-group">
           <label for="">İşin adı</label>
@@ -223,7 +220,7 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn">Save changes</button>
+          <button type="submit" class="btn modal_download_btn" id="add_work_btn" >Save changes</button>
         </div>
       </form>
     </div>

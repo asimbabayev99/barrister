@@ -558,26 +558,28 @@ $(document).ready(function () {
 
 
   // Client new work adding begin 
-  $("#work_form").on("submit", function() {
-    let work_name = $("#work_name_input").val()
+  $("#add_work_btn").click(function() {
+    let work_name =  $("#work_name_input").val()
     let work_status = $("#work_status").val()
-    let other_status = null
+    let other_status = "";
     if(work_status == "success") {
-      other_status == "Danger"
+      work_status = "Aktiv"
+      other_status = "Qeyri-aktiv";
     } else {
-      other_status = "Success"
+      other_status = "Aktiv";
+      work_status = "Qeyri-aktiv"
     }
     $("#work_table_body").append(
       "<tr>" +
       "<td>"+ work_name +"</td>" +
-      "<td>" +
-      "<select>" +
-      "<option>" + work_status +"</option>" +
-      "<option>" + other_status +"</option>" +
-      "</select>" +
-      +"</td>" +
-      "</tr>"
-    )
+      "<td class='p-0 table-dropdown'>" +
+      "<select class='form-control select_status'>" +
+      "<option value='"+ work_status +"'><span  style='text-transform:capitalize'>" + work_status +"</span></option>" +
+      "<option value='"+ other_status +"'><span style='text-transform:capitalize'>" + other_status +"</span></option></select></td></tr>"      
+    );
+    $("#work_name_input").val("")
+    $("#work_status").val("");
+    
   })
   // Client new work adding end 
 });
