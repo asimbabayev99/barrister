@@ -172,7 +172,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if message_type == 'text':
             if action == 'post':
                 message = data['message']
-                print(message)
                 # Store message.
                 msg = await save_message(message=message, sender=sender, receiver=receiver)
 
@@ -363,7 +362,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         action = event['action']
         receiver = event['receiver']
         date = event['date']
-        print('chat_message',message)
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
