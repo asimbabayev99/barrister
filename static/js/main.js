@@ -558,7 +558,7 @@ $(document).ready(function () {
 
 
   // Client new work adding begin 
-  $("#work_form").on("submit", function() {
+  $("#work_form").onsubmit(function() {
     let work_name = $("#work_name_input").val()
     let work_status = $("#work_status").val()
     let other_status = null
