@@ -1,64 +1,91 @@
-{% extends 'barrister/barrister-base.html' %}
-{% load static %}
-
-
-{% block title %}
+{% extends 'barrister/barrister-base.html' %} {% load static %} {% block title
+%}
 <title>Musteriler</title>
-{% endblock title %}
-
-{% block links %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'css/style2.css' %}">
-<link rel="stylesheet" href="{% static 'css/clients.css' %}">
+{% endblock title %} {% block links %} {{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}" />
+<link rel="stylesheet" href="{% static 'css/clients.css' %}" />
 
 <style>
-  .table td, .table th {
+  .table td,
+  .table th {
     vertical-align: inherit;
   }
   i {
     font-size: 1rem;
     cursor: pointer;
   }
-  
 </style>
-{% endblock links %}
-
-
-{% block content %}
-<main  class="page-content design" style="background-color: #fff;">
+{% endblock links %} {% block content %}
+<main class="page-content design" style="background-color: #fff">
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="container-fluid clients-content">
     <div class="row mr-0">
       <div class="col-12 header">
-        <span id="current_user_id" user_id = "{{request.user.id}}">Müştərilər</span>
+        <span id="current_user_id" user_id="{{request.user.id}}"
+          >Müştərilər</span
+        >
       </div>
       <div class="col-md-4 col-12 rounded-0 my-2">
-        <button class="btn btn-block btn-light rounded-0 border-0" data-toggle="modal" data-target="#addClient"
-          style="background-color: #eee;">Əlavə et</button>
+        <button
+          class="btn btn-block btn-light rounded-0 border-0"
+          data-toggle="modal"
+          data-target="#addClient"
+          style="background-color: #eee"
+        >
+          Əlavə et
+        </button>
       </div>
 
-
       <!-- Modal -->
-      <div class="modal fade" id="addClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+      <div
+        class="modal fade"
+        id="addClient"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog" role="document">
           <div class="modal-content p-3" id="clients_modal">
             <form method="dialog">
               <div class="form-group">
                 <label for="">Ad</label>
-                <input required type="text" id="new_client_name" class="form-control" placeholder="Ad">
+                <input
+                  required
+                  type="text"
+                  id="new_client_name"
+                  class="form-control"
+                  placeholder="Ad"
+                />
               </div>
               <div class="form-group">
                 <label for="">Email</label>
-                <input required type="email" id="new_client_email" class="form-control" placeholder="Email">
+                <input
+                  required
+                  type="email"
+                  id="new_client_email"
+                  class="form-control"
+                  placeholder="Email"
+                />
               </div>
               <div class="form-group">
                 <label for="">Telefon</label>
-                <input required class="form-control client_phone" id="clientPhoneInput" placeholder="Telefon">
+                <input
+                  required
+                  class="form-control client_phone"
+                  id="clientPhoneInput"
+                  placeholder="Telefon"
+                />
               </div>
               <div class="form-group">
                 <label for="">Ünvan</label>
-                <input required type="text" class="form-control" id="new_client_address" placeholder="Ünvan">
+                <input
+                  required
+                  type="text"
+                  class="form-control"
+                  id="new_client_address"
+                  placeholder="Ünvan"
+                />
               </div>
 
               <div class="form-group">
@@ -66,23 +93,37 @@
                 <textarea name="" class="form-control"></textarea>
               </div>
               <div class="form-group d-flex justify-content-end pb-0 mb-0">
-                <button class="btn btn-light" data-dismiss="modal">Bağla</button>
-                <button class="btn btn-primary ml-2" id="add_new_client_btn" type="submit" data-dismiss="modal">Yadda saxla</button>
+                <button class="btn btn-light" data-dismiss="modal">
+                  Bağla
+                </button>
+                <button
+                  class="btn btn-primary ml-2"
+                  id="add_new_client_btn"
+                  type="submit"
+                  data-dismiss="modal"
+                >
+                  Yadda saxla
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="col-12  my-2">
+      <div class="col-12 my-2">
         <div class="row">
-        <div class="col-12">
+          <div class="col-12">
             <div class="table-responsive">
               <table class="table table-bordered client-table">
                 <thead>
                   <tr>
                     <td colspan="3">Aktiv Müştərilər</td>
                     <td colspan="3">
-                        <input type="text" id="search_client_input" placeholder="Axtar..." class="form-control form-control-sm"> 
+                      <input
+                        type="text"
+                        id="search_client_input"
+                        placeholder="Axtar..."
+                        class="form-control form-control-sm"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -96,48 +137,61 @@
                 </thead>
                 <tbody id="client_table">
                   <div class="collapse_main">
-                    
-                    {% for client in active_clients %}    
+                    {% for client in active_clients %}
                     <tr class="main_tr">
-                      <td class="name">{{client.first_name}} {{client.last_name}}</td>
+                      <td class="name">
+                        {{client.first_name}} {{client.last_name}}
+                      </td>
                       <td>{{client.email}}</td>
                       <td>{{client.phone}}</td>
                       <td class="table-dropdown py-0">
-                        <select class="form-control select_status" id="select_status">
-                          <option  value="success" selected >Aktiv</option>
+                        <select
+                          class="form-control select_status"
+                          id="select_status"
+                        >
+                          <option value="success" selected>Aktiv</option>
                           <option value="warning">Qeyri-Aktiv</option>
                         </select>
                       </td>
-                      
-                      
+
                       <td class="text-center">
                         {% if client.user %}
-                        <i onclick="modal_show('{{client.first_name}}','{{client.last_name}}','{{client.phone}}','{{client.get_user_id}}')" class="far fa-comments"></i>
+                        <i
+                          onclick="modal_show('{{client.first_name}}','{{client.last_name}}','{{client.phone}}','{{client.get_user_id}}')"
+                          class="far fa-comments"
+                        ></i>
                         <sup>
-                          <span class="badge badge-pill badge-primary" >3</span>
+                          <span class="badge badge-pill badge-primary">3</span>
                         </sup>
                         {% endif %}
                       </td>
-                       
-                      <td onclick="page_redirect('{{client.id}}')" class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
+
+                      <td
+                        onclick="page_redirect('{{client.id}}')"
+                        class="text-center"
+                      >
+                        <i
+                          data-target="#active_table_1"
+                          class="fas open-collapse fa-ellipsis-h"
+                        ></i>
+                      </td>
                     </tr>
                     {% endfor %}
                   </div>
-                 
-                  
                 </tbody>
               </table>
             </div>
           </div>
-            <br><br>
-            <br><br>
+          <br /><br />
+          <br /><br />
           <div class="col-12 mt-5">
-            
             <div class="table-responsive">
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <td colspan="6" class="text-danger">Aktiv olmayan Müştərilər</td>
+                    <td colspan="6" class="text-danger">
+                      Aktiv olmayan Müştərilər
+                    </td>
                   </tr>
                   <tr>
                     <th>Ad və soyad</th>
@@ -149,114 +203,170 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
                   {% for inactive in inactive_clients %}
                   <tr>
                     <td>{{inactive.first_name}} {{inactive.last_name}}</td>
                     <td>{{inactive.email}}</td>
                     <td>{{inactive.phone}}</td>
                     <td class="table-dropdown py-0">
-                      <select class="form-control select_status" id="select_status">
-                        <option  value="success">Aktiv</option>
+                      <select
+                        class="form-control select_status"
+                        id="select_status"
+                      >
+                        <option value="success">Aktiv</option>
                         <option value="warning" selected>Qeyri-Aktiv</option>
                       </select>
                     </td>
                     <td class="text-center">
                       {% if inactive.user %}
-                      <i onclick="modal_show('{{inactive.first_name}}','{{inactive.last_name}}','{{inactive.phone}}','{{inactive.get_user_id}}')" class="far fa-comments"></i>
+                      <i
+                        onclick="modal_show('{{inactive.first_name}}','{{inactive.last_name}}','{{inactive.phone}}','{{inactive.get_user_id}}')"
+                        class="far fa-comments"
+                      ></i>
                       <sup>
                         <span class="badge badge-pill badge-primary">3</span>
                       </sup>
-                      {% endif %} 
+                      {% endif %}
                     </td>
-                      
-                    <td onclick="page_redirect('{{inactive.id}}')" class="text-center"><i data-target="#active_table_1" class="fas open-collapse fa-ellipsis-h"></i></td>
+
+                    <td
+                      onclick="page_redirect('{{inactive.id}}')"
+                      class="text-center"
+                    >
+                      <i
+                        data-target="#active_table_1"
+                        class="fas open-collapse fa-ellipsis-h"
+                      ></i>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
               </table>
             </div>
           </div>
-        
-          
         </div>
-
       </div>
     </div>
   </div>
-  
 </main>
-<div id="modal_aside_right" class="modal fixed-left fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog col-md-6 p-0 col-lg-5 modal-dialog-aside" role="document">
-    <div class=" modal-content">
+<div
+  id="modal_aside_right"
+  class="modal fixed-left fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div
+    class="modal-dialog col-md-6 p-0 col-lg-5 modal-dialog-aside"
+    role="document"
+  >
+    <div class="modal-content">
       <div class="modal-header justify-content-start align-items-center d-flex">
-          <button type="button" class="close ml-1" style="outline: none;" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-arrow-left"></i>
-          </button>
-          <div class="d-flex align-items-center ml-3">
-            <div class="image_chat_avatar">
-              MH
-            </div>
-            <div>
-              <span class="person-title">John Doe</span><br>
-              <small class="person-number">05597589934</small>
-            </div>
-          </div>
-      </div>
-      <div class="modal-body"> 
-        
-      </div>
-      <div class="modal-footer justify-content-between">
-        <textarea placeholder="Type, paste, cut text here..." class="form-control textareaElement" id="chat-message-input"></textarea>
-        
+        <button
+          type="button"
+          class="close ml-1"
+          style="outline: none"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="d-flex align-items-center ml-3">
+          <div class="image_chat_avatar">MH</div>
           <div>
-            <label class="btn btn-primary" for="input_file">
-              <input type="file" style="display: none;" id="input_file" name="input_file">
-              <i class="fas fa-paperclip"></i>
-            </label>
-            <button class="btn ml-2 btn-primary" id="chat-message-submit">
-              <i class="fas fa-paper-plane"></i>
-            </button>
+            <span class="person-title">John Doe</span><br />
+            <small class="person-number">05597589934</small>
           </div>
+        </div>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer justify-content-between">
+        <textarea
+          placeholder="Type, paste, cut text here..."
+          class="form-control textareaElement"
+          id="chat-message-input"
+        ></textarea>
+
+        <div>
+          <label class="btn btn-primary" for="input_file">
+            <input
+              type="file"
+              style="display: none"
+              id="input_file"
+              name="input_file"
+            />
+            <i class="fas fa-paperclip"></i>
+          </label>
+          <button class="btn ml-2 btn-primary" id="chat-message-submit">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
         <!-- <input type="file" id="input_file" class="form-control-file"> -->
       </div>
     </div>
-  </div> <!-- modal-bialog .// -->
+  </div>
+  <!-- modal-bialog .// -->
 </div>
 
-
-<div id="modal_aside_top" class="modal fixed-left fade" tabindex="-1" role="dialog">
+<div
+  id="modal_aside_top"
+  class="modal fixed-left fade"
+  tabindex="-1"
+  role="dialog"
+>
   <div class="modal-dialog col-md-6 p-0 col-lg-5" role="document">
-    <div class=" modal-content">
+    <div class="modal-content">
       <div class="modal-header justify-content-start align-items-center d-flex">
-          <span class="lead">File name: <span></span></span>
+        <span class="lead">File name: <span></span></span>
       </div>
-      <div class="modal-body"> 
+      <div class="modal-body">
         <p>File-Size : <span></span></p>
         <!-- <p class="lead">File-number : 3</p> -->
       </div>
       <div class="modal-footer">
-        <button data-dismiss="modal" id="cancel_confirm_btn" class="btn btn-danger">Cancel</button>
-        <button data-dismiss="modal" id="send_confirm_btn" class="btn btn-primary">Send</button>
+        <button
+          data-dismiss="modal"
+          id="cancel_confirm_btn"
+          class="btn btn-danger"
+        >
+          Cancel
+        </button>
+        <button
+          data-dismiss="modal"
+          id="send_confirm_btn"
+          class="btn btn-primary"
+        >
+          Send
+        </button>
       </div>
     </div>
-  </div> <!-- modal-bialog .// -->
+  </div>
+  <!-- modal-bialog .// -->
 </div>
 
-
 <!-- Add new work begin Modal -->
-<div id="modal_aside_top_2" class="modal fixed-left fade" tabindex="-1" role="dialog">
+<div
+  id="modal_aside_top_2"
+  class="modal fixed-left fade"
+  tabindex="-1"
+  role="dialog"
+>
   <div class="modal-dialog col-md-6 p-0 col-lg-5" role="document">
-    <div class=" modal-content works_modal p-3" id="clients_modal">
+    <div class="modal-content works_modal p-3" id="clients_modal">
       <form method="dialog">
         <div class="form-group">
           <label for="">İşin adı</label>
-          <input required type="text" id="new_client_work_name" class="form-control" placeholder="Ad">
+          <input
+            required
+            type="text"
+            id="new_client_work_name"
+            class="form-control"
+            placeholder="Ad"
+          />
         </div>
         <div class="form-group">
           <label for="">İşin statusu</label>
           <select class="form-control" id="new_client_work_status">
-            <option  value="success">Success</option>
+            <option value="success">Success</option>
             <option value="warning">Warning</option>
             <option value="danger">Danger</option>
             <option value="dark">Dark</option>
@@ -264,28 +374,30 @@
             <option value="primary">Primary</option>
           </select>
         </div>
-        
 
-        
         <div class="form-group d-flex justify-content-end pb-0 mb-0">
           <button class="btn btn-light" data-dismiss="modal">Bağla</button>
-          <button class="btn btn-primary ml-2" id="add_new_work" type="submit" data-dismiss="modal">Yadda saxla</button>
+          <button
+            class="btn btn-primary ml-2"
+            id="add_new_work"
+            type="submit"
+            data-dismiss="modal"
+          >
+            Yadda saxla
+          </button>
         </div>
       </form>
     </div>
-  </div> <!-- modal-bialog .// -->
+  </div>
+  <!-- modal-bialog .// -->
 </div>
-
 
 <!-- Modal -->
 
 <!-- Modal -->
 
 <!-- The Modal -->
-{% endblock content %}
-
-
-{% block scripts %}
+{% endblock content %} {% block scripts %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
@@ -302,108 +414,92 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="{% static 'js/chat-script.js'%}"></script>
 <script>
-  function page_redirect(id){
-    window.open(location.href + 'client/'+id)
+  function page_redirect(id) {
+    window.open(location.href + "client/" + id);
+  }
+  
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  $(function() {
+
+  })
+  function modal_show(first_name, last_name, phone, id = null) {
+    $(".person-title").text(first_name + " " + last_name);
+    $(".person-title").attr("chat_id", id);
+    $(".person-number").text(phone);
+    $("#modal_aside_right").modal("show");
+    $.ajax({
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+      type: "GET",
+      url: "http://127.0.0.1:8000/api/messages/list/" + id + "/&page=1",
+      success: function (data) {
+        var messages = data.results.reverse();
+        for (var i = 0; i < messages.length; i++) {
+          if (messages[i].sender == "{{request.user.id}}") {
+            document.querySelector(
+              "#modal_aside_right .modal-body"
+            ).innerHTML +=
+              "<div class='outgoing_msg'>" +
+              "<div class='sent_msg'>" +
+              "<p>" +
+              messages[i].text +
+              "</p>" +
+              "<span class='time_date'>" +
+              messages[i].date +
+              "</span>" +
+              "</div>" +
+              "</div>";
+          } else {
+            document.querySelector(
+              "#modal_aside_right .modal-body"
+            ).innerHTML +=
+              "<div class='incoming_msg'>" +
+              "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
+              "<div class='received_msg'>" +
+              "<div class='received_withd_msg'>" +
+              "<p>" +
+              messages[i].message +
+              "</p>" +
+              "<span class='time_date'>" +
+              messages[i].date +
+              "</span>" +
+              "</div>" +
+              "</div>" +
+              "</div>";
+          }
+        }
+      },
+    });
   }
 
-
-
-
-  function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-              var cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
-      }
-      return cookieValue;
+  $(function () {
+    if ($(".page-wrapper").hasClass("toggled")) {
+      $(".clients-content").css("padding-left", "0px");
+    } else {
+      $(".clients-content").css("padding-left", "40px");
     }
-
-
-
-
-
-  function modal_show(first_name,last_name,phone,id=null){
-    $('.person-title').text(first_name+" "+last_name)
-    $('.person-title').attr('chat_id',id)
-    $('.person-number').text(phone)
-    $('#modal_aside_right').modal('show')
-    $.ajax({
-    headers:{
-      "X-CSRFToken":getCookie('csrftoken')
-
-    },
-    type:"GET",
-    url:"http://127.0.0.1:8000/api/messages/list/?person=" + id +"&page=1",
-    success:function(data){
-      console.log()
-      var messages = data.results.reverse();
-      for(var i =0;i<messages.length;i++){
-        if(messages[i].sender == "{{request.user.id}}"){
-          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
-          "<div class='outgoing_msg'>" +
-          "<div class='sent_msg'>" +
-          "<p>" +
-          messages[i].text +
-          "</p>" +
-          "<span class='time_date'>" +
-          messages[i].date +
-          "</span>" +
-          "</div>" +
-          "</div>";
-
-        }
-        else{
-          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
-          "<div class='incoming_msg'>" +
-          "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
-          "<div class='received_msg'>" +
-          "<div class='received_withd_msg'>" +
-          "<p>" +
-          messages[i].message +
-          "</p>" +
-          "<span class='time_date'>" +
-          messages[i].date +
-          "</span>" +
-          "</div>" +
-          "</div>" +
-          "</div>";
-         
-
-        }
+    $(window).click(function () {
+      if ($(".page-wrapper").hasClass("toggled")) {
+        $(".clients-content").css("padding-left", "0px");
+      } else {
+        $(".clients-content").css("padding-left", "40px");
       }
-
-    }
-
-  })
-
-
-    }
-  
-  
-
-
-
-
-  $(function() {
-    if($(".page-wrapper").hasClass("toggled")) {
-        $(".clients-content").css("padding-left",'0px')
-      }else {
-        $(".clients-content").css("padding-left",'40px')
-      }
-    $(window).click(function() {
-      if($(".page-wrapper").hasClass("toggled")) {
-        $(".clients-content").css("padding-left",'0px')
-      }else {
-        $(".clients-content").css("padding-left",'40px')
-      }
-    })
-  })
+    });
+  });
 </script>
 {% endblock scripts %}
