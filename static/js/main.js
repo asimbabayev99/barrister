@@ -582,4 +582,21 @@ $(document).ready(function () {
     
   })
   // Client new work adding end 
+
+  // Searching in the works
+  $("#search_work").keyup(function() {
+    let value = $(this).val().toLowerCase()
+    $(".main_tr").each(function(){
+    if($(this).children("td.name").text().toLowerCase().includes(value)) {
+        $(this).css("display", "table-row")
+        $(this).children().css("display","table-cell")
+      }
+    else {
+        $(this).css("display", "none")
+        // $(this).children().css("display","block")
+      }
+    })
+    
+  })
+  // Searching in the works
 });

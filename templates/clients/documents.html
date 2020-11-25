@@ -99,7 +99,7 @@
                       <thead>
                         <tr>
                           <td>
-                            <input placeholder="Axtar" type="text" class="form-control form-control-sm">
+                            <input placeholder="Axtar" type="text" id="search_work" class="form-control form-control-sm">
                           </td>
                           <td colspan="2">
                             <button class="btn btn-block btn-sm btn-success" data-toggle="modal" data-target="#add_new_work">Yeni iş əlavə et</button>
@@ -108,27 +108,42 @@
                         <tr>
                           <th>İşin adı</th>
                           <th>İşin Statusu</th>
-                          
                         </tr>
                       </thead>
                       <tbody id="work_table_body">
-                        
-                        {% for case in cases %}
                         <tr>
                           <td>
-                            {{case.name}}
+                            Asim Babayev
                           </td>
                           <td class="table-dropdown py-0">
                             <select class="form-control select_status" id="select_status">
                               <option  value="success" selected>{{case.status}}</option>
-                              <!-- <option value="warning">Warning</option>
-                              <option value="danger">Danger</option>
-                              <option value="dark">Dark</option>
-                              <option value="secondary">Secondary</option>
-                              <option value="primary">Primary</option> -->
                             </select>
                           </td>
                           
+                        </tr>
+                        <tr>
+                          <td>
+                            Musa Hesenli
+                          </td>
+                          <td class="table-dropdown py-0">
+                            <select class="form-control select_status" id="select_status">
+                              <option  value="success" selected>{{case.status}}</option>
+                            </select>
+                          </td>
+                          
+                        </tr>
+                        {% for case in cases %}
+                        <tr>
+                          <td>
+                            {{case.name}}
+
+                          </td>
+                          <td class="table-dropdown py-0">
+                            <select class="form-control select_status" id="select_status">
+                              <option  value="success" selected>{{case.status}}</option>
+                            </select>
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="2">
