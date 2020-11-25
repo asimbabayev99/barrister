@@ -1,5 +1,6 @@
-{% extends 'barrister/barrister-base.html' %} {% load static %} {% block title
-%}
+{% extends 'barrister/barrister-base.html' %} 
+{% load static %} 
+{% block title%}
 <title>Musteriler</title>
 {% endblock title %} {% block links %} {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
@@ -417,7 +418,12 @@
   function page_redirect(id) {
     window.open(location.href + "client/" + id);
   }
-  
+
+  var message_data = null;
+  var is_loading = false;
+  var current_user = null;
+  var active_user = null
+
   function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== "") {
@@ -433,21 +439,29 @@
     }
     return cookieValue;
   }
-  $(function() {
-
-  })
+  $(function () {
+    $("#modal_aside_right").on("hidden.bs.modal",function() {
+    //   $("#modal_aside_right .modal-body").html("");
+    //   $("#modal_aside_right").scrollTop(10)
+    })
+  });
   function modal_show(first_name, last_name, phone, id = null) {
     $(".person-title").text(first_name + " " + last_name);
     $(".person-title").attr("chat_id", id);
     $(".person-number").text(phone);
     $("#modal_aside_right").modal("show");
+    current_user = id;
+    if(is_loading) return;
+    is_loading = true;
     $.ajax({
       headers: {
         "X-CSRFToken": getCookie("csrftoken"),
       },
       type: "GET",
-      url: "http://127.0.0.1:8000/api/messages/list/" + id + "/&page=1",
+      url: "/api/messages/list/" + id + "/",
       success: function (data) {
+        is_loading = false;
+        message_data = data
         var messages = data.results.reverse();
         for (var i = 0; i < messages.length; i++) {
           if (messages[i].sender == "{{request.user.id}}") {
@@ -484,6 +498,63 @@
           }
         }
       },
+    });
+    $("#modal_aside_right .modal-body").scroll(function () {
+      if ($(this).scrollTop() == 0) {
+        if(message_data.next && is_loading == false){
+          is_loading = true;
+          $.ajax({
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
+          type: "GET",
+          url: message_data.next,
+          success: function (data) {
+            message_data = data;
+            is_loading = false; 
+            var messages = data.results.reverse();
+            for (var i = 0; i < messages.length; i++) {
+              if (messages[i].sender == "{{request.user.id}}") {
+                document.querySelector(
+                  "#modal_aside_right .modal-body"
+                ).insertAdjacentHTML("afterbegin",
+                "<div class='outgoing_msg'>" +
+                  "<div class='sent_msg'>" +
+                  "<p>" +
+                  messages[i].text +
+                  "</p>" +
+                  "<span class='time_date'>" +
+                  messages[i].date +
+                  "</span>" +
+                  "</div>" +
+                  "</div>" );
+                $("#modal_aside_right .modal-body").scrollTop(10);
+              } else {
+                document.querySelector(
+                  "#modal_aside_right .modal-body"
+                ).prepend(
+                  "<div class='incoming_msg'>" +
+                  "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
+                  "<div class='received_msg'>" +
+                  "<div class='received_withd_msg'>" +
+                  "<p>" +
+                  messages[i].message +
+                  "</p>" +
+                  "<span class='time_date'>" +
+                  messages[i].date +
+                  "</span>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>");
+                  $("#modal_aside_right .modal_body").scrollTop(10);
+                  
+              }
+            }
+          }
+        });
+      }
+        }
+        
     });
   }
 
