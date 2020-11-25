@@ -57,6 +57,6 @@ urlpatterns = [
     path('appointments/', AppointmentAPIView.as_view()),
     path('appointments/<int:id>/', AppointmentAPIView.as_view()),
 
-    path('messages/list/',MessageListView.as_view()),
+    path('messages/list/<int:id>/',MessageListView.as_view()),
 
 ]

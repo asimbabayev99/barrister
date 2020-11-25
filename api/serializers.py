@@ -3,6 +3,7 @@ from account.models import *
 from home.models import *
 from chat.models import Message
 from shop.models import *
+from clients.models import *
 # from rest_framework.parsers import 
 from django.forms.fields import FileField
 
@@ -368,3 +369,17 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = '__all__'
+
+
+class ClientSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Client
+        fields = "__all__"
+
+
+class CaseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Case
+        fields = "__all__"
