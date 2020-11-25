@@ -18,7 +18,7 @@ def index(request):
 def client_documents(request,id):
     client = get_object_or_404(Client.objects.all(),pk=id)
     cases = client.case.all()
-    context={'cases':cases}
+    context={'cases':cases,"client_id":id}
     return render(request,"clients/documents.html",context=context)
 
 def case_document_download(request,path):

@@ -59,4 +59,7 @@ urlpatterns = [
 
     path('messages/list/<int:id>/',MessageListView.as_view()),
 
+
+    path('case/create/<int:id>',CaseApiView.as_view())
+
 ]

@@ -213,8 +213,9 @@
         <div class="form-group">
           <label for="">İşin statusu</label>
           <select type="text" class="form-control" id="work_status" placeholder="İşin status">
-            <option value="success">Aktiv</option>
-            <option value="danger">Qeyri-aktiv</option>
+            <option value="Bağlı">Bağlı</option>
+            <option value="Uğurlu">Uğurlu</option>
+            <option value="Davam edir">Davam edir</option>
           </select>
         </div>
         </div>
@@ -245,6 +246,58 @@
 <script src="{% static 'js/main.js' %}"></script>
 
 <script>
+   function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
+
+
+
+
+
+
+
+  $('#add_work_btn').on('click',function(){
+    $.ajax({
+      headers:{
+        'X-CSRFToken':getCookie('csrftoken')
+      },
+      type:"POST",
+      url:"/api/case/create/{{client_id}}",
+      data:{
+        'name':$('#work_name_input').val(),
+        'status':$('#work_status').val()
+      },
+      success:function(data){
+        console.log(data)
+      },
+      error:function(data){
+        console.log(data)
+      }
+
+
+
+
+    })
+
+
+
+
+  })
+
+
+
   $(function() {
     if($(".page-wrapper").hasClass("toggled")) {
         $(".clients-content").css("padding-left",'0px')
