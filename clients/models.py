@@ -56,7 +56,7 @@ class Case(models.Model):
 
 
 class CaseDocument(models.Model):
-    case = models.ForeignKey(Case, on_delete=models.CASCADE, null=False, blank=False,related_name='document')
+    case = models.ForeignKey(Case, on_delete=models.CASCADE, null=False, blank=False,related_name='documents')
     name = models.CharField(max_length=64)
     document = models.FileField(upload_to='case-documents')
 

@@ -372,14 +372,27 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class ClientSerializer(serializers.ModelSerializer):
-
+    
     class Meta:
         model = Client
         fields = "__all__"
 
 
+
+class CaseDocumentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model  = CaseDocument
+        fields = ["case","name","document"]
+
+
+
+
+
 class CaseSerializer(serializers.ModelSerializer):
+    document =  CaseDocumentSerializer(many=True)
 
     class Meta:
         model = Case
-        fields = ["id",'name','status']
+        fields = ['pk','name','status','document']
+

@@ -965,11 +965,18 @@ class CaseApiView(APIView):
         serializer = CaseSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             print(serializer.validated_data)
-            Case.objects.create(
+            case = Case.objects.create(
                 barrister=self.request.user,
                 status=serializer.validated_data['status'],
                 client_id=id,
                 name=serializer.validated_data['name']
             )
-            return Response(serializer.data)
+            return Response({"id":case.id,"name":case.name,"status":case.status})
+    
+
+
+
+
+   
+    
         
