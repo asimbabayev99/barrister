@@ -953,3 +953,23 @@ class CaseListView(ListAPIView):
         client = Client.objects.filter(id=client_id,barrister=user)
         
         return Case.objects.filter(barrister=user,client=client)
+
+
+class CaseApiView(APIView):
+    permission_classes = [IsAuthenticated,]
+
+
+    def post(self,request,id):
+        data = request.data
+        print(data)
+        serializer = CaseSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            print(serializer.validated_data)
+            Case.objects.create(
+                barrister=self.request.user,
+                status=serializer.validated_data['status'],
+                client_id=id,
+                name=serializer.validated_data['name']
+            )
+            return Response(serializer.data)
+        
