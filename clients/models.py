@@ -17,7 +17,7 @@ CASE_STATUSES = [
 
 
 class Client(models.Model):
-    barrister = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=False, blank=False)
+    barrister = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=False, blank=False,related_name='clients')
     first_name = models.CharField(max_length=64,blank=True,null=True)
     last_name = models.CharField(max_length=64,blank=True,null=True)
     image = models.ImageField(null=True, blank=True)
@@ -25,6 +25,7 @@ class Client(models.Model):
     phone = models.CharField(max_length=16)
     status = models.CharField(max_length=16, choices=CLIENT_STATUSES, null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.email
@@ -37,7 +38,7 @@ class Client(models.Model):
         return CustomUser.objects.filter(first_name=self.first_name,last_name=self.last_name,email=self.email).exists()
     
     def get_user_id(self):
-        return CustomUser.objects.get(first_name=self.first_name,last_name=self.last_name,email=self.email).pk
+        return self.user.id
 
 class Case(models.Model):
     barrister = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=False, blank=False)

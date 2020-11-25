@@ -49,3 +49,10 @@ class Attachment(models.Model):
         indexes = [
             models.Index(fields=['message',]),
         ]
+    
+
+
+class Notification(models.Model):
+    message = models.ForeignKey(Message,on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    viewed =  models.BooleanField(default=False)

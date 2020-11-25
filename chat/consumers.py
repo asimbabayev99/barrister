@@ -21,8 +21,8 @@ def save_message(**data):
     message = data.get('message')
     sender = data.get('sender')
     receiver = data.get('receiver')
-    # Store message.
-    msg = Message(sender=sender, receiver=receiver, text=message)
+    viewed = data.get('viewed')
+    msg = Message(sender=sender, receiver=receiver, text=message,viewed=viewed)
     msg.save()
     return msg
 
@@ -74,6 +74,17 @@ def delete_channel(**data):
     print('channel deleted')
     return 'deleted'
 
+@database_sync_to_async
+def update_messages(**data):
+    last_message_id =data.get('id')
+    messages = Message.objects.filter(id__lte=last_message_id,viewed=False)
+    for i in messages:
+        i.viewed = True
+        i.save()
+    
+    return 'updated'
+
+        
 
 @database_sync_to_async
 def get_channels(**data):
@@ -142,6 +153,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         data = json.loads(text_data)
         message_type = data.get('type')
         action = data.get('action')
+
         receiver = data.get('receiver')
         receiver = await database_sync_to_async(CustomUser.objects.get)(id = int(receiver))
         sender = self.scope['user']
@@ -151,8 +163,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if message_type == 'text':
             if action == 'post':
                 message = data['message']
+                viewed = False
                 # Store message.
                 msg = await save_message(message=message, sender=sender, receiver=receiver,viewed=False)
+
+            elif action == 'put':
+                msg_id = text_data.get('id')
+                viewed = True
+                await update_messages(sender=sender,receicer=receiver,id=msg_id)
 
             elif action == "delete":
                 message = ""
@@ -178,7 +196,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 )
 
             
-            # await sync_to_async(self.send_message)(message_type=message_type,action=action,msg=msg,sender=sender,receiver=receiver,message=message,channels=channels)
+            
             for channel in channels:
                 await self.channel_layer.send(
                     channel.channel_name,
@@ -190,11 +208,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
                         'message': message,
                         'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
                         'sender': sender,
-                        'receiver': receiver
+                        'receiver': receiver,
+                        'viewed':viewed
                     }
                 )
         
-
 
         # if message type is file
         elif message_type == "file":
@@ -333,13 +351,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
     
     async def chat_message(self, event):
+
         message = event['message']
         # message_type = event['type']
         sender = event['sender']
         action = event['action']
         receiver = event['receiver']
         date = event['date']
-
+        viewed = event['viewed']
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'success': True,
@@ -348,7 +367,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'action': action,
             'date': date,
             'sender': sender.id,
-            'receiver': receiver.id
+            'receiver': receiver.id,
+            'viewed':viewed
         }))
 
     
@@ -383,3 +403,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'success': 'False',
             'error_message': error_message,
         }))
+    
+    async def send_notification(self,event):
+        pass
