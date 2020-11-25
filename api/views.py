@@ -22,7 +22,7 @@ from rest_framework.parsers import *
 from shop.models import *
 from account.tasks import *
 import logging
-
+from django.db.models import Q
 
 
 class UserAPI(APIView):
@@ -310,7 +310,10 @@ class ExperienceAPIView(APIView):
 
     def post(self, request):
         data = request.data
-        profile = Profile.objects.get(id=data.get('profile'))
+        try:
+            profile = Profile.objects.get(id=data.get('profile'))
+        except:
+            return Response({'profile':'was not created'})
         if request.user != profile.user:
             return Response({"detail": "Permission denied"}, status=403)
         # Create an experience from the above data
@@ -404,7 +407,7 @@ class PublicationAPIView(APIView):
 
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 4
+    page_size = 5
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
@@ -924,3 +927,19 @@ class EmailDeleteView(APIView):
         emails.delete()
         delete_mail.delay(folders)
         return Response({'emails':'deleted'})
+
+from chat.models import Message
+
+
+class MessageListView(ListAPIView):
+    def get_queryset(self):
+        person2 = self.request.query_params.get('person')
+        person = self.request.user.id
+        return Message.objects.filter(Q(sender_id=person2,receiver_id=person)|Q(receiver_id=person2,sender_id=person)).order_by('-date')
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+    pagination_class = StandardResultsSetPagination
+
+
+

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
-
+from chat.models import Message
 from shop.models import *
 # from rest_framework.parsers import 
 from django.forms.fields import FileField
@@ -362,4 +362,9 @@ class EmailFlagSerializer(serializers.Serializer):
     uids = serializers.ListField(child=serializers.CharField(required=True))
     folder = serializers.CharField(required=True)
     flag = serializers.CharField(required=True)
-    
+
+class MessageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Message
+        fields = '__all__'
