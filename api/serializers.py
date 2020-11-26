@@ -379,11 +379,10 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 
-class CaseDocumentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model  = CaseDocument
-        fields = ["case","name","document"]
+class CaseDocumentSerializer(serializers.Serializer):
+    name = serializers.CharField(required=False)
+    case_id = serializers.IntegerField(required=True)
+    
 
 
 

@@ -117,7 +117,7 @@
                         
                         {% for case in cases %}
                         <tr>
-                          <td>
+                          <td id="case">
                             {{case.name}}
                           </td>
                           <td class="table-dropdown py-0">
@@ -126,8 +126,8 @@
                             </select>
                           </td>
                           <td>
-                            <label for="new_document" class="btn btn-outline-dark btn-block btn-sm m-0">
-                              <input type="file" id="new_document" name="new_document" class="d-none">
+                            <label for="{{case.id}}" class="btn btn-outline-dark btn-block btn-sm m-0" >
+                              <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
                               Yeni sənəd
                             </label>
                           </td>
@@ -141,9 +141,9 @@
                         <tr>
                           <td colspan="5">
                             <div class="row p-0 m-0">
-                              {% if case.document %}
+                              {% if case.documents.all %}
                               
-                                {% for document in case.document.all %}
+                                {% for document in case.documents.all %}
                                 <div class="col-md-3 mb-3">
                                   <div class="file_main">
                                     <p class="blockquote-footer file_name">
@@ -157,11 +157,11 @@
                                   </div>
                                 </div>
                                 {% endfor %}
-                                {% else %}
+                              {% else %}
                                 <div class="col-12">
                                   <div class="alert alert-warning">Sənəd yoxdur</div>
                                 </div>
-                                {% endif %}
+                              {% endif %}
                             </div>
                           </td>
                         </tr>
@@ -269,10 +269,6 @@
 
 
 
-
-
-
-
   $('#add_work_btn').on('click',function(){
     $.ajax({
       headers:{
@@ -290,16 +286,36 @@
       error:function(data){
         console.log(data)
       }
+    })
+  })
 
-
-
-
+  $('.new-document').change(function(){
+    var case_id = $(this).attr('id')
+    console.log(case_id)
+    file  = $(this).get(0).files[0]
+    console.log(file)
+    var formdata = new FormData()
+    formdata.append("file",file)
+    formdata.append('case_id',case_id)
+    $.ajax({
+      headers:{
+        "X-CSRFToken":getCookie('csrftoken'),
+      },
+      contentType:false,
+      processData:false,
+      type : "POST",
+      data : formdata,
+      url:"/api/case/document/",
+      success:function(data){
+        console.log(data)
+      },
+      error:function(data){
+        console.log(data)
+      }
     })
 
-
-
-
   })
+
 
 
 
