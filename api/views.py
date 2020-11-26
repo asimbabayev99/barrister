@@ -972,6 +972,10 @@ class CaseApiView(APIView):
                 name=serializer.validated_data['name']
             )
             return Response({"id":case.id,"name":case.name,"status":case.status})
+
+    def delete(self,request,id):
+        Case.objects.filter(id=id).delete()
+        return Response({'case':'deleted'})
     
 
 class CaseDocumentApiView(APIView):
@@ -988,6 +992,9 @@ class CaseDocumentApiView(APIView):
                 
         
         return Response({'test':'test'})
+    
+
+
 
 
 
