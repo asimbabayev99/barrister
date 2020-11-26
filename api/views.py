@@ -974,6 +974,21 @@ class CaseApiView(APIView):
             return Response({"id":case.id,"name":case.name,"status":case.status})
     
 
+class CaseDocumentApiView(APIView):
+    parser_classes = [FormParser,MultiPartParser,]
+    authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated,]
+    
+    def post(self,request):
+        print(request.FILES)
+        serializer = CaseDocumentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            for file_obj in request.FILES.getlist('file'):
+                CaseDocument.objects.create(case_id=serializer.validated_data['case_id'],name=file_obj.name,document=file_obj)
+                
+        
+        return Response({'test':'test'})
+
 
 
 
