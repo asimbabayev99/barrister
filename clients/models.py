@@ -69,3 +69,11 @@ class CaseDocument(models.Model):
         return '/clients/document'+self.document.url
  
 
+class Notes(models.Model):
+    text = models.CharField(max_length=1024)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['date'])
+        ]

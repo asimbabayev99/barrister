@@ -132,10 +132,10 @@
                             </label>
                           </td>
                           <td>
-                            <button class="btn btn-sm btn-outline-success btn-block">Düzəliş et</button>
+                            <button class="btn btn-sm btn-outline-success btn-block update_btn"  case_id="{{case.id}}">Düzəliş et</button>
                           </td>
                           <td>
-                            <button class="btn btn-sm btn-outline-danger btn-block">Sil</button>
+                            <button class="btn btn-sm btn-outline-danger btn-block delete_btn" case_id="{{case.id}}">Sil</button>
                           </td>
                         </tr>
                         <tr>
@@ -311,8 +311,25 @@
 
   })
 
+  $(".delete_btn").on('click',function(){
+    case_id = $(this).attr('case_id')
+    $.ajax({
+      headers:{
+        "X-CSRFToken":getCookie('csrftoken')
+      },
+      type:'DELETE',
+      url:"/api/case/delete/"+case_id,
+      success:function(data){
+        console.log(data)
+      },
+      error:function(data){
+        console.log(data)
+    }
+
+    })
 
 
+  })
 
   $(function() {
     if($(".page-wrapper").hasClass("toggled")) {
