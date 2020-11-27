@@ -97,12 +97,12 @@
                   <div class="table-responsive">
                     <table class="table table-bordered">
                       <thead>
-                        <tr>
-                          <td colspan="2">
-                            <input placeholder="Axtar" type="text" id="search_work" class="form-control form-control-sm">
+                        <tr class="p-0">
+                          <td colspan="2" class="p-0">
+                            <input placeholder="Axtar" type="text" id="search_work" class="form-control form-control-sm border-0">
                           </td>
-                          <td colspan="2">
-                            <button class="btn btn-block btn-sm btn-success" data-toggle="modal" data-target="#add_new_work">Yeni iş əlavə et</button>
+                          <td colspan="2" class="py-0 px-1">
+                            <button class="btn btn-block btn-sm text-success btn-link text-left" data-toggle="modal" data-target="#add_new_work">Yeni iş əlavə et</button>
                           </td>
                         </tr>
                         <tr>
@@ -116,23 +116,37 @@
                       <tbody id="work_table_body">
                         
                         {% for case in cases %}
-                        <tr>
-                          <td id="case">
-                            {{case.name}}
+                        <tr style="padding: 0px;">
+                          <td id="case" style="padding: 0px;display: flex;">
+                            <input type="text" value="{{case.name}}" class="case_name form-control border-0">
+                            <button class="btn btn-sm btn-info hidden_save_btn">Save</button>
                           </td>
-                          <td class="table-dropdown p-0">
+                          <td class="table-dropdown" style="padding: 0px;">
                             <select class="form-control select_status" id="select_status">
-                              <option  value="success" selected>{{case.status}}</option>
+
+                              {% if case.status == "Uğurlu" %} 
+                              <option value="success">Uğurlu</option>
+                              <option value="info">Davam edir</option>
+                              <option value="danger">Bağlı</option>
+                              {% elif case.status == "Davam edir" %}
+                              <option value="info">Davam edir</option> 
+                              <option value="success">Uğurlu</option>
+                              <option value="danger">Bağlı</option>
+                              {% else %}
+                              <option value="danger">Bağlı</option>
+                              <option value="success">Uğurlu</option>
+                              <option value="info">Davam edir</option> 
+                              {% endif %}
                             </select>
                           </td>
-                          <td>
-                            <label for="{{case.id}}" class="btn btn-outline-dark btn-block btn-sm m-0" >
+                          <td style="padding: 0px 5px;">
+                            <label for="{{case.id}}" class="btn btn-link text-dark text-left btn-block btn-sm m-0" >
                               <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
                               Yeni sənəd
                             </label>
                           </td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-danger btn-block delete_btn" case_id="{{case.id}}">Sil</button>
+                          <td style="padding: 0px 5px;">
+                            <button class="btn btn-sm btn-link btn-block text-danger text-left delete_btn" case_id="{{case.id}}">Sil</button>
                           </td>
                         </tr>
                         {% if case.documents.all %}
@@ -215,9 +229,9 @@
         <div class="form-group">
           <label for="">İşin statusu</label>
           <select type="text" class="form-control" id="work_status" placeholder="İşin status">
-            <option value="Bağlı">Bağlı</option>
-            <option value="Uğurlu">Uğurlu</option>
-            <option value="Davam edir">Davam edir</option>
+            <option value="success">Uğurlu</option>
+            <option value="danger">Bağlı</option>
+            <option value="info">Davam edir</option>
           </select>
         </div>
         </div>
@@ -239,12 +253,14 @@
 
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
 <script src="{% static 'js/fullcalendar.js' %}"></script>
+
 <script src="{% static 'js/main.js' %}"></script>
 
 <script>
@@ -349,6 +365,14 @@
 
     $(".delete_document").click(function() {
       $(this).parents("div.file_container").remove()
+    })
+  });
+  $(function() {
+    $(".case_name").keyup(function() {
+      $(this).parent().children("button").css({
+        visibility : "visible",
+        opacity : 1
+      })
     })
   })
 </script>

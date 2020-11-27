@@ -469,7 +469,6 @@ $(document).ready(function () {
     let client_address = $("#new_client_address").val();
     let client_id = Math.floor(Math.random() * 100000);
     console.log(client_id);
-
     $("#client_table").prepend(
       "<tr class='main_tr'>" +
         "<td class = 'name'>" +
@@ -561,24 +560,54 @@ $(document).ready(function () {
   $("#add_work_btn").click(function() {
     let work_name =  $("#work_name_input").val()
     let work_status = $("#work_status").val()
-    let other_status = "";
-    if(work_status == "success") {
-      work_status = "Aktiv"
-      other_status = "Qeyri-aktiv";
+    if(!work_name && !work_status) {
+      return;
     } else {
-      other_status = "Aktiv";
-      work_status = "Qeyri-aktiv"
+      if(work_status == "success") {
+        $("#work_table_body").append(
+          "<tr>" +
+          "<td>"+ work_name +"</td>" +
+          "<td class='p-0 table-dropdown'>" +
+          "<select class='form-control select_status'>" +
+          "<option value='success'>" +"Uğurlu"+"</option>" +
+          "<option value='danger'>Bağlı</option>" +
+          "<option value='info'>Davam edir</option></select>"+
+          "<td>Yeni sənəd</td>" +
+          "<td>Yeni sənəd</td>" +
+          "</td></tr>"      
+        );
+      } else if (work_status == "danger" ) {
+        $("#work_table_body").append(
+          "<tr>" +
+          "<td>"+ work_name +"</td>" +
+          "<td class='p-0 table-dropdown'>" +
+          "<select class='form-control select_status'>" +
+          "<option value='danger'>Bağlı</option>" +
+          "<option value='success'>" +"Uğurlu"+"</option>" +
+          "<option value='info'>Davam edir</option></select>"+
+          "<td>Yeni sənəd</td>" +
+          "<td>Yeni sənəd</td>" +
+          "</td></tr>");  
+        
+      } else {
+        $("#work_table_body").append(
+          "<tr>" +
+          "<td>"+ work_name +"</td>" +
+          "<td class='p-0 table-dropdown'>" +
+          "<select class='form-control select_status'>" +
+          "<option value='info'>Davam edir</option>" +
+          "<option value='success'>Uğurlu</option>" +
+          "<option value='danger'>Bağlı</option></select>"+
+          "<td>Yeni sənəd</td>" +
+          "<td>Yeni sənəd</td>" +
+          
+          "</td></tr>");  
+        
+      }
+      $("#work_name_input").val("")
+      $("#work_status").val("");
     }
-    $("#work_table_body").append(
-      "<tr>" +
-      "<td>"+ work_name +"</td>" +
-      "<td class='p-0 table-dropdown'>" +
-      "<select class='form-control select_status'>" +
-      "<option value='"+ work_status +"'><span  style='text-transform:capitalize'>" + work_status +"</span></option>" +
-      "<option value='"+ other_status +"'><span style='text-transform:capitalize'>" + other_status +"</span></option></select></td></tr>"      
-    );
-    $("#work_name_input").val("")
-    $("#work_status").val("");
+    
     
   })
   // Client new work adding end 

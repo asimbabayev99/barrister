@@ -424,7 +424,7 @@ img {
 }
 
 .file_main {
-  height: 200px;
+  height: 150px;
   width: 100%;
   background-color: #f9f9f9;
   border-radius: 5px;
@@ -497,3 +497,8 @@ button.close {
   font-size: 15px;
 }
 
+.hidden_save_btn {
+  visibility: hidden;
+  opacity: 0;
+  transition: .4s;
+}
