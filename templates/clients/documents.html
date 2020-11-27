@@ -116,12 +116,12 @@
                       <tbody id="work_table_body">
                         
                         {% for case in cases %}
-                        <tr style="padding: 0px;">
+                        <tr class="client_information_row">
                           <td id="case" style="padding: 0px;display: flex;">
                             <input type="text" value="{{case.name}}" class="case_name form-control border-0">
                             <button case_id="{{case.id}}" class="btn btn-sm btn-info hidden_save_btn">Save</button>
                           </td>
-                          <td class="table-dropdown" style="padding: 0px;">
+                          <td class="table-dropdown">
                             <select class="form-control select_status" id="select_status">
 
                               {% if case.status == "Uğurlu" %} 
@@ -139,13 +139,13 @@
                               {% endif %}
                             </select>
                           </td>
-                          <td style="padding: 0px 5px;">
+                          <td>
                             <label for="{{case.id}}" class="btn btn-link text-dark text-left btn-block btn-sm m-0" >
                               <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
                               Yeni sənəd
                             </label>
                           </td>
-                          <td style="padding: 0px 5px;">
+                          <td>
                             <button class="btn btn-sm btn-link btn-block text-danger text-left delete_btn" case_id="{{case.id}}">Sil</button>
                           </td>
                         </tr>
@@ -368,7 +368,9 @@
     })
   });
   $(function() {
+    
     $(".case_name").keyup(function() {
+      
       $(this).parent().children("button").css({
         visibility : "visible",
         opacity : 1

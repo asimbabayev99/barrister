@@ -502,3 +502,17 @@ button.close {
   opacity: 0;
   transition: .4s;
 }
+
+.client_information_row {
+  padding: 0px;
+}
+.client_information_row td {
+  padding: 0px;
+}
+
+.client_information_row input {
+  border: none;
+  width: 100%;
+  outline: none;
+  padding: 0px 10px;
+}
