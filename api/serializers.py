@@ -384,7 +384,11 @@ class CaseDocumentSerializer(serializers.Serializer):
     case_id = serializers.IntegerField(required=True)
     
 
+class NotesSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Notes
+        fields = ['text']
 
 
 

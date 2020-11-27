@@ -72,7 +72,7 @@ class CaseDocument(models.Model):
 class Notes(models.Model):
     text = models.CharField(max_length=1024)
     date = models.DateTimeField(auto_now_add=True)
-
+    barrister = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='notes')
     class Meta:
         indexes = [
             models.Index(fields=['date'])

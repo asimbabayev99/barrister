@@ -440,7 +440,14 @@ class City(models.Model):
 
 class Contact(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=64)
+    #new fields from client
+    barrister = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="contacts",blank=True,null=True)
+    first_name = models.CharField(max_length=64,blank=True,null=True)
+    last_name = models.CharField(max_length=64,blank=True,null=True)
+    status = models.CharField(max_length=60,blank=True,null=True)
+    phone = models.CharField(max_length=16,blank=True,null=True)
+
+    # name = models.CharField(max_length=64)
     phone = models.CharField(max_length=16, null=True, blank=True)
     email = models.EmailField(blank=True,null=True)
     adress = models.CharField(max_length=50,blank=True,null=True)
@@ -448,7 +455,7 @@ class Contact(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['user', 'name']),
+            models.Index(fields=['user']),
         ]
 
 
