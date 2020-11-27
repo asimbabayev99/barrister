@@ -957,6 +957,7 @@ class CaseListView(ListAPIView):
 
 class CaseApiView(APIView):
     permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
 
 
     def post(self,request,id):
@@ -972,6 +973,16 @@ class CaseApiView(APIView):
                 name=serializer.validated_data['name']
             )
             return Response({"id":case.id,"name":case.name,"status":case.status})
+
+    def put(self,request,id):
+        case = Case.objects.get(id=id)
+        print(case)
+        serializer = CaseSerializer(data=request.data,instance=case,partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
+
 
     def delete(self,request,id):
         Case.objects.filter(id=id).delete()
@@ -992,6 +1003,9 @@ class CaseDocumentApiView(APIView):
                 
         
         return Response({'test':'test'})
+
+
+
 
     def delete(self,request,id):
         CaseDocument.objects.filter(id=id).delete()

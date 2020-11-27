@@ -557,78 +557,78 @@ $(document).ready(function () {
 
 
   // Client new work adding begin 
-  $("#add_work_btn").click(function() {
-    let work_name =  $("#work_name_input").val()
-    let work_status = $("#work_status").val()
-    if(work_name =="" && !work_status == "") {
-      return;
-    } else {
-      $("#add_work_btn").attr("data-dismiss", "modal");
-      // $("#add_work_btn").click();
-      if(work_status == "success") {
-        $("#work_table_body").append(
-          "<tr>" +
-          "<td>"+ work_name +"</td>" +
-          "<td class='p-0 table-dropdown'>" +
-          "<select class='form-control select_status'>" +
-          "<option value='success'>" +"Uğurlu"+"</option>" +
-          "<option value='danger'>Bağlı</option>" +
-          "<option value='info'>Davam edir</option></select>"+
-          "<td>Yeni sənəd</td>" +
-          "<td>Yeni sənəd</td>" +
-          "</td></tr>"      
-        );
-      } else if (work_status == "danger" ) {
-        $("#work_table_body").append(
-          "<tr>" +
-          "<td>"+ work_name +"</td>" +
-          "<td class='p-0 table-dropdown'>" +
-          "<select class='form-control select_status'>" +
-          "<option value='danger'>Bağlı</option>" +
-          "<option value='success'>" +"Uğurlu"+"</option>" +
-          "<option value='info'>Davam edir</option></select>"+
-          "<td>Yeni sənəd</td>" +
-          "<td>Yeni sənəd</td>" +
-          "</td></tr>");  
+  // $("#add_work_btn").click(function() {
+  //   let work_name =  $("#work_name_input").val()
+  //   let work_status = $("#work_status").val()
+  //   if(work_name =="" && !work_status == "") {
+  //     return;
+  //   } else {
+  //     $("#add_work_btn").attr("data-dismiss", "modal");
+  //     // $("#add_work_btn").click();
+  //     if(work_status == "success") {
+  //       $("#work_table_body").append(
+  //         "<tr>" +
+  //         "<td>"+ work_name +"</td>" +
+  //         "<td class='p-0 table-dropdown'>" +
+  //         "<select class='form-control select_status'>" +
+  //         "<option value='success'>" +"Uğurlu"+"</option>" +
+  //         "<option value='danger'>Bağlı</option>" +
+  //         "<option value='info'>Davam edir</option></select>"+
+  //         "<td>Yeni sənəd</td>" +
+  //         "<td>Yeni sənəd</td>" +
+  //         "</td></tr>"      
+  //       );
+  //     } else if (work_status == "danger" ) {
+  //       $("#work_table_body").append(
+  //         "<tr>" +
+  //         "<td>"+ work_name +"</td>" +
+  //         "<td class='p-0 table-dropdown'>" +
+  //         "<select class='form-control select_status'>" +
+  //         "<option value='danger'>Bağlı</option>" +
+  //         "<option value='success'>" +"Uğurlu"+"</option>" +
+  //         "<option value='info'>Davam edir</option></select>"+
+  //         "<td>Yeni sənəd</td>" +
+  //         "<td>Yeni sənəd</td>" +
+  //         "</td></tr>");  
         
-      } else {
-        $("#work_table_body").append(
-          "<tr>" +
-          "<td>"+ work_name +"</td>" +
-          "<td class='p-0 table-dropdown'>" +
-          "<select class='form-control select_status'>" +
-          "<option value='info'>Davam edir</option>" +
-          "<option value='success'>Uğurlu</option>" +
-          "<option value='danger'>Bağlı</option></select>"+
-          "<td>Yeni sənəd</td>" +
-          "<td>Yeni sənəd</td>" +
+  //     } else {
+  //       $("#work_table_body").append(
+  //         "<tr>" +
+  //         "<td>"+ work_name +"</td>" +
+  //         "<td class='p-0 table-dropdown'>" +
+  //         "<select class='form-control select_status'>" +
+  //         "<option value='info'>Davam edir</option>" +
+  //         "<option value='success'>Uğurlu</option>" +
+  //         "<option value='danger'>Bağlı</option></select>"+
+  //         "<td>Yeni sənəd</td>" +
+  //         "<td>Yeni sənəd</td>" +
           
-          "</td></tr>");  
+  //         "</td></tr>");  
         
-      }
-      $.ajax({
-        headers:{
-          'X-CSRFToken':getCookie('csrftoken')
-        },
-        type:"POST",
-        url:"/api/case/create/{{client_id}}",
-        data:{
-          'name':$('#work_name_input').val(),
-          'status':$('#work_status').val()
-        },
-        success:function(data){
-          console.log(data)
-        },
-        error:function(data){
-          console.log(data)
-        }
-      })
-      $("#work_name_input").val("")
-      $("#work_status").val("success");
-    }
+  //     }
+  //     $.ajax({
+  //       headers:{
+  //         'X-CSRFToken':getCookie('csrftoken')
+  //       },
+  //       type:"POST",
+  //       url:"/api/case/create/{{client_id}}",
+  //       data:{
+  //         'name':$('#work_name_input').val(),
+  //         'status':$('#work_status').val()
+  //       },
+  //       success:function(data){
+  //         console.log(data)
+  //       },
+  //       error:function(data){
+  //         console.log(data)
+  //       }
+  //     })
+  //     $("#work_name_input").val("")
+  //     $("#work_status").val("success");
+  //   }
     
     
-  })
+  // })
   // Client new work adding end 
 
   // Searching in the works

@@ -393,9 +393,9 @@ class NotesSerializer(serializers.ModelSerializer):
 
 
 class CaseSerializer(serializers.ModelSerializer):
-    document =  CaseDocumentSerializer(many=True)
+    # documents =  CaseDocumentSerializer(many=True)
 
     class Meta:
         model = Case
-        fields = ['pk','name','status','document']
+        fields = ['pk','name','status','documents']
 

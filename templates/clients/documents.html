@@ -119,7 +119,7 @@
                         <tr style="padding: 0px;">
                           <td id="case" style="padding: 0px;display: flex;">
                             <input type="text" value="{{case.name}}" class="case_name form-control border-0">
-                            <button class="btn btn-sm btn-info hidden_save_btn">Save</button>
+                            <button case_id="{{case.id}}" class="btn btn-sm btn-info hidden_save_btn">Save</button>
                           </td>
                           <td class="table-dropdown" style="padding: 0px;">
                             <select class="form-control select_status" id="select_status">
@@ -229,9 +229,9 @@
         <div class="form-group">
           <label for="">İşin statusu</label>
           <select type="text" class="form-control" id="work_status" placeholder="İşin status">
-            <option value="success">Uğurlu</option>
-            <option value="danger">Bağlı</option>
-            <option value="info">Davam edir</option>
+            <option value="Uğurlu">Uğurlu</option>
+            <option value="Bağlı">Bağlı</option>
+            <option value="Davam edir">Davam edir</option>
           </select>
         </div>
         </div>
@@ -342,6 +342,8 @@
 
     $(".delete_document").click(function(){
       var id = $(this).attr('document_id')
+      var that = $(this)
+          
       $.ajax({
         headers:{
           "X-CSRFToken": getCookie('csrftoken')
@@ -350,8 +352,8 @@
         type:"DELETE",
         url:'/api/case/document/delete/'+id,
         success:function(data){
+          that.parents("div.file_container").remove()
           console.log(data)
-          $(this).parents("div.file_container").remove()
           
         },
         error:function(data){
@@ -372,6 +374,113 @@
         opacity : 1
       })
     })
+
   })
+  $("#add_work_btn").click(function() {
+    let work_name =  $("#work_name_input").val()
+    let work_status = $("#work_status").val()
+    if(work_name =="" && !work_status == "") {
+      return;
+    } else {
+      $("#add_work_btn").attr("data-dismiss", "modal");
+      // $("#add_work_btn").click();
+      if(work_status == "Uğurlu") {
+        $("#work_table_body").append(
+          "<tr>" +
+          "<td>"+ work_name +"</td>" +
+          "<td class='p-0 table-dropdown'>" +
+          "<select class='form-control select_status'>" +
+          "<option value='success'>" +"Uğurlu"+"</option>" +
+          "<option value='danger'>Bağlı</option>" +
+          "<option value='info'>Davam edir</option></select>"+
+          "<td>Yeni sənəd</td>" +
+          "<td>Yeni sənəd</td>" +
+          "</td></tr>"      
+        );
+      } else if (work_status == "Bağlı" ) {
+        $("#work_table_body").append(
+          "<tr>" +
+          "<td>"+ work_name +"</td>" +
+          "<td class='p-0 table-dropdown'>" +
+          "<select class='form-control select_status'>" +
+          "<option value='danger'>Bağlı</option>" +
+          "<option value='success'>" +"Uğurlu"+"</option>" +
+          "<option value='info'>Davam edir</option></select>"+
+          "<td>Yeni sənəd</td>" +
+          "<td>Yeni sənəd</td>" +
+          "</td></tr>");  
+        
+      } else {
+        $("#work_table_body").append(
+          "<tr>" +
+          "<td>"+ work_name +"</td>" +
+          "<td class='p-0 table-dropdown'>" +
+          "<select class='form-control select_status'>" +
+          "<option value='info'>Davam edir</option>" +
+          "<option value='success'>Uğurlu</option>" +
+          "<option value='danger'>Bağlı</option></select>"+
+          "<td>Yeni sənəd</td>" +
+          "<td>Yeni sənəd</td>" +
+          
+          "</td></tr>");  
+        
+      }
+      $.ajax({
+        headers:{
+          'X-CSRFToken':getCookie('csrftoken')
+        },
+        type:"POST",
+        url:"/api/case/create/{{client_id}}",
+        data:{
+          'name':$('#work_name_input').val(),
+          'status':$('#work_status').val()
+        },
+        success:function(data){
+          console.log(data)
+        },
+        error:function(data){
+          console.log(data)
+        }
+      })
+      $("#work_name_input").val("")
+      $("#work_status").val("success");
+    }
+    
+    
+  })
+  // Client new work adding end 
+
+  $('.hidden_save_btn').on('click',function(){
+    var self = $(this)
+    var case_id = self.attr('case_id')
+    parent  = self.parent()
+    console.log(parent.children('input').val())
+    console.log(case_id)
+    $.ajax({
+      headers:{
+        "X-CSRFToken":getCookie('csrftoken')
+      },
+      data:{
+        'name':parent.children('input').val()
+      },
+      type:'PUT',
+      url:"/api/case/update/" + case_id,
+      success:function(data){
+        console.log(data)
+        self.css({
+          visibility:'hidden'
+        })
+      },
+      error:function(data){
+        console.log(data)
+    }
+
+    })
+    
+
+  })
+  
+
+
 </script>
 {% endblock scripts %}
