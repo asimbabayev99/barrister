@@ -992,6 +992,11 @@ class CaseDocumentApiView(APIView):
                 
         
         return Response({'test':'test'})
+
+    def delete(self,request,id):
+        CaseDocument.objects.filter(id=id).delete()
+        return Response({'document':'deleted'})
+
     
 
 # class NotesListAPi()

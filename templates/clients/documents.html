@@ -145,7 +145,7 @@
                                   <div class="file_main">
                                     <p class="blockquote-footer file_name">
                                       {{ document.name }}
-                                      <button class="close delete_document">
+                                      <button class="close delete_document" document_id={{document.id}}>
                                         <span>&times;</span>
                                       </button>
                                     </p>
@@ -347,8 +347,29 @@
       }
     });
 
-    $(".delete_document").click(function() {
-      $(this).parents("div.file_container").remove()
+    $(".delete_document").click(function(){
+      var id = $(this).attr('document_id')
+      $.ajax({
+        headers:{
+          "X-CSRFToken": getCookie('csrftoken')
+
+        },
+        type:"DELETE",
+        url:'/api/case/document/delete/'+id,
+        success:function(data){
+          console.log(data)
+          $(this).parents("div.file_container").remove()
+          
+        },
+        error:function(data){
+          console.log(data)
+        }
+
+
+
+
+      })
+      
     })
   })
 </script>
