@@ -101,7 +101,7 @@
                           <td colspan="2">
                             <input placeholder="Axtar" type="text" id="search_work" class="form-control form-control-sm">
                           </td>
-                          <td colspan="3">
+                          <td colspan="2">
                             <button class="btn btn-block btn-sm btn-success" data-toggle="modal" data-target="#add_new_work">Yeni iş əlavə et</button>
                           </td>
                         </tr>
@@ -109,7 +109,7 @@
                           <th>İşin adı</th>
                           <th>İşin Statusu</th>
                           <th>Yeni sənəd</th>
-                          <th>Düzəliş</th>
+                          
                           <th>Sil</th>
                         </tr>
                       </thead>
@@ -120,7 +120,7 @@
                           <td id="case">
                             {{case.name}}
                           </td>
-                          <td class="table-dropdown py-0">
+                          <td class="table-dropdown p-0">
                             <select class="form-control select_status" id="select_status">
                               <option  value="success" selected>{{case.status}}</option>
                             </select>
@@ -132,35 +132,37 @@
                             </label>
                           </td>
                           <td>
-                            <button class="btn btn-sm btn-outline-success btn-block update_btn"  case_id="{{case.id}}">Düzəliş et</button>
-                          </td>
-                          <td>
                             <button class="btn btn-sm btn-outline-danger btn-block delete_btn" case_id="{{case.id}}">Sil</button>
                           </td>
                         </tr>
+                        {% if case.documents.all %}
                         <tr>
-                          <td colspan="5">
+                          <td colspan="4">
                             <div class="row p-0 m-0">
-                              {% if case.documents.all %}
                               
                                 {% for document in case.documents.all %}
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3 mb-3 file_container">
                                   <div class="file_main">
-                                    <p class="blockquote-footer file_name">{{ document.name }}</p>
+                                    <p class="blockquote-footer file_name">
+                                      {{ document.name }}
+                                      <button class="close delete_document">
+                                        <span>&times;</span>
+                                      </button>
+                                    </p>
                                     <button class="file_preview btn" show_url = "{{ document.url }}" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
                                     <a href="{{ document.download_url }}"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
                                   </div>
                                 </div>
                                 {% endfor %}
                               {% else %}
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                   <div class="alert alert-warning">Sənəd yoxdur</div>
-                                </div>
-                              {% endif %}
-                            </div>
-                          </td>
-                        </tr>
-                        {% endfor %}
+                                </div> -->
+                              </div>
+                            </td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
                       </tbody>
                     </table>
                   </div>
@@ -343,6 +345,10 @@
       }else {
         $(".clients-content").css("padding-left",'40px')
       }
+    });
+
+    $(".delete_document").click(function() {
+      $(this).parents("div.file_container").remove()
     })
   })
 </script>
