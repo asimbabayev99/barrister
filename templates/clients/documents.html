@@ -279,29 +279,6 @@
       }
       return cookieValue;
     }
-
-
-
-  $('#add_work_btn').on('click',function(){
-    $.ajax({
-      headers:{
-        'X-CSRFToken':getCookie('csrftoken')
-      },
-      type:"POST",
-      url:"/api/case/create/{{client_id}}",
-      data:{
-        'name':$('#work_name_input').val(),
-        'status':$('#work_status').val()
-      },
-      success:function(data){
-        console.log(data)
-      },
-      error:function(data){
-        console.log(data)
-      }
-    })
-  })
-
   $('.new-document').change(function(){
     var case_id = $(this).attr('id')
     console.log(case_id)
