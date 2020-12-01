@@ -109,74 +109,66 @@
                           <th>İşin adı</th>
                           <th>İşin Statusu</th>
                           <th>Yeni sənəd</th>
-                          
                           <th>Sil</th>
                         </tr>
                       </thead>
                       <tbody id="work_table_body">
-                        
                         {% for case in cases %}
-                        <tr class="client_information_row">
-                          <td id="case" style="padding: 0px;display: flex;">
-                            <input type="text" value="{{case.name}}" class="case_name form-control border-0">
-                            <button case_id="{{case.id}}" class="btn btn-sm btn-info hidden_save_btn">Save</button>
-                          </td>
-                          <td class="table-dropdown">
-                            <select class="form-control select_status" id="select_status">
-
-                              {% if case.status == "Uğurlu" %} 
-                              <option value="success">Uğurlu</option>
-                              <option value="info">Davam edir</option>
-                              <option value="danger">Bağlı</option>
-                              {% elif case.status == "Davam edir" %}
-                              <option value="info">Davam edir</option> 
-                              <option value="success">Uğurlu</option>
-                              <option value="danger">Bağlı</option>
-                              {% else %}
-                              <option value="danger">Bağlı</option>
-                              <option value="success">Uğurlu</option>
-                              <option value="info">Davam edir</option> 
-                              {% endif %}
-                            </select>
-                          </td>
-                          <td>
-                            <label for="{{case.id}}" class="btn btn-link text-dark text-left btn-block btn-sm m-0" >
-                              <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
-                              Yeni sənəd
-                            </label>
-                          </td>
-                          <td>
-                            <button class="btn btn-sm btn-link btn-block text-danger text-left delete_btn" case_id="{{case.id}}">Sil</button>
-                          </td>
-                        </tr>
-                        {% if case.documents.all %}
-                        <tr>
-                          <td colspan="4">
-                            <div class="row p-0 m-0">
-                              
-                                {% for document in case.documents.all %}
-                                <div class="col-md-3 mb-3 file_container">
-                                  <div class="file_main">
-                                    <p class="blockquote-footer file_name">
-                                      {{ document.name }}
-                                      <button class="close delete_document" document_id={{document.id}}>
-                                        <span>&times;</span>
-                                      </button>
-                                    </p>
-                                    <button class="file_preview btn" show_url = "{{ document.url }}" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
-                                    <a href="{{ document.download_url }}"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
+                            <tr class="client_information_row" data-id="{{case.id}}">
+                              <td id="case" style="padding: 0px;display: flex;">
+                                <input type="text" value="{{case.name}}" class="case_name form-control border-0">
+                                <button case_id="{{case.id}}" class="btn btn-sm btn-info hidden_save_btn">Save</button>
+                              </td>
+                              <td class="table-dropdown">
+                                <select class="form-control select_status" id="select_status">
+                                  {% if case.status == "Uğurlu" %} 
+                                  <option value="success">Uğurlu</option>
+                                  <option value="info">Davam edir</option>
+                                  <option value="danger">Bağlı</option>
+                                  {% elif case.status == "Davam edir" %}
+                                  <option value="info">Davam edir</option> 
+                                  <option value="success">Uğurlu</option>
+                                  <option value="danger">Bağlı</option>
+                                  {% else %}
+                                  <option value="danger">Bağlı</option>
+                                  <option value="success">Uğurlu</option>
+                                  <option value="info">Davam edir</option> 
+                                  {% endif %}
+                                </select>
+                              </td>
+                              <td>
+                                <label for="{{case.id}}" class="btn btn-link text-dark text-left btn-block btn-sm m-0" >
+                                  <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
+                                  Yeni sənəd
+                                </label>
+                              </td>
+                              <td>
+                                <button class="btn btn-sm btn-link btn-block text-danger text-left delete_btn" case_id="{{case.id}}">Sil</button>
+                              </td>
+                            </tr> 
+                            {% if case.documents.all %}
+                            <tr class="{{case.id}}">
+                              <td colspan="4">
+                                <div class="row p-0 m-0">
+                                    {% for document in case.documents.all %}
+                                    <div class="col-md-3 mb-3 file_container">
+                                      <div class="file_main">
+                                        <p class="blockquote-footer file_name">
+                                          {{ document.name }}
+                                          <button class="close delete_document" document_id={{document.id}}>
+                                            <span>&times;</span>
+                                          </button>
+                                        </p>
+                                        <button class="file_preview btn" show_url = "{{ document.url }}" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
+                                        <a href="{{ document.download_url }}"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
+                                      </div>
+                                    </div>
+                                    {% endfor %}
                                   </div>
-                                </div>
-                                {% endfor %}
-                              {% else %}
-                                <!-- <div class="col-12">
-                                  <div class="alert alert-warning">Sənəd yoxdur</div>
-                                </div> -->
-                              </div>
-                            </td>
-                          </tr>
-                          {% endif %}
-                          {% endfor %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
@@ -307,15 +299,19 @@
   })
 
   $(".delete_btn").on('click',function(){
-    case_id = $(this).attr('case_id')
+    case_id = $(this).attr('case_id');
+    let item = $(this).parents("tr").attr("data-id");
+    let context = $(this).parents("tr")
+    console.log(item)
     $.ajax({
       headers:{
         "X-CSRFToken":getCookie('csrftoken')
       },
       type:'DELETE',
       url:"/api/case/delete/"+case_id,
-      success:function(data){
-        console.log(data)
+      success:function(data) {
+        context.parents("tbody").find("tr." + item).remove();
+        context.remove()
       },
       error:function(data){
         console.log(data)
@@ -441,8 +437,6 @@
       $("#work_name_input").val("")
       $("#work_status").val("success");
     }
-    
-    
   })
   // Client new work adding end 
 
