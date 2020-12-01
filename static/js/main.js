@@ -597,8 +597,7 @@ $(document).ready(function () {
           '</label></td>' +
           "<td class=''>Yeni sənəd</td>" +
           "<td><button class='btn btn-link text-left text-danger'>Sil</button></td>" +
-          "</td></tr>");  
-        
+          "</td></tr>");
       } else {
         $("#work_table_body").append(
           "<tr class='client_information_row'>" +
