@@ -439,7 +439,7 @@ class City(models.Model):
 
 
 class Contact(models.Model):
-    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,blank=True,null=True)
     #new fields from client
     barrister = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="contacts",blank=True,null=True)
     first_name = models.CharField(max_length=64,blank=True,null=True)
@@ -448,7 +448,6 @@ class Contact(models.Model):
     phone = models.CharField(max_length=16,blank=True,null=True)
 
     # name = models.CharField(max_length=64)
-    phone = models.CharField(max_length=16, null=True, blank=True)
     email = models.EmailField(blank=True,null=True)
     adress = models.CharField(max_length=50,blank=True,null=True)
     date = models.DateTimeField(auto_now_add=True)

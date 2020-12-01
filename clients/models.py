@@ -1,5 +1,6 @@
 from django.db import models
 from account.models import CustomUser
+from home.models import *
 # Create your models here.
 
 
@@ -26,6 +27,16 @@ class Client(models.Model):
     status = models.CharField(max_length=16, choices=CLIENT_STATUSES, null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank=True)
+    contact = models.OneToOneField(Contact,on_delete=models.SET_NULL,blank=True,null=True)
+
+
+    def save(self,*args, **kwargs):
+        if self.user is not None:
+            contact = Contact.objects.create(barrister=self.barrister,first_name=self.first_name,last_name=self.last_name,phone=self.phone,email=self.email,user=self.user)
+        else:
+            contact = Contact.objects.create(barrister=self.barrister,first_name=self.first_name,last_name=self.last_name,phone=self.phone,email=self.email)
+        self.contact = contact
+        super(Client,self).save(*args, **kwargs)
 
     def __str__(self):
         return self.email
