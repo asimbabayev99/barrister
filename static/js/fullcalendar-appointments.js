@@ -395,8 +395,8 @@ $(document).ready(function () {
         console.log(data);
         // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
       },
-      error: function (jqXhr, textStatus, errorMessage) {
-        alert(errorMessage)
+      error: function (data) {
+        console.log(data)
       }
     }); 
 

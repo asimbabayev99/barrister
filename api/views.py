@@ -599,7 +599,7 @@ class EmailAccountToken(APIView):
 
 class AppointmentListView(ListAPIView):
 
-    serializer_class = AppointmentSerializer
+    serializer_class = AppointmentContactSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
     pagination_class = None
@@ -614,7 +614,7 @@ class AppointmentListView(ListAPIView):
 
 class AppointmentAPIView(APIView):
 
-    serializer_class = AppointmentSerializer
+    serializer_class = AppointmentContactSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
     
@@ -634,16 +634,21 @@ class AppointmentAPIView(APIView):
             "request": self.request,
         }
         if isinstance(request.data.get('contact'), dict):
-            serializer = AppointmentContactSerializer(data=request.data, context=context)
+            print(request.data)
+            serializer = AppointmentContactSerializer(data = request.data,context={'request':request})
+            print(serializer.is_valid(raise_exception=True))
+            print(serializer.create(serializer.validated_data))
         else:
             serializer = self.serializer_class(data=request.data, context=context)
+            print(serializer.data)
+        return Response({'none':"none"})
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=200)
-        else:
-            print(serializer.errors)
-            return Response(serializer.errors, status=400)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=200)
+        # else:
+        #     print(serializer.errors)
+        #     return Response(serializer.errors, status=400)
 
 
     def put(self, request, id):

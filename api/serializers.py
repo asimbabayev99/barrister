@@ -265,12 +265,11 @@ class EventSerializer(serializers.ModelSerializer):
 
 class ContactSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
-
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.phone = validated_data.get('phone', instance.phone)
         instance.email = validated_data.get('email', instance.email)
-        instance.address = validated_date.get('address', instance.address)
+        instance.address = validated_data.get('address', instance.address)
         instance.save()
         return instance
 
@@ -283,26 +282,21 @@ class ContactSerializer(serializers.ModelSerializer):
 
 # serializer with nested contact serializer
 class AppointmentContactSerializer(serializers.ModelSerializer):
-    contact = ContactSerializer()
     # start = serializers.DateField(format="%d/%m/%Y %H:%M")
     # end = serializers.DateField(format="%d/%m/%Y %H:%M")
+    contact = ContactSerializer(read_only=False)
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
-
-
-    def update(self, instance, validated_data):
-        instance.status = validated_data.get('status', instance.status)
-        instance.detail = validated_data.get('detail', instance.detail)
-        instance.address = validated_data.get('address', instance.address)
-        instance.start = validated_data.get('start', instance.start)
-        instance.end = validated_data.get('end', instance.end)
-        instance.save()
-        return instance
-
 
     class Meta:
         model = Appointment
-        fields = '__all__'
+        fields = ['user','status','detail','address','start','end','contact']
+        # fields = "__all__"
 
+    def create(self,validated_data):
+        contact_data = validated_data.pop('contact')
+        contact = Contact.objects.create(**contact_data)
+        Appointment.objects.create(**validated_data,contact=contact)
+        return 'created'
 
 
 
