@@ -50,9 +50,16 @@
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane py-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <div class="form-group my-2">
-                    <p>Qeyd yoxdur</p>
-                    <input id="note" type="text" class="form-control" placeholder="Qeyd əlavə et">
-                    <button class="btn btn-light btn-block save_btn_clients my-1">Save</button>
+                    <form method = "dialog" id="note_form">
+
+                      <ul class="list-group note_list_main">
+                        
+                        <li class="list-group-item"> message </li>
+                      </ul>
+                      <br>
+                      <input type="text" required class="form-control" placeholder="Qeyd əlavə et">
+                      <button type = "submit" class="btn btn-light btn-block save_btn_clients my-1" id="add_new_note_btn">Save</button>
+                    </form>
                   </div>
                 </div>
                
@@ -137,7 +144,7 @@
                                 </select>
                               </td>
                               <td>
-                                <label for="{{case.id}}" class="btn btn-link text-dark text-left btn-block btn-sm m-0" >
+                                <label for="{{case.id}}" class="adding_file btn btn-link text-dark text-left btn-block btn-sm m-0" >
                                   <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
                                   Yeni sənəd
                                 </label>
@@ -192,7 +199,7 @@
         </button>
       </div>
       <div class="modal-body p-0">
-        <iframe src="/Viewerjs/#http://127.0.0.1:8000/clients/document/media/case-documents/senedler-ucun-test.docx" frameborder="0" class="file_preview_iframe"></iframe>
+        <iframe src="" frameborder="0" class="file_preview_iframe"></iframe>
       </div>
       <div class="modal-footer m-0">
         <button type="button" class="btn modal_dismiss_btn" data-dismiss="modal">Close</button>
@@ -469,8 +476,8 @@
     
 
   })
-  $(".save_btn_clients").on('click',function(){
-    text = $('#note').val()
+  $("#note_form").on('submit',function(){
+    text = $('#note_form').find('input').val()
     console.log(text)
     $.ajax({
       headers:{
@@ -483,7 +490,10 @@
       type:"POST",
       url:"/api/case/note/create/",
       success:function(data){
+        $(".note_list_main").prepend("<li class='list-group-item'>"+ $("#note_form").find("input").val() +"</li>")
+        $("#note_form").find("input").val("")
         console.log(data)
+    
       },
       error:function(data){
         console.log(data)
@@ -499,7 +509,14 @@
 
   })
   
+  $(function() {
+    $("#note_form").on("submit", function() {
+      $(".note_list_main").prepend("<li class='list-group-item'>"+ $("#note_form").find("input").val() +"</li>")
+      $("#note_form").find("input").val("")
+    })
+  })
 
 
 </script>
+
 {% endblock scripts %}
