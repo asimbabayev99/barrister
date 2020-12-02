@@ -282,8 +282,6 @@ class ContactSerializer(serializers.ModelSerializer):
 
 # serializer with nested contact serializer
 class AppointmentContactSerializer(serializers.ModelSerializer):
-    # start = serializers.DateField(format="%d/%m/%Y %H:%M")
-    # end = serializers.DateField(format="%d/%m/%Y %H:%M")
     contact = ContactSerializer(read_only=False)
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
 

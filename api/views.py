@@ -633,11 +633,9 @@ class AppointmentAPIView(APIView):
         if isinstance(request.data.get('contact'), dict):
             serializer = AppointmentContactSerializer(data = request.data,context={'request':request})
             if serializer.is_valid(raise_exception=True):
-                try:
-                    serializer.create(serializer.validated_data)
-                    return Response(serializer.data,status=200)
-                except:
-                    return Response({'error':'occured'},status=500)
+                serializer.create(serializer.validated_data)
+                return Response({'appointment':'created'},status=200)
+               
     
         else:
             serializer = self.serializer_class(data=request.data, context={'request':request})

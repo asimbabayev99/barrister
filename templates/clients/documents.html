@@ -51,14 +51,20 @@
                 <div class="tab-pane py-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <div class="form-group my-2">
                     <form method = "dialog" id="note_form">
+                      <input type="text" required class="form-control" placeholder="Qeyd əlavə et">
+                      <button type = "submit" class="btn btn-light btn-block save_btn_clients my-1" id="add_new_note_btn">Save</button>
 
                       <ul class="list-group note_list_main">
                         
-                        <li class="list-group-item"> message </li>
+                        {% if notes %}
+                        {% for note in notes %}
+                        <li class="list-group-item">{{note.text}}</li>  
+                        {% endfor %}
+                        {% else %}
+                        <li class="list-group-item"> Qeyd yoxdur</li>
+                        {% endif %}
                       </ul>
                       <br>
-                      <input type="text" required class="form-control" placeholder="Qeyd əlavə et">
-                      <button type = "submit" class="btn btn-light btn-block save_btn_clients my-1" id="add_new_note_btn">Save</button>
                     </form>
                   </div>
                 </div>

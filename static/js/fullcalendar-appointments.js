@@ -374,15 +374,17 @@ $(document).ready(function () {
         
     var data = {
       'contact': {
-        'name': $('#name_input').val(),
+        'first_name': $('#name_input').val(),
+        'last_name':$('#surname_input').val(),
         'email': $('#email_input').val(),
         'phone': $('#phone_input').val(),
-        'address': $('#address_input').val()
+        
       },
       'start': start_date.toISOString(),
       'end': end_date.toISOString(),
       'status': $('.validation_input_meeting').text(),
-      'detail': $('#detail_input').val() 
+      'detail': $('#detail_input').val(),
+      'address': $('#address_input').val() 
     }
     console.log(data)
     $.ajax({
