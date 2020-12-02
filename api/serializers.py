@@ -275,7 +275,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = "__all__"
         
     
 
@@ -294,9 +294,8 @@ class AppointmentContactSerializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
         contact_data = validated_data.pop('contact')
-        contact = Contact.objects.create(**contact_data)
-        Appointment.objects.create(**validated_data,contact=contact)
-        return 'created'
+        contact,created = Contact.objects.get_or_create(**contact_data)
+        return Appointment.objects.create(**validated_data,contact=contact)
 
 
 

@@ -66,7 +66,12 @@ urlpatterns = [
     
 
     path('case/document/',CaseDocumentApiView.as_view()),
-    path('case/document/delete/<int:id>',CaseDocumentApiView.as_view())
+    path('case/document/delete/<int:id>',CaseDocumentApiView.as_view()),
+    path('case/note/<int:id>',NotesApiView.as_view()),
+    path('case/note/create/',NotesApiView.as_view()),
+
+
+
 
     
 

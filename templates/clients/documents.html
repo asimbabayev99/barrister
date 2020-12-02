@@ -51,7 +51,7 @@
                 <div class="tab-pane py-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <div class="form-group my-2">
                     <p>Qeyd yoxdur</p>
-                    <input type="text" class="form-control" placeholder="Qeyd əlavə et">
+                    <input id="note" type="text" class="form-control" placeholder="Qeyd əlavə et">
                     <button class="btn btn-light btn-block save_btn_clients my-1">Save</button>
                   </div>
                 </div>
@@ -467,6 +467,35 @@
 
     })
     
+
+  })
+  $(".save_btn_clients").on('click',function(){
+    text = $('#note').val()
+    console.log(text)
+    $.ajax({
+      headers:{
+        'X-CSRFToken':getCookie('csrftoken')
+
+      },
+      data:{
+        'text':text
+      },
+      type:"POST",
+      url:"/api/case/note/create/",
+      success:function(data){
+        console.log(data)
+      },
+      error:function(data){
+        console.log(data)
+      }
+
+
+    })
+
+
+
+
+
 
   })
   
