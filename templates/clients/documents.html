@@ -1,31 +1,21 @@
-{% extends 'barrister/barrister-base.html' %}
-{% load static %}
-
-
-{% block title %}
+{% extends 'barrister/barrister-base.html' %} {% load static %} {% block title %}
 <title>Musteriler</title>
-{% endblock title %}
-
-{% block links %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'css/style2.css' %}">
-<link rel="stylesheet" href="{% static 'css/clients.css' %}">
+{% endblock title %} {% block links %} {{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}" />
+<link rel="stylesheet" href="{% static 'css/clients.css' %}" />
 
 <style>
-  .table td, .table th {
+  .table td,
+  .table th {
     vertical-align: inherit;
   }
   i {
     font-size: 1rem;
     cursor: pointer;
   }
-  
 </style>
-{% endblock links %}
-
-
-{% block content %}
-<main class="page-content design " style="background-color: #fff;">
+{% endblock links %} {% block content %}
+<main class="page-content design" style="background-color: #fff">
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="container-fluid clients-content">
     <div class="row mr-0 mt-3">
@@ -33,183 +23,309 @@
         <h1 class="lead">Müştəri haqqında</h1>
       </div>
       <div class="col-12">
-        
-            <div class="w-100 client_expanding_information">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Qeydlər</a>
-                </li>
-               
-                <li class="nav-item">
-                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Son Görüşlər</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="works-tab" data-toggle="tab" href="#works" role="tab" aria-controls="works" aria-selected="false">İşlər</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane py-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                  <div class="form-group my-2">
-                    <form method = "dialog" id="note_form">
-                      <input type="text" id="value_inner" required class="form-control" placeholder="Qeyd əlavə et">
-                      <button type = "submit" class="btn btn-light btn-block save_btn_clients my-1" id="add_new_note_btn">Save</button>
+        <div class="w-100 client_expanding_information">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="home-tab"
+                data-toggle="tab"
+                href="#home"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+                >Qeydlər</a
+              >
+            </li>
 
-                      <ul class="list-group note_list_main">
-                        
-                        {% if notes %}
-                        {% for note in notes %}
-                        <li class="list-group-item p-0">
-                          <input type="text" value="{{note.text}}" class="form-control border-0">
-                          <div class="p-2 d-flex align-items-center">
-                            <small>02.02.2020</small>
-                            &nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger btn-sm">Sil</button>
-                          </div>
-                        </li>  
-                        {% endfor %}
-                        {% else %}
-                        <li class="list-group-item"> Qeyd yoxdur</li>
-                        {% endif %}
-                      </ul>
-                      <br>
-                    </form>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="contact-tab"
+                data-toggle="tab"
+                href="#contact"
+                role="tab"
+                aria-controls="contact"
+                aria-selected="false"
+                >Son Görüşlər</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="works-tab"
+                data-toggle="tab"
+                href="#works"
+                role="tab"
+                aria-controls="works"
+                aria-selected="false"
+                >İşlər</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane py-2 fade show active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <div class="form-group my-2">
+                <form method="dialog" id="note_form">
+                  <input
+                    type="text"
+                    id="value_inner"
+                    required
+                    class="form-control"
+                    placeholder="Qeyd əlavə et"
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-light btn-block save_btn_clients my-1"
+                    id="add_new_note_btn"
+                  >
+                    Save
+                  </button>
+
+                  <ul class="list-group note_list_main">
+                    {% if notes %} {% for note in notes %}
+                    <li class="list-group-item p-0">
+                      <input
+                        type="text"
+                        value="{{note.text}}"
+                        class="form-control form-control-sm border-0"
+                      />
+                      <div
+                        class="p-2 pt-0 d-flex align-items-center justify-content-between"
+                      >
+                        <small>02.02.2020</small>
+                        &nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-danger btn-sm">Sil</button>
+                      </div>
+                    </li>
+                    {% endfor %} {% else %}
+                    <li class="list-group-item">Qeyd yoxdur</li>
+                    {% endif %}
+                  </ul>
+                  <br />
+                </form>
+              </div>
+            </div>
+
+            <div
+              class="tab-pane fade p-3"
+              id="contact"
+              role="tabpanel"
+              aria-labelledby="contact-tab"
+            >
+              <div class="form-group">
+                <a href="{{ '/calendar' }}"
+                  ><button class="btn btn-primary">
+                    Yeni Görüş əlavə et
+                  </button></a
+                >
+              </div>
+              <div class="nearest-reservations my-2">
+                <span class="bold-text mb-1 text-muted"
+                  >Bazar ertəsi, 14.09.2020</span
+                >
+                <br />
+                <div class="my-2">
+                  <div class="float-left mr-4 my-1 hours_main">
+                    <span>08:00</span>
+                    <br />
+                    <span class="differ-time mb-2">09:00</span>
+                  </div>
+                  <div class="float-left my-1 names-main">
+                    <span>Asim Babayev</span>
+                    <br />
+                    <span class="differ-time mb-2"
+                      >7.9.2020, 17:05 , Calendar by Barrister</span
+                    >
                   </div>
                 </div>
-               
-                <div class="tab-pane fade p-3" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                  <div class="form-group">
-                    <a href="{{ '/calendar' }}"><button class="btn btn-primary">Yeni Görüş əlavə et</button></a>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="nearest-reservations my-2">
+                <span class="bold-text mb-1 text-muted"
+                  >Bazar ertəsi, 14.09.2020</span
+                >
+                <br />
+                <div class="my-2">
+                  <div class="float-left mr-4 my-1 hours_main">
+                    <span>08:00</span>
+                    <br />
+                    <span class="differ-time mb-2">09:00</span>
                   </div>
-                  <div class="nearest-reservations my-2">
-                    <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
-                    <br>
-                    <div class="my-2">
-                      <div class="float-left mr-4 my-1 hours_main">
-                        <span>08:00</span>
-                        <br>
-                        <span class="differ-time mb-2">09:00</span>
-                      </div>
-                      <div class="float-left my-1 names-main">
-                        <span>Asim Babayev</span>
-                        <br>
-                        <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="dropdown-divider"></div>
-                  <div class="nearest-reservations my-2">
-                    
-                    <span class="bold-text mb-1 text-muted">Bazar ertəsi, 14.09.2020</span>
-                    <br>
-                    <div class="my-2">
-                      <div class="float-left mr-4 my-1 hours_main">
-                        <span>08:00</span>
-                        <br>
-                        <span class="differ-time mb-2">09:00</span>
-                      </div>
-                      <div class="float-left my-1 names-main">
-                        <span>Asim Babayev</span>
-                        <br>
-                        <span class="differ-time mb-2">7.9.2020, 17:05 , Calendar by Barrister</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane fade" role="tabpanel" id="works" aria-labelledby="works">
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr class="p-0">
-                          <td colspan="2" class="p-0">
-                            <input placeholder="Axtar" type="text" id="search_work" class="form-control form-control-sm border-0">
-                          </td>
-                          <td colspan="2" class="py-0 px-1">
-                            <button class="btn btn-block btn-sm text-success btn-link text-left" data-toggle="modal" data-target="#add_new_work">Yeni iş əlavə et</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th>İşin adı</th>
-                          <th>İşin Statusu</th>
-                          <th>Yeni sənəd</th>
-                          <th>Sil</th>
-                        </tr>
-                      </thead>
-                      <tbody id="work_table_body">
-                        {% for case in cases %}
-                            <tr class="client_information_row" data-id="{{case.id}}">
-                              <td id="case" style="padding: 0px;display: flex;">
-                                <input type="text" value="{{case.name}}" class="case_name form-control border-0">
-                                <button case_id="{{case.id}}" class="btn btn-sm btn-info hidden_save_btn">Save</button>
-                              </td>
-                              <td class="table-dropdown">
-                                <select class="form-control select_status" id="select_status">
-                                  {% if case.status == "Uğurlu" %} 
-                                  <option value="success">Uğurlu</option>
-                                  <option value="info">Davam edir</option>
-                                  <option value="danger">Bağlı</option>
-                                  {% elif case.status == "Davam edir" %}
-                                  <option value="info">Davam edir</option> 
-                                  <option value="success">Uğurlu</option>
-                                  <option value="danger">Bağlı</option>
-                                  {% else %}
-                                  <option value="danger">Bağlı</option>
-                                  <option value="success">Uğurlu</option>
-                                  <option value="info">Davam edir</option> 
-                                  {% endif %}
-                                </select>
-                              </td>
-                              <td>
-                                <label for="{{case.id}}" class="adding_file btn btn-link text-dark text-left btn-block btn-sm m-0" >
-                                  <input type="file" id="{{case.id}}"   name="new_document" class="d-none new-document">
-                                  Yeni sənəd
-                                </label>
-                              </td>
-                              <td>
-                                <button class="btn btn-sm btn-link btn-block text-danger text-left delete_btn" case_id="{{case.id}}">Sil</button>
-                              </td>
-                            </tr> 
-                            {% if case.documents.all %}
-                            <tr class="{{case.id}}">
-                              <td colspan="4">
-                                <div class="row p-0 m-0">
-                                    {% for document in case.documents.all %}
-                                    <div class="col-md-3 mb-3 file_container">
-                                      <div class="file_main">
-                                        <p class="blockquote-footer file_name">
-                                          {{ document.name }}
-                                          <button class="close delete_document" document_id={{document.id}}>
-                                            <span>&times;</span>
-                                          </button>
-                                        </p>
-                                        <button class="file_preview btn" show_url = "{{ document.url }}" data-toggle="modal" data-target="#preview_file_modal"><i class="fas fa-eye"></i></button>
-                                        <a href="{{ document.download_url }}"><button class="file_download btn"><i class="fas fa-download"></i></button></a>
-                                      </div>
-                                    </div>
-                                    {% endfor %}
-                                  </div>
-                                </td>
-                            </tr>
-                            {% endif %}
-                        {% endfor %}
-                      </tbody>
-                    </table>
+                  <div class="float-left my-1 names-main">
+                    <span>Asim Babayev</span>
+                    <br />
+                    <span class="differ-time mb-2"
+                      >7.9.2020, 17:05 , Calendar by Barrister</span
+                    >
                   </div>
                 </div>
               </div>
             </div>
-          
+            <div
+              class="tab-pane fade"
+              role="tabpanel"
+              id="works"
+              aria-labelledby="works"
+            >
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr class="p-0">
+                      <td colspan="2" class="p-0">
+                        <input
+                          placeholder="Axtar"
+                          type="text"
+                          id="search_work"
+                          class="form-control form-control-sm border-0"
+                        />
+                      </td>
+                      <td colspan="2" class="py-0 px-1">
+                        <button
+                          class="btn btn-block btn-sm text-success btn-link text-left"
+                          data-toggle="modal"
+                          data-target="#add_new_work"
+                        >
+                          Yeni iş əlavə et
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>İşin adı</th>
+                      <th>İşin Statusu</th>
+                      <th>Yeni sənəd</th>
+                      <th>Sil</th>
+                    </tr>
+                  </thead>
+                  <tbody id="work_table_body">
+                    {% for case in cases %}
+                    <tr class="client_information_row" data-id="{{case.id}}">
+                      <td id="case" style="padding: 0px; display: flex">
+                        <input
+                          type="text"
+                          value="{{case.name}}"
+                          class="case_name form-control border-0"
+                        />
+                        <button
+                          case_id="{{case.id}}"
+                          class="btn btn-sm btn-info hidden_save_btn"
+                        >
+                          Save
+                        </button>
+                      </td>
+                      <td class="table-dropdown">
+                        <select
+                          class="form-control select_status"
+                          id="select_status"
+                        >
+                          {% if case.status == "Uğurlu" %}
+                          <option value="success">Uğurlu</option>
+                          <option value="info">Davam edir</option>
+                          <option value="danger">Bağlı</option>
+                          {% elif case.status == "Davam edir" %}
+                          <option value="info">Davam edir</option>
+                          <option value="success">Uğurlu</option>
+                          <option value="danger">Bağlı</option>
+                          {% else %}
+                          <option value="danger">Bağlı</option>
+                          <option value="success">Uğurlu</option>
+                          <option value="info">Davam edir</option>
+                          {% endif %}
+                        </select>
+                      </td>
+                      <td>
+                        <label
+                          for="{{case.id}}"
+                          class="adding_file btn btn-link text-dark text-left btn-block btn-sm m-0"
+                        >
+                          <input
+                            type="file"
+                            id="{{case.id}}"
+                            name="new_document"
+                            class="d-none new-document"
+                          />
+                          Yeni sənəd
+                        </label>
+                      </td>
+                      <td>
+                        <button
+                          class="btn btn-sm btn-link btn-block text-danger text-left delete_btn"
+                          case_id="{{case.id}}"
+                        >
+                          Sil
+                        </button>
+                      </td>
+                    </tr>
+                    {% if case.documents.all %}
+                    <tr class="{{case.id}}">
+                      <td colspan="4">
+                        <div class="row p-0 m-0">
+                          {% for document in case.documents.all %}
+                          <div class="col-md-3 mb-3 file_container">
+                            <div class="file_main">
+                              <p class="blockquote-footer file_name">
+                                {{ document.name }}
+                                <button
+                                  class="close delete_document"
+                                  document_id="{{document.id}}"
+                                >
+                                  <span>&times;</span>
+                                </button>
+                              </p>
+                              <button
+                                class="file_preview btn"
+                                show_url="{{ document.url }}"
+                                data-toggle="modal"
+                                data-target="#preview_file_modal"
+                              >
+                                <i class="fas fa-eye"></i>
+                              </button>
+                              <a href="{{ document.download_url }}"
+                                ><button class="file_download btn">
+                                  <i class="fas fa-download"></i></button
+                              ></a>
+                            </div>
+                          </div>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                    {% endif %} {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </main>
 
 <!-- File preview modal begin -->
-<div class="modal fade" id="preview_file_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="preview_file_modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -217,40 +333,76 @@
         <iframe src="" frameborder="0" class="file_preview_iframe"></iframe>
       </div>
       <div class="modal-footer m-0">
-        <button type="button" class="btn modal_dismiss_btn" data-dismiss="modal">Close</button>
-        <button type="button" class="btn modal_download_btn">Save changes</button>
+        <button
+          type="button"
+          class="btn modal_dismiss_btn"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" class="btn modal_download_btn">
+          Save changes
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-
-<div class="modal fade" id="add_new_work" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="add_new_work"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Yeni iş əlavə et</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="dialog" >
+      <form method="dialog">
         <div class="modal-body">
-        <div class="form-group">
-          <label for="">İşin adı</label>
-          <input type="text" class="form-control" id="work_name_input" placeholder="İşin adı" required>
-        </div>
-        <div class="form-group">
-          <label for="">İşin statusu</label>
-          <select type="text" class="form-control" id="work_status" placeholder="İşin status">
-            <option value="Uğurlu">Uğurlu</option>
-            <option value="Bağlı">Bağlı</option>
-            <option value="Davam edir">Davam edir</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="">İşin adı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="work_name_input"
+              placeholder="İşin adı"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="">İşin statusu</label>
+            <select
+              type="text"
+              class="form-control"
+              id="work_status"
+              placeholder="İşin status"
+            >
+              <option value="Uğurlu">Uğurlu</option>
+              <option value="Bağlı">Bağlı</option>
+              <option value="Davam edir">Davam edir</option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn modal_download_btn" id="add_work_btn" >Save changes</button>
+          <button
+            type="submit"
+            class="btn modal_download_btn"
+            id="add_work_btn"
+          >
+            Save changes
+          </button>
         </div>
       </form>
     </div>
@@ -258,12 +410,7 @@
 </div>
 <!-- File preview modal end   -->
 
-
-
-{% endblock content %}
-
-
-{% block scripts %}
+{% endblock content %} {% block scripts %}
 
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -278,253 +425,251 @@
 <script src="{% static 'js/main.js' %}"></script>
 
 <script>
-   function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-              var cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
       }
-      return cookieValue;
     }
-  $('.new-document').change(function(){
-    var case_id = $(this).attr('id')
-    console.log(case_id)
-    file  = $(this).get(0).files[0]
-    console.log(file)
-    var formdata = new FormData()
-    formdata.append("file",file)
-    formdata.append('case_id',case_id)
+    return cookieValue;
+  }
+  $(".new-document").change(function () {
+    var case_id = $(this).attr("id");
+    console.log(case_id);
+    file = $(this).get(0).files[0];
+    console.log(file);
+    var formdata = new FormData();
+    formdata.append("file", file);
+    formdata.append("case_id", case_id);
     $.ajax({
-      headers:{
-        "X-CSRFToken":getCookie('csrftoken'),
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
       },
-      contentType:false,
-      processData:false,
-      type : "POST",
-      data : formdata,
-      url:"/api/case/document/",
-      success:function(data){
-        console.log(data)
+      contentType: false,
+      processData: false,
+      type: "POST",
+      data: formdata,
+      url: "/api/case/document/",
+      success: function (data) {
+        console.log(data);
       },
-      error:function(data){
-        console.log(data)
-      }
-    })
+      error: function (data) {
+        console.log(data);
+      },
+    });
+  });
 
-  })
-
-  $(".delete_btn").on('click',function(){
-    case_id = $(this).attr('case_id');
+  $(".delete_btn").on("click", function () {
+    case_id = $(this).attr("case_id");
     let item = $(this).parents("tr").attr("data-id");
-    let context = $(this).parents("tr")
-    console.log(item)
+    let context = $(this).parents("tr");
+    console.log(item);
     $.ajax({
-      headers:{
-        "X-CSRFToken":getCookie('csrftoken')
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
       },
-      type:'DELETE',
-      url:"/api/case/delete/"+case_id,
-      success:function(data) {
-        context.parents("tbody").find("tr." + item).remove();
-        context.remove()
+      type: "DELETE",
+      url: "/api/case/delete/" + case_id,
+      success: function (data) {
+        context
+          .parents("tbody")
+          .find("tr." + item)
+          .remove();
+        context.remove();
       },
-      error:function(data){
-        console.log(data)
+      error: function (data) {
+        console.log(data);
+      },
+    });
+  });
+
+  $(function () {
+    if ($(".page-wrapper").hasClass("toggled")) {
+      $(".clients-content").css("padding-left", "0px");
+    } else {
+      $(".clients-content").css("padding-left", "40px");
     }
-
-    })
-
-
-  })
-
-  $(function() {
-    if($(".page-wrapper").hasClass("toggled")) {
-        $(".clients-content").css("padding-left",'0px')
-      }else {
-        $(".clients-content").css("padding-left",'40px')
-      }
-    $(window).click(function() {
-      if($(".page-wrapper").hasClass("toggled")) {
-        $(".clients-content").css("padding-left",'0px')
-      }else {
-        $(".clients-content").css("padding-left",'40px')
+    $(window).click(function () {
+      if ($(".page-wrapper").hasClass("toggled")) {
+        $(".clients-content").css("padding-left", "0px");
+      } else {
+        $(".clients-content").css("padding-left", "40px");
       }
     });
 
-    $(".delete_document").click(function(){
-      var id = $(this).attr('document_id')
-      var that = $(this)
-          
+    $(".delete_document").click(function () {
+      var id = $(this).attr("document_id");
+      var that = $(this);
+
       $.ajax({
-        headers:{
-          "X-CSRFToken": getCookie('csrftoken')
-
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
         },
-        type:"DELETE",
-        url:'/api/case/document/delete/'+id,
-        success:function(data){
-          that.parents("div.file_container").remove()
-          console.log(data)
-          
+        type: "DELETE",
+        url: "/api/case/document/delete/" + id,
+        success: function (data) {
+          that.parents("div.file_container").remove();
+          console.log(data);
         },
-        error:function(data){
-          console.log(data)
-        }
-      })
-      
-    })
+        error: function (data) {
+          console.log(data);
+        },
+      });
+    });
   });
-  $(function() {
-    $(".case_name").keyup(function() {
+  $(function () {
+    $(".case_name").keyup(function () {
       $(this).parent().children("button").css({
-        visibility : "visible",
-        opacity : 1
-      })
-    })
-
-  })
-  $("#add_work_btn").click(function() {
-    let work_name =  $("#work_name_input").val()
-    let work_status = $("#work_status").val()
-    if(work_name =="" && !work_status == "") {
+        visibility: "visible",
+        opacity: 1,
+      });
+    });
+  });
+  $("#add_work_btn").click(function () {
+    let work_name = $("#work_name_input").val();
+    let work_status = $("#work_status").val();
+    if (work_name == "" && !work_status == "") {
       return;
     } else {
       $("#add_work_btn").attr("data-dismiss", "modal");
       // $("#add_work_btn").click();
-      if(work_status == "Uğurlu") {
+      if (work_status == "Uğurlu") {
         $("#work_table_body").append(
           "<tr>" +
-          "<td>"+ work_name +"</td>" +
-          "<td class='p-0 table-dropdown'>" +
-          "<select class='form-control select_status'>" +
-          "<option value='success'>" +"Uğurlu"+"</option>" +
-          "<option value='danger'>Bağlı</option>" +
-          "<option value='info'>Davam edir</option></select>"+
-          "<td>Yeni sənəd</td>" +
-          "<td>Yeni sənəd</td>" +
-          "</td></tr>"      
+            "<td>" +
+            work_name +
+            "</td>" +
+            "<td class='p-0 table-dropdown'>" +
+            "<select class='form-control select_status'>" +
+            "<option value='success'>" +
+            "Uğurlu" +
+            "</option>" +
+            "<option value='danger'>Bağlı</option>" +
+            "<option value='info'>Davam edir</option></select>" +
+            "<td>Yeni sənəd</td>" +
+            "<td>Yeni sənəd</td>" +
+            "</td></tr>"
         );
-      } else if (work_status == "Bağlı" ) {
+      } else if (work_status == "Bağlı") {
         $("#work_table_body").append(
           "<tr>" +
-          "<td>"+ work_name +"</td>" +
-          "<td class='p-0 table-dropdown'>" +
-          "<select class='form-control select_status'>" +
-          "<option value='danger'>Bağlı</option>" +
-          "<option value='success'>" +"Uğurlu"+"</option>" +
-          "<option value='info'>Davam edir</option></select>"+
-          "<td>Yeni sənəd</td>" +
-          "<td>Yeni sənəd</td>" +
-          "</td></tr>");  
-        
+            "<td>" +
+            work_name +
+            "</td>" +
+            "<td class='p-0 table-dropdown'>" +
+            "<select class='form-control select_status'>" +
+            "<option value='danger'>Bağlı</option>" +
+            "<option value='success'>" +
+            "Uğurlu" +
+            "</option>" +
+            "<option value='info'>Davam edir</option></select>" +
+            "<td>Yeni sənəd</td>" +
+            "<td>Yeni sənəd</td>" +
+            "</td></tr>"
+        );
       } else {
         $("#work_table_body").append(
           "<tr>" +
-          "<td>"+ work_name +"</td>" +
-          "<td class='p-0 table-dropdown'>" +
-          "<select class='form-control select_status'>" +
-          "<option value='info'>Davam edir</option>" +
-          "<option value='success'>Uğurlu</option>" +
-          "<option value='danger'>Bağlı</option></select>"+
-          "<td>Yeni sənəd</td>" +
-          "<td>Yeni sənəd</td>" +
-          
-          "</td></tr>");  
-        
+            "<td>" +
+            work_name +
+            "</td>" +
+            "<td class='p-0 table-dropdown'>" +
+            "<select class='form-control select_status'>" +
+            "<option value='info'>Davam edir</option>" +
+            "<option value='success'>Uğurlu</option>" +
+            "<option value='danger'>Bağlı</option></select>" +
+            "<td>Yeni sənəd</td>" +
+            "<td>Yeni sənəd</td>" +
+            "</td></tr>"
+        );
       }
       $.ajax({
-        headers:{
-          'X-CSRFToken':getCookie('csrftoken')
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
         },
-        type:"POST",
-        url:"/api/case/create/{{client_id}}",
-        data:{
-          'name':$('#work_name_input').val(),
-          'status':$('#work_status').val()
+        type: "POST",
+        url: "/api/case/create/{{client_id}}",
+        data: {
+          name: $("#work_name_input").val(),
+          status: $("#work_status").val(),
         },
-        success:function(data){
-          console.log(data)
+        success: function (data) {
+          console.log(data);
         },
-        error:function(data){
-          console.log(data)
-        }
-      })
-      $("#work_name_input").val("")
+        error: function (data) {
+          console.log(data);
+        },
+      });
+      $("#work_name_input").val("");
       $("#work_status").val("success");
     }
-  })
-  // Client new work adding end 
+  });
+  // Client new work adding end
 
-  $('.hidden_save_btn').on('click',function(){
-    var self = $(this)
-    var case_id = self.attr('case_id')
-    parent  = self.parent()
-    console.log(parent.children('input').val())
-    console.log(case_id)
+  $(".hidden_save_btn").on("click", function () {
+    var self = $(this);
+    var case_id = self.attr("case_id");
+    parent = self.parent();
+    console.log(parent.children("input").val());
+    console.log(case_id);
     $.ajax({
-      headers:{
-        "X-CSRFToken":getCookie('csrftoken')
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
       },
-      data:{
-        'name':parent.children('input').val()
+      data: {
+        name: parent.children("input").val(),
       },
-      type:'PUT',
-      url:"/api/case/update/" + case_id,
-      success:function(data){
-        console.log(data)
+      type: "PUT",
+      url: "/api/case/update/" + case_id,
+      success: function (data) {
+        console.log(data);
         self.css({
-          visibility:'hidden'
-        })
+          visibility: "hidden",
+        });
       },
-      error:function(data){
-        console.log(data)
-    }
-
-    })
-    
-
-  })
-  $("#note_form").on('submit',function(){
-    text = $('#note_form').find('input').val()
-    console.log(text)
+      error: function (data) {
+        console.log(data);
+      },
+    });
+  });
+  $("#note_form").on("submit", function () {
+    text = $("#note_form").find("input").val();
+    console.log(text);
     $.ajax({
-      headers:{
-        'X-CSRFToken':getCookie('csrftoken')
-
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
       },
-      data:{
-        'text':text,
-        'client':"{{client_id}}"
+      data: {
+        text: text,
+        client: "{{client_id}}",
       },
-      type:"POST",
-      url:"/api/case/note/create/",
-      success:function(data){
-        $(".note_list_main").prepend("<li class='list-group-item p-0' ><input type='text' class='form-control border-0' value= '"+ $("#note_form #value_inner").val() +"'/></li>")
-      $("#note_form").find("input#value_inner").val("")
-        console.log(data)
-    
+      type: "POST",
+      url: "/api/case/note/create/",
+      success: function (data) {
+        $(".note_list_main").prepend(
+          "<li class='list-group-item p-0' ><input type='text' class='form-control form-control-sm border-0' value= '" +
+            $("#note_form #value_inner").val() +
+            "'/><div class='p-2 pt-0 d-flex align-items-center justify-content-between'>" +
+            "<small>02.02.2020</small>" +
+            "&nbsp;&nbsp;&nbsp;" +
+            '<button class="btn btn-danger btn-sm">Sil</button>' +
+            "</div></li>"
+        );
+        $("#note_form").find("input#value_inner").val("");
+        console.log(data);
       },
-      error:function(data){
-        console.log(data)
-      }
-
-
-    })
-
-
-
-
-
-
-  })
-
+      error: function (data) {
+        console.log(data);
+      },
+    });
+  });
 </script>
 
 {% endblock scripts %}
