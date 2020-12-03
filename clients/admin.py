@@ -5,3 +5,4 @@ from clients.models import *
 admin.site.register(Client)
 admin.site.register(Case)
 admin.site.register(CaseDocument)
+admin.site.register(Notes)

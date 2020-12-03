@@ -599,7 +599,7 @@ class EmailAccountToken(APIView):
 
 class AppointmentListView(ListAPIView):
 
-    serializer_class = AppointmentContactSerializer
+    serializer_class = AppointmentSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
     pagination_class = None
@@ -630,17 +630,16 @@ class AppointmentAPIView(APIView):
         if 'home.add_appointment' not in user_permissions:
             return Response({"detail": "Permission denied"}, status=403) 
 
-        context = {
-            "request": self.request,
-        }
         if isinstance(request.data.get('contact'), dict):
-            print(request.data)
             serializer = AppointmentContactSerializer(data = request.data,context={'request':request})
-            print(serializer.is_valid(raise_exception=True))
-            print(serializer.create(serializer.validated_data))
+            if serializer.is_valid(raise_exception=True):
+                serializer.create(serializer.validated_data)
+                return Response({'appointment':'created'},status=200)
+               
+    
         else:
-            serializer = self.serializer_class(data=request.data, context=context)
-            print(serializer.data)
+            serializer = self.serializer_class(data=request.data, context={'request':request})
+            return Response(serializer.data)
         return Response({'none':"none"})
 
         # if serializer.is_valid():
@@ -1018,7 +1017,49 @@ class CaseDocumentApiView(APIView):
 
     
 
-# class NotesListAPi()
+class NotesApiView(APIView):
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+
+    def get(self,request,id):
+        try:
+            note= Notes.objects.get(id=id)
+            serializer=  NotesSerializer(note)
+            return Response(serializer.data)
+        except:
+            return Response({'error':'occured'},status=500)
+    
+    def post(self,request):
+        user = request.user
+        serializer=NotesSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        try:
+            Notes.objects.create(barrister=user,text=serializer.validated_data['text'])
+            return Response(serializer.data,status=200)
+        except:
+            return Response({'error':'occured'},status=400)
+    
+    def put(self,request,id):
+        note = get_object_or_404(Notes.objects.all(),pk=id)
+        serializer = NotesSerializer(instance=note,data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+        return Response()
+    
+    def delete(self,request,id):
+        Notes.objects.filter(id=id).delete()
+        return Response({'note':'deleted'})
+
+
+
+
+
+
+
+
+
+
 
     
         

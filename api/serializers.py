@@ -275,15 +275,13 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = "__all__"
         
     
 
 
 # serializer with nested contact serializer
 class AppointmentContactSerializer(serializers.ModelSerializer):
-    # start = serializers.DateField(format="%d/%m/%Y %H:%M")
-    # end = serializers.DateField(format="%d/%m/%Y %H:%M")
     contact = ContactSerializer(read_only=False)
     user = serializers.HiddenField(default = serializers.CurrentUserDefault())
 
@@ -294,9 +292,8 @@ class AppointmentContactSerializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
         contact_data = validated_data.pop('contact')
-        contact = Contact.objects.create(**contact_data)
-        Appointment.objects.create(**validated_data,contact=contact)
-        return 'created'
+        contact,created = Contact.objects.get_or_create(**contact_data)
+        return Appointment.objects.create(**validated_data,contact=contact)
 
 
 

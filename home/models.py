@@ -449,14 +449,16 @@ class Contact(models.Model):
 
     # name = models.CharField(max_length=64)
     email = models.EmailField(blank=True,null=True)
-    adress = models.CharField(max_length=50,blank=True,null=True)
+    address = models.CharField(max_length=50,blank=True,null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         indexes = [
-            models.Index(fields=['user']),
+            models.Index(fields=['user','first_name','last_name']),
         ]
 
+    def __str__(self):
+        return "%s %s"%(self.first_name,self.last_name)
 
 
 APPOINTMENT_STATUSES = [
@@ -468,7 +470,7 @@ APPOINTMENT_STATUSES = [
 
 class Appointment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    contact = models.ForeignKey(Contact, on_delete=models.SET_NULL, null=True, blank=True)
+    contact = models.ForeignKey(Contact, on_delete=models.SET_NULL, null=True, blank=True,related_name="appointments")
     status = models.CharField(max_length=32, choices=APPOINTMENT_STATUSES, null=False, blank=False)
     detail = models.CharField(max_length=256, null=True, blank=True)
     address = models.CharField(max_length=32, null=True, blank=True)
