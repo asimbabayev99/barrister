@@ -135,6 +135,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         )
         await self.accept()
+        await self.send(text_data=json.dumps({
+            'status':'online',
+            'user': self.scope['user'].id
+        }))
 
     async def disconnect(self, close_code):
         await delete_channel(user=self.scope['user'],channel_name = self.channel_name)

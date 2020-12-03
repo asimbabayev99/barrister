@@ -139,6 +139,8 @@ $(document).ready(function () {
     var data = JSON.parse(e.data);
     console.log(data);
     if (data.type == "text" && data.action == "post") {
+      
+
       if (data.sender == current_user) {
         $("#modal_aside_right .modal-body").animate(
           {
@@ -158,6 +160,8 @@ $(document).ready(function () {
           "</div>" +
           "</div>";
       } else {
+        alert("you have e message")
+        
         $("#modal_aside_right .modal-body").animate(
           {
             scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
