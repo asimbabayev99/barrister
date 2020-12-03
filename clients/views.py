@@ -19,7 +19,7 @@ def client_documents(request,id):
     client = get_object_or_404(Client.objects.all(),pk=id)
     cases = client.case.all().order_by('-id')
     appointments = client.contact.appointments.all()
-    notes = Notes.objects.filter(barrister=request.user)
+    notes = Notes.objects.filter(barrister=request.user,client_id=id)
     context={'cases':cases,"client_id":id,"notes":notes}
     return render(request,"clients/documents.html",context=context)
 

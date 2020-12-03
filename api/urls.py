@@ -70,6 +70,8 @@ urlpatterns = [
     path('case/note/<int:id>',NotesApiView.as_view()),
     path('case/note/create/',NotesApiView.as_view()),
 
+    path('contact/list/',ContactListApiView.as_view())
+
 
 
 

@@ -1033,11 +1033,8 @@ class NotesApiView(APIView):
         user = request.user
         serializer=NotesSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        try:
-            Notes.objects.create(barrister=user,text=serializer.validated_data['text'])
-            return Response(serializer.data,status=200)
-        except:
-            return Response({'error':'occured'},status=400)
+        Notes.objects.create(barrister=user,text=serializer.validated_data['text'],client=serializer.validated_data['client'])
+        return Response(serializer.data,status=200)
     
     def put(self,request,id):
         note = get_object_or_404(Notes.objects.all(),pk=id)
@@ -1055,11 +1052,14 @@ class NotesApiView(APIView):
 
 
 
-
-
-
-
-
-
+class ContactListApiView(ListAPIView):
+    def get_queryset(self):
+        user = self.request.user
+        return Contact.objects.filter(user=user)
     
+
+    serializer_class = ContactSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
+
         

@@ -275,7 +275,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = "__all__"
+        fields = ['id','user','first_name','last_name','status','phone']
         
     
 
@@ -379,7 +379,7 @@ class NotesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notes
-        fields = ['text']
+        fields = ['text','client']
 
 
 
