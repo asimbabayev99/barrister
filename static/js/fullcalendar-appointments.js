@@ -342,40 +342,41 @@ $(document).ready(function () {
         ikonka: $(".choose_icon_main span").html(),
         category: $(".icon-content").attr("data-id"),
       };
-
-      data = {
-        name: eventData.title,
-        category: eventData.category,
-        description: "",
-        location: eventData.mekan,
-        start:
-          moment(
-            $(".calendar-modal #modal_2_begin").val(),
-            "DD/MM/YYYY"
-          ).format("YYYY-MM-DD") +
-          "T" +
-          $("#modal_2_end_hour").val(),
-        end:
-          moment($(".calendar-modal #modal_2_end").val(), "DD/MM/YYYY").format(
-            "YYYY-MM-DD"
-          ) +
-          "T" +
-          $(".calendar-modal #modal_2_end_hour").val(),
-      };
-      $.ajax({
-        type: "POST",
-        url: "/api/events/",
-        headers: { "X-CSRFToken": getCookie("csrftoken") },
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(data),
-        success: function (data) {
-          console.log(eventData);
-          $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
-        },
-        error: function (jqXhr, textStatus, errorMessage) {
-          alert(errorMessage);
-        },
-      });
+    
+        data = {
+          name: eventData.title,
+          category: eventData.category,
+          description: "",
+          location: eventData.mekan,
+          start:
+            moment(
+              $(".calendar-modal #modal_2_begin").val(),
+              "DD/MM/YYYY"
+            ).format("YYYY-MM-DD") +
+            "T" +
+            $("#modal_2_end_hour").val(),
+          end:
+            moment($(".calendar-modal #modal_2_end").val(), "DD/MM/YYYY").format(
+              "YYYY-MM-DD"
+            ) +
+            "T" +
+            $(".calendar-modal #modal_2_end_hour").val(),
+        };
+        $.ajax({
+          type: "POST",
+          url: "/api/events/",
+          headers: { "X-CSRFToken": getCookie("csrftoken") },
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(data),
+          success: function (data) {
+            console.log(eventData);
+            $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+          },
+          error: function (jqXhr, textStatus, errorMessage) {
+            alert(errorMessage);
+          },
+        });
+      
     }
     $("#calendar-ms").fullCalendar("unselect");
 
@@ -442,6 +443,7 @@ $(document).ready(function () {
   });
 
   $(".calendar-save-button").on("click", function () {
+
     let beginingTime = $(".validation-date").val().split("/");
     let timeInterval = parseInt($(".validation-interval").text().split(" ")[0]);
     start_date = new Date(
@@ -455,35 +457,41 @@ $(document).ready(function () {
         ":00"
     );
     end_date = new Date(start_date.getTime() + timeInterval * 60000);
+    if(is_new_client) {
+      var data = {
+        contact: {
+          first_name: $("#name_input").val(),
+          last_name: $("#surname_input").val(),
+          email: $("#email_input").val(),
+          phone: $("#phone_input").val(),
+        },
+        start: start_date.toISOString(),
+        end: end_date.toISOString(),
+        status: $(".validation_input_meeting").text(),
+        detail: $("#detail_input").val(),
+        address: $("#address_input").val(),
+      };
+      console.log(data);
+      $.ajax({
+        type: "POST",
+        url: "/api/appointments/",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        success: function (data) {
+          console.log(data);
+          // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
 
-    var data = {
-      contact: {
-        first_name: $("#name_input").val(),
-        last_name: $("#surname_input").val(),
-        email: $("#email_input").val(),
-        phone: $("#phone_input").val(),
-      },
-      start: start_date.toISOString(),
-      end: end_date.toISOString(),
-      status: $(".validation_input_meeting").text(),
-      detail: $("#detail_input").val(),
-      address: $("#address_input").val(),
-    };
-    console.log(data);
-    $.ajax({
-      type: "POST",
-      url: "/api/appointments/",
-      headers: { "X-CSRFToken": getCookie("csrftoken") },
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      success: function (data) {
-        console.log(data);
-        // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
-      },
-      error: function (data) {
-        console.log(data);
-      },
-    });
+    }  else {
+      let contact_id = $(".auto_name_2").attr("contact-id");
+      console.log(contact_id);
+      is_new_client = true
+    }
   });
 
   // $("textarea").autosize();
@@ -520,6 +528,7 @@ $(document).ready(function () {
 // Modal 2 validation end
 
 //  Auto complete modal in 1 begin
+var is_new_client = true
 $(document).ready(function () {
   var contacts = [];
   $.get("/api/contact/list/", function (data, status) {
@@ -563,6 +572,7 @@ $(document).ready(function () {
       if ($(this).val() !== 0) {
       }
       $(".auto_name").click(function () {
+        is_new_client = false
         let id = $(this).attr("id")
         let name = $(this).find("h6").text()
         let phone = $(this).find("span.blockquote-footer").text();
@@ -581,7 +591,7 @@ $(document).ready(function () {
         $("#common_contacts div.card").remove();
         $(".auto_name_2").find("h6").text(name);
         $(".auto_name_2").find("span.blockquote-footer").text(phone)
-        $(".auto_name_2").attr("id", id);
+        $(".auto_name_2").attr("contact-id", id);
         $(".auto-img").text(first_letter.toUpperCase() + second_letter.toUpperCase());
         $(".auto_name_2").css({
           display: "block", 
@@ -596,6 +606,7 @@ $(document).ready(function () {
     });
     
     $(".close-information").click(function () {
+      is_new_client = true
       $(".calendar-modal #name_input").css({
         display: "block",
       });
