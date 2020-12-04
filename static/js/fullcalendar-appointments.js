@@ -530,8 +530,6 @@ $(document).ready(function () {
       $("#common_contacts div.card").each(function() {
         $(this).remove()
       })
-      
-      
       let filter_value = $(this).val().toLowerCase().trim();
       for (let key in contacts) {
         if (
@@ -540,7 +538,7 @@ $(document).ready(function () {
           ( (contacts[key].first_name.toLowerCase() + " " + contacts[key].last_name.toLowerCase()).includes(filter_value)  )
         ) {
           $("#common_contacts").append(
-            '<div id='+ contacts[key].id +' class="card mt-1 p-2 auto_name" style="user-select: none;">' +
+            '<div id='+ contacts[key].id +' class="card mt-1 p-2 auto_name " style="user-select:none">' +
               ' <div class="card-body d-flex p-0"> ' +
               '<div class="auto-img">' +
               "AB" +
@@ -564,18 +562,39 @@ $(document).ready(function () {
       }
       if ($(this).val() !== 0) {
       }
+      $(".auto_name").click(function () {
+        let id = $(this).attr("id")
+        let name = $(this).find("h6").text()
+        let phone = $(this).find("span.blockquote-footer").text();
+        let first_letter = name.split(" ")[0][0];
+        let second_letter = name.split(" ")[1][0];
+        let bg_color;
+        if(id % 2 == 0 ) {
+          bg_color = "#dc3545"
+        } else if (id % 3 == 0 ) {
+          bg_color = "purple"
+        } else if (id % 5 == 0 ) {
+          bg_color = "#10773d"
+        } else {
+          bg_color = "#049489"
+        }
+        $("#common_contacts div.card").remove();
+        $(".auto_name_2").find("h6").text(name);
+        $(".auto_name_2").find("span.blockquote-footer").text(phone)
+        $(".auto_name_2").attr("id", id);
+        $(".auto-img").text(first_letter.toUpperCase() + second_letter.toUpperCase());
+        $(".auto_name_2").css({
+          display: "block", 
+        });
+        $(this).css({
+          display: "none",
+        });
+        $("#name_input, #email_input,#phone_input,#address_input, #surname_input").css({
+          display: "none",
+        });
+      });
     });
-    $(".auto_name").click(function () {
-      $(".auto_name_2").css({
-        display: "block",
-      });
-      $(this).css({
-        display: "none",
-      });
-      $("#name_input, #email_input,#phone_input,#address_input").css({
-        display: "none",
-      });
-    });
+    
     $(".close-information").click(function () {
       $(".calendar-modal #name_input").css({
         display: "block",
@@ -589,6 +608,7 @@ $(document).ready(function () {
       $(".calendar-modal #email_input, #phone_input").css({
         display: "block",
       });
+      $(".calendar-modal #name_input").val("")
     });
   });
 });
