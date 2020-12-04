@@ -636,9 +636,11 @@ class AppointmentAPIView(APIView):
                 serializer.create(serializer.validated_data)
                 return Response({'appointment':'created'},status=200)
                
-    
         else:
+            print(request.data)
             serializer = self.serializer_class(data=request.data, context={'request':request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
             return Response(serializer.data)
         return Response({'none':"none"})
 
