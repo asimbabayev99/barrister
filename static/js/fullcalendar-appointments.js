@@ -530,17 +530,14 @@ $(document).ready(function () {
       $("#common_contacts div.card").each(function() {
         $(this).remove()
       })
-      let common_value = [];
+      
       
       let filter_value = $(this).val().toLowerCase().trim();
       for (let key in contacts) {
-        let whole_name = contacts[key].first_name.toLowerCase() + " " + contacts[key].last_name.toLowerCase()
         if (
           (contacts[key].first_name.toLowerCase().includes(filter_value) &&
-          filter_value !== "")  || ( contacts[key].last_name.toLowerCase().includes(filter_value) && filter_value !== "" ) || (
-            filter_value.split(" ")[0].toLowerCase() == contacts[key].first_name.toLowerCase() && filter_value.split(" ")[1].toLowerCase() ==
-            contacts[key].last_name.toLowerCase()
-          )
+          filter_value !== "")  || ( contacts[key].last_name.toLowerCase().includes(filter_value) && filter_value !== "" ) || 
+          ( (contacts[key].first_name.toLowerCase() + " " + contacts[key].last_name.toLowerCase()).includes(filter_value)  )
         ) {
           $("#common_contacts").append(
             '<div id='+ contacts[key].id +' class="card mt-1 p-2 auto_name" style="user-select: none;">' +
@@ -555,8 +552,6 @@ $(document).ready(function () {
               "</div> " +
               "</div>"
           );
-        } else {
-
         }
       }
       $(".auto_name").css({
