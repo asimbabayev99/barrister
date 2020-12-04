@@ -13,6 +13,21 @@
     font-size: 1rem;
     cursor: pointer;
   }
+  .change_button {
+    background-color: #24314b;
+    border-color: #455881;
+    opacity: 0.8;
+  }
+  .change_button:hover {
+    background-color: #455881;
+    opacity: 0.9;
+    border-color: #455881;
+  }
+  .change_button:active {
+    background-color: #455881;
+    opacity: 1;
+    box-shadow: none !important;
+  }
 </style>
 {% endblock links %} {% block content %}
 <main class="page-content design" style="background-color: #fff">
@@ -88,24 +103,31 @@
                   </button>
 
                   <ul class="list-group note_list_main">
+                    <div class="row">
                     {% if notes %} {% for note in notes %}
-                    <li class="list-group-item p-0">
-                      <input
-                        type="text"
-                        value="{{note.text}}"
-                        class="form-control form-control-sm border-0"
-                      />
-                      <div
-                        class="p-2 pt-0 d-flex align-items-center justify-content-between"
-                      >
-                        <small>02.02.2020</small>
-                        &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-danger btn-sm">Sil</button>
-                      </div>
-                    </li>
+                    <div class="col-md-4 mb-1">
+                      <li class="list-group-item p-0">
+                        <input
+                          type="text"
+                          value="{{note.text}}"
+                          class="form-control form-control-sm border-0"
+                        />
+                        <div
+                          class="p-2 pt-0 d-flex align-items-center justify-content-between"
+                        >
+                          <small>02.02.2020</small>
+                          &nbsp;&nbsp;&nbsp;
+                         <div>
+                          <button class="btn btn-primary btn-sm change_button">Dəyişiklik</button>
+                          <button class="btn btn-danger btn-sm">Sil</button>
+                         </div>
+                        </div>
+                      </li>
+                    </div>
                     {% endfor %} {% else %}
                     <li class="list-group-item">Qeyd yoxdur</li>
                     {% endif %}
+                  </div>
                   </ul>
                   <br />
                 </form>
