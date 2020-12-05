@@ -94,6 +94,7 @@
                     class="form-control"
                     placeholder="Qeyd əlavə et"
                   />
+                  
                   <button
                     type="submit"
                     class="btn btn-light btn-block save_btn_clients my-1"
@@ -125,7 +126,9 @@
                       </li>
                     </div>
                     {% endfor %} {% else %}
-                    <li class="list-group-item">Qeyd yoxdur</li>
+                    <div class="col-12">
+                      <li class="list-group-item">Qeyd yoxdur</li>
+                    </div>
                     {% endif %}
                   </div>
                   </ul>
