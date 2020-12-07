@@ -614,7 +614,7 @@ class AppointmentListView(ListAPIView):
 
 class AppointmentAPIView(APIView):
 
-    serializer_class = AppointmentContactSerializer
+    serializer_class = AppointmentSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
     
@@ -1057,7 +1057,7 @@ class NotesApiView(APIView):
 class ContactListApiView(ListAPIView):
     def get_queryset(self):
         user = self.request.user
-        return Contact.objects.filter(user=user)
+        return Contact.objects.filter(barrister=user)
     
 
     serializer_class = ContactSerializer
@@ -1065,3 +1065,22 @@ class ContactListApiView(ListAPIView):
     authentication_classes = [SessionAuthentication,]
 
         
+class ClientApiView(APIView):
+    authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated,]
+
+
+    def post(self,request):
+        print(request.data)
+        serializer = ClientSerializer(data=request.data,context={'request':request})
+        serializer.is_valid(raise_exception=True)
+        created = False
+        try:
+            Client.objects.get(**serializer.validated_data)
+            created= True
+        except Exception as e:
+            print(e)
+            Client.objects.create(**serializer.validated_data)
+        if created:
+            return Response({'client':"already created"})
+        return Response(serializer.data)

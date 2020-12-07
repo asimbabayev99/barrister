@@ -264,7 +264,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
+    barrister = serializers.HiddenField(default = serializers.CurrentUserDefault())
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.phone = validated_data.get('phone', instance.phone)
@@ -275,7 +275,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ['id','user','first_name','last_name','status','phone']
+        fields = ['id',"barrister",'first_name','last_name','status','phone']
         
     
 
@@ -363,7 +363,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    
+    barrister = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Client
         fields = "__all__"

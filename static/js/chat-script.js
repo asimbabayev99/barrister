@@ -140,7 +140,6 @@ $(document).ready(function () {
     console.log(data);
     if (data.type == "text" && data.action == "post") {
       
-
       if (data.sender == current_user) {
         $("#modal_aside_right .modal-body").animate(
           {
@@ -160,7 +159,7 @@ $(document).ready(function () {
           "</div>" +
           "</div>";
       } else {
-        alert("you have e message")
+          alert("you have new message")
         
         $("#modal_aside_right .modal-body").animate(
           {
