@@ -13,6 +13,21 @@
     font-size: 1rem;
     cursor: pointer;
   }
+  .change_button {
+    background-color: #24314b;
+    border-color: #455881;
+    opacity: 0.8;
+  }
+  .change_button:hover {
+    background-color: #455881;
+    opacity: 0.9;
+    border-color: #455881;
+  }
+  .change_button:active {
+    background-color: #455881;
+    opacity: 1;
+    box-shadow: none !important;
+  }
 </style>
 {% endblock links %} {% block content %}
 <main class="page-content design" style="background-color: #fff">
@@ -79,6 +94,7 @@
                     class="form-control"
                     placeholder="Qeyd əlavə et"
                   />
+                  
                   <button
                     type="submit"
                     class="btn btn-light btn-block save_btn_clients my-1"
@@ -88,24 +104,33 @@
                   </button>
 
                   <ul class="list-group note_list_main">
+                    <div class="row">
                     {% if notes %} {% for note in notes %}
-                    <li class="list-group-item p-0">
-                      <input
-                        type="text"
-                        value="{{note.text}}"
-                        class="form-control form-control-sm border-0"
-                      />
-                      <div
-                        class="p-2 pt-0 d-flex align-items-center justify-content-between"
-                      >
-                        <small>02.02.2020</small>
-                        &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-danger btn-sm">Sil</button>
-                      </div>
-                    </li>
+                    <div class="col-md-4 mb-1">
+                      <li class="list-group-item p-0">
+                        <input
+                          type="text"
+                          value="{{note.text}}"
+                          class="form-control form-control-sm border-0"
+                        />
+                        <div
+                          class="p-2 pt-0 d-flex align-items-center justify-content-between"
+                        >
+                          <small>02.02.2020</small>
+                          &nbsp;&nbsp;&nbsp;
+                         <div>
+                          <button class="btn btn-primary btn-sm change_button">Dəyişiklik</button>
+                          <button class="btn btn-danger btn-sm">Sil</button>
+                         </div>
+                        </div>
+                      </li>
+                    </div>
                     {% endfor %} {% else %}
-                    <li class="list-group-item">Qeyd yoxdur</li>
+                    <div class="col-12">
+                      <li class="list-group-item">Qeyd yoxdur</li>
+                    </div>
                     {% endif %}
+                  </div>
                   </ul>
                   <br />
                 </form>
@@ -125,47 +150,36 @@
                   </button></a
                 >
               </div>
-              <div class="nearest-reservations my-2">
-                <span class="bold-text mb-1 text-muted"
-                  >Bazar ertəsi, 14.09.2020</span
-                >
-                <br />
-                <div class="my-2">
-                  <div class="float-left mr-4 my-1 hours_main">
-                    <span>08:00</span>
-                    <br />
-                    <span class="differ-time mb-2">09:00</span>
+              <div class="row">
+                <div class="col-md-6 col-lg-4 mb-1">
+                   <div class="list-group-item">
+                    <div class="nearest-reservations">
+                      <span class="bold-text mb-1 text-muted"
+                        >Bazar ertəsi, 14.09.2020</span
+                      >
+                      <br />
+                      <div class="mt-2">
+                        <div class="float-left mr-4 my-1 hours_main">
+                          <span>08:00</span>
+                          <br />
+                          <span class="differ-time mb-2">09:00</span>
+                        </div>
+                        <div class="float-left my-1 names-main">
+                          <span>Asim Babayev</span>
+                          <br />
+                          <span class="differ-time"
+                            >7.9.2020, 17:05 , Calendar by Barrister</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                   </div>
+                    
                   </div>
-                  <div class="float-left my-1 names-main">
-                    <span>Asim Babayev</span>
-                    <br />
-                    <span class="differ-time mb-2"
-                      >7.9.2020, 17:05 , Calendar by Barrister</span
-                    >
-                  </div>
-                </div>
+                </div>                     
               </div>
-              <div class="dropdown-divider"></div>
-              <div class="nearest-reservations my-2">
-                <span class="bold-text mb-1 text-muted"
-                  >Bazar ertəsi, 14.09.2020</span
-                >
-                <br />
-                <div class="my-2">
-                  <div class="float-left mr-4 my-1 hours_main">
-                    <span>08:00</span>
-                    <br />
-                    <span class="differ-time mb-2">09:00</span>
-                  </div>
-                  <div class="float-left my-1 names-main">
-                    <span>Asim Babayev</span>
-                    <br />
-                    <span class="differ-time mb-2"
-                      >7.9.2020, 17:05 , Calendar by Barrister</span
-                    >
-                  </div>
-                </div>
               </div>
+
             </div>
             <div
               class="tab-pane fade"
