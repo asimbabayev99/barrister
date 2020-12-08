@@ -31,11 +31,12 @@ class Client(models.Model):
 
 
     def save(self,*args, **kwargs):
-        if self.user is not None:
-            contact = Contact.objects.create(barrister=self.barrister,first_name=self.first_name,last_name=self.last_name,phone=self.phone,email=self.email,user=self.user)
-        else:
-            contact = Contact.objects.create(barrister=self.barrister,first_name=self.first_name,last_name=self.last_name,phone=self.phone,email=self.email)
-        self.contact = contact
+        if self.contact is None:
+            if self.user is not None:
+                contact = Contact.objects.create(barrister=self.barrister,first_name=self.first_name,last_name=self.last_name,phone=self.phone,email=self.email,user=self.user)
+            else:
+                contact = Contact.objects.create(barrister=self.barrister,first_name=self.first_name,last_name=self.last_name,phone=self.phone,email=self.email)
+            self.contact = contact
         super(Client,self).save(*args, **kwargs)
 
     def __str__(self):
