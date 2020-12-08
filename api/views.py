@@ -1004,11 +1004,12 @@ class CaseDocumentApiView(APIView):
         print(request.FILES)
         serializer = CaseDocumentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
+            print(serializer.data)
             for file_obj in request.FILES.getlist('file'):
                 CaseDocument.objects.create(case_id=serializer.validated_data['case_id'],name=file_obj.name,document=file_obj)
                 
         
-        return Response({'test':'test'})
+        return Response(serializer.data)
 
 
 

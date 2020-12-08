@@ -370,16 +370,21 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 
-class CaseDocumentSerializer(serializers.Serializer):
+class CaseDocumentSerializer(serializers.ModelSerializer):
     name = serializers.CharField(required=False)
     case_id = serializers.IntegerField(required=True)
+    url = serializers.CharField(source="download_url",read_only=True)
+
+    class Meta:
+        model = CaseDocument
+        fields = ['name',"case_id","url"]
     
 
 class NotesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notes
-        fields = ['text','client']
+        fields = ['text','client',"url"]
 
 
 
