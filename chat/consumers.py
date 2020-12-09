@@ -98,9 +98,7 @@ def get_users_channels(**data):
         if user.role.name == "Barrister":
             users = Contact.objects.filter(barrister=user).values_list('user')
         
-    print(users)
     channels = list(Channel.objects.filter(user__in=users).select_related('user'))
-    print(channels)
     return channels
 
         
