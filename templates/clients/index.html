@@ -54,9 +54,18 @@
                 <input
                   required
                   type="text"
-                  id="new_client_name"
+                  id="new_client_first_name"
                   class="form-control"
                   placeholder="Ad"
+                />
+              </div> <div class="form-group">
+                <label for="">Soyad</label>
+                <input
+                  required
+                  type="text"
+                  id="new_client_last_name"
+                  class="form-control"
+                  placeholder="Soyad"
                 />
               </div>
               <div class="form-group">
@@ -74,7 +83,7 @@
                 <input
                   required
                   class="form-control client_phone"
-                  id="clientPhoneInput"
+                  id="new_client_phone"
                   placeholder="Telefon"
                 />
               </div>
@@ -486,7 +495,7 @@
               "<div class='received_msg'>" +
               "<div class='received_withd_msg'>" +
               "<p>" +
-              messages[i].message +
+              messages[i].text +
               "</p>" +
               "<span class='time_date'>" +
               messages[i].date +
@@ -537,7 +546,7 @@
                   "<div class='received_msg'>" +
                   "<div class='received_withd_msg'>" +
                   "<p>" +
-                  messages[i].message +
+                  messages[i].text +
                   "</p>" +
                   "<span class='time_date'>" +
                   messages[i].date +
@@ -576,5 +585,40 @@
       })
     })
   });
+
+$('#add_new_client_btn').on('click',function(){
+  $.ajax({
+    headers:{
+      'X-CSRFToken':getCookie('csrftoken')
+    },
+    type:"POST",
+    data:{
+      "first_name":$('#new_client_first_name').val(),
+      "last_name":$('#new_client_last_name').val(),
+      "phone":$("#new_client_phone").val(),
+      "email":$('#new_client_email').val(),
+      "address":$("#new_client_address").val(),
+      "status":'active'
+    },
+    url:"/api/client/create/",
+    success:function(data){
+      console.log(data)
+    },
+    error:function(data){
+      console.log(data)
+    }
+
+
+
+
+  })
+
+
+
+
+})
+
+
+
 </script>
 {% endblock scripts %}

@@ -10,6 +10,8 @@ import base64
 import json
 import os
 import uuid
+from home.models import *
+from clients.models import *
 # from channels.layers import get_channel_layer
 
     
@@ -84,6 +86,23 @@ def update_messages(**data):
     
     return 'updated'
 
+
+from django.db.models import Q
+@database_sync_to_async
+def get_users_channels(**data):
+    user=data.get('user')
+    print(user.role)
+    if user.role is None:
+        users = Contact.objects.filter(user=user).values_list('barrister')
+    else:
+        if user.role.name == "Barrister":
+            users = Contact.objects.filter(barrister=user).values_list('user')
+        
+    print(users)
+    channels = list(Channel.objects.filter(user__in=users).select_related('user'))
+    print(channels)
+    return channels
+
         
 
 @database_sync_to_async
@@ -91,6 +110,7 @@ def get_channels(**data):
     sender = data.get('sender')
     receiver = data.get('receiver')
     channels =  Channel.objects.filter(user__in=[sender,receiver])
+    print(channels)
     return list(channels)
 
 
@@ -134,10 +154,31 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
 
         )
+        user_channels = await get_users_channels(user=self.scope['user'])
+        for channel in user_channels:
+
+            await self.channel_layer.send(
+                    channel.channel_name,
+                        {
+                        'type': 'status_message',
+                        "user":self.scope['user'].id,
+                        "status":'online'
+                    }
+                )
         await self.accept()
 
     async def disconnect(self, close_code):
         await delete_channel(user=self.scope['user'],channel_name = self.channel_name)
+        user_channels = await get_users_channels(user=self.scope['user'])
+        for channel in user_channels:
+            await self.channel_layer.send(
+                    channel.channel_name,
+                        {
+                        'type': 'status_message',
+                        "user":self.scope['user'].id,
+                        "status":'offline'
+                    }
+                )
         # Leave room group
         await self.channel_layer.group_discard(
             self.room_group_name,
@@ -371,7 +412,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'viewed':viewed
         }))
 
-    
+    async def status_message(self,event):
+        user=event['user']
+        status=event['status']
+        print(user)
+        await self.send(text_data=json.dumps({
+            "user":user,
+            "status":status
+        }))
+
+
+
     async def chat_file_message(self, event):
         id = event['id']
         action = event['action']

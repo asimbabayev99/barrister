@@ -614,7 +614,7 @@ class AppointmentListView(ListAPIView):
 
 class AppointmentAPIView(APIView):
 
-    serializer_class = AppointmentContactSerializer
+    serializer_class = AppointmentSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
     
@@ -636,9 +636,11 @@ class AppointmentAPIView(APIView):
                 serializer.create(serializer.validated_data)
                 return Response({'appointment':'created'},status=200)
                
-    
         else:
+            print(request.data)
             serializer = self.serializer_class(data=request.data, context={'request':request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
             return Response(serializer.data)
         return Response({'none':"none"})
 
@@ -1002,11 +1004,12 @@ class CaseDocumentApiView(APIView):
         print(request.FILES)
         serializer = CaseDocumentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
+            print(serializer.data)
             for file_obj in request.FILES.getlist('file'):
                 CaseDocument.objects.create(case_id=serializer.validated_data['case_id'],name=file_obj.name,document=file_obj)
                 
         
-        return Response({'test':'test'})
+        return Response(serializer.data)
 
 
 
@@ -1055,7 +1058,7 @@ class NotesApiView(APIView):
 class ContactListApiView(ListAPIView):
     def get_queryset(self):
         user = self.request.user
-        return Contact.objects.filter(user=user)
+        return Contact.objects.filter(barrister=user)
     
 
     serializer_class = ContactSerializer
@@ -1063,3 +1066,22 @@ class ContactListApiView(ListAPIView):
     authentication_classes = [SessionAuthentication,]
 
         
+class ClientApiView(APIView):
+    authentication_classes = [SessionAuthentication,]
+    permission_classes = [IsAuthenticated,]
+
+
+    def post(self,request):
+        print(request.data)
+        serializer = ClientSerializer(data=request.data,context={'request':request})
+        serializer.is_valid(raise_exception=True)
+        created = False
+        try:
+            Client.objects.get(**serializer.validated_data)
+            created= True
+        except Exception as e:
+            print(e)
+            Client.objects.create(**serializer.validated_data)
+        if created:
+            return Response({'client':"already created"})
+        return Response(serializer.data)

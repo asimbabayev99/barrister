@@ -472,26 +472,38 @@ $(document).ready(function () {
         address: $("#address_input").val(),
       };
       console.log(data);
-      $.ajax({
-        type: "POST",
-        url: "/api/appointments/",
-        headers: { "X-CSRFToken": getCookie("csrftoken") },
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(data),
-        success: function (data) {
-          console.log(data);
-          // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
-        },
-        error: function (data) {
-          console.log(data);
-        },
-      });
-
     }  else {
       let contact_id = $(".auto_name_2").attr("contact-id");
       console.log(contact_id);
-      is_new_client = true
+      is_new_client = true;
+      var data = {
+        contact:contact_id,
+        start:start_date.toISOString(),
+        end:end_date.toISOString(),
+        status:$(".validation_input_meeting").text(),
+        detail:$("#detail_input").val(),
+        address:$("#address_input").val(),
+
+
+
+
+      }
+
     }
+    $.ajax({
+      type: "POST",
+      url: "/api/appointments/",
+      headers: { "X-CSRFToken": getCookie("csrftoken") },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(data),
+      success: function (data) {
+        console.log(data);
+        // $("#calendar-ms").fullCalendar("renderEvent", eventData, true); // stick? = tru
+      },
+      error: function (data) {
+        console.log(data);
+      },
+    });
   });
 
   // $("textarea").autosize();
