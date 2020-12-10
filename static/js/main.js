@@ -684,7 +684,7 @@ $(document).ready(function () {
     let before_name = $(".all_clients_in_chat span.client_name").text();
     $(".all_clients_in_chat span.client_name").text(name);
     $(this).text(before_name);
- 
+    
   })
 
 

@@ -3,6 +3,7 @@
 {% block title%}
 <title>Musteriler</title>
 {% endblock title %} {% block links %} {{ block.super }}
+
 <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
 <link rel="stylesheet" href="{% static 'css/clients.css' %}" />
 
@@ -18,6 +19,7 @@
 </style>
 {% endblock links %} {% block content %}
 <main class="page-content design" style="background-color: #fff">
+  
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="container-fluid clients-content">
     <div class="row mr-0">
@@ -372,12 +374,13 @@
 <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
 <script src="{% static 'js/fullcalendar.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/chat-script.js'%}"></script>
 <script>
+
   function page_redirect(id) {
     window.open(location.href + "client/" + id);
   }
@@ -522,6 +525,7 @@
   }
 
   $(function () {
+
     if ($(".page-wrapper").hasClass("toggled")) {
       $(".clients-content").css("padding-left", "0px");
     } else {
@@ -562,18 +566,8 @@ $('#add_new_client_btn').on('click',function(){
     error:function(data){
       console.log(data)
     }
-
-
-
-
   })
-
-
-
-
-})
-
-
+});
 
 </script>
 {% endblock scripts %}
