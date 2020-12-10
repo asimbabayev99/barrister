@@ -1040,9 +1040,11 @@ class NotesApiView(APIView):
         return Response(serializer.data,status=200)
     
     def put(self,request,id):
+        print(request.data)
         note = get_object_or_404(Notes.objects.all(),pk=id)
         serializer = NotesSerializer(instance=note,data=request.data)
         if serializer.is_valid(raise_exception=True):
+            print(serializer.validated_data)
             serializer.save()
             return Response(serializer.data)
         return Response()
