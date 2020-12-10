@@ -119,8 +119,8 @@
                           <small>02.02.2020</small>
                           &nbsp;&nbsp;&nbsp;
                          <div>
-                          <button class="btn btn-primary btn-sm change_button">Dəyişiklik</button>
-                          <button class="btn btn-danger btn-sm">Sil</button>
+                          <button note_id="{{note.id}}" class="btn btn-primary btn-sm change_button">Dəyişiklik</button>
+                          <button note_id="{{note.id}}" class="btn btn-danger btn-sm note_delete_btn">Sil</button>
                          </div>
                         </div>
                       </li>
@@ -684,6 +684,63 @@
       },
     });
   });
+
+  $(".note_delete_btn").on('click',function(){
+    let current_item = $(this)
+    $.ajax({
+
+      headers:{
+        "X-CSRFToken":getCookie('csrftoken')
+      },
+      url:"/api/case/note/"+$(this).attr('note_id'),
+      type:"DELETE",
+      success:function(data){
+        console.log(data)
+        current_item.parents("div.list-group-item").remove()
+      },
+      error:function(data){
+        console.log(data)
+      }
+
+
+
+
+    })
+
+  })
+  $(".change_button").on('click',function(){
+    text = $(this).parent().children('input').val()
+    console.log(text)
+    client = "{{client_id}}"
+    $.ajax({
+      headers:{
+        "X-CSRFToken":getCookie('csrftoken')
+      },
+      url:"/api/case/note/"+$(this).attr('note_id'),
+      type:"PUT",
+      data:{
+  
+        'client':client,
+      },
+      success:function(data){
+        console.log(data)
+
+      },
+      error:function(data){
+        console.log(data)
+      }
+
+
+
+    })
+
+    
+
+
+
+  })
+
+
 </script>
 
 {% endblock scripts %}
