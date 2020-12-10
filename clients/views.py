@@ -20,7 +20,7 @@ def client_documents(request,id):
     cases = client.case.all().order_by('-id')
     appointments = client.contact.appointments.all()
     notes = Notes.objects.filter(barrister=request.user,client_id=id)
-    context={'cases':cases,"client_id":id,"notes":notes}
+    context={'cases':cases,"client_id":id,"notes":notes,'appointments':appointments}
     return render(request,"clients/documents.html",context=context)
 
 def case_document_download(request,path):

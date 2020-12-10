@@ -1,4 +1,4 @@
-{% extends 'barrister/barrister-base.html' %} {% load static %} {% block title %}
+{% extends 'barrister/barrister-base.html' %} {% load static %} {% load client_tags %} {% block title %}
 <title>Musteriler</title>
 {% endblock title %} {% block links %} {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
@@ -150,22 +150,29 @@
                   </button></a
                 >
               </div>
+              
+              
+                
+             
+                
               <div class="row">
+                {% for appointment in appointments %}
                 <div class="col-md-6 col-lg-4 mb-1">
+                  
                    <div class="list-group-item">
                     <div class="nearest-reservations">
                       <span class="bold-text mb-1 text-muted"
-                        >Bazar ertəsi, 14.09.2020</span
+                        >{{appointment.start|date_with_week}}</span
                       >
                       <br />
                       <div class="mt-2">
                         <div class="float-left mr-4 my-1 hours_main">
-                          <span>08:00</span>
+                          <span>{{appointment.start|date:'H:i'}}</span>
                           <br />
-                          <span class="differ-time mb-2">09:00</span>
+                          <span class="differ-time mb-2">{{appointment.end|date:'H:i'}}</span>
                         </div>
                         <div class="float-left my-1 names-main">
-                          <span>Asim Babayev</span>
+                          <span>{{appointment.contact.first_name}} {{appointment.contact.last_name}} </span>
                           <br />
                           <span class="differ-time"
                             >7.9.2020, 17:05 , Calendar by Barrister</span
@@ -176,8 +183,11 @@
                    </div>
                     
                   </div>
-                </div>                     
+                  
+                {% endfor %}
+              </div>                   
               </div>
+             
               <div
               class="tab-pane fade"
               role="tabpanel"
