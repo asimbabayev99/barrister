@@ -1,5 +1,6 @@
 {% extends 'barrister/barrister-base.html' %} 
 {% load static %} 
+
 {% block title%}
 <title>Musteriler</title>
 {% endblock title %} {% block links %} {{ block.super }}
@@ -124,6 +125,7 @@
       <div class="col-12 my-2">
         <div class="row">
           <div class="col-12">
+
             <div class="table-responsive">
               <table class="table table-bordered client-table">
                 <thead>
@@ -365,7 +367,6 @@
 <!-- The Modal -->
 {% endblock content %} {% block scripts %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -374,9 +375,7 @@
 <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
 <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
 <script src="{% static 'js/fullcalendar.js' %}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/chat-script.js'%}"></script>
 <script>
