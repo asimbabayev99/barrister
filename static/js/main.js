@@ -462,63 +462,6 @@ $(document).ready(function () {
     });
   });
 
-  $("#add_new_client_btn").click(function () {
-    let client_name = $("#new_client_name").val();
-    let client_email = $("#new_client_email").val();
-    let client_phone = $("#clientPhoneInput").val();
-    let client_address = $("#new_client_address").val();
-    let client_id = Math.floor(Math.random() * 100000);
-    console.log(client_id);
-    $("#client_table").prepend(
-      "<tr class='main_tr'>" +
-        "<td class = 'name'>" +
-        client_name +
-        "</td>" +
-        "<td>" +
-        client_email +
-        "</td>" +
-        "<td>" +
-        client_phone +
-        "</td>" +
-        "<td class = 'table-success py-0'>" +
-        '<select class="form-control select_status" id="select_status">' +
-        ' <option  value="success">Success</option> ' +
-        '<option value="warning">Warning</option> ' +
-        '<option value="danger">Danger</option>' +
-        '<option value="dark">Dark</option>' +
-        '<option value="secondary">Secondary</option>' +
-        '<option value="primary">Primary</option>' +
-        "</select>" +
-        "</td>" +
-        "<td class = 'text-center'>" +
-        "<i class = ' far fa-comments' data-toggle = 'modal' data-target = '#modal_aside_right'></i>" +
-        "</td>" +
-        "<td class='text-center'>" +
-        "<i data-target='#active_table_" +
-        client_id +
-        "' class='fas open-collapse fa-ellipsis-h'></i>" +
-        "</td>" +
-        "</tr>"
-        
-    );
-    $(".select_status").on("change", function () {
-      $(this).parent().attr("class", "");
-      $(this).attr("class", "form-control");
-      $(this).css({
-        backgroundColor: $(this).parent().css("background-color"),
-        border: "none",
-      });
-      $(this)
-        .parents("td")
-        .addClass("table-" + $(this).val());
-      $(this).parents("td").addClass("py-0");
-      if ($(this).parent().hasClass("table-dark")) {
-        $(this).css("color", "#dc3545");
-      } else {
-        $(this).css("color", "#303f48");
-      }
-    });
-  });
   $(".select_status").on("change", function () {
     $(this).parent().attr("class", "");
     $(this).attr("class", "form-control");
@@ -647,4 +590,91 @@ $(document).ready(function () {
     
   })
   // Searching in the works
+  $(function() {
+    var INDEX = 0; 
+    $("#chat-submit").click(function(e) {
+      e.preventDefault();
+      var msg = $("#chat-input").val(); 
+      if(msg.trim() == ''){
+        return false;
+      }
+      generate_message(msg, 'self');
+      var buttons = [
+          {
+            name: 'Existing User',
+            value: 'existing'
+          },
+          {
+            name: 'New User',
+            value: 'new'
+          }
+        ];
+      setTimeout(function() {      
+        generate_message(msg, 'user');  
+      }, 1000)
+      
+    })
+    // Chat in everywhere begin 
+    function generate_message(msg, type) {
+      INDEX++;
+      var str="";
+      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
+      str += "          <span class=\"msg-avatar\">";
+      str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
+      str += "          <\/span>";
+      str += "          <div class=\"cm-msg-text\">";
+      str += msg;
+      str += "          <\/div>";
+      str += "        <\/div>";
+      $(".chat-logs").append(str);
+      $("#cm-msg-"+INDEX).hide().fadeIn(300);
+      if(type == 'self'){
+       $("#chat-input").val(''); 
+      }    
+      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);    
+    }  
+    
+    function generate_button_message(msg, buttons){    
+      INDEX++;
+      var btn_obj = buttons.map(function(button) {
+         return  "              <li class=\"button\"><a href=\"javascript:;\" class=\"btn btn-primary chat-btn\" chat-value=\""+button.value+"\">"+button.name+"<\/a><\/li>";
+      }).join('');
+      var str="";
+      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg user\">";
+      str += "          <span class=\"msg-avatar\">";
+      str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
+      str += "          <\/span>";
+      str += "          <div class=\"cm-msg-text\">";
+      str += msg;
+      str += "          <\/div>";
+      str += "          <div class=\"cm-msg-button\">";
+      str += "            <ul>";   
+      str += btn_obj;
+      str += "            <\/ul>";
+      str += "          <\/div>";
+      str += "        <\/div>";
+      $(".chat-logs").append(str);
+      $("#cm-msg-"+INDEX).hide().fadeIn(300);   
+      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);
+      $("#chat-input").attr("disabled", true);
+    }
+    
+    $(document).delegate(".chat-btn", "click", function() {
+      var value = $(this).attr("chat-value");
+      var name = $(this).html();
+      $("#chat-input").attr("disabled", false);
+      generate_message(name, 'self');
+    })
+    
+    $("#chat-circle").click(function() {    
+      $("#chat-circle").toggle('scale');
+      $(".chat-box").toggle('scale');
+    })
+    
+    $(".chat-box-toggle").click(function() {
+      $("#chat-circle").toggle('scale');
+      $(".chat-box").toggle('scale');
+    })
+    
+  })
 });

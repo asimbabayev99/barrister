@@ -40,6 +40,35 @@
   </head>
   
   <body >
+    <div id="body"> 
+    
+    <div id="chat-circle" class="btn btn-raised">
+      <div id="chat-overlay"></div>
+      <i class="fas fa-comment-alt"></i>
+    </div>
+    <div class="chat-box">
+      <div class="chat-box-header">
+        Barrister chat
+        <span class="chat-box-toggle"><i class="fas fa-times"></i></span>
+      </div>
+      <div class="chat-box-body">
+        <div class="chat-box-overlay">   
+        </div>
+        <div class="chat-logs">
+         
+        </div><!--chat-log -->
+      </div>
+      <div class="chat-input">      
+        <form>
+          <input type="text" id="chat-input" placeholder="Send a message..."/>
+        <button type="submit" class="chat-submit" id="chat-submit"><i class="fas fa-paper-plane"></i></button>
+        </form>      
+      </div>
+    </div>
+  </div>
+
+
+
     <div class="page-wrapper chiller-theme toggled">
     <div id="show-sidebar">
       <a
@@ -212,8 +241,57 @@
       <!-- sidebar-content-->
       
 
-      <div class="sidebar-footer settings d-flex align-items-center p-3">
-        <span class="text-secondary" class="blockquote-footer" style="font-family: cursive;">Created by <a class="text-light" href="http://lua.az">LUA Group</a></span>
+      <div class="sidebar-footer settings">
+        <div class="footer-item">
+          <button class="">
+            <i class="fas fa-comment-alt"></i>
+            <sup>
+              <span class="message_block">
+                <span style="background-color: #0072ac;" class="badge-pill">10</span>
+              </span>
+            </sup>
+          </button>
+        </div>
+        <div class="footer-item">
+          <button class="">
+            <i class="fas fa-handshake"></i>
+            <sup>
+              <span class="message_block">
+                <span class="badge-pill">10</span>
+              </span>
+            </sup>
+          </button>
+        </div>
+        <div class="footer-item">
+          <button class="">
+            <i class="fas fa-comment-alt"></i>
+            <sup>
+              <span class="message_block">
+                <span style="background-color: rgba(255, 10, 10, 0.829);" class="badge-pill">10</span>
+              </span>
+            </sup>
+          </button>
+        </div>
+        <div class="footer-item">
+          <button class="">
+            <i class="fas fa-paper-plane"></i>
+            <sup>
+              <span class="message_block">
+                <span style="background-color: #7e026d;"  class="badge-pill">10</span>
+              </span>
+            </sup>
+          </button>
+        </div>
+        <div class="footer-item">
+          <button class="">
+            <i class="fas fa-user-alt"></i>
+            <sup>
+              <span class="message_block">
+                <span style="background-color: #bbfd21;color: #303f48;"  class="badge-pill">10</span>
+              </span>
+            </sup>
+          </button>
+        </div>
       </div>
       
     </nav>

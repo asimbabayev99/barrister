@@ -258,6 +258,7 @@
     </div>
   </div>
 </main>
+
 <div
   id="modal_aside_right"
   class="modal fixed-left fade"
@@ -353,53 +354,6 @@
 </div>
 
 <!-- Add new work begin Modal -->
-<div
-  id="modal_aside_top_2"
-  class="modal fixed-left fade"
-  tabindex="-1"
-  role="dialog"
->
-  <div class="modal-dialog col-md-6 p-0 col-lg-5" role="document">
-    <div class="modal-content works_modal p-3" id="clients_modal">
-      <form method="dialog">
-        <div class="form-group">
-          <label for="">İşin adı</label>
-          <input
-            required
-            type="text"
-            id="new_client_work_name"
-            class="form-control"
-            placeholder="Ad"
-          />
-        </div>
-        <div class="form-group">
-          <label for="">İşin statusu</label>
-          <select class="form-control" id="new_client_work_status">
-            <option value="success">Success</option>
-            <option value="warning">Warning</option>
-            <option value="danger">Danger</option>
-            <option value="dark">Dark</option>
-            <option value="secondary">Secondary</option>
-            <option value="primary">Primary</option>
-          </select>
-        </div>
-
-        <div class="form-group d-flex justify-content-end pb-0 mb-0">
-          <button class="btn btn-light" data-dismiss="modal">Bağla</button>
-          <button
-            class="btn btn-primary ml-2"
-            id="add_new_work"
-            type="submit"
-            data-dismiss="modal"
-          >
-            Yadda saxla
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <!-- modal-bialog .// -->
-</div>
 
 <!-- Modal -->
 
@@ -602,7 +556,7 @@ $('#add_new_client_btn').on('click',function(){
     },
     url:"/api/client/create/",
     success:function(data){
-      console.log(data)
+      window.location.reload()
     },
     error:function(data){
       console.log(data)
