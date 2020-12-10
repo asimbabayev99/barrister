@@ -27,7 +27,7 @@
       <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
 
       <div class="welcome">
-        <div class="container-fluid">
+        <div class="container-fluid account_content">
           <div class="row">
             <div class="col-md-12 mt-3">
               <div class="card">
@@ -47,30 +47,8 @@
           </div>
         </div>
       </div>
-      
-      <div class="statistics">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="box-personal">
-                <form class="info_input" method="POST" action="">
-                  
-                  <div class="info-personal">
-                    <div> <input type="submit" name="button" value="Yadda saxla" required="" class="button-personal">
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-
-
-
     </main>
+    
     {% endblock content %}
 
 
@@ -85,9 +63,25 @@
   <script src="{% static 'js/fullcalendar.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
   <script>
-    $(function() {
+    $(document).ready(function() {
       $(".myPageSidebar").addClass("active");
-      $(".myPageSubMenu").css("display", "block")
+      $(".myPageSubMenu").css("display", "block");
+
+      if ($(".page-wrapper").hasClass("toggled")) {
+        $(".welcome").css("padding-left", "0px");
+      } 
+      else {
+        $(".welcome").css("padding-left", "40px");
+      };
+
+
+      $(window).click(function () {
+      if ($(".page-wrapper").hasClass("toggled")) {
+        $(".welcome").css("padding-left", "0px");
+      } else {
+        $(".welcome").css("padding-left", "40px");
+      }
+    });
     })
   </script>
   {% endblock scripts %}
