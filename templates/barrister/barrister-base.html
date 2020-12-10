@@ -17,12 +17,17 @@
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/owl.theme.default.min.css' %}" />
     <link rel="stylesheet" href="{% static 'vendor/animate.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link
       href="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}"
       rel="stylesheet"
@@ -35,7 +40,7 @@
       <!-- croppie -->
     <link rel="stylesheet" href="{% static 'vendor/croppie/croppie.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+  
     {% endblock links %}
   </head>
   
@@ -48,7 +53,25 @@
     </div>
     <div class="chat-box">
       <div class="chat-box-header">
-        Barrister chat
+        <div class="dropdown" id="all_clients">
+          <div  class="all_clients_in_chat" data-toggle="dropdown">
+            <span class="client_name">
+              Musa Hesenli
+            </span>
+            
+            <i class="fas fa-angle-down"></i>
+          </div>
+          <div class="dropdown-menu col-12">
+            <a class="dropdown-item" id="client_2">Müştəri 2</a>
+            <a class="dropdown-item">Link 2</a>
+            <a class="dropdown-item">Link 3</a>
+          </div>
+        </div>
+        <!-- <div class="all_clients_in_chat">
+            
+            
+        </div> -->
+        
         <span class="chat-box-toggle"><i class="fas fa-times"></i></span>
       </div>
       <div class="chat-box-body">
@@ -66,9 +89,6 @@
       </div>
     </div>
   </div>
-
-
-
     <div class="page-wrapper chiller-theme toggled">
     <div id="show-sidebar">
       <a
@@ -109,6 +129,7 @@
         <!-- sidebar-header  -->
         
         <div class="sidebar-menu">
+          
           <ul>
             <li class="header-menu">
               <span></span>
@@ -257,7 +278,7 @@
             <i class="fas fa-handshake"></i>
             <sup>
               <span class="message_block">
-                <span class="badge-pill">10</span>
+                <span class="badge-pill message_number">10</span>
               </span>
             </sup>
           </button>
@@ -299,8 +320,7 @@
       <a href="" class="navbar-brand">Home</a>
     </div> -->
   {% block content %}
-
-
+ 
 
   {% endblock content %}
   
@@ -316,9 +336,30 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
-  <!-- croppie -->
+
   <script src="{% static 'vendor/croppie/croppie.js' %}"></script>
+  <script src="{% static 'js/chat-script.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    $( document ).ready(function() {
+    
+    $("#one").on("click", function () {
+         alertify.alert("Hello World");
+     });
+    
+     $("#two").on("click", function () {
+         alertify.confirm("Are you sure you want to delete?", function (asc) {
+             if (asc) {
+                 //ajax call for delete       
+                 alertify.success("Record is deleted.");
+    
+             } else {
+                 alertify.error("You've clicked cancel");
+             }
+         }, "Default Value");
+     });
+    }); 
+  </script>
 {% endblock scripts %}
 </body>
 </html>

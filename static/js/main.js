@@ -609,9 +609,9 @@ $(document).ready(function () {
             value: 'new'
           }
         ];
-      setTimeout(function() {      
-        generate_message(msg, 'user');  
-      }, 1000)
+      // setTimeout(function() {      
+      //   generate_message(msg, 'user');  
+      // }, 1000)
       
     })
     // Chat in everywhere begin 
@@ -676,5 +676,18 @@ $(document).ready(function () {
       $(".chat-box").toggle('scale');
     })
     
+  });
+
+  $("#all_clients .dropdown-menu .dropdown-item").click(function() {
+    let id = $(this).attr("id");
+    let name = $(this).text();
+    let before_name = $(".all_clients_in_chat span.client_name").text();
+    $(".all_clients_in_chat span.client_name").text(name);
+    $(this).text(before_name);
+ 
   })
+
+
+
+  // Chat in everywhere end
 });
