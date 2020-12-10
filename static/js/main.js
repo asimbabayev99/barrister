@@ -609,9 +609,9 @@ $(document).ready(function () {
             value: 'new'
           }
         ];
-      setTimeout(function() {      
-        generate_message(msg, 'user');  
-      }, 1000)
+      // setTimeout(function() {      
+      //   generate_message(msg, 'user');  
+      // }, 1000)
       
     })
     // Chat in everywhere begin 
@@ -684,7 +684,7 @@ $(document).ready(function () {
     let before_name = $(".all_clients_in_chat span.client_name").text();
     $(".all_clients_in_chat span.client_name").text(name);
     $(this).text(before_name);
-
+ 
   })
 
 

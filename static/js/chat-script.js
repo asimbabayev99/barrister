@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   // var roomName = "{{ room_name }}";
   var current_user = $("#current_user_id").attr('user_id');
+  var notification_number = parseInt($(".message_number").text())
   var chatSocket = new WebSocket(
     "ws://" + window.location.host + "/ws/chat/" + current_user + "/"
   );
@@ -159,8 +160,9 @@ $(document).ready(function () {
           "</div>" +
           "</div>";
       } else {
-          alert("you have new message")
-        
+          
+        notification_number += 1;
+        $(".message_number").text(notification_number);
         $("#modal_aside_right .modal-body").animate(
           {
             scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),

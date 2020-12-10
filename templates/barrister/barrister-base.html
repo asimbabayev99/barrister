@@ -17,6 +17,7 @@
       alt="Изображение Tim Treis с сайта Pixabay "
       type="image/x-icon"
     />
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fontawesome/all.css' %}" />
@@ -277,7 +278,7 @@
             <i class="fas fa-handshake"></i>
             <sup>
               <span class="message_block">
-                <span class="badge-pill">10</span>
+                <span class="badge-pill message_number">10</span>
               </span>
             </sup>
           </button>
@@ -319,8 +320,7 @@
       <a href="" class="navbar-brand">Home</a>
     </div> -->
   {% block content %}
-
-
+ 
 
   {% endblock content %}
   
@@ -336,10 +336,30 @@
   <script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
   <script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
   <script src="{% static 'js/fullcalendar.js' %}"></script>
-  <!-- croppie -->
+
   <script src="{% static 'vendor/croppie/croppie.js' %}"></script>
+  <script src="{% static 'js/chat-script.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
-  
+  <script>
+    $( document ).ready(function() {
+    
+    $("#one").on("click", function () {
+         alertify.alert("Hello World");
+     });
+    
+     $("#two").on("click", function () {
+         alertify.confirm("Are you sure you want to delete?", function (asc) {
+             if (asc) {
+                 //ajax call for delete       
+                 alertify.success("Record is deleted.");
+    
+             } else {
+                 alertify.error("You've clicked cancel");
+             }
+         }, "Default Value");
+     });
+    }); 
+  </script>
 {% endblock scripts %}
 </body>
 </html>
