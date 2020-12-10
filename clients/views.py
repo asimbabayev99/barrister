@@ -14,7 +14,7 @@ def index(request):
     }
     return render(request,'clients/index.html',context=context)
 
-# @login_required(login_url = "/account/login")
+@login_required(login_url = "/account/login")
 def client_documents(request,id):
     client = get_object_or_404(Client.objects.all(),pk=id)
     cases = client.case.all().order_by('-id')
