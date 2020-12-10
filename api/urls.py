@@ -73,7 +73,10 @@ urlpatterns = [
     path('contact/list/',ContactListApiView.as_view()),
 
 
-    path('client/create/',ClientApiView.as_view())
+    path('client/create/',ClientApiView.as_view()),
+
+
+    path('chat/users/',ChatUsersApiView.as_view())
 
 
 
