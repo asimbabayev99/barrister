@@ -666,7 +666,8 @@
   });
   $("#note_form").on("submit", function () {
     text = $("#note_form").find("input").val();
-    $("#add_new_note_btn").text("Qeyd əlavə olunur...")
+    $("#add_new_note_btn").text("Qeyd əlavə olunur...");
+    $("#add_new_note_btn").attr("disabled", true)
     $.ajax({
       headers: {
         "X-CSRFToken": getCookie("csrftoken"),
@@ -697,7 +698,8 @@
             "</div>"
         );
         $("#note_form").find("input#value_inner").val("");
-        
+        $("#add_new_note_btn").text("Əlavə et");
+        $("#add_new_note_btn").attr("disabled", false)
       },
       error: function (data) {
         console.log(data);
@@ -706,7 +708,9 @@
   });
 
   $(".note_delete_btn").on('click',function(){
-    let current_item = $(this)
+    let current_item = $(this).parent();
+    // console.log(current_item.parent().parent())
+    // return;
     $.ajax({
       headers:{
         "X-CSRFToken":getCookie('csrftoken')
@@ -715,15 +719,11 @@
       type:"DELETE",
       success:function(data){
         console.log(data)
-        current_item.parents("div.list-group-item").remove()
+        current_item.parent().parent().remove()
       },
       error:function(data){
         console.log(data)
       }
-
-
-
-
     })
 
   })
