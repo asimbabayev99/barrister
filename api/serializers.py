@@ -10,7 +10,7 @@ from django.forms.fields import FileField
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["first_name","last_name","email","password","phone_number",]
+        fields = ["id","first_name","last_name","email","phone_number",]
     def create(self,validated_data):
         user=CustomUser.objects.create(**validated_data)
         user.set_password(validated_data["password"])

@@ -439,7 +439,7 @@ class City(models.Model):
 
 
 class Contact(models.Model):
-    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,blank=True,null=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,blank=True,null=True,related_name="contact_user")
     #new fields from client
     barrister = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="contacts",blank=True,null=True)
     first_name = models.CharField(max_length=64,blank=True,null=True)

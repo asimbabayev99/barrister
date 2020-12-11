@@ -174,7 +174,6 @@ $(document).ready(function () {
       $(".modal").find(".calendar-modal #address_input").css({
         display: "block",
       });
-
       $(".modal").find(".calendar-modal .validation-reserv").text("");
       $(".modal").find(".calendar-modal .validation-interval").text("");
       $(".modal").find(".calendar-modal .text-area-modal").val("");
@@ -220,21 +219,21 @@ $(document).ready(function () {
         $("#updateAppointment").modal("show");
       }
       // Display the modal and set event values.
-      // $(".modal").modal("show");
-      // $(".modal").find(".calendar-modal #profile #event_title").val(calEvent.title);
-      // $(".modal").find(".calendar-modal #profile #event_location").val(calEvent.mekan);
-      // $(".modal").find(".calendar-modal #profile #modal_2_end_hour").val(calEvent.hour);
-      // $(".modal").find(".calendar-modal #profile #modal_2_begin_hour").val(calEvent.begin_hour);
-      // $(".modal").find(".calendar-modal #profile #modal_2_begin").val(calEvent.start.format('DD/MM/YYYY'));
-      // $(".modal").find(".calendar-modal #profile #modal_2_end").val(calEvent.end.format('DD/MM/YYYY'));
-      // $(".modal").find(".calendar-modal #profile input").attr("disabled", true);
-      // $(".modal").find(".calendar-modal #profile .dropdown-menu").css({
-      //   visibility: "hidden",
-      //   opacity: "0"
-      // });
-      // $(".modal").find(".calendar-modal #modal_2_save").css({
-      //   display: "none"
-      // });
+      $(".modal").modal("show");
+      $(".modal").find(".calendar-modal #profile #event_title").val(calEvent.title);
+      $(".modal").find(".calendar-modal #profile #event_location").val(calEvent.mekan);
+      $(".modal").find(".calendar-modal #profile #modal_2_end_hour").val(calEvent.hour);
+      $(".modal").find(".calendar-modal #profile #modal_2_begin_hour").val(calEvent.begin_hour);
+      $(".modal").find(".calendar-modal #profile #modal_2_begin").val(calEvent.start.format('DD/MM/YYYY'));
+      $(".modal").find(".calendar-modal #profile #modal_2_end").val(calEvent.end.format('DD/MM/YYYY'));
+      $(".modal").find(".calendar-modal #profile input").attr("disabled", true);
+      $(".modal").find(".calendar-modal #profile .dropdown-menu").css({
+        visibility: "hidden",
+        opacity: "0"
+      });
+      $(".modal").find(".calendar-modal #modal_2_save").css({
+        display: "none"
+      });
     },
   });
 
@@ -483,12 +482,7 @@ $(document).ready(function () {
         status:$(".validation_input_meeting").text(),
         detail:$("#detail_input").val(),
         address:$("#address_input").val(),
-
-
-
-
       }
-
     }
     $.ajax({
       type: "POST",

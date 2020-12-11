@@ -1087,3 +1087,16 @@ class ClientApiView(APIView):
         if created:
             return Response({'client':"already created"})
         return Response(serializer.data)
+
+
+
+class ChatUsersApiView(ListAPIView):
+    def get_queryset(self):
+        user = self.request.user
+        if user.role.name == "Barrister":
+            return [x.user for x in Contact.objects.filter(barrister=user).filter(user__isnull=False)]
+        else:
+            return [x.barrister for x in Contact.objects.filter(user=user).filter(barrister__isnull=False)]
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated,]
+    authentication_classes = [SessionAuthentication,]
