@@ -384,7 +384,7 @@ class NotesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notes
-        fields = ['text','client',"url"]
+        fields = ['text','client']
 
 
 

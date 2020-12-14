@@ -1033,16 +1033,19 @@ class NotesApiView(APIView):
             return Response({'error':'occured'},status=500)
     
     def post(self,request):
+        print(request.data)
         user = request.user
         serializer=NotesSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         Notes.objects.create(barrister=user,text=serializer.validated_data['text'],client=serializer.validated_data['client'])
+        print(serializer.data)
         return Response(serializer.data,status=200)
     
     def put(self,request,id):
         print(request.data)
         note = get_object_or_404(Notes.objects.all(),pk=id)
-        serializer = NotesSerializer(instance=note,data=request.data)
+        print(note)
+        serializer = NotesSerializer(instance=note,data=request.data,partial=True)
         if serializer.is_valid(raise_exception=True):
             print(serializer.validated_data)
             serializer.save()
