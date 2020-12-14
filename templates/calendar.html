@@ -7,6 +7,10 @@
 
 
 {% block links %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {{ block.super }}
 {% endblock links %}
 
@@ -22,7 +26,6 @@
       aria-hidden="true">
       <div class="modal-dialog" style="max-width: 380px;" role="document">
         <div class="modal-content">
-
           <div class="modal-body calendar-modal">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
@@ -33,7 +36,6 @@
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                   aria-controls="profile" aria-selected="false">Hadisə</a>
               </li>
-
             </ul>
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane mt-2 fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">

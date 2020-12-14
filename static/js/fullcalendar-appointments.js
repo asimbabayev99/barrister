@@ -375,7 +375,6 @@ $(document).ready(function () {
             alert(errorMessage);
           },
         });
-      
     }
     $("#calendar-ms").fullCalendar("unselect");
 

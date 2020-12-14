@@ -688,6 +688,49 @@ $(document).ready(function () {
   })
 
 
+  // users begin
+  
+  let is_users_came = false
+  if(!is_users_came) {
+    $(".user-list").append("<div class='loader col-12 d-flex justify-content-center mt-5'><span class='spinner spinner-border'></span></div>")
+  }
+  $.get("/api/chat/users", function(data, status) {
+    if(status == "success") {
+      is_users_came = true;
+      $(".user-list div.loader").remove()
+    }
+    
+      data.forEach(element => {
+        $(".user-list").append(
+          '<div class="list-group-item rounded-0 user-list-row" user-id='+ element.id +'>' +
+              '<div class="user-list-img"> ' +
+              '</div>' +
+              '<div class="user-list-name"> ' +
+                '<span>'+ element.first_name + ' ' + element.last_name +'</span><br>' +
+                '<span class="client-chat-status">'+ element.phone_number +'</span>' +
+                '<div class="unread-message-number"></div>' +
+              '</div>' +
+            '</div>'
+        )
+      });
+    $(".user-list-row").click(function() {
+      let current_id = $(this).attr("user-id");
+      $(".user-list-row").each(function() {
+        $(this).removeClass("active-user");
+      });
+      $(this).addClass("active-user")
+    });
+    $(".user-list-row-main input").keyup(function() {
+      let value = $(this).val()
+      $(".user-list-row").each(function() {
+        if(!$(this).find("div.user-list-row").includes(value)) {
+         $(this).remove() 
+        }
+      })
+    })
+  })  
+  // users end
+
 
   // Chat in everywhere end
 });
