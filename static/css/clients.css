@@ -516,3 +516,7 @@ button.close {
   outline: none;
   padding: 0px 10px;
 }
+
+.change_button {
+  display: none;
+}

@@ -119,7 +119,7 @@
                           <small>02.02.2020</small>
                           &nbsp;&nbsp;&nbsp;
                          <div>
-                          <button note_id="{{note.id}}" class="btn btn-primary btn-sm change_button">Dəyişiklik</button>
+                          <button  note_id="{{note.id}}" class="btn btn-primary btn-sm change_button">Dəyişikliyi təstiq et</button>
                           <button note_id="{{note.id}}" class="btn btn-danger btn-sm note_delete_btn">Sil</button>
                          </div>
                         </div>
@@ -149,12 +149,7 @@
                     Yeni Görüş əlavə et
                   </button></a
                 >
-              </div>
-              
-              
-                
-             
-                
+              </div>                
               <div class="row">
                 {% for appointment in appointments %}
                 <div class="col-md-6 col-lg-4 mb-1">
@@ -532,7 +527,7 @@
     $(".delete_document").click(function () {
       var id = $(this).attr("document_id");
       var that = $(this);
-
+      $(this).html("<span style='border-width : 3px' class='spinner  spinner-border'></span>")
       $.ajax({
         headers: {
           "X-CSRFToken": getCookie("csrftoken"),
@@ -578,8 +573,10 @@
             "</option>" +
             "<option value='danger'>Bağlı</option>" +
             "<option value='info'>Davam edir</option></select>" +
-            "<td>Yeni sənəd</td>" +
-            "<td>Yeni sənəd</td>" +
+            "<td class='p-0'>" +
+            '<label for="document_input" class="adding_file btn btn-link text-dark text-left btn-block btn-sm m-0"><input type="file" name="document_input" class="d-none" id="document_input"/>Yeni sənəd</label>' +
+            "</td>" +
+            "<td><a class='text-danger' href='#'>Sil</a></td>" +
             "</td></tr>"
         );
       } else if (work_status == "Bağlı") {
@@ -712,6 +709,8 @@
     let current_item = $(this).parent();
     // console.log(current_item.parent().parent())
     // return;
+    $(this).attr("disabled", true)
+    $(this).text("Silinir...")
     $.ajax({
       headers:{
         "X-CSRFToken":getCookie('csrftoken')
@@ -720,7 +719,7 @@
       type:"DELETE",
       success:function(data){
         console.log(data)
-        current_item.parent().parent().remove()
+        current_item.parent().parent().parent().remove()
       },
       error:function(data){
         console.log(data)
@@ -759,8 +758,15 @@
 
 
   })
+  
+  $(".note_list_main input").change(function() {
+    $(this).parent().find(".change_button").css("display", "inline-block");
+  })
 
-
+  $(".change_button").click(function() {
+    $(this).attr("disabled", true); 
+    $(this).text("Təstiqlənir...");
+  })
 </script>
 
 {% endblock scripts %}

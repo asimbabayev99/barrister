@@ -694,6 +694,21 @@ $(document).ready(function () {
   if(!is_users_came) {
     $(".user-list").append("<div class='loader col-12 d-flex justify-content-center mt-5'><span class='spinner spinner-border'></span></div>")
   }
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
   $.get("/api/chat/users", function(data, status) {
     if(status == "success") {
       is_users_came = true;
@@ -718,19 +733,64 @@ $(document).ready(function () {
       $(".user-list-row").each(function() {
         $(this).removeClass("active-user");
       });
-      $(this).addClass("active-user")
+      $(this).addClass("active-user");
+      $.ajax({
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        type: "GET",
+        url: "/api/messages/list/" + current_id + "/",
+        success: function (data) {
+        let message_data = data
+        var messages = data.results.reverse();
+        for (var i = 0; i < messages.length; i++) {
+          if (messages[i].sender == "{{request.user.id}}") {
+            document.querySelector(
+              "#modal_aside_right .modal-body"
+            ).innerHTML +=
+              "<div class='outgoing_msg'>" +
+              "<div class='sent_msg'>" +
+              "<p>" +
+              messages[i].text +
+              "</p>" +
+              "<span class='time_date'>" +
+              messages[i].date +
+              "</span>" +
+              "</div>" +
+              "</div>";
+          } else {
+            document.querySelector(
+              "#modal_aside_right .modal-body"
+            ).innerHTML +=
+              "<div class='incoming_msg'>" +
+              "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
+              "<div class='received_msg'>" +
+              "<div class='received_withd_msg'>" +
+              "<p>" +
+              messages[i].text +
+              "</p>" +
+              "<span class='time_date'>" +
+              messages[i].date +
+              "</span>" +
+              "</div>" +
+              "</div>" +
+              "</div>";
+          }
+        }
+        },
+      });
     });
+
     $(".user-list-row-main input").keyup(function() {
       let value = $(this).val()
       $(".user-list-row").each(function() {
-        if(!$(this).find("div.user-list-row").includes(value)) {
+        if(!$(this).find("div.user-list-row").text().toLowerCase().includes(value.toLowerCase())) {
          $(this).remove() 
         }
       })
     })
   })  
   // users end
-
-
+  
   // Chat in everywhere end
 });
