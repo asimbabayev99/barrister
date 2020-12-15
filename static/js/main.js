@@ -1,4 +1,19 @@
 // sidebar js begin
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 $(".sidebar-dropdown > a").click(function () {
   $(".sidebar-submenu").slideUp(200);
   if ($(this).parent().hasClass("active")) {
@@ -481,25 +496,22 @@ $(document).ready(function () {
   });
   // clients table collapsing end
 
-
   // clients table searching begin
-  $("#search_client_input").keyup(function(e){
-    let value = $(this).val().toLowerCase()
-    $(".main_tr").each(function(){
-    if($(this).children("td.name").text().toLowerCase().includes(value)) {
-        $(this).css("display", "table-row")
-        $(this).children().css("display","table-cell")
-      }
-    else {
-        $(this).css("display", "none")
+  $("#search_client_input").keyup(function (e) {
+    let value = $(this).val().toLowerCase();
+    $(".main_tr").each(function () {
+      if ($(this).children("td.name").text().toLowerCase().includes(value)) {
+        $(this).css("display", "table-row");
+        $(this).children().css("display", "table-cell");
+      } else {
+        $(this).css("display", "none");
         // $(this).children().css("display","block")
       }
-    })
-  })
+    });
+  });
   // clients table searching end
 
-
-  // Client new work adding begin 
+  // Client new work adding begin
   // $("#add_work_btn").click(function() {
   //   let work_name =  $("#work_name_input").val()
   //   let work_status = $("#work_status").val()
@@ -519,7 +531,7 @@ $(document).ready(function () {
   //         "<option value='info'>Davam edir</option></select>"+
   //         "<td>Yeni sənəd</td>" +
   //         "<td>Yeni sənəd</td>" +
-  //         "</td></tr>"      
+  //         "</td></tr>"
   //       );
   //     } else if (work_status == "danger" ) {
   //       $("#work_table_body").append(
@@ -532,8 +544,8 @@ $(document).ready(function () {
   //         "<option value='info'>Davam edir</option></select>"+
   //         "<td>Yeni sənəd</td>" +
   //         "<td>Yeni sənəd</td>" +
-  //         "</td></tr>");  
-        
+  //         "</td></tr>");
+
   //     } else {
   //       $("#work_table_body").append(
   //         "<tr>" +
@@ -545,9 +557,9 @@ $(document).ready(function () {
   //         "<option value='danger'>Bağlı</option></select>"+
   //         "<td>Yeni sənəd</td>" +
   //         "<td>Yeni sənəd</td>" +
-          
-  //         "</td></tr>");  
-        
+
+  //         "</td></tr>");
+
   //     }
   //     $.ajax({
   //       headers:{
@@ -569,228 +581,288 @@ $(document).ready(function () {
   //     $("#work_name_input").val("")
   //     $("#work_status").val("success");
   //   }
-    
-    
+
   // })
-  // Client new work adding end 
+  // Client new work adding end
 
   // Searching in the works
-  $("#search_work").keyup(function() {
-    let value = $(this).val().toLowerCase()
-    $(".main_tr").each(function(){
-    if($(this).children("td.name").text().toLowerCase().includes(value)) {
-        $(this).css("display", "table-row")
-        $(this).children().css("display","table-cell")
-      }
-    else {
-        $(this).css("display", "none")
+  $("#search_work").keyup(function () {
+    let value = $(this).val().toLowerCase();
+    $(".main_tr").each(function () {
+      if ($(this).children("td.name").text().toLowerCase().includes(value)) {
+        $(this).css("display", "table-row");
+        $(this).children().css("display", "table-cell");
+      } else {
+        $(this).css("display", "none");
         // $(this).children().css("display","block")
       }
-    })
-    
-  })
+    });
+  });
   // Searching in the works
-  $(function() {
-    var INDEX = 0; 
-    $("#chat-submit").click(function(e) {
-      e.preventDefault();
-      var msg = $("#chat-input").val(); 
-      if(msg.trim() == ''){
-        return false;
-      }
-      generate_message(msg, 'self');
-      var buttons = [
-          {
-            name: 'Existing User',
-            value: 'existing'
-          },
-          {
-            name: 'New User',
-            value: 'new'
+  $(function () {
+    function userlistclick() {
+      $(".user-list-row").click(function () {
+        $('.alternative-first_view').each(function() {
+          $(this).remove()
+        })
+        let second_user;
+        $(".user-list-row").each(function () {
+          if ($(this).hasClass("active-user")) {
+            second_user = $(this).attr("user-id");
           }
-        ];
-      // setTimeout(function() {      
-      //   generate_message(msg, 'user');  
-      // }, 1000)
-      
-    })
-    // Chat in everywhere begin 
-    function generate_message(msg, type) {
-      INDEX++;
-      var str="";
-      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
-      str += "          <span class=\"msg-avatar\">";
-      str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
-      str += "          <\/span>";
-      str += "          <div class=\"cm-msg-text\">";
-      str += msg;
-      str += "          <\/div>";
-      str += "        <\/div>";
-      $(".chat-logs").append(str);
-      $("#cm-msg-"+INDEX).hide().fadeIn(300);
-      if(type == 'self'){
-       $("#chat-input").val(''); 
-      }    
-      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);    
-    }  
+        });
+        let current_id = $(this).attr("user-id");
+        first_user = current_id;
+        $(".user-list-row").each(function () {
+          $(this).removeClass("active-user");
+        });
+        $(this).addClass("active-user");
+        if (first_user !== second_user) {
+          $(".chat-logs").html("");
+          $(".chat-logs").html("<div class='loading_chat'>Mesajlar yüklənir...</div>");
+        }
     
-    function generate_button_message(msg, buttons){    
-      INDEX++;
-      var btn_obj = buttons.map(function(button) {
-         return  "              <li class=\"button\"><a href=\"javascript:;\" class=\"btn btn-primary chat-btn\" chat-value=\""+button.value+"\">"+button.name+"<\/a><\/li>";
-      }).join('');
-      var str="";
-      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg user\">";
-      str += "          <span class=\"msg-avatar\">";
-      str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
-      str += "          <\/span>";
-      str += "          <div class=\"cm-msg-text\">";
-      str += msg;
-      str += "          <\/div>";
-      str += "          <div class=\"cm-msg-button\">";
-      str += "            <ul>";   
-      str += btn_obj;
-      str += "            <\/ul>";
-      str += "          <\/div>";
-      str += "        <\/div>";
-      $(".chat-logs").append(str);
-      $("#cm-msg-"+INDEX).hide().fadeIn(300);   
-      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);
-      $("#chat-input").attr("disabled", true);
+        $.ajax({
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
+          type: "GET",
+          url: "/api/messages/list/" + current_id + "/",
+          success: function (data) {
+            console.log(data);
+            $(".chat-logs div.loading_chat").remove();
+            let message_data = data;
+            var messages = data.results.reverse();
+            for (var i = 0; i < messages.length; i++) {
+              if (
+                messages[i].sender == $("p#user-id").attr("chat-current-user-id")
+              ) {
+                generate_message(messages[i].text, "self");
+              } else {
+                generate_message(messages[i].text, "user");
+              }
+            }
+          },
+        });
+      });
     }
     
-    $(document).delegate(".chat-btn", "click", function() {
+    var INDEX = 0;
+    $("#chat-submit").click(function (e) {
+      e.preventDefault();
+      var msg = $("#chat-input").val();
+      if (msg.trim() == "") {
+        return false;
+      }
+      generate_message(msg, "self");
+      var buttons = [
+        {
+          name: "Existing User",
+          value: "existing",
+        },
+        {
+          name: "New User",
+          value: "new",
+        },
+      ];
+      // setTimeout(function() {
+      //   generate_message(msg, 'user');
+      // }, 1000)
+    });
+    // Chat in everywhere begin
+    function generate_message(msg, type) {
+      INDEX++;
+      var str = "";
+      str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + '">';
+      // str += '          <span class="msg-avatar">';
+      // str +=
+      //   '            <img src="">';
+      // str += "          </span>";
+      str += '          <div class="cm-msg-text">';
+      str += msg;
+      str += "          </div>";
+      str += "        </div>";
+      $(".chat-logs").append(str);
+      $("#cm-msg-" + INDEX)
+        .hide()
+        .fadeIn(300);
+      if (type == "self") {
+        $("#chat-input").val("");
+      }
+      $(".chat-logs")
+        .stop()
+        .animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
+    }
+
+    function generate_button_message(msg, buttons) {
+      INDEX++;
+      var btn_obj = buttons
+        .map(function (button) {
+          return (
+            '              <li class="button"><a href="javascript:;" class="btn btn-primary chat-btn" chat-value="' +
+            button.value +
+            '">' +
+            button.name +
+            "</a></li>"
+          );
+        })
+        .join("");
+      var str = "";
+      str += "<div id='cm-msg-" + INDEX + '\' class="chat-msg user">';
+      str += '          <span class="msg-avatar">';
+      str +=
+        '            <img src="https://image.crisp.im/avatar/operator/196af8cc-f6ad-4ef7-afd1-c45d5231387c/240/?1483361727745">';
+      str += "          </span>";
+      str += '          <div class="cm-msg-text">';
+      str += msg;
+      str += "          </div>";
+      str += '          <div class="cm-msg-button">';
+      str += "            <ul>";
+      str += btn_obj;
+      str += "            </ul>";
+      str += "          </div>";
+      str += "        </div>";
+      $(".chat-logs").append(str);
+      $("#cm-msg-" + INDEX)
+        .hide()
+        .fadeIn(300);
+      $(".chat-logs")
+        .stop()
+        .animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
+      $("#chat-input").attr("disabled", true);
+    }
+
+    $(document).delegate(".chat-btn", "click", function () {
       var value = $(this).attr("chat-value");
       var name = $(this).html();
       $("#chat-input").attr("disabled", false);
-      generate_message(name, 'self');
-    })
-    
-    $("#chat-circle").click(function() {    
-      $("#chat-circle").toggle('scale');
-      $(".chat-box").toggle('scale');
-    })
-    
-    $(".chat-box-toggle").click(function() {
-      $("#chat-circle").toggle('scale');
-      $(".chat-box").toggle('scale');
-    })
-    
-  });
-
-  $("#all_clients .dropdown-menu .dropdown-item").click(function() {
-    let id = $(this).attr("id");
-    let name = $(this).text();
-    let before_name = $(".all_clients_in_chat span.client_name").text();
-    $(".all_clients_in_chat span.client_name").text(name);
-    $(this).text(before_name);
-    
-  })
-
-
-  // users begin
-  
-  let is_users_came = false
-  if(!is_users_came) {
-    $(".user-list").append("<div class='loader col-12 d-flex justify-content-center mt-5'><span class='spinner spinner-border'></span></div>")
-  }
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-  $.get("/api/chat/users", function(data, status) {
-    if(status == "success") {
-      is_users_came = true;
-      $(".user-list div.loader").remove()
-    }
-    
-      data.forEach(element => {
-        $(".user-list").append(
-          '<div class="list-group-item rounded-0 user-list-row" user-id='+ element.id +'>' +
-              '<div class="user-list-img"> ' +
-              '</div>' +
-              '<div class="user-list-name"> ' +
-                '<span>'+ element.first_name + ' ' + element.last_name +'</span><br>' +
-                '<span class="client-chat-status">'+ element.phone_number +'</span>' +
-                '<div class="unread-message-number"></div>' +
-              '</div>' +
-            '</div>'
-        )
-      });
-    $(".user-list-row").click(function() {
-      let current_id = $(this).attr("user-id");
-      $(".user-list-row").each(function() {
-        $(this).removeClass("active-user");
-      });
-      $(this).addClass("active-user");
-      $.ajax({
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-        type: "GET",
-        url: "/api/messages/list/" + current_id + "/",
-        success: function (data) {
-        let message_data = data
-        var messages = data.results.reverse();
-        for (var i = 0; i < messages.length; i++) {
-          if (messages[i].sender == "{{request.user.id}}") {
-            document.querySelector(
-              "#modal_aside_right .modal-body"
-            ).innerHTML +=
-              "<div class='outgoing_msg'>" +
-              "<div class='sent_msg'>" +
-              "<p>" +
-              messages[i].text +
-              "</p>" +
-              "<span class='time_date'>" +
-              messages[i].date +
-              "</span>" +
-              "</div>" +
-              "</div>";
-          } else {
-            document.querySelector(
-              "#modal_aside_right .modal-body"
-            ).innerHTML +=
-              "<div class='incoming_msg'>" +
-              "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
-              "<div class='received_msg'>" +
-              "<div class='received_withd_msg'>" +
-              "<p>" +
-              messages[i].text +
-              "</p>" +
-              "<span class='time_date'>" +
-              messages[i].date +
-              "</span>" +
-              "</div>" +
-              "</div>" +
-              "</div>";
-          }
-        }
-        },
-      });
+      generate_message(name, "self");
     });
 
-    $(".user-list-row-main input").keyup(function() {
-      let value = $(this).val()
-      $(".user-list-row").each(function() {
-        if(!$(this).find("div.user-list-row").text().toLowerCase().includes(value.toLowerCase())) {
-         $(this).remove() 
+    $("#chat-circle").click(function () {
+      $("#chat-circle").toggle("scale");
+      $(".chat-box").toggle("scale");
+    });
+
+    $(".chat-box-toggle").click(function () {
+      $("#chat-circle").toggle("scale");
+      $(".chat-box").toggle("scale");
+    });
+
+    let is_users_came = false;
+    if (!is_users_came) {
+      $(".user-list").append(
+        "<div class='loader col-12 d-flex justify-content-center mt-5'><span class='spinner spinner-border'></span></div>"
+      );
+    }
+
+    var all_chat_users = [];
+    $.get("/api/chat/users", function (data, status) {
+      if (status == "success") {
+        is_users_came = true;
+        $(".user-list div.loader").remove();
+      }
+      all_chat_users = data;
+      data.forEach((element) => {
+        $(".user-list").append(
+          '<div class="list-group-item rounded-0 user-list-row" user-id=' +
+            element.id +
+            ">" +
+            '<div class="user-list-img"> ' +
+            "</div>" +
+            '<div class="user-list-name"> ' +
+            "<span>" +
+            element.first_name +
+            " " +
+            element.last_name +
+            "</span><br>" +
+            '<span class="client-chat-status">' +
+            element.phone_number +
+            "</span>" +
+            '<div class="unread-message-number"></div>' +
+            "</div>" +
+            "</div>"
+        );
+      });
+      var first_user;
+      $(".user-list-row-main input").keyup(function () {
+        $(".user-list div.user-list-row").each(function () {
+          $(this).remove();
+        });
+        let value = $(this).val();
+        if (!value) {
+          all_chat_users.forEach((element) => {
+            $(".user-list").append(
+              '<div class="list-group-item rounded-0 user-list-row" user-id=' +
+                element.id +
+                ">" +
+                '<div class="user-list-img"> ' +
+                "</div>" +
+                '<div class="user-list-name"> ' +
+                "<span>" +
+                element.first_name +
+                " " +
+                element.last_name +
+                "</span><br>" +
+                '<span class="client-chat-status">' +
+                element.phone_number +
+                "</span>" +
+                '<div class="unread-message-number"></div>' +
+                "</div>" +
+                "</div>"
+            );
+          });
+          userlistclick();
+          return;
         }
-      })
-    })
-  })  
+        all_chat_users.forEach((element) => {
+          if (element.first_name && element.last_name && element.phone_number) {
+            if (
+              element.first_name
+                .toLowerCase()
+                .includes(value.toLowerCase().trim()) ||
+              element.last_name
+                .toLowerCase()
+                .includes(value.toLowerCase().trim()) ||
+              (element.first_name + " " + element.last_name)
+                .toLocaleLowerCase()
+                .includes(value.toLowerCase().trim()) ||
+              element.phone_number.toString().includes(value.trim())
+            ) {
+              $(".user-list").append(
+                '<div class="list-group-item rounded-0 user-list-row" user-id=' +
+                  element.id +
+                  ">" +
+                  '<div class="user-list-img"> ' +
+                  "</div>" +
+                  '<div class="user-list-name"> ' +
+                  "<span>" +
+                  element.first_name +
+                  " " +
+                  element.last_name +
+                  "</span><br>" +
+                  '<span class="client-chat-status">' +
+                  element.phone_number +
+                  "</span>" +
+                  '<div class="unread-message-number"></div>' +
+                  "</div>" +
+                  "</div>"
+              );
+            }
+          } else {
+            return;
+          }
+          userlistclick();
+        });
+      });
+      userlistclick();
+    });
+  });
+
+  // users begin
+
   // users end
-  
+
   // Chat in everywhere end
 });
+
