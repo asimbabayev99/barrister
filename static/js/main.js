@@ -602,9 +602,9 @@ $(document).ready(function () {
   $(function () {
     function userlistclick() {
       $(".user-list-row").click(function () {
-        $('.alternative-first_view').each(function() {
-          $(this).remove()
-        })
+        $(".alternative-first_view").each(function () {
+          $(this).remove();
+        });
         let second_user;
         $(".user-list-row").each(function () {
           if ($(this).hasClass("active-user")) {
@@ -619,10 +619,14 @@ $(document).ready(function () {
         $(this).addClass("active-user");
         if (first_user !== second_user) {
           $(".chat-logs").html("");
-          $(".chat-logs").html("<div class='loading_chat'>Mesajlar yüklənir...</div>");
+          $(".chat-logs").html(
+            "<div class='loading_chat'>Mesajlar yüklənir...</div>"
+          );
         }
-    
+        var message_data_main;
+        
         $.ajax({
+
           headers: {
             "X-CSRFToken": getCookie("csrftoken"),
           },
@@ -631,11 +635,13 @@ $(document).ready(function () {
           success: function (data) {
             console.log(data);
             $(".chat-logs div.loading_chat").remove();
-            let message_data = data;
+            next_message_url = data.next;
+            message_data_main = data;
             var messages = data.results.reverse();
-            for (var i = 0; i < messages.length; i++) {
+            for (let i = 0; i < messages.length; i++) {
               if (
-                messages[i].sender == $("p#user-id").attr("chat-current-user-id")
+                messages[i].sender ==
+                $("p#user-id").attr("chat-current-user-id")
               ) {
                 generate_message(messages[i].text, "self");
               } else {
@@ -644,9 +650,42 @@ $(document).ready(function () {
             }
           },
         });
+        var next_message_url = "";
+        $(".chat-logs").on("scroll", function () {
+          is_loading = true;
+          let id = $(".chat-logs").attr("current_user_id");
+          if ($(this).scrollTop() == 0) {
+            console.log("0");
+            if ($(".chat-logs div.load_more_messages_loader").length == 1) {
+              $(".chat-logs div.load_more_messages_loader").remove();
+            }
+            $(".chat-logs").prepend(
+              "<div class='load_more_messages_loader'><span class='spinner-grow'></span> Yüklənir...</div>"
+              );
+
+              
+              $.get(message_data_main.next, function (data) {
+                // if(next_message_url.toString() == data.next.toString() ) return;
+                // console.log(next_message_url);
+                // console.log(data)
+                next_message_url = data.next;               
+                let result = data.results.reverse();
+                $(".chat-logs div.load_more_messages_loader").remove();
+                for(let j = 0; j < result.length ; j++ ) {
+                  if(result[j].sender == $("p#user-id").attr("chat-current-user-id")) {
+                    load_message(result[j].text, "self")
+                  } else {
+                    load_message(result[j].text, "user")
+                  }
+                }
+            });
+             
+          }
+        });
+        $(".chat-logs").attr("current_user_id", current_id);
       });
     }
-    
+
     var INDEX = 0;
     $("#chat-submit").click(function (e) {
       e.preventDefault();
@@ -693,45 +732,22 @@ $(document).ready(function () {
         .stop()
         .animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
     }
-
-    function generate_button_message(msg, buttons) {
+    function load_message(msg, type) {
       INDEX++;
-      var btn_obj = buttons
-        .map(function (button) {
-          return (
-            '              <li class="button"><a href="javascript:;" class="btn btn-primary chat-btn" chat-value="' +
-            button.value +
-            '">' +
-            button.name +
-            "</a></li>"
-          );
-        })
-        .join("");
       var str = "";
-      str += "<div id='cm-msg-" + INDEX + '\' class="chat-msg user">';
-      str += '          <span class="msg-avatar">';
-      str +=
-        '            <img src="https://image.crisp.im/avatar/operator/196af8cc-f6ad-4ef7-afd1-c45d5231387c/240/?1483361727745">';
-      str += "          </span>";
+      str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + '">';
+      // str += '          <span class="msg-avatar">';
+      // str +=
+      //   '            <img src="">';
+      // str += "          </span>";
       str += '          <div class="cm-msg-text">';
       str += msg;
       str += "          </div>";
-      str += '          <div class="cm-msg-button">';
-      str += "            <ul>";
-      str += btn_obj;
-      str += "            </ul>";
-      str += "          </div>";
       str += "        </div>";
-      $(".chat-logs").append(str);
-      $("#cm-msg-" + INDEX)
-        .hide()
-        .fadeIn(300);
-      $(".chat-logs")
-        .stop()
-        .animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
-      $("#chat-input").attr("disabled", true);
-    }
+      $(".chat-logs").prepend(str);
+      $("#cm-msg-" + INDEX).hide().fadeIn(300);
 
+    }
     $(document).delegate(".chat-btn", "click", function () {
       var value = $(this).attr("chat-value");
       var name = $(this).html();
@@ -866,3 +882,4 @@ $(document).ready(function () {
   // Chat in everywhere end
 });
 
+$(function () {});
