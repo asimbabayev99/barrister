@@ -1,3 +1,232 @@
+
+function chatSocketFunction() {
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+
+  var current_user = $("#current_user_id").attr('user_id');
+  var notification_number = parseInt($(".message_number").text())
+  var chatSocket = new WebSocket(
+    "ws://" + window.location.host + "/ws/chat/" + current_user + "/"
+  );
+
+
+
+  var load_data = function (index) {
+    var end = index + 1000000;
+    if (index >= this.file.size) return;
+    if (end > this.file.size) end = this.file.size;
+
+    var reader = new FileReader();
+    reader.onload = function () {
+      var content = reader.result;
+      console.log(end / 1000000);
+      content = btoa(content);
+      chatSocket.send(
+        JSON.stringify({
+          message: "",
+          type: "file",
+          action: "progress",
+          data: content,
+        })
+      );
+    };
+    reader.readAsBinaryString(this.file.slice(index, end));
+  }.bind(this);
+
+  function uploadProgressHandler(event) {
+    var percent = (event.loaded / event.total) * 100;
+    var progress = Math.round(percent);
+    console.log(progress);
+    // $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
+    // var percent = (event.loaded / event.total) * 100;
+    // var progress = Math.round(percent);
+    // $("#uploadProgressBar").html(progress + " percent na ang progress");
+    // $("#uploadProgressBar").css("width", progress + "%");
+    // $("#status").html(progress + "% uploaded... please wait");
+  }
+
+  function loadHandler(event) {
+    // $("#status").html(event.target.responseText);
+    // $("#uploadProgressBar").css("width", "0%");
+  }
+
+  function errorHandler(event) {
+    // $("#status").html("Upload Failed");
+  }
+
+  function abortHandler(event) {
+    // $("#status").html("Upload Aborted");
+  }
+
+
+  // To send file like image and others code we'll write in here and that part is begin
+
+
+  // To send file like image and others code we'll write in here and that part is end
+
+  chatSocket.onmessage = function (e) {
+    var data = JSON.parse(e.data);
+    console.log(data);
+    if (data.type == "text" && data.action == "post") {
+      
+      if (data.sender == current_user) {
+        $("#modal_aside_right .modal-body").animate(
+          {
+            scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
+          },
+          1000
+        );
+        document.querySelector("#modal_aside_right .modal-body").innerHTML +=
+          "<div class='outgoing_msg'>" +
+          "<div class='sent_msg'>" +
+          "<p>" +
+          data.message +
+          "</p>" +
+          "<span class='time_date'>" +
+          data.date +
+          "</span>" +
+          "</div>" +
+          "</div>";
+      } else {
+          
+        notification_number += 1;
+        $(".message_number").text(notification_number);
+        $("#modal_aside_right .modal-body").animate(
+          {
+            scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
+          },
+          1000
+        );
+        document.querySelector("#modal_aside_right .modal-body").innerHTML +=
+          "<div class='incoming_msg'>" +
+          "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
+          "<div class='received_msg'>" +
+          "<div class='received_withd_msg'>" +
+          "<p>" +
+          data.message +
+          "</p>" +
+          "<span class='time_date'>" +
+          data.date +
+          "</span>" +
+          "</div>" +
+          "</div>" +
+          "</div>";
+         
+      }
+    } else if (data.type == "file") {
+      // if (data.action == 'progress') {
+      //   load_data(data.file_size);
+      // }
+      // else if (data.action == "complete") {
+      //
+      // }
+      if (data.action == "post") {
+        if (data.sender == current_user) {
+          $("#modal_aside_right .modal-body").animate(
+            {
+              scrollTop: $("#modal_aside_right .modal-body").prop(
+                "scrollHeight"
+              ),
+            },
+            1000
+          );
+          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
+            "<div class='outgoing_msg'>" +
+            "<div class='sent_msg'>" +
+            "<p><a href='" +
+            data.url +
+            "'>" +
+            data.filename +
+            "</a></p>" +
+            "<p>" +
+            data.message +
+            "</p>" +
+            "<span class='time_date'>" +
+            data.date +
+            "</span>" +
+            "</div>" +
+            "</div>";
+        } else {
+          $("#modal_aside_right .modal-body").animate(
+            {
+              scrollTop: $("#modal_aside_right .modal-body").prop(
+                "scrollHeight"
+              ),
+            },
+            1000
+          );
+          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
+            "<div class='incoming_msg'>" +
+            "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
+            "<div class='received_msg'>" +
+            "<div class='received_withd_msg'>" +
+            "<p><a href='" +
+            data.file_link +
+            "'>" +
+            data.filename +
+            "</a></p>" +
+            "<p>" +
+            data.message +
+            "</p>" +
+            "<span class='time_date'>" +
+            data.date +
+            "</span>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+        }
+      }
+    }
+  };
+  chatSocket.onclose = function (e) {
+    console.error("Chat socket closed unexpectedly");
+  };
+
+  document.querySelector("#chat-message-input").focus();
+  document.querySelector("#chat-message-input").onkeyup = function (e) {
+    // if (e.keyCode === 13) {
+    //   // enter, return
+    //   // document.querySelector("#chat-message-submit").click();
+    // }
+  };
+
+  document.querySelector("#chat-message-submit").onclick = function (e) {
+    var messageInputDom = document.querySelector("#chat-message-input");
+
+    var message = messageInputDom.value;
+    chatSocket.send(
+      JSON.stringify({
+        message: message,
+        type: "text",
+        action: "post",
+        receiver: $('.person-title').attr('chat_id') 
+      })
+    );
+    $("textarea").css("height", "38px");
+    messageInputDom.value = "";
+  };
+  
+
+}
+
+
+
+
+
 $(document).ready(function () {
   // $(".fa-paperclip").click(function () {
   //   if (confirm("Are you sure")) {
