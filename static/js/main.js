@@ -698,6 +698,7 @@ $(document).ready(function () {
     var INDEX = 0;
     $("#chat-submit").click(function (e) {
       e.preventDefault();
+
       var msg = $("#chat-input").val();
       if (msg.trim() == "") {
         return false;
@@ -716,6 +717,18 @@ $(document).ready(function () {
       // setTimeout(function() {
       //   generate_message(msg, 'user');
       // }, 1000)
+      var messageInputDom = document.querySelector("#chat-input");
+      var message = messageInputDom.value;
+      chatSocket.send(
+        JSON.stringify({
+          message: message,
+          type: "text",
+          action: "post",
+          receiver: $(".person-title").attr("chat_id"),
+        })
+      );
+      $("textarea").css("height", "38px");
+      messageInputDom.value = "";
     });
     // Chat in everywhere begin
     function generate_message(msg, type) {
@@ -891,8 +904,7 @@ $(document).ready(function () {
   // users end
 
   // Chat in everywhere end
-  $(function () {
-    console.log("Salam")
+    
     function getCookie(name) {
       var cookieValue = null;
       if (document.cookie && document.cookie != "") {
@@ -917,7 +929,7 @@ $(document).ready(function () {
       var end = index + 1000000;
       if (index >= this.file.size) return;
       if (end > this.file.size) end = this.file.size;
-  
+
       var reader = new FileReader();
       reader.onload = function () {
         var content = reader.result;
@@ -934,32 +946,32 @@ $(document).ready(function () {
       };
       reader.readAsBinaryString(this.file.slice(index, end));
     }.bind(this);
-    
-  function uploadProgressHandler(event) {
-    var percent = (event.loaded / event.total) * 100;
-    var progress = Math.round(percent);
-    console.log(progress);
-    // $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
-    // var percent = (event.loaded / event.total) * 100;
-    // var progress = Math.round(percent);
-    // $("#uploadProgressBar").html(progress + " percent na ang progress");
-    // $("#uploadProgressBar").css("width", progress + "%");
-    // $("#status").html(progress + "% uploaded... please wait");
-  }
 
-  function loadHandler(event) {
-    // $("#status").html(event.target.responseText);
-    // $("#uploadProgressBar").css("width", "0%");
-  }
+    function uploadProgressHandler(event) {
+      var percent = (event.loaded / event.total) * 100;
+      var progress = Math.round(percent);
+      console.log(progress);
+      // $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
+      // var percent = (event.loaded / event.total) * 100;
+      // var progress = Math.round(percent);
+      // $("#uploadProgressBar").html(progress + " percent na ang progress");
+      // $("#uploadProgressBar").css("width", progress + "%");
+      // $("#status").html(progress + "% uploaded... please wait");
+    }
 
-  function errorHandler(event) {
-    // $("#status").html("Upload Failed");
-  }
+    function loadHandler(event) {
+      // $("#status").html(event.target.responseText);
+      // $("#uploadProgressBar").css("width", "0%");
+    }
 
-  function abortHandler(event) {
-    // $("#status").html("Upload Aborted");
-  }
-  });
+    function errorHandler(event) {
+      // $("#status").html("Upload Failed");
+    }
+
+    function abortHandler(event) {
+      // $("#status").html("Upload Aborted");
+    }
+  
   chatSocket.onmessage = function (e) {
     var data = JSON.parse(e.data);
 
@@ -1002,30 +1014,7 @@ $(document).ready(function () {
 
   document.querySelector("#chat-submit").onclick = function (e) {
     console.log("message sent");
-    var messageInputDom = document.querySelector("#chat-input");
-    var message = messageInputDom.value;
-    chatSocket.send(
-      JSON.stringify({
-        message: message,
-        type: "text",
-        action: "post",
-        receiver: $(".person-title").attr("chat_id"),
-      })
-    );
-    $("textarea").css("height", "38px");
-    messageInputDom.value = "";
   };
 });
 
 // Chat socket begin
-
-function chatSocketFunction() {
-  
-
-
-  // To send file like image and others code we'll write in here and that part is begin
-
-  // To send file like image and others code we'll write in here and that part is end
-
-  
-}
