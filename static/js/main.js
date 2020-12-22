@@ -698,12 +698,23 @@ $(document).ready(function () {
     var INDEX = 0;
     $("#chat-submit").click(function (e) {
       e.preventDefault();
-
+      var messageInputDom = document.querySelector("#chat-input");
+      var message = messageInputDom.value;
+      chatSocket.send(
+        JSON.stringify({
+          message: message,
+          type: "text",
+          action: "post",
+          receiver: $(".chat-logs").attr("current_user_id"),
+        })
+      );
+      $("textarea").css("height", "38px");
+      messageInputDom.value = "";
       var msg = $("#chat-input").val();
       if (msg.trim() == "") {
         return false;
       }
-      generate_message(msg, "self");
+      // generate_message(msg, "self");
       var buttons = [
         {
           name: "Existing User",
@@ -717,18 +728,7 @@ $(document).ready(function () {
       // setTimeout(function() {
       //   generate_message(msg, 'user');
       // }, 1000)
-      var messageInputDom = document.querySelector("#chat-input");
-      var message = messageInputDom.value;
-      chatSocket.send(
-        JSON.stringify({
-          message: message,
-          type: "text",
-          action: "post",
-          receiver: $(".chat-logs").attr("current_user_id"),
-        })
-      );
-      $("textarea").css("height", "38px");
-      messageInputDom.value = "";
+      
     });
     // Chat in everywhere begin
     function generate_message(msg, type) {
@@ -929,7 +929,7 @@ $(document).ready(function () {
         content = btoa(content);
         chatSocket.send(
           JSON.stringify({
-            message: "",
+            message: message,
             type: "file",
             action: "progress",
             data: content,
@@ -966,7 +966,6 @@ $(document).ready(function () {
   
   chatSocket.onmessage = function (e) {
     var data = JSON.parse(e.data);
-
     console.log(data);
     if (data.type == "text" && data.action == "post") {
       if (data.sender == current_user) {
@@ -1004,9 +1003,7 @@ $(document).ready(function () {
     // }
   };
 
-  document.querySelector("#chat-submit").onclick = function (e) {
-    console.log("message sent");
-  };
+  
 });
 
   // users begin
