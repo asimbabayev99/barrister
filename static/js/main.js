@@ -724,7 +724,7 @@ $(document).ready(function () {
           message: message,
           type: "text",
           action: "post",
-          receiver: $(".person-title").attr("chat_id"),
+          receiver: $(".chat-logs").attr("current_user_id"),
         })
       );
       $("textarea").css("height", "38px");
@@ -897,14 +897,6 @@ $(document).ready(function () {
       // });
       userlistclick();
     });
-  });
-
-  // users begin
-
-  // users end
-
-  // Chat in everywhere end
-    
     function getCookie(name) {
       var cookieValue = null;
       if (document.cookie && document.cookie != "") {
@@ -1015,6 +1007,14 @@ $(document).ready(function () {
   document.querySelector("#chat-submit").onclick = function (e) {
     console.log("message sent");
   };
+});
+
+  // users begin
+
+  // users end
+
+  // Chat in everywhere end
+    
 });
 
 // Chat socket begin
