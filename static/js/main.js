@@ -628,7 +628,7 @@ $(document).ready(function () {
         } else {
           return;
         }
-
+        var is_loading = false;
         $.ajax({
           headers: {
             "X-CSRFToken": getCookie("csrftoken"),
@@ -650,31 +650,31 @@ $(document).ready(function () {
                 generate_message(messages[i].text, "user");
               }
             }
-          },
+            is_loading = true;
+          }
         });
 
         $(".chat-logs").on("scroll", function () {
-          is_loading = true;
+          console.log(message_data_main)
+          if(!is_loading) return;
           let id = $(".chat-logs").attr("current_user_id");
-          if ($(this).scrollTop() < 10) {
+          if ($(this).scrollTop() == 0 ) {
             if ($(".chat-logs div.load_more_messages_loader").length == 1) {
               $(".chat-logs div.load_more_messages_loader").remove();
             }
             $(".chat-logs").prepend(
               "<div class='load_more_messages_loader'><span class='spinner-grow'></span> Yüklənir...</div>"
             );
-            console.log(message_data_main);
             if (!message_data_main) {
               $(".chat-logs div.load_more_messages_loader").remove();
-              console.log("null");
+              console.log("Function ended");
               return;
             }
             $.get(message_data_main, function (data) {
-              // if(next_message_url.toString() == data.next.toString() ) return;
-              // console.log(next_message_url);
-              // console.log(data)
+              if(message_data_main == data.next) return;
               message_data_main = data.next;
               next_message_url = data.next;
+              console.log("Next data came");
               let result = data.results.reverse();
               $(".chat-logs div.load_more_messages_loader").remove();
               for (let j = 0; j < result.length; j++) {
@@ -687,8 +687,9 @@ $(document).ready(function () {
                   load_message(result[j].text, "user");
                 }
               }
-              return;
+              $(".chat-logs").scrollTop(10);
             });
+            
           }
         });
         $(".chat-logs").attr("current_user_id", current_id);
