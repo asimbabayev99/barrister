@@ -621,6 +621,7 @@ $(document).ready(function () {
         $(this).addClass("active-user");
         if (first_user !== second_user) {
           message_data_main = "";
+          $(".chatting-client-name").text($(".user-list-row.active-user span").first().text())
           $(".chat-logs").html("");
           $(".chat-logs").html(
             "<div class='loading_chat'>Mesajlar yüklənir...</div>"
@@ -636,7 +637,6 @@ $(document).ready(function () {
           type: "GET",
           url: "/api/messages/list/" + current_id + "/",
           success: function (data) {
-            console.log(data);
             message_data_main = data.next;
             $(".chat-logs div.loading_chat").remove();
             let messages = data.results.reverse();
@@ -655,7 +655,7 @@ $(document).ready(function () {
         });
 
         $(".chat-logs").on("scroll", function () {
-          console.log(message_data_main)
+         
           if(!is_loading) return;
           let id = $(".chat-logs").attr("current_user_id");
           if ($(this).scrollTop() == 0 ) {
@@ -667,14 +667,13 @@ $(document).ready(function () {
             );
             if (!message_data_main) {
               $(".chat-logs div.load_more_messages_loader").remove();
-              console.log("Function ended");
               return;
             }
             $.get(message_data_main, function (data) {
               if(message_data_main == data.next) return;
               message_data_main = data.next;
               next_message_url = data.next;
-              console.log("Next data came");
+              
               let result = data.results.reverse();
               $(".chat-logs div.load_more_messages_loader").remove();
               for (let j = 0; j < result.length; j++) {
