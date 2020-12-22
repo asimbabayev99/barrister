@@ -602,8 +602,8 @@ $(document).ready(function () {
   // Searching in the works
   $(function () {
     function userlistclick() {
+      var message_data_main = "";
       $(".user-list-row").click(function () {
-        
         $(".alternative-first_view").each(function () {
           $(this).remove();
         });
@@ -620,7 +620,7 @@ $(document).ready(function () {
         });
         $(this).addClass("active-user");
         if (first_user !== second_user) {
-          
+          message_data_main = "";
           $(".chat-logs").html("");
           $(".chat-logs").html(
             "<div class='loading_chat'>Mesajlar yüklənir...</div>"
@@ -628,6 +628,7 @@ $(document).ready(function () {
         } else {
           return;
         }
+
         $.ajax({
           headers: {
             "X-CSRFToken": getCookie("csrftoken"),
@@ -636,6 +637,7 @@ $(document).ready(function () {
           url: "/api/messages/list/" + current_id + "/",
           success: function (data) {
             console.log(data);
+            message_data_main = data.next;
             $(".chat-logs div.loading_chat").remove();
             let messages = data.results.reverse();
             for (let i = 0; i < messages.length; i++) {
@@ -650,35 +652,43 @@ $(document).ready(function () {
             }
           },
         });
-       
+
         $(".chat-logs").on("scroll", function () {
           is_loading = true;
           let id = $(".chat-logs").attr("current_user_id");
-          if ($(this).scrollTop() == 0) {
-            
+          if ($(this).scrollTop() < 10) {
             if ($(".chat-logs div.load_more_messages_loader").length == 1) {
               $(".chat-logs div.load_more_messages_loader").remove();
             }
             $(".chat-logs").prepend(
               "<div class='load_more_messages_loader'><span class='spinner-grow'></span> Yüklənir...</div>"
-              );
-                            
-              $.get(message_data_main.next, function (data) {
-                // if(next_message_url.toString() == data.next.toString() ) return;
-                // console.log(next_message_url);
-                // console.log(data)
-                next_message_url = data.next;               
-                let result = data.results.reverse();
-                $(".chat-logs div.load_more_messages_loader").remove();
-                for(let j = 0; j < result.length ; j++ ) {
-                  if(result[j].sender == $("p#user-id").attr("chat-current-user-id")) {
-                    load_message(result[j].text, "self")
-                  } else {
-                    load_message(result[j].text, "user")
-                  }
+            );
+            console.log(message_data_main);
+            if (!message_data_main) {
+              $(".chat-logs div.load_more_messages_loader").remove();
+              console.log("null");
+              return;
+            }
+            $.get(message_data_main, function (data) {
+              // if(next_message_url.toString() == data.next.toString() ) return;
+              // console.log(next_message_url);
+              // console.log(data)
+              message_data_main = data.next;
+              next_message_url = data.next;
+              let result = data.results.reverse();
+              $(".chat-logs div.load_more_messages_loader").remove();
+              for (let j = 0; j < result.length; j++) {
+                if (
+                  result[j].sender ==
+                  $("p#user-id").attr("chat-current-user-id")
+                ) {
+                  load_message(result[j].text, "self");
+                } else {
+                  load_message(result[j].text, "user");
                 }
+              }
+              return;
             });
-             
           }
         });
         $(".chat-logs").attr("current_user_id", current_id);
@@ -744,8 +754,9 @@ $(document).ready(function () {
       str += "          </div>";
       str += "        </div>";
       $(".chat-logs").prepend(str);
-      $("#cm-msg-" + INDEX).hide().fadeIn(300);
-
+      $("#cm-msg-" + INDEX)
+        .hide()
+        .fadeIn(300);
     }
     $(document).delegate(".chat-btn", "click", function () {
       var value = $(this).attr("chat-value");
@@ -880,60 +891,50 @@ $(document).ready(function () {
   // users end
 
   // Chat in everywhere end
-});
-
-
-
-// Chat socket begin
-
-function chatSocketFunction() {
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != "") {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = jQuery.trim(cookies[i]);
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) == name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
+  $(function () {
+    console.log("Salam")
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie != "") {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) == name + "=") {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
         }
       }
+      return cookieValue;
     }
-    return cookieValue;
-  }
-
-
-  var current_user = $("#current_user_id").attr('user_id');
-  var notification_number = parseInt($(".message_number").text())
-  var chatSocket = new WebSocket(
-    "ws://" + window.location.host + "/ws/chat/" + current_user + "/"
-  );
-
-
-
-  var load_data = function (index) {
-    var end = index + 1000000;
-    if (index >= this.file.size) return;
-    if (end > this.file.size) end = this.file.size;
-
-    var reader = new FileReader();
-    reader.onload = function () {
-      var content = reader.result;
-      console.log(end / 1000000);
-      content = btoa(content);
-      chatSocket.send(
-        JSON.stringify({
-          message: "",
-          type: "file",
-          action: "progress",
-          data: content,
-        })
-      );
-    };
-    reader.readAsBinaryString(this.file.slice(index, end));
-  }.bind(this);
-
+    var current_user = $("p#user-id").attr("chat-current-user-id");
+    var notification_number = parseInt($(".message_number").text());
+    var chatSocket = new WebSocket(
+      "ws://" + window.location.host + "/ws/chat/" + current_user + "/"
+    );
+    var load_data = function (index) {
+      var end = index + 1000000;
+      if (index >= this.file.size) return;
+      if (end > this.file.size) end = this.file.size;
+  
+      var reader = new FileReader();
+      reader.onload = function () {
+        var content = reader.result;
+        console.log(end / 1000000);
+        content = btoa(content);
+        chatSocket.send(
+          JSON.stringify({
+            message: "",
+            type: "file",
+            action: "progress",
+            data: content,
+          })
+        );
+      };
+      reader.readAsBinaryString(this.file.slice(index, end));
+    }.bind(this);
+    
   function uploadProgressHandler(event) {
     var percent = (event.loaded / event.total) * 100;
     var progress = Math.round(percent);
@@ -958,62 +959,18 @@ function chatSocketFunction() {
   function abortHandler(event) {
     // $("#status").html("Upload Aborted");
   }
-
-
-  // To send file like image and others code we'll write in here and that part is begin
-
-
-  // To send file like image and others code we'll write in here and that part is end
-
+  });
   chatSocket.onmessage = function (e) {
     var data = JSON.parse(e.data);
-    
+
     console.log(data);
     if (data.type == "text" && data.action == "post") {
-      generate_message()
       if (data.sender == current_user) {
-        $("#modal_aside_right .modal-body").animate(
-          {
-            scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
-          },
-          1000
-        );
-        document.querySelector("#modal_aside_right .modal-body").innerHTML +=
-          "<div class='outgoing_msg'>" +
-          "<div class='sent_msg'>" +
-          "<p>" +
-          data.message +
-          "</p>" +
-          "<span class='time_date'>" +
-          data.date +
-          "</span>" +
-          "</div>" +
-          "</div>";
+        generate_message(data.message, "self");
       } else {
-          
         notification_number += 1;
         $(".message_number").text(notification_number);
-        $("#modal_aside_right .modal-body").animate(
-          {
-            scrollTop: $("#modal_aside_right .modal-body").prop("scrollHeight"),
-          },
-          1000
-        );
-        document.querySelector("#modal_aside_right .modal-body").innerHTML +=
-          "<div class='incoming_msg'>" +
-          "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
-          "<div class='received_msg'>" +
-          "<div class='received_withd_msg'>" +
-          "<p>" +
-          data.message +
-          "</p>" +
-          "<span class='time_date'>" +
-          data.date +
-          "</span>" +
-          "</div>" +
-          "</div>" +
-          "</div>";
-         
+        generate_message(data.message, "user");
       }
     } else if (data.type == "file") {
       // if (data.action == 'progress') {
@@ -1024,58 +981,9 @@ function chatSocketFunction() {
       // }
       if (data.action == "post") {
         if (data.sender == current_user) {
-          $("#modal_aside_right .modal-body").animate(
-            {
-              scrollTop: $("#modal_aside_right .modal-body").prop(
-                "scrollHeight"
-              ),
-            },
-            1000
-          );
-          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
-            "<div class='outgoing_msg'>" +
-            "<div class='sent_msg'>" +
-            "<p><a href='" +
-            data.url +
-            "'>" +
-            data.filename +
-            "</a></p>" +
-            "<p>" +
-            data.message +
-            "</p>" +
-            "<span class='time_date'>" +
-            data.date +
-            "</span>" +
-            "</div>" +
-            "</div>";
+          generate_message(data.url, "self");
         } else {
-          $("#modal_aside_right .modal-body").animate(
-            {
-              scrollTop: $("#modal_aside_right .modal-body").prop(
-                "scrollHeight"
-              ),
-            },
-            1000
-          );
-          document.querySelector("#modal_aside_right .modal-body").innerHTML +=
-            "<div class='incoming_msg'>" +
-            "<div class='incoming_msg_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>" +
-            "<div class='received_msg'>" +
-            "<div class='received_withd_msg'>" +
-            "<p><a href='" +
-            data.file_link +
-            "'>" +
-            data.filename +
-            "</a></p>" +
-            "<p>" +
-            data.message +
-            "</p>" +
-            "<span class='time_date'>" +
-            data.date +
-            "</span>" +
-            "</div>" +
-            "</div>" +
-            "</div>";
+          generate_message(data.url, "user");
         }
       }
     }
@@ -1093,20 +1001,31 @@ function chatSocketFunction() {
   };
 
   document.querySelector("#chat-submit").onclick = function (e) {
+    console.log("message sent");
     var messageInputDom = document.querySelector("#chat-input");
-
     var message = messageInputDom.value;
     chatSocket.send(
       JSON.stringify({
         message: message,
         type: "text",
         action: "post",
-        receiver: $('.person-title').attr('chat_id') 
+        receiver: $(".person-title").attr("chat_id"),
       })
     );
     $("textarea").css("height", "38px");
     messageInputDom.value = "";
   };
+});
+
+// Chat socket begin
+
+function chatSocketFunction() {
   
 
+
+  // To send file like image and others code we'll write in here and that part is begin
+
+  // To send file like image and others code we'll write in here and that part is end
+
+  
 }
