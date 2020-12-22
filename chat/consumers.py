@@ -415,6 +415,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         status=event['status']
         print(user)
         await self.send(text_data=json.dumps({
+            "type":'status_message',
             "user":user,
             "status":status
         }))
