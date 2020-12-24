@@ -3084,6 +3084,7 @@ s
 
 .load_more_messages_loader {
   display: flex;
+  align-items:center;
   justify-content: center;
 }
 /* Chat end */

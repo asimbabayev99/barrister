@@ -655,7 +655,6 @@ $(document).ready(function () {
         });
 
         $(".chat-logs").on("scroll", function () {
-         
           if(!is_loading) return;
           let id = $(".chat-logs").attr("current_user_id");
           if ($(this).scrollTop() == 0 ) {
@@ -810,7 +809,7 @@ $(document).ready(function () {
             '<div class="user-list-img"> ' +
             "</div>" +
             '<div class="user-list-name"> ' +
-            "<span>" +
+            "<span class='username-span'>" +
             element.first_name +
             " " +
             element.last_name +
@@ -825,7 +824,10 @@ $(document).ready(function () {
       });
       var first_user;
       // filter in users in chat
-      // $(".user-list-row-main input").keyup(function () {
+      $(".user-list-row-main input").keyup(function () {
+        filter_user($(this).val())
+
+      })
       //   $(".user-list div.user-list-row").each(function () {
       //     // $(this).remove();
       //   });
@@ -1014,4 +1016,15 @@ $(document).ready(function () {
     
 });
 
-// Chat socket begin
+
+function filter_user(username) {
+  value = username.toLowerCase();
+  $(".user-list .user-list-row").each(function() {
+    text = $(this).find(".user-list-name .username-span").text().toLowerCase();
+    if(text.includes(value)) {
+      $(this).css('display', 'flex')
+    } else {
+      $(this).css('display', 'none')
+    }
+  })
+}
