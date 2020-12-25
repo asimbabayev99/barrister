@@ -62,7 +62,7 @@ def save_attachment(**data):
 def save_channel(**data):
     user = data.get('user')
     channel = data.get('channel_name')
-    channel = Channel(user=user,channel_name=channel)
+    channel = Channel(user_id=user.id,channel_name=channel)
     print(channel)
     channel.save()
     return Channel
@@ -92,7 +92,7 @@ from django.db.models import Q
 def get_users_channels(**data):
     user=data.get('user')
     print(user.role)
-    if user.role is None:
+    if user.role is None or user.role.name == "User":
         users = Contact.objects.filter(user=user).values_list('barrister')
     else:
         if user.role.name == "Barrister":
