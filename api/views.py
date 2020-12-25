@@ -1103,3 +1103,17 @@ class ChatUsersApiView(ListAPIView):
     serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated,]
     authentication_classes = [SessionAuthentication,]
+
+class CharUserStatus(APIView):
+
+    def post(self,request,id):
+        if Channel.objects.filter(user_id=id).exists():
+            return Response({
+                'user':id,
+                'status':'online'
+            })
+        else:
+            return Response({
+                'user':id,
+                'status':'offline'
+            })

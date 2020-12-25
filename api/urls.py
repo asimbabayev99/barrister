@@ -76,7 +76,8 @@ urlpatterns = [
     path('client/create/',ClientApiView.as_view()),
 
 
-    path('chat/users/',ChatUsersApiView.as_view())
+    path('chat/users/',ChatUsersApiView.as_view()),
+    path('chat/user/status/<int:id>',CharUserStatus.as_view())
 
 
 

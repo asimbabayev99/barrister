@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from account.models import *
 from home.models import *
-from chat.models import Message
+from chat.models import *
 from shop.models import *
 from clients.models import *
 # from rest_framework.parsers import 
@@ -394,4 +394,8 @@ class CaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Case
         fields = ['pk','name','status','documents']
+
+
+class UserChannelSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
 
