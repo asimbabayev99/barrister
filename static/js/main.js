@@ -620,6 +620,20 @@ $(document).ready(function () {
         });
         $(this).addClass("active-user");
         if (first_user !== second_user) {
+          $.ajax({
+            headers: {
+              "X-CSRFToken": getCookie("csrftoken"),
+            },
+            type: "POST",
+            url: "/api/chat/user/status/" + current_id,
+            success : function(data) {
+              if(data.status == true) {
+                $("#chat-user-status").html("<span class='text-success'>&#x25CF;</span> online");
+                return;
+              }
+              $("#chat-user-status").html("<span class='text-danger'>&#x25CF;</span> offline");
+            }
+          })
           message_data_main = "";
           $(".chatting-client-name").text($(".user-list-row.active-user span").first().text())
           $(".chat-logs").html("");
