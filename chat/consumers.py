@@ -209,17 +209,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 viewed = False
                 # Store message.
                 msg = await save_message(message=message, sender=sender, receiver=receiver,viewed=False)
-                for channel in channels:
-                    await self.channel_layer.send()
 
             elif action == 'put':
-                msg_id = data.get('id')
-                sender = data.get('sender')
+                msg_id = text_data.get('id')
                 
                 viewed = await update_messages(sender=sender,receicer=receiver,id=msg_id)
                 if viewed:
                     for channel in channels:
-                        self.channel_layer.send(
+                        await self.channel_layer.send(
                             channel.channel_name,
                             {
                             "type":'update_message',
