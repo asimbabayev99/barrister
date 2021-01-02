@@ -705,6 +705,16 @@ $(document).ready(function () {
           }
         });
         $(".chat-logs").attr("current_user_id", current_id);
+        $("")
+        chatSocket.send(
+          JSON.stringify({
+            type: "text",
+            action: "put",
+            sender: current_id,
+            receiver: $("p#user-id").attr("chat-current-user-id"),
+            id : '416'
+          })
+        );
       });
     }
 
@@ -747,7 +757,7 @@ $(document).ready(function () {
     function generate_message(msg, type) {
       INDEX++;
       var str = "";
-      str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + '">';
+      str += "<div id='" + INDEX + "' class=\"chat-msg " + type + '">';
       // str += '          <span class="msg-avatar">';
       // str +=
       //   '            <img src="">';
@@ -770,7 +780,7 @@ $(document).ready(function () {
     function load_message(msg, type) {
       INDEX++;
       var str = "";
-      str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + '">';
+      str += "<div id='" + INDEX + "' class=\"chat-msg " + type + '">';
       // str += '          <span class="msg-avatar">';
       // str +=
       //   '            <img src="">';
