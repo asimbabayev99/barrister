@@ -213,8 +213,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     await self.channel_layer.send()
 
             elif action == 'put':
-                msg_id = text_data.get('id')
-                sender = text_data.get('sender')
+                msg_id = data.get('id')
+                sender = data.get('sender')
                 
                 viewed = await update_messages(sender=sender,receicer=receiver,id=msg_id)
                 if viewed:
