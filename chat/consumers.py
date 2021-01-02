@@ -276,21 +276,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             
             
-            for channel in channels:
-                await self.channel_layer.send(
-                    channel.channel_name,
-                        {
-                        'type': 'chat_message',
-                        'message_type': message_type,
-                        'action': action,
-                        'id': msg.id,
-                        'message': message,
-                        'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
-                        'sender': sender,
-                        'receiver': receiver,
-                        'viewed':viewed
-                    }
-                )
+            # for channel in channels:
+            #     await self.channel_layer.send(
+            #         channel.channel_name,
+            #             {
+            #             'type': 'chat_message',
+            #             'message_type': message_type,
+            #             'action': action,
+            #             'id': msg.id,
+            #             'message': message,
+            #             'date': datetime.strftime(msg.date, '%d.%m.%Y %H:%M:%S'),
+            #             'sender': sender,
+            #             'receiver': receiver,
+            #             'viewed':viewed
+            #         }
+            #     )
         
 
         # if message type is file
