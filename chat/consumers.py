@@ -78,13 +78,17 @@ def delete_channel(**data):
 
 @database_sync_to_async
 def update_messages(**data):
-    last_message_id =data.get('id')
-    messages = Message.objects.filter(id__lte=last_message_id,viewed=False)
-    for i in messages:
-        i.viewed = True
-        i.save()
-    
-    return 'updated'
+    try:
+        last_message_id =data.get('id')
+        sender = data.get('sender')
+        receiver = data.get('receriver')
+        messages = Message.objects.filter(sender_id=sender,receiver_id=receiver,id__lte=last_message_id,viewed=False)
+        for i in messages:
+            i.viewed = True
+            i.save()
+        return True
+    except:
+        return False
 
 
 from django.db.models import Q
@@ -205,11 +209,34 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 viewed = False
                 # Store message.
                 msg = await save_message(message=message, sender=sender, receiver=receiver,viewed=False)
+                for channel in channels:
+                    await self.channel_layer.send()
 
             elif action == 'put':
                 msg_id = text_data.get('id')
-                viewed = True
-                await update_messages(sender=sender,receicer=receiver,id=msg_id)
+                sender = text_data.get('sender')
+                
+                viewed = await update_messages(sender=sender,receicer=receiver,id=msg_id)
+                if viewed:
+                    for channel in channels:
+                        self.channel_layer.send(
+                            channel.channel_name,
+                            {
+                            "type":'update_message',
+                            "sender":sender,
+                            "receiver":receiver,
+                            "status":"readed"
+                        })
+                else:
+                    await self.channel_layer.group_send(
+                        self.room_group_name,
+                        {
+                            'type':'handle_error',
+                            'error_message':'mesajlarin oxunmasinda xeta bas verdi'
+                        }
+                    )
+
+                
 
             elif action == "delete":
                 message = ""
@@ -454,5 +481,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'error_message': error_message,
         }))
     
-    async def send_notification(self,event):
-        pass
+    async def update_message(self,event):
+        user = event['user']
+        status = event['status']
+        await self.send(text_data=json.dumps({
+            'type':'message_status',
+            'user':user,
+            'status':status
+
+        }))
