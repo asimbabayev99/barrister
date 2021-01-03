@@ -495,7 +495,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
     
     async def update_message(self,event):
-        user = event['reciver']
+        user = event['receiver']
         status = event['status']
         await self.send(text_data=json.dumps({
             'type':'message_status',
