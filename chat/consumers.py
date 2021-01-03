@@ -197,14 +197,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message_type = data.get('type')
         action = data.get('action')
 
-        receiver = data.get('receiver')
-        receiver = await database_sync_to_async(CustomUser.objects.get)(id = int(receiver))
-        sender = self.scope['user']
-        channels = await get_channels(receiver=receiver,sender=sender)
+        # receiver = data.get('receiver')
+        # receiver = await database_sync_to_async(CustomUser.objects.get)(id = int(receiver))
+        # sender = self.scope['user']
+        # channels = await get_channels(receiver=receiver,sender=sender)
         
         # if message type is text
         if message_type == 'text':
+
+        
             if action == 'post':
+                receiver = data.get('receiver')
+                receiver = await database_sync_to_async(CustomUser.objects.get)(id = int(receiver))
+                sender = self.scope['user']
+                channels = await get_channels(receiver=receiver,sender=sender)
                 message = data['message']
                 viewed = False
                 # Store message.
@@ -228,7 +234,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             elif action == 'put':
                 msg_id = data.get('id')
                 sender = data.get('sender')
-                
+                receiver = data.get('receiver')
+                channels = await get_channels(receiver=receiver,sender=sender)
                 viewed = await update_messages(sender=sender,receicer=receiver,id=msg_id)
                 if viewed:
                     for channel in channels:
