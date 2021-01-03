@@ -1110,10 +1110,10 @@ class CharUserStatus(APIView):
         if Channel.objects.filter(user_id=id).exists():
             return Response({
                 'user':id,
-                'status':'online'
+                'status':True
             })
         else:
             return Response({
                 'user':id,
-                'status':'offline'
+                'status':False
             })
