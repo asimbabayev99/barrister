@@ -32,3 +32,7 @@ def case_document_download(request,path):
             response["Content-Disposition"] = "filename={}".format(file_name) 
             return response
     return Http404
+
+
+def document_viewer(request):
+    return render(request, 'clients/viewer.html')

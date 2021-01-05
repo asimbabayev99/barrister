@@ -7,5 +7,7 @@ urlpatterns = [
     path("client/<int:id>", client_documents , name = 'barrister-clients-documents'),
 
     #document download
-    path('document/<str:path>',case_document_download,name='document-download')
+    path('document/<str:path>',case_document_download,name='document-download'),
+
+    path('document/edit/', document_viewer, name = 'docview')
 ]

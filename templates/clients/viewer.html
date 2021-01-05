@@ -1,0 +1,57 @@
+{% extends 'barrister/barrister-base.html' %} {% load static %} {% load client_tags %} {% block title %}
+<title>Musteriler</title>
+{% endblock title %} {% block links %} {{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}" />
+
+{% endblock links %} {% block content %}
+<main class="page-content design" style="background-color: #fff">
+  <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
+  <div class="container-fluid clients-content">
+    <div class="row p-2 m-0">
+      <div class="main-content">
+        <iframe src="https://w3schools.com" frameborder="0" class="document-iframe">
+
+        </iframe>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+<!-- File preview modal end   -->
+
+{% endblock content %} {% block scripts %}
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-3.10.0/locale/az.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+  $(function() {
+      if($(".page_wrapper").hasClass('toggled')) {
+        $(".clients-content").css("padding-left", "0px");
+      } else {
+        $(".clients-content").css("padding-left", "40px");
+      }
+
+      $(window).click(function() {
+        if ($(".page-wrapper").hasClass("toggled")) {
+        $(".clients-content").css("padding-left", "0px");
+        } else {
+        $(".clients-content").css("padding-left", "40px");
+        }
+      })
+  })
+  
+</script>
+
+{% endblock scripts %}
