@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse , Http404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.clickjacking import xframe_options_exempt , xframe_options_deny
 from .models import *
 import os
 import mimetypes
@@ -33,6 +34,6 @@ def case_document_download(request,path):
             return response
     return Http404
 
-
+# @xframe_options_deny
 def document_viewer(request):
     return render(request, 'clients/viewer.html')

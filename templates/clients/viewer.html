@@ -5,11 +5,14 @@
 
 {% endblock links %} {% block content %}
 <main class="page-content design" style="background-color: #fff">
+  <input type="file" id="file_input" >
+  <button style="width: 50px; height: 20px;" id="test_button"></button>
+
   <!-- https://codepen.io/themustafaomar/pen/jLMPKm -->
   <div class="container-fluid clients-content">
     <div class="row p-2 m-0">
       <div class="main-content">
-        <iframe src="https://w3schools.com" frameborder="0" class="document-iframe">
+        <iframe src="https://example.com/" frameborder="0" class="document-iframe" width="300px" height="200px" >
 
         </iframe>
       </div>
@@ -51,6 +54,35 @@
         }
       })
   })
+  $('#test_button').on('click',function(){
+    var form = new FormData();
+    form.append("apikey", "95227d94038e01ebe6a84f2016d73bc3");
+    form.append("editor_settings", "{ \"unit\": \"in\", \"language\": \"ru\", \"view\": \"pageview\" }");
+    form.append("permissions", "{ \"document.export\": true, \"document.print\": true, \"document.edit\": true, \"review.changes.resolve\": false, \"review.comment\": true, \"collab.chat\": true }");
+    form.append("callback_settings", "{\"save_format\":\"docx\",\"save_url\":\"https://domain.com/save.php\",\"context_info\":\"User or Doc Info\"}");
+    form.append("document_info", "{\"document_name\":\"\",\"document_id\":\"750912\"}");
+    form.append("user_info", "{ \"user_id\": \"100\", \"display_name\": \"Azad\" }");
+    form.append("document_defaults", "{ \"orientation\": \"portrait\", \"paper_size\": \"Letter\", \"font_name\": \"Lato\", \"font_size\": 12, \"track_changes\": \"disabled\" }");
+    form.append("document", $('#file_input').get(0).files[0]);
+
+
+  var settings = {
+  "url": "https://api.office-integrator.com/writer/officeapi/v1/document",
+  "method": "POST",
+  "timeout": 0,
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+    };
+
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+
+
+  })
+
   
 </script>
 
