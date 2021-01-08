@@ -34,6 +34,6 @@ def case_document_download(request,path):
             return response
     return Http404
 
-# @xframe_options_deny
+
 def document_viewer(request):
     return render(request, 'clients/viewer.html')
